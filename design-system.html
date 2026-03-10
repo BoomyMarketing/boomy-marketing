@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boomy Marketing — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Brand */
+    --primary: #FF6B35;
+    --primary-dark: #e55a28;
+    --primary-glow: rgba(255,107,53,0.45);
+    --secondary: #7C3AED;
+    --accent: #FFD23F;
+    /* Backgrounds */
+    --bg: #100930;
+    --bg-surface: #1a0f3e;
+    --bg-soft: rgba(255,255,255,0.06);
+    --dark: #1a0f3e;
+    --hero-bg: linear-gradient(135deg, #1a0f3e 0%, #2D1B69 60%, #100930 100%);
+    /* Text */
+    --text-heading: #FFFFFF;
+    --text: rgba(255,255,255,0.78);
+    --text-muted: rgba(255,255,255,0.45);
+    --text-on-primary: #100930;
+    --logo-color: #FFFFFF;
+    /* Borders */
+    --border-color: rgba(255,255,255,0.12);
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #FF6B35, #FFD23F);
+    /* Shape */
+    --radius: 16px;
+    --radius-sm: 8px;
+    --radius-lg: 24px;
+    --radius-btn: 100px;
+    /* Shadows */
+    --shadow: 0 4px 24px rgba(0,0,0,0.5);
+    --shadow-lg: 0 20px 60px rgba(255,107,53,0.2);
+    --shadow-primary: 0 8px 32px rgba(255,107,53,0.45);
+    /* Motion */
+    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    /* Fonts */
+    --font-heading: 'Berkshire Swash', serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── LAYOUT ── */
+  .ds-header {
+    background: var(--hero-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 60px 40px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .ds-header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: var(--primary-glow);
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .ds-logo {
+    font-family: var(--font-heading);
+    font-size: 48px;
+    color: var(--text-heading);
+    letter-spacing: -1px;
+    position: relative;
+    z-index: 1;
+  }
+  .ds-logo span { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .ds-tagline { font-size: 16px; color: var(--text-muted); margin-top: 8px; position: relative; z-index: 1; }
+  .ds-meta { margin-top: 20px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+  .ds-meta-pill {
+    background: var(--bg-soft);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .ds-nav {
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .ds-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 14px 16px;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: var(--transition);
+  }
+  .ds-nav a:hover { color: var(--primary); border-bottom-color: var(--primary); }
+
+  .ds-main { max-width: 1100px; margin: 0 auto; padding: 48px 40px 80px; }
+
+  .ds-section { margin-bottom: 72px; }
+  .ds-section-title {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    color: var(--text-heading);
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .ds-section-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 28px; }
+
+  /* ── COLORS ── */
+  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; }
+  .color-swatch {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    background: var(--bg-surface);
+  }
+  .color-block { height: 110px; width: 100%; }
+  .color-info { padding: 10px 12px; }
+  .color-name { font-size: 11px; font-weight: 600; color: var(--text-heading); font-family: monospace; }
+  .color-hex { font-size: 11px; color: var(--text-muted); font-family: monospace; margin-top: 2px; }
+
+  /* ── TYPOGRAPHY ── */
+  .type-samples { display: flex; flex-direction: column; gap: 24px; }
+  .type-row {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .type-label { font-size: 11px; font-weight: 600; color: var(--text-muted); font-family: monospace; text-transform: uppercase; letter-spacing: 0.08em; }
+  .t-h1 { font-family: var(--font-heading); font-size: 48px; color: var(--text-heading); line-height: 1.1; }
+  .t-h2 { font-family: var(--font-heading); font-size: 36px; color: var(--text-heading); line-height: 1.2; }
+  .t-h3 { font-family: var(--font-heading); font-size: 26px; color: var(--text-heading); line-height: 1.3; }
+  .t-h4 { font-family: var(--font-body); font-size: 20px; font-weight: 700; color: var(--text-heading); }
+  .t-body { font-size: 16px; color: var(--text); }
+  .t-small { font-size: 14px; color: var(--text-muted); }
+  .t-mono { font-family: monospace; font-size: 14px; color: var(--primary); }
+
+  /* ── BUTTONS ── */
+  .btn-grid { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px;
+    border-radius: var(--radius-btn);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--gradient-primary);
+    color: var(--text-on-primary);
+    box-shadow: var(--shadow-primary);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,107,53,0.55); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-heading);
+    border: 1.5px solid var(--border-color);
+  }
+  .btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
+  .btn-secondary {
+    background: var(--secondary);
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(124,58,237,0.35);
+  }
+  .btn-secondary:hover { transform: translateY(-2px); }
+  .btn-sm { padding: 9px 18px; font-size: 13px; }
+  .btn-label { font-size: 11px; color: var(--text-muted); font-family: monospace; white-space: nowrap; margin-top: 6px; text-align: center; }
+  .btn-item { display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+  /* ── CARDS ── */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+  .card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(255,107,53,0.3); }
+  .card-icon {
+    width: 52px; height: 52px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 16px;
+  }
+  .card-title { font-family: var(--font-heading); font-size: 20px; color: var(--text-heading); margin-bottom: 8px; }
+  .card-text { font-size: 14px; color: var(--text); }
+  .card-pricing { text-align: center; }
+  .card-pricing .price { font-family: var(--font-heading); font-size: 36px; color: var(--primary); }
+  .card-pricing .price-label { font-size: 13px; color: var(--text-muted); }
+  .card-pricing ul { list-style: none; margin: 16px 0; text-align: left; }
+  .card-pricing ul li { padding: 6px 0; font-size: 14px; color: var(--text); border-bottom: 1px solid var(--border-color); }
+  .card-pricing ul li::before { content: '✓ '; color: var(--primary); font-weight: 700; }
+  .card-aside {
+    background: linear-gradient(135deg, rgba(255,107,53,0.12), rgba(255,210,63,0.08));
+    border: 1px solid rgba(255,107,53,0.25);
+  }
+  .card-aside .aside-heading { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary); font-weight: 700; margin-bottom: 10px; }
+
+  /* ── COMPONENTS ── */
+  .comp-row { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; margin-bottom: 28px; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px;
+    border-radius: var(--radius-btn);
+    font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.07em;
+  }
+  .badge-primary { background: rgba(255,107,53,0.18); color: var(--primary); border: 1px solid rgba(255,107,53,0.3); }
+  .badge-accent { background: rgba(255,210,63,0.18); color: var(--accent); border: 1px solid rgba(255,210,63,0.3); }
+  .badge-secondary { background: rgba(124,58,237,0.18); color: var(--secondary); border: 1px solid rgba(124,58,237,0.3); }
+  .badge-muted { background: var(--bg-soft); color: var(--text-muted); border: 1px solid var(--border-color); }
+
+  .faq-item {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+  .faq-q {
+    padding: 16px 20px;
+    font-weight: 600;
+    color: var(--text-heading);
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer;
+  }
+  .faq-q::after { content: '+'; color: var(--primary); font-size: 20px; font-weight: 300; }
+  .faq-a { padding: 0 20px 16px; font-size: 14px; color: var(--text); }
+
+  .nearby-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    background: var(--bg-soft);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--text);
+    text-decoration: none;
+    transition: var(--transition);
+  }
+  .pill:hover { border-color: var(--primary); color: var(--primary); background: rgba(255,107,53,0.08); }
+
+  .breadcrumb { display: flex; gap: 6px; align-items: center; font-size: 13px; color: var(--text-muted); }
+  .breadcrumb a { color: var(--primary); text-decoration: none; }
+  .breadcrumb span { color: var(--text-muted); }
+
+  .stats-bar {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    text-align: center;
+  }
+  .stat-val { font-family: var(--font-heading); font-size: 28px; color: var(--primary); }
+  .stat-lbl { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ── GRADIENTS & SHADOWS ── */
+  .grad-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .grad-block {
+    border-radius: var(--radius);
+    height: 100px;
+    display: flex; align-items: flex-end;
+    padding: 12px;
+    font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.9);
+    font-family: monospace;
+    position: relative;
+    overflow: hidden;
+  }
+  .shadow-demo {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 24px;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    font-family: monospace;
+  }
+
+  /* ── TOKENS TABLE ── */
+  .tokens-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    font-family: monospace;
+  }
+  .tokens-table th {
+    background: var(--bg-surface);
+    color: var(--text-muted);
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .tokens-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text);
+    vertical-align: middle;
+  }
+  .tokens-table tr:hover td { background: var(--bg-soft); }
+  .token-name { color: var(--primary); }
+  .token-dot { width: 20px; height: 20px; border-radius: 4px; display: inline-block; vertical-align: middle; border: 1px solid var(--border-color); }
+  .token-section-row td { background: var(--bg-surface); color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; padding: 6px 14px; }
+
+  /* ── FOOTER ── */
+  .ds-footer {
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="ds-header">
+  <div class="ds-logo">Boomy <span>Marketing</span></div>
+  <p class="ds-tagline">AI-Powered Marketing That Gets You Results</p>
+  <div class="ds-meta">
+    <span class="ds-meta-pill">boomymarketing.com</span>
+    <span class="ds-meta-pill">Toronto, ON, Canada</span>
+    <span class="ds-meta-pill">Berkshire Swash + Inter</span>
+    <span class="ds-meta-pill">Design System v1.0</span>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="ds-nav">
+  <a href="#colors">Colors</a>
+  <a href="#typography">Typography</a>
+  <a href="#buttons">Buttons</a>
+  <a href="#cards">Cards</a>
+  <a href="#components">Components</a>
+  <a href="#gradients">Gradients & Shadows</a>
+  <a href="#tokens">Design Tokens</a>
+</nav>
+
+<main class="ds-main">
+
+  <!-- COLORS -->
+  <section class="ds-section" id="colors">
+    <h2 class="ds-section-title">Color Palette</h2>
+    <p class="ds-section-desc">All brand colors and their CSS custom property names.</p>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="color-block" style="background:#FF6B35;"></div>
+        <div class="color-info"><div class="color-name">--primary</div><div class="color-hex">#FF6B35</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#e55a28;"></div>
+        <div class="color-info"><div class="color-name">--primary-dark</div><div class="color-hex">#e55a28</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#7C3AED;"></div>
+        <div class="color-info"><div class="color-name">--secondary</div><div class="color-hex">#7C3AED</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#FFD23F;"></div>
+        <div class="color-info"><div class="color-name">--accent</div><div class="color-hex">#FFD23F</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#100930;"></div>
+        <div class="color-info"><div class="color-name">--bg</div><div class="color-hex">#100930</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#1a0f3e;"></div>
+        <div class="color-info"><div class="color-name">--bg-surface</div><div class="color-hex">#1a0f3e</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#2D1B69;"></div>
+        <div class="color-info"><div class="color-name">--dark (mid)</div><div class="color-hex">#2D1B69</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:#FFFFFF;"></div>
+        <div class="color-info"><div class="color-name">--text-heading</div><div class="color-hex">#FFFFFF</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:rgba(255,255,255,0.78);"></div>
+        <div class="color-info"><div class="color-name">--text</div><div class="color-hex">rgba(255,255,255,.78)</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-block" style="background:rgba(255,255,255,0.45);"></div>
+        <div class="color-info"><div class="color-name">--text-muted</div><div class="color-hex">rgba(255,255,255,.45)</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section class="ds-section" id="typography">
+    <h2 class="ds-section-title">Typography</h2>
+    <p class="ds-section-desc">Heading font: Berkshire Swash (serif) — Body font: Inter (sans-serif)</p>
+    <div class="type-samples">
+      <div class="type-row">
+        <div class="type-label">H1 / 48px<br>Berkshire Swash</div>
+        <div class="t-h1">AI-Powered Marketing</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">H2 / 36px<br>Berkshire Swash</div>
+        <div class="t-h2">Grow Your Business Faster</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">H3 / 26px<br>Berkshire Swash</div>
+        <div class="t-h3">SEO Agency in Toronto</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">H4 / 20px<br>Inter 700</div>
+        <div class="t-h4">Our Core Services</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">Body / 16px<br>Inter 400</div>
+        <div class="t-body">We help Canadian businesses rank higher, attract more customers, and grow revenue through data-driven SEO, PPC, and content marketing strategies proven in the Toronto market.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">Small / 14px<br>Inter 400 muted</div>
+        <div class="t-small">Results may vary. Based on average client data across 500+ campaigns managed since 2019. Past performance does not guarantee future results.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">Mono / 14px<br>system-mono</div>
+        <div class="t-mono">--primary: #FF6B35; --radius: 16px;</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section class="ds-section" id="buttons">
+    <h2 class="ds-section-title">Buttons</h2>
+    <p class="ds-section-desc">All button variants. Hover over each to see the interaction state.</p>
+    <div class="btn-grid">
+      <div class="btn-item">
+        <button class="btn btn-primary">Get a Free Quote</button>
+        <div class="btn-label">.btn-primary</div>
+      </div>
+      <div class="btn-item">
+        <button class="btn btn-ghost">View Case Studies</button>
+        <div class="btn-label">.btn-ghost</div>
+      </div>
+      <div class="btn-item">
+        <button class="btn btn-secondary">Learn More</button>
+        <div class="btn-label">.btn-secondary</div>
+      </div>
+      <div class="btn-item">
+        <button class="btn btn-primary btn-sm">Start Today</button>
+        <div class="btn-label">.btn-primary.btn-sm</div>
+      </div>
+      <div class="btn-item">
+        <button class="btn btn-ghost btn-sm">See Pricing</button>
+        <div class="btn-label">.btn-ghost.btn-sm</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARDS -->
+  <section class="ds-section" id="cards">
+    <h2 class="ds-section-title">Cards</h2>
+    <p class="ds-section-desc">Service card, pricing card, and sidebar aside card variants.</p>
+    <div class="cards-grid">
+      <!-- Service Card -->
+      <div class="card">
+        <div class="card-icon">🚀</div>
+        <div class="card-title">SEO Agency</div>
+        <div class="card-text">Dominate search rankings across Toronto and Canada with our AI-enhanced SEO service. We build authority, fix technical issues, and drive organic traffic that converts.</div>
+        <div style="margin-top:16px;"><button class="btn btn-primary btn-sm">Learn More</button></div>
+      </div>
+      <!-- Pricing Card -->
+      <div class="card card-pricing">
+        <div style="margin-bottom:8px;"><span class="badge badge-accent">Most Popular</span></div>
+        <div class="card-title">Growth Plan</div>
+        <div class="price">$3,500 <span style="font-size:18px;color:var(--text-muted);">CAD/mo</span></div>
+        <ul>
+          <li>Full SEO + Content Strategy</li>
+          <li>Monthly reporting dashboard</li>
+          <li>Google Ads management</li>
+          <li>Dedicated account manager</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%;">Get Started</button>
+      </div>
+      <!-- Aside Card -->
+      <div class="card card-aside">
+        <div class="aside-heading">Quick Stats</div>
+        <div class="stats-bar" style="background:transparent;border:none;padding:0;">
+          <div><div class="stat-val">500+</div><div class="stat-lbl">Clients Served</div></div>
+          <div><div class="stat-val">98%</div><div class="stat-lbl">Retention Rate</div></div>
+          <div><div class="stat-val">$50M+</div><div class="stat-lbl">Revenue Generated</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPONENTS -->
+  <section class="ds-section" id="components">
+    <h2 class="ds-section-title">Components</h2>
+    <p class="ds-section-desc">UI atoms and molecules used across all pages.</p>
+
+    <h3 style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Badges / Labels</h3>
+    <div class="comp-row">
+      <span class="badge badge-primary">SEO</span>
+      <span class="badge badge-accent">New</span>
+      <span class="badge badge-secondary">AI-Powered</span>
+      <span class="badge badge-muted">Canada</span>
+      <span class="badge badge-primary">✓ Verified</span>
+    </div>
+
+    <h3 style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">FAQ Item</h3>
+    <div class="faq-item">
+      <div class="faq-q">How long does SEO take to show results?</div>
+      <div class="faq-a">Most clients begin to see measurable ranking improvements within 60–90 days. Significant traffic gains typically occur within 4–6 months, depending on industry competition and starting domain authority.</div>
+    </div>
+    <div class="faq-item" style="margin-bottom:24px;">
+      <div class="faq-q">Do you work with businesses outside Toronto?</div>
+      <div class="faq-a">Yes — while we're headquartered in Toronto, we serve clients across all major Canadian cities including Vancouver, Calgary, Ottawa, and Montreal.</div>
+    </div>
+
+    <h3 style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Nearby City Pills</h3>
+    <div class="comp-row">
+      <div class="nearby-pills">
+        <a href="#" class="pill">Mississauga</a>
+        <a href="#" class="pill">Brampton</a>
+        <a href="#" class="pill">Markham</a>
+        <a href="#" class="pill">Oakville</a>
+        <a href="#" class="pill">Hamilton</a>
+      </div>
+    </div>
+
+    <h3 style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Breadcrumb</h3>
+    <div class="comp-row">
+      <nav class="breadcrumb">
+        <a href="#">Home</a>
+        <span>›</span>
+        <a href="#">Services</a>
+        <span>›</span>
+        <a href="#">Toronto</a>
+        <span>›</span>
+        <span style="color:var(--text);">SEO Agency Toronto</span>
+      </nav>
+    </div>
+
+    <h3 style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Stats Bar</h3>
+    <div class="stats-bar">
+      <div><div class="stat-val">500+</div><div class="stat-lbl">Clients Served</div></div>
+      <div><div class="stat-val">98%</div><div class="stat-lbl">Client Retention</div></div>
+      <div><div class="stat-val">$50M+</div><div class="stat-lbl">Revenue Generated</div></div>
+    </div>
+  </section>
+
+  <!-- GRADIENTS & SHADOWS -->
+  <section class="ds-section" id="gradients">
+    <h2 class="ds-section-title">Gradients &amp; Shadows</h2>
+    <p class="ds-section-desc">Visual samples of all gradient and shadow tokens.</p>
+    <div class="grad-grid" style="margin-bottom:24px;">
+      <div class="grad-block" style="background:linear-gradient(135deg, #FF6B35, #FFD23F);">--gradient-primary</div>
+      <div class="grad-block" style="background:linear-gradient(135deg, #1a0f3e 0%, #2D1B69 60%, #100930 100%);">--hero-bg</div>
+      <div class="grad-block" style="background:rgba(255,107,53,0.45);">--primary-glow</div>
+      <div class="grad-block" style="background:linear-gradient(135deg,#7C3AED,#FF6B35);">secondary → primary</div>
+    </div>
+    <div class="grad-grid">
+      <div class="shadow-demo" style="box-shadow:0 4px 24px rgba(0,0,0,0.5);">--shadow<br>0 4px 24px rgba(0,0,0,0.5)</div>
+      <div class="shadow-demo" style="box-shadow:0 20px 60px rgba(255,107,53,0.2);">--shadow-lg<br>0 20px 60px rgba(255,107,53,0.2)</div>
+      <div class="shadow-demo" style="box-shadow:0 8px 32px rgba(255,107,53,0.45);">--shadow-primary<br>0 8px 32px rgba(255,107,53,0.45)</div>
+    </div>
+  </section>
+
+  <!-- TOKENS TABLE -->
+  <section class="ds-section" id="tokens">
+    <h2 class="ds-section-title">Design Tokens</h2>
+    <p class="ds-section-desc">Complete reference of all CSS custom properties defined in :root.</p>
+    <table class="tokens-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Preview</th></tr>
+      </thead>
+      <tbody>
+        <tr class="token-section-row"><td colspan="3">Brand Colors</td></tr>
+        <tr><td class="token-name">--primary</td><td>#FF6B35</td><td><span class="token-dot" style="background:#FF6B35;"></span></td></tr>
+        <tr><td class="token-name">--primary-dark</td><td>#e55a28</td><td><span class="token-dot" style="background:#e55a28;"></span></td></tr>
+        <tr><td class="token-name">--primary-glow</td><td>rgba(255,107,53,0.45)</td><td><span class="token-dot" style="background:rgba(255,107,53,0.45);"></span></td></tr>
+        <tr><td class="token-name">--secondary</td><td>#7C3AED</td><td><span class="token-dot" style="background:#7C3AED;"></span></td></tr>
+        <tr><td class="token-name">--accent</td><td>#FFD23F</td><td><span class="token-dot" style="background:#FFD23F;"></span></td></tr>
+        <tr class="token-section-row"><td colspan="3">Backgrounds</td></tr>
+        <tr><td class="token-name">--bg</td><td>#100930</td><td><span class="token-dot" style="background:#100930;"></span></td></tr>
+        <tr><td class="token-name">--bg-surface</td><td>#1a0f3e</td><td><span class="token-dot" style="background:#1a0f3e;"></span></td></tr>
+        <tr><td class="token-name">--bg-soft</td><td>rgba(255,255,255,0.06)</td><td><span class="token-dot" style="background:rgba(255,255,255,0.06);border-color:#333;"></span></td></tr>
+        <tr><td class="token-name">--dark</td><td>#1a0f3e</td><td><span class="token-dot" style="background:#1a0f3e;"></span></td></tr>
+        <tr><td class="token-name">--hero-bg</td><td>linear-gradient(135deg,#1a0f3e,#2D1B69,#100930)</td><td><span class="token-dot" style="background:linear-gradient(135deg,#1a0f3e,#2D1B69,#100930);"></span></td></tr>
+        <tr class="token-section-row"><td colspan="3">Text</td></tr>
+        <tr><td class="token-name">--text-heading</td><td>#FFFFFF</td><td><span class="token-dot" style="background:#FFFFFF;"></span></td></tr>
+        <tr><td class="token-name">--text</td><td>rgba(255,255,255,0.78)</td><td><span class="token-dot" style="background:rgba(255,255,255,0.78);"></span></td></tr>
+        <tr><td class="token-name">--text-muted</td><td>rgba(255,255,255,0.45)</td><td><span class="token-dot" style="background:rgba(255,255,255,0.45);"></span></td></tr>
+        <tr><td class="token-name">--text-on-primary</td><td>#100930</td><td><span class="token-dot" style="background:#100930;"></span></td></tr>
+        <tr><td class="token-name">--logo-color</td><td>#FFFFFF</td><td><span class="token-dot" style="background:#FFFFFF;"></span></td></tr>
+        <tr class="token-section-row"><td colspan="3">Borders &amp; Gradients</td></tr>
+        <tr><td class="token-name">--border-color</td><td>rgba(255,255,255,0.12)</td><td><span class="token-dot" style="background:rgba(255,255,255,0.12);border-color:#555;"></span></td></tr>
+        <tr><td class="token-name">--gradient-primary</td><td>linear-gradient(135deg, #FF6B35, #FFD23F)</td><td><span class="token-dot" style="background:linear-gradient(135deg,#FF6B35,#FFD23F);"></span></td></tr>
+        <tr class="token-section-row"><td colspan="3">Shape</td></tr>
+        <tr><td class="token-name">--radius</td><td>16px</td><td>—</td></tr>
+        <tr><td class="token-name">--radius-sm</td><td>8px</td><td>—</td></tr>
+        <tr><td class="token-name">--radius-lg</td><td>24px</td><td>—</td></tr>
+        <tr><td class="token-name">--radius-btn</td><td>100px</td><td>—</td></tr>
+        <tr class="token-section-row"><td colspan="3">Shadows</td></tr>
+        <tr><td class="token-name">--shadow</td><td>0 4px 24px rgba(0,0,0,0.5)</td><td>—</td></tr>
+        <tr><td class="token-name">--shadow-lg</td><td>0 20px 60px rgba(255,107,53,0.2)</td><td>—</td></tr>
+        <tr><td class="token-name">--shadow-primary</td><td>0 8px 32px rgba(255,107,53,0.45)</td><td>—</td></tr>
+        <tr class="token-section-row"><td colspan="3">Motion</td></tr>
+        <tr><td class="token-name">--transition</td><td>0.3s cubic-bezier(0.4,0,0.2,1)</td><td>—</td></tr>
+        <tr class="token-section-row"><td colspan="3">Typography</td></tr>
+        <tr><td class="token-name">--font-heading</td><td>'Berkshire Swash', serif</td><td>—</td></tr>
+        <tr><td class="token-name">--font-body</td><td>'Inter', sans-serif</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer class="ds-footer">
+  Boomy Marketing Design System — boomymarketing.com — Toronto, ON, Canada &nbsp;·&nbsp; Generated 2026-03-09
+</footer>
+
+</body>
+</html>

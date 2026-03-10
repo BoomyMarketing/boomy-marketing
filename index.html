@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boomy Marketing Agency &mdash; Launch Your Business Into The Stratosphere</title>
+  <meta name="description" content="Boomy Marketing is Toronto's award-winning digital agency. SEO, paid advertising, social media, and web design that puts your brand light-years ahead." />
+  <meta name="keywords" content="digital marketing agency Toronto, SEO agency Toronto, paid advertising, social media marketing, web design Toronto" />
+  <link rel="canonical" href="https://boomymarketing.com" />
+  <meta property="og:title" content="Boomy Marketing Agency &mdash; Launch Your Business Into The Stratosphere" />
+  <meta property="og:description" content="Data-driven marketing that puts your brand light-years ahead. Toronto's premier digital agency." />
+  <meta property="og:url" content="https://boomymarketing.com" />
+  <meta property="og:type" content="website" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MarketingAgency",
+    "name": "Boomy Marketing Agency",
+    "url": "https://boomymarketing.com",
+    "description": "Award-winning digital marketing agency based in Toronto specialising in SEO, paid advertising, social media, web design, email marketing, and analytics.",
+    "address": { "@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" },
+    "telephone": "+16475289485",
+    "email": "care@boomymarketing.com",
+    "foundingDate": "2013",
+    "areaServed": { "@type": "Place", "name": "Toronto, Canada" },
+    "sameAs": [
+      "https://instagram.com/boomymarketing",
+      "https://linkedin.com/company/boomymarketing",
+      "https://twitter.com/boomymarketing",
+      "https://facebook.com/boomymarketing"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Digital Marketing Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO & Content Marketing" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Paid Advertising" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social Media Marketing" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Design & Development" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Email Marketing" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Analytics & Reporting" } }
+      ]
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* ================================================================
+       DESIGN TOKENS
+    ================================================================ */
+    :root {
+      --bg-deep:       #2D1B69;
+      --bg-darker:     #1a0f3e;
+      --bg-darkest:    #100930;
+      --accent-orange: #FF6B35;
+      --accent-yellow: #FFD23F;
+      --accent-purple: #7C3AED;
+      --text-primary:  #FFFFFF;
+      --text-sec:      rgba(255,255,255,0.7);
+      --text-muted:    rgba(255,255,255,0.45);
+      --card-bg:       rgba(255,255,255,0.08);
+      --card-border:   rgba(255,255,255,0.12);
+      --nav-h:         72px;
+      --r-md:          16px;
+      --r-lg:          24px;
+      --ease:          cubic-bezier(0.4,0,0.2,1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-darkest);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ================================================================
+       STARFIELD
+    ================================================================ */
+    #starfield {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0; pointer-events: none;
+    }
+    .site-wrapper { position: relative; z-index: 1; }
+
+    /* ================================================================
+       GLOBAL TYPOGRAPHY
+    ================================================================ */
+    h1,h2,h3,h4 { line-height: 1.15; font-weight: 800; }
+
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .75rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--accent-orange); background: rgba(255,107,53,.12);
+      border: 1px solid rgba(255,107,53,.3); padding: 6px 14px; border-radius: 100px; margin-bottom: 20px;
+    }
+    .section-title { font-size: clamp(2rem,4.5vw,3.5rem); font-weight: 800; margin-bottom: 16px; }
+    .section-sub   { font-size: 1.05rem; color: var(--text-sec); max-width: 560px; line-height: 1.7; }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* ================================================================
+       BUTTONS
+    ================================================================ */
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 32px; border-radius: 100px;
+      font-size: 1rem; font-weight: 700; cursor: pointer; border: none;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+      text-decoration: none; white-space: nowrap; font-family: 'Inter', sans-serif;
+      position: relative; overflow: hidden;
+    }
+    .btn::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(255,255,255,.12); opacity: 0;
+      transition: opacity .2s ease; border-radius: inherit;
+    }
+    .btn:hover::after { opacity: 1; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-orange), #e55a28);
+      color: #fff; box-shadow: 0 8px 32px rgba(255,107,53,.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 44px rgba(255,107,53,.55); }
+
+    .btn-ghost {
+      background: transparent; color: #fff;
+      border: 2px solid rgba(255,255,255,.3);
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,.75); transform: translateY(-2px); }
+
+    .btn-cta {
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+      color: var(--bg-darkest); font-size: 1.05rem; padding: 17px 38px;
+      box-shadow: 0 12px 40px rgba(255,107,53,.45);
+    }
+    .btn-cta:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 22px 62px rgba(255,107,53,.6); }
+
+    /* ================================================================
+       PROGRESS BAR
+    ================================================================ */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow));
+      z-index: 2000; width: 0%; transition: width .05s linear;
+    }
+
+    /* ================================================================
+       NAVBAR
+    ================================================================ */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: var(--nav-h); display: flex; align-items: center; padding: 0 5%;
+      background: rgba(16,9,48,.65);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      transition: background .3s ease;
+    }
+    .navbar.scrolled { background: rgba(16,9,48,.93); }
+
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; max-width: 1200px; margin: 0 auto;
+    }
+    .nav-logo {
+      font-family: 'Berkshire Swash', cursive; font-size: 1.7rem;
+      text-decoration: none; color: #fff;
+    }
+    .nav-logo span {
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,.8); text-decoration: none;
+      font-size: .93rem; font-weight: 500; transition: color .2s ease;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--accent-orange), #e55a28) !important;
+      color: #fff !important; padding: 9px 22px; border-radius: 100px;
+      font-weight: 700 !important; box-shadow: 0 4px 20px rgba(255,107,53,.35);
+    }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 8px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: #fff; border-radius: 2px; transition: transform .3s var(--ease), opacity .2s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; top: var(--nav-h); left: 0; right: 0;
+      background: rgba(16,9,48,.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      padding: 20px 5%; border-bottom: 1px solid rgba(255,255,255,.08);
+      z-index: 999; flex-direction: column;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: rgba(255,255,255,.85); text-decoration: none;
+      font-size: 1.1rem; font-weight: 500; padding: 15px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06); transition: color .2s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; color: var(--accent-orange); font-weight: 700; }
+    .mobile-menu a:hover { color: var(--accent-orange); }
+
+    /* ================================================================
+       HERO
+    ================================================================ */
+    .hero {
+      min-height: 100vh; padding: var(--nav-h) 5% 80px;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(124,58,237,.25) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 30%, rgba(255,107,53,.12) 0%, transparent 50%),
+        linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-deep) 50%, var(--bg-darkest) 100%);
+    }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: center; max-width: 1200px; margin: 0 auto; width: 100%;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,107,53,.12); border: 1px solid rgba(255,107,53,.35);
+      color: var(--accent-orange); font-size: .78rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: 8px 18px; border-radius: 100px; margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 900; line-height: 1.08; margin-bottom: 20px; letter-spacing: -.02em;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* BOOMING animated sweep */
+    .booming-word {
+      font-family: 'Berkshire Swash', cursive;
+      font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 400; line-height: 1;
+      background: linear-gradient(90deg, var(--accent-orange) 0%, var(--accent-yellow) 40%, var(--accent-orange) 80%, var(--accent-yellow) 100%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: sweepGradient 3s linear infinite;
+      display: block; margin-bottom: 22px;
+    }
+    @keyframes sweepGradient {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .hero-sub {
+      font-size: 1.1rem; color: var(--text-sec); line-height: 1.75;
+      margin-bottom: 40px; max-width: 500px;
+    }
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* ---- ORBITAL VISUAL ---- */
+    .hero-visual {
+      position: relative; display: flex; align-items: center;
+      justify-content: center; height: 520px;
+    }
+
+    /* Planet orb */
+    .planet {
+      width: 180px; height: 180px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%,
+        #b06aff 0%, var(--bg-deep) 28%, var(--accent-orange) 62%, var(--accent-yellow) 100%);
+      box-shadow:
+        0 0 60px rgba(255,107,53,.5),
+        0 0 120px rgba(255,107,53,.2),
+        inset 0 0 40px rgba(124,58,237,.4);
+      position: relative; z-index: 5;
+      animation: planetPulse 5s ease-in-out infinite;
+    }
+    @keyframes planetPulse {
+      0%,100% {
+        box-shadow: 0 0 60px rgba(255,107,53,.5),0 0 120px rgba(255,107,53,.2),inset 0 0 40px rgba(124,58,237,.4);
+      }
+      50% {
+        box-shadow: 0 0 85px rgba(255,107,53,.72),0 0 165px rgba(255,107,53,.3),inset 0 0 60px rgba(124,58,237,.55);
+      }
+    }
+
+    /* Static ring circles */
+    .orbit-ring { position: absolute; border-radius: 50%; }
+    .orbit-1 { width: 280px; height: 280px; border: 1.5px solid rgba(255,107,53,.3); }
+    .orbit-2 { width: 380px; height: 380px; border: 1.5px solid rgba(255,210,63,.2); }
+    .orbit-3 { width: 480px; height: 480px; border: 1.5px solid rgba(124,58,237,.15); }
+
+    /* Animated satellite wrappers */
+    .orbit-1-wrap { position: absolute; width: 280px; height: 280px; border-radius: 50%; animation: orbitSpin  8s linear infinite; }
+    .orbit-2-wrap { position: absolute; width: 380px; height: 380px; border-radius: 50%; animation: orbitSpin 14s linear infinite reverse; }
+    .orbit-3-wrap { position: absolute; width: 480px; height: 480px; border-radius: 50%; animation: orbitSpin 20s linear infinite; }
+    @keyframes orbitSpin { to { transform: rotate(360deg); } }
+
+    .ring-dot { position: absolute; border-radius: 50%; top: 50%; left: 50%; }
+    .orbit-1-wrap .ring-dot {
+      width: 34px; height: 34px;
+      background: radial-gradient(circle at 35% 35%, #FFD23F, #FF6B35);
+      box-shadow: 0 0 16px rgba(255,210,63,.85);
+      transform: translate(-50%, -140px);
+    }
+    .orbit-2-wrap .ring-dot {
+      width: 20px; height: 20px;
+      background: radial-gradient(circle at 35% 35%, #a78bfa, #7C3AED);
+      box-shadow: 0 0 12px rgba(124,58,237,.85);
+      transform: translate(-50%, -190px);
+    }
+    .orbit-3-wrap .ring-dot {
+      width: 13px; height: 13px;
+      background: radial-gradient(circle at 35% 35%, #fff, #e2e8f0);
+      box-shadow: 0 0 8px rgba(255,255,255,.9);
+      transform: translate(-50%, -240px);
+    }
+
+    /* Floating metric tags */
+    .float-tag {
+      position: absolute; background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(8px);
+      border-radius: 12px; padding: 10px 16px;
+      font-size: .78rem; font-weight: 600; white-space: nowrap; z-index: 6;
+    }
+    .float-tag-1 { top: 10%;  right: 2%;  animation: floatTag 4s ease-in-out infinite; }
+    .float-tag-2 { bottom: 15%; right: 0%; animation: floatTag 4s ease-in-out 1.5s infinite; }
+    .float-tag-3 { bottom: 28%; left: 0%;  animation: floatTag 4s ease-in-out .8s infinite; }
+    @keyframes floatTag {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    /* ================================================================
+       STATS BAR
+    ================================================================ */
+    .stats-bar {
+      background: rgba(255,255,255,.05);
+      border-top: 1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(10px); padding: 30px 5%;
+    }
+    .stats-inner {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 24px; max-width: 1200px; margin: 0 auto;
+    }
+    .stat-item { text-align: center; padding: 12px; position: relative; }
+    .stat-item:not(:last-child)::after {
+      content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+      width: 1px; height: 55%; background: rgba(255,255,255,.12);
+    }
+    .stat-value {
+      font-size: clamp(1.7rem,3vw,2.5rem); font-weight: 900; line-height: 1.1;
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .stat-label { font-size: .82rem; color: var(--text-sec); margin-top: 5px; font-weight: 500; }
+
+    /* ================================================================
+       GENERIC SECTION
+    ================================================================ */
+    .section { padding: 100px 5%; position: relative; }
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-header .section-sub { margin: 0 auto; }
+
+    /* ================================================================
+       SERVICES
+    ================================================================ */
+    .services {
+      background: linear-gradient(180deg, var(--bg-darkest) 0%, var(--bg-deep) 50%, var(--bg-darkest) 100%);
+    }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 24px; max-width: 1200px; margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: var(--r-lg); padding: 36px 28px;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s ease;
+      position: relative; overflow: hidden; backdrop-filter: blur(8px);
+    }
+    .service-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,107,53,.06), rgba(255,210,63,.03));
+      opacity: 0; transition: opacity .3s; border-radius: inherit;
+    }
+    .service-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow));
+      opacity: 0; transition: opacity .3s;
+    }
+    .service-card:hover {
+      border-color: rgba(255,107,53,.35); transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(255,107,53,.15);
+    }
+    .service-card:hover::before, .service-card:hover::after { opacity: 1; }
+
+    .service-icon   { font-size: 2.6rem; margin-bottom: 20px; display: block; line-height: 1; }
+    .service-name   { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+    .service-desc   { font-size: .9rem; color: var(--text-sec); line-height: 1.7; }
+    .service-more   {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 20px; font-size: .85rem; font-weight: 600;
+      color: var(--accent-orange); cursor: pointer; transition: gap .2s ease;
+    }
+    .service-more:hover { gap: 10px; }
+
+    /* ================================================================
+       WHY BOOMY
+    ================================================================ */
+    .why-boomy { background: var(--bg-darkest); overflow: hidden; }
+    .why-inner {
+      display: grid; grid-template-columns: 1fr 1.1fr;
+      gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto;
+    }
+
+    .why-left h2 {
+      font-size: clamp(2.8rem,5.5vw,5rem); font-weight: 900;
+      line-height: 1; letter-spacing: -.03em;
+    }
+    .why-left h2 .line-2 {
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .why-left p { margin-top: 24px; color: var(--text-sec); line-height: 1.75; }
+    .why-accent-bar {
+      width: 60px; height: 4px;
+      background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow));
+      border-radius: 2px; margin-top: 28px;
+    }
+
+    .why-bullets { display: flex; flex-direction: column; gap: 18px; }
+    .why-bullet {
+      display: flex; gap: 18px; align-items: flex-start;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: var(--r-md); padding: 22px 24px;
+      transition: border-color .3s ease, background .3s ease;
+    }
+    .why-bullet:hover { border-color: rgba(255,107,53,.3); background: rgba(255,107,53,.06); }
+    .why-check {
+      width: 28px; height: 28px; min-width: 28px;
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; color: var(--bg-darkest); font-weight: 900; margin-top: 2px;
+    }
+    .why-bullet-content h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .why-bullet-content p  { font-size: .88rem; color: var(--text-sec); line-height: 1.65; }
+
+    /* ================================================================
+       RESULTS BENTO GRID
+    ================================================================ */
+    .results { background: linear-gradient(180deg, var(--bg-darkest), var(--bg-deep)); }
+    .bento-grid {
+      display: grid; grid-template-columns: repeat(12,1fr);
+      gap: 20px; max-width: 1200px; margin: 0 auto;
+    }
+    .bento-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: var(--r-lg); padding: 36px;
+      position: relative; overflow: hidden;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s ease;
+    }
+    .bento-card:hover {
+      border-color: rgba(255,107,53,.3); transform: translateY(-4px);
+      box-shadow: 0 16px 50px rgba(255,107,53,.12);
+    }
+    .bento-1 { grid-column: span 7; }
+    .bento-2 { grid-column: span 5; }
+    .bento-3, .bento-4, .bento-5 { grid-column: span 4; }
+
+    .bento-label  { font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+    .bento-metric {
+      font-size: clamp(3rem,5vw,5rem); font-weight: 900;
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1; letter-spacing: -.03em;
+    }
+    .bento-desc { font-size: .9rem; color: var(--text-sec); margin-top: 10px; line-height: 1.65; }
+    .bento-tag {
+      display: inline-block; background: rgba(255,107,53,.15); border: 1px solid rgba(255,107,53,.25);
+      color: var(--accent-orange); font-size: .72rem; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-top: 16px;
+    }
+    .bento-glow {
+      position: absolute; width: 130px; height: 130px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,107,53,.2), transparent 70%);
+      bottom: -35px; right: -35px; pointer-events: none;
+    }
+
+    /* ================================================================
+       PROCESS
+    ================================================================ */
+    .process { background: var(--bg-darkest); }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 0; max-width: 1200px; margin: 0 auto; position: relative;
+    }
+    .process-steps::before {
+      content: ''; position: absolute;
+      top: 38px; left: calc(12.5% + 28px); right: calc(12.5% + 28px);
+      height: 2px; background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow), var(--accent-orange));
+      z-index: 0;
+    }
+    .process-step {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 0 20px; position: relative; z-index: 1;
+    }
+    .step-number {
+      width: 76px; height: 76px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; margin-bottom: 24px;
+      box-shadow: 0 8px 30px rgba(255,107,53,.4);
+    }
+    .step-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .step-desc  { font-size: .87rem; color: var(--text-sec); line-height: 1.65; }
+
+    /* ================================================================
+       CTA SECTION
+    ================================================================ */
+    .cta-section {
+      position: relative; padding: 110px 5%;
+      background: linear-gradient(135deg, var(--bg-deep) 0%, #3a1444 40%, #c04520 100%);
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(124,58,237,.4) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 50%, rgba(255,107,53,.3) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .cta-inner { max-width: 760px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+    .cta-inner h2 { font-size: clamp(2.4rem,5vw,4rem); font-weight: 900; margin-bottom: 16px; letter-spacing: -.02em; }
+    .cta-inner > p { font-size: 1.1rem; color: rgba(255,255,255,.85); margin-bottom: 48px; line-height: 1.7; }
+
+    .cta-form { display: flex; gap: 12px; max-width: 520px; margin: 0 auto 12px; }
+    .cta-input {
+      flex: 1; padding: 16px 22px;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+      border-radius: 100px; color: #fff; font-size: .95rem;
+      font-family: 'Inter', sans-serif; outline: none;
+      transition: border-color .2s ease, background .2s ease;
+    }
+    .cta-input::placeholder { color: rgba(255,255,255,.5); }
+    .cta-input:focus { border-color: rgba(255,255,255,.65); background: rgba(255,255,255,.17); }
+
+    .cta-note { font-size: .8rem; color: rgba(255,255,255,.55); margin-top: 8px; }
+    .cta-trust {
+      display: flex; align-items: center; justify-content: center;
+      gap: 28px; margin-top: 44px; flex-wrap: wrap;
+    }
+    .cta-trust-item { display: flex; align-items: center; gap: 8px; font-size: .85rem; color: rgba(255,255,255,.7); }
+    .cta-trust-icon { color: var(--accent-yellow); font-size: 1.1rem; }
+
+    /* ================================================================
+       FOOTER
+    ================================================================ */
+    .footer { background: var(--bg-darkest); border-top: 1px solid rgba(255,255,255,.06); padding: 70px 5% 32px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+
+    .footer-top {
+      display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .footer-logo { font-family: 'Berkshire Swash',cursive; font-size: 1.8rem; color: #fff; text-decoration: none; display: block; margin-bottom: 16px; }
+    .footer-logo span {
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .footer-tagline { font-size: .9rem; color: var(--text-sec); line-height: 1.7; margin-bottom: 24px; }
+
+    .footer-socials { display: flex; gap: 12px; }
+    .social-link {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.7); text-decoration: none;
+      transition: background .3s ease, border-color .3s ease, color .3s ease, transform .2s ease;
+    }
+    .social-link:hover {
+      background: rgba(255,107,53,.15); border-color: rgba(255,107,53,.4);
+      color: var(--accent-orange); transform: translateY(-2px);
+    }
+    .social-link svg { width: 17px; height: 17px; fill: currentColor; }
+
+    .footer-col h4 {
+      font-size: .85rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(255,255,255,.44); margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { color: rgba(255,255,255,.7); text-decoration: none; font-size: .9rem; transition: color .2s; }
+    .footer-col ul a:hover { color: var(--accent-orange); }
+
+    .footer-contact-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 13px; }
+    .fc-icon { color: var(--accent-orange); font-size: .9rem; margin-top: 2px; min-width: 16px; }
+    .fc-text { font-size: .88rem; color: rgba(255,255,255,.7); line-height: 1.5; }
+    .fc-text a { color: inherit; text-decoration: none; transition: color .2s; }
+    .fc-text a:hover { color: var(--accent-orange); }
+
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 32px; gap: 16px;
+    }
+    .footer-copy { font-size: .83rem; color: rgba(255,255,255,.38); }
+    .footer-bl { display: flex; gap: 24px; }
+    .footer-bl a { font-size: .83rem; color: rgba(255,255,255,.38); text-decoration: none; transition: color .2s; }
+    .footer-bl a:hover { color: rgba(255,255,255,.75); }
+
+    /* ================================================================
+       SCROLL REVEAL INITIAL STATES
+    ================================================================ */
+    .reveal       { opacity: 0; transform: translateY(36px); }
+    .reveal-left  { opacity: 0; transform: translateX(-44px); }
+    .reveal-right { opacity: 0; transform: translateX(44px); }
+
+    /* ================================================================
+       RESPONSIVE
+    ================================================================ */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2,1fr); }
+      .bento-1, .bento-2 { grid-column: span 12; }
+      .bento-3,.bento-4,.bento-5 { grid-column: span 4; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+      .hero-visual { height: 360px; order: -1; }
+      .hero-sub { margin: 0 auto 40px; }
+      .hero-buttons { justify-content: center; }
+      .orbit-1-wrap, .orbit-ring.orbit-1 { width: 200px; height: 200px; }
+      .orbit-2-wrap, .orbit-ring.orbit-2 { width: 280px; height: 280px; }
+      .orbit-3-wrap, .orbit-ring.orbit-3 { width: 340px; height: 340px; }
+      .orbit-1-wrap .ring-dot { transform: translate(-50%,-100px); }
+      .orbit-2-wrap .ring-dot { transform: translate(-50%,-140px); }
+      .orbit-3-wrap .ring-dot { transform: translate(-50%,-170px); }
+      .planet { width: 130px; height: 130px; }
+      .float-tag-3 { display: none; }
+      .stats-inner { grid-template-columns: repeat(2,1fr); }
+      .stat-item:nth-child(2)::after { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .why-inner { grid-template-columns: 1fr; gap: 48px; }
+      .why-left { text-align: center; }
+      .why-accent-bar { margin: 28px auto 0; }
+      .bento-3,.bento-4,.bento-5 { grid-column: span 12; }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .process-steps::before { display: none; }
+      .cta-form { flex-direction: column; }
+      .cta-input { border-radius: var(--r-md); }
+      .btn-cta { border-radius: var(--r-md); width: 100%; justify-content: center; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .stats-inner { grid-template-columns: 1fr; }
+      .stat-item::after { display: none; }
+      .process-steps { grid-template-columns: 1fr; }
+      .cta-trust { gap: 16px; }
+      .float-tag-1, .float-tag-2 { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Page reading progress"></div>
+
+<!-- STARFIELD -->
+<canvas id="starfield" aria-hidden="true"></canvas>
+
+<div class="site-wrapper">
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================= -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="Boomy Marketing — Home">Boomy<span>.</span></a>
+      <ul class="nav-links" role="list">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#results">Work</a></li>
+        <li><a href="#contact" class="nav-cta">Get Started</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" role="menu" aria-label="Mobile navigation">
+    <a href="#services" role="menuitem">Services</a>
+    <a href="#about"    role="menuitem">About</a>
+    <a href="#results"  role="menuitem">Work</a>
+    <a href="#process"  role="menuitem">Process</a>
+    <a href="#contact"  role="menuitem">Get Started &rarr;</a>
+  </div>
+
+  <!-- ============================================================
+       HERO
+  ============================================================= -->
+  <section class="hero" id="hero" aria-labelledby="hero-heading">
+    <div class="hero-inner">
+
+      <!-- Left: Text -->
+      <div class="hero-text">
+        <div class="hero-badge" id="heroBadge">
+          <span aria-hidden="true">&#x1F680;</span>
+          <span>Award-Winning Digital Agency</span>
+        </div>
+        <h1 id="hero-heading">
+          Launch Your Business<br />Into The <span>Stratosphere</span>
+        </h1>
+        <span class="booming-word" aria-label="Booming">BOOMING</span>
+        <p class="hero-sub">Data-driven marketing that puts your brand light-years ahead of the competition. From search to social, we engineer growth with precision and purpose.</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary magnetic-btn" aria-label="Start your marketing mission with Boomy">
+            Start Your Mission
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#results" class="btn btn-ghost magnetic-btn">See Our Work</a>
+        </div>
+      </div>
+
+      <!-- Right: Orbital visual -->
+      <div class="hero-visual" aria-hidden="true">
+        <div class="float-tag float-tag-1">&#x1F4C8; +340% Traffic</div>
+        <div class="float-tag float-tag-2">&#x26A1; 8x ROAS</div>
+        <div class="float-tag float-tag-3">&#x1F3AF; 60% Lower CPL</div>
+        <!-- Static rings -->
+        <div class="orbit-ring orbit-1"></div>
+        <div class="orbit-ring orbit-2"></div>
+        <div class="orbit-ring orbit-3"></div>
+        <!-- Orbiting satellites -->
+        <div class="orbit-1-wrap"><div class="ring-dot"></div></div>
+        <div class="orbit-2-wrap"><div class="ring-dot"></div></div>
+        <div class="orbit-3-wrap"><div class="ring-dot"></div></div>
+        <!-- Planet -->
+        <div class="planet"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       STATS BAR
+  ============================================================= -->
+  <div class="stats-bar" role="region" aria-label="Agency statistics">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <div class="stat-value">500+</div>
+        <div class="stat-label">Missions Completed</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-value">98%</div>
+        <div class="stat-label">Client Retention Rate</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-value">$50M+</div>
+        <div class="stat-label">Revenue Generated</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-value">12 Yrs</div>
+        <div class="stat-label">In Orbit</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SERVICES
+  ============================================================= -->
+  <section class="section services" id="services" aria-labelledby="services-heading">
+    <div class="section-header">
+      <div class="section-label reveal">&#x26A1; What We Do</div>
+      <h2 class="section-title reveal" id="services-heading">
+        Full-Stack Marketing<br /><span class="gradient-text">For Ambitious Brands</span>
+      </h2>
+      <p class="section-sub reveal">
+        Every service is engineered to drive measurable results&mdash;no vanity metrics, no fluff. Only growth that impacts your actual bottom line.
+      </p>
+    </div>
+
+    <div class="services-grid">
+
+      <article class="service-card" aria-label="SEO and Content Marketing service">
+        <span class="service-icon" aria-hidden="true">&#x1F50D;</span>
+        <h3 class="service-name">SEO &amp; Content Marketing</h3>
+        <p class="service-desc">
+          We build topical authority that compounds over time. Our technical SEO audits, keyword cluster strategy,
+          and content architecture put you at position one&mdash;and keep you there. Every article, landing page,
+          and guide is built to rank, convert, and build genuine trust with your ideal buyers. Organic traffic
+          that keeps delivering ROI long after the campaign ends.
+        </p>
+        <span class="service-more" role="link" tabindex="0" aria-label="Learn more about SEO and Content Marketing">Learn more &rarr;</span>
+      </article>
+
+      <article class="service-card" aria-label="Paid Advertising service">
+        <span class="service-icon" aria-hidden="true">&#x1F3AF;</span>
+        <h3 class="service-name">Paid Advertising</h3>
+        <p class="service-desc">
+          Google, Meta, LinkedIn, TikTok&mdash;multi-platform paid campaigns that consistently deliver 5x+ ROAS.
+          Our proprietary bidding framework eliminates wasted spend and focuses every dollar on prospects most
+          likely to convert. Full creative testing cycles, weekly bid optimisations, and absolutely zero
+          set-and-forget campaign management. Your budget works as hard as we do.
+        </p>
+        <span class="service-more" role="link" tabindex="0" aria-label="Learn more about Paid Advertising">Learn more &rarr;</span>
+      </article>
+
+      <article class="service-card" aria-label="Social Media Marketing service">
+        <span class="service-icon" aria-hidden="true">&#x1F4F1;</span>
+        <h3 class="service-name">Social Media Marketing</h3>
+        <p class="service-desc">
+          We turn your social channels into genuine revenue engines. Strategy, content creation, community
+          management, and influencer partnerships&mdash;all aligned to your brand voice and business targets.
+          We grow engaged audiences that actually purchase, not just follow. Every post earns its place in
+          your feed through rigorous performance tracking and creative iteration.
+        </p>
+        <span class="service-more" role="link" tabindex="0" aria-label="Learn more about Social Media">Learn more &rarr;</span>
+      </article>
+
+      <article class="service-card" aria-label="Web Design and Development service">
+        <span class="service-icon" aria-hidden="true">&#x1F310;</span>
+        <h3 class="service-name">Web Design &amp; Development</h3>
+        <p class="service-desc">
+          Conversion-optimised websites that load in under 2 seconds and turn visitors into leads. We design
+          with intention&mdash;every scroll depth, CTA placement, and form field tested against real user behaviour.
+          Core Web Vitals scores in the green. Your website becomes your highest-performing sales representative,
+          working 24 hours a day without a salary or sick days.
+        </p>
+        <span class="service-more" role="link" tabindex="0" aria-label="Learn more about Web Design">Learn more &rarr;</span>
+      </article>
+
+      <article class="service-card" aria-label="Email Marketing service">
+        <span class="service-icon" aria-hidden="true">&#x1F4E7;</span>
+        <h3 class="service-name">Email Marketing</h3>
+        <p class="service-desc">
+          Email still delivers $42 ROI for every dollar spent&mdash;when executed correctly. We build automated
+          nurture sequences, lifecycle campaigns, and deep segmentation systems that convert cold leads into
+          loyal repeat buyers on autopilot. Our average client open rate sits 48% above industry benchmarks
+          because every send is a conversation, not a broadcast.
+        </p>
+        <span class="service-more" role="link" tabindex="0" aria-label="Learn more about Email Marketing">Learn more &rarr;</span>
+      </article>
+
+      <article class="service-card" aria-label="Analytics and Reporting service">
+        <span class="service-icon" aria-hidden="true">&#x1F4CA;</span>
+        <h3 class="service-name">Analytics &amp; Reporting</h3>
+        <p class="service-desc">
+          You will always know exactly what is working and precisely why. We implement GA4, server-side tracking,
+          custom Looker Studio dashboards, and attribution modelling that gives you full-funnel visibility from
+          first click to closed deal. Every touchpoint accounted for, every decision backed by clean data,
+          every dollar of spend justified with evidence.
+        </p>
+        <span class="service-more" role="link" tabindex="0" aria-label="Learn more about Analytics">Learn more &rarr;</span>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHY BOOMY
+  ============================================================= -->
+  <section class="section why-boomy" id="about" aria-labelledby="why-heading">
+    <div class="why-inner">
+
+      <div class="why-left reveal-left">
+        <div class="section-label">&#x1F3C6; Why Choose Us</div>
+        <h2 id="why-heading">
+          WHY<br />
+          <span class="line-2">CHOOSE</span><br />
+          BOOMY?
+        </h2>
+        <p>
+          We are not a vendor&mdash;we are your growth partner. Toronto-based, globally minded, and obsessively
+          focused on outcomes that matter to your business, not just your vanity dashboard. Twelve years in
+          orbit means we have navigated every market cycle and know how to consistently win through all of them.
+        </p>
+        <div class="why-accent-bar"></div>
+      </div>
+
+      <div class="why-bullets reveal-right">
+
+        <div class="why-bullet">
+          <div class="why-check" aria-hidden="true">&#x2713;</div>
+          <div class="why-bullet-content">
+            <h4>No Long-Term Lock-Ins</h4>
+            <p>We earn your business every month. Month-to-month agreements mean we are always performing
+            at peak level. Your results are our contract renewal&mdash;there is no fine print to hide behind,
+            ever. Stay because we deliver, not because you are obligated.</p>
+          </div>
+        </div>
+
+        <div class="why-bullet">
+          <div class="why-check" aria-hidden="true">&#x2713;</div>
+          <div class="why-bullet-content">
+            <h4>Dedicated Senior Strategy Team</h4>
+            <p>Every client receives a dedicated strategist, account manager, and specialist pod. No junior
+            handoffs, no account-roulette between staff. Senior talent works directly on your campaigns daily,
+            fully invested in your growth trajectory and accountable to your KPIs.</p>
+          </div>
+        </div>
+
+        <div class="why-bullet">
+          <div class="why-check" aria-hidden="true">&#x2713;</div>
+          <div class="why-bullet-content">
+            <h4>Transparent Real-Time Reporting</h4>
+            <p>Live dashboards, weekly performance calls, and zero-fluff reporting. You see every dollar
+            spent, every lead generated, and every test we run&mdash;in real time. No hidden metrics,
+            no cherry-picked numbers, no waiting for a monthly PDF that obscures the truth.</p>
+          </div>
+        </div>
+
+        <div class="why-bullet">
+          <div class="why-check" aria-hidden="true">&#x2713;</div>
+          <div class="why-bullet-content">
+            <h4>Performance-Tied Pricing</h4>
+            <p>Genuine skin in the game. Our fee structure includes performance bonuses tied directly to
+            KPIs we define together before a single campaign launches. We win when you win&mdash;period.
+            Incentives are perfectly aligned from day one.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RESULTS BENTO GRID
+  ============================================================= -->
+  <section class="section results" id="results" aria-labelledby="results-heading">
+    <div class="section-header">
+      <div class="section-label reveal">&#x1F680; Client Results</div>
+      <h2 class="section-title reveal" id="results-heading">
+        Numbers That <span class="gradient-text">Speak Louder</span>
+      </h2>
+      <p class="section-sub reveal">
+        Real outcomes from real campaigns. Every metric belongs to an actual Boomy client&mdash;anonymised,
+        verified, and never manufactured for a case study page.
+      </p>
+    </div>
+
+    <div class="bento-grid">
+
+      <div class="bento-card bento-1 reveal-left">
+        <div class="bento-label">E-Commerce &sol; Google Ads + SEO &sol; 9 Months</div>
+        <div class="bento-metric">340%</div>
+        <p class="bento-desc">
+          Organic traffic increase for a Toronto-based e-commerce brand. Through technical SEO, topical
+          cluster content, and Core Web Vitals optimisation we moved 68 keywords to page one, lifting
+          monthly visitors from 12,000 to 53,000 and annual online revenue by $280,000. Simultaneously,
+          Google Shopping campaigns achieved 6.2x ROAS while spending 22% less than the prior agency.
+        </p>
+        <span class="bento-tag">SEO + Content + PPC</span>
+        <div class="bento-glow"></div>
+      </div>
+
+      <div class="bento-card bento-2 reveal-right">
+        <div class="bento-label">B2B SaaS &sol; Meta + LinkedIn &sol; 60 Days</div>
+        <div class="bento-metric">8x</div>
+        <p class="bento-desc">
+          Return on ad spend for a SaaS platform. We rebuilt the targeting architecture and creative
+          testing framework, dropping cost-per-MQL from $420 to $52 within 60 days while scaling
+          monthly qualified pipeline by 340%. LinkedIn lead-gen forms drove 58% of volume.
+        </p>
+        <span class="bento-tag">Paid Advertising</span>
+        <div class="bento-glow"></div>
+      </div>
+
+      <div class="bento-card bento-3 reveal">
+        <div class="bento-label">Health &amp; Wellness &sol; Google Ads</div>
+        <div class="bento-metric">60%</div>
+        <p class="bento-desc">
+          Lower cost per lead through smart bidding restructure, audience layering, and 14-variant
+          CRO testing across landing pages during a focused 45-day sprint.
+        </p>
+        <span class="bento-tag">Paid Ads + CRO</span>
+        <div class="bento-glow"></div>
+      </div>
+
+      <div class="bento-card bento-4 reveal">
+        <div class="bento-label">Retail Brand &sol; Social + Influencer</div>
+        <div class="bento-metric">2.3M</div>
+        <p class="bento-desc">
+          Total impressions in a single product launch, driving 18,000 new followers and $140K
+          direct attributed revenue within 14 days of campaign activation.
+        </p>
+        <span class="bento-tag">Social Media</span>
+        <div class="bento-glow"></div>
+      </div>
+
+      <div class="bento-card bento-5 reveal">
+        <div class="bento-label">Professional Services &sol; Email</div>
+        <div class="bento-metric">52%</div>
+        <p class="bento-desc">
+          Average open rate across automated 7-touch nurture sequences&mdash;outperforming the
+          21% industry average by more than 2.5x and generating a 19% MQL conversion rate.
+        </p>
+        <span class="bento-tag">Email Marketing</span>
+        <div class="bento-glow"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROCESS
+  ============================================================= -->
+  <section class="section process" id="process" aria-labelledby="process-heading">
+    <div class="section-header">
+      <div class="section-label reveal">&#x1F6F8; How We Work</div>
+      <h2 class="section-title reveal" id="process-heading">
+        Your Launch <span class="gradient-text">Sequence</span>
+      </h2>
+      <p class="section-sub reveal">
+        A clear four-phase process that takes you from strategy to orbit&mdash;with complete transparency
+        and zero surprises at every stage of the journey.
+      </p>
+    </div>
+
+    <div class="process-steps">
+
+      <div class="process-step reveal">
+        <div class="step-number" aria-label="Step 1">&#x1F52D;</div>
+        <h3 class="step-title">Discovery &amp; Audit</h3>
+        <p class="step-desc">
+          We deep-dive into your business, market position, competitor landscape, and current marketing
+          performance with zero assumptions&mdash;only data. You receive a comprehensive audit document
+          with opportunities prioritised by projected impact and implementation effort, delivered within
+          5 business days of onboarding. This forms the factual foundation of everything that follows.
+        </p>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-number" aria-label="Step 2">&#x1F5FA;</div>
+        <h3 class="step-title">Strategy &amp; Roadmap</h3>
+        <p class="step-desc">
+          We build a 90-day growth roadmap precisely tailored to your goals and budget. Every channel,
+          campaign, and content asset has a defined objective, measurable KPI, and realistic outcome range.
+          You approve everything before a single cent of ad spend is committed. Full alignment
+          before liftoff&mdash;no surprises, no scope creep, no hidden fees.
+        </p>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-number" aria-label="Step 3">&#x1F680;</div>
+        <h3 class="step-title">Launch &amp; Optimise</h3>
+        <p class="step-desc">
+          Campaigns go live using our 47-point launch checklist. We monitor performance daily during the
+          critical first 30 days, running continuous A/B tests on creative, copy, audiences, and landing
+          pages. We act on data in real time&mdash;never waiting for a month-end review to address what
+          the numbers are clearly telling us. Speed of iteration is our competitive advantage.
+        </p>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-number" aria-label="Step 4">&#x1F4C8;</div>
+        <h3 class="step-title">Scale &amp; Report</h3>
+        <p class="step-desc">
+          Once we identify what converts reliably, we scale it with discipline. Weekly performance reviews,
+          monthly strategy sessions, and a live dashboard give you constant visibility into CAC, ROAS, LTV,
+          and pipeline. We double down on winners aggressively and eliminate losers fast&mdash;no emotional
+          attachment to tactics, only commitment to your growth numbers.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CTA SECTION
+  ============================================================= -->
+  <section class="cta-section" id="contact" aria-labelledby="cta-heading">
+    <div class="cta-inner">
+      <div class="section-label reveal" style="margin:0 auto 20px;">&#x1F4E1; Ready for Liftoff?</div>
+      <h2 id="cta-heading" class="reveal">
+        Ready to <span class="gradient-text">Launch?</span>
+      </h2>
+      <p class="reveal">
+        Share your email below and we will send over a complimentary 15-minute strategy session.
+        No sales pitch, no obligation&mdash;just a candid look at your single biggest growth opportunity right now.
+      </p>
+
+      <form class="cta-form reveal" id="ctaForm" novalidate
+            aria-label="Request a free strategy session"
+            onsubmit="handleFormSubmit(event)">
+        <input
+          type="email" id="emailInput" class="cta-input"
+          placeholder="your@email.com"
+          aria-label="Your email address"
+          autocomplete="email" required
+        />
+        <button type="submit" class="btn btn-cta magnetic-btn" aria-label="Claim free strategy session">
+          Claim Free Session
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M3.75 9h10.5M10.5 5.25L14.25 9l-3.75 3.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </form>
+
+      <p class="cta-note reveal" id="formMessage">
+        No spam, ever. Unsubscribe any time. We respond within 1 business day.
+      </p>
+
+      <div class="cta-trust reveal">
+        <div class="cta-trust-item">
+          <span class="cta-trust-icon" aria-hidden="true">&#x2B50;</span>
+          <span>5.0 Google Rating</span>
+        </div>
+        <div class="cta-trust-item">
+          <span class="cta-trust-icon" aria-hidden="true">&#x1F512;</span>
+          <span>No Contracts Required</span>
+        </div>
+        <div class="cta-trust-item">
+          <span class="cta-trust-icon" aria-hidden="true">&#x26A1;</span>
+          <span>Results in 30 Days</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+
+      <div class="footer-top">
+
+        <!-- Brand -->
+        <div>
+          <a href="#" class="footer-logo" aria-label="Boomy Marketing home">Boomy<span>.</span></a>
+          <p class="footer-tagline">
+            Toronto&rsquo;s award-winning digital marketing agency. We put ambitious brands into orbit
+            with data-driven strategies that actually move the needle and grow your bottom line.
+          </p>
+          <div class="footer-socials" aria-label="Social media links">
+            <a href="https://instagram.com/boomymarketing" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Boomy on Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://linkedin.com/company/boomymarketing" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Boomy on LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://twitter.com/boomymarketing" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Boomy on X (Twitter)">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://facebook.com/boomymarketing" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Boomy on Facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul role="list">
+            <li><a href="#services">SEO &amp; Content</a></li>
+            <li><a href="#services">Paid Advertising</a></li>
+            <li><a href="#services">Social Media</a></li>
+            <li><a href="#services">Web Design</a></li>
+            <li><a href="#services">Email Marketing</a></li>
+            <li><a href="#services">Analytics</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul role="list">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#results">Case Studies</a></li>
+            <li><a href="#process">Our Process</a></li>
+            <li><a href="#contact">Careers</a></li>
+            <li><a href="#contact">Blog</a></li>
+            <li><a href="#contact">Press</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <div class="footer-contact-item">
+            <span class="fc-icon" aria-hidden="true">&#x1F4CD;</span>
+            <span class="fc-text">Toronto, Ontario, Canada</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="fc-icon" aria-hidden="true">&#x1F4DE;</span>
+            <span class="fc-text"><a href="tel:+16475289485">(647) 528-94-85</a></span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="fc-icon" aria-hidden="true">&#x2709;</span>
+            <span class="fc-text"><a href="mailto:care@boomymarketing.com">care@boomymarketing.com</a></span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="fc-icon" aria-hidden="true">&#x1F310;</span>
+            <span class="fc-text"><a href="https://boomymarketing.com" target="_blank" rel="noopener">boomymarketing.com</a></span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Boomy Marketing Agency. All rights reserved.</p>
+        <div class="footer-bl">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+</div><!-- /.site-wrapper -->
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================= -->
+<script>
+/* ================================================================
+   1. STARFIELD CANVAS — 150 drifting particles
+================================================================ */
+(function () {
+  var canvas = document.getElementById('starfield');
+  var ctx    = canvas.getContext('2d');
+  var stars  = [];
+  var raf;
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function createStars(n) {
+    stars = [];
+    for (var i = 0; i < n; i++) {
+      stars.push({
+        x:   Math.random() * canvas.width,
+        y:   Math.random() * canvas.height,
+        r:   Math.random() * 1.3 + 0.3,
+        a:   Math.random() * 0.55 + 0.2,
+        sp:  Math.random() * 0.22 + 0.04,
+        dr:  (Math.random() - 0.5) * 0.07,
+        td:  Math.random() * 0.013 + 0.004,
+        ti:  Math.random() > 0.5 ? 1 : -1
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+      // twinkle
+      s.a += s.td * s.ti;
+      if (s.a > 0.82 || s.a < 0.1) s.ti *= -1;
+      // drift
+      s.y -= s.sp;
+      s.x += s.dr;
+      if (s.y < -2)              { s.y = canvas.height + 2; s.x = Math.random() * canvas.width; }
+      if (s.x < -2)              s.x = canvas.width + 2;
+      if (s.x > canvas.width + 2) s.x = -2;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, 6.2832);
+      ctx.fillStyle = 'rgba(255,255,255,' + s.a.toFixed(3) + ')';
+      ctx.fill();
+    }
+    raf = requestAnimationFrame(draw);
+  }
+
+  resize();
+  createStars(150);
+  draw();
+
+  window.addEventListener('resize', function () {
+    cancelAnimationFrame(raf);
+    resize();
+    createStars(150);
+    draw();
+  });
+}());
+
+/* ================================================================
+   2. NAVBAR — glass effect on scroll
+================================================================ */
+(function () {
+  var nav = document.getElementById('navbar');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+}());
+
+/* ================================================================
+   3. SCROLL PROGRESS BAR
+================================================================ */
+(function () {
+  var bar = document.getElementById('progressBar');
+  window.addEventListener('scroll', function () {
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    var pct   = total > 0 ? (window.scrollY / total) * 100 : 0;
+    bar.style.width = pct.toFixed(1) + '%';
+    bar.setAttribute('aria-valuenow', Math.round(pct));
+  }, { passive: true });
+}());
+
+/* ================================================================
+   4. HAMBURGER MENU
+================================================================ */
+(function () {
+  var btn  = document.getElementById('hamburger');
+  var menu = document.getElementById('mobileMenu');
+
+  btn.addEventListener('click', function () {
+    var open = menu.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+  });
+
+  menu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  });
+}());
+
+/* ================================================================
+   5. MAGNETIC CTA BUTTONS — cursor-proximity pull effect
+================================================================ */
+(function () {
+  var PULL = 0.34;
+
+  document.querySelectorAll('.magnetic-btn').forEach(function (el) {
+    el.addEventListener('mousemove', function (e) {
+      var r  = el.getBoundingClientRect();
+      var dx = (e.clientX - (r.left + r.width  / 2)) * PULL;
+      var dy = (e.clientY - (r.top  + r.height / 2)) * PULL;
+      el.style.transform = 'translate(' + dx + 'px,' + dy + 'px) translateY(-2px)';
+    });
+    el.addEventListener('mouseleave', function () {
+      el.style.transform = '';
+    });
+  });
+}());
+
+/* ================================================================
+   6. CTA FORM HANDLER
+================================================================ */
+function handleFormSubmit(e) {
+  e.preventDefault();
+  var inp = document.getElementById('emailInput');
+  var msg = document.getElementById('formMessage');
+  var val = inp.value.trim();
+
+  if (!val || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+    inp.style.borderColor = '#ff4d4d';
+    inp.setAttribute('aria-invalid', 'true');
+    inp.focus();
+    return;
+  }
+
+  inp.style.borderColor = '';
+  inp.setAttribute('aria-invalid', 'false');
+
+  var btn      = e.target.querySelector('button[type="submit"]');
+  btn.textContent = 'Sending\u2026';
+  btn.disabled = true;
+
+  setTimeout(function () {
+    inp.value = '';
+    btn.textContent = '\u2713 You\u2019re on the launchpad!';
+    btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
+    btn.style.color = '#fff';
+    msg.textContent = 'We\u2019ll be in touch within 1 business day. Check your inbox!';
+    msg.style.color = '#86efac';
+  }, 900);
+}
+
+/* ================================================================
+   7. GSAP + ScrollTrigger ANIMATIONS
+================================================================ */
+window.addEventListener('load', function () {
+  if (typeof gsap === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* -- Hero staggered entrance -- */
+  var heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  heroTl
+    .from('#heroBadge',    { opacity: 0, y: 30,        duration: 0.6 })
+    .from('#hero-heading', { opacity: 0, y: 45,        duration: 0.7  }, '-=0.3')
+    .from('.booming-word', { opacity: 0, scale: 0.82,  duration: 0.65 }, '-=0.4')
+    .from('.hero-sub',     { opacity: 0, y: 24,        duration: 0.55 }, '-=0.35')
+    .from('.hero-buttons', { opacity: 0, y: 20,        duration: 0.5  }, '-=0.3')
+    .from('.hero-visual',  { opacity: 0, scale: 0.86,  duration: 0.9, ease: 'back.out(1.4)' }, '-=0.7')
+    .from('.float-tag',    { opacity: 0, y: 18, stagger: 0.14, duration: 0.5 }, '-=0.55');
+
+  /* -- Generic .reveal -- */
+  gsap.utils.toArray('.reveal').forEach(function (el) {
+    gsap.fromTo(el,
+      { opacity: 0, y: 38 },
+      { opacity: 1, y: 0, duration: 0.72, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  /* -- .reveal-left -- */
+  gsap.utils.toArray('.reveal-left').forEach(function (el) {
+    gsap.fromTo(el,
+      { opacity: 0, x: -50 },
+      { opacity: 1, x: 0, duration: 0.75, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  /* -- .reveal-right -- */
+  gsap.utils.toArray('.reveal-right').forEach(function (el) {
+    gsap.fromTo(el,
+      { opacity: 0, x: 50 },
+      { opacity: 1, x: 0, duration: 0.75, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  /* -- Service cards stagger -- */
+  gsap.utils.toArray('.service-card').forEach(function (card, i) {
+    gsap.fromTo(card,
+      { opacity: 0, y: 52, scale: 0.95 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.65, ease: 'power2.out',
+        delay: (i % 3) * 0.1,
+        scrollTrigger: { trigger: card, start: 'top 91%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  /* -- Why bullets stagger -- */
+  gsap.utils.toArray('.why-bullet').forEach(function (b, i) {
+    gsap.fromTo(b,
+      { opacity: 0, x: 42 },
+      { opacity: 1, x: 0, duration: 0.6, ease: 'power2.out', delay: i * 0.12,
+        scrollTrigger: { trigger: b, start: 'top 91%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  /* -- Bento cards stagger -- */
+  gsap.utils.toArray('.bento-card').forEach(function (card, i) {
+    gsap.fromTo(card,
+      { opacity: 0, y: 42 },
+      { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', delay: i * 0.1,
+        scrollTrigger: { trigger: card, start: 'top 91%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  /* -- Process steps stagger -- */
+  gsap.utils.toArray('.process-step').forEach(function (step, i) {
+    gsap.fromTo(step,
+      { opacity: 0, y: 52 },
+      { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', delay: i * 0.15,
+        scrollTrigger: { trigger: '.process-steps', start: 'top 85%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  /* -- Stat value pop -- */
+  gsap.utils.toArray('.stat-value').forEach(function (el) {
+    ScrollTrigger.create({
+      trigger: el, start: 'top 92%', once: true,
+      onEnter: function () {
+        gsap.from(el, { scale: 0.65, opacity: 0, duration: 0.55, ease: 'back.out(1.8)' });
+      }
+    });
+  });
+
+  /* -- Trust items -- */
+  gsap.utils.toArray('.cta-trust-item').forEach(function (item, i) {
+    gsap.fromTo(item,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: i * 0.1,
+        scrollTrigger: { trigger: item, start: 'top 93%', toggleActions: 'play none none none' }
+      }
+    );
+  });
+
+  /* -- Footer fade in -- */
+  gsap.fromTo('.footer',
+    { opacity: 0.4 },
+    { opacity: 1, duration: 0.8,
+      scrollTrigger: { trigger: '.footer', start: 'top 96%', toggleActions: 'play none none none' }
+    }
+  );
+});
+</script>
+
+</body>
+</html>

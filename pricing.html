@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing Plans Toronto | Boomy Marketing — CAD Packages</title>
+  <meta name="description" content="Transparent, no-contract digital marketing pricing in CAD. Starter from $1,500/mo, Growth from $3,500/mo, Scale from $7,500/mo. Toronto AI-powered agency packages for Canadian businesses." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://boomymarketing.com/pricing.html" />
+  <meta property="og:title" content="Pricing Plans Toronto | Boomy Marketing — CAD Packages" />
+  <meta property="og:description" content="Transparent CAD pricing for AI-powered digital marketing. Choose from Starter, Growth, Scale, or Enterprise. No hidden fees." />
+  <meta property="og:url" content="https://boomymarketing.com/pricing.html" />
+  <meta property="og:type" content="website" />
+  <meta property="article:published_time" content="2026-03-08T09:00:00+00:00" />
+
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Boomy Marketing",
+      "url": "https://boomymarketing.com",
+      "telephone": "+16475289485",
+      "email": "care@boomymarketing.com",
+      "address": { "@type": "PostalAddress", "streetAddress": "240 Richmond St W", "addressLocality": "Toronto", "addressRegion": "ON", "postalCode": "M5V 1V6", "addressCountry": "CA" },
+      "priceRange": "$1,500 - $7,500+ CAD/month"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://boomymarketing.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://boomymarketing.com/pricing.html" }
+      ]
+    }
+  ]
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root{--bg-deep:#2D1B69;--bg-darker:#1a0f3e;--bg-darkest:#100930;--accent-orange:#FF6B35;--accent-yellow:#FFD23F;--accent-purple:#7C3AED;--text-primary:#FFFFFF;--text-sec:rgba(255,255,255,0.7);--text-muted:rgba(255,255,255,0.45);--card-bg:rgba(255,255,255,0.08);--card-border:rgba(255,255,255,0.12);--nav-h:72px;--r-md:16px;--r-lg:24px;--ease:cubic-bezier(0.4,0,0.2,1)}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--bg-darkest);color:var(--text-primary);overflow-x:hidden;line-height:1.6}
+    #starfield{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+    .site-wrapper{position:relative;z-index:1}
+    h1,h2,h3,h4{line-height:1.15;font-weight:800}
+    .section-label{display:inline-flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-orange);background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.3);padding:6px 14px;border-radius:100px;margin-bottom:20px}
+    .gradient-text{background:linear-gradient(135deg,var(--accent-orange),var(--accent-yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 32px;border-radius:100px;font-size:1rem;font-weight:700;cursor:pointer;border:none;transition:transform .3s var(--ease),box-shadow .3s var(--ease);text-decoration:none;white-space:nowrap;font-family:'Inter',sans-serif;justify-content:center}
+    .btn-primary{background:linear-gradient(135deg,var(--accent-orange),#e55a28);color:#fff;box-shadow:0 8px 32px rgba(255,107,53,.4)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 44px rgba(255,107,53,.55)}
+    .btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.3)}
+    .btn-ghost:hover{border-color:rgba(255,255,255,.75);transform:translateY(-2px)}
+    .btn-outline-orange{background:transparent;color:var(--accent-orange);border:2px solid rgba(255,107,53,.5)}
+    .btn-outline-orange:hover{background:rgba(255,107,53,.1);transform:translateY(-2px)}
+    .progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent-orange),var(--accent-yellow));z-index:2000;width:0%;transition:width .05s linear}
+    .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);display:flex;align-items:center;padding:0 5%;background:rgba(16,9,48,.65);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);transition:background .3s ease}
+    .navbar.scrolled{background:rgba(16,9,48,.93)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1200px;margin:0 auto}
+    .nav-logo{font-family:'Berkshire Swash',cursive;font-size:1.7rem;text-decoration:none;color:#fff}
+    .nav-logo span{background:linear-gradient(135deg,var(--accent-orange),var(--accent-yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+    .nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.93rem;font-weight:500;transition:color .2s ease}
+    .nav-links a:hover{color:#fff}
+    .nav-cta{background:linear-gradient(135deg,var(--accent-orange),#e55a28)!important;color:#fff!important;padding:9px 22px;border-radius:100px;font-weight:700!important;box-shadow:0 4px 20px rgba(255,107,53,.35)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
+    .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:transform .3s var(--ease),opacity .2s ease}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(16,9,48,.97);backdrop-filter:blur(20px);padding:20px 5%;border-bottom:1px solid rgba(255,255,255,.08);z-index:999;flex-direction:column}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{color:rgba(255,255,255,.85);text-decoration:none;font-size:1.1rem;font-weight:500;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.06);transition:color .2s}
+    .mobile-menu a:last-child{border-bottom:none;color:var(--accent-orange);font-weight:700}
+    .mobile-menu a:hover{color:var(--accent-orange)}
+
+    .page-hero{min-height:55vh;padding:calc(var(--nav-h)+60px) 5% 80px;display:flex;align-items:center;background:radial-gradient(ellipse at 20% 50%,rgba(124,58,237,.25) 0%,transparent 60%),radial-gradient(ellipse at 80% 30%,rgba(255,107,53,.12) 0%,transparent 50%),linear-gradient(180deg,var(--bg-darker) 0%,var(--bg-deep) 50%,var(--bg-darkest) 100%)}
+    .page-hero-inner{max-width:1200px;margin:0 auto;width:100%;text-align:center}
+    .page-hero h1{font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:900;line-height:1.08;margin-bottom:24px;letter-spacing:-.02em}
+    .page-hero p{font-size:1.15rem;color:var(--text-sec);max-width:640px;margin:0 auto 40px;line-height:1.75}
+    .breadcrumb{display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:28px;font-size:.85rem;color:var(--text-muted)}
+    .breadcrumb a{color:var(--text-muted);text-decoration:none;transition:color .2s}
+    .breadcrumb a:hover{color:var(--accent-orange)}
+    .breadcrumb span{color:var(--accent-orange)}
+
+    .pricing-section{padding:100px 5%;background:linear-gradient(180deg,var(--bg-darkest) 0%,var(--bg-deep) 50%,var(--bg-darkest) 100%)}
+    .pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:1200px;margin:0 auto}
+    .pricing-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--r-lg);padding:40px 28px;position:relative;overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s ease}
+    .pricing-card:hover{transform:translateY(-6px);box-shadow:0 24px 70px rgba(255,107,53,.15)}
+    .pricing-card.featured{border-color:rgba(255,107,53,.5);background:rgba(255,107,53,.08)}
+    .pricing-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent-orange),var(--accent-yellow))}
+    .featured-badge{position:absolute;top:20px;right:20px;background:linear-gradient(135deg,var(--accent-orange),var(--accent-yellow));color:var(--bg-darkest);font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:100px}
+    .plan-name{font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-orange);margin-bottom:16px}
+    .plan-price{font-size:clamp(2.2rem,3.5vw,3rem);font-weight:900;line-height:1;margin-bottom:6px}
+    .plan-price span{font-size:1rem;font-weight:400;color:var(--text-sec)}
+    .plan-tagline{font-size:.88rem;color:var(--text-sec);margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .plan-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+    .plan-features li{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--text-sec)}
+    .plan-features li::before{content:'✓';color:var(--accent-orange);font-weight:700;min-width:16px;margin-top:1px}
+    .plan-features li.not-included{opacity:.4}
+    .plan-features li.not-included::before{content:'–';color:var(--text-muted)}
+
+    .faq-section{padding:100px 5%;background:var(--bg-darkest)}
+    .faq-inner{max-width:780px;margin:0 auto}
+    .faq-title{text-align:center;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;margin-bottom:48px}
+    .faq-item{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--r-md);margin-bottom:16px;overflow:hidden}
+    .faq-q{display:flex;justify-content:space-between;align-items:center;padding:24px 28px;cursor:pointer;font-weight:600;font-size:1rem;gap:20px}
+    .faq-q:hover{color:var(--accent-orange)}
+    .faq-toggle{font-size:1.4rem;color:var(--accent-orange);flex-shrink:0;transition:transform .3s ease}
+    .faq-item.open .faq-toggle{transform:rotate(45deg)}
+    .faq-a{padding:0 28px;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease}
+    .faq-a p{padding-bottom:24px;color:var(--text-sec);line-height:1.75;font-size:.93rem}
+    .faq-item.open .faq-a{max-height:400px;padding-top:0}
+
+    .cta-section{position:relative;padding:110px 5%;background:linear-gradient(135deg,var(--bg-deep) 0%,#3a1444 40%,#c04520 100%);overflow:hidden}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(124,58,237,.4) 0%,transparent 55%),radial-gradient(ellipse at 80% 50%,rgba(255,107,53,.3) 0%,transparent 55%);pointer-events:none}
+    .cta-inner{max-width:760px;margin:0 auto;text-align:center;position:relative;z-index:1}
+    .cta-inner h2{font-size:clamp(2.4rem,5vw,4rem);font-weight:900;margin-bottom:16px;letter-spacing:-.02em}
+    .cta-inner>p{font-size:1.1rem;color:rgba(255,255,255,.85);margin-bottom:48px;line-height:1.7}
+    .cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+    .footer{background:var(--bg-darkest);border-top:1px solid rgba(255,255,255,.06);padding:70px 5% 32px}
+    .footer-inner{max-width:1200px;margin:0 auto}
+    .footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.06)}
+    .footer-logo{font-family:'Berkshire Swash',cursive;font-size:1.8rem;color:#fff;text-decoration:none;display:block;margin-bottom:16px}
+    .footer-logo span{background:linear-gradient(135deg,var(--accent-orange),var(--accent-yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .footer-tagline{font-size:.9rem;color:var(--text-sec);line-height:1.7;margin-bottom:24px}
+    .footer-socials{display:flex;gap:12px}
+    .social-link{width:40px;height:40px;border-radius:10px;background:var(--card-bg);border:1px solid var(--card-border);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);text-decoration:none;transition:all .3s ease;font-size:.9rem}
+    .social-link:hover{background:rgba(255,107,53,.15);border-color:rgba(255,107,53,.4);color:var(--accent-orange);transform:translateY(-2px)}
+    .footer-col h4{font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.44);margin-bottom:20px}
+    .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .footer-col ul a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.9rem;transition:color .2s}
+    .footer-col ul a:hover{color:var(--accent-orange)}
+    .footer-contact-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:13px}
+    .fc-icon{color:var(--accent-orange);font-size:.9rem;margin-top:2px;min-width:16px}
+    .fc-text{font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.5}
+    .fc-text a{color:inherit;text-decoration:none;transition:color .2s}
+    .fc-text a:hover{color:var(--accent-orange)}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:32px;gap:16px}
+    .footer-copy{font-size:.83rem;color:rgba(255,255,255,.38)}
+    .footer-bl{display:flex;gap:24px}
+    .footer-bl a{font-size:.83rem;color:rgba(255,255,255,.38);text-decoration:none;transition:color .2s}
+    .footer-bl a:hover{color:rgba(255,255,255,.75)}
+
+    .reveal{opacity:0;transform:translateY(36px)}
+    @media(max-width:1024px){.pricing-grid{grid-template-columns:repeat(2,1fr)}.footer-top{grid-template-columns:1fr 1fr;gap:36px}}
+    @media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}.pricing-grid{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr;gap:32px}.footer-bottom{flex-direction:column;text-align:center}}
+  </style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<canvas id="starfield" aria-hidden="true"></canvas>
+<div class="site-wrapper">
+
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/boomy/index.html" class="nav-logo">Boomy<span>.</span></a>
+      <ul class="nav-links" role="list">
+        <li><a href="/boomy/services.html">Services</a></li>
+        <li><a href="/boomy/about.html">About</a></li>
+        <li><a href="/boomy/pricing.html">Pricing</a></li>
+        <li><a href="/boomy/contact.html" class="nav-cta">Get Started</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/boomy/services.html">Services</a>
+    <a href="/boomy/about.html">About</a>
+    <a href="/boomy/pricing.html">Pricing</a>
+    <a href="/boomy/contact.html">Get Started &rarr;</a>
+  </div>
+
+  <section class="page-hero" aria-labelledby="pricing-heading">
+    <div class="page-hero-inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/boomy/index.html">Home</a><span>&#47;</span><span aria-current="page">Pricing</span>
+      </nav>
+      <div class="section-label reveal">&#x1F4B0; Transparent Pricing</div>
+      <h1 id="pricing-heading" class="reveal">Simple, Honest Pricing<br /><span class="gradient-text">In CAD — No Surprises</span></h1>
+      <p class="reveal">No hidden fees. No surprise invoices. Every package includes clear deliverables, direct access to your team, and real-time performance dashboards. Cancel anytime after 3 months.</p>
+    </div>
+  </section>
+
+  <section class="pricing-section" aria-labelledby="plans-heading">
+    <h2 class="reveal" id="plans-heading" style="text-align:center;font-size:clamp(1.8rem,3.5vw,2.8rem);margin-bottom:48px;">Choose Your <span class="gradient-text">Growth Plan</span></h2>
+    <div class="pricing-grid">
+
+      <div class="pricing-card reveal">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">$1,500 <span>CAD/mo</span></div>
+        <div class="plan-tagline">For businesses ready to build a foundation. SEO + one marketing channel, monthly reporting.</div>
+        <ul class="plan-features">
+          <li>Full technical SEO audit & fix</li>
+          <li>Keyword strategy (up to 50 target terms)</li>
+          <li>4 SEO-optimized blog posts/mo</li>
+          <li>1 paid channel (Google OR Meta)</li>
+          <li>Monthly performance report</li>
+          <li>Email support (48h response)</li>
+          <li>Google Analytics 4 setup</li>
+          <li class="not-included">Bi-weekly strategy calls</li>
+          <li class="not-included">AI automations</li>
+          <li class="not-included">Web design work</li>
+        </ul>
+        <a href="/boomy/contact.html" class="btn btn-outline-orange" style="width:100%;border-radius:var(--r-md);">Get Started &rarr;</a>
+      </div>
+
+      <div class="pricing-card featured reveal">
+        <div class="featured-badge">Most Popular</div>
+        <div class="plan-name">Growth</div>
+        <div class="plan-price">$3,500 <span>CAD/mo</span></div>
+        <div class="plan-tagline">For scaling businesses. Full SEO + paid ads + web updates + AI automations, bi-weekly calls.</div>
+        <ul class="plan-features">
+          <li>Everything in Starter</li>
+          <li>Google Ads + Meta Ads management</li>
+          <li>8 SEO blog posts + landing pages/mo</li>
+          <li>Web design updates (up to 8 hrs/mo)</li>
+          <li>Basic AI automation (2 workflows)</li>
+          <li>Bi-weekly strategy calls</li>
+          <li>Bi-weekly performance reports</li>
+          <li>Priority Slack channel access</li>
+          <li>Conversion rate optimization</li>
+          <li class="not-included">Dedicated account team</li>
+        </ul>
+        <a href="/boomy/contact.html" class="btn btn-primary" style="width:100%;border-radius:var(--r-md);">Get Started &rarr;</a>
+      </div>
+
+      <div class="pricing-card reveal">
+        <div class="plan-name">Scale</div>
+        <div class="plan-price">$7,500 <span>CAD/mo</span></div>
+        <div class="plan-tagline">Full-stack marketing with a dedicated team. AI development, all channels, maximum velocity.</div>
+        <ul class="plan-features">
+          <li>Everything in Growth</li>
+          <li>Dedicated 3-person account team</li>
+          <li>All paid channels managed</li>
+          <li>Custom AI development (10 hrs/mo)</li>
+          <li>Voice AI agent deployment</li>
+          <li>AI outbound / SDR setup</li>
+          <li>Weekly strategy calls</li>
+          <li>Real-time Looker Studio dashboard</li>
+          <li>Priority 4h response SLA</li>
+          <li>Quarterly executive review</li>
+        </ul>
+        <a href="/boomy/contact.html" class="btn btn-outline-orange" style="width:100%;border-radius:var(--r-md);">Get Started &rarr;</a>
+      </div>
+
+      <div class="pricing-card reveal" style="background:rgba(124,58,237,.08);border-color:rgba(124,58,237,.3);">
+        <div class="plan-name" style="color:#a78bfa;">Enterprise</div>
+        <div class="plan-price" style="font-size:2rem;">Custom</div>
+        <div class="plan-tagline">For enterprise brands with complex needs. Custom scope, custom team, custom SLA.</div>
+        <ul class="plan-features">
+          <li>Everything in Scale</li>
+          <li>Fully custom service scope</li>
+          <li>Dedicated senior strategist</li>
+          <li>Custom AI product development</li>
+          <li>Multi-brand or multi-market</li>
+          <li>White-label reporting available</li>
+          <li>API integrations & custom builds</li>
+          <li>Quarterly on-site strategy sessions</li>
+          <li>Executive-level reporting</li>
+          <li>Flexible billing terms</li>
+        </ul>
+        <a href="/boomy/contact.html" class="btn btn-ghost" style="width:100%;border-radius:var(--r-md);">Get a Custom Quote &rarr;</a>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:48px;color:var(--text-sec);font-size:.9rem;">
+      All prices in CAD. HST added where applicable. Month-to-month after initial 3-month commitment. Prices subject to change — locked in once contract signed.
+    </div>
+  </section>
+
+  <section class="faq-section" aria-labelledby="faq-heading">
+    <div class="faq-inner">
+      <h2 class="faq-title reveal" id="faq-heading">Pricing <span class="gradient-text">FAQs</span></h2>
+
+      <div class="faq-item">
+        <div class="faq-q">What is the minimum commitment? <span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>We ask for an initial 3-month commitment on all plans to give strategies enough time to show results. After that, it's month-to-month with 30 days notice to cancel. We don't believe in locking clients into long contracts — we keep you because of results.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I upgrade or downgrade my plan? <span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Yes — you can upgrade at any time and the change takes effect immediately. Downgrades take effect at the start of the next billing cycle. We'll always recommend the right plan for your current stage of growth.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Do you charge a setup fee? <span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>No setup fees on any plan. The first month includes onboarding — account setup, tracking installation, strategy development, and access to your client dashboard. Everything is included in your monthly rate from day one.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What does "AI development included" mean on the Scale plan? <span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Scale clients receive 10 hours/month of custom AI development from our Dev K. and AI team. This covers building custom workflows, LLM integrations, voice agents, AI chatbots, or any other AI tool specific to your business needs. Additional hours can be purchased at $185 CAD/hr.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Do prices include ad spend? <span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>No — management fees are separate from ad spend. Your ad budget goes directly to Google or Meta; we manage the campaigns on top of that. We recommend minimum $1,500 CAD/mo in ad spend for Google Ads and $1,000 CAD/mo for Meta Ads to see meaningful results.</p></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta-section" aria-labelledby="cta-heading">
+    <div class="cta-inner">
+      <div class="section-label" style="display:inline-flex;margin-bottom:20px;">&#x1F4DE; Free 30-Min Call</div>
+      <h2 id="cta-heading">Not Sure Which Plan Is Right?<br /><span class="gradient-text">Let's Figure It Out Together</span></h2>
+      <p>Book a free strategy call and we'll recommend the exact plan and services that match your goals and budget. Zero pressure, zero obligation.</p>
+      <div class="cta-buttons">
+        <a href="/boomy/contact.html" class="btn btn-primary" style="background:linear-gradient(135deg,var(--accent-orange),var(--accent-yellow));color:var(--bg-darkest);font-size:1.05rem;padding:17px 38px;">Book Free Strategy Call &rarr;</a>
+        <a href="/boomy/services.html" class="btn btn-ghost">View All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <a href="/boomy/index.html" class="footer-logo">Boomy<span>.</span></a>
+          <p class="footer-tagline">AI-Powered Marketing That Gets You Results. Toronto's most forward-thinking digital agency, serving Canadian businesses since 2020.</p>
+          <div class="footer-socials">
+            <a href="https://instagram.com/boomymarketing" class="social-link" aria-label="Instagram" rel="noopener">in</a>
+            <a href="https://linkedin.com/company/boomymarketing" class="social-link" aria-label="LinkedIn" rel="noopener">li</a>
+            <a href="https://twitter.com/boomymarketing" class="social-link" aria-label="Twitter" rel="noopener">x</a>
+            <a href="https://facebook.com/boomymarketing" class="social-link" aria-label="Facebook" rel="noopener">fb</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="/boomy/services/seo.html">SEO & AI SEO</a></li>
+            <li><a href="/boomy/services/geo.html">GEO</a></li>
+            <li><a href="/boomy/services/google-ads.html">Google Ads</a></li>
+            <li><a href="/boomy/services/meta-ads.html">Meta Ads</a></li>
+            <li><a href="/boomy/services/ai-automations.html">AI Automations</a></li>
+            <li><a href="/boomy/services/web-design.html">Web Design</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/boomy/about.html">About Us</a></li>
+            <li><a href="/boomy/services.html">All Services</a></li>
+            <li><a href="/boomy/pricing.html">Pricing</a></li>
+            <li><a href="/boomy/contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <div class="footer-contact-item"><span class="fc-icon">&#x1F4CD;</span><div class="fc-text">240 Richmond St W<br />Toronto, ON M5V 1V6</div></div>
+          <div class="footer-contact-item"><span class="fc-icon">&#x1F4DE;</span><div class="fc-text"><a href="tel:+16475289485">(647) 528-94-85</a></div></div>
+          <div class="footer-contact-item"><span class="fc-icon">&#x2709;&#xFE0F;</span><div class="fc-text"><a href="mailto:care@boomymarketing.com">care@boomymarketing.com</a></div></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">&copy; 2026 Boomy Marketing. All rights reserved.</div>
+        <div class="footer-bl"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+<script>
+  const canvas=document.getElementById('starfield'),ctx=canvas.getContext('2d');let stars=[];
+  function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+  function initStars(){stars=[];for(let i=0;i<160;i++)stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5+.3,a:Math.random(),speed:Math.random()*.0008+.0002})}
+  function drawStars(){ctx.clearRect(0,0,canvas.width,canvas.height);stars.forEach(s=>{s.a+=s.speed;if(s.a>1)s.a=0;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${s.a})`;ctx.fill()});requestAnimationFrame(drawStars)}
+  resizeCanvas();initStars();drawStars();
+  window.addEventListener('resize',()=>{resizeCanvas();initStars()});
+  const navbar=document.getElementById('navbar');
+  window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40);document.getElementById('progressBar').style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%'});
+  const ham=document.getElementById('hamburger'),mob=document.getElementById('mobileMenu');
+  ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open')});
+  document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{q.parentElement.classList.toggle('open')})});
+  if(typeof gsap!=='undefined'){gsap.registerPlugin(ScrollTrigger);gsap.utils.toArray('.reveal').forEach(el=>{gsap.to(el,{opacity:1,y:0,duration:.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}})})}
+</script>
+</body>
+</html>
