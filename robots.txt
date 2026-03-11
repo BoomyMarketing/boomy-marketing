@@ -1,5 +1,5 @@
 User-agent: *
-# Published local pages — Allow before Disallow
+# Published local pages — Allow MUST come before Disallow
 Allow: /local/abbotsford/ai-automation-agency/
 Allow: /local/abbotsford/ai-development-company/
 Allow: /local/abbotsford/content-marketing-agency/
@@ -81,7 +81,7 @@ Disallow: /local/
 Disallow: /admin/
 Disallow: /private/
 
-# AI crawlers
+# AI crawlers — allow full access to published content
 User-agent: GPTBot
 Allow: /
 
