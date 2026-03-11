@@ -76,6 +76,21 @@ Allow: /local/coquitlam/ai-development-company/
 Allow: /local/coquitlam/content-marketing-agency/
 Allow: /local/coquitlam/digital-marketing-agency/
 
+# Historical pages — Allow all
+Allow: /richmond-hill-seo-company/
+Allow: /seo-bc-kelowna/
+Allow: /seo-calgary-seo-services-calgary/
+Allow: /seo-toronto/
+Allow: /seo-vancouver/
+Allow: /seo/
+Allow: /vaughan-seo-company/
+Allow: /web-design-calgary/
+Allow: /web-design-mississauga/
+Allow: /web-design-ottawa/
+Allow: /web-design-southport/
+Allow: /web-design-toronto/
+Allow: /web-design/
+
 # Block unpublished local pages
 Disallow: /local/
 Disallow: /admin/

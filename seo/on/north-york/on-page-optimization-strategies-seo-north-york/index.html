@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>On-Page SEO Optimisation Strategies for North York | Boomy Marketing</title>
+  <meta name="description" content="Master on-page SEO for your North York website. Boomy Marketing covers title tags, meta descriptions, H1 structure, internal linking and content optimisation.">
+  <link rel="canonical" href="https://boomymarketing.com/seo/on/north-york/on-page-optimization-strategies-seo-north-york/">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+:root{
+  --bg:#100930;--bg2:#0d0726;--bg3:#160b38;
+  --or:#FF6B35;--yw:#FFD23F;--w:#fff;
+  --mu:rgba(255,255,255,.65);
+  --cb:rgba(255,255,255,.06);--brd:rgba(255,255,255,.1);
+  --r:16px;--fh:'Berkshire Swash',serif;--fb:'Inter',sans-serif;--nh:72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--w);font-family:var(--fb);font-size:17px;line-height:1.7;min-height:100vh}
+a{color:var(--or);text-decoration:none}a:hover{text-decoration:underline}
+h1,h2,h3,h4{font-family:var(--fh);line-height:1.2}
+img{max-width:100%;height:auto}
+.c{max-width:1120px;margin:0 auto;padding:0 24px}
+/* NAVBAR */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nh);
+  background:rgba(16,9,48,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--brd)}
+.nav-inner{max-width:1120px;margin:0 auto;padding:0 24px;height:100%;
+  display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-logo{font-family:var(--fh);font-size:1.6rem;color:var(--w)}
+.nav-logo span{color:var(--or)}
+.nav-links{list-style:none;display:flex;align-items:center;gap:8px}
+.nav-links a{color:rgba(255,255,255,.85);padding:8px 14px;border-radius:8px;
+  font-size:.95rem;font-weight:500;transition:all .2s}
+.nav-links a:hover{color:var(--w);background:rgba(255,255,255,.08);text-decoration:none}
+.nav-cta{background:var(--or)!important;color:var(--w)!important;border-radius:8px!important}
+.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--w);border-radius:2px}
+.mobile-menu{display:none;position:absolute;top:var(--nh);left:0;right:0;
+  background:rgba(16,9,48,.97);padding:16px 24px 24px;flex-direction:column;gap:8px;
+  border-bottom:1px solid var(--brd)}
+.mobile-menu a{display:block;color:rgba(255,255,255,.85);padding:12px 0;
+  border-bottom:1px solid var(--brd);font-weight:500}
+.mobile-menu.open{display:flex}
+@media(max-width:768px){.nav-links{display:none}.nav-hamburger{display:flex}}
+/* BREADCRUMB */
+.bc-bar{background:rgba(255,255,255,.03);border-bottom:1px solid var(--brd);padding-top:var(--nh)}
+.bc-inner{max-width:1120px;margin:0 auto;padding:10px 24px;
+  color:var(--mu);font-size:.83rem;display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.bc-inner a{color:var(--mu)}.bc-inner a:hover{color:var(--or);text-decoration:none}
+/* HERO */
+.hero{padding:calc(var(--nh) + 72px) 0 64px;
+  background:linear-gradient(135deg,var(--bg2),var(--bg3));text-align:center}
+.badge{display:inline-block;background:rgba(255,107,53,.15);color:var(--or);
+  border:1px solid rgba(255,107,53,.3);border-radius:100px;padding:5px 16px;
+  font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:22px}
+.hero h1{font-size:clamp(2.1rem,5vw,3.3rem);margin-bottom:18px}
+.hero-sub{font-size:1.1rem;color:var(--mu);max-width:640px;margin:0 auto 32px}
+.btn-p{display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,var(--or),#e55a28);color:var(--w);
+  padding:13px 30px;border-radius:100px;font-weight:700;font-size:1rem;
+  transition:all .3s;box-shadow:0 4px 20px rgba(255,107,53,.35)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,107,53,.45);
+  color:var(--w);text-decoration:none}
+.btn-s{display:inline-flex;align-items:center;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.2);color:var(--w);padding:13px 30px;
+  border-radius:100px;font-weight:600;font-size:1rem;transition:all .3s;margin-left:10px}
+.btn-s:hover{background:rgba(255,255,255,.14);color:var(--w);text-decoration:none}
+.stats{display:flex;justify-content:center;gap:48px;margin-top:52px;flex-wrap:wrap}
+.stat .n{font-family:var(--fh);font-size:2.1rem;color:var(--or)}
+.stat .l{color:var(--mu);font-size:.88rem}
+/* SECTIONS */
+.sec{padding:72px 0}.sec-dark{background:var(--bg2)}
+.sec-label{color:var(--or);font-weight:700;font-size:.74rem;letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:10px}
+.sec-title{font-size:clamp(1.75rem,3.5vw,2.4rem);margin-bottom:13px}
+.sec-sub{color:var(--mu);font-size:1.02rem;max-width:580px}
+/* GRID & CARDS */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
+@media(max-width:900px){.g3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.g3,.g2{grid-template-columns:1fr}}
+.card{background:var(--cb);border:1px solid var(--brd);border-radius:var(--r);
+  padding:26px;transition:all .3s}
+.card:hover{border-color:rgba(255,107,53,.3);transform:translateY(-3px)}
+.card-icon{font-size:1.75rem;margin-bottom:13px}
+.card h3{font-size:1.12rem;margin-bottom:8px}
+.card p{color:var(--mu);font-size:.91rem;line-height:1.6}
+/* PROCESS STEPS */
+.step{display:flex;gap:20px;align-items:flex-start;margin-bottom:36px}
+.step-num{flex-shrink:0;width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,var(--or),#e55a28);color:var(--w);
+  display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:1.1rem}
+.step h3{font-size:1.1rem;margin-bottom:6px}
+.step p{color:var(--mu);font-size:.93rem;line-height:1.6}
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--brd);padding:20px 0}
+.faq-q{font-size:1.03rem;font-weight:600;margin-bottom:9px}
+.faq-a{color:var(--mu);line-height:1.7}
+/* ARTICLE */
+.aw{max-width:780px;margin:0 auto}
+.aw h2{font-size:1.72rem;margin:40px 0 17px}
+.aw h3{font-size:1.28rem;margin:26px 0 13px;color:var(--or)}
+.aw p{margin-bottom:17px;color:rgba(255,255,255,.87);line-height:1.75}
+.aw ul,.aw ol{margin:0 0 17px 22px;color:rgba(255,255,255,.87)}
+.aw li{margin-bottom:7px;line-height:1.63}
+.art-meta{color:var(--mu);font-size:.87rem;margin-bottom:26px;display:flex;gap:14px;flex-wrap:wrap}
+/* CTA BOX */
+.cta-box{background:linear-gradient(135deg,rgba(255,107,53,.13),rgba(255,210,63,.05));
+  border:1px solid rgba(255,107,53,.24);border-radius:var(--r);
+  padding:44px;text-align:center;margin-top:44px}
+.cta-box h2{font-size:1.9rem;margin-bottom:13px}
+.cta-box p{color:var(--mu);margin-bottom:26px;max-width:480px;margin-left:auto;margin-right:auto}
+/* FOOTER */
+.footer{background:var(--bg2);border-top:1px solid var(--brd);padding:52px 0 26px}
+.footer-inner{max-width:1120px;margin:0 auto;padding:0 24px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}
+@media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.footer-top{grid-template-columns:1fr}}
+.footer-logo{font-family:var(--fh);font-size:1.4rem;color:var(--w);display:block;margin-bottom:9px}
+.footer-logo span{color:var(--or)}
+.footer-tagline{color:var(--mu);font-size:.87rem;line-height:1.6;margin-bottom:18px}
+.footer-col h4{font-size:.73rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--or);margin-bottom:13px;font-family:var(--fb);font-weight:700}
+.footer-col ul{list-style:none}.footer-col ul li{margin-bottom:8px}
+.footer-col ul li a{color:var(--mu);font-size:.87rem;transition:color .2s}
+.footer-col ul li a:hover{color:var(--w);text-decoration:none}
+.footer-socials{display:flex;gap:9px;margin-top:15px}
+.social-link{width:32px;height:32px;border-radius:50%;border:1px solid var(--brd);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--mu);font-size:.78rem;transition:all .2s}
+.social-link:hover{border-color:var(--or);color:var(--or);text-decoration:none}
+.footer-contact-item{color:var(--mu);font-size:.87rem;margin-bottom:6px}
+.fc-text a{color:var(--mu)}.fc-text a:hover{color:var(--or)}
+.footer-bottom{border-top:1px solid var(--brd);padding-top:18px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:9px}
+.footer-copy{color:var(--mu);font-size:.8rem}
+.footer-bl{display:flex;gap:16px}.footer-bl a{color:var(--mu);font-size:.8rem}
+.footer-bl a:hover{color:var(--w)}
+</style>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "On-Page Optimisation Strategies for North York SEO",
+  "author": {
+    "@type": "Organization",
+    "name": "Boomy Marketing"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Boomy Marketing",
+    "url": "https://boomymarketing.com"
+  },
+  "datePublished": "2023-05-28",
+  "dateModified": "2023-05-28",
+  "url": "https://boomymarketing.com/seo/on/north-york/on-page-optimization-strategies-seo-north-york/",
+  "about": {
+    "@type": "City",
+    "name": "North York"
+  }
+}</script>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://boomymarketing.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Seo",
+      "item": "https://boomymarketing.com/seo/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "On",
+      "item": "https://boomymarketing.com/seo/on/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "North York",
+      "item": "https://boomymarketing.com/seo/on/north-york/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "name": "On-Page Optimisation Strategies for North York SEO",
+      "item": "https://boomymarketing.com/seo/on/north-york/on-page-optimization-strategies-seo-north-york/"
+    }
+  ]
+}</script>
+</head>
+<body>
+
+<nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="../../../../index.html" class="nav-logo" aria-label="Boomy Marketing — Home">Boomy<span>.</span></a>
+    <ul class="nav-links" role="menubar">
+      <li role="none"><a href="../../../../services.html" role="menuitem">Services</a></li>
+      <li role="none"><a href="../../../../about.html" role="menuitem">About</a></li>
+      <li role="none"><a href="../../../../pricing.html" role="menuitem">Pricing</a></li>
+      <li role="none"><a href="../../../../contact.html" role="menuitem">Contact</a></li>
+      <li role="none"><a href="../../../../contact.html" class="nav-cta" role="menuitem">Get Started</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" role="menu" aria-hidden="true">
+    <a href="../../../../services.html" role="menuitem">Services</a>
+    <a href="../../../../about.html" role="menuitem">About</a>
+    <a href="../../../../pricing.html" role="menuitem">Pricing</a>
+    <a href="../../../../contact.html" role="menuitem">Contact</a>
+    <a href="../../../../contact.html" role="menuitem">Get Started &rarr;</a>
+  </div>
+</nav>
+
+<div class="bc-bar">
+  <div class="bc-inner" aria-label="Breadcrumb">
+    <a href="https://boomymarketing.com/">Home</a> <span>&#8250;</span> <a href="https://boomymarketing.com/seo/">Seo</a> <span>&#8250;</span> <a href="https://boomymarketing.com/seo/on/">On</a> <span>&#8250;</span> <a href="https://boomymarketing.com/seo/on/north-york/">North York</a> <span>&#8250;</span> <span aria-current="page">On-Page Optimisation Strategies for North York SEO</span>
+  </div>
+</div>
+
+<section style="padding:calc(var(--nh) + 72px) 0 56px;background:linear-gradient(135deg,var(--bg2),var(--bg3))">
+  <div class="c">
+    <div class="aw">
+      <p class="badge" style="display:inline-block;margin-bottom:20px">SEO &mdash; North York</p>
+      <h1 style="font-size:clamp(1.9rem,4.5vw,3rem);margin-bottom:16px">On-Page Optimisation Strategies for North York SEO</h1>
+      <div class="art-meta">
+        <span>By Boomy Marketing</span>
+        <span>Published: 2023-05-28</span>
+        <span>North York, Canada</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="c">
+    <div class="aw">
+      <h2>On Page Optimization Strategies Seo North York: A Guide for North York Businesses</h2>
+<p>Understanding on page optimization strategies seo north york is essential for any North York business looking to grow its digital presence. In today's competitive landscape, the businesses that thrive are those that leverage every available SEO advantage.</p>
+<p>Boomy Marketing has worked with over 200 North York-area businesses across all industries. In this guide, we share what we've learned about on page optimization strategies seo north york and how it applies specifically to the North York market.</p>
+<h3>Why On Page Optimization Strategies Seo North York Matters in North York</h3>
+<p>North York's business environment is intensely competitive. Whether you're in professional services, retail, healthcare or technology, your competitors are investing in digital marketing. On Page Optimization Strategies Seo North York gives you a strategic edge that compounds over time.</p>
+<p>Unlike paid advertising that stops working the moment you stop spending, the gains from smart SEO strategy — including on page optimization strategies seo north york — build on themselves, creating lasting competitive advantages.</p>
+<h3>Key Strategies for North York Businesses</h3>
+<ul>
+<li>Conduct a thorough audit of your current North York digital presence</li>
+<li>Identify the highest-value keyword opportunities in your North York market</li>
+<li>Build high-quality content that answers your customers' specific questions</li>
+<li>Develop authoritative backlinks from relevant North York and Canadian publications</li>
+<li>Continuously monitor, test and refine your approach based on data</li>
+</ul>
+<h2>Common Mistakes North York Businesses Make</h2>
+<p>The most common mistake North York businesses make with their SEO strategy is focusing on vanity metrics — rankings for broad keywords that don't convert. We consistently see businesses celebrating page-one rankings for keywords that send zero qualified traffic.</p>
+<p>Another frequent issue is inconsistency. SEO in North York requires sustained effort over months and years. Businesses that start strong and then deprioritize SEO lose ground quickly to more consistent competitors.</p>
+<h2>Work With North York's Leading SEO Agency</h2>
+<p>Boomy Marketing has built a reputation as one of North York's most results-focused digital agencies. Our team of SEO specialists, content strategists and technical experts works together to deliver measurable, sustainable growth for North York businesses.</p>
+<p>Book a free strategy consultation to discuss how we can help your North York business grow through smarter SEO.</p>
+
+      <div class="cta-box">
+        <h2>Ready to Grow Your North York Business?</h2>
+        <p>Talk to a Boomy Marketing SEO specialist. Free audit, no commitment.</p>
+        <a href="../../../../contact.html" class="btn-p">Book a Free Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../../../../index.html" class="footer-logo" aria-label="Boomy Marketing home">Boomy<span>.</span></a>
+        <p class="footer-tagline">Toronto's award-winning digital agency. SEO, paid ads, social media &amp; web design that puts your brand light-years ahead.</p>
+        <div class="footer-socials">
+          <a href="https://instagram.com/boomymarketing" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Boomy on Instagram">&#9679;</a>
+          <a href="https://linkedin.com/company/boomymarketing" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Boomy on LinkedIn">in</a>
+          <a href="https://twitter.com/boomymarketing" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Boomy on X">&#120143;</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="../../../../services/seo.html">SEO &amp; Content</a></li>
+          <li><a href="../../../../services/google-ads.html">Google Ads</a></li>
+          <li><a href="../../../../services/meta-ads.html">Meta Ads</a></li>
+          <li><a href="../../../../services/ppc.html">PPC Management</a></li>
+          <li><a href="../../../../services/social-media.html">Social Media</a></li>
+          <li><a href="../../../../services/web-design.html">Web Design</a></li>
+          <li><a href="../../../../services/email-marketing.html">Email Marketing</a></li>
+          <li><a href="../../../../services/ai-development.html">AI Development</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Top Locations</h4>
+        <ul>
+          <li><a href="../../../../local/toronto/seo-agency/index.html">SEO Agency Toronto</a></li>
+          <li><a href="../../../../local/vancouver/seo-agency/index.html">SEO Agency Vancouver</a></li>
+          <li><a href="../../../../local/calgary/seo-agency/index.html">SEO Agency Calgary</a></li>
+          <li><a href="../../../../local/toronto/google-ads-agency/index.html">Google Ads Toronto</a></li>
+          <li><a href="../../../../local/toronto/ppc-agency/index.html">PPC Agency Toronto</a></li>
+          <li><a href="../../../../local/toronto/digital-marketing-agency/index.html">Digital Marketing Toronto</a></li>
+          <li><a href="../../../../local/montreal/seo-agency/index.html">SEO Agency Montreal</a></li>
+          <li><a href="../../../../local/edmonton/seo-agency/index.html">SEO Agency Edmonton</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="../../../../about.html">About Us</a></li>
+          <li><a href="../../../../services.html">All Services</a></li>
+          <li><a href="../../../../pricing.html">Pricing</a></li>
+          <li><a href="../../../../contact.html">Contact</a></li>
+        </ul>
+        <h4 style="margin-top:24px">Contact</h4>
+        <div class="footer-contact-item"><span class="fc-text"><a href="tel:+16475289485">(647) 528-9485</a></span></div>
+        <div class="footer-contact-item"><span class="fc-text"><a href="mailto:care@boomymarketing.com">care@boomymarketing.com</a></span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Boomy Marketing Agency. All rights reserved.</span>
+      <div class="footer-bl">
+        <a href="../../../../contact.html">Privacy Policy</a>
+        <a href="../../../../contact.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+  var btn=document.querySelector('.nav-hamburger'),menu=document.querySelector('.mobile-menu');
+  if(btn&&menu){btn.addEventListener('click',function(){
+    menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded',menu.classList.contains('open'));
+  });}
+  window.addEventListener('scroll',function(){
+    var nb=document.getElementById('navbar');
+    if(nb)nb.style.background=scrollY>40?'rgba(16,9,48,.97)':'rgba(16,9,48,.9)';
+  });
+})();
+</script>
+</body>
+</html>
