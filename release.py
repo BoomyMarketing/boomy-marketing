@@ -18,7 +18,7 @@ from pathlib import Path
 
 TODAY = date.today()
 PAGES_PER_DAY = 5
-BACKDATE_DAYS = 14       # days of backdating on first run
+LAUNCH_DATE  = date(2026, 2, 26)  # fixed — DO NOT change after first run
 DOMAIN = "https://boomymarketing.com"
 SITE_ROOT = Path(__file__).parent.resolve()
 
@@ -35,7 +35,7 @@ def get_local_pages():
 
 
 def assign_dates(pages):
-    start = TODAY - timedelta(days=BACKDATE_DAYS)
+    start = LAUNCH_DATE
     schedule = {}
     for i, page in enumerate(pages):
         day_offset = i // PAGES_PER_DAY
