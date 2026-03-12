@@ -6,10 +6,10 @@
   <title>Pricing Plans Toronto | Boomy Marketing — CAD Packages</title>
   <meta name="description" content="Transparent, no-contract digital marketing pricing in CAD. Starter from $1,500/mo, Growth from $3,500/mo, Scale from $7,500/mo. Toronto AI-powered agency packages." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://boomymarketing.com/pricing.html" />
+  <link rel="canonical" href="https://boomymarketing.com/pricing" />
   <meta property="og:title" content="Pricing Plans Toronto | Boomy Marketing — CAD Packages" />
   <meta property="og:description" content="Transparent CAD pricing for AI-powered digital marketing. Choose from Starter, Growth, Scale, or Enterprise. No hidden fees." />
-  <meta property="og:url" content="https://boomymarketing.com/pricing.html" />
+  <meta property="og:url" content="https://boomymarketing.com/pricing" />
   <meta property="og:type" content="website" />
   <meta property="article:published_time" content="2026-03-08T09:00:00+00:00" />
 
@@ -399,7 +399,7 @@
   window.addEventListener('resize',()=>{resizeCanvas();initStars()});
   const navbar=document.getElementById('navbar');
   window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40);document.getElementById('progressBar').style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%'});
-  const ham=document.getElementById('hamburger'),mob=document.getElementById('mobileMenu');
+  const ham=document.querySelector('.nav-hamburger'),mob=document.getElementById('mobile-menu');if(!ham||!mob)return;
   ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open')});
   document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{q.parentElement.classList.toggle('open')})});
   if(typeof gsap!=='undefined'){gsap.registerPlugin(ScrollTrigger);gsap.utils.toArray('.reveal').forEach(el=>{gsap.to(el,{opacity:1,y:0,duration:.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}})})}

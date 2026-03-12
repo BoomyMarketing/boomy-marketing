@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Is SEO? Understanding Search Engine Optimisation Basics | Boomy Marketing</title>
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="What is SEO and how does it work? A comprehensive overview of search engine optimisation basics for Canadian business owners looking to grow organic traffic.">
+  <link rel="canonical" href="https://boomymarketing.com/seo/what-is-seo-understanding-search-engine-optimization-basics/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="What Is SEO? Understanding Search Engine Optimisation Basics | Boomy Marketing">
+  <meta property="og:description" content="What is SEO and how does it work? A comprehensive overview of search engine optimisation basics for Canadian business owners looking to grow organic traffic.">
+  <meta property="og:url" content="https://boomymarketing.com/seo/what-is-seo-understanding-search-engine-optimization-basics/">
+  <meta property="og:image" content="https://boomymarketing.com/og-image.png">
+  <meta property="og:locale" content="en_CA">
+  <meta property="og:site_name" content="Boomy Marketing">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+:root{--bg:#100930;--bg2:#0d0726;--bg3:#160b38;--or:#FF6B35;--yw:#FFD23F;--w:#fff;
+  --mu:rgba(255,255,255,.65);--cb:rgba(255,255,255,.06);--brd:rgba(255,255,255,.1);
+  --r:16px;--fh:'Berkshire Swash',serif;--fb:'Inter',sans-serif;--nh:72px;--primary:#FF6B35}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--w);font-family:var(--fb);font-size:17px;line-height:1.7;min-height:100vh}
+a{color:var(--or);text-decoration:none}a:hover{text-decoration:underline}
+h1,h2,h3,h4{font-family:var(--fh);line-height:1.2}
+img{max-width:100%;height:auto}
+.c{max-width:1120px;margin:0 auto;padding:0 24px}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nh);background:rgba(16,9,48,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--brd)}
+.nav-inner{max-width:1120px;margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-logo{font-family:var(--fh);font-size:1.6rem;color:var(--w)}
+.nav-logo span{color:var(--or)}
+.nav-links{list-style:none;display:flex;align-items:center;gap:8px}
+.nav-links a{color:rgba(255,255,255,.85);padding:8px 14px;border-radius:8px;font-size:.95rem;font-weight:500;transition:all .2s}
+.nav-links a:hover{color:var(--w);background:rgba(255,255,255,.08);text-decoration:none}
+.nav-cta{background:var(--or)!important;color:var(--w)!important;border-radius:8px!important}
+.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--w);border-radius:2px}
+.mobile-menu{display:none;position:absolute;top:var(--nh);left:0;right:0;background:rgba(16,9,48,.97);padding:16px 24px 24px;flex-direction:column;gap:8px;border-bottom:1px solid var(--brd)}
+.mobile-menu a{display:block;color:rgba(255,255,255,.85);padding:12px 0;border-bottom:1px solid var(--brd);font-weight:500}
+.mobile-menu.open{display:flex}
+@media(max-width:768px){.nav-links{display:none}.nav-hamburger{display:flex}}
+.bc-bar{background:rgba(255,255,255,.03);border-bottom:1px solid var(--brd);padding-top:var(--nh)}
+.bc-inner{max-width:1120px;margin:0 auto;padding:10px 24px;color:var(--mu);font-size:.83rem;display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.bc-inner a{color:var(--mu)}.bc-inner a:hover{color:var(--or);text-decoration:none}
+.hero{padding:calc(var(--nh) + 72px) 0 64px;background:linear-gradient(135deg,var(--bg2),var(--bg3));text-align:center}
+.badge{display:inline-block;background:rgba(255,107,53,.15);color:var(--or);border:1px solid rgba(255,107,53,.3);border-radius:100px;padding:5px 16px;font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:22px}
+.hero h1{font-size:clamp(2.1rem,5vw,3.3rem);margin-bottom:18px}
+.hero-sub{font-size:1.1rem;color:var(--mu);max-width:640px;margin:0 auto 32px}
+.btn-p{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--or),#e55a28);color:var(--w);padding:13px 30px;border-radius:100px;font-weight:700;font-size:1rem;transition:all .3s;box-shadow:0 4px 20px rgba(255,107,53,.35)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,107,53,.45);color:var(--w);text-decoration:none}
+.btn-s{display:inline-flex;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:var(--w);padding:13px 30px;border-radius:100px;font-weight:600;font-size:1rem;transition:all .3s;margin-left:10px}
+.btn-s:hover{background:rgba(255,255,255,.14);color:var(--w);text-decoration:none}
+.stats{display:flex;justify-content:center;gap:48px;margin-top:52px;flex-wrap:wrap}
+.stat .n{font-family:var(--fh);font-size:2.1rem;color:var(--or)}
+.stat .l{color:var(--mu);font-size:.88rem}
+.sec{padding:72px 0}.sec-dark{background:var(--bg2)}
+.sec-label{color:var(--or);font-weight:700;font-size:.74rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.sec-title{font-size:clamp(1.75rem,3.5vw,2.4rem);margin-bottom:13px}
+.sec-sub{color:var(--mu);font-size:1.02rem;max-width:580px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
+@media(max-width:900px){.g3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.g3,.g2{grid-template-columns:1fr}}
+.card{background:var(--cb);border:1px solid var(--brd);border-radius:var(--r);padding:26px;transition:all .3s}
+.card:hover{border-color:rgba(255,107,53,.3);transform:translateY(-3px)}
+.card-icon{font-size:1.75rem;margin-bottom:13px}
+.card h3{font-size:1.12rem;margin-bottom:8px}
+.card p{color:var(--mu);font-size:.91rem;line-height:1.6}
+.step{display:flex;gap:20px;align-items:flex-start;margin-bottom:36px}
+.step-num{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--or),#e55a28);color:var(--w);display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:1.1rem}
+.step h3{font-size:1.1rem;margin-bottom:6px}
+.step p{color:var(--mu);font-size:.93rem;line-height:1.6}
+.faq-item{border-bottom:1px solid var(--brd);padding:20px 0}
+.faq-q{font-size:1.03rem;font-weight:600;margin-bottom:9px}
+.faq-a{color:var(--mu);line-height:1.7}
+.aw{max-width:780px;margin:0 auto}
+.aw h2{font-size:1.72rem;margin:40px 0 17px}
+.aw h3{font-size:1.28rem;margin:26px 0 13px;color:var(--or)}
+.aw p{margin-bottom:17px;color:rgba(255,255,255,.87);line-height:1.75}
+.aw ul,.aw ol{margin:0 0 17px 22px;color:rgba(255,255,255,.87)}
+.aw li{margin-bottom:7px;line-height:1.63}
+.art-meta{color:var(--mu);font-size:.87rem;margin-bottom:26px;display:flex;gap:14px;flex-wrap:wrap}
+.cta-box{background:linear-gradient(135deg,rgba(255,107,53,.13),rgba(255,210,63,.05));border:1px solid rgba(255,107,53,.24);border-radius:var(--r);padding:44px;text-align:center;margin-top:44px}
+.cta-box h2{font-size:1.9rem;margin-bottom:13px}
+.cta-box p{color:var(--mu);margin-bottom:26px;max-width:480px;margin-left:auto;margin-right:auto}
+.city-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+@media(max-width:900px){.city-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.city-grid{grid-template-columns:repeat(2,1fr)}}
+.city-link{background:var(--cb);border:1px solid var(--brd);border-radius:10px;padding:14px 16px;color:rgba(255,255,255,.85);font-size:.9rem;font-weight:500;transition:all .2s;display:block}
+.city-link:hover{border-color:rgba(255,107,53,.4);color:var(--or);text-decoration:none;transform:translateY(-2px)}
+.footer{background:var(--bg2);border-top:1px solid var(--brd);padding:52px 0 26px}
+.footer-inner{max-width:1120px;margin:0 auto;padding:0 24px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}
+@media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.footer-top{grid-template-columns:1fr}}
+.footer-logo{font-family:var(--fh);font-size:1.4rem;color:var(--w);display:block;margin-bottom:9px}
+.footer-logo span{color:var(--or)}
+.footer-tagline{color:var(--mu);font-size:.87rem;line-height:1.6;margin-bottom:18px}
+.footer-col h4{font-size:.73rem;letter-spacing:2px;text-transform:uppercase;color:var(--or);margin-bottom:13px;font-family:var(--fb);font-weight:700}
+.footer-col ul{list-style:none}.footer-col ul li{margin-bottom:8px}
+.footer-col ul li a{color:var(--mu);font-size:.87rem;transition:color .2s}
+.footer-col ul li a:hover{color:var(--w);text-decoration:none}
+.footer-bottom{border-top:1px solid var(--brd);padding-top:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:9px}
+.footer-copy{color:var(--mu);font-size:.8rem}
+.footer-bl{display:flex;gap:16px}.footer-bl a{color:var(--mu);font-size:.8rem}
+.footer-bl a:hover{color:var(--w)}
+</style>
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Boomy Marketing",
+  "url": "https://boomymarketing.com/seo/what-is-seo-understanding-search-engine-optimization-basics/",
+  "telephone": "+16475289485",
+  "email": "care@boomymarketing.com",
+  "address": {"@type": "PostalAddress","addressLocality": "Toronto","addressRegion": "Ontario","addressCountry": "CA"},
+  "priceRange": "$$$",
+  "foundingDate": "2020",
+  "datePublished": "2023-09-28"
+}</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What is the difference between SEO and content marketing?","acceptedAnswer":{"@type":"Answer","text":"SEO tells you what your audience searches for and optimises content to rank. Content marketing creates valuable articles and guides that attract links and build authority. The most effective strategies use both together."}},
+    {"@type":"Question","name":"How does Google AI Overview affect SEO?","acceptedAnswer":{"@type":"Answer","text":"AI Overviews show AI-generated answers that can reduce clicks for informational queries. However being cited in AI Overviews is itself an SEO opportunity. Optimising for E-E-A-T and structured data helps your content get cited."}},
+    {"@type":"Question","name":"What is domain authority?","acceptedAnswer":{"@type":"Answer","text":"A Moz metric predicting how well a site will rank based on its backlink profile. Scored 0-100. Improve it by earning high-quality backlinks from authoritative websites over time."}},
+    {"@type":"Question","name":"Can SEO work for B2B businesses?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. B2B buyers use search to research vendors. B2B SEO focuses on longer specific keywords reflecting the research phase, thought leadership content, and content that supports the sales process."}},
+    {"@type":"Question","name":"What is local vs national SEO?","acceptedAnswer":{"@type":"Answer","text":"Local SEO targets geographic searches and optimises for Google Maps. National SEO targets broader keywords across an entire country. Most small businesses should prioritise local SEO first."}}
+  ]
+}</script><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://boomymarketing.com/"},
+    {"@type":"ListItem","position":2,"name":"SEO","item":"https://boomymarketing.com/seo/"},
+    {"@type":"ListItem","position":3,"name":"SEO Explained","item":"https://boomymarketing.com/seo/what-is-seo-understanding-search-engine-optimization-basics/"}
+  ]
+}</script>
+</head><body><nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="../../index.html" class="nav-logo" aria-label="Boomy Marketing — Home">Boomy<span>.</span></a>
+    <ul class="nav-links" role="menubar">
+      <li role="none"><a href="../../services.html" role="menuitem">Services</a></li>
+      <li role="none"><a href="../../about.html" role="menuitem">About</a></li>
+      <li role="none"><a href="../../pricing.html" role="menuitem">Pricing</a></li>
+      <li role="none"><a href="../../contact.html" role="menuitem">Contact</a></li>
+      <li role="none"><a href="../../contact.html" class="nav-cta" role="menuitem">Get Started</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" role="menu" aria-hidden="true">
+    <a href="../../services.html" role="menuitem">Services</a>
+    <a href="../../about.html" role="menuitem">About</a>
+    <a href="../../pricing.html" role="menuitem">Pricing</a>
+    <a href="../../contact.html" role="menuitem">Contact</a>
+    <a href="../../contact.html" role="menuitem">Get Started &rarr;</a>
+  </div>
+</nav><div class="bc-bar"><div class="bc-inner"><a href="https://boomymarketing.com/">Home</a> &rsaquo; <a href="https://boomymarketing.com/seo/">SEO</a> &rsaquo; <span>SEO Explained</span></div></div><section class="hero" style="padding:calc(var(--nh) + 52px) 0 48px"><div class="c"><p class="badge">SEO Explained</p><h1 style="max-width:780px;margin:0 auto 18px">What Is SEO? Understanding Search Engine Optimisation Basics</h1><p class="hero-sub">SEO is the backbone of long-term digital growth. This overview explains what it is, how it works, and why every Canadian business needs it.</p><div class="art-meta" style="justify-content:center"><span>Published 2023-09-28</span><span>Boomy Marketing</span></div></div></section><section class="sec"><div class="c"><div class="aw"><h2>Defining SEO in the Modern Search Era</h2><p>Search Engine Optimisation (SEO) is the discipline of improving a website visibility in organic search results. The goal is to appear as high as possible when potential customers search for products, services, or information related to your business. In 2025 and beyond, SEO extends beyond traditional Google rankings to encompass visibility in AI Overviews, Bing search, voice search, and emerging AI platforms like Perplexity and ChatGPT search. Businesses optimised for search today are positioning themselves for the full spectrum of organic discovery.</p><h2>How Search Engines Work: Three Stages</h2><p>Crawling: Search engine bots visit websites by following links, discovering new pages and revisiting existing ones. If a page cannot be crawled it cannot be indexed or ranked. Indexing: After crawling, search engines process and store page content in their index. Only indexed pages can appear in search results. Ranking: When a user searches, the engine retrieves relevant indexed pages and ranks them using hundreds of signals. The pages Google considers most relevant, authoritative, and user-friendly appear at the top.</p><h2>What Changed in SEO: The Evolution</h2><p>In the early days, stuffing keywords into a page was enough to rank. Today, Google algorithm understands natural language, assesses content quality, evaluates user experience, and detects manipulation. This evolution benefits legitimate businesses: genuine quality is now rewarded. The most significant recent changes include the Helpful Content Update (prioritising people-first content), Core Web Vitals becoming ranking signals, and AI Overviews changing how some informational queries are answered.</p><h2>Measuring SEO Success: Visibility to Revenue</h2><p>SEO success is measured through a hierarchy: Rankings (where do you appear for target keywords?), Organic Impressions (how often do your pages appear?), Organic Click-Through Rate (what percentage click your result?), Organic Traffic (how many visitors arrive via search?), Organic Conversion Rate (what percentage take a desired action?), and Revenue from Organic (what revenue is attributed to organic search?). At Boomy Marketing, we track all six levels for our clients and report on what matters most to your business goals.</p><div class="cta-box"><h2>Need Help With Your SEO?</h2><p>Get a free audit from Boomy Marketing today.</p><a href="../../contact.html" class="btn-p">Get a Free SEO Audit</a></div></div></div></section><section class="sec sec-dark"><div class="c"><p class="sec-label">FAQ</p><h2 class="sec-title">Common Questions</h2><div style="margin-top:32px"><div class="faq-item"><p class="faq-q">What is the difference between SEO and content marketing?</p><p class="faq-a">SEO tells you what your audience searches for and optimises content to rank. Content marketing creates valuable articles and guides that attract links and build authority. The most effective strategies use both together.</p></div><div class="faq-item"><p class="faq-q">How does Google AI Overview affect SEO?</p><p class="faq-a">AI Overviews show AI-generated answers that can reduce clicks for informational queries. However being cited in AI Overviews is itself an SEO opportunity. Optimising for E-E-A-T and structured data helps your content get cited.</p></div><div class="faq-item"><p class="faq-q">What is domain authority?</p><p class="faq-a">A Moz metric predicting how well a site will rank based on its backlink profile. Scored 0-100. Improve it by earning high-quality backlinks from authoritative websites over time.</p></div><div class="faq-item"><p class="faq-q">Can SEO work for B2B businesses?</p><p class="faq-a">Absolutely. B2B buyers use search to research vendors. B2B SEO focuses on longer specific keywords reflecting the research phase, thought leadership content, and content that supports the sales process.</p></div><div class="faq-item"><p class="faq-q">What is local vs national SEO?</p><p class="faq-a">Local SEO targets geographic searches and optimises for Google Maps. National SEO targets broader keywords across an entire country. Most small businesses should prioritise local SEO first.</p></div></div></div></section><footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-col">
+        <a href="../../index.html" class="footer-logo">Boomy<span>.</span></a>
+        <p class="footer-tagline">Canada&rsquo;s performance digital marketing agency. SEO, paid media and AI-driven growth strategies that move the needle.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="../../services/seo.html">SEO</a></li>
+          <li><a href="../../services/google-ads.html">Google Ads</a></li>
+          <li><a href="../../services/meta-ads.html">Meta Ads</a></li>
+          <li><a href="../../services/web-design.html">Web Design</a></li>
+          <li><a href="../../services/ai-automations.html">AI Automations</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="../../about.html">About</a></li>
+          <li><a href="../../pricing.html">Pricing</a></li>
+          <li><a href="../../contact.html">Contact</a></li>
+          <li><a href="https://boomymarketing.com/boomy-digital-marketing-blog/">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p class="footer-contact-item">Toronto, Ontario, Canada</p>
+        <p class="footer-contact-item"><a href="tel:+16475289485" style="color:var(--mu)">(647) 528-9485</a></p>
+        <p class="footer-contact-item"><a href="mailto:care@boomymarketing.com" style="color:var(--mu)">care@boomymarketing.com</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Boomy Marketing. All rights reserved.</p>
+      <div class="footer-bl">
+        <a href="../../about.html">Privacy</a>
+        <a href="../../about.html">Terms</a>
+        <a href="https://boomymarketing.com/sitemap/">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer><script>
+(function(){
+  var btn=document.querySelector('.nav-hamburger'),menu=document.getElementById('mobile-menu');
+  if(!btn||!menu)return;
+  btn.addEventListener('click',function(){var o=menu.classList.toggle('open');btn.classList.toggle('open',o);btn.setAttribute('aria-expanded',String(o));});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');});});
+}());
+</script></body></html>

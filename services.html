@@ -6,10 +6,10 @@
   <title>Digital Marketing Services Toronto | Boomy Marketing</title>
   <meta name="description" content="Explore all 14 digital marketing services from Boomy Marketing Toronto — SEO, GEO, Google Ads, Meta Ads, AI Automations, Web Design, Voice AI and more. AI-powered." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://boomymarketing.com/services.html" />
+  <link rel="canonical" href="https://boomymarketing.com/services" />
   <meta property="og:title" content="Digital Marketing Services Toronto | Boomy Marketing" />
   <meta property="og:description" content="14 AI-powered digital marketing services for Canadian businesses. SEO, paid ads, web design, AI automations, and more from Toronto's top agency." />
-  <meta property="og:url" content="https://boomymarketing.com/services.html" />
+  <meta property="og:url" content="https://boomymarketing.com/services" />
   <meta property="og:type" content="website" />
   <meta property="article:published_time" content="2026-03-08T09:00:00+00:00" />
 
@@ -365,7 +365,7 @@
   window.addEventListener('resize',()=>{resizeCanvas();initStars()});
   const navbar=document.getElementById('navbar');
   window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40);document.getElementById('progressBar').style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%'});
-  const ham=document.getElementById('hamburger'),mob=document.getElementById('mobileMenu');
+  const ham=document.querySelector('.nav-hamburger'),mob=document.getElementById('mobile-menu');if(!ham||!mob)return;
   ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open')});
   if(typeof gsap!=='undefined'){gsap.registerPlugin(ScrollTrigger);gsap.utils.toArray('.reveal').forEach(el=>{gsap.to(el,{opacity:1,y:0,duration:.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}})})}
 </script>

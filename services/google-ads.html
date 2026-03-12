@@ -6,10 +6,10 @@
   <title>Google Ads Management Toronto — Boomy Marketing</title>
   <meta name="description" content="Expert Google Ads management in Toronto. Search, Display, Shopping &amp; YouTube campaigns engineered for maximum ROI. Certified Google Partners managing $2M+ in ad." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://boomymarketing.com/services/google-ads.html" />
+  <link rel="canonical" href="https://boomymarketing.com/services/google-ads" />
   <meta property="og:title" content="Google Ads Management Toronto — Boomy Marketing" />
   <meta property="og:description" content="Stop wasting ad spend. Boomy Marketing's certified Google Ads team builds and manages campaigns that generate qualified leads and measurable revenue for Toronto businesses." />
-  <meta property="og:url" content="https://boomymarketing.com/services/google-ads.html" />
+  <meta property="og:url" content="https://boomymarketing.com/services/google-ads" />
   <meta property="og:type" content="website" />
   <script type="application/ld+json">
   [
@@ -289,7 +289,7 @@
   function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);stars.forEach(s=>{s.o+=Math.sin(Date.now()*s.s*.001)*.005;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${Math.max(.05,s.o)})`;ctx.fill()});requestAnimationFrame(draw)}
   resize();window.addEventListener('resize',resize);draw();
   window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40)});
-  document.getElementById('hamburger').addEventListener('click',function(){this.classList.toggle('open');document.getElementById('mobileMenu').classList.toggle('open')});
+  document.querySelector('.nav-hamburger').addEventListener('click',function(){this.classList.toggle('open');document.getElementById('mobile-menu').classList.toggle('open')});
   function toggleFaq(btn){const a=btn.nextElementSibling;const isOpen=a.classList.contains('open');document.querySelectorAll('.faq-a.open').forEach(el=>el.classList.remove('open'));document.querySelectorAll('.faq-q.open').forEach(el=>el.classList.remove('open'));if(!isOpen){a.classList.add('open');btn.classList.add('open')}}
 </script>
 </body>

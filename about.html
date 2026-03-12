@@ -6,10 +6,10 @@
   <title>About Boomy Marketing — Toronto's AI-Powered Digital Agency</title>
   <meta name="description" content="Meet the team behind Boomy Marketing — Toronto's most forward-thinking digital agency. Founded 2020, blending AI and marketing expertise to deliver measurable." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://boomymarketing.com/about.html" />
+  <link rel="canonical" href="https://boomymarketing.com/about" />
   <meta property="og:title" content="About Boomy Marketing — Toronto's AI-Powered Digital Agency" />
   <meta property="og:description" content="Meet the team behind Boomy Marketing — Toronto's most forward-thinking digital agency blending AI and marketing to get real results." />
-  <meta property="og:url" content="https://boomymarketing.com/about.html" />
+  <meta property="og:url" content="https://boomymarketing.com/about" />
   <meta property="og:type" content="website" />
   <meta property="article:published_time" content="2026-03-08T09:00:00+00:00" />
   <meta property="article:modified_time" content="2026-03-08T09:00:00+00:00" />
@@ -489,8 +489,9 @@
   window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); document.getElementById('progressBar').style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%'; });
 
   // Hamburger
-  const ham = document.getElementById('hamburger');
-  const mob = document.getElementById('mobileMenu');
+  const ham = document.querySelector('.nav-hamburger');
+  const mob = document.getElementById('mobile-menu');
+  if (!ham || !mob) return;
   ham.addEventListener('click', () => { ham.classList.toggle('open'); mob.classList.toggle('open'); });
 
   // GSAP reveal

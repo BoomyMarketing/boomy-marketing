@@ -1307,8 +1307,10 @@
    4. HAMBURGER MENU
 ================================================================ */
 (function () {
-  var btn  = document.getElementById('hamburger');
-  var menu = document.getElementById('mobileMenu');
+  var btn  = document.querySelector('.nav-hamburger');
+  var menu = document.getElementById('mobile-menu');
+
+  if (!btn || !menu) return;
 
   btn.addEventListener('click', function () {
     var open = menu.classList.toggle('open');

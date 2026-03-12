@@ -6,10 +6,10 @@
   <title>AI Outbound Sales Toronto — Automated Prospecting | Boomy</title>
   <meta name="description" content="AI-powered outbound sales for Toronto businesses. Automated prospecting, cold email sequences, LinkedIn automation, and SDR automation that books more meetings at a." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://boomymarketing.com/services/ai-outbound.html" />
+  <link rel="canonical" href="https://boomymarketing.com/services/ai-outbound" />
   <meta property="og:title" content="AI Outbound Sales Toronto — Automated Prospecting | Boomy" />
   <meta property="og:description" content="Replace manual SDR work with AI-powered outbound. Automated prospecting, cold email sequences, and LinkedIn automation that fills your pipeline 24/7." />
-  <meta property="og:url" content="https://boomymarketing.com/services/ai-outbound.html" />
+  <meta property="og:url" content="https://boomymarketing.com/services/ai-outbound" />
   <meta property="og:type" content="website" />
 
   <script type="application/ld+json">
@@ -423,7 +423,7 @@
   function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);stars.forEach(s=>{s.o+=Math.sin(Date.now()*s.s*.001)*.005;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${Math.max(.05,s.o)})`;ctx.fill()});requestAnimationFrame(draw)}
   resize();window.addEventListener('resize',resize);draw();
   window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40)});
-  document.getElementById('hamburger').addEventListener('click',function(){this.classList.toggle('open');document.getElementById('mobileMenu').classList.toggle('open')});
+  document.querySelector('.nav-hamburger').addEventListener('click',function(){this.classList.toggle('open');document.getElementById('mobile-menu').classList.toggle('open')});
   function toggleFaq(btn){const a=btn.nextElementSibling;const isOpen=a.classList.contains('open');document.querySelectorAll('.faq-a.open').forEach(el=>el.classList.remove('open'));document.querySelectorAll('.faq-q.open').forEach(el=>el.classList.remove('open'));if(!isOpen){a.classList.add('open');btn.classList.add('open')}}
 </script>
 </body>
