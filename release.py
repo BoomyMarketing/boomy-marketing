@@ -10,9 +10,11 @@ Logic:
   - HTML files are NOT modified
 """
 
+import json
 import os
 import re
 import subprocess
+import urllib.request
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -21,6 +23,7 @@ PAGES_PER_DAY = 5
 LAUNCH_DATE  = date(2026, 2, 26)  # fixed — DO NOT change after first run
 DOMAIN = "https://boomymarketing.com"
 SITE_ROOT = Path(__file__).parent.resolve()
+INDEXNOW_KEY = "0af09ac783bf4a66a867cf66d3f7f01a"
 
 
 def get_local_pages():
@@ -145,6 +148,33 @@ if __name__ == "__main__":
 
     in_sitemap = update_sitemap(schedule)
     print(f"sitemap.xml: {in_sitemap} local URLs")
+
+    # IndexNow — notify Bing of newly published pages
+    yesterday = TODAY - timedelta(days=1)
+    new_today = [p for p, d in schedule.items() if d == TODAY]
+    if new_today:
+        urls = []
+        for page in new_today:
+            rel = page.relative_to(SITE_ROOT).as_posix().replace("\\", "/")
+            url_path = rel.replace("/index.html", "")
+            urls.append(f"{DOMAIN}/{url_path}")
+        payload = {
+            "host": DOMAIN.replace("https://", ""),
+            "key": INDEXNOW_KEY,
+            "keyLocation": f"{DOMAIN}/{INDEXNOW_KEY}.txt",
+            "urlList": urls
+        }
+        try:
+            data = json.dumps(payload).encode("utf-8")
+            req = urllib.request.Request(
+                "https://api.indexnow.org/indexnow",
+                data=data,
+                headers={"Content-Type": "application/json; charset=utf-8"}
+            )
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                print(f"IndexNow: submitted {len(urls)} URLs (HTTP {resp.status})")
+        except Exception as ex:
+            print(f"IndexNow: error — {ex}")
 
     # Commit if anything changed
     result = subprocess.run(
