@@ -167,7 +167,7 @@ if __name__ == "__main__":
         try:
             data = json.dumps(payload).encode("utf-8")
             req = urllib.request.Request(
-                "https://api.indexnow.org/indexnow",
+                "https://www.bing.com/indexnow",
                 data=data,
                 headers={"Content-Type": "application/json; charset=utf-8"}
             )
