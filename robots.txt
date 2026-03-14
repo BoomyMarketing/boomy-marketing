@@ -80,6 +80,11 @@ Allow: /local/coquitlam/google-ads-agency/
 Allow: /local/coquitlam/seo-agency/
 Allow: /local/coquitlam/seo-company/
 Allow: /local/coquitlam/social-media-marketing-agency/
+Allow: /local/coquitlam/web-design-company/
+Allow: /local/edmonton/ai-automation-agency/
+Allow: /local/edmonton/ai-development-company/
+Allow: /local/edmonton/content-marketing-agency/
+Allow: /local/edmonton/digital-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
