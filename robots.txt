@@ -85,6 +85,11 @@ Allow: /local/edmonton/ai-automation-agency/
 Allow: /local/edmonton/ai-development-company/
 Allow: /local/edmonton/content-marketing-agency/
 Allow: /local/edmonton/digital-marketing-agency/
+Allow: /local/edmonton/email-marketing-agency/
+Allow: /local/edmonton/google-ads-agency/
+Allow: /local/edmonton/seo-agency/
+Allow: /local/edmonton/seo-company/
+Allow: /local/edmonton/social-media-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
