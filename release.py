@@ -176,6 +176,38 @@ if __name__ == "__main__":
         except Exception as ex:
             print(f"IndexNow: error — {ex}")
 
+    # GSC Sitemaps API — resubmit sitemap to Google
+    gsc_key_env = os.environ.get("GSC_SERVICE_ACCOUNT_KEY")
+    gsc_key_file = SITE_ROOT / "gsc-key.json"
+    if gsc_key_env:
+        gsc_key_file.write_text(gsc_key_env, encoding="utf-8")
+    if gsc_key_file.exists():
+        try:
+            from google.oauth2 import service_account
+            import google.auth.transport.requests as google_requests
+            import urllib.parse
+            creds = service_account.Credentials.from_service_account_file(
+                str(gsc_key_file),
+                scopes=["https://www.googleapis.com/auth/webmasters"]
+            )
+            creds.refresh(google_requests.Request())
+            token = creds.token
+            site_url = urllib.parse.quote(DOMAIN + "/", safe="")
+            sitemap_url = urllib.parse.quote(f"{DOMAIN}/sitemap.xml", safe="")
+            api_url = f"https://www.googleapis.com/webmasters/v3/sites/{site_url}/sitemaps/{sitemap_url}"
+            req = urllib.request.Request(api_url, data=b"", method="PUT")
+            req.add_header("Authorization", f"Bearer {token}")
+            req.add_header("Content-Length", "0")
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                print(f"GSC sitemap submit: HTTP {resp.status}")
+        except ImportError:
+            print("GSC: google-auth not installed, skipping")
+        except Exception as ex:
+            print(f"GSC sitemap submit error: {ex}")
+        finally:
+            if gsc_key_env and gsc_key_file.exists():
+                gsc_key_file.unlink()  # remove temp key file
+
     # Commit if anything changed
     result = subprocess.run(
         ["git", "diff", "--quiet", "robots.txt", "sitemap.xml"],
