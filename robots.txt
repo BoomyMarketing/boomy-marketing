@@ -90,6 +90,11 @@ Allow: /local/edmonton/google-ads-agency/
 Allow: /local/edmonton/seo-agency/
 Allow: /local/edmonton/seo-company/
 Allow: /local/edmonton/social-media-marketing-agency/
+Allow: /local/edmonton/web-design-company/
+Allow: /local/fort-mcmurray/ai-automation-agency/
+Allow: /local/fort-mcmurray/ai-development-company/
+Allow: /local/fort-mcmurray/content-marketing-agency/
+Allow: /local/fort-mcmurray/digital-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
