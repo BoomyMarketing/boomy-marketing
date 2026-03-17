@@ -95,6 +95,11 @@ Allow: /local/fort-mcmurray/ai-automation-agency/
 Allow: /local/fort-mcmurray/ai-development-company/
 Allow: /local/fort-mcmurray/content-marketing-agency/
 Allow: /local/fort-mcmurray/digital-marketing-agency/
+Allow: /local/fort-mcmurray/email-marketing-agency/
+Allow: /local/fort-mcmurray/google-ads-agency/
+Allow: /local/fort-mcmurray/seo-agency/
+Allow: /local/fort-mcmurray/seo-company/
+Allow: /local/fort-mcmurray/social-media-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
