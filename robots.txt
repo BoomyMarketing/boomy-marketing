@@ -100,6 +100,11 @@ Allow: /local/fort-mcmurray/google-ads-agency/
 Allow: /local/fort-mcmurray/seo-agency/
 Allow: /local/fort-mcmurray/seo-company/
 Allow: /local/fort-mcmurray/social-media-marketing-agency/
+Allow: /local/fort-mcmurray/web-design-company/
+Allow: /local/fredericton/ai-automation-agency/
+Allow: /local/fredericton/ai-development-company/
+Allow: /local/fredericton/content-marketing-agency/
+Allow: /local/fredericton/digital-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
