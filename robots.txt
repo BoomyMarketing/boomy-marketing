@@ -105,6 +105,11 @@ Allow: /local/fredericton/ai-automation-agency/
 Allow: /local/fredericton/ai-development-company/
 Allow: /local/fredericton/content-marketing-agency/
 Allow: /local/fredericton/digital-marketing-agency/
+Allow: /local/fredericton/email-marketing-agency/
+Allow: /local/fredericton/google-ads-agency/
+Allow: /local/fredericton/seo-agency/
+Allow: /local/fredericton/seo-company/
+Allow: /local/fredericton/social-media-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
