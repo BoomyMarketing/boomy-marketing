@@ -110,6 +110,11 @@ Allow: /local/fredericton/google-ads-agency/
 Allow: /local/fredericton/seo-agency/
 Allow: /local/fredericton/seo-company/
 Allow: /local/fredericton/social-media-marketing-agency/
+Allow: /local/fredericton/web-design-company/
+Allow: /local/guelph/ai-automation-agency/
+Allow: /local/guelph/ai-development-company/
+Allow: /local/guelph/content-marketing-agency/
+Allow: /local/guelph/digital-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
