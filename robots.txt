@@ -115,6 +115,11 @@ Allow: /local/guelph/ai-automation-agency/
 Allow: /local/guelph/ai-development-company/
 Allow: /local/guelph/content-marketing-agency/
 Allow: /local/guelph/digital-marketing-agency/
+Allow: /local/guelph/email-marketing-agency/
+Allow: /local/guelph/google-ads-agency/
+Allow: /local/guelph/seo-agency/
+Allow: /local/guelph/seo-company/
+Allow: /local/guelph/social-media-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
