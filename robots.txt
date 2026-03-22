@@ -120,6 +120,11 @@ Allow: /local/guelph/google-ads-agency/
 Allow: /local/guelph/seo-agency/
 Allow: /local/guelph/seo-company/
 Allow: /local/guelph/social-media-marketing-agency/
+Allow: /local/guelph/web-design-company/
+Allow: /local/halifax/ai-automation-agency/
+Allow: /local/halifax/ai-development-company/
+Allow: /local/halifax/content-marketing-agency/
+Allow: /local/halifax/digital-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
