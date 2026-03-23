@@ -125,6 +125,11 @@ Allow: /local/halifax/ai-automation-agency/
 Allow: /local/halifax/ai-development-company/
 Allow: /local/halifax/content-marketing-agency/
 Allow: /local/halifax/digital-marketing-agency/
+Allow: /local/halifax/email-marketing-agency/
+Allow: /local/halifax/google-ads-agency/
+Allow: /local/halifax/seo-agency/
+Allow: /local/halifax/seo-company/
+Allow: /local/halifax/social-media-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
