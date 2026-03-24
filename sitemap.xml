@@ -2,119 +2,119 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- Core Pages -->
-<url>
+  <url>
     <loc>https://boomymarketing.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/pricing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/services/seo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/services/geo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/services/google-ads</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/services/meta-ads</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/services/ai-automations</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/services/ai-development</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/services/web-design</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/services/saas-products</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/services/voice-ai</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/services/email-marketing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/services/ai-outbound</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/services/social-media</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/services/content-marketing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
-<url>
+  <url>
     <loc>https://boomymarketing.com/services/ppc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
 
   <!-- Published Local Pages -->
@@ -122,511 +122,451 @@
     <loc>https://boomymarketing.com/local/abbotsford/ai-automation-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-26</lastmod>
+    <lastmod>2026-03-14</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/abbotsford/ai-development-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-26</lastmod>
+    <lastmod>2026-03-14</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/abbotsford/content-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-26</lastmod>
+    <lastmod>2026-03-14</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/abbotsford/digital-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-26</lastmod>
+    <lastmod>2026-03-14</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/abbotsford/email-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-26</lastmod>
+    <lastmod>2026-03-14</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/abbotsford/google-ads-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-03-15</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/abbotsford/seo-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-03-15</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/abbotsford/seo-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-03-15</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/abbotsford/social-media-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-03-15</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/abbotsford/web-design-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-27</lastmod>
+    <lastmod>2026-03-15</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/barrie/ai-automation-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-28</lastmod>
+    <lastmod>2026-03-16</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/barrie/ai-development-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-28</lastmod>
+    <lastmod>2026-03-16</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/barrie/content-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-28</lastmod>
+    <lastmod>2026-03-16</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/barrie/digital-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-28</lastmod>
+    <lastmod>2026-03-16</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/barrie/email-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-28</lastmod>
+    <lastmod>2026-03-16</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/barrie/google-ads-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-17</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/barrie/seo-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-04</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/barrie/seo-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-02-03</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/barrie/social-media-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-17</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/barrie/web-design-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-17</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/brampton/ai-automation-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-17</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/brampton/ai-development-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-17</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/brampton/content-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-18</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/brampton/digital-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-02-23</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/brampton/email-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-18</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/brampton/google-ads-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-03</lastmod>
+    <lastmod>2026-03-18</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/brampton/seo-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-03</lastmod>
+    <lastmod>2026-01-29</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/brampton/seo-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-03</lastmod>
+    <lastmod>2025-12-17</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/brampton/social-media-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-03</lastmod>
+    <lastmod>2026-03-18</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/brampton/web-design-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-03</lastmod>
+    <lastmod>2025-12-15</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burlington/ai-automation-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-04</lastmod>
+    <lastmod>2026-03-18</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burlington/ai-development-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-04</lastmod>
+    <lastmod>2026-03-19</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burlington/content-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-04</lastmod>
+    <lastmod>2026-03-19</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burlington/digital-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-04</lastmod>
+    <lastmod>2026-03-19</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burlington/email-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-04</lastmod>
+    <lastmod>2026-03-19</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burlington/google-ads-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-05</lastmod>
+    <lastmod>2026-03-19</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burlington/seo-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-05</lastmod>
+    <lastmod>2026-01-17</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burlington/seo-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-05</lastmod>
+    <lastmod>2025-12-22</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burlington/social-media-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-05</lastmod>
+    <lastmod>2026-03-20</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burlington/web-design-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-05</lastmod>
+    <lastmod>2026-01-24</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burnaby/ai-automation-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-06</lastmod>
+    <lastmod>2026-03-20</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burnaby/ai-development-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-06</lastmod>
+    <lastmod>2026-03-20</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burnaby/content-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-06</lastmod>
+    <lastmod>2026-03-20</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burnaby/digital-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-06</lastmod>
+    <lastmod>2026-01-26</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burnaby/email-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-06</lastmod>
+    <lastmod>2026-03-20</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burnaby/google-ads-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-21</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burnaby/seo-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-02-12</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burnaby/seo-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-21</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burnaby/social-media-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-21</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/burnaby/web-design-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-21</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/calgary/ai-automation-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-08</lastmod>
+    <lastmod>2026-03-21</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/calgary/ai-development-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-08</lastmod>
+    <lastmod>2026-03-22</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/calgary/content-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-08</lastmod>
+    <lastmod>2026-03-22</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/calgary/digital-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-08</lastmod>
+    <lastmod>2026-01-19</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/calgary/email-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-08</lastmod>
+    <lastmod>2026-03-22</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/calgary/google-ads-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-09</lastmod>
+    <lastmod>2026-03-22</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/calgary/seo-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-09</lastmod>
+    <lastmod>2025-12-09</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/calgary/seo-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-09</lastmod>
+    <lastmod>2025-12-30</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/calgary/social-media-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-09</lastmod>
+    <lastmod>2026-02-04</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/calgary/web-design-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-09</lastmod>
+    <lastmod>2026-03-05</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/calgary/web-development-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-01-12</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/charlottetown/ai-automation-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-22</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/charlottetown/ai-development-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-23</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/charlottetown/content-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-23</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/charlottetown/digital-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-23</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/charlottetown/email-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-11</lastmod>
+    <lastmod>2026-03-23</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/charlottetown/google-ads-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-11</lastmod>
+    <lastmod>2026-03-23</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/charlottetown/seo-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-11</lastmod>
+    <lastmod>2026-03-24</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/charlottetown/seo-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-11</lastmod>
+    <lastmod>2026-03-24</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/charlottetown/social-media-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-11</lastmod>
+    <lastmod>2026-03-24</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/charlottetown/web-design-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-24</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/coquitlam/ai-automation-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-24</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/coquitlam/ai-development-company</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/coquitlam/content-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-12</lastmod>
+    <lastmod>2026-03-25</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/coquitlam/digital-marketing-agency</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-03-12</lastmod>
-  </url>
-  <url>
-    <loc>https://boomymarketing.com/local/coquitlam/email-marketing-agency</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-03-13</lastmod>
-  </url>
-  <url>
-    <loc>https://boomymarketing.com/local/coquitlam/google-ads-agency</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-03-13</lastmod>
-  </url>
-  <url>
-    <loc>https://boomymarketing.com/local/coquitlam/seo-agency</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-03-13</lastmod>
-  </url>
-  <url>
-    <loc>https://boomymarketing.com/local/coquitlam/seo-company</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-03-13</lastmod>
-  </url>
-  <url>
-    <loc>https://boomymarketing.com/local/coquitlam/social-media-marketing-agency</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-03-13</lastmod>
-  </url>
-  <url>
-    <loc>https://boomymarketing.com/local/coquitlam/web-design-company</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-03-14</lastmod>
-  </url>
-  <url>
-    <loc>https://boomymarketing.com/local/edmonton/ai-automation-agency</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-03-14</lastmod>
-  </url>
-  <url>
-    <loc>https://boomymarketing.com/local/edmonton/ai-development-company</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-03-14</lastmod>
-  </url>
-  <url>
-    <loc>https://boomymarketing.com/local/edmonton/content-marketing-agency</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-03-14</lastmod>
-  </url>
-  <url>
-    <loc>https://boomymarketing.com/local/edmonton/digital-marketing-agency</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-02-20</lastmod>
   </url>
   <url>
     <loc>https://boomymarketing.com/local/edmonton/email-marketing-agency</loc>
