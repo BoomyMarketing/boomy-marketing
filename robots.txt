@@ -130,6 +130,11 @@ Allow: /local/halifax/google-ads-agency/
 Allow: /local/halifax/seo-agency/
 Allow: /local/halifax/seo-company/
 Allow: /local/halifax/social-media-marketing-agency/
+Allow: /local/halifax/web-design-company/
+Allow: /local/hamilton/ai-automation-agency/
+Allow: /local/hamilton/ai-development-company/
+Allow: /local/hamilton/content-marketing-agency/
+Allow: /local/hamilton/digital-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
