@@ -145,6 +145,11 @@ Allow: /local/oakville/seo-agency/
 Allow: /local/oakville/seo-company/
 Allow: /local/oakville/social-media-marketing-agency/
 Allow: /local/oakville/web-design-company/
+Allow: /local/oshawa/ai-automation-agency/
+Allow: /local/oshawa/ai-development-company/
+Allow: /local/oshawa/content-marketing-agency/
+Allow: /local/oshawa/digital-marketing-agency/
+Allow: /local/oshawa/email-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
