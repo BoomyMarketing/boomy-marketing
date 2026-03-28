@@ -150,6 +150,11 @@ Allow: /local/oshawa/ai-development-company/
 Allow: /local/oshawa/content-marketing-agency/
 Allow: /local/oshawa/digital-marketing-agency/
 Allow: /local/oshawa/email-marketing-agency/
+Allow: /local/oshawa/google-ads-agency/
+Allow: /local/oshawa/seo-agency/
+Allow: /local/oshawa/seo-company/
+Allow: /local/oshawa/social-media-marketing-agency/
+Allow: /local/oshawa/web-design-company/
 
 # Block unpublished local pages
 Disallow: /local/
