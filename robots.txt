@@ -155,6 +155,11 @@ Allow: /local/oshawa/seo-agency/
 Allow: /local/oshawa/seo-company/
 Allow: /local/oshawa/social-media-marketing-agency/
 Allow: /local/oshawa/web-design-company/
+Allow: /local/ottawa/ai-automation-agency/
+Allow: /local/ottawa/ai-development-company/
+Allow: /local/ottawa/content-marketing-agency/
+Allow: /local/ottawa/digital-marketing-agency/
+Allow: /local/ottawa/email-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
