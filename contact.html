@@ -163,7 +163,13 @@
     .reveal-right{opacity:0;transform:translateX(44px)}
     @media(max-width:1024px){.contact-inner{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr 1fr;gap:36px}}
     @media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}.form-row{grid-template-columns:1fr}.contact-form-wrap{padding:28px}.footer-top{grid-template-columns:1fr;gap:32px}.footer-bottom{flex-direction:column;text-align:center}}
-  </style>
+  
+    /* Fallback: show content even if GSAP fails */
+    @keyframes revealFallback { to { opacity: 1; transform: none; } }
+    .reveal, .reveal-left, .reveal-right {
+      animation: revealFallback 0.6s ease 0.3s forwards;
+    }
+</style>
   <meta property="og:locale" content="en_CA">
   <meta property="og:image" content="https://boomymarketing.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
