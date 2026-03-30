@@ -160,6 +160,11 @@ Allow: /local/ottawa/ai-development-company/
 Allow: /local/ottawa/content-marketing-agency/
 Allow: /local/ottawa/digital-marketing-agency/
 Allow: /local/ottawa/email-marketing-agency/
+Allow: /local/ottawa/google-ads-agency/
+Allow: /local/ottawa/seo-agency/
+Allow: /local/ottawa/seo-company/
+Allow: /local/ottawa/social-media-marketing-agency/
+Allow: /local/ottawa/web-design-company/
 
 # Block unpublished local pages
 Disallow: /local/
