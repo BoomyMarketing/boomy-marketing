@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 const SITE_LABEL = 'Boomy Marketing';
-const TO_EMAIL   = 'petrusenkocorp@gmail.com';
+const TO_EMAIL   = 'boomymarketing.com@gmail.com';
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
