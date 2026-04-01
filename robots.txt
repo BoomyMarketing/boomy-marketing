@@ -170,6 +170,11 @@ Allow: /local/regina/ai-development-company/
 Allow: /local/regina/content-marketing-agency/
 Allow: /local/regina/digital-marketing-agency/
 Allow: /local/regina/email-marketing-agency/
+Allow: /local/regina/google-ads-agency/
+Allow: /local/regina/seo-agency/
+Allow: /local/regina/seo-company/
+Allow: /local/regina/social-media-marketing-agency/
+Allow: /local/regina/web-design-company/
 
 # Block unpublished local pages
 Disallow: /local/
