@@ -175,6 +175,11 @@ Allow: /local/regina/seo-agency/
 Allow: /local/regina/seo-company/
 Allow: /local/regina/social-media-marketing-agency/
 Allow: /local/regina/web-design-company/
+Allow: /local/richmond-hill/ai-automation-agency/
+Allow: /local/richmond-hill/ai-development-company/
+Allow: /local/richmond-hill/content-marketing-agency/
+Allow: /local/richmond-hill/digital-marketing-agency/
+Allow: /local/richmond-hill/email-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
