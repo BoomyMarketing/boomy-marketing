@@ -180,6 +180,11 @@ Allow: /local/richmond-hill/ai-development-company/
 Allow: /local/richmond-hill/content-marketing-agency/
 Allow: /local/richmond-hill/digital-marketing-agency/
 Allow: /local/richmond-hill/email-marketing-agency/
+Allow: /local/richmond-hill/google-ads-agency/
+Allow: /local/richmond-hill/seo-agency/
+Allow: /local/richmond-hill/seo-company/
+Allow: /local/richmond-hill/social-media-marketing-agency/
+Allow: /local/richmond-hill/web-design-company/
 
 # Block unpublished local pages
 Disallow: /local/
