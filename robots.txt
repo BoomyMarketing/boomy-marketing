@@ -185,6 +185,11 @@ Allow: /local/richmond-hill/seo-agency/
 Allow: /local/richmond-hill/seo-company/
 Allow: /local/richmond-hill/social-media-marketing-agency/
 Allow: /local/richmond-hill/web-design-company/
+Allow: /local/saskatoon/ai-automation-agency/
+Allow: /local/saskatoon/ai-development-company/
+Allow: /local/saskatoon/content-marketing-agency/
+Allow: /local/saskatoon/digital-marketing-agency/
+Allow: /local/saskatoon/email-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
