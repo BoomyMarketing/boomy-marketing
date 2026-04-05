@@ -190,6 +190,11 @@ Allow: /local/saskatoon/ai-development-company/
 Allow: /local/saskatoon/content-marketing-agency/
 Allow: /local/saskatoon/digital-marketing-agency/
 Allow: /local/saskatoon/email-marketing-agency/
+Allow: /local/saskatoon/google-ads-agency/
+Allow: /local/saskatoon/seo-agency/
+Allow: /local/saskatoon/seo-company/
+Allow: /local/saskatoon/social-media-marketing-agency/
+Allow: /local/saskatoon/web-design-company/
 
 # Block unpublished local pages
 Disallow: /local/
