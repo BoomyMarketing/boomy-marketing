@@ -200,6 +200,11 @@ Allow: /local/surrey/ai-development-company/
 Allow: /local/surrey/content-marketing-agency/
 Allow: /local/surrey/digital-marketing-agency/
 Allow: /local/surrey/email-marketing-agency/
+Allow: /local/surrey/google-ads-agency/
+Allow: /local/surrey/seo-agency/
+Allow: /local/surrey/seo-company/
+Allow: /local/surrey/social-media-marketing-agency/
+Allow: /local/surrey/web-design-company/
 
 # Block unpublished local pages
 Disallow: /local/
