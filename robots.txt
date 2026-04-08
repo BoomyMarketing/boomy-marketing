@@ -205,6 +205,11 @@ Allow: /local/surrey/seo-agency/
 Allow: /local/surrey/seo-company/
 Allow: /local/surrey/social-media-marketing-agency/
 Allow: /local/surrey/web-design-company/
+Allow: /local/surrey/web-development-company/
+Allow: /local/toronto/ai-automation-agency/
+Allow: /local/toronto/ai-development-company/
+Allow: /local/toronto/content-marketing-agency/
+Allow: /local/toronto/digital-marketing-agency/
 
 # Block unpublished local pages
 Disallow: /local/
