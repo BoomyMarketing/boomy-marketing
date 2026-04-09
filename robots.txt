@@ -210,6 +210,11 @@ Allow: /local/toronto/ai-automation-agency/
 Allow: /local/toronto/ai-development-company/
 Allow: /local/toronto/content-marketing-agency/
 Allow: /local/toronto/digital-marketing-agency/
+Allow: /local/toronto/email-marketing-agency/
+Allow: /local/toronto/google-ads-agency/
+Allow: /local/toronto/ppc-agency/
+Allow: /local/toronto/seo-agency/
+Allow: /local/toronto/seo-company/
 
 # Block unpublished local pages
 Disallow: /local/
