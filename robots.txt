@@ -215,6 +215,11 @@ Allow: /local/toronto/google-ads-agency/
 Allow: /local/toronto/ppc-agency/
 Allow: /local/toronto/seo-agency/
 Allow: /local/toronto/seo-company/
+Allow: /local/toronto/social-media-marketing-agency/
+Allow: /local/toronto/web-design-company/
+Allow: /local/toronto/web-development-company/
+Allow: /local/vancouver/ai-automation-agency/
+Allow: /local/vancouver/ai-development-company/
 
 # Block unpublished local pages
 Disallow: /local/
