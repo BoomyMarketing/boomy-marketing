@@ -220,6 +220,11 @@ Allow: /local/toronto/web-design-company/
 Allow: /local/toronto/web-development-company/
 Allow: /local/vancouver/ai-automation-agency/
 Allow: /local/vancouver/ai-development-company/
+Allow: /local/vancouver/content-marketing-agency/
+Allow: /local/vancouver/digital-marketing-agency/
+Allow: /local/vancouver/email-marketing-agency/
+Allow: /local/vancouver/google-ads-agency/
+Allow: /local/vancouver/seo-agency/
 
 # Block unpublished local pages
 Disallow: /local/
