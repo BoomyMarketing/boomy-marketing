@@ -54,7 +54,7 @@ def update_robots(schedule):
         rel = page.relative_to(SITE_ROOT).as_posix().replace("\\", "/")
         parts = rel.split("/")
         if len(parts) >= 3:
-            allowed_paths.add("/" + "/".join(parts[:-1]) + "/")
+            allowed_paths.add("/" + "/".join(parts[:-1]))
 
     lines = [
         "User-agent: *",
