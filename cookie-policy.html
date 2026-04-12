@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookie Policy — Boomy Marketing Inc. | Toronto Digital Agency</title>
+  <meta name="description" content="Boomy Marketing's Cookie Policy explains what cookies we use on boomymarketing.com, why we use them, and how you can manage your cookie preferences." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://boomymarketing.com/cookie-policy" />
+  <meta property="og:title" content="Cookie Policy — Boomy Marketing Inc." />
+  <meta property="og:description" content="Learn about the cookies used on Boomy Marketing's website, including analytics, performance, and marketing cookies, and how to manage your preferences." />
+  <meta property="og:url" content="https://boomymarketing.com/cookie-policy" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_CA" />
+  <meta property="og:image" content="https://boomymarketing.com/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Boomy Marketing",
+      "url": "https://boomymarketing.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "240 Richmond St W",
+        "addressLocality": "Toronto",
+        "addressRegion": "ON",
+        "postalCode": "M5V 1V6",
+        "addressCountry": "CA"
+      },
+      "telephone": "+16473701888",
+      "email": "care@boomymarketing.com"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://boomymarketing.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Cookie Policy", "item": "https://boomymarketing.com/cookie-policy" }
+      ]
+    }
+  ]
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      --bg-deep:       #2D1B69;
+      --bg-darker:     #1a0f3e;
+      --bg-darkest:    #100930;
+      --accent-orange: #FF6B35;
+      --accent-yellow: #FFD23F;
+      --accent-purple: #7C3AED;
+      --text-primary:  #FFFFFF;
+      --text-sec:      rgba(255,255,255,0.7);
+      --text-muted:    rgba(255,255,255,0.45);
+      --card-bg:       rgba(255,255,255,0.08);
+      --card-border:   rgba(255,255,255,0.12);
+      --nav-h:         72px;
+      --r-md:          16px;
+      --r-lg:          24px;
+      --ease:          cubic-bezier(0.4,0,0.2,1);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg-darkest); color: var(--text-primary); overflow-x: hidden; line-height: 1.6; }
+    #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    .site-wrapper { position: relative; z-index: 1; }
+
+    h1,h2,h3,h4 { line-height: 1.15; font-weight: 800; }
+    .gradient-text { background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow)); z-index: 2000; width: 0%; transition: width .05s linear; }
+
+    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: var(--nav-h); display: flex; align-items: center; padding: 0 5%; background: rgba(16,9,48,.65); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,.06); transition: background .3s ease; }
+    .navbar.scrolled { background: rgba(16,9,48,.93); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1200px; margin: 0 auto; }
+    .nav-logo { font-family: 'Berkshire Swash', cursive; font-size: 1.7rem; text-decoration: none; color: #fff; }
+    .nav-logo span { background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.8); text-decoration: none; font-size: .93rem; font-weight: 500; transition: color .2s ease; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { background: linear-gradient(135deg, var(--accent-orange), #e55a28) !important; color: #fff !important; padding: 9px 22px; border-radius: 100px; font-weight: 700 !important; box-shadow: 0 4px 20px rgba(255,107,53,.35); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: transform .3s var(--ease), opacity .2s ease; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: rgba(16,9,48,.97); backdrop-filter: blur(20px); padding: 20px 5%; border-bottom: 1px solid rgba(255,255,255,.08); z-index: 999; flex-direction: column; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: rgba(255,255,255,.85); text-decoration: none; font-size: 1.1rem; font-weight: 500; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,.06); transition: color .2s; }
+    .mobile-menu a:last-child { border-bottom: none; color: var(--accent-orange); font-weight: 700; }
+    .mobile-menu a:hover { color: var(--accent-orange); }
+
+    .page-hero { min-height: 40vh; padding: calc(var(--nav-h) + 60px) 5% 60px; display: flex; align-items: center; background: radial-gradient(ellipse at 20% 50%, rgba(124,58,237,.25) 0%, transparent 60%), radial-gradient(ellipse at 80% 30%, rgba(255,107,53,.12) 0%, transparent 50%), linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-deep) 50%, var(--bg-darkest) 100%); }
+    .page-hero-inner { max-width: 860px; margin: 0 auto; width: 100%; text-align: center; }
+    .page-hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 900; line-height: 1.1; margin-bottom: 16px; letter-spacing: -.02em; }
+    .page-hero p { font-size: 1.05rem; color: var(--text-sec); max-width: 600px; margin: 0 auto; line-height: 1.75; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; justify-content: center; margin-bottom: 24px; font-size: .85rem; color: var(--text-muted); }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color .2s; }
+    .breadcrumb a:hover { color: var(--accent-orange); }
+    .breadcrumb span { color: var(--accent-orange); }
+    .last-updated { display: inline-block; background: rgba(255,107,53,.1); border: 1px solid rgba(255,107,53,.25); color: var(--accent-orange); font-size: .8rem; font-weight: 600; padding: 5px 14px; border-radius: 100px; margin-top: 16px; }
+
+    .legal-wrap { max-width: 860px; margin: 0 auto; padding: 64px 5% 100px; }
+    .legal-section { margin-bottom: 48px; }
+    .legal-section h2 { font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .legal-section h3 { font-size: 1.1rem; font-weight: 700; color: rgba(255,255,255,.9); margin: 20px 0 10px; }
+    .legal-section p { color: var(--text-sec); font-size: .97rem; line-height: 1.8; margin-bottom: 14px; }
+    .legal-section ul { list-style: none; padding: 0; margin-bottom: 14px; }
+    .legal-section ul li { color: var(--text-sec); font-size: .97rem; line-height: 1.8; padding: 4px 0 4px 22px; position: relative; }
+    .legal-section ul li::before { content: '›'; position: absolute; left: 0; color: var(--accent-orange); font-weight: 700; }
+    .legal-section a { color: var(--accent-orange); text-decoration: none; }
+    .legal-section a:hover { text-decoration: underline; }
+    .contact-box { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 32px; margin-top: 16px; }
+    .contact-box p { margin-bottom: 8px; }
+
+    /* Cookie table */
+    .cookie-table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: .9rem; }
+    .cookie-table th { text-align: left; padding: 12px 16px; background: rgba(255,255,255,.08); color: rgba(255,255,255,.7); font-size: .8rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .cookie-table td { padding: 12px 16px; color: var(--text-sec); border-bottom: 1px solid rgba(255,255,255,.06); vertical-align: top; line-height: 1.6; }
+    .cookie-table tr:last-child td { border-bottom: none; }
+    .cookie-table td:first-child { font-weight: 600; color: rgba(255,255,255,.9); white-space: nowrap; }
+    .badge { display: inline-block; padding: 2px 10px; border-radius: 100px; font-size: .78rem; font-weight: 600; }
+    .badge-essential { background: rgba(78,205,196,.15); color: #4ecdc4; border: 1px solid rgba(78,205,196,.3); }
+    .badge-analytics { background: rgba(255,107,53,.12); color: var(--accent-orange); border: 1px solid rgba(255,107,53,.3); }
+    .badge-marketing { background: rgba(124,58,237,.15); color: #a78bfa; border: 1px solid rgba(124,58,237,.3); }
+    .badge-functional { background: rgba(255,210,63,.1); color: var(--accent-yellow); border: 1px solid rgba(255,210,63,.3); }
+
+    .footer { background: var(--bg-darkest); border-top: 1px solid rgba(255,255,255,.06); padding: 70px 5% 32px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .footer-logo { font-family: 'Berkshire Swash',cursive; font-size: 1.8rem; color: #fff; text-decoration: none; display: block; margin-bottom: 16px; }
+    .footer-logo span { background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-tagline { font-size: .9rem; color: var(--text-sec); line-height: 1.7; margin-bottom: 24px; }
+    .footer-socials { display: flex; gap: 12px; }
+    .social-link { width: 40px; height: 40px; border-radius: 10px; background: var(--card-bg); border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.7); text-decoration: none; transition: background .3s ease, border-color .3s ease, color .3s ease, transform .2s ease; }
+    .social-link svg { width: 16px; height: 16px; fill: currentColor; }
+    .social-link:hover { background: rgba(255,107,53,.15); border-color: rgba(255,107,53,.4); color: var(--accent-orange); transform: translateY(-2px); }
+    .footer-col h4 { font-size: .85rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.44); margin-bottom: 20px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { color: rgba(255,255,255,.7); text-decoration: none; font-size: .9rem; transition: color .2s; }
+    .footer-col ul a:hover { color: var(--accent-orange); }
+    .footer-contact-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 13px; }
+    .fc-text { font-size: .88rem; color: rgba(255,255,255,.7); line-height: 1.5; }
+    .fc-text a { color: inherit; text-decoration: none; transition: color .2s; }
+    .fc-text a:hover { color: var(--accent-orange); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 32px; gap: 16px; }
+    .footer-copy { font-size: .83rem; color: rgba(255,255,255,.38); }
+    .footer-bl { display: flex; gap: 24px; }
+    .footer-bl a { font-size: .83rem; color: rgba(255,255,255,.38); text-decoration: none; transition: color .2s; }
+    .footer-bl a:hover { color: rgba(255,255,255,.75); }
+
+    .reveal { opacity: 0; transform: translateY(36px); }
+    @keyframes revealFallback { to { opacity: 1; transform: none; } }
+    .reveal { animation: revealFallback 0.6s ease 0.3s forwards; }
+
+    @media (max-width: 1024px) { .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; } }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .cookie-table { font-size: .82rem; }
+      .cookie-table th, .cookie-table td { padding: 10px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<canvas id="starfield" aria-hidden="true"></canvas>
+
+<div class="site-wrapper">
+
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Boomy Marketing — Home">Boomy<span>.</span></a>
+    <ul class="nav-links" role="menubar">
+      <li role="none"><a href="services.html" role="menuitem">Services</a></li>
+      <li role="none"><a href="about.html" role="menuitem">About</a></li>
+      <li role="none"><a href="pricing.html" role="menuitem">Pricing</a></li>
+      <li role="none"><a href="contact.html" role="menuitem">Contact</a></li>
+      <li role="none"><a href="contact.html" class="nav-cta" role="menuitem">Get Started</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" role="menu" aria-hidden="true">
+    <a href="services.html" role="menuitem">Services</a>
+    <a href="about.html" role="menuitem">About</a>
+    <a href="pricing.html" role="menuitem">Pricing</a>
+    <a href="contact.html" role="menuitem">Contact</a>
+    <a href="contact.html" role="menuitem">Get Started &rarr;</a>
+  </div>
+</nav>
+
+  <!-- HERO -->
+  <section class="page-hero" aria-labelledby="cp-heading">
+    <div class="page-hero-inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span>&#47;</span>
+        <span aria-current="page">Cookie Policy</span>
+      </nav>
+      <h1 id="cp-heading" class="reveal">Cookie <span class="gradient-text">Policy</span></h1>
+      <p class="reveal">We believe in transparency about how we use cookies. This policy explains what cookies are, which ones we use, and how you can control them.</p>
+      <div class="last-updated reveal">Last Updated: April 12, 2026</div>
+    </div>
+  </section>
+
+  <!-- LEGAL CONTENT -->
+  <main class="legal-wrap" id="main-content">
+
+    <div class="legal-section reveal">
+      <h2>1. What Are Cookies?</h2>
+      <p>Cookies are small text files that are placed on your device (computer, tablet, or smartphone) when you visit a website. They are widely used to make websites work more efficiently, to remember your preferences, and to provide website operators with information about how their site is being used.</p>
+      <p>Cookies are not programs and cannot carry viruses or install malware on your device. Most web browsers accept cookies by default, but you can modify your browser settings to decline cookies or to alert you when cookies are being sent. Declining certain cookies may affect your ability to use some features of our website.</p>
+      <p>In addition to cookies, we may also use similar technologies such as web beacons (also known as "tracking pixels" or "clear GIFs"), local storage, and session storage. This policy applies to all such technologies collectively referred to as "cookies."</p>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2>2. Who Sets Cookies on This Website?</h2>
+      <p>Cookies on <a href="https://boomymarketing.com">boomymarketing.com</a> are set by:</p>
+      <ul>
+        <li><strong>Boomy Marketing Inc. (first-party cookies):</strong> Cookies we set directly to enable core website functionality and measure our website's performance</li>
+        <li><strong>Third-party providers (third-party cookies):</strong> Cookies set by external services we use, such as Google Analytics, Google Ads, Meta Pixel, and LinkedIn Insight Tag. These third parties have their own privacy policies governing how they use cookie data</li>
+      </ul>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2>3. Categories of Cookies We Use</h2>
+      <p>We group the cookies on our website into four categories based on their purpose:</p>
+
+      <h3>3.1 Strictly Necessary Cookies</h3>
+      <p>These cookies are essential for the website to function properly. They enable core features such as page navigation, security, and access to secure areas. Without these cookies, services you have requested cannot be provided. These cookies do not require your consent under Canadian privacy law.</p>
+      <table class="cookie-table" aria-label="Strictly necessary cookies">
+        <thead>
+          <tr><th>Cookie Name</th><th>Provider</th><th>Purpose</th><th>Duration</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>__cf_bm</td>
+            <td>Cloudflare</td>
+            <td>Bot management and security — distinguishes humans from automated bots</td>
+            <td>30 minutes</td>
+            <td><span class="badge badge-essential">Essential</span></td>
+          </tr>
+          <tr>
+            <td>PHPSESSID / session</td>
+            <td>boomymarketing.com</td>
+            <td>Maintains your session state across page requests</td>
+            <td>Session</td>
+            <td><span class="badge badge-essential">Essential</span></td>
+          </tr>
+          <tr>
+            <td>cookie_consent</td>
+            <td>boomymarketing.com</td>
+            <td>Stores your cookie consent preferences to avoid asking on every visit</td>
+            <td>1 year</td>
+            <td><span class="badge badge-essential">Essential</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3.2 Analytics and Performance Cookies</h3>
+      <p>These cookies collect information about how visitors use our website — for example, which pages are visited most frequently and whether visitors receive error messages. All data is aggregated and anonymized. We use this information to improve our website's performance and usability. These cookies require your consent.</p>
+      <table class="cookie-table" aria-label="Analytics cookies">
+        <thead>
+          <tr><th>Cookie Name</th><th>Provider</th><th>Purpose</th><th>Duration</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>_ga</td>
+            <td>Google Analytics 4</td>
+            <td>Distinguishes individual users; used to calculate visitor, session, and campaign data</td>
+            <td>2 years</td>
+            <td><span class="badge badge-analytics">Analytics</span></td>
+          </tr>
+          <tr>
+            <td>_ga_[ID]</td>
+            <td>Google Analytics 4</td>
+            <td>Stores and counts pageviews; maintains session state</td>
+            <td>2 years</td>
+            <td><span class="badge badge-analytics">Analytics</span></td>
+          </tr>
+          <tr>
+            <td>_gid</td>
+            <td>Google Analytics 4</td>
+            <td>Distinguishes users for a 24-hour period</td>
+            <td>24 hours</td>
+            <td><span class="badge badge-analytics">Analytics</span></td>
+          </tr>
+          <tr>
+            <td>_gat</td>
+            <td>Google Analytics 4</td>
+            <td>Throttles request rate to limit data collection on high-traffic sites</td>
+            <td>1 minute</td>
+            <td><span class="badge badge-analytics">Analytics</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3.3 Functional Cookies</h3>
+      <p>Functional cookies enable enhanced website features and personalization, such as remembering your language preference, region, or any customizations you have made. Disabling these cookies may affect the quality of your experience but will not prevent you from using the website.</p>
+      <table class="cookie-table" aria-label="Functional cookies">
+        <thead>
+          <tr><th>Cookie Name</th><th>Provider</th><th>Purpose</th><th>Duration</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>lang</td>
+            <td>boomymarketing.com</td>
+            <td>Remembers your language or locale preference</td>
+            <td>1 year</td>
+            <td><span class="badge badge-functional">Functional</span></td>
+          </tr>
+          <tr>
+            <td>_hjSessionUser_[ID]</td>
+            <td>Hotjar (if active)</td>
+            <td>Sets a unique user ID to track behaviour across visits for heatmap and session replay analysis</td>
+            <td>1 year</td>
+            <td><span class="badge badge-functional">Functional</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3.4 Marketing and Advertising Cookies</h3>
+      <p>These cookies track your browsing habits and online activity to help deliver more relevant advertising across the web. They are set by our advertising partners (Google, Meta, LinkedIn) and are used to build a profile of your interests. This enables us and our advertising partners to show you relevant ads on other websites. These cookies require your explicit consent.</p>
+      <table class="cookie-table" aria-label="Marketing cookies">
+        <thead>
+          <tr><th>Cookie Name</th><th>Provider</th><th>Purpose</th><th>Duration</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>_gcl_au</td>
+            <td>Google Ads</td>
+            <td>Used by Google AdSense to experiment with advertising efficiency across websites</td>
+            <td>3 months</td>
+            <td><span class="badge badge-marketing">Marketing</span></td>
+          </tr>
+          <tr>
+            <td>_fbp</td>
+            <td>Meta (Facebook) Pixel</td>
+            <td>Identifies browsers to track visitors across the Meta advertising network for conversion measurement</td>
+            <td>3 months</td>
+            <td><span class="badge badge-marketing">Marketing</span></td>
+          </tr>
+          <tr>
+            <td>_fbc</td>
+            <td>Meta (Facebook) Pixel</td>
+            <td>Stores ad click information from Facebook to attribute conversions</td>
+            <td>3 months</td>
+            <td><span class="badge badge-marketing">Marketing</span></td>
+          </tr>
+          <tr>
+            <td>li_sugr</td>
+            <td>LinkedIn Insight Tag</td>
+            <td>Probabilistic matching of LinkedIn members for conversion tracking and retargeting</td>
+            <td>3 months</td>
+            <td><span class="badge badge-marketing">Marketing</span></td>
+          </tr>
+          <tr>
+            <td>bcookie</td>
+            <td>LinkedIn Insight Tag</td>
+            <td>Browser identifier for LinkedIn advertising features</td>
+            <td>2 years</td>
+            <td><span class="badge badge-marketing">Marketing</span></td>
+          </tr>
+          <tr>
+            <td>IDE</td>
+            <td>Google DoubleClick</td>
+            <td>Registers and reports user actions after viewing or clicking a Google ad for attribution reporting</td>
+            <td>13 months</td>
+            <td><span class="badge badge-marketing">Marketing</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2>4. Your Cookie Choices and How to Manage Them</h2>
+      <p>You have several options for controlling cookies:</p>
+
+      <h3>4.1 Browser Settings</h3>
+      <p>Most web browsers allow you to manage cookies through the browser settings. You can usually find cookie settings in the "Privacy" or "Security" section of your browser. The links below provide instructions for the most popular browsers:</p>
+      <ul>
+        <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Google Chrome</a> — Settings &gt; Privacy and security &gt; Cookies and other site data</li>
+        <li><a href="https://support.mozilla.org/kb/enhanced-tracking-protection-firefox-desktop" target="_blank" rel="noopener noreferrer">Mozilla Firefox</a> — Settings &gt; Privacy &amp; Security &gt; Cookies and Site Data</li>
+        <li><a href="https://support.apple.com/guide/safari/manage-cookies-sfri11471" target="_blank" rel="noopener noreferrer">Apple Safari</a> — Preferences &gt; Privacy</li>
+        <li><a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer">Microsoft Edge</a> — Settings &gt; Privacy, search, and services &gt; Cookies and site permissions</li>
+      </ul>
+      <p>Please note that deleting or disabling cookies may affect the functionality of our website and your ability to use certain features.</p>
+
+      <h3>4.2 Opt-Out of Analytics</h3>
+      <p>You can opt out of Google Analytics tracking across all websites by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>.</p>
+
+      <h3>4.3 Opt-Out of Interest-Based Advertising</h3>
+      <p>You can opt out of interest-based advertising from participating companies in Canada through the <a href="https://youradchoices.ca" target="_blank" rel="noopener noreferrer">Digital Advertising Alliance of Canada (DAAC)</a> at youradchoices.ca. Note that opting out does not prevent you from seeing ads — it means the ads you see will be less tailored to your interests.</p>
+
+      <h3>4.4 Platform-Specific Opt-Outs</h3>
+      <ul>
+        <li><strong>Google:</strong> Manage ad personalization at <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">adssettings.google.com</a></li>
+        <li><strong>Meta (Facebook/Instagram):</strong> Manage ad preferences in your Facebook or Instagram account settings under "Ads"</li>
+        <li><strong>LinkedIn:</strong> Opt out of LinkedIn's tracking by visiting your LinkedIn account's Privacy Settings, under "Data privacy" &gt; "Ads"</li>
+      </ul>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2>5. Do Not Track Signals</h2>
+      <p>Some browsers include a "Do Not Track" (DNT) feature that signals to websites that you do not want to be tracked. Because there is currently no universally accepted standard for how websites should respond to DNT signals, our website does not currently respond to DNT signals. We will revisit this policy as industry standards evolve.</p>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2>6. Cookies and Children</h2>
+      <p>Our website is not directed at children under the age of 16 and we do not knowingly use cookies to collect data from children. If you believe a child has provided us with personal information through our website, please contact us at <a href="mailto:care@boomymarketing.com">care@boomymarketing.com</a> and we will take appropriate steps to address the situation.</p>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2>7. Updates to This Cookie Policy</h2>
+      <p>We may update this Cookie Policy from time to time to reflect changes in our cookie usage, new features added to the website, or changes in applicable privacy law. The "Last Updated" date at the top of this page will be revised accordingly. We encourage you to review this policy periodically. Your continued use of our website following any updates constitutes your acceptance of the revised policy.</p>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2>8. Contact Us</h2>
+      <p>If you have questions about our use of cookies or this Cookie Policy, please contact our Privacy Officer:</p>
+      <div class="contact-box">
+        <p><strong>Boomy Marketing Inc.</strong></p>
+        <p>Attn: Privacy Officer</p>
+        <p>240 Richmond St W, Toronto, ON M5V 1V6</p>
+        <p>Email: <a href="mailto:care@boomymarketing.com">care@boomymarketing.com</a></p>
+        <p>Phone: <a href="tel:+16473701888">+1 (647) 370-1888</a></p>
+      </div>
+      <p style="margin-top:20px">For general privacy inquiries, see our <a href="privacy-policy.html">Privacy Policy</a>. For our terms of service, see our <a href="terms.html">Terms of Service</a>.</p>
+    </div>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo" aria-label="Boomy Marketing home">Boomy<span>.</span></a>
+        <p class="footer-tagline">Toronto's award-winning digital agency. SEO, paid ads, social media &amp; web design that puts your brand light-years ahead.</p>
+        <div class="footer-socials"><a href="https://instagram.com/boomymarketing" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Boomy on Instagram"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="https://www.facebook.com/BoomyMarketing/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Boomy on Facebook"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="https://www.youtube.com/@boomy-digitalmarketingagen1970" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Boomy on YouTube"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a><a href="https://linkedin.com/company/boomymarketing" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Boomy on LinkedIn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://x.com/DMABOOMY" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Boomy on X"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="https://www.google.com/maps/place/?q=place_id:ChIJcxxxprk1K4gRVNJJqrYAT14" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Boomy on Google Business Profile"><svg viewBox="0 0 24 24"><path d="M12 11.5A2.5 2.5 0 0 1 9.5 9 2.5 2.5 0 0 1 12 6.5 2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/></svg></a></div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services/seo.html">SEO &amp; Content</a></li>
+          <li><a href="services/google-ads.html">Google Ads</a></li>
+          <li><a href="services/meta-ads.html">Meta Ads</a></li>
+          <li><a href="services/ppc.html">PPC Management</a></li>
+          <li><a href="services/social-media.html">Social Media</a></li>
+          <li><a href="services/web-design.html">Web Design</a></li>
+          <li><a href="services/email-marketing.html">Email Marketing</a></li>
+          <li><a href="services/ai-development.html">AI Development</a></li>
+          <li><a href="boomy-digital-marketing-blog/">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Top Locations</h4>
+        <ul>
+          <li><a href="local/toronto/seo-agency/index.html">SEO Agency Toronto</a></li>
+          <li><a href="local/vancouver/seo-agency/index.html">SEO Agency Vancouver</a></li>
+          <li><a href="local/calgary/seo-agency/index.html">SEO Agency Calgary</a></li>
+          <li><a href="local/toronto/google-ads-agency/index.html">Google Ads Toronto</a></li>
+          <li><a href="local/toronto/ppc-agency/index.html">PPC Agency Toronto</a></li>
+          <li><a href="local/toronto/digital-marketing-agency/index.html">Digital Marketing Toronto</a></li>
+          <li><a href="local/montreal/seo-agency/index.html">SEO Agency Montreal</a></li>
+          <li><a href="local/edmonton/seo-agency/index.html">SEO Agency Edmonton</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">All Services</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <h4 style="margin-top:24px">Contact</h4>
+        <div class="footer-contact-item"><span class="fc-text"><a href="tel:+16473701888">(647) 370-1888</a></span></div>
+        <div class="footer-contact-item"><span class="fc-text"><a href="mailto:care@boomymarketing.com">care@boomymarketing.com</a></span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Boomy Marketing Agency. All rights reserved.</span>
+      <div class="footer-bl">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="cookie-policy.html">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script>
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  function initStars() { stars = []; for (let i = 0; i < 160; i++) { stars.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.5+.3, a: Math.random(), speed: Math.random()*.0008+.0002 }); } }
+  function drawStars() { ctx.clearRect(0,0,canvas.width,canvas.height); stars.forEach(s => { s.a += s.speed; if (s.a > 1) s.a = 0; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fillStyle = `rgba(255,255,255,${s.a})`; ctx.fill(); }); requestAnimationFrame(drawStars); }
+  resizeCanvas(); initStars(); drawStars();
+  window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
+
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); document.getElementById('progressBar').style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%'; });
+
+  const ham = document.getElementById('hamburger');
+  const mob = document.getElementById('mobile-menu');
+  if (ham && mob) { ham.addEventListener('click', () => { ham.classList.toggle('open'); mob.classList.toggle('open'); }); }
+
+  if (typeof gsap !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray('.reveal').forEach(el => { gsap.to(el, { opacity:1, y:0, duration:.8, ease:'power3.out', scrollTrigger: { trigger:el, start:'top 88%' } }); });
+  }
+</script>
+</body>
+</html>
