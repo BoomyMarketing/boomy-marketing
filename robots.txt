@@ -225,6 +225,11 @@ Allow: /local/vancouver/digital-marketing-agency/
 Allow: /local/vancouver/email-marketing-agency/
 Allow: /local/vancouver/google-ads-agency/
 Allow: /local/vancouver/seo-agency/
+Allow: /local/vancouver/seo-company/
+Allow: /local/vancouver/social-media-marketing-agency/
+Allow: /local/vancouver/web-design-company/
+Allow: /local/victoria/ai-automation-agency/
+Allow: /local/victoria/ai-development-company/
 
 # Block unpublished local pages
 Disallow: /local/
