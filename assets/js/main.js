@@ -1,8 +1,9 @@
 /* ================================================================
    BOOMY MARKETING — Shared JavaScript
-   Version: 2.0 | 2026-04-14 | ES2022+
+   Version: 3.0 | 2026-04-14 | ES2022+
    Covers: starfield, navbar, progress bar, hamburger, magnetic
            buttons, GSAP reveals, visibility pause
+   Note: body scroll-lock on menu open handled by CSS :has()
 ================================================================ */
 
 /* ================================================================
@@ -113,7 +114,7 @@ const initHamburger = () => {
     const open = menu.classList.toggle('open');
     btn.classList.toggle('open', open);
     btn.setAttribute('aria-expanded', String(open));
-    document.body.style.overflow = open ? 'hidden' : '';
+    // Scroll lock handled by CSS: body:has(.mobile-menu.open)
   });
 
   // Close on nav link click
@@ -122,7 +123,6 @@ const initHamburger = () => {
       menu.classList.remove('open');
       btn.classList.remove('open');
       btn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
     });
   });
 
@@ -133,7 +133,6 @@ const initHamburger = () => {
       btn.classList.remove('open');
       btn.setAttribute('aria-expanded', 'false');
       btn.focus();
-      document.body.style.overflow = '';
     }
   });
 
@@ -143,7 +142,6 @@ const initHamburger = () => {
       menu.classList.remove('open');
       btn.classList.remove('open');
       btn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
     }
   });
 };
