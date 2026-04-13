@@ -110,11 +110,14 @@ const initHamburger = () => {
   const menu = document.getElementById('mobile-menu');
   if (!btn || !menu) return;
 
+  // Use :has() for scroll lock if supported, else JS fallback
+  const hasSupport = CSS.supports('selector(body:has(a))');
+
   btn.addEventListener('click', () => {
     const open = menu.classList.toggle('open');
     btn.classList.toggle('open', open);
     btn.setAttribute('aria-expanded', String(open));
-    // Scroll lock handled by CSS: body:has(.mobile-menu.open)
+    if (!hasSupport) document.body.style.overflow = open ? 'hidden' : '';
   });
 
   // Close on nav link click
@@ -123,6 +126,7 @@ const initHamburger = () => {
       menu.classList.remove('open');
       btn.classList.remove('open');
       btn.setAttribute('aria-expanded', 'false');
+      if (!hasSupport) document.body.style.overflow = '';
     });
   });
 
@@ -133,6 +137,7 @@ const initHamburger = () => {
       btn.classList.remove('open');
       btn.setAttribute('aria-expanded', 'false');
       btn.focus();
+      if (!hasSupport) document.body.style.overflow = '';
     }
   });
 
@@ -142,6 +147,7 @@ const initHamburger = () => {
       menu.classList.remove('open');
       btn.classList.remove('open');
       btn.setAttribute('aria-expanded', 'false');
+      if (!hasSupport) document.body.style.overflow = '';
     }
   });
 };
