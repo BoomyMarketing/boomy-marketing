@@ -176,6 +176,9 @@
   <meta property="og:locale" content="en_CA">
   <meta property="og:image" content="https://boomymarketing.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="preload" href="/assets/css/main.css" as="style">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script defer src="/assets/js/main.js"></script>
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
@@ -408,18 +411,7 @@
 
 </div>
 <script>
-  const canvas=document.getElementById('starfield'),ctx=canvas.getContext('2d');let stars=[];
-  function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
-  function initStars(){stars=[];for(let i=0;i<160;i++)stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5+.3,a:Math.random(),speed:Math.random()*.0008+.0002})}
-  function drawStars(){ctx.clearRect(0,0,canvas.width,canvas.height);stars.forEach(s=>{s.a+=s.speed;if(s.a>1)s.a=0;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${s.a})`;ctx.fill()});requestAnimationFrame(drawStars)}
-  resizeCanvas();initStars();drawStars();
-  window.addEventListener('resize',()=>{resizeCanvas();initStars()});
-  const navbar=document.getElementById('navbar');
-  window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40);document.getElementById('progressBar').style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%'});
-  const ham=document.querySelector('.nav-hamburger'),mob=document.getElementById('mobile-menu');if(!ham||!mob)return;
-  ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open')});
   document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{q.parentElement.classList.toggle('open')})});
-  if(typeof gsap!=='undefined'){gsap.registerPlugin(ScrollTrigger);gsap.utils.toArray('.reveal').forEach(el=>{gsap.to(el,{opacity:1,y:0,duration:.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}})})}
 </script>
 </body>
 </html>
