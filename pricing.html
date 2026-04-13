@@ -7,6 +7,11 @@
   <meta name="description" content="Transparent, no-contract digital marketing pricing in CAD. Starter from $1,500/mo, Growth from $3,500/mo, Scale from $7,500/mo. Toronto AI-powered agency packages." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://boomymarketing.com/pricing" />
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#100930">
+  <link rel="manifest" href="/manifest.json">
   <meta property="og:title" content="Pricing Plans Toronto | Boomy Marketing — CAD Packages" />
   <meta property="og:description" content="Transparent CAD pricing for AI-powered digital marketing. Choose from Starter, Growth, Scale, or Enterprise. No hidden fees." />
   <meta property="og:url" content="https://boomymarketing.com/pricing" />
@@ -38,9 +43,13 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap"></noscript>
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+  <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <style>
     :root{--bg-deep:#2D1B69;--bg-darker:#1a0f3e;--bg-darkest:#100930;--accent-orange:#FF6B35;--accent-yellow:#FFD23F;--accent-purple:#7C3AED;--text-primary:#FFFFFF;--text-sec:rgba(255,255,255,0.7);--text-muted:rgba(255,255,255,0.45);--card-bg:rgba(255,255,255,0.08);--card-border:rgba(255,255,255,0.12);--nav-h:72px;--r-md:16px;--r-lg:24px;--ease:cubic-bezier(0.4,0,0.2,1)}
@@ -159,6 +168,10 @@
     .reveal, .reveal-left, .reveal-right {
       animation: revealFallback 0.6s ease 0.3s forwards;
     }
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+    .skip-nav{position:absolute;top:-100%;left:1rem;z-index:9999;padding:.75rem 1.5rem;background:var(--accent-orange);color:#fff;font-weight:700;border-radius:0 0 8px 8px;text-decoration:none;transition:top .2s}
+    .skip-nav:focus{top:0}
+    :focus-visible{outline:2px solid var(--accent-orange);outline-offset:3px}
 </style>
   <meta property="og:locale" content="en_CA">
   <meta property="og:image" content="https://boomymarketing.com/og-image.png">

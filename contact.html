@@ -7,6 +7,11 @@
   <meta name="description" content="Contact Boomy Marketing in Toronto. Book a free 30-min strategy call, send us a message, or visit us at 240 Richmond St W. Call (647) 370-1888 or email." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://boomymarketing.com/contact" />
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#100930">
+  <link rel="manifest" href="/manifest.json">
   <meta property="og:title" content="Contact Boomy Marketing Toronto | Book a Free Strategy Call" />
   <meta property="og:description" content="Get in touch with Toronto's AI-powered digital marketing agency. Book a free strategy call, call (647) 370-1888, or email care@boomymarketing.com." />
   <meta property="og:url" content="https://boomymarketing.com/contact" />
@@ -51,9 +56,13 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap"></noscript>
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+  <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <style>
     :root{--bg-deep:#2D1B69;--bg-darker:#1a0f3e;--bg-darkest:#100930;--accent-orange:#FF6B35;--accent-yellow:#FFD23F;--accent-purple:#7C3AED;--text-primary:#FFFFFF;--text-sec:rgba(255,255,255,0.7);--text-muted:rgba(255,255,255,0.45);--card-bg:rgba(255,255,255,0.08);--card-border:rgba(255,255,255,0.12);--nav-h:72px;--r-md:16px;--r-lg:24px;--ease:cubic-bezier(0.4,0,0.2,1)}
@@ -170,6 +179,10 @@
     .reveal, .reveal-left, .reveal-right {
       animation: revealFallback 0.6s ease 0.3s forwards;
     }
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+    .skip-nav{position:absolute;top:-100%;left:1rem;z-index:9999;padding:.75rem 1.5rem;background:var(--accent-orange);color:#fff;font-weight:700;border-radius:0 0 8px 8px;text-decoration:none;transition:top .2s}
+    .skip-nav:focus{top:0}
+    :focus-visible{outline:2px solid var(--accent-orange);outline-offset:3px}
 </style>
   <meta property="og:locale" content="en_CA">
   <meta property="og:image" content="https://boomymarketing.com/og-image.png">
@@ -203,6 +216,7 @@
   </div>
 </nav>
 
+  <main id="main-content">
   <section class="page-hero" aria-labelledby="contact-heading">
     <div class="page-hero-inner">
       <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -261,21 +275,21 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" for="fname">First Name <span class="req">*</span></label>
-              <input class="form-input" type="text" id="fname" name="fname" placeholder="Marcus" required />
+              <input class="form-input" type="text" id="fname" name="fname" placeholder="Marcus" required autocomplete="given-name" />
             </div>
             <div class="form-group">
               <label class="form-label" for="lname">Last Name <span class="req">*</span></label>
-              <input class="form-input" type="text" id="lname" name="lname" placeholder="Taylor" required />
+              <input class="form-input" type="text" id="lname" name="lname" placeholder="Taylor" required autocomplete="family-name" />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" for="email">Email <span class="req">*</span></label>
-              <input class="form-input" type="email" id="email" name="email" placeholder="marcus@company.com" required />
+              <input class="form-input" type="email" id="email" name="email" placeholder="marcus@company.com" required autocomplete="email" />
             </div>
             <div class="form-group">
               <label class="form-label" for="phone">Phone</label>
-              <input class="form-input" type="tel" id="phone" name="phone" placeholder="(647) 370-1888" />
+              <input class="form-input" type="tel" id="phone" name="phone" placeholder="(647) 370-1888" autocomplete="tel" />
             </div>
           </div>
           <div class="form-group">
@@ -316,7 +330,7 @@
           </div>
           <div class="form-consent">
             <input type="checkbox" id="consent" name="consent" required />
-            <label for="consent">I agree to receive marketing communications from Boomy Marketing. I understand I can unsubscribe at any time. View our <a href="#" style="color:var(--accent-orange)">Privacy Policy</a>.</label>
+            <label for="consent">I agree to receive marketing communications from Boomy Marketing. I understand I can unsubscribe at any time. View our <a href="/privacy-policy" style="color:var(--accent-orange)">Privacy Policy</a>.</label>
           </div>
           <button type="submit" class="form-submit">Send My Message &mdash; It's Free</button>
         </form>
@@ -344,6 +358,7 @@
     </div>
   </section>
 
+  </main>
   <footer class="footer" role="contentinfo">
   <div class="footer-inner">
     <div class="footer-top">

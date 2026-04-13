@@ -7,6 +7,11 @@
   <meta name="description" content="Meet the team behind Boomy Marketing — Toronto's most forward-thinking digital agency. Founded 2020, blending AI and marketing expertise to deliver measurable." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://boomymarketing.com/about" />
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#100930">
+  <link rel="manifest" href="/manifest.json">
   <meta property="og:title" content="About Boomy Marketing — Toronto's AI-Powered Digital Agency" />
   <meta property="og:description" content="Meet the team behind Boomy Marketing — Toronto's most forward-thinking digital agency blending AI and marketing to get real results." />
   <meta property="og:url" content="https://boomymarketing.com/about" />
@@ -48,9 +53,13 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap"></noscript>
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+  <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <style>
     :root {
@@ -72,6 +81,23 @@
     }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
+    /* Accessibility: prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Accessibility: skip navigation */
+    .skip-nav { position: absolute; top: -100%; left: 1rem; z-index: 9999; padding: 0.75rem 1.5rem; background: var(--accent-orange); color: #fff; font-weight: 700; border-radius: 0 0 8px 8px; text-decoration: none; transition: top 0.2s; }
+    .skip-nav:focus { top: 0; }
+
+    /* Accessibility: focus-visible */
+    :focus-visible { outline: 2px solid var(--accent-orange); outline-offset: 3px; }
     body { font-family: 'Inter', sans-serif; background: var(--bg-darkest); color: var(--text-primary); overflow-x: hidden; line-height: 1.6; }
     #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
     .site-wrapper { position: relative; z-index: 1; }
@@ -271,6 +297,7 @@
 </nav>
 
   <!-- HERO -->
+  <main id="main-content">
   <section class="page-hero" aria-labelledby="about-heading">
     <div class="page-hero-inner">
       <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -417,6 +444,7 @@
   </section>
 
   <!-- FOOTER -->
+  </main>
   <footer class="footer" role="contentinfo">
   <div class="footer-inner">
     <div class="footer-top">
@@ -481,12 +509,18 @@
   // Starfield
   const canvas = document.getElementById('starfield');
   const ctx = canvas.getContext('2d');
-  let stars = [];
-  function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-  function initStars() { stars = []; for (let i = 0; i < 160; i++) { stars.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.5+.3, a: Math.random(), speed: Math.random()*.0008+.0002 }); } }
-  function drawStars() { ctx.clearRect(0,0,canvas.width,canvas.height); stars.forEach(s => { s.a += s.speed; if (s.a > 1) s.a = 0; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fillStyle = `rgba(255,255,255,${s.a})`; ctx.fill(); }); requestAnimationFrame(drawStars); }
-  resizeCanvas(); initStars(); drawStars();
-  window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
+  let stars = [], rafId;
+  // Respect prefers-reduced-motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    canvas.style.display = 'none';
+  } else {
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    function initStars() { stars = []; for (let i = 0; i < 160; i++) { stars.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.5+.3, a: Math.random(), speed: Math.random()*.0008+.0002 }); } }
+    function drawStars() { ctx.clearRect(0,0,canvas.width,canvas.height); stars.forEach(s => { s.a += s.speed; if (s.a > 1) s.a = 0; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fillStyle = `rgba(255,255,255,${s.a})`; ctx.fill(); }); rafId = requestAnimationFrame(drawStars); }
+    resizeCanvas(); initStars(); drawStars();
+    window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) cancelAnimationFrame(rafId); else rafId = requestAnimationFrame(drawStars); });
+  }
 
   // Navbar scroll
   const navbar = document.getElementById('navbar');

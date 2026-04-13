@@ -1,0 +1,21 @@
+{
+  "name": "Boomy Marketing Agency",
+  "short_name": "Boomy",
+  "description": "Toronto's AI-powered digital marketing agency. SEO, Google Ads, social media, and web design.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#100930",
+  "theme_color": "#100930",
+  "icons": [
+    {
+      "src": "/assets/images/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/images/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

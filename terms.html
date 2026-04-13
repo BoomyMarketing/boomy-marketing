@@ -7,6 +7,11 @@
   <meta name="description" content="Read Boomy Marketing's Terms of Service. These terms govern your use of our website and digital marketing services provided by Boomy Marketing Inc., Toronto, Canada." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://boomymarketing.com/terms" />
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#100930">
+  <link rel="manifest" href="/manifest.json">
   <meta property="og:title" content="Terms of Service — Boomy Marketing Inc." />
   <meta property="og:description" content="Terms governing the use of Boomy Marketing's website and digital marketing services, including SEO, paid advertising, social media, and web design." />
   <meta property="og:url" content="https://boomymarketing.com/terms" />
@@ -46,9 +51,13 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap"></noscript>
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+  <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <style>
     :root {
@@ -163,7 +172,11 @@
       .footer-top { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; text-align: center; }
     }
-  </style>
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+    .skip-nav{position:absolute;top:-100%;left:1rem;z-index:9999;padding:.75rem 1.5rem;background:var(--accent-orange);color:#fff;font-weight:700;border-radius:0 0 8px 8px;text-decoration:none;transition:top .2s}
+    .skip-nav:focus{top:0}
+    :focus-visible{outline:2px solid var(--accent-orange);outline-offset:3px}
+</style>
 </head>
 <body>
 

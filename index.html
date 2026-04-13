@@ -8,6 +8,11 @@
   <meta name="description" content="Boomy Marketing Agency is Toronto's AI-powered digital marketing agency. SEO, Google Ads, social media, and web design that puts your brand light-years ahead." />
   <meta name="keywords" content="digital marketing agency Toronto, SEO agency Toronto, paid advertising, social media marketing, web design Toronto" />
   <link rel="canonical" href="https://boomymarketing.com" />
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+  <link rel="icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#100930">
+  <link rel="manifest" href="/manifest.json">
   <meta property="og:title" content="Boomy Marketing Agency &mdash; Launch Your Business Into The Stratosphere" />
   <meta property="og:description" content="Data-driven marketing that puts your brand light-years ahead. Toronto's premier digital agency." />
   <meta property="og:url" content="https://boomymarketing.com" />
@@ -85,9 +90,13 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap"></noscript>
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+  <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <style>
     /* ================================================================
@@ -113,6 +122,38 @@
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
+    /* Accessibility: prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Accessibility: skip navigation */
+    .skip-nav {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      z-index: 9999;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent-orange);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 0 0 8px 8px;
+      text-decoration: none;
+      transition: top 0.2s;
+    }
+    .skip-nav:focus { top: 0; }
+
+    /* Accessibility: focus-visible */
+    :focus-visible {
+      outline: 2px solid var(--accent-orange);
+      outline-offset: 3px;
+    }
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg-darkest);
@@ -502,7 +543,7 @@
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
       font-size: .8rem; color: var(--bg-darkest); font-weight: 900; margin-top: 2px;
     }
-    .why-bullet-content h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .why-bullet-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
     .why-bullet-content p  { font-size: .88rem; color: var(--text-sec); line-height: 1.65; }
 
     /* ================================================================
@@ -723,6 +764,8 @@
 </head>
 <body>
 
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
 <!-- SCROLL PROGRESS -->
 <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Page reading progress"></div>
 
@@ -760,6 +803,7 @@
   <!-- ============================================================
        HERO
   ============================================================= -->
+  <main id="main-content">
   <section class="hero" id="hero" aria-labelledby="hero-heading">
     <div class="hero-inner">
 
@@ -946,7 +990,7 @@
         <div class="why-bullet">
           <div class="why-check" aria-hidden="true">&#x2713;</div>
           <div class="why-bullet-content">
-            <h4>No Long-Term Lock-Ins</h4>
+            <h3>No Long-Term Lock-Ins</h3>
             <p>We earn your business every month. Month-to-month agreements mean we are always performing
             at peak level. Your results are our contract renewal&mdash;there is no fine print to hide behind,
             ever. Stay because we deliver, not because you are obligated.</p>
@@ -956,7 +1000,7 @@
         <div class="why-bullet">
           <div class="why-check" aria-hidden="true">&#x2713;</div>
           <div class="why-bullet-content">
-            <h4>Dedicated Senior Strategy Team</h4>
+            <h3>Dedicated Senior Strategy Team</h3>
             <p>Every client receives a dedicated strategist, account manager, and specialist pod. No junior
             handoffs, no account-roulette between staff. Senior talent works directly on your campaigns daily,
             fully invested in your growth trajectory and accountable to your KPIs.</p>
@@ -966,7 +1010,7 @@
         <div class="why-bullet">
           <div class="why-check" aria-hidden="true">&#x2713;</div>
           <div class="why-bullet-content">
-            <h4>Transparent Real-Time Reporting</h4>
+            <h3>Transparent Real-Time Reporting</h3>
             <p>Live dashboards, weekly performance calls, and zero-fluff reporting. You see every dollar
             spent, every lead generated, and every test we run&mdash;in real time. No hidden metrics,
             no cherry-picked numbers, no waiting for a monthly PDF that obscures the truth.</p>
@@ -976,7 +1020,7 @@
         <div class="why-bullet">
           <div class="why-check" aria-hidden="true">&#x2713;</div>
           <div class="why-bullet-content">
-            <h4>Performance-Tied Pricing</h4>
+            <h3>Performance-Tied Pricing</h3>
             <p>Genuine skin in the game. Our fee structure includes performance bonuses tied directly to
             KPIs we define together before a single campaign launches. We win when you win&mdash;period.
             Incentives are perfectly aligned from day one.</p>
@@ -1212,6 +1256,8 @@
   <!-- ============================================================
        FOOTER
   ============================================================= -->
+  </main><!-- /#main-content -->
+
   <footer class="footer" role="contentinfo">
   <div class="footer-inner">
     <div class="footer-top">
@@ -1328,9 +1374,25 @@
     raf = requestAnimationFrame(draw);
   }
 
+  // Respect prefers-reduced-motion
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    canvas.style.display = 'none';
+    return;
+  }
+
   resize();
   createStars(150);
   draw();
+
+  // Pause animation when tab is not visible (save CPU/battery)
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      cancelAnimationFrame(raf);
+    } else {
+      raf = requestAnimationFrame(draw);
+    }
+  });
 
   window.addEventListener('resize', function () {
     cancelAnimationFrame(raf);
