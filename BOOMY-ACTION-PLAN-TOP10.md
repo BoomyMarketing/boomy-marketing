@@ -963,3 +963,40 @@ Google entity graph обмежує relevance до Toronto.
 ---
 
 *Раунд 2 додано: 2026-04-13 | Технічний SEO audit на основі прямого аналізу файлів*
+
+---
+
+# E-E-A-T & Schema — TOP 10 (Раунд 3)
+> **Фокус:** E-E-A-T сигнали, Article schema, свіжість контенту, cross-linking
+> **Дата:** 2026-04-14 | Раунди 1 і 2 виконані ✅
+
+## Знайдені проблеми (пряма перевірка файлів)
+
+| Проблема | Де | Критичність |
+|----------|-----|-------------|
+| Немає `BlogPosting`/`Article` schema | 39 SEO статей | 🔴 Критично |
+| Немає `author` Person у статтях | 39 статей | 🔴 Критично |
+| `"name": "Boomy Marketing"` (без Agency) | 39 статей, seo/ | 🔴 Критично |
+| `dateModified` 2023/2024 (застарілий) | 39 статей | 🟠 Високо |
+| `"seo agency in Nearby Areas"` — lowercase H2 | 258 local pages | 🟠 Високо |
+| BreadcrumbList trailing slashes у статтях | 39 статей | 🟠 Високо |
+| Inline `<span>Boomy Marketing</span>` у art-meta | 39 статей | 🟡 Середньо |
+| Тільки 3 сусідніх міст у Nearby section | 258 local pages | 🟡 Середньо |
+| Sitemap lastmod дати застарілі | sitemap.xml | 🟡 Середньо |
+| Дублікати `/seo/bc-kelowna/` і `/seo/bc/kelowna/` | seo/ folder | 🟡 Середньо |
+
+## Статус виконання
+
+| # | Задача | Вплив | Файлів | Статус |
+|---|--------|-------|--------|--------|
+| R1 | BlogPosting schema на всі SEO статті | E-E-A-T / Rich Results | 39 | ⬜ |
+| R2 | Author Person schema у статтях | E-E-A-T Authorship | 39 | ⬜ |
+| R3 | "Boomy Marketing" → "Boomy Marketing Agency" у статтях | Entity | 39 | ⬜ |
+| R4 | dateModified → 2026-04-14 на всіх статтях | Freshness | 39 | ⬜ |
+| R5 | H2 "seo agency in Nearby Areas" → Title Case | CTR / Schema | 258 | ⬜ |
+| R6 | BreadcrumbList trailing slashes у статтях | Canonical | 39 | ⬜ |
+| R7 | art-meta: "Boomy Marketing" → "Boomy Marketing Agency" | Brand | 39 | ⬜ |
+| R8 | Розширити Nearby section: 3 → 6+ міст | Internal links | 258 | ⬜ |
+| R9 | Sitemap lastmod оновити | Crawl freshness | 1 | ⬜ |
+| R10 | Видалити/canonicalize дублікат seo/bc-kelowna/ | Duplicate content | 1 | ⬜ |
+
