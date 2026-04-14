@@ -17,7 +17,9 @@ Static HTML сайт на Vercel. boomymarketing.com.
 - `container-type` НЕ ставити на `.section` (ламає layout)
 
 ## Документи проєкту
-- `FRONTEND-WORKFLOW.md` — стандарти верстки і тренди
-- `FRONTEND-AUDIT-PLAN.md` — план аудиту та оптимізації
-- `SEO-WORKFLOW-SYSTEM-2026.md` — SEO процес
+- `FRONTEND-WORKFLOW.md` — стандарти верстки і тренди 2026-2027
+- `SEO-CONTENT-WORKFLOW.md` — SEO контент стандарти, E-E-A-T, GEO, schema 2026-2027
+- `CONTENT-OPTIMIZATION-PLAN.md` — 9-кроковий план оптимізації контенту
+- `FRONTEND-AUDIT-PLAN.md` — план аудиту та оптимізації верстки
+- `SEO-WORKFLOW-SYSTEM-2026.md` — SEO процес (загальний)
 - `PARTNER-REPORT.md` — звіт для партнера
