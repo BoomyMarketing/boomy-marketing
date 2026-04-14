@@ -269,6 +269,31 @@ const showToast = (message, type = 'info') => {
 };
 
 /* ================================================================
+   8. FAQ ACCORDION
+================================================================ */
+const initFaqAccordion = () => {
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+
+      // Open clicked if was closed
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+};
+
+/* ================================================================
    INIT
 ================================================================ */
 document.addEventListener('DOMContentLoaded', () => {
@@ -277,6 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initProgressBar();
   initHamburger();
   initMagneticButtons();
+  initFaqAccordion();
 });
 
 window.addEventListener('load', initRevealAnimations);

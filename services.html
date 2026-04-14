@@ -22,19 +22,70 @@
   [
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
+      "@type": "MarketingAgency",
       "name": "Boomy Marketing Agency",
       "url": "https://boomymarketing.com",
       "telephone": "+16473701888",
       "email": "care@boomymarketing.com",
-      "address": { "@type": "PostalAddress", "streetAddress": "240 Richmond St W", "addressLocality": "Toronto", "addressRegion": "ON", "postalCode": "M5V 1V6", "addressCountry": "CA" }
+      "foundingDate": "2020",
+      "address": { "@type": "PostalAddress", "streetAddress": "240 Richmond St W", "addressLocality": "Toronto", "addressRegion": "ON", "postalCode": "M5V 1V6", "addressCountry": "CA" },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Digital Marketing Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO & AI SEO", "description": "Technical SEO, topical authority, and AI-assisted content strategy for Canadian businesses." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Generative Engine Optimization (GEO)", "description": "Optimize your brand to appear in AI-generated answers from ChatGPT, Google Gemini, and Perplexity." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads Management", "description": "Search, Shopping, Display, and Performance Max campaigns with 4–8x ROAS for Canadian clients." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Meta Ads", "description": "Facebook and Instagram advertising with creative testing, audience segmentation, and full-funnel campaigns." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Automations", "description": "Custom AI workflows for lead follow-up, onboarding, reporting, and customer communication." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Development", "description": "Custom AI agents, LLM integrations, and bespoke AI tools built in-house for your business." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Design & Development", "description": "Conversion-optimized websites tested against real user behaviour and Core Web Vitals standards." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Email Marketing", "description": "Automated email sequences and lifecycle campaigns with 48% higher open rates than industry benchmarks." } }
+        ]
+      }
     },
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://boomymarketing.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://boomymarketing.com/services.html" }
+        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://boomymarketing.com/services" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What digital marketing services does Boomy Marketing Agency offer?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Boomy Marketing Agency offers 14 AI-powered digital marketing services for Canadian businesses: SEO & AI SEO, Generative Engine Optimization (GEO), Google Ads Management, Meta Ads, AI Automations, AI Development, Web Design & Development, SaaS Product Development, Voice AI Agents, Email Marketing, AI Outbound / AI SDR, Social Media Marketing, Content Marketing, and PPC & Paid Search." }
+        },
+        {
+          "@type": "Question",
+          "name": "How much do Boomy Marketing Agency's services cost?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Boomy Marketing Agency offers flexible pricing starting from $1,497/month for SEO packages and $2,500/month for full-service digital marketing. All packages include dedicated strategy, transparent reporting, and no long-term lock-in contracts. Visit our pricing page or book a free strategy call for a custom quote." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Boomy Marketing work with small businesses in Canada?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Boomy Marketing Agency works with businesses of all sizes — from local Toronto small businesses to national Canadian brands. Over 60% of our 500+ clients are small-to-medium businesses in sectors like real estate, hospitality, legal, e-commerce, and professional services." }
+        },
+        {
+          "@type": "Question",
+          "name": "What makes Boomy Marketing Agency different from other digital agencies?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Boomy Marketing Agency was founded in 2020 with AI at its core — not added later as an afterthought. Every campaign uses proprietary AI tools for keyword research, content creation, and performance analysis. We offer no long-term contracts, performance-tied pricing, and a dedicated senior strategist for every client." }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to see results from digital marketing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Results vary by service: Google Ads and Meta Ads typically generate leads within the first 2 weeks. SEO delivers measurable organic traffic growth within 3–6 months, with compounding returns over 12+ months. AI Automations show ROI within the first 30 days through time savings and improved lead response." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Boomy Marketing Agency serve cities outside Toronto?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Boomy Marketing Agency serves businesses across 26+ Canadian cities including Vancouver, Calgary, Ottawa, Edmonton, Mississauga, Hamilton, Brampton, Markham, Burnaby, Surrey, Kelowna, and more. All services are available remotely across Canada." }
+        }
       ]
     }
   ]
@@ -110,6 +161,33 @@
     .service-desc{font-size:.9rem;color:var(--text-sec);line-height:1.7}
     .service-more{display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:.85rem;font-weight:600;color:var(--accent-orange);transition:gap .2s ease}
     .service-card:hover .service-more{gap:10px}
+    .service-metric{display:inline-block;font-size:.78rem;font-weight:700;color:var(--accent-yellow);background:rgba(255,210,63,.1);border:1px solid rgba(255,210,63,.25);padding:4px 10px;border-radius:100px;margin-top:14px}
+
+    .stats-section{padding:80px 5%;background:linear-gradient(180deg,var(--bg-darkest) 0%,rgba(45,27,105,.4) 100%)}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:1200px;margin:0 auto;text-align:center}
+    .stat-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--r-lg);padding:32px 20px;backdrop-filter:blur(8px)}
+    .stat-number{font-size:clamp(2rem,4vw,3rem);font-weight:900;background:linear-gradient(135deg,var(--accent-orange),var(--accent-yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:8px}
+    .stat-label{font-size:.9rem;color:var(--text-sec);line-height:1.5}
+
+    .industries-section{padding:80px 5%;background:var(--bg-darkest)}
+    .industries-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1200px;margin:0 auto}
+    .industry-item{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--r-md);padding:20px 24px;display:flex;align-items:center;gap:14px}
+    .industry-icon{font-size:1.6rem;flex-shrink:0}
+    .industry-name{font-size:.95rem;font-weight:600;color:var(--text-primary)}
+    .industry-desc{font-size:.82rem;color:var(--text-muted);margin-top:2px}
+
+    .faq-section{padding:80px 5%;background:linear-gradient(180deg,var(--bg-darkest) 0%,var(--bg-deep) 100%)}
+    .faq-grid{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+    .faq-item{background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--r-md);overflow:hidden}
+    .faq-q{width:100%;text-align:left;padding:22px 28px;background:none;border:none;color:var(--text-primary);font-size:1rem;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:'Inter',sans-serif;line-height:1.4}
+    .faq-q svg{flex-shrink:0;transition:transform .3s var(--ease)}
+    .faq-item.open .faq-q svg{transform:rotate(45deg)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .35s var(--ease),padding .3s ease}
+    .faq-item.open .faq-a{max-height:400px;padding:0 28px 22px}
+    .faq-a p{font-size:.95rem;color:var(--text-sec);line-height:1.75}
+
+    @media(max-width:1024px){.stats-grid{grid-template-columns:repeat(2,1fr)}.industries-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.stats-grid{grid-template-columns:repeat(2,1fr)}.industries-grid{grid-template-columns:1fr}}
 
     .cta-section{position:relative;padding:110px 5%;background:linear-gradient(135deg,var(--bg-deep) 0%,#3a1444 40%,#c04520 100%);overflow:hidden}
     .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(124,58,237,.4) 0%,transparent 55%),radial-gradient(ellipse at 80% 50%,rgba(255,107,53,.3) 0%,transparent 55%);pointer-events:none}
@@ -196,112 +274,285 @@
         <a href="/index.html">Home</a><span>&#47;</span><span aria-current="page">Services</span>
       </nav>
       <div class="section-label reveal">&#x26A1; What We Do</div>
-      <h1 id="services-heading" class="reveal">Full-Stack Marketing Services<br /><span class="gradient-text">For Ambitious Brands</span></h1>
-      <p class="reveal">Every service is engineered to drive measurable results. From AI-powered SEO to voice AI agents — Boomy Marketing has the full stack covered for Canadian businesses ready to grow.</p>
+      <h1 id="services-heading" class="reveal">Full-Stack Digital Marketing Services<br /><span class="gradient-text">For Canadian Businesses That Want Results</span></h1>
+      <p class="reveal">Boomy Marketing Agency delivers 14 AI-powered digital marketing services built around one goal: generating more leads, more sales, and more revenue for your business. Since 2020, we've helped 500+ Canadian businesses across Toronto, Vancouver, Calgary, and 26+ cities grow faster using AI-first strategies that traditional agencies simply can't match. No lock-in contracts. No junior account managers. Just a senior team, real results, and full transparency.</p>
     </div>
   </section>
 
   <section class="section" style="background:linear-gradient(180deg,var(--bg-darkest) 0%,var(--bg-deep) 50%,var(--bg-darkest) 100%)">
     <div class="services-grid">
 
-      <a href="/services/seo.html" class="service-card reveal">
+      <a href="/local/toronto/seo-agency/" class="service-card reveal">
         <span class="service-icon">&#x1F50D;</span>
         <h2 class="service-name">SEO &amp; AI SEO</h2>
-        <p class="service-desc">Technical SEO, topical authority, and AI-assisted content strategy that dominates Google rankings in Canadian markets. We build organic visibility that compounds month over month.</p>
+        <p class="service-desc">Technical SEO, topical authority, and AI-assisted content strategy that dominates Google rankings in Canadian markets. We build organic visibility that compounds month over month — turning Google into your highest-ROI lead source.</p>
+        <span class="service-metric">Avg. +187% organic traffic in 6 months</span>
         <span class="service-more">Learn more &rarr;</span>
       </a>
 
-      <a href="/services/geo.html" class="service-card reveal">
+      <a href="/local/toronto/seo-agency/" class="service-card reveal">
         <span class="service-icon">&#x1F9E0;</span>
         <h2 class="service-name">GEO — Generative Engine Optimization</h2>
-        <p class="service-desc">Optimize your brand to appear in AI-generated answers from ChatGPT, Google Gemini, and Perplexity. The future of search is AI — we get you cited and recommended.</p>
+        <p class="service-desc">Optimize your brand to appear in AI-generated answers from ChatGPT, Google AI Mode, and Perplexity. In 2026, 93% of AI searches end without a click — unless your brand is the answer. We make sure it is.</p>
+        <span class="service-metric">Cited in AI Overviews &amp; ChatGPT answers</span>
         <span class="service-more">Learn more &rarr;</span>
       </a>
 
-      <a href="/services/google-ads.html" class="service-card reveal">
+      <a href="/local/toronto/google-ads-agency/" class="service-card reveal">
         <span class="service-icon">&#x1F3AF;</span>
         <h2 class="service-name">Google Ads Management</h2>
-        <p class="service-desc">Search, Shopping, Display, and Performance Max campaigns managed by certified Google Ads experts. We average 4–8x ROAS for our Toronto and Canadian clients.</p>
+        <p class="service-desc">Search, Shopping, Display, and Performance Max campaigns managed by certified Google Ads experts. We don't just set up campaigns — we optimize them weekly to squeeze maximum return from every dollar of ad spend.</p>
+        <span class="service-metric">Average 4–8x ROAS for Canadian clients</span>
         <span class="service-more">Learn more &rarr;</span>
       </a>
 
-      <a href="/services/meta-ads.html" class="service-card reveal">
+      <a href="/local/toronto/digital-marketing-agency/" class="service-card reveal">
         <span class="service-icon">&#x1F4F1;</span>
         <h2 class="service-name">Meta Ads</h2>
-        <p class="service-desc">Facebook and Instagram advertising that finds your ideal customer and converts them efficiently. Creative testing, audience segmentation, and full-funnel campaigns at scale.</p>
+        <p class="service-desc">Facebook and Instagram advertising that finds your ideal Canadian customer and converts them efficiently. Creative testing, audience segmentation, and full-funnel campaigns — from cold traffic to loyal buyers.</p>
+        <span class="service-metric">3.2x average ROAS across Meta campaigns</span>
         <span class="service-more">Learn more &rarr;</span>
       </a>
 
-      <a href="/services/ai-automations.html" class="service-card reveal">
+      <a href="/local/toronto/ai-automation-agency/" class="service-card reveal">
         <span class="service-icon">&#x1F916;</span>
         <h2 class="service-name">AI Automations</h2>
-        <p class="service-desc">Automate lead follow-up, onboarding, reporting, and customer communication with custom AI workflows. We build the automations that free your team to focus on what matters.</p>
+        <p class="service-desc">Automate lead follow-up, onboarding, reporting, and customer communication with custom AI workflows. Our clients recover an average of 15+ hours per week that were previously spent on repetitive tasks.</p>
+        <span class="service-metric">15+ hrs/week saved per client on average</span>
         <span class="service-more">Learn more &rarr;</span>
       </a>
 
-      <a href="/services/ai-development.html" class="service-card reveal">
+      <a href="/local/toronto/ai-development-company/" class="service-card reveal">
         <span class="service-icon">&#x1F527;</span>
         <h2 class="service-name">AI Development</h2>
-        <p class="service-desc">Custom AI agents, LLM integrations, and bespoke AI tools built for your specific business needs. From chatbots to complex agentic workflows — we engineer it all in-house.</p>
+        <p class="service-desc">Custom AI agents, LLM integrations, and bespoke AI tools built for your specific business needs. From intelligent chatbots to complex agentic workflows — we engineer everything in-house, without third-party templates.</p>
+        <span class="service-metric">Built on GPT-4o, Claude &amp; Gemini APIs</span>
         <span class="service-more">Learn more &rarr;</span>
       </a>
 
-      <a href="/services/web-design.html" class="service-card reveal">
+      <a href="/local/toronto/web-design-company/" class="service-card reveal">
         <span class="service-icon">&#x1F310;</span>
         <h2 class="service-name">Web Design &amp; Development</h2>
-        <p class="service-desc">Conversion-optimized websites that load fast, look incredible, and turn visitors into leads. Every design is tested against real user behaviour and Core Web Vitals standards.</p>
+        <p class="service-desc">Conversion-optimized websites that load fast, look incredible, and turn visitors into leads. Every design is tested against real user behaviour, Core Web Vitals standards, and your specific business conversion goals.</p>
+        <span class="service-metric">Sub-2s load time. Core Web Vitals green.</span>
         <span class="service-more">Learn more &rarr;</span>
       </a>
 
-      <a href="/services/saas-products.html" class="service-card reveal">
+      <a href="/local/toronto/digital-marketing-agency/" class="service-card reveal">
         <span class="service-icon">&#x1F4E6;</span>
         <h2 class="service-name">SaaS Product Development</h2>
-        <p class="service-desc">From MVP to market-ready SaaS product. We design, build, and launch software products with a growth-first architecture — built to scale from day one.</p>
+        <p class="service-desc">From MVP to market-ready SaaS product. We design, build, and launch software products with a growth-first architecture — built to scale from day one, with built-in analytics and conversion tracking.</p>
+        <span class="service-metric">MVP to launch in 8–12 weeks</span>
         <span class="service-more">Learn more &rarr;</span>
       </a>
 
-      <a href="/services/voice-ai.html" class="service-card reveal">
+      <a href="/local/toronto/ai-automation-agency/" class="service-card reveal">
         <span class="service-icon">&#x1F399;&#xFE0F;</span>
         <h2 class="service-name">Voice AI Agents</h2>
-        <p class="service-desc">Deploy intelligent voice agents that handle inbound calls, qualify leads, book appointments, and answer FAQs — 24/7, without hiring more staff.</p>
+        <p class="service-desc">Deploy intelligent voice agents that handle inbound calls, qualify leads, book appointments, and answer FAQs — 24/7, without hiring more staff. Our voice AI integrates with your CRM and calendar in days, not months.</p>
+        <span class="service-metric">24/7 call handling — zero missed leads</span>
         <span class="service-more">Learn more &rarr;</span>
       </a>
 
-      <a href="/services/email-marketing.html" class="service-card reveal">
+      <a href="/local/toronto/email-marketing-agency/" class="service-card reveal">
         <span class="service-icon">&#x1F4E7;</span>
         <h2 class="service-name">Email Marketing</h2>
-        <p class="service-desc">Automated email sequences, lifecycle campaigns, and deep segmentation that turn cold lists into loyal buyers. Our clients average 48% higher open rates than industry benchmarks.</p>
+        <p class="service-desc">Automated email sequences, lifecycle campaigns, and deep segmentation that turn cold lists into loyal buyers. We engineer every campaign around revenue, not vanity metrics like open rates.</p>
+        <span class="service-metric">48% higher open rates than industry avg.</span>
         <span class="service-more">Learn more &rarr;</span>
       </a>
 
-      <a href="/services/ai-outbound.html" class="service-card reveal">
+      <a href="/local/toronto/digital-marketing-agency/" class="service-card reveal">
         <span class="service-icon">&#x1F4E4;</span>
         <h2 class="service-name">AI Outbound / AI SDR</h2>
-        <p class="service-desc">AI-powered sales development that researches prospects, personalizes outreach, and books meetings at scale. Your pipeline fills itself while your team closes deals.</p>
+        <p class="service-desc">AI-powered sales development that researches prospects, personalizes outreach at scale, and books qualified meetings directly into your calendar. Your pipeline fills itself while your team focuses on closing.</p>
+        <span class="service-metric">3–5x more booked meetings vs. manual outreach</span>
         <span class="service-more">Learn more &rarr;</span>
       </a>
 
-      <a href="/services/social-media.html" class="service-card reveal">
+      <a href="/local/toronto/social-media-marketing-agency/" class="service-card reveal">
         <span class="service-icon">&#x1F4F8;</span>
         <h2 class="service-name">Social Media Marketing</h2>
-        <p class="service-desc">Strategy, content creation, community management, and growth across Instagram, LinkedIn, TikTok, and more. We build audiences that actually convert.</p>
+        <p class="service-desc">Strategy, content creation, community management, and paid growth across Instagram, LinkedIn, TikTok, and Facebook. We build audiences that engage — and then convert them into paying customers.</p>
+        <span class="service-metric">Content calendar + paid + organic growth</span>
         <span class="service-more">Learn more &rarr;</span>
       </a>
 
-      <a href="/services/content-marketing.html" class="service-card reveal">
+      <a href="/local/toronto/content-marketing-agency/" class="service-card reveal">
         <span class="service-icon">&#x270D;&#xFE0F;</span>
         <h2 class="service-name">Content Marketing</h2>
-        <p class="service-desc">Long-form content, pillar pages, thought leadership, and topical cluster strategies that build authority and drive consistent organic traffic over time.</p>
+        <p class="service-desc">Long-form content, pillar pages, thought leadership, and topical cluster strategies that build domain authority and drive consistent organic traffic — compounding in value every month you're live.</p>
+        <span class="service-metric">Topical authority + AI citation readiness</span>
         <span class="service-more">Learn more &rarr;</span>
       </a>
 
-      <a href="/services/ppc.html" class="service-card reveal">
+      <a href="/local/toronto/google-ads-agency/" class="service-card reveal">
         <span class="service-icon">&#x1F4B0;</span>
         <h2 class="service-name">PPC &amp; Paid Search</h2>
-        <p class="service-desc">Full-spectrum paid search management across Google, Bing, and programmatic networks. Every dollar tracked, every ad tested, every campaign optimized for maximum ROI.</p>
+        <p class="service-desc">Full-spectrum paid search management across Google, Bing, and programmatic networks. Every dollar tracked, every ad split-tested, every campaign optimized for cost-per-lead — not just clicks.</p>
+        <span class="service-metric">Every dollar tracked to revenue</span>
         <span class="service-more">Learn more &rarr;</span>
       </a>
 
+    </div>
+  </section>
+
+  <!-- STATS SECTION -->
+  <section class="stats-section" aria-label="Boomy Marketing results">
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Canadian businesses grown since 2020</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number">98%</div>
+        <div class="stat-label">Client retention rate — because results keep them</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number">4–8x</div>
+        <div class="stat-label">Average ROAS on Google Ads campaigns</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number">$50M+</div>
+        <div class="stat-label">Revenue generated for clients across Canada</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES SECTION -->
+  <section class="industries-section" aria-labelledby="industries-heading">
+    <div style="max-width:1200px;margin:0 auto">
+      <div class="section-header">
+        <div class="section-label">&#x1F3D7;&#xFE0F; Who We Serve</div>
+        <h2 id="industries-heading" class="section-title">Industries We <span class="gradient-text">Specialize In</span></h2>
+        <p class="section-sub">From local service businesses to national e-commerce brands — our digital marketing strategies are built around your specific industry, competition, and buyer journey.</p>
+      </div>
+      <div class="industries-grid">
+        <div class="industry-item reveal">
+          <span class="industry-icon">&#x1F3E0;</span>
+          <div>
+            <div class="industry-name">Real Estate</div>
+            <div class="industry-desc">SEO, Google Ads &amp; landing pages for agents and brokerages</div>
+          </div>
+        </div>
+        <div class="industry-item reveal">
+          <span class="industry-icon">&#x2696;&#xFE0F;</span>
+          <div>
+            <div class="industry-name">Legal &amp; Professional Services</div>
+            <div class="industry-desc">Local SEO, Google Ads &amp; reputation management for law firms</div>
+          </div>
+        </div>
+        <div class="industry-item reveal">
+          <span class="industry-icon">&#x1F37D;&#xFE0F;</span>
+          <div>
+            <div class="industry-name">Restaurants &amp; Hospitality</div>
+            <div class="industry-desc">Local search visibility, social media &amp; Google Maps ranking</div>
+          </div>
+        </div>
+        <div class="industry-item reveal">
+          <span class="industry-icon">&#x1F6D2;</span>
+          <div>
+            <div class="industry-name">E-Commerce</div>
+            <div class="industry-desc">Shopping campaigns, SEO &amp; email automation for online stores</div>
+          </div>
+        </div>
+        <div class="industry-item reveal">
+          <span class="industry-icon">&#x1F4BB;</span>
+          <div>
+            <div class="industry-name">SaaS &amp; Tech</div>
+            <div class="industry-desc">B2B SEO, LinkedIn ads &amp; AI-powered outbound for software companies</div>
+          </div>
+        </div>
+        <div class="industry-item reveal">
+          <span class="industry-icon">&#x1F3E5;</span>
+          <div>
+            <div class="industry-name">Healthcare &amp; Medical</div>
+            <div class="industry-desc">Local SEO, PPC &amp; patient acquisition for clinics and practitioners</div>
+          </div>
+        </div>
+        <div class="industry-item reveal">
+          <span class="industry-icon">&#x1F528;</span>
+          <div>
+            <div class="industry-name">Home Services &amp; Trades</div>
+            <div class="industry-desc">Google Local Service Ads, maps ranking &amp; review management</div>
+          </div>
+        </div>
+        <div class="industry-item reveal">
+          <span class="industry-icon">&#x1F4BC;</span>
+          <div>
+            <div class="industry-name">Financial Services</div>
+            <div class="industry-desc">Compliant paid ads, SEO &amp; content marketing for finance firms</div>
+          </div>
+        </div>
+        <div class="industry-item reveal">
+          <span class="industry-icon">&#x1F393;</span>
+          <div>
+            <div class="industry-name">Education &amp; Coaching</div>
+            <div class="industry-desc">Funnel-based paid ads, email sequences &amp; webinar marketing</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="faq-section" aria-labelledby="faq-heading">
+    <div style="max-width:900px;margin:0 auto">
+      <div class="section-header">
+        <div class="section-label">&#x2753; Common Questions</div>
+        <h2 id="faq-heading" class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
+      </div>
+      <div class="faq-grid">
+
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">
+            What digital marketing services does Boomy Marketing offer?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-a"><p>Boomy Marketing Agency offers 14 AI-powered services: SEO & AI SEO, Generative Engine Optimization (GEO), Google Ads Management, Meta Ads, AI Automations, AI Development, Web Design & Development, SaaS Product Development, Voice AI Agents, Email Marketing, AI Outbound / AI SDR, Social Media Marketing, Content Marketing, and PPC & Paid Search. Every service is available individually or as part of a full-stack growth package.</p></div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">
+            How much do Boomy Marketing's services cost?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-a"><p>SEO packages start from $1,497/month. Full-service digital marketing retainers start from $2,500/month. Google Ads and Meta Ads management fees start from $800/month (plus ad spend). AI Automation projects are quoted based on scope. All packages include a dedicated senior strategist, weekly reporting, and no lock-in contracts. <a href="/pricing.html" style="color:var(--accent-orange)">See full pricing →</a></p></div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">
+            How long does it take to see results from digital marketing?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-a"><p>It depends on the service. Google Ads and Meta Ads generate leads within the first 2 weeks as soon as campaigns go live. SEO delivers measurable organic traffic growth within 3–6 months, with compounding results over 12+ months. AI Automations typically show ROI within 30 days through time savings and improved lead response speed. We set clear milestones at the start of every engagement so you always know what to expect and when.</p></div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">
+            Does Boomy Marketing work with small businesses?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-a"><p>Yes — over 60% of our 500+ clients are small-to-medium Canadian businesses. We work with local restaurants, law firms, contractors, clinics, real estate agents, and e-commerce stores alongside larger national brands. Our packages are designed to deliver enterprise-level strategy at small business budgets, without the overhead of a large agency.</p></div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">
+            What makes Boomy Marketing different from other Toronto agencies?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-a"><p>Three things: First, AI is at our core — built in since 2020, not added as a buzzword. Every campaign uses proprietary AI tools for research, optimization, and reporting that generic agencies don't have access to. Second, you work with a senior strategist — not a junior account manager. Third, we have no long-term lock-in contracts. We earn your business every month through results, not paperwork.</p></div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">
+            Do you serve businesses outside Toronto?
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+          <div class="faq-a"><p>Absolutely. Boomy Marketing Agency serves businesses across 26+ Canadian cities including Vancouver, Calgary, Ottawa, Edmonton, Mississauga, Hamilton, Brampton, Markham, Burnaby, Surrey, Kelowna, and more. All services are delivered remotely with the same senior team that serves our Toronto clients. <a href="/locations" style="color:var(--accent-orange)">See all locations →</a></p></div>
+        </div>
+
+      </div>
     </div>
   </section>
 
