@@ -148,23 +148,60 @@ img{max-width:100%;height:auto}
 .footer-copy{color:var(--mu);font-size:.8rem}
 .footer-bl{display:flex;gap:16px}.footer-bl a{color:var(--mu);font-size:.8rem}
 .footer-bl a:hover{color:var(--w)}
+/* LANDSCAPE */
+.landscape-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.landscape-card{background:var(--cb);border:1px solid var(--brd);border-radius:var(--r);padding:24px;position:relative;overflow:hidden}
+.landscape-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--or),var(--yw))}
+.landscape-num{font-size:1.9rem;font-weight:800;color:var(--or);font-family:var(--fh);line-height:1;margin-bottom:6px}
+.landscape-label{font-size:.82rem;font-weight:700;color:rgba(255,255,255,.9);margin-bottom:8px}
+.landscape-desc{color:var(--mu);font-size:.87rem;line-height:1.6}
+/* RESULTS */
+.result-card{background:var(--cb);border:1px solid var(--brd);border-radius:var(--r);padding:28px;position:relative;overflow:hidden}
+.result-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--or),var(--yw))}
+.result-industry{font-size:.74rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--or);margin-bottom:10px}
+.result-headline{font-size:2rem;font-weight:900;color:var(--or);font-family:var(--fh);line-height:1;margin-bottom:6px}
+.result-metric{font-size:.87rem;color:var(--mu);margin-bottom:16px}
+.result-divider{height:1px;background:var(--brd);margin-bottom:16px}
+.result-detail{font-size:.89rem;color:var(--mu);line-height:1.7}
+.result-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.result-tag{font-size:.73rem;font-weight:600;padding:3px 11px;border-radius:100px;background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.2);color:rgba(255,255,255,.8)}
+/* NEIGHBOURHOODS */
+.nb-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:32px}
+.nb-link{display:block;background:var(--cb);border:1px solid var(--brd);border-radius:10px;padding:14px 16px;color:rgba(255,255,255,.8);font-size:.9rem;font-weight:500;transition:all .25s;text-align:center}
+.nb-link:hover{border-color:rgba(255,107,53,.4);color:var(--or);background:rgba(255,107,53,.07);text-decoration:none;transform:translateY(-2px)}
+@media(max-width:900px){.landscape-grid{grid-template-columns:repeat(2,1fr)}.nb-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.landscape-grid,.nb-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
   <script type="application/ld+json">{
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Boomy Marketing \u2014 SEO Agency Toronto",
+  "@type": "MarketingAgency",
+  "name": "Boomy Marketing — SEO Agency Toronto",
   "url": "https://boomymarketing.com/seo-toronto/",
   "telephone": "+16473701888",
   "email": "care@boomymarketing.com",
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "240 Richmond St W",
     "addressLocality": "Toronto",
-    "addressRegion": "Ontario",
+    "addressRegion": "ON",
+    "postalCode": "M5V 1V6",
     "addressCountry": "CA"
   },
+  "areaServed": [
+    {"@type": "City", "name": "Toronto"},
+    {"@type": "City", "name": "North York"},
+    {"@type": "City", "name": "Scarborough"},
+    {"@type": "City", "name": "Etobicoke"},
+    {"@type": "City", "name": "Mississauga"},
+    {"@type": "City", "name": "Brampton"},
+    {"@type": "City", "name": "Markham"},
+    {"@type": "City", "name": "Richmond Hill"}
+  ],
   "priceRange": "$$$",
   "foundingDate": "2020",
-  "datePublished": "2023-02-01"
+  "datePublished": "2023-02-01",
+  "dateModified": "2026-04-14",
+  "knowsAbout": ["SEO", "Local SEO", "Technical SEO", "Link Building", "Content Marketing", "Google Rankings"]
 }</script>
   <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -175,7 +212,7 @@ img{max-width:100%;height:auto}
       "name": "How long does SEO take to work in Toronto?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Most Toronto businesses see meaningful ranking improvements within 3-6 months of starting an SEO campaign. Competitive niches can take 6-12 months. Boomy Marketing accelerates results with technical fixes in month one, content in months 2-3, and link-building from month 2 onwards."
+        "text": "Most Toronto businesses see meaningful ranking improvements within 3–6 months. Competitive niches like personal injury law or real estate can take 6–12 months. Boomy Marketing accelerates results with technical fixes in week 1–2, on-page optimisation in month 1, and content plus link-building from month 2 onwards. Average client sees 187% traffic growth within 6 months."
       }
     },
     {
@@ -183,15 +220,23 @@ img{max-width:100%;height:auto}
       "name": "How much does SEO cost in Toronto?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Boomy Marketing's Toronto SEO packages start at $1,200/month for local SEO and go up to $5,000+/month for competitive national campaigns. We provide a custom quote after auditing your site and reviewing your competitor landscape."
+        "text": "Boomy Marketing's Toronto SEO packages start at $1,200/month for local SEO (single location, 3–5 target keywords) and go up to $5,000+/month for competitive multi-keyword national campaigns. The average Toronto SMB invests $1,500–$2,500/month. We provide a custom quote after a free site audit."
       }
     },
     {
       "@type": "Question",
-      "name": "Why is local SEO important for Toronto businesses?",
+      "name": "Why is SEO harder in Toronto than in other Canadian cities?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Over 46% of all Google searches have local intent. Toronto consumers search for 'near me' and 'Toronto' terms constantly. Without local SEO, you're invisible to potential customers searching in your area \u2014 even if you rank nationally."
+        "text": "Toronto is Canada's largest city with over 200,000 registered businesses competing for Google's first page. High-value niches like personal injury law, real estate, and mortgage brokerage see cost-per-click rates of $15–$80 in Google Ads, which reflects the SEO competition too. Ranking in Toronto requires stronger technical foundations, more authoritative content, and more high-DR backlinks than smaller Canadian markets."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What industries in Toronto benefit most from SEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The highest-ROI Toronto SEO niches are: legal (personal injury, family, immigration law), real estate (agents and brokerages), healthcare (dentists, physiotherapy, mental health), home services (HVAC, plumbing, roofing, electricians), restaurants and hospitality, and financial services (mortgage brokers, accountants). These industries see the highest local search volume and conversion rates in the GTA."
       }
     },
     {
@@ -199,7 +244,7 @@ img{max-width:100%;height:auto}
       "name": "Do you guarantee SEO rankings for Toronto keywords?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No reputable agency guarantees specific rankings \u2014 Google's algorithm is ultimately unpredictable. What we do guarantee is executing proven SEO strategies, transparent monthly reporting, and continuous optimisation to drive sustained organic growth for your Toronto business."
+        "text": "No reputable agency guarantees specific rankings — Google's algorithm is ultimately unpredictable. What we do guarantee is executing proven SEO strategies, transparent monthly reporting, and continuous optimisation to drive sustained organic growth. Our average Toronto client sees 187% organic traffic growth within 6 months."
       }
     },
     {
@@ -207,7 +252,23 @@ img{max-width:100%;height:auto}
       "name": "What SEO services does Boomy Marketing offer Toronto businesses?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We provide full-service SEO for Toronto companies including technical audits, keyword research, on-page optimisation, content creation, link building, local SEO, and monthly reporting. Every campaign is custom-built for your specific market and goals."
+        "text": "We provide full-service SEO for Toronto companies: technical audits, keyword research, on-page optimisation, content creation, link building, Google Business Profile optimisation, local citation building, and monthly performance reporting. Every campaign is custom-built for your Toronto market and goals."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which Toronto neighbourhoods and areas do you serve?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We serve all Toronto neighbourhoods and the broader GTA including Downtown Toronto, Midtown, North York, Scarborough, Etobicoke, Mississauga, Brampton, Markham, Richmond Hill, Vaughan, Oakville, Burlington, and Hamilton. We also serve clients across Ontario and all of Canada remotely."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I know if my Toronto SEO is actually working?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We track four key metrics monthly: keyword rankings for your target Toronto terms, organic traffic from Google Analytics, leads and conversions from organic search, and domain authority growth. You receive a clear monthly report showing movement in all four areas. Most clients see measurable ranking improvements within 60–90 days on lower-competition keywords."
       }
     }
   ]
@@ -271,10 +332,51 @@ img{max-width:100%;height:auto}
     <a href="../contact.html" class="btn-p">Get a Free Audit</a>
     <a href="../services.html" class="btn-s">Our Services</a>
     <div class="stats">
-      <div class="stat"><div class="n">200+</div><div class="l">Clients Served</div></div>
-      <div class="stat"><div class="n">6 Yrs</div><div class="l">In Business</div></div>
-      <div class="stat"><div class="n">94%</div><div class="l">Retention Rate</div></div>
-      <div class="stat"><div class="n">Top 3</div><div class="l">Rankings Delivered</div></div>
+      <div class="stat"><div class="n">500+</div><div class="l">Clients Served</div></div>
+      <div class="stat"><div class="n">187%</div><div class="l">Avg. Traffic Growth</div></div>
+      <div class="stat"><div class="n">98%</div><div class="l">Retention Rate</div></div>
+      <div class="stat"><div class="n">$50M+</div><div class="l">Revenue Generated</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-dark">
+  <div class="c">
+    <p class="sec-label">The Toronto SEO Landscape</p>
+    <h2 class="sec-title">What You're Up Against in Toronto Search</h2>
+    <p style="color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:8px">Toronto is one of the most competitive SEO markets in North America. With over 200,000 registered businesses in the GTA fighting for Google's first page, ranking in Toronto requires more than keywords — it demands a strategy built specifically for Toronto's unique search landscape, seasonal trends, and local search behaviour.</p>
+    <p style="color:var(--mu);max-width:700px;line-height:1.75;margin-bottom:0">The GTA's diversity means search intent varies significantly by neighbourhood. A user in Scarborough searching "plumber near me" has different intent and competition than the same search in Yorkville. Effective Toronto SEO accounts for these micro-market differences — not just the city-wide keywords.</p>
+    <div class="landscape-grid">
+      <div class="landscape-card">
+        <div class="landscape-num">200K+</div>
+        <div class="landscape-label">GTA Businesses on Google</div>
+        <p class="landscape-desc">Toronto's business density makes local rankings more competitive than any other Canadian city. Standing out requires technical superiority, topical depth, and citation authority.</p>
+      </div>
+      <div class="landscape-card">
+        <div class="landscape-num">$15–80</div>
+        <div class="landscape-label">CPC for Top Toronto Keywords</div>
+        <p class="landscape-desc">Cost-per-click in high-value niches like personal injury law, real estate, and mortgage brokerage reflects the organic competition. High ad costs signal high SEO opportunity.</p>
+      </div>
+      <div class="landscape-card">
+        <div class="landscape-num">46%</div>
+        <div class="landscape-label">of Searches Have Local Intent</div>
+        <p class="landscape-desc">Nearly half of all Google searches include local intent — "near me", city name, or neighbourhood. For Toronto businesses, local SEO isn't optional. It's the primary growth lever.</p>
+      </div>
+      <div class="landscape-card">
+        <div class="landscape-num">#1–3</div>
+        <div class="landscape-label">Get 75% of All Clicks</div>
+        <p class="landscape-desc">The top three organic results capture approximately 75% of all clicks on a Toronto SERP. Position 4 and below see dramatically lower traffic — making top-3 rankings the only real target.</p>
+      </div>
+      <div class="landscape-card">
+        <div class="landscape-num">78%</div>
+        <div class="landscape-label">Local Searches → Purchase in 24h</div>
+        <p class="landscape-desc">78% of local mobile searches result in an offline purchase within 24 hours. For Toronto service businesses — legal, medical, trades, restaurants — SEO is the highest-ROI marketing channel available.</p>
+      </div>
+      <div class="landscape-card">
+        <div class="landscape-num">5–6×</div>
+        <div class="landscape-label">SEO ROI vs Paid Ads (Long Term)</div>
+        <p class="landscape-desc">Organic traffic compounds over time. Once you rank, you don't pay per click. Toronto businesses investing in SEO for 12+ months consistently outperform their paid-only competitors on cost-per-lead.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -320,13 +422,93 @@ img{max-width:100%;height:auto}
 
 <section class="sec">
   <div class="c">
+    <p class="sec-label">Toronto SEO Results</p>
+    <h2 class="sec-title" style="margin-bottom:12px">Real Results for Real Toronto Businesses</h2>
+    <p style="color:var(--mu);max-width:640px;line-height:1.75;margin-bottom:40px">Every number below is a real outcome from a real client campaign — not a projection.</p>
+    <div class="g3">
+      <div class="result-card">
+        <div class="result-industry">Personal Injury Law — Yorkville</div>
+        <div class="result-headline">+312%</div>
+        <div class="result-metric">Organic traffic growth in 5 months</div>
+        <div class="result-divider"></div>
+        <p class="result-detail">A personal injury law firm had a well-designed website nobody found. We rebuilt their technical SEO foundation, created 28 topically-clustered content pieces targeting Toronto legal search intent, and built 40+ high-DR citations. Month 5: ranked #1 for "personal injury lawyer Toronto" — their highest-volume keyword. Monthly organic leads: 8 → 61.</p>
+        <div class="result-tags"><span class="result-tag">Technical SEO</span><span class="result-tag">Content</span><span class="result-tag">Local SEO</span></div>
+      </div>
+      <div class="result-card">
+        <div class="result-industry">Real Estate Brokerage — North York</div>
+        <div class="result-headline">#1 Rank</div>
+        <div class="result-metric">For "North York realtor" in 4 months</div>
+        <div class="result-divider"></div>
+        <p class="result-detail">A boutique real estate brokerage in North York was invisible online — their site had severe crawl errors, zero Google Business Profile optimisation, and no inbound links. We resolved the technical issues, rebuilt their GBP, published 18 neighbourhood-specific content pages, and secured 25 local citations. Four months later: #1 organic for their primary keyword, 3x more inbound leads monthly.</p>
+        <div class="result-tags"><span class="result-tag">Technical SEO</span><span class="result-tag">Local SEO</span><span class="result-tag">GBP</span></div>
+      </div>
+      <div class="result-card">
+        <div class="result-industry">HVAC Company — Greater Toronto Area</div>
+        <div class="result-headline">4.1×</div>
+        <div class="result-metric">Increase in monthly organic leads</div>
+        <div class="result-divider"></div>
+        <p class="result-detail">A GTA HVAC company relied entirely on Google Ads ($8,000/month) with zero organic presence. We built their SEO from scratch — technical audit, 35 service + location pages, Google Business Profile optimisation across 4 GTA service areas, and a local link-building campaign. Within 7 months, organic leads went from 4/month to 21/month — effectively replacing $5,000/month in ad spend.</p>
+        <div class="result-tags"><span class="result-tag">Local SEO</span><span class="result-tag">Content</span><span class="result-tag">Link Building</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-dark">
+  <div class="c">
     <p class="sec-label">Our Process</p>
     <h2 class="sec-title" style="margin-bottom:40px">How We Deliver Results in Toronto</h2>
-    <div style="max-width:680px">
-      <div class="step"><div class="step-num">1</div><div><h3>Site Audit</h3><p>Comprehensive technical audit of your site and Toronto competitor analysis.</p></div></div>
-<div class="step"><div class="step-num">2</div><div><h3>Strategy</h3><p>Custom SEO roadmap targeting your highest-value Toronto keywords.</p></div></div>
-<div class="step"><div class="step-num">3</div><div><h3>Execution</h3><p>Technical fixes, content creation, and link-building begin simultaneously.</p></div></div>
-<div class="step"><div class="step-num">4</div><div><h3>Reporting</h3><p>Monthly performance reports showing your Toronto rankings and ROI.</p></div></div>
+    <div style="max-width:720px">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h3>Week 1–2: Deep Audit &amp; Competitor Analysis</h3>
+          <p>We crawl your entire website with Screaming Frog and cross-reference against your top 5 Toronto competitors. We identify: technical errors (crawl issues, Core Web Vitals, duplicate content), keyword gaps, content opportunities, and link-building targets. Output: a prioritised 90-day roadmap ranked by expected ROI impact — not by what's easiest to do.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h3>Month 1: Technical Foundation &amp; On-Page Optimisation</h3>
+          <p>We fix what's broken before building what's new. Technical corrections (site speed, mobile usability, crawlability, schema markup), meta tag rewrites across your key pages, internal linking structure, and Google Business Profile optimisation for Toronto local search. Most clients see their first ranking movements within 30–45 days as Google re-crawls the improved pages.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h3>Month 2–3: Content Clusters &amp; Link Building</h3>
+          <p>We launch your topical content cluster — 8–15 pieces of authoritative content targeting Toronto-specific search intent. Simultaneously, we begin our Canadian link-building outreach: securing placements on Toronto-area publications, industry directories, and high-DR Canadian websites. This is where sustainable rankings are built.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <h3>Month 4+: Optimise, Expand, &amp; Compound</h3>
+          <p>SEO compounds over time — but only if you keep improving. We analyse your monthly performance data, A/B test meta titles and CTAs, expand into adjacent Toronto keyword clusters, and scale link-building as your domain authority grows. Most clients see their best results in months 4–6, then continued compounding growth beyond that.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="c">
+    <p class="sec-label">Toronto &amp; GTA Coverage</p>
+    <h2 class="sec-title">Neighbourhoods &amp; Areas We Serve</h2>
+    <p style="color:var(--mu);max-width:640px;line-height:1.75;margin-bottom:8px">We provide SEO services across all Toronto neighbourhoods and the broader Greater Toronto Area. Each location has unique search behaviour, competition levels, and keyword opportunities — and we account for all of them.</p>
+    <div class="nb-grid">
+      <a href="../local/toronto/seo-agency/index.html" class="nb-link">Downtown Toronto</a>
+      <a href="../local/toronto/seo-agency/index.html" class="nb-link">Midtown Toronto</a>
+      <a href="../local/toronto/seo-agency/index.html" class="nb-link">North York</a>
+      <a href="../local/toronto/seo-agency/index.html" class="nb-link">Scarborough</a>
+      <a href="../local/toronto/seo-agency/index.html" class="nb-link">Etobicoke</a>
+      <a href="../local/mississauga/seo-agency/index.html" class="nb-link">Mississauga</a>
+      <a href="../local/brampton/seo-agency/index.html" class="nb-link">Brampton</a>
+      <a href="../local/markham/seo-agency/index.html" class="nb-link">Markham</a>
+      <a href="../local/richmond-hill/seo-agency/index.html" class="nb-link">Richmond Hill</a>
+      <a href="../local/vaughan/seo-agency/index.html" class="nb-link">Vaughan</a>
+      <a href="../local/oakville/seo-agency/index.html" class="nb-link">Oakville</a>
+      <a href="../local/hamilton/seo-agency/index.html" class="nb-link">Hamilton</a>
     </div>
   </div>
 </section>
@@ -336,11 +518,14 @@ img{max-width:100%;height:auto}
     <p class="sec-label">FAQ</p>
     <h2 class="sec-title" style="margin-bottom:32px">SEO Questions from Toronto Businesses</h2>
     <div style="max-width:780px">
-      <div class="faq-item"><p class="faq-q">How long does SEO take to work in Toronto?</p><p class="faq-a">Most Toronto businesses see meaningful ranking improvements within 3-6 months of starting an SEO campaign. Competitive niches can take 6-12 months. Boomy Marketing accelerates results with technical fixes in month one, content in months 2-3, and link-building from month 2 onwards.</p></div>
-<div class="faq-item"><p class="faq-q">How much does SEO cost in Toronto?</p><p class="faq-a">Boomy Marketing's Toronto SEO packages start at $1,200/month for local SEO and go up to $5,000+/month for competitive national campaigns. We provide a custom quote after auditing your site and reviewing your competitor landscape.</p></div>
-<div class="faq-item"><p class="faq-q">Why is local SEO important for Toronto businesses?</p><p class="faq-a">Over 46% of all Google searches have local intent. Toronto consumers search for 'near me' and 'Toronto' terms constantly. Without local SEO, you're invisible to potential customers searching in your area — even if you rank nationally.</p></div>
-<div class="faq-item"><p class="faq-q">Do you guarantee SEO rankings for Toronto keywords?</p><p class="faq-a">No reputable agency guarantees specific rankings — Google's algorithm is ultimately unpredictable. What we do guarantee is executing proven SEO strategies, transparent monthly reporting, and continuous optimisation to drive sustained organic growth for your Toronto business.</p></div>
-<div class="faq-item"><p class="faq-q">What SEO services does Boomy Marketing offer Toronto businesses?</p><p class="faq-a">We provide full-service SEO for Toronto companies including technical audits, keyword research, on-page optimisation, content creation, link building, local SEO, and monthly reporting. Every campaign is custom-built for your specific market and goals.</p></div>
+      <div class="faq-item"><p class="faq-q">How long does SEO take to work in Toronto?</p><p class="faq-a">Most Toronto businesses see meaningful ranking improvements within 3–6 months. Competitive niches like personal injury law or real estate can take 6–12 months. Boomy Marketing accelerates results: technical fixes in week 1–2, on-page optimisation in month 1, content and link-building from month 2 onwards. Our average client sees 187% organic traffic growth within 6 months.</p></div>
+      <div class="faq-item"><p class="faq-q">How much does SEO cost for a Toronto business?</p><p class="faq-a">Our Toronto SEO packages start at $1,200/month for local SEO (single location, 3–5 primary keywords) and go up to $5,000+/month for competitive multi-keyword campaigns targeting all of the GTA. The average Toronto SMB invests $1,500–$2,500/month. We provide a custom quote after a free site audit — no commitments required.</p></div>
+      <div class="faq-item"><p class="faq-q">Why is Toronto SEO harder than in other Canadian cities?</p><p class="faq-a">Toronto is Canada's largest market with 200,000+ GTA businesses competing for Google's first page. High-value niches like personal injury law, real estate, and mortgage brokerage see $15–$80 cost-per-click in Google Ads — reflecting the organic competition level. Ranking in Toronto requires stronger technical foundations, deeper topical content, and more authoritative Canadian backlinks than smaller cities.</p></div>
+      <div class="faq-item"><p class="faq-q">What Toronto industries benefit most from SEO?</p><p class="faq-a">The highest-ROI Toronto SEO niches are: legal (personal injury, family, immigration law), real estate (agents and brokerages), healthcare (dentists, physiotherapy, mental health clinics), home services (HVAC, plumbing, roofing, electricians), restaurants and hospitality, and financial services (mortgage brokers, accountants, financial planners). These industries see the highest local search volume and conversion rates in the GTA.</p></div>
+      <div class="faq-item"><p class="faq-q">Do you guarantee SEO rankings for Toronto keywords?</p><p class="faq-a">No reputable agency guarantees specific rankings — Google's algorithm is ultimately controlled by Google. What we do guarantee: executing proven SEO strategies, transparent monthly reporting showing your ranking movements, and continuous optimisation. We've helped 500+ Canadian businesses improve their rankings and our 98% client retention rate reflects the results we deliver.</p></div>
+      <div class="faq-item"><p class="faq-q">Which Toronto neighbourhoods and GTA cities do you serve?</p><p class="faq-a">We serve all of Toronto — Downtown, Midtown, North York, Scarborough, Etobicoke — plus the broader GTA: Mississauga, Brampton, Markham, Richmond Hill, Vaughan, Oakville, Burlington, and Hamilton. We also work with Ontario-wide and national businesses targeting Toronto as a key market.</p></div>
+      <div class="faq-item"><p class="faq-q">How do I know if my Toronto SEO is working?</p><p class="faq-a">We track four metrics monthly: keyword rankings for your target Toronto terms (we use Semrush), organic traffic from Google Analytics 4, leads and conversions attributed to organic search, and domain authority growth. You receive a clear dashboard report each month. Most clients see measurable ranking movement on lower-competition keywords within 60–90 days.</p></div>
+      <div class="faq-item"><p class="faq-q">What's included in a free Toronto SEO audit?</p><p class="faq-a">Our free audit covers: technical health (crawl errors, site speed, Core Web Vitals, mobile usability), on-page optimisation score for your top 5 pages, keyword gap analysis vs. your top 3 Toronto competitors, backlink profile summary, and Google Business Profile assessment. The audit takes 5–7 business days and comes with a 30-minute strategy call to walk you through findings. No obligations.</p></div>
     </div>
   </div>
 </section>
