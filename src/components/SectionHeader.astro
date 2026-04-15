@@ -1,0 +1,43 @@
+---
+/**
+ * SectionHeader.astro — reusable section intro block
+ * Renders the label / title / subtitle pattern used across all sections.
+ *
+ * Usage:
+ *   <SectionHeader
+ *     label="⚡ What We Do"
+ *     title="Full-Stack Marketing"
+ *     titleHighlight="For Ambitious Brands"
+ *     sub="Every service is engineered to drive measurable results."
+ *     id="services-heading"
+ *   />
+ */
+interface Props {
+  label?: string;
+  title: string;
+  titleHighlight?: string; // renders inside <span class="gradient-text">
+  sub?: string;
+  id?: string;
+  align?: 'center' | 'left';
+}
+
+const {
+  label,
+  title,
+  titleHighlight,
+  sub,
+  id,
+  align = 'center',
+} = Astro.props;
+---
+
+<div class={`section-header${align === 'left' ? ' section-header--left' : ''}`}>
+  {label && <div class="section-label reveal">{label}</div>}
+  <h2 class="section-title reveal" {id ? { id } : {}}>
+    {title}
+    {titleHighlight && (
+      <><br /><span class="gradient-text">{titleHighlight}</span></>
+    )}
+  </h2>
+  {sub && <p class="section-sub reveal">{sub}</p>}
+</div>

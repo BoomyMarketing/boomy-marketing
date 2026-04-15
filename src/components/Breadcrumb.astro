@@ -1,0 +1,53 @@
+---
+/**
+ * Breadcrumb.astro — accessible breadcrumb with BreadcrumbList schema
+ *
+ * Usage:
+ *   <Breadcrumb items={[
+ *     { label: 'Home', href: '/' },
+ *     { label: 'Local', href: '/local' },
+ *     { label: 'SEO Agency Calgary' },   // no href = current page
+ *   ]} />
+ */
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+
+// Build BreadcrumbList schema
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": items.map((item, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": item.label,
+    ...(item.href
+      ? { "item": `https://boomymarketing.com${item.href}` }
+      : {}),
+  })),
+};
+---
+
+<!-- BreadcrumbList JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    {items.map((item, i) => (
+      <>
+        {i > 0 && <span class="sep" aria-hidden="true">›</span>}
+        {item.href
+          ? <a href={item.href}>{item.label}</a>
+          : <span class="current" aria-current="page">{item.label}</span>
+        }
+      </>
+    ))}
+  </div>
+</nav>

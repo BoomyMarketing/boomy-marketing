@@ -1,0 +1,26 @@
+---
+/**
+ * StatsBar.astro — agency statistics bar
+ * Hard-coded values (updated manually when numbers change).
+ *
+ * Usage:
+ *   <StatsBar />
+ */
+const stats = [
+  { value: '500+',  label: 'Missions Completed' },
+  { value: '98%',   label: 'Client Retention Rate' },
+  { value: '$50M+', label: 'Revenue Generated' },
+  { value: '12 Yrs', label: 'In Orbit' },
+];
+---
+
+<div class="stats-bar" role="region" aria-label="Agency statistics">
+  <div class="stats-inner">
+    {stats.map(({ value, label }) => (
+      <div class="stat-item reveal">
+        <div class="stat-value">{value}</div>
+        <div class="stat-label">{label}</div>
+      </div>
+    ))}
+  </div>
+</div>

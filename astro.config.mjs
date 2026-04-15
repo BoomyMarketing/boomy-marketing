@@ -6,14 +6,27 @@ export default defineConfig({
   output: 'static',
   integrations: [
     sitemap({
-      // Sitemap generation — will be extended in Phase 5
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
     }),
   ],
   build: {
-    // Output to dist/ (Vercel picks this up automatically)
-    format: 'directory', // generates clean URLs: /about/ instead of /about.html
+    format: 'directory', // clean URLs: /about/ instead of /about.html
+  },
+  vite: {
+    // Exclude legacy HTML directories from Vite's scanner (pre-Astro migration).
+    // These static HTML files are served directly by Vercel from the repo root.
+    // Phase 5 will migrate local/ to getStaticPaths(); until then keep them out.
+    optimizeDeps: {
+      // Restrict pre-bundling to only src/
+      entries: ['src/**/*.{astro,ts,js}'],
+    },
+    build: {
+      rollupOptions: {
+        // Prevent Rollup from crawling outside src/
+        input: {},
+      },
+    },
   },
 });

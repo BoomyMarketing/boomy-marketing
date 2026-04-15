@@ -1,0 +1,30 @@
+---
+/**
+ * ServiceCard.astro — clickable service card
+ *
+ * Usage:
+ *   <ServiceCard
+ *     href="/services/seo"
+ *     icon="🔍"
+ *     title="SEO & Content Marketing"
+ *     description="We build topical authority that compounds over time..."
+ *     label="SEO and Content Marketing service"
+ *   />
+ */
+interface Props {
+  href: string;
+  icon: string;
+  title: string;
+  description: string;
+  label?: string; // aria-label override
+}
+
+const { href, icon, title, description, label } = Astro.props;
+---
+
+<a href={href} class="service-card" aria-label={label ?? `${title} service`}>
+  <span class="service-icon" aria-hidden="true">{icon}</span>
+  <h3 class="service-name">{title}</h3>
+  <p class="service-desc">{description}</p>
+  <span class="service-more" aria-hidden="true">Learn more &rarr;</span>
+</a>

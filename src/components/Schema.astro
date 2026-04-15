@@ -1,0 +1,20 @@
+---
+/**
+ * Schema.astro — JSON-LD structured data injector
+ * Used in BaseLayout for page-level schemas, or inline for section-level.
+ *
+ * Usage:
+ *   <Schema data={mySchemaObject} />
+ *   <Schema data={[schema1, schema2]} />
+ */
+interface Props {
+  data: object | object[];
+}
+
+const { data } = Astro.props;
+const schemas = Array.isArray(data) ? data : [data];
+---
+
+{schemas.map((schema) => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

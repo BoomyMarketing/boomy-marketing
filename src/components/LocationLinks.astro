@@ -1,0 +1,70 @@
+---
+/**
+ * LocationLinks.astro — internal SEO linking block ("We Serve All of Canada")
+ * Renders pill-style location links for local SEO interlinking.
+ *
+ * Usage:
+ *   <LocationLinks />
+ *   <LocationLinks links={customLinks} />
+ */
+interface LocationLink {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  links?: LocationLink[];
+  viewAllHref?: string;
+  viewAllText?: string;
+}
+
+const defaultLinks: LocationLink[] = [
+  { label: 'SEO Agency Toronto',          href: '/local/toronto/seo-agency' },
+  { label: 'SEO Agency Vancouver',        href: '/local/vancouver/seo-agency' },
+  { label: 'SEO Agency Calgary',          href: '/local/calgary/seo-agency' },
+  { label: 'SEO Agency Ottawa',           href: '/local/ottawa/seo-agency' },
+  { label: 'SEO Agency Edmonton',         href: '/local/edmonton/seo-agency' },
+  { label: 'SEO Agency Mississauga',      href: '/local/mississauga/seo-agency' },
+  { label: 'SEO Agency Hamilton',         href: '/local/hamilton/seo-agency' },
+  { label: 'SEO Agency Brampton',         href: '/local/brampton/seo-agency' },
+  { label: 'Digital Marketing Toronto',   href: '/local/toronto/digital-marketing-agency' },
+  { label: 'Digital Marketing Vancouver', href: '/local/vancouver/digital-marketing-agency' },
+  { label: 'Digital Marketing Calgary',   href: '/local/calgary/digital-marketing-agency' },
+  { label: 'Google Ads Agency Toronto',   href: '/local/toronto/google-ads-agency' },
+  { label: 'Google Ads Agency Vancouver', href: '/local/vancouver/google-ads-agency' },
+  { label: 'Web Design Toronto',          href: '/local/toronto/web-design-company' },
+  { label: 'AI Automation Agency Toronto', href: '/local/toronto/ai-automation-agency' },
+];
+
+const {
+  links = defaultLinks,
+  viewAllHref = '/locations',
+  viewAllText = 'View all 26 cities we serve →',
+} = Astro.props;
+---
+
+<section class="section" aria-label="Service Locations" style="background:var(--bg-2,#0a0a0a);padding:48px 0 40px;">
+  <div class="container" style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <p style="text-align:center;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent,#f97316);margin-bottom:12px;">
+      We Serve All of Canada
+    </p>
+    <h2 style="text-align:center;font-size:1.4rem;font-weight:700;margin-bottom:32px;color:#fff;">
+      Digital Marketing Services by City
+    </h2>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:900px;margin:0 auto 28px;">
+      {links.map(({ label, href }) => (
+        <a
+          href={href}
+          style="color:var(--accent,#f97316);font-size:0.85rem;padding:5px 12px;border:1px solid rgba(249,115,22,0.3);border-radius:20px;text-decoration:none;white-space:nowrap;"
+        >
+          {label}
+        </a>
+      ))}
+    </div>
+    <p style="text-align:center;">
+      <a href={viewAllHref} style="color:#999;font-size:0.85rem;text-decoration:none;">
+        {viewAllText}
+      </a>
+    </p>
+  </div>
+</section>
