@@ -726,11 +726,8 @@
     .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
   }
 
-  /* Mobile */
+  /* Mobile — layout rules (footer etc.) */
   @media (max-width: 768px) {
-    .nav-links    { display: none; }
-    .nav-hamburger,
-    .hamburger    { display: flex; }
     .footer-top   { grid-template-columns: 1fr; gap: 32px; }
     .footer-bottom { flex-direction: column; text-align: center; }
   }
@@ -745,6 +742,15 @@
   /* Fold */
   @media (max-width: 320px) {
     :root { font-size: 14px; }
+  }
+}
+
+/* Nav mobile — in utilities layer so it overrides components layer */
+@layer utilities {
+  @media (max-width: 768px) {
+    .nav-links    { display: none; }
+    .nav-hamburger,
+    .hamburger    { display: flex; }
   }
 }
 
