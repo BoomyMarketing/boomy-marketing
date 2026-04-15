@@ -1,0 +1,2187 @@
+[
+  {
+    "slug": "ai-automations",
+    "title": "AI Automations Toronto — Business Automation | Boomy",
+    "metaDescription": "AI workflow automation for Toronto businesses. Automate CRM, lead follow-up, reporting, and operations with custom AI workflows. Save 20+ hours per week.",
+    "canonical": "https://boomymarketing.com/services/ai-automations",
+    "heroBadge": "&#9889; AI Business Automation",
+    "heroH1": "Automate Your Business with <span>AI Workflows</span>",
+    "heroP": "Your team's time is your most valuable asset. We build custom AI automation workflows that handle repetitive tasks — lead follow-up, CRM updates, reporting, scheduling, and more — so your people can focus on work that actually requires human intelligence.",
+    "heroStats": [
+      {
+        "num": "20+",
+        "label": "Hours saved per week on average"
+      },
+      {
+        "num": "3mo",
+        "label": "Average payback period"
+      },
+      {
+        "num": "500+",
+        "label": "Apps and tools we integrate with"
+      }
+    ],
+    "heroVisualItems": [
+      {
+        "icon": "&#128203;",
+        "title": "CRM Automation",
+        "sub": "Auto-update records, score leads, assign tasks"
+      },
+      {
+        "icon": "&#128140;",
+        "title": "Lead Follow-Up",
+        "sub": "Instant, personalised nurture sequences"
+      },
+      {
+        "icon": "&#128202;",
+        "title": "Reporting Automation",
+        "sub": "Auto-generated dashboards delivered on schedule"
+      },
+      {
+        "icon": "&#128197;",
+        "title": "Scheduling Workflows",
+        "sub": "Automated appointment booking and reminders"
+      },
+      {
+        "icon": "&#128276;",
+        "title": "Alert Systems",
+        "sub": "Smart notifications when KPIs shift"
+      }
+    ],
+    "whatIsLabel": "The Opportunity",
+    "whatIsTitle": "How Much Time Is Your Business Losing to Repetitive Tasks?",
+    "whatIsText": [
+      "The average knowledge worker spends 41% of their time on low-value, repetitive tasks — data entry, status updates, manual reporting, copy-paste transfers between systems. At $50,000-$100,000 per employee, this is an enormous and unnecessary cost for any growing Toronto business.",
+      "AI automation changes the equation entirely. Modern AI tools can understand unstructured data, make contextual decisions, and trigger sophisticated multi-step workflows across dozens of integrated applications — all without human intervention. A lead fills out a form, and AI instantly qualifies them, updates your CRM, sends a personalised email sequence, notifies the right sales rep, and books a discovery call in their calendar. Zero manual steps.",
+      "The businesses that automate aggressively now gain a permanent operational advantage — they can grow revenue without proportionally growing headcount, respond to leads faster than competitors, and eliminate the human errors that erode customer trust."
+    ],
+    "whatIsCards": [
+      {
+        "icon": "",
+        "title": "5-minute lead response",
+        "text": "Leads contacted within 5 minutes are 100x more likely to convert than those reached after 30 minutes. AI does it instantly, 24/7."
+      },
+      {
+        "icon": "",
+        "title": "20+ hours saved weekly",
+        "text": "Our average automation client recovers 20+ staff hours per week — equivalent to a part-time hire at a fraction of the cost."
+      },
+      {
+        "icon": "",
+        "title": "Zero errors on repetitive tasks",
+        "text": "Automated workflows execute perfectly every time — no missed follow-ups, no data entry errors, no tasks falling through the cracks."
+      }
+    ],
+    "servicesSectionLabel": "What We Automate",
+    "servicesSectionTitle": "AI Automation Services We Deliver",
+    "servicesSectionSub": "Custom-built workflows across the full scope of your business operations.",
+    "cards": [
+      {
+        "icon": "&#128203;",
+        "title": "CRM Automation",
+        "text": "Automatically create and update CRM records from form submissions, emails, and calls. Score leads based on behaviour, route them to the right sales rep, update deal stages, and trigger follow-up tasks — all without manual data entry. We integrate with HubSpot, Salesforce, GoHighLevel, Pipedrive, and more."
+      },
+      {
+        "icon": "&#128140;",
+        "title": "Lead Nurture Automation",
+        "text": "Build sophisticated AI-driven nurture sequences that personalise messaging based on lead behaviour, source, industry, and engagement history. AI determines the right message, channel, and timing — sending emails, SMS, and internal alerts that move prospects through your funnel on autopilot."
+      },
+      {
+        "icon": "&#128202;",
+        "title": "Reporting Automation",
+        "text": "Eliminate the weekly grind of pulling data from multiple platforms and building reports manually. We build automated reporting pipelines that collect data from Google Analytics, Meta Ads, HubSpot, Shopify, and more — compiling polished reports delivered to your inbox on schedule."
+      },
+      {
+        "icon": "&#128197;",
+        "title": "Scheduling & Booking",
+        "text": "Automate appointment scheduling, reminder sequences, rescheduling workflows, and post-appointment follow-ups. Integrate with Calendly, Acuity, Google Calendar, and your CRM so every booked meeting is automatically logged and actioned without staff involvement."
+      },
+      {
+        "icon": "&#128722;",
+        "title": "E-commerce Operations",
+        "text": "Automate order confirmations, shipping notifications, inventory alerts, abandoned cart recovery, review request sequences, and customer win-back campaigns. Integrate Shopify, WooCommerce, or Magento with your email, SMS, and CRM tools for a fully automated customer journey."
+      },
+      {
+        "icon": "&#128101;",
+        "title": "Internal Team Workflows",
+        "text": "Automate onboarding checklists, project status updates, meeting notes distribution, expense approval routing, and Slack notifications triggered by business events. Reduce internal communication overhead and ensure critical information reaches the right people automatically."
+      }
+    ],
+    "processLabel": "Our Process",
+    "processTitle": "How We Build Your AI Automation System",
+    "processSub": "",
+    "steps": [
+      {
+        "num": "1",
+        "title": "Process Discovery",
+        "text": "We map your current workflows, identify the highest-value automation opportunities, and estimate time savings and ROI for each before writing a single line of code."
+      },
+      {
+        "num": "2",
+        "title": "Stack Audit",
+        "text": "We review your existing tools and integrations to design automations that work within your current tech stack — or recommend cost-effective additions where gaps exist."
+      },
+      {
+        "num": "3",
+        "title": "Workflow Design",
+        "text": "We document every trigger, condition, action, and exception path before building — ensuring the automation handles edge cases and doesn't create new problems."
+      },
+      {
+        "num": "4",
+        "title": "Build & Test",
+        "text": "We build in a staging environment, test with real and synthetic data, and validate every branch of the workflow before touching your live systems."
+      },
+      {
+        "num": "5",
+        "title": "Launch & Train",
+        "text": "We deploy to production, monitor closely for the first two weeks, and train your team on how to interact with, override, and manage the automations we've built."
+      },
+      {
+        "num": "6",
+        "title": "Maintain & Expand",
+        "text": "Ongoing support handles platform updates and edge cases, while monthly review sessions identify the next automation opportunities to tackle."
+      }
+    ],
+    "resultsLabel": "",
+    "resultsTitle": "",
+    "resultsSub": "",
+    "results": [],
+    "faqLabel": "FAQ",
+    "faqTitle": "AI Automation Frequently Asked Questions",
+    "faqs": [
+      {
+        "q": "What business processes can you automate with AI?",
+        "a": "We automate a wide range including lead qualification, CRM data entry, appointment scheduling, customer onboarding, invoice processing, inventory alerts, social media scheduling, email campaign triggers, performance reporting, and internal notifications. If it's repetitive and rules-based — or even partially predictable — it's a strong automation candidate."
+      },
+      {
+        "q": "What tools and platforms do you work with?",
+        "a": "We work with leading platforms including Make (formerly Integromat), Zapier, n8n, and custom Python/Node.js scripts. We integrate with 500+ apps including Salesforce, HubSpot, GoHighLevel, Shopify, Stripe, Google Workspace, Slack, Monday.com, Asana, and most major business tools. If it has an API, we can likely automate it."
+      },
+      {
+        "q": "How long does it take to build an AI automation?",
+        "a": "Simple automations — like a lead form triggering a CRM entry and email sequence — can be built and deployed in 3-7 days. Complex multi-step workflows involving AI decision-making, multiple integrations, or custom data processing typically take 2-6 weeks from discovery to go-live. We always provide a project timeline before starting."
+      },
+      {
+        "q": "Do I need technical knowledge to use the automations you build?",
+        "a": "No technical knowledge required. We design automations to run invisibly in the background. We provide simple dashboards or monitoring views when needed, train your team on how to interact with the system, and handle all technical maintenance. You see the results — hours saved, leads followed up, reports delivered — without touching any code."
+      },
+      {
+        "q": "What is the ROI of AI automation?",
+        "a": "Most clients recover their investment within 2-3 months. A typical mid-size Toronto business saves 15-30 hours of staff time per week — at $30-80/hour, that's $23,000-$125,000+ in annual labour savings, plus faster lead response times, fewer errors, and the ability to scale without proportional headcount growth. We calculate a projected ROI during the discovery phase."
+      }
+    ],
+    "ctaH2": "Find Out What You Could Be Automating",
+    "ctaP": "Book a free automation discovery call. We'll map your biggest time sinks and show you exactly what AI can handle for you.",
+    "ctaBtn1": {
+      "text": "Book Free Discovery Call ->",
+      "href": "https://boomymarketing.com/contact.html"
+    },
+    "ctaBtn2": {
+      "text": "View Pricing",
+      "href": "https://boomymarketing.com/pricing.html"
+    }
+  },
+  {
+    "slug": "ai-development",
+    "title": "AI Development Toronto — Custom AI Solutions | Boomy",
+    "metaDescription": "Custom AI development in Toronto. Chatbots, AI agents, API integrations, and custom AI models built for your business. End-to-end AI product development by Boomy.",
+    "canonical": "https://boomymarketing.com/services/ai-development",
+    "heroBadge": "&#129504; Custom AI Development",
+    "heroH1": "Custom AI Solutions <span>Built for Your Business</span>",
+    "heroP": "Off-the-shelf AI tools have limits. We design and build custom AI solutions — chatbots, autonomous agents, document processors, recommendation engines, and API integrations — that solve your specific business problems and integrate seamlessly into your existing technology stack.",
+    "heroStats": [
+      {
+        "num": "50+",
+        "label": "AI solutions deployed"
+      },
+      {
+        "num": "4wk",
+        "label": "Avg. MVP delivery time"
+      },
+      {
+        "num": "98%",
+        "label": "Client satisfaction rate"
+      }
+    ],
+    "heroVisualItems": [],
+    "whatIsLabel": "What We Build",
+    "whatIsTitle": "Custom AI Development Services",
+    "whatIsText": [
+      "From conversational AI to autonomous agents and data intelligence systems — we build what your business actually needs."
+    ],
+    "whatIsCards": [],
+    "servicesSectionLabel": "What We Build",
+    "servicesSectionTitle": "Custom AI Development Services",
+    "servicesSectionSub": "From conversational AI to autonomous agents and data intelligence systems — we build what your business actually needs.",
+    "cards": [
+      {
+        "icon": "&#129302;",
+        "title": "AI Chatbots & Assistants",
+        "text": "Intelligent conversational agents for customer support, lead qualification, internal helpdesks, and e-commerce assistance. Built on GPT-4o, Claude, or Gemini with your company's knowledge base integrated via RAG (Retrieval-Augmented Generation) for accurate, brand-consistent responses at any scale."
+      },
+      {
+        "icon": "&#129504;",
+        "title": "Autonomous AI Agents",
+        "text": "Multi-step AI agents that can research, plan, and execute tasks across multiple tools and data sources without human oversight. We build agents for lead research and enrichment, competitive monitoring, content creation pipelines, automated customer outreach, and complex operational workflows."
+      },
+      {
+        "icon": "&#128203;",
+        "title": "Document Intelligence",
+        "text": "AI systems that read, extract, classify, and act on information from contracts, invoices, applications, emails, and unstructured documents. Extract structured data from PDFs, route documents to the right workflows, and automate compliance checks — eliminating hours of manual document processing."
+      },
+      {
+        "icon": "&#128200;",
+        "title": "Recommendation Engines",
+        "text": "Custom AI recommendation systems that personalise product suggestions, content feeds, pricing, and offers for individual users based on behaviour, preferences, and contextual signals. Increase average order value and engagement with ML-powered personalisation built specifically for your data."
+      },
+      {
+        "icon": "&#128279;",
+        "title": "API Integrations & Middleware",
+        "text": "We build the connective tissue between AI capabilities and your existing software stack. Custom API layers that pipe AI intelligence into your CRM, marketing tools, e-commerce platform, ERP, or proprietary systems — enabling AI-powered features without rebuilding your technology infrastructure."
+      },
+      {
+        "icon": "&#129516;",
+        "title": "Model Fine-Tuning & RAG",
+        "text": "When general AI models aren't specific enough, we fine-tune open-source models on your proprietary data or build RAG systems that ground AI responses in your authoritative knowledge base. Your AI speaks your brand's language, follows your processes, and knows your products and policies."
+      }
+    ],
+    "processLabel": "Our Process",
+    "processTitle": "How We Build Your Custom AI Solution",
+    "processSub": "",
+    "steps": [
+      {
+        "num": "1",
+        "title": "Discovery & Scoping",
+        "text": "We define the problem clearly, assess feasibility, and determine the right AI approach — avoiding over-engineering simple problems with complex AI where automation suffices."
+      },
+      {
+        "num": "2",
+        "title": "Architecture Design",
+        "text": "We design the technical architecture: model selection, data flows, integration points, security model, and scalability approach before writing any code."
+      },
+      {
+        "num": "3",
+        "title": "Prototype",
+        "text": "A working prototype in 2-4 weeks demonstrates core functionality with real data. You see what the AI can do before committing to full development."
+      },
+      {
+        "num": "4",
+        "title": "Build & Iterate",
+        "text": "Full development with weekly progress reviews. We test with edge cases, refine prompts and model behaviour, and build robust error handling."
+      },
+      {
+        "num": "5",
+        "title": "Integration & Testing",
+        "text": "We integrate with your existing systems, run user acceptance testing, performance testing, and security review before deployment."
+      },
+      {
+        "num": "6",
+        "title": "Deploy & Support",
+        "text": "Production launch with monitoring, alerting, and ongoing support. As AI models evolve, we upgrade your solution to take advantage of new capabilities."
+      }
+    ],
+    "resultsLabel": "",
+    "resultsTitle": "",
+    "resultsSub": "",
+    "results": [],
+    "faqLabel": "FAQ",
+    "faqTitle": "AI Development Frequently Asked Questions",
+    "faqs": [
+      {
+        "q": "What kinds of AI solutions can you build for my business?",
+        "a": "We build customer-facing chatbots, internal AI assistants, AI-powered recommendation engines, document processing systems, lead qualification agents, automated content generation tools, custom LLM fine-tuning, RAG systems for knowledge base integration, and API integrations connecting AI capabilities to your existing software stack. If it involves language, documents, or data — we can likely build an AI solution for it."
+      },
+      {
+        "q": "Which AI models and frameworks do you work with?",
+        "a": "We work with OpenAI (GPT-4o, o1), Anthropic (Claude), Google (Gemini), and open-source models including Llama and Mistral. Our development team builds on frameworks including LangChain, LlamaIndex, CrewAI, and Hugging Face, selecting the right combination for your specific use case, data privacy requirements, and budget."
+      },
+      {
+        "q": "How long does it take to build a custom AI solution?",
+        "a": "A focused AI chatbot or single-use-case agent can be prototyped in 2 weeks and fully built in 4-8 weeks. Complex systems — multi-agent architectures, custom model fine-tuning, or enterprise integrations — typically take 2-6 months. We provide a detailed project timeline and milestone plan before starting, so you always know what to expect."
+      },
+      {
+        "q": "Is my data safe when you build AI systems?",
+        "a": "Data security is built into every project from the start. We implement role-based access controls, encryption at rest and in transit, and can deploy entirely on-premise or within your private cloud. We never use your proprietary data to train foundation models without explicit consent. All projects comply with Canadian privacy law (PIPEDA and applicable provincial regulations)."
+      },
+      {
+        "q": "Do you provide ongoing support after the AI solution is built?",
+        "a": "Yes. We offer retainer-based support packages covering model performance monitoring, prompt optimisation as models update, integration maintenance, version upgrades, and feature additions. AI systems require ongoing care as underlying models evolve and your business needs change — we're designed to be your long-term AI development partner, not a one-and-done vendor."
+      }
+    ],
+    "ctaH2": "Have an AI Project in Mind?",
+    "ctaP": "Let's talk about what's possible. Book a free technical consultation and we'll scope your AI solution and give you a realistic timeline and budget estimate.",
+    "ctaBtn1": {
+      "text": "Book Free Consultation ->",
+      "href": "https://boomymarketing.com/contact.html"
+    },
+    "ctaBtn2": {
+      "text": "See AI Automations",
+      "href": "https://boomymarketing.com/services/ai-automations.html"
+    }
+  },
+  {
+    "slug": "ai-outbound",
+    "title": "AI Outbound Sales Toronto — Automated Prospecting | Boomy",
+    "metaDescription": "AI-powered outbound sales for Toronto businesses. Automated prospecting, cold email sequences, LinkedIn automation, and SDR automation that books more meetings at a.",
+    "canonical": "https://boomymarketing.com/services/ai-outbound",
+    "heroBadge": "&#129302; AI Outbound Sales",
+    "heroH1": "AI-Powered Outbound Sales That Fills Your <span>Pipeline 24/7</span>",
+    "heroP": "Stop spending thousands on manual SDR teams that prospect all day and close nothing. Our AI outbound system identifies your ideal customers, crafts hyper-personalised messages, and books qualified meetings directly into your calendar — around the clock, at scale.",
+    "heroStats": [
+      {
+        "num": "40+",
+        "label": "Qualified meetings/month"
+      },
+      {
+        "num": "8x",
+        "label": "ROI vs. traditional SDRs"
+      },
+      {
+        "num": "14d",
+        "label": "Avg. time to first meeting"
+      }
+    ],
+    "heroVisualItems": [
+      {
+        "icon": "&#128269;",
+        "title": "AI Prospect Discovery",
+        "sub": "ICP-matched leads sourced automatically"
+      },
+      {
+        "icon": "&#128140;",
+        "title": "Personalised Sequences",
+        "sub": "Multi-touch cold email campaigns"
+      },
+      {
+        "icon": "&#128101;",
+        "title": "LinkedIn Automation",
+        "sub": "Connection requests, DMs, follow-ups"
+      },
+      {
+        "icon": "&#128197;",
+        "title": "Meeting Booking",
+        "sub": "Calendar integration, automated scheduling"
+      },
+      {
+        "icon": "&#128202;",
+        "title": "Pipeline Reporting",
+        "sub": "Replies, meetings, pipeline value tracked"
+      }
+    ],
+    "whatIsLabel": "The Technology",
+    "whatIsTitle": "What Is AI Outbound and Why It Outperforms Traditional SDRs",
+    "whatIsText": [
+      "Traditional outbound sales development relies on human SDRs manually researching prospects, writing individual emails, and following up through spreadsheets. It is slow, expensive — a fully-loaded SDR in Toronto costs $80,000–$110,000 CAD per year — and highly inconsistent. Output depends entirely on the motivation and skill of each rep on any given day.",
+      "AI outbound changes this equation entirely. Our system uses large language models, intent data, and firmographic signals to identify prospects who match your Ideal Customer Profile precisely. It then generates personalised outreach at scale — emails that reference each prospect's company news, industry challenges, and LinkedIn activity — making every message feel individually crafted, even when delivered to thousands of contacts simultaneously.",
+      "The result is a pipeline-filling machine that operates 24 hours a day, seven days a week, learns from every reply, and continuously improves its own messaging and targeting. For Toronto B2B companies, this translates to a cost-per-meeting that is typically 60–80% lower than hiring a traditional SDR team."
+    ],
+    "whatIsCards": [
+      {
+        "icon": "",
+        "title": "Fraction of the cost",
+        "text": "Our AI outbound costs a fraction of a single SDR salary while generating 3–5x more outreach volume."
+      },
+      {
+        "icon": "",
+        "title": "Scales without headcount",
+        "text": "Add new markets, verticals, or ICPs without hiring. The system scales outreach in hours, not months."
+      },
+      {
+        "icon": "",
+        "title": "Learns and improves",
+        "text": "Every open, click, and reply trains the model to write better messages and target sharper ICPs over time."
+      }
+    ],
+    "servicesSectionLabel": "Our Services",
+    "servicesSectionTitle": "Everything Included in Our AI Outbound System",
+    "servicesSectionSub": "A complete outbound stack — from prospect identification to booked meeting — managed entirely by our team and AI.",
+    "cards": [
+      {
+        "icon": "&#128269;",
+        "title": "AI Prospect Research & List Building",
+        "text": "We build hyper-targeted prospect lists using AI-powered data enrichment tools, filtering by industry, company size, revenue, tech stack, hiring signals, and intent data. Every contact is validated and matched against your ICP before a single message is sent."
+      },
+      {
+        "icon": "&#128140;",
+        "title": "Cold Email Sequences",
+        "text": "Our AI writes multi-step cold email sequences with personalised first lines referencing each prospect's company, role, and recent activity. Sequences include strategic follow-ups, objection-handling emails, and breakup messages — all optimised for reply rates and CASL compliance."
+      },
+      {
+        "icon": "&#128101;",
+        "title": "LinkedIn Automation",
+        "text": "We automate LinkedIn connection requests, message sequences, and profile engagement to open a second outreach channel alongside email. Our LinkedIn outreach mirrors the personalisation of cold email — no generic copy-paste blasts that get ignored or flagged."
+      },
+      {
+        "icon": "&#129302;",
+        "title": "SDR Automation & AI Follow-Up",
+        "text": "The AI handles all follow-up touchpoints automatically — detecting out-of-office replies, auto-routing warm responses to your sales team, and re-engaging cold prospects after set intervals. Your human reps only see prospects who have already expressed genuine interest."
+      },
+      {
+        "icon": "&#128197;",
+        "title": "Meeting Booking & CRM Integration",
+        "text": "Qualified prospects are routed directly to your Calendly, HubSpot, or Salesforce with full context on their company, conversation history, and engagement signals — so your closers walk into every call fully prepared and not starting from scratch."
+      },
+      {
+        "icon": "&#128202;",
+        "title": "Performance Analytics & Optimisation",
+        "text": "Weekly dashboards track open rates, reply rates, positive reply rates, meetings booked, and pipeline value generated. We use this data to A/B test subject lines, messaging angles, and ICP segments — continuously improving campaign performance month over month."
+      }
+    ],
+    "processLabel": "How It Works",
+    "processTitle": "From Setup to Booked Meetings in 2 Weeks",
+    "processSub": "Our onboarding process is fast, structured, and designed to get your first campaign live within 14 days.",
+    "steps": [
+      {
+        "num": "1",
+        "title": "ICP Workshop",
+        "text": "We deep-dive into your best customers to define your Ideal Customer Profile — industry, company size, title, pain points, and trigger events that predict a high likelihood to buy."
+      },
+      {
+        "num": "2",
+        "title": "Domain & Inbox Warm-Up",
+        "text": "We set up dedicated sending domains and warm up email inboxes to protect your primary domain's deliverability and ensure messages land in the primary inbox, not spam."
+      },
+      {
+        "num": "3",
+        "title": "Prospect List Build",
+        "text": "AI-powered data sourcing builds your initial list of 2,000–5,000 verified, ICP-matched contacts complete with personalisation data points for each record."
+      },
+      {
+        "num": "4",
+        "title": "Sequence Creation",
+        "text": "We craft a multi-step outreach sequence — typically 5–7 touches across email and LinkedIn — with AI-generated personalised openers and strategically timed follow-ups."
+      },
+      {
+        "num": "5",
+        "title": "Campaign Launch",
+        "text": "Campaigns go live with controlled sending volumes, real-time reply monitoring, and immediate routing of positive responses to your sales team within minutes of receipt."
+      },
+      {
+        "num": "6",
+        "title": "Optimise & Scale",
+        "text": "Weekly review of performance data drives continuous A/B testing, ICP refinement, and message improvement. Winning variations are scaled; underperformers are cut fast."
+      }
+    ],
+    "resultsLabel": "Proven Results",
+    "resultsTitle": "AI Outbound Performance Benchmarks Across 500+ Clients",
+    "resultsSub": "Consistent outcomes our AI outbound campaigns deliver across industries and markets.",
+    "results": [
+      {
+        "num": "35+",
+        "label": "Average qualified meetings booked per month"
+      },
+      {
+        "num": "8.4%",
+        "label": "Average positive reply rate across all campaigns"
+      },
+      {
+        "num": "8x",
+        "label": "Average ROI versus traditional SDR team cost"
+      },
+      {
+        "num": "14d",
+        "label": "Average time from onboarding to first booked meeting"
+      }
+    ],
+    "faqLabel": "Common Questions",
+    "faqTitle": "AI Outbound Sales — Frequently Asked Questions",
+    "faqs": [
+      {
+        "q": "What is AI outbound sales automation?",
+        "a": "AI outbound sales automation uses artificial intelligence to identify ideal prospects, craft personalised outreach messages, and send them at scale across channels like email and LinkedIn — without a human SDR manually doing each step. The AI continuously learns from reply data to improve message relevance and timing, creating a self-improving pipeline engine that works around the clock."
+      },
+      {
+        "q": "How many meetings can AI outbound generate per month?",
+        "a": "Results vary by industry, ICP, and offer, but our clients typically book 15–40 qualified sales meetings per month from a single AI outbound campaign. We optimise continuously based on reply rates, open rates, and booked-meeting data to grow that number over time. In competitive markets with a strong offer, we have achieved 50+ meetings per month for clients."
+      },
+      {
+        "q": "Is cold email legal in Canada under CASL?",
+        "a": "Yes — B2B cold email is fully legal in Canada under CASL (Canada's Anti-Spam Legislation), provided messages meet the business-to-business exemption criteria and include proper sender identification and an unsubscribe mechanism. Our campaigns are built to be fully CASL-compliant from day one, including proper sender identification, physical address disclosure, and one-click unsubscribe in every sequence."
+      },
+      {
+        "q": "Will AI outbound replace my sales team?",
+        "a": "AI outbound is designed to augment, not replace, your sales team. The system handles the repetitive top-of-funnel work — prospecting, initial outreach, and follow-up — so your human salespeople can focus exclusively on closing warm, qualified opportunities. Most clients find their closers book 40–60% more deals after removing manual prospecting from their daily workflow."
+      },
+      {
+        "q": "How much does AI outbound sales cost in Toronto?",
+        "a": "AI outbound services are included in our Growth and Scale retainer packages starting at $3,500 CAD/month. Standalone AI outbound engagements are also available for companies that only need pipeline generation. Contact us for a custom quote based on your target markets, monthly meeting goals, and the number of outreach channels you want to activate."
+      }
+    ],
+    "ctaH2": "Ready to Fill Your Pipeline with Qualified Meetings?",
+    "ctaP": "Book a free strategy call and we will show you a live demo of our AI outbound system working in your industry.",
+    "ctaBtn1": {
+      "text": "Book Your Free Strategy Call ->",
+      "href": "https://boomymarketing.com/contact.html"
+    },
+    "ctaBtn2": {
+      "text": "View Pricing Plans",
+      "href": "https://boomymarketing.com/pricing.html"
+    }
+  },
+  {
+    "slug": "content-marketing",
+    "title": "Content Marketing Toronto — SEO Content Agency | Boomy",
+    "metaDescription": "Content marketing strategy, SEO blog writing, and content production for Toronto businesses. We create content that ranks, earns backlinks, and converts readers.",
+    "canonical": "https://boomymarketing.com/services/content-marketing",
+    "heroBadge": "&#9999;&#65039; Content Marketing",
+    "heroH1": "Content That <span>Ranks, Educates, and Converts</span>",
+    "heroP": "Great content is the most durable marketing asset you can build. We create research-driven, SEO-optimised content that attracts your ideal customers through organic search, establishes your brand as the definitive authority in your niche, and converts readers into leads and clients — continuing to generate ROI for years after publication.",
+    "heroStats": [
+      {
+        "num": "3.8x",
+        "label": "Avg. organic traffic increase in year 1"
+      },
+      {
+        "num": "7x",
+        "label": "More leads than outbound-only businesses"
+      },
+      {
+        "num": "62%",
+        "label": "Lower cost per lead vs. paid channels"
+      }
+    ],
+    "heroVisualItems": [],
+    "whatIsLabel": "Why Content Marketing",
+    "whatIsTitle": "The Business Case for Content Marketing in 2026",
+    "whatIsText": [
+      "Content marketing has a fundamental advantage over every paid advertising channel: it compounds. A well-written blog post that ranks on page one for a high-intent keyword generates qualified traffic and leads every single day — without ongoing spend. After 12-24 months of consistent content investment, most businesses find their content library generating more leads than their paid channels at a fraction of the cost.",
+      "In 2026, content marketing has become even more powerful thanks to AI search. Content that is authoritative, well-structured, and factually credible is the content that AI search engines like Google AI Overviews, ChatGPT Search, and Perplexity cite as their sources. This means that investment in genuinely great content now pays dividends in both traditional organic search rankings and AI-generated answers — a double return on every content dollar invested."
+    ],
+    "whatIsCards": [],
+    "servicesSectionLabel": "Why Content Marketing",
+    "servicesSectionTitle": "The Business Case for Content Marketing in 2026",
+    "servicesSectionSub": "",
+    "cards": [
+      {
+        "icon": "&#128196;",
+        "title": "SEO Blog Writing",
+        "text": "Long-form, thoroughly researched blog posts targeting your most valuable search queries. Every post is structured for SEO — proper heading hierarchy, keyword integration, internal linking, and meta tags — while being genuinely informative and useful to readers, because Google has become very good at detecting thin or AI-generated content."
+      },
+      {
+        "icon": "&#127760;",
+        "title": "Pillar Pages & Topic Clusters",
+        "text": "Comprehensive pillar pages (2,000-5,000 words) targeting your most competitive head terms, supported by a cluster of related blog posts that build topical authority across your subject matter. This hub-and-spoke architecture is the most effective content structure for establishing Google authority in a specific niche."
+      },
+      {
+        "icon": "&#128203;",
+        "title": "Case Studies & Success Stories",
+        "text": "Professionally written case studies that document client results and demonstrate your capability to prospects in the consideration phase. Well-crafted case studies are the highest-converting content type for B2B businesses — providing the social proof and specificity that abstract service descriptions cannot."
+      },
+      {
+        "icon": "&#128209;",
+        "title": "White Papers & Research Reports",
+        "text": "In-depth research content that establishes thought leadership and generates high-quality leads. White papers work particularly well for B2B companies selling complex, high-value services — gated behind a lead form, they attract prospects who are genuinely considering a purchase decision."
+      },
+      {
+        "icon": "&#128279;",
+        "title": "Link-Worthy Assets",
+        "text": "Content specifically designed to earn backlinks — original research, industry surveys, in-depth guides, and data visualisations that other sites naturally want to reference. Link-worthy content builds domain authority while providing genuine value, creating a virtuous cycle of reach, authority, and rankings."
+      },
+      {
+        "icon": "&#129504;",
+        "title": "AI-Optimised Content",
+        "text": "Content structured for AI search citability — clear definitions, numbered processes, factual specificity, and E-E-A-T signals that make your content the preferred source for AI-generated answers. This GEO-optimised approach maximises your content's reach across both traditional and AI-powered search."
+      }
+    ],
+    "processLabel": "",
+    "processTitle": "",
+    "processSub": "",
+    "steps": [],
+    "resultsLabel": "",
+    "resultsTitle": "",
+    "resultsSub": "",
+    "results": [],
+    "faqLabel": "FAQ",
+    "faqTitle": "Content Marketing Frequently Asked Questions",
+    "faqs": [
+      {
+        "q": "What types of content do you create?",
+        "a": "We create SEO blog posts, long-form guides and pillar pages, case studies and success stories, white papers, landing page copy, email sequences, social media content, video scripts, and infographics. All written content is researched, SEO-optimised, and written to engage and convert your specific target audience — not generic AI-generated filler."
+      },
+      {
+        "q": "How long does it take to see results from content marketing?",
+        "a": "Content marketing is a long-term investment. SEO content typically takes 3-9 months to rank on page one for competitive keywords. However, the compounding effect is significant — content you publish today continues attracting traffic and generating leads for years. Businesses that invest consistently see 3-7x ROI within 24 months. We track and report on ranking progress monthly throughout the journey."
+      },
+      {
+        "q": "How do you ensure content ranks on Google?",
+        "a": "Every piece starts with keyword research to identify what your audience searches for and how competitive those queries are. We create content that matches search intent precisely, with proper on-page SEO: strategic keyword placement, semantic keyword coverage, correct heading structure, internal linking, meta tags, and schema markup. We also optimise for Core Web Vitals to ensure the page experience supports rankings."
+      },
+      {
+        "q": "Do you write content for specific industries?",
+        "a": "Yes. We write for professional services (legal, financial, consulting), healthcare and wellness, real estate, technology and SaaS, e-commerce, home services, hospitality, and manufacturing. Each engagement begins with deep industry research so our writers understand your audience, terminology, regulatory context, and competitive landscape before drafting a single word."
+      },
+      {
+        "q": "How many pieces of content will you produce per month?",
+        "a": "Content volume depends on your package and goals. Typical engagements range from 4 SEO blog posts per month (Starter) to 8 posts plus a pillar page (Growth) to a comprehensive multi-format programme (Scale). We can adjust volume based on your competitive landscape — sometimes 4 exceptional posts per month outperforms 16 mediocre ones. Quality is always the priority."
+      }
+    ],
+    "ctaH2": "Start Building Your Content Authority Today",
+    "ctaP": "Get a free content gap analysis. We'll identify the keywords your competitors rank for that you don't — and map the content opportunities that would drive the most traffic to your business.",
+    "ctaBtn1": {
+      "text": "Get Free Content Audit ->",
+      "href": "https://boomymarketing.com/contact.html"
+    },
+    "ctaBtn2": {
+      "text": "See SEO Services",
+      "href": "https://boomymarketing.com/services/seo.html"
+    }
+  },
+  {
+    "slug": "ecommerce-seo",
+    "title": "E-commerce SEO Agency in Canada | Shopify SEO Experts — Boomy Marketing",
+    "metaDescription": "Canada's e-commerce SEO experts. Shopify, WooCommerce &amp; custom store SEO that drives qualified organic traffic and measurable revenue growth. Book a free store audit.",
+    "canonical": "https://boomymarketing.com/services/ecommerce-seo",
+    "heroBadge": "&#128722; E-commerce SEO",
+    "heroH1": "E-commerce SEO That <span>Turns Organic Traffic Into Revenue</span>",
+    "heroP": "Paid ads stop the moment you pause spending. Organic rankings compound every month. Boomy Marketing's e-commerce SEO team builds the infrastructure that drives qualified buyers to your Shopify, WooCommerce, or custom store — without the constant cost-per-click overhead.",
+    "heroStats": [
+      {
+        "num": "312%",
+        "label": "Avg. organic traffic growth for e-com clients"
+      },
+      {
+        "num": "$50M+",
+        "label": "Revenue generated for Canadian online stores"
+      },
+      {
+        "num": "98%",
+        "label": "Client retention rate"
+      }
+    ],
+    "heroVisualItems": [
+      {
+        "icon": "&#128269;",
+        "title": "Technical SEO Audit",
+        "sub": "Fix what blocks search engines from indexing your store"
+      },
+      {
+        "icon": "&#128196;",
+        "title": "Product Page Optimisation",
+        "sub": "Turn product pages into organic traffic magnets"
+      },
+      {
+        "icon": "&#128193;",
+        "title": "Category & Collection SEO",
+        "sub": "Rank where buyers start their search journey"
+      },
+      {
+        "icon": "&#128279;",
+        "title": "E-commerce Link Building",
+        "sub": "Authority backlinks from relevant industry sources"
+      },
+      {
+        "icon": "&#9889;",
+        "title": "AI Search Optimisation",
+        "sub": "Appear in ChatGPT, Perplexity & Google AI results"
+      }
+    ],
+    "whatIsLabel": "&#128200; The Opportunity",
+    "whatIsTitle": "Why Canadian E-commerce Stores Can't Ignore SEO in 2026",
+    "whatIsText": [
+      "Organic search remains the highest-converting, lowest-cost traffic channel for e-commerce — and AI is making it more competitive, not less."
+    ],
+    "whatIsCards": [],
+    "servicesSectionLabel": "&#128200; The Opportunity",
+    "servicesSectionTitle": "Why Canadian E-commerce Stores Can't Ignore SEO in 2026",
+    "servicesSectionSub": "Organic search remains the highest-converting, lowest-cost traffic channel for e-commerce — and AI is making it more competitive, not less.",
+    "cards": [
+      {
+        "icon": "&#129302;",
+        "title": "AI Traffic to Retail Surged 520%",
+        "text": "Between 2024 and 2025, referral traffic from AI platforms like ChatGPT, Perplexity, and Google AI Overviews to e-commerce sites grew 520% year-over-year. Stores with strong SEO foundations are capturing this new traffic channel automatically."
+      },
+      {
+        "icon": "&#127981;",
+        "title": "Shopify Powers 1M+ Canadian Businesses",
+        "text": "Canada is Shopify's home market and has one of the highest e-commerce adoption rates globally. Competition for product keywords has intensified — stores without deliberate SEO strategy are invisible to the buyers who are actively searching to purchase."
+      },
+      {
+        "icon": "&#128176;",
+        "title": "Organic Converts 2.8x Better Than Paid",
+        "text": "Across our e-commerce client portfolio, organic search visitors convert to buyers at 2.8 times the rate of paid ad visitors. Shoppers who find you through organic search have higher purchase intent — they searched specifically for what you sell, not just clicked an ad."
+      },
+      {
+        "icon": "&#127758;",
+        "title": "Most Product Pages Have Zero Organic Traffic",
+        "text": "Studies show that 90.63% of web pages get zero organic search traffic from Google. For e-commerce, this means the vast majority of product and category pages are invisible — even if the products are excellent. Systematic SEO changes this equation at scale."
+      },
+      {
+        "icon": "&#128241;",
+        "title": "72% of Canadian E-commerce Traffic Is Mobile",
+        "text": "Canadian shoppers browse and buy on mobile. Page speed, Core Web Vitals, and mobile UX are now direct ranking factors — stores that fail these technical benchmarks lose both rankings and conversions simultaneously. We optimise for both."
+      },
+      {
+        "icon": "&#128200;",
+        "title": "Compounding Returns Over Time",
+        "text": "Unlike paid ads — which deliver zero the moment you stop spending — organic rankings compound. A category page that earns first-page rankings continues driving revenue for years. Most of our long-term e-commerce clients see organic revenue surpass paid within 12–18 months."
+      }
+    ],
+    "processLabel": "&#9881; Our Process",
+    "processTitle": "How We Build Your E-commerce SEO Engine",
+    "processSub": "A structured, milestone-based process that delivers early wins while building compounding long-term growth.",
+    "steps": [
+      {
+        "num": "1",
+        "title": "Store Audit & Diagnosis",
+        "text": "Week 1–2. Full technical audit of your store: crawl errors, indexation gaps, site speed, Core Web Vitals, duplicate content, and keyword cannibalization. We identify exactly what's holding your rankings back."
+      },
+      {
+        "num": "2",
+        "title": "Keyword & Catalogue Mapping",
+        "text": "Week 2–4. We map your entire product and category structure to search demand — identifying which pages have the highest revenue potential and prioritising the optimisation sequence accordingly."
+      },
+      {
+        "num": "3",
+        "title": "Technical Fix & On-Page Optimisation",
+        "text": "Month 1–2. We implement technical fixes and begin on-page optimisation for your highest-priority categories and products: title tags, meta descriptions, content, internal linking, and structured data."
+      },
+      {
+        "num": "4",
+        "title": "Content & Link Building",
+        "text": "Month 2–4. SEO content (buying guides, comparison articles) targets early-funnel buyers. Simultaneously, our link building outreach builds the domain authority that pushes competitive keywords to page one."
+      },
+      {
+        "num": "5",
+        "title": "Monitor, Measure & Iterate",
+        "text": "Month 3+. Weekly rank tracking, Google Search Console analysis, and conversion attribution. We identify what's working, scale it, and continuously refine the strategy based on real performance data."
+      },
+      {
+        "num": "6",
+        "title": "Monthly Revenue Reporting",
+        "text": "Clear monthly reports connect organic traffic directly to revenue — not just rankings. You see exactly how much revenue organic search generated, cost per acquisition vs. paid channels, and strategic priorities for the next 30 days."
+      }
+    ],
+    "resultsLabel": "&#128200; Results",
+    "resultsTitle": "E-commerce SEO Benchmarks From Our Client Portfolio",
+    "resultsSub": "Real performance metrics from Canadian e-commerce stores we've grown through organic search.",
+    "results": [
+      {
+        "num": "312%",
+        "label": "Average organic traffic growth within 12 months"
+      },
+      {
+        "num": "2.8x",
+        "label": "Organic conversion rate vs. paid traffic"
+      },
+      {
+        "num": "47%",
+        "label": "Average reduction in paid ad spend per revenue dollar after 12 months"
+      },
+      {
+        "num": "$50M+",
+        "label": "Revenue generated for Canadian e-commerce clients"
+      }
+    ],
+    "faqLabel": "&#10067; FAQ",
+    "faqTitle": "E-commerce SEO — Frequently Asked Questions",
+    "faqs": [
+      {
+        "q": "How long does e-commerce SEO take to show results?",
+        "a": "Most e-commerce clients see measurable ranking improvements within 60–90 days for long-tail product and category keywords. Significant organic revenue growth typically builds between months 4–8 as domain authority strengthens and content compounds. Unlike paid ads, organic traffic doesn't stop the moment you stop spending — it keeps delivering returns month after month."
+      },
+      {
+        "q": "Do you work with Shopify stores?",
+        "a": "Yes — Shopify is our most common e-commerce platform and we have deep experience with Shopify's unique SEO challenges: duplicate content from faceted navigation, canonical tag issues, collection vs. product page hierarchy, and Shopify app conflicts. We optimise Shopify stores at both the technical and content level to maximize organic visibility."
+      },
+      {
+        "q": "How is e-commerce SEO different from regular SEO?",
+        "a": "E-commerce SEO requires specialised expertise that general SEO doesn't cover: Product schema markup (price, availability, reviews), faceted navigation handling (filtering by size, colour, brand), category page optimisation, site architecture for large catalogues, and optimising for commercial-intent keywords ('buy', 'best', 'cheap', 'for sale'). A general SEO strategy applied to an e-commerce store will miss the majority of revenue opportunities."
+      },
+      {
+        "q": "What platforms do you support beyond Shopify?",
+        "a": "We support all major e-commerce platforms: Shopify, WooCommerce, BigCommerce, Magento, Squarespace Commerce, and custom-built stores. Each platform has its own SEO quirks and limitations — our team has experience across all of them and will work within your existing platform rather than pushing you to migrate."
+      },
+      {
+        "q": "Do you optimise product pages or just the homepage?",
+        "a": "The homepage is just the starting point. Our e-commerce SEO strategy focuses heavily on product pages, collection/category pages, and blog content — which is where the majority of organic revenue is actually generated. We identify your highest-value products and categories, then build dedicated optimisation plans for each."
+      },
+      {
+        "q": "Can SEO replace paid ads for my e-commerce store?",
+        "a": "In most cases, SEO doesn't replace paid ads — it makes them more profitable. Stores that rank organically for their core products spend significantly less on Google Shopping and Search ads because organic traffic covers the awareness and consideration stages. Our clients typically see a 30–50% reduction in paid ad spend per revenue dollar once organic rankings mature — while overall revenue grows."
+      },
+      {
+        "q": "How do you handle large product catalogues with thousands of SKUs?",
+        "a": "Large catalogues require a strategic approach: we identify your highest-margin, highest-search-volume products and categories first, then build a systematic optimisation schedule. We also implement technical foundations — XML sitemaps, crawl budget optimisation, internal linking architecture — that help search engines efficiently discover and index your entire catalogue."
+      },
+      {
+        "q": "How much does e-commerce SEO cost in Canada?",
+        "a": "E-commerce SEO is included in our Growth ($3,500 CAD/mo) and Scale ($7,500 CAD/mo) retainer packages alongside other channels. We also offer standalone e-commerce SEO starting from $1,500 CAD/mo depending on catalogue size and competitive landscape. Book a free store audit and we'll provide an accurate quote based on your specific situation."
+      }
+    ],
+    "ctaH2": "Ready to Build Your Organic Revenue Engine?",
+    "ctaP": "Get a free e-commerce SEO audit — we'll identify exactly which products and categories have the highest untapped organic potential in your market.",
+    "ctaBtn1": {
+      "text": "Get Free Store Audit ->",
+      "href": "https://boomymarketing.com/contact"
+    },
+    "ctaBtn2": {
+      "text": "View Pricing",
+      "href": "https://boomymarketing.com/pricing"
+    }
+  },
+  {
+    "slug": "email-marketing",
+    "title": "Email Marketing Toronto — Campaigns & Automation | Boomy",
+    "metaDescription": "Email marketing strategy, automation, and campaigns for Toronto businesses. Build your list, nurture leads, and drive revenue with ROI-positive email programs.",
+    "canonical": "https://boomymarketing.com/services/email-marketing",
+    "heroBadge": "&#128140; Email Marketing",
+    "heroH1": "Email Marketing That <span>Returns $42 for Every $1 Spent</span>",
+    "heroP": "Email remains the highest-ROI digital marketing channel. With the right strategy, list, and automation, email works around the clock to nurture prospects, retain customers, and drive repeat revenue — without the ongoing costs of paid advertising. We build and manage complete email programs that compound in value over time.",
+    "heroStats": [
+      {
+        "num": "$42",
+        "label": "Average ROI per $1 spent on email"
+      },
+      {
+        "num": "34%",
+        "label": "Avg. open rate we deliver"
+      },
+      {
+        "num": "100%",
+        "label": "CASL compliant programs"
+      }
+    ],
+    "heroVisualItems": [],
+    "whatIsLabel": "Why Email Marketing",
+    "whatIsTitle": "Why Email Marketing Is Still the Highest-ROI Channel in 2026",
+    "whatIsText": [
+      "While social media algorithms limit organic reach to 1-5% of followers, email lands directly in your subscriber's inbox — a channel they chose to give you access to. The average email open rate of 20-35% dwarfs organic social engagement by 10-20x. And unlike paid advertising, your email list is an asset you own outright — no algorithm changes or platform policy shifts can take it away.",
+      "For e-commerce businesses, email typically drives 30-40% of total revenue. For service businesses, email nurture sequences convert leads who weren't ready to buy into clients months later — at zero incremental cost. For B2B companies, email is the most cost-effective way to stay top-of-mind with prospects through long sales cycles."
+    ],
+    "whatIsCards": [],
+    "servicesSectionLabel": "Why Email Marketing",
+    "servicesSectionTitle": "Why Email Marketing Is Still the Highest-ROI Channel in 2026",
+    "servicesSectionSub": "",
+    "cards": [
+      {
+        "icon": "&#127381;",
+        "title": "Welcome & Onboarding Sequences",
+        "text": "First impressions matter. We design automated welcome series that introduce new subscribers to your brand, establish value immediately, and guide them toward their first conversion. A strong welcome sequence increases lifetime customer value by an average of 33%."
+      },
+      {
+        "icon": "&#128260;",
+        "title": "Lead Nurture Flows",
+        "text": "Multi-step automated sequences that educate prospects, address objections, build trust, and move leads through your sales funnel on autopilot. Behaviour-triggered emails ensure the right message reaches each subscriber at the right moment based on how they're engaging."
+      },
+      {
+        "icon": "&#128176;",
+        "title": "Promotional Campaigns",
+        "text": "Strategic promotional emails for product launches, seasonal campaigns, limited offers, and events. We write compelling copy, design eye-catching templates, segment your list for relevance, and time sends for maximum open rates — not just spray-and-pray blasts."
+      },
+      {
+        "icon": "&#128722;",
+        "title": "E-commerce Flows",
+        "text": "Abandoned cart recovery, browse abandonment, post-purchase follow-up, cross-sell and upsell sequences, win-back campaigns for lapsed customers, and VIP programmes. For Shopify and WooCommerce stores, these automated flows generate revenue 24/7 without ongoing effort."
+      },
+      {
+        "icon": "&#127775;",
+        "title": "Newsletter Strategy",
+        "text": "Consistent, valuable newsletters that keep your brand top-of-mind with subscribers. We develop content calendars, write newsletters that people actually want to read, and track engagement to continuously improve content strategy based on what resonates with your audience."
+      },
+      {
+        "icon": "&#128202;",
+        "title": "List Growth & Deliverability",
+        "text": "We implement strategic list growth tactics — lead magnets, opt-in forms, gated content — while maintaining rigorous list hygiene and deliverability standards. A smaller, engaged list consistently outperforms a large, disengaged one. We optimise both dimensions simultaneously."
+      }
+    ],
+    "processLabel": "",
+    "processTitle": "",
+    "processSub": "",
+    "steps": [],
+    "resultsLabel": "",
+    "resultsTitle": "",
+    "resultsSub": "",
+    "results": [],
+    "faqLabel": "FAQ",
+    "faqTitle": "Email Marketing Frequently Asked Questions",
+    "faqs": [
+      {
+        "q": "What email platforms do you work with?",
+        "a": "We work with all major email platforms including Klaviyo, Mailchimp, ActiveCampaign, HubSpot, Drip, ConvertKit, and Brevo. We'll recommend the right platform based on your business size, e-commerce integration needs, automation complexity, and budget. We handle full platform setup, migration, and management."
+      },
+      {
+        "q": "How do you grow an email list?",
+        "a": "We grow email lists through strategically placed opt-in forms, lead magnets (guides, checklists, discount codes, templates), exit-intent pop-ups, landing page campaigns, gated content, referral programmes, and integration with paid advertising to capture leads from ad traffic. Every subscriber we add has genuinely consented — no purchased lists, ever."
+      },
+      {
+        "q": "What is a good email open rate?",
+        "a": "Average open rates vary by industry — 20-35% is strong for B2C and 25-45% for B2B. Our managed programs consistently achieve above-industry benchmarks through list hygiene, subject line testing, send-time optimisation, and personalisation. We benchmark your performance against your specific industry in every monthly report."
+      },
+      {
+        "q": "How do you ensure emails don't go to spam?",
+        "a": "Deliverability is foundational. We configure proper email authentication (SPF, DKIM, DMARC), warm up new sending domains gradually, maintain list hygiene by removing unengaged subscribers, monitor sender reputation scores, avoid spam-trigger patterns in copy and HTML, and follow all CASL compliance requirements. Our average inbox placement rate across clients is above 96%."
+      },
+      {
+        "q": "How is email marketing CASL compliant in Canada?",
+        "a": "Canada's Anti-Spam Legislation requires express or implied consent to send commercial emails. We implement proper consent collection at every opt-in point, maintain documented consent records, include required sender identification and functional unsubscribe mechanisms in every email, and manage suppression lists carefully. Full CASL compliance is non-negotiable in every programme we build."
+      }
+    ],
+    "ctaH2": "Turn Your Email List Into a Revenue Engine",
+    "ctaP": "Get a free email audit. We'll assess your current email setup and show you exactly what automated flows and campaigns could be generating revenue for you right now.",
+    "ctaBtn1": {
+      "text": "Get Free Email Audit ->",
+      "href": "https://boomymarketing.com/contact.html"
+    },
+    "ctaBtn2": {
+      "text": "View Pricing",
+      "href": "https://boomymarketing.com/pricing.html"
+    }
+  },
+  {
+    "slug": "geo",
+    "title": "GEO Services — AI Overview Optimization | Boomy Marketing",
+    "metaDescription": "Generative Engine Optimisation (GEO) for Google AI Overviews, ChatGPT Search &amp; Perplexity. Get cited in AI answers and win the next era of search in Toronto.",
+    "canonical": "https://boomymarketing.com/services/geo",
+    "heroBadge": "&#129504; Generative Engine Optimisation",
+    "heroH1": "Be the Brand AI <span>Recommends</span>",
+    "heroP": "Google AI Overviews, ChatGPT Search, and Perplexity are rewriting how people find businesses. GEO (Generative Engine Optimisation) ensures your brand is cited, trusted, and recommended when AI generates answers for your target customers.",
+    "heroStats": [
+      {
+        "num": "50%",
+        "label": "Searches now show AI Overviews"
+      },
+      {
+        "num": "3x",
+        "label": "Click-through from cited AI answers"
+      },
+      {
+        "num": "60d",
+        "label": "Avg. time to first AI citation"
+      }
+    ],
+    "heroVisualItems": [],
+    "whatIsLabel": "The New Search Reality",
+    "whatIsTitle": "What Is GEO and Why It's the Most Important Marketing Shift of 2025–2026",
+    "whatIsText": [
+      "Generative Engine Optimisation (GEO) is the discipline of making your website the source that AI systems cite when generating answers for user queries. When someone asks Google, ChatGPT, or Perplexity a question relevant to your business, GEO determines whether your brand appears as a trusted reference — or remains invisible.",
+      "Traditional SEO targets the ten blue links. GEO targets the AI-generated answer that now appears before those links for roughly half of all searches. Research from major search analysts shows that AI-cited sources receive 3-5x more qualified traffic than equivalent organic ranking positions, because the AI answer pre-qualifies intent.",
+      "For Toronto businesses, this is an extraordinary first-mover opportunity. The vast majority of your competitors are not yet optimising for AI search. Brands that establish AI citability now build a compounding advantage that will be extremely difficult for late movers to overcome.",
+      "AI Overviews push blue links down the page. Brands not cited in AI answers lose visibility even if they rank #1 organically.",
+      "Most businesses haven't started GEO. Early optimisers dominate AI citation for their keywords before the space becomes competitive.",
+      "Boomy was one of the first Toronto agencies to build a dedicated GEO practice, giving us 18+ months of real-world data on what earns AI citations."
+    ],
+    "whatIsCards": [],
+    "servicesSectionLabel": "What We Do",
+    "servicesSectionTitle": "Our GEO Service Components",
+    "servicesSectionSub": "A comprehensive approach to earning AI visibility across every major platform.",
+    "cards": [
+      {
+        "icon": "&#127758;",
+        "title": "Entity & Knowledge Graph Optimisation",
+        "text": "AI models understand the world through entities — named brands, people, and concepts they've learned to associate. We establish your brand as a recognisable, trusted entity in Google's Knowledge Graph through structured data, Wikipedia-style references, and authoritative mentions across the web."
+      },
+      {
+        "icon": "&#128196;",
+        "title": "AI-Citeable Content Creation",
+        "text": "AI systems prefer content that is factual, well-structured, comprehensive, and directly answers questions. We create and optimise your content to match the answer patterns AI models favour — including clear definitions, numbered processes, and cited statistics that AI engines surface with confidence."
+      },
+      {
+        "icon": "&#128203;",
+        "title": "Schema & Structured Data",
+        "text": "Rich schema markup tells AI crawlers exactly what your content means. We implement FAQPage, HowTo, Article, Product, and LocalBusiness schema across your site so AI systems can extract and attribute your answers with precision."
+      },
+      {
+        "icon": "&#128279;",
+        "title": "Authority Signal Building",
+        "text": "AI systems weight sources by perceived authority. We build the backlink profile, brand mention footprint, and E-E-A-T signals (Experience, Expertise, Authoritativeness, Trustworthiness) that make your site a preferred citation source over less established competitors."
+      },
+      {
+        "icon": "&#128200;",
+        "title": "AI Citation Tracking",
+        "text": "We query major AI engines weekly across your target keyword set and track when and how your brand is cited, at what frequency, and with what sentiment. Monthly reports give you a clear picture of your AI search visibility and how it's trending."
+      },
+      {
+        "icon": "&#128269;",
+        "title": "Competitor AI Gap Analysis",
+        "text": "We analyse which of your competitors are being cited in AI answers for your most valuable queries, what content earned those citations, and build a targeted plan to displace them or dominate unclaimed territory."
+      }
+    ],
+    "processLabel": "Our Process",
+    "processTitle": "How We Build Your AI Search Presence",
+    "processSub": "A structured, research-led approach that delivers measurable citation gains.",
+    "steps": [
+      {
+        "num": "1",
+        "title": "AI Visibility Audit",
+        "text": "We benchmark your current citation rate across Google AI Overviews, ChatGPT Search, and Perplexity for 50+ target queries."
+      },
+      {
+        "num": "2",
+        "title": "Entity Mapping",
+        "text": "We map your brand's entity graph and identify gaps in knowledge base coverage, structured data, and authoritative citations."
+      },
+      {
+        "num": "3",
+        "title": "Content Optimisation",
+        "text": "Existing pages are rewritten to match AI citation patterns: direct answers, clear structure, verified facts, and comprehensive coverage."
+      },
+      {
+        "num": "4",
+        "title": "New Content Assets",
+        "text": "We create GEO-optimised content targeting high-value queries where you're currently absent from AI-generated answers."
+      },
+      {
+        "num": "5",
+        "title": "Authority Building",
+        "text": "PR placements, link acquisition, and brand mention campaigns expand your entity footprint across the sources AI systems trust."
+      },
+      {
+        "num": "6",
+        "title": "Monitor & Expand",
+        "text": "Weekly citation tracking feeds a continuous optimisation loop, expanding your AI-visible keyword footprint every month."
+      }
+    ],
+    "resultsLabel": "",
+    "resultsTitle": "",
+    "resultsSub": "",
+    "results": [],
+    "faqLabel": "Common Questions",
+    "faqTitle": "GEO Frequently Asked Questions",
+    "faqs": [
+      {
+        "q": "What is Generative Engine Optimisation (GEO)?",
+        "a": "GEO is the practice of optimising your website content so that AI-powered search engines like Google AI Overviews, ChatGPT Search, and Perplexity cite your brand when generating answers. Unlike traditional SEO which targets blue-link rankings, GEO targets the AI-generated summaries that now appear above organic results for millions of queries."
+      },
+      {
+        "q": "How is GEO different from SEO?",
+        "a": "SEO focuses on ranking your pages in traditional search results. GEO focuses on making your content the source AI systems draw from when composing answers. The two are complementary — strong SEO authority helps GEO — but GEO requires additional signals: authoritative citations, structured data, clear factual claims, and a strong entity presence in knowledge graphs. We offer both as an integrated strategy."
+      },
+      {
+        "q": "Why does GEO matter in 2025-2026?",
+        "a": "Google AI Overviews now appear in roughly 50% of searches. ChatGPT Search, Perplexity, and Meta AI handle tens of millions of queries daily. Brands not cited in these AI answers are effectively invisible to a rapidly growing segment of the market. Early movers in GEO are building citability moats competitors cannot quickly overcome — this window won't remain open forever."
+      },
+      {
+        "q": "Which AI search engines do you optimise for?",
+        "a": "We optimise for the major AI search surfaces: Google AI Overviews, ChatGPT Search (with Bing integration), Perplexity, Microsoft Copilot, and Meta AI. We track citation frequency across all platforms and report on your brand's full AI search footprint monthly, so you can see exactly where you're winning and where gaps remain."
+      },
+      {
+        "q": "How long does GEO take to show results?",
+        "a": "GEO citation gains can appear faster than traditional SEO — some clients see their content cited in AI Overviews within 60-90 days of publishing GEO-optimised content. Full brand entity establishment across all major AI systems typically takes 3-6 months of consistent effort. We track and report progress every step of the way."
+      }
+    ],
+    "ctaH2": "Find Out How Visible You Are to AI Search",
+    "ctaP": "We'll run a free AI visibility audit — checking your citation rate across Google AI Overviews, ChatGPT Search, and Perplexity for your top 20 keywords.",
+    "ctaBtn1": {
+      "text": "Get Your Free AI Audit ->",
+      "href": "https://boomymarketing.com/contact.html"
+    },
+    "ctaBtn2": {
+      "text": "See SEO Services",
+      "href": "https://boomymarketing.com/services/seo.html"
+    }
+  },
+  {
+    "slug": "google-ads",
+    "title": "Google Ads Management Toronto — Boomy Marketing",
+    "metaDescription": "Expert Google Ads management in Toronto. Search, Display, Shopping &amp; YouTube campaigns engineered for maximum ROI. Certified Google Partners managing $2M+ in ad.",
+    "canonical": "https://boomymarketing.com/services/google-ads",
+    "heroBadge": "&#127919; Google Ads Management",
+    "heroH1": "Google Ads That <span>Convert Clicks Into Clients</span>",
+    "heroP": "Every dollar of your ad budget deserves to work harder. Our certified Google Ads specialists build, manage, and continuously optimise Search, Display, Shopping, and YouTube campaigns engineered around your cost-per-acquisition targets — not just click volume.",
+    "heroStats": [
+      {
+        "num": "3.8x",
+        "label": "Average ROAS delivered"
+      },
+      {
+        "num": "$2M+",
+        "label": "Ad spend managed annually"
+      },
+      {
+        "num": "41%",
+        "label": "Avg. reduction in wasted spend"
+      }
+    ],
+    "heroVisualItems": [
+      {
+        "icon": "&#128269;",
+        "title": "Search Campaigns",
+        "sub": "High-intent buyers ready to convert"
+      },
+      {
+        "icon": "&#128444;&#65039;",
+        "title": "Display & Remarketing",
+        "sub": "Stay top-of-mind across the web"
+      },
+      {
+        "icon": "&#128722;",
+        "title": "Shopping Campaigns",
+        "sub": "Product ads for e-commerce growth"
+      },
+      {
+        "icon": "&#127909;",
+        "title": "YouTube Ads",
+        "sub": "Video campaigns that build brand & demand"
+      },
+      {
+        "icon": "&#9889;",
+        "title": "Performance Max",
+        "sub": "AI-powered cross-channel campaigns"
+      }
+    ],
+    "whatIsLabel": "Campaign Types",
+    "whatIsTitle": "Google Ads Campaign Types We Manage",
+    "whatIsText": [
+      "Every campaign type serves a different purpose in your marketing funnel. We match the right format to the right objective."
+    ],
+    "whatIsCards": [],
+    "servicesSectionLabel": "Campaign Types",
+    "servicesSectionTitle": "Google Ads Campaign Types We Manage",
+    "servicesSectionSub": "Every campaign type serves a different purpose in your marketing funnel. We match the right format to the right objective.",
+    "cards": [
+      {
+        "icon": "&#128269;",
+        "title": "Search Campaigns",
+        "text": "Text ads that appear when users search for your products or services on Google. We conduct deep keyword research, write high-converting ad copy, structure campaigns for quality scores, and set smart bidding strategies that maximise conversions within your budget."
+      },
+      {
+        "icon": "&#128444;&#65039;",
+        "title": "Display & Remarketing",
+        "text": "Visual banner ads shown across millions of websites in the Google Display Network. We use audience targeting and remarketing lists to keep your brand in front of past visitors and ideal prospects — converting window shoppers into buyers."
+      },
+      {
+        "icon": "&#128722;",
+        "title": "Google Shopping",
+        "text": "Product listing ads for e-commerce businesses. We optimise your Google Merchant Center feed, product titles, descriptions, and bidding strategy to place your products in front of shoppers actively searching to buy — often the highest-converting ad format available."
+      },
+      {
+        "icon": "&#127909;",
+        "title": "YouTube Advertising",
+        "text": "Video ads that build brand awareness, drive consideration, and capture demand. From skippable in-stream ads to YouTube Shorts, we develop video ad strategies that reach your target audience where they spend hours each week."
+      },
+      {
+        "icon": "&#9889;",
+        "title": "Performance Max",
+        "text": "Google's AI-powered campaign type that runs across Search, Display, YouTube, Gmail, Discover, and Maps from a single campaign. We structure PMax campaigns with strong asset groups and audience signals to guide Google's AI toward your ideal customers."
+      },
+      {
+        "icon": "&#127968;",
+        "title": "Local Service Ads",
+        "text": "Google-guaranteed ads for service-area businesses. Appear at the very top of Google Search results and pay only for qualified leads — not clicks. Ideal for home services, legal, healthcare, and other local service businesses in Toronto."
+      }
+    ],
+    "processLabel": "Our Process",
+    "processTitle": "How We Build and Manage Your Google Ads Campaigns",
+    "processSub": "A rigorous, data-driven management process that improves performance month over month.",
+    "steps": [
+      {
+        "num": "1",
+        "title": "Account Audit",
+        "text": "We audit your existing account (or build from scratch), identifying wasted spend, quality score issues, and missed opportunities across keywords, audiences, and ad formats."
+      },
+      {
+        "num": "2",
+        "title": "Strategy & Structure",
+        "text": "We design a campaign architecture aligned with your sales funnel — from awareness through conversion — with clear budget allocation and bidding strategies for each stage."
+      },
+      {
+        "num": "3",
+        "title": "Ad Creation",
+        "text": "Our copywriters craft compelling, benefit-driven ads with strong calls to action. We build multiple variants for A/B testing across headlines, descriptions, and extensions."
+      },
+      {
+        "num": "4",
+        "title": "Launch & Tracking",
+        "text": "We implement conversion tracking for every meaningful action — calls, form fills, purchases — so every campaign decision is backed by actual revenue data."
+      },
+      {
+        "num": "5",
+        "title": "Ongoing Optimisation",
+        "text": "Weekly bid adjustments, negative keyword refinement, ad rotation analysis, landing page testing, and audience optimisation continuously improve your cost-per-acquisition."
+      },
+      {
+        "num": "6",
+        "title": "Monthly Reporting",
+        "text": "Clear reports tie ad spend directly to leads, revenue, and ROAS — with strategic recommendations for the next 30 days."
+      }
+    ],
+    "resultsLabel": "Results",
+    "resultsTitle": "Google Ads Performance Benchmarks We Deliver",
+    "resultsSub": "Real results across our client portfolio in Toronto and beyond.",
+    "results": [
+      {
+        "num": "3.8x",
+        "label": "Average return on ad spend (ROAS)"
+      },
+      {
+        "num": "41%",
+        "label": "Average reduction in cost-per-lead vs. previous agency"
+      },
+      {
+        "num": "28%",
+        "label": "Average improvement in click-through rate within 60 days"
+      },
+      {
+        "num": "$2M+",
+        "label": "CAD in annual ad spend actively managed"
+      }
+    ],
+    "faqLabel": "FAQ",
+    "faqTitle": "Google Ads Frequently Asked Questions",
+    "faqs": [
+      {
+        "q": "How much should I budget for Google Ads in Toronto?",
+        "a": "For meaningful results in most Toronto markets, we recommend a minimum ad spend of $2,000-$3,000 CAD/month. Competitive industries like legal, real estate, and finance typically require $5,000-$15,000/month. We'll recommend a budget based on your industry's cost-per-click benchmarks and your revenue goals during our free consultation."
+      },
+      {
+        "q": "How quickly can I see results from Google Ads?",
+        "a": "Google Ads can generate leads and sales within the first week of launch. However, campaigns reach optimal performance after 30-60 days of data collection and optimisation. Our team refines targeting, bids, and ad copy continuously, so results consistently improve over the first three months."
+      },
+      {
+        "q": "What types of Google Ads campaigns do you manage?",
+        "a": "We manage all Google Ads campaign types: Search (text ads on Google Search), Display (visual banner ads), Shopping (product ads for e-commerce), YouTube (video ads), Performance Max (AI-driven cross-channel campaigns), and Local Service Ads. We'll recommend the right mix based on your business type and goals."
+      },
+      {
+        "q": "Do you manage accounts for all industries?",
+        "a": "We work across most industries including professional services, e-commerce, healthcare, real estate, home services, SaaS, and hospitality. Some industries have Google Ads policy restrictions (certain financial products, pharmaceuticals) — we'll flag these upfront during our consultation."
+      },
+      {
+        "q": "How do you charge for Google Ads management?",
+        "a": "Google Ads management is included in our Growth ($3,500 CAD/mo) and Scale ($7,500 CAD/mo) retainer packages alongside other marketing channels. We also manage Google Ads as a standalone service — contact us for a quote based on your monthly ad spend. Our management fee is always separate from your ad budget, which goes directly to Google."
+      }
+    ],
+    "ctaH2": "Stop Wasting Budget on Underperforming Ads",
+    "ctaP": "Get a free Google Ads account audit — we'll identify exactly where your budget is leaking and how to fix it.",
+    "ctaBtn1": {
+      "text": "Get Free Account Audit ->",
+      "href": "https://boomymarketing.com/contact.html"
+    },
+    "ctaBtn2": {
+      "text": "View Pricing",
+      "href": "https://boomymarketing.com/pricing.html"
+    }
+  },
+  {
+    "slug": "meta-ads",
+    "title": "Meta Ads Agency Toronto — Facebook & Instagram | Boomy",
+    "metaDescription": "Boomy Marketing runs high-converting Meta Ads campaigns on Facebook and Instagram. Drive targeted traffic, build audiences and maximise ROAS for your business.",
+    "canonical": "https://boomymarketing.com/services/meta-ads",
+    "heroBadge": "&#128247; Meta Ads — Facebook & Instagram",
+    "heroH1": "Meta Ads That <span>Build Audiences &amp; Drive Revenue</span>",
+    "heroP": "With 3+ billion active users across Facebook and Instagram, Meta's advertising platform offers unmatched audience reach and targeting precision. Our certified Meta Ads team builds full-funnel campaigns that turn cold audiences into loyal customers — backed by rigorous creative testing and data-driven optimisation.",
+    "heroStats": [
+      {
+        "num": "4.1x",
+        "label": "Average ROAS for e-commerce clients"
+      },
+      {
+        "num": "62%",
+        "label": "Lower cost-per-lead vs. industry avg"
+      },
+      {
+        "num": "3B+",
+        "label": "Users reachable on Meta platforms"
+      }
+    ],
+    "heroVisualItems": [
+      {
+        "icon": "&#127981;",
+        "title": "Full-Funnel Campaigns",
+        "sub": "Awareness, consideration & conversion"
+      },
+      {
+        "icon": "&#127775;",
+        "title": "Creative Testing",
+        "sub": "Image, video, carousel & Reels ads"
+      },
+      {
+        "icon": "&#127919;",
+        "title": "Audience Strategy",
+        "sub": "Lookalike, interest & custom audiences"
+      },
+      {
+        "icon": "&#128260;",
+        "title": "Retargeting",
+        "sub": "Re-engage warm leads and past visitors"
+      },
+      {
+        "icon": "&#128202;",
+        "title": "Conversions API",
+        "sub": "Server-side tracking for iOS resilience"
+      }
+    ],
+    "whatIsLabel": "Why Meta Ads",
+    "whatIsTitle": "Why Facebook & Instagram Advertising Works for Toronto Businesses",
+    "whatIsText": [
+      "Meta's advertising platform gives you the ability to reach virtually any demographic with extraordinary precision — by location, age, interests, behaviours, income indicators, life events, job titles, and more. For Toronto businesses, this means you can serve ads exclusively to homeowners in Rosedale, restaurant-goers in the Distillery District, or B2B decision-makers in downtown financial services.",
+      "Unlike search advertising, where you wait for people to express intent, Meta Ads let you create demand by reaching people before they're actively searching. This makes Meta exceptionally powerful for brand building, product launches, e-commerce, and services that solve problems people don't yet know they have.",
+      "Meta's AI-driven Advantage+ audience and campaign tools, combined with our hands-on management and creative expertise, consistently deliver cost-per-acquisition rates that make Meta one of the highest-ROI channels available to growing businesses."
+    ],
+    "whatIsCards": [
+      {
+        "icon": "",
+        "title": "Unmatched Reach",
+        "text": "Reach Toronto's 2.9M+ Facebook users and Instagram's highly engaged younger demographics in a single campaign."
+      },
+      {
+        "icon": "",
+        "title": "Precision Targeting",
+        "text": "Target by postal code, interest, behaviour, income level, life event, or upload your own customer list to find more like them."
+      },
+      {
+        "icon": "",
+        "title": "Flexible Budgets",
+        "text": "Start with $1,500/month and scale to $50,000+ as performance data guides intelligent budget allocation."
+      }
+    ],
+    "servicesSectionLabel": "What We Do",
+    "servicesSectionTitle": "Our Meta Ads Management Services",
+    "servicesSectionSub": "Every component of a high-performing Meta advertising programme, handled end-to-end.",
+    "cards": [
+      {
+        "icon": "&#127981;",
+        "title": "Full-Funnel Campaign Architecture",
+        "text": "We build layered campaign structures: top-of-funnel cold prospecting to build awareness, middle-funnel engagement retargeting, and bottom-funnel conversion campaigns targeting users who've shown clear purchase intent. Each layer is optimised independently for its specific objective."
+      },
+      {
+        "icon": "&#127775;",
+        "title": "Creative Strategy & Production",
+        "text": "Creative is the #1 performance variable in Meta Ads. Our team produces static images, carousel ads, short-form video, UGC-style content, and Instagram Reels. We systematically test creative hooks, formats, and calls-to-action to identify what resonates with your specific audience."
+      },
+      {
+        "icon": "&#127919;",
+        "title": "Audience Research & Targeting",
+        "text": "We build layered audience strategies using detailed interest and behaviour targeting, custom audiences from your CRM and website visitors, lookalike audiences based on your best customers, and Advantage+ audience signals to let Meta's AI find the highest-value users."
+      },
+      {
+        "icon": "&#128202;",
+        "title": "Pixel & Conversions API Setup",
+        "text": "Proper tracking is non-negotiable. We implement the Meta Pixel and server-side Conversions API to ensure every lead, purchase, and micro-conversion is tracked with maximum accuracy — giving Meta's algorithm the quality data it needs to find your ideal customers."
+      },
+      {
+        "icon": "&#128260;",
+        "title": "Dynamic Retargeting",
+        "text": "We set up product catalogue retargeting for e-commerce (showing users exactly the products they viewed) and custom retargeting sequences for service businesses — nurturing prospects through a structured consideration journey until they're ready to convert."
+      },
+      {
+        "icon": "&#128200;",
+        "title": "Reporting & Optimisation",
+        "text": "Weekly performance reviews assess ROAS, CPL, CTR, and creative fatigue. We rotate fresh creatives before saturation, adjust audience sizes as you scale, and provide monthly strategy sessions tied to your broader business goals."
+      }
+    ],
+    "processLabel": "Our Process",
+    "processTitle": "How We Launch and Scale Your Meta Ads",
+    "processSub": "",
+    "steps": [
+      {
+        "num": "1",
+        "title": "Audit & Onboarding",
+        "text": "Review your ad account history, pixel data, and existing creative assets. If starting fresh, we benchmark competitors and identify the most effective angles for your offer."
+      },
+      {
+        "num": "2",
+        "title": "Strategy Blueprint",
+        "text": "We design a full-funnel campaign structure, audience strategy, creative brief, and monthly content calendar before a single dollar is spent."
+      },
+      {
+        "num": "3",
+        "title": "Creative Production",
+        "text": "Our team produces multiple creative variations for A/B testing across formats: image, video, carousel — with distinct hooks targeting different audience pain points."
+      },
+      {
+        "num": "4",
+        "title": "Launch & Learn",
+        "text": "Campaigns go live with proper tracking, initial budget distribution across cold and warm audiences, and a 14-day learning phase observation protocol."
+      },
+      {
+        "num": "5",
+        "title": "Optimise & Scale",
+        "text": "Winners are scaled aggressively. Losers are paused and learnings inform the next creative batch. We systematically increase budgets on proven ad sets while maintaining ROAS targets."
+      },
+      {
+        "num": "6",
+        "title": "Report & Strategise",
+        "text": "Monthly reporting covers all key metrics tied to revenue. Quarterly strategy reviews set the direction for the next growth phase."
+      }
+    ],
+    "resultsLabel": "",
+    "resultsTitle": "",
+    "resultsSub": "",
+    "results": [],
+    "faqLabel": "FAQ",
+    "faqTitle": "Meta Ads Frequently Asked Questions",
+    "faqs": [
+      {
+        "q": "What is the minimum budget for Meta Ads in Toronto?",
+        "a": "We recommend a minimum ad spend of $1,500-$2,000 CAD/month to gather meaningful data and exit the learning phase. For e-commerce and lead generation with scaling ambitions, $3,000-$8,000/month unlocks more sophisticated audience strategies and faster growth. Our management fee is separate from your ad spend, which goes directly to Meta."
+      },
+      {
+        "q": "What types of Meta Ads campaigns do you run?",
+        "a": "We run the full spectrum: awareness campaigns (reach, video views, brand recall), consideration campaigns (traffic, engagement, lead generation, messages), and conversion campaigns (purchases, leads, catalog sales). We build full-funnel structures with cold audience prospecting layered with warm retargeting and hot conversion campaigns."
+      },
+      {
+        "q": "How do you handle iOS 14+ tracking limitations?",
+        "a": "We implement Meta Conversions API (server-side tracking) to supplement browser-based pixel tracking, configure Aggregated Event Measurement, prioritise your eight most important conversion events, and use statistical modelling and first-party data to recover attribution visibility lost to iOS privacy changes. Our clients typically recover 70-85% of lost attribution signal."
+      },
+      {
+        "q": "Do you create the ad creatives?",
+        "a": "Yes — creative production is included in our management service. Our team produces static image ads, carousel ads, short-form video, and Reels-style content. We test multiple creative angles simultaneously — UGC-style, benefit-led, testimonial, and direct-response — because creative quality is the #1 lever in Meta Ads performance. Fresh creative is produced each month to combat ad fatigue."
+      },
+      {
+        "q": "How long before Meta Ads campaigns become profitable?",
+        "a": "Most well-structured campaigns begin generating leads or sales within the first 2-4 weeks. Meta's learning phase (when the algorithm optimises delivery) typically takes 7-14 days per ad set. Sustainable profitability at scale usually emerges by month 2-3 as we refine audiences, creatives, and landing pages based on accumulated performance data."
+      }
+    ],
+    "ctaH2": "Ready to Scale with Meta Advertising?",
+    "ctaP": "Get a free campaign review. We'll audit your current Meta Ads setup and show you exactly where you're leaving money on the table.",
+    "ctaBtn1": {
+      "text": "Get Free Campaign Review ->",
+      "href": "https://boomymarketing.com/contact.html"
+    },
+    "ctaBtn2": {
+      "text": "View Pricing",
+      "href": "https://boomymarketing.com/pricing.html"
+    }
+  },
+  {
+    "slug": "ppc",
+    "title": "PPC Management Toronto — Boomy Marketing",
+    "metaDescription": "Expert PPC management in Toronto. Google Ads, Meta Ads, Microsoft Ads and more — data-driven paid media driving qualified leads and measurable ROI for Canadian.",
+    "canonical": "https://boomymarketing.com/services/ppc",
+    "heroBadge": "&#128200; PPC Management",
+    "heroH1": "PPC Campaigns That <span>Turn Ad Spend Into Revenue</span>",
+    "heroP": "Pay-per-click advertising is the fastest way to generate qualified leads when managed correctly. Our PPC specialists build and manage multi-platform campaigns across Google, Meta, Microsoft, and LinkedIn, engineered around your cost-per-acquisition targets and revenue goals for Toronto businesses.",
+    "heroStats": [
+      {
+        "num": "4.1x",
+        "label": "Average ROAS across platforms"
+      },
+      {
+        "num": "38%",
+        "label": "Avg. cost-per-lead reduction"
+      },
+      {
+        "num": "$3M+",
+        "label": "Ad spend managed annually"
+      }
+    ],
+    "heroVisualItems": [
+      {
+        "icon": "&#128269;",
+        "title": "Google Ads",
+        "sub": "Search, Display, Shopping & Performance Max"
+      },
+      {
+        "icon": "&#128247;",
+        "title": "Meta Ads",
+        "sub": "Facebook & Instagram social campaigns"
+      },
+      {
+        "icon": "&#128187;",
+        "title": "Microsoft Ads",
+        "sub": "Bing search — lower CPC, high intent"
+      },
+      {
+        "icon": "&#128188;",
+        "title": "LinkedIn Ads",
+        "sub": "B2B lead generation at scale"
+      },
+      {
+        "icon": "&#127909;",
+        "title": "TikTok Ads",
+        "sub": "Video-first reach for younger audiences"
+      }
+    ],
+    "whatIsLabel": "Platform Coverage",
+    "whatIsTitle": "PPC Platforms We Manage",
+    "whatIsText": [
+      "Each platform has distinct strengths. We match your budget to the platforms where your customers actually spend time and money."
+    ],
+    "whatIsCards": [],
+    "servicesSectionLabel": "Platform Coverage",
+    "servicesSectionTitle": "PPC Platforms We Manage",
+    "servicesSectionSub": "Each platform has distinct strengths. We match your budget to the platforms where your customers actually spend time and money.",
+    "cards": [
+      {
+        "icon": "&#128269;",
+        "title": "Google Ads",
+        "text": "The world's largest PPC platform, capturing users at the highest point of purchase intent. We manage Search, Display, Shopping, YouTube, and Performance Max campaigns with rigorous keyword strategy, ad copy testing, and smart bidding frameworks. Google Ads remains the most effective paid channel for most Toronto businesses looking to generate leads or e-commerce revenue at scale. Every campaign is structured around Quality Score, conversion tracking, and measurable cost-per-acquisition targets."
+      },
+      {
+        "icon": "&#128247;",
+        "title": "Meta Ads (Facebook & Instagram)",
+        "text": "With over 3 billion active users across Facebook and Instagram, Meta Ads deliver unmatched audience targeting capabilities based on demographics, interests, behaviours, and lookalike audiences. We build full-funnel Meta campaigns — from awareness video to conversion-focused retargeting — with creative-first strategies that stop the scroll and drive measurable action. Meta Ads are particularly powerful for B2C brands, e-commerce, and local service businesses reaching Toronto consumers."
+      },
+      {
+        "icon": "&#128187;",
+        "title": "Microsoft Ads (Bing)",
+        "text": "Microsoft Ads reaches over 900 million unique searchers globally, with a user base that skews older, more affluent, and more educated — a highly valuable audience for B2B, finance, legal, and home services. Average CPCs on Bing are typically 20-40% lower than Google for equivalent keywords, delivering better efficiency on your budget. We synchronise and independently optimise Microsoft Ads campaigns to capture intent-rich traffic your Google campaigns may miss entirely."
+      },
+      {
+        "icon": "&#128188;",
+        "title": "LinkedIn Ads",
+        "text": "LinkedIn is the premier platform for B2B paid advertising, enabling precise targeting by job title, company size, industry, seniority, and professional skills. We manage Sponsored Content, Message Ads, and Lead Gen Forms optimised for enterprise decision-makers and mid-market buyers. LinkedIn Ads command a higher CPC than other platforms, but the quality of leads generated for professional services and SaaS businesses consistently justifies the investment when campaigns are managed with the right objectives."
+      },
+      {
+        "icon": "&#127909;",
+        "title": "TikTok Ads",
+        "text": "TikTok has become a dominant platform for brands targeting millennials and Gen Z, with video-first ad formats that drive both brand awareness and direct conversions. We develop creative-led TikTok campaigns using In-Feed Ads, TopView, and Spark Ads, working with your existing creative assets or guiding in-house production to create native-feeling content that performs. TikTok's growing Canadian user base and lower CPMs make it a cost-effective addition for consumer brands reaching the right audience demographic."
+      },
+      {
+        "icon": "&#127760;",
+        "title": "Programmatic Display",
+        "text": "Programmatic advertising uses real-time bidding to place display and video ads across thousands of premium publisher sites, targeting your ideal audience wherever they browse online. We leverage programmatic platforms to run highly targeted retargeting, prospecting, and contextual campaigns that extend your paid reach far beyond the major search and social platforms. Programmatic is particularly effective for brand awareness campaigns, re-engaging high-value prospects, and reaching niche professional audiences at efficient CPMs."
+      }
+    ],
+    "processLabel": "Our Process",
+    "processTitle": "How We Build and Manage Your PPC Campaigns",
+    "processSub": "A structured, data-driven management process that improves cross-platform performance month over month.",
+    "steps": [
+      {
+        "num": "1",
+        "title": "Audit & Discovery",
+        "text": "We audit your existing paid accounts, ad spend history, and competitive landscape to uncover wasted budget, missed opportunities, and the platforms best aligned to your audience, goals, and budget."
+      },
+      {
+        "num": "2",
+        "title": "Strategy & Platform Mix",
+        "text": "We build a cross-platform PPC strategy with clear budget allocation across channels, defining campaign objectives, audience targeting frameworks, and bidding approaches tailored to your cost-per-acquisition targets and revenue goals."
+      },
+      {
+        "num": "3",
+        "title": "Campaign Build",
+        "text": "Our team builds every campaign from the ground up — keyword research, audience segmentation, ad copy creation, creative briefing, landing page alignment, and campaign architecture structured for maximum relevance scores and conversion performance."
+      },
+      {
+        "num": "4",
+        "title": "Conversion Tracking",
+        "text": "We implement comprehensive conversion tracking across all platforms before launch — including calls, form submissions, purchases, and micro-conversions — ensuring every budget decision is grounded in actual revenue data, not vanity metrics."
+      },
+      {
+        "num": "5",
+        "title": "Continuous Optimisation",
+        "text": "Weekly bid adjustments, audience exclusions, negative keyword refinement, A/B ad testing, creative rotation, and landing page iteration continuously reduce your cost-per-lead and improve ROAS across every active platform over time."
+      },
+      {
+        "num": "6",
+        "title": "Transparent Reporting",
+        "text": "Monthly performance reports connect ad spend directly to leads, revenue, and ROAS by platform — with clear attribution, trend analysis, and forward-looking recommendations. No confusing dashboards, just clarity on what's working."
+      }
+    ],
+    "resultsLabel": "Results",
+    "resultsTitle": "PPC Performance Benchmarks We Deliver",
+    "resultsSub": "Real results across our client portfolio in Toronto and across Canada.",
+    "results": [
+      {
+        "num": "4.1x",
+        "label": "Average return on ad spend (ROAS) across all platforms"
+      },
+      {
+        "num": "38%",
+        "label": "Average cost-per-lead reduction vs. previous campaigns"
+      },
+      {
+        "num": "22%",
+        "label": "Average conversion rate improvement within 90 days"
+      },
+      {
+        "num": "$3M+",
+        "label": "CAD in annual multi-platform ad spend actively managed"
+      }
+    ],
+    "faqLabel": "FAQ",
+    "faqTitle": "PPC Management Frequently Asked Questions",
+    "faqs": [
+      {
+        "q": "Which PPC platforms do you manage?",
+        "a": "We manage paid campaigns across all major platforms including Google Ads (Search, Display, Shopping, YouTube, Performance Max), Meta Ads (Facebook and Instagram), Microsoft Ads (Bing), LinkedIn Ads, and TikTok Ads. We recommend the right platform mix based on your target audience, industry, and budget — not every business needs to be on every platform, and we'll be direct about where your dollars will work hardest."
+      },
+      {
+        "q": "How much should I budget for PPC advertising in Toronto?",
+        "a": "A meaningful multi-platform PPC budget typically starts at $3,000-$5,000 CAD/month in ad spend. For competitive industries or aggressive growth targets, $10,000-$25,000/month is common. We'll build a specific budget recommendation based on your cost-per-acquisition goals, industry benchmarks, and the platforms best suited to reach your customers efficiently."
+      },
+      {
+        "q": "What is ROAS and what can I realistically expect?",
+        "a": "ROAS stands for Return on Ad Spend — for every $1 you invest in ads, how much revenue you generate. Across our client portfolio, we deliver an average 4.1x ROAS, though this varies significantly by industry and platform. E-commerce clients on Google Shopping often achieve 5-8x, while B2B lead generation campaigns are better evaluated on cost-per-qualified-lead rather than direct ROAS."
+      },
+      {
+        "q": "How long does it take to see results from PPC?",
+        "a": "Most platforms can generate leads or sales within the first week of launch. Campaigns typically reach peak performance after 60-90 days as the platform algorithms collect conversion data and our team refines targeting, bids, and creative based on real performance signals. We provide transparent reporting from day one so you can track progress and understand what's happening at every stage of the ramp-up period."
+      },
+      {
+        "q": "Do you manage PPC for B2B companies?",
+        "a": "Yes — B2B PPC is a core specialisation for our team. We leverage LinkedIn Ads for professional audience targeting by job title and company, Google Search for capturing in-market intent, and Microsoft Ads for the business-heavy Bing user base. Our B2B campaigns are built and optimised around qualified lead volume and cost-per-qualified-lead metrics, not just raw click traffic that inflates reports without driving real pipeline."
+      }
+    ],
+    "ctaH2": "Stop Letting Ad Budget Leak — Get a Free PPC Audit",
+    "ctaP": "Our PPC specialists will review your current campaigns, identify exactly where budget is being wasted, and show you how a managed multi-platform strategy can dramatically improve your results.",
+    "ctaBtn1": {
+      "text": "Get Free PPC Audit ->",
+      "href": "https://boomymarketing.com/contact.html"
+    },
+    "ctaBtn2": {
+      "text": "View Pricing",
+      "href": "https://boomymarketing.com/pricing.html"
+    }
+  },
+  {
+    "slug": "saas-products",
+    "title": "SaaS Product Development Toronto | Boomy Marketing",
+    "metaDescription": "Custom SaaS product development in Toronto. We design, build, and launch scalable software-as-a-service products — from MVP to growth-ready platform.",
+    "canonical": "https://boomymarketing.com/services/saas-products",
+    "heroBadge": "&#128187; SaaS Product Development",
+    "heroH1": "Build Your <span>SaaS Product</span> With a Team That Gets It to Market",
+    "heroP": "From validated idea to live, paying product — our Toronto-based team handles strategy, design, engineering, and launch so you can focus on building your business, not managing developers.",
+    "heroStats": [
+      {
+        "num": "12",
+        "label": "Avg. weeks to MVP launch"
+      },
+      {
+        "num": "30+",
+        "label": "SaaS products shipped"
+      },
+      {
+        "num": "$0",
+        "label": "Technical debt in year one"
+      }
+    ],
+    "heroVisualItems": [
+      {
+        "icon": "&#128161;",
+        "title": "Product Discovery",
+        "sub": "Scope, roadmap, and tech decisions"
+      },
+      {
+        "icon": "&#127912;",
+        "title": "UX/UI Design",
+        "sub": "User flows, wireframes, high-fidelity UI"
+      },
+      {
+        "icon": "&#9881;&#65039;",
+        "title": "Full-Stack Engineering",
+        "sub": "Front-end, back-end, APIs, database"
+      },
+      {
+        "icon": "&#128176;",
+        "title": "Billing & Auth",
+        "sub": "Stripe, Auth0, subscription logic"
+      },
+      {
+        "icon": "&#128640;",
+        "title": "Launch & Scale",
+        "sub": "CI/CD, cloud infra, monitoring"
+      }
+    ],
+    "whatIsLabel": "Why Build a SaaS",
+    "whatIsTitle": "Why SaaS Products Are the Highest-Leverage Business Asset in 2026",
+    "whatIsText": [
+      "Software-as-a-service (SaaS) products generate predictable, recurring revenue with unit economics that improve as you scale. Unlike services businesses, a well-built SaaS product serves thousands of customers simultaneously without proportional increases in cost — making it one of the most powerful business models available to Canadian entrepreneurs and enterprises alike.",
+      "The difference between a SaaS idea and a SaaS business is execution. Most product visions stall at the prototype stage because founders underestimate how much domain expertise goes into building something users actually pay for — intuitive UX, reliable infrastructure, secure authentication, scalable billing, and the dozens of product decisions that determine whether users stay or churn after week one.",
+      "At Boomy Marketing, our SaaS development practice is led by engineers who have built and shipped their own products — not just client work. We know what makes a product sticky, what makes it fail, and how to get you to paying customers as quickly as possible without cutting corners that cost you later."
+    ],
+    "whatIsCards": [
+      {
+        "icon": "",
+        "title": "Recurring revenue compounds",
+        "text": "SaaS businesses with strong retention grow MRR exponentially — each retained customer adds to the base for next month."
+      },
+      {
+        "icon": "",
+        "title": "Scale without headcount",
+        "text": "Serve 10 or 10,000 customers with the same core infrastructure — your margins improve as you grow."
+      },
+      {
+        "icon": "",
+        "title": "Valuable exit multiples",
+        "text": "SaaS businesses command 5-15x ARR in acquisitions — far above traditional service businesses."
+      }
+    ],
+    "servicesSectionLabel": "What We Build",
+    "servicesSectionTitle": "Our SaaS Development Services",
+    "servicesSectionSub": "End-to-end product expertise from napkin sketch to production-ready platform.",
+    "cards": [
+      {
+        "icon": "&#128269;",
+        "title": "Product Discovery & Strategy",
+        "text": "We facilitate structured discovery workshops to define your target user, core job-to-be-done, MVP feature set, technical architecture, and go-to-market plan. You leave with a clear product brief, not just a features list."
+      },
+      {
+        "icon": "&#127912;",
+        "title": "UX/UI Design",
+        "text": "User research, information architecture, wireframes, and pixel-perfect UI in Figma — designed for conversion, retention, and delight. We test critical flows with real users before a single line of code is written."
+      },
+      {
+        "icon": "&#128187;",
+        "title": "Full-Stack Engineering",
+        "text": "We build on modern, maintainable stacks: Next.js, React, Node.js, Python, PostgreSQL, Redis. Clean code with full test coverage, CI/CD pipelines, and documentation so you're never held hostage to one developer."
+      },
+      {
+        "icon": "&#128176;",
+        "title": "Billing & Subscription Infrastructure",
+        "text": "Stripe integration with subscription plans, usage-based billing, trial management, coupon codes, invoice generation, and revenue analytics. Getting billing right from day one prevents months of refactoring later."
+      },
+      {
+        "icon": "&#128274;",
+        "title": "Auth & Multi-Tenancy",
+        "text": "Secure authentication (Auth0 or custom JWT), role-based access control, SSO/SAML for enterprise customers, and multi-tenant data isolation — built to compliance standards from the start."
+      },
+      {
+        "icon": "&#9729;&#65039;",
+        "title": "Cloud Infrastructure & DevOps",
+        "text": "AWS or GCP deployment with auto-scaling, CDN, managed databases, automated backups, uptime monitoring, and zero-downtime deployments. Your product stays up when it matters most."
+      }
+    ],
+    "processLabel": "How It Works",
+    "processTitle": "Our SaaS Development Process",
+    "processSub": "From idea to paying customers in a structured, milestone-driven engagement.",
+    "steps": [
+      {
+        "num": "1",
+        "title": "Discovery Sprint",
+        "text": "Two-week intensive: user research, competitive analysis, technical scoping, architecture decisions, and MVP roadmap with prioritised feature set."
+      },
+      {
+        "num": "2",
+        "title": "Design & Prototype",
+        "text": "UX flows, wireframes, and high-fidelity UI. We prototype the critical user journeys and validate with real users before committing to build."
+      },
+      {
+        "num": "3",
+        "title": "MVP Engineering",
+        "text": "Agile two-week sprints with daily standups, weekly demos, and a shared project board so you always know what's built and what's next."
+      },
+      {
+        "num": "4",
+        "title": "Launch & Iterate",
+        "text": "Staged rollout, performance monitoring, user feedback collection, and rapid iteration based on real usage data to drive towards product-market fit."
+      }
+    ],
+    "resultsLabel": "Proven Results",
+    "resultsTitle": "SaaS Products We've Helped Build and Launch",
+    "resultsSub": "Real outcomes from real product engagements.",
+    "results": [
+      {
+        "num": "30+",
+        "label": "SaaS products launched for Canadian founders"
+      },
+      {
+        "num": "12 wk",
+        "label": "Average MVP-to-launch timeline"
+      },
+      {
+        "num": "94%",
+        "label": "Of MVPs achieve first paying customer within 30 days of launch"
+      }
+    ],
+    "faqLabel": "Common Questions",
+    "faqTitle": "SaaS Development FAQ",
+    "faqs": [
+      {
+        "q": "How long does it take to build a SaaS MVP?",
+        "a": "A focused MVP with core functionality typically takes 8-14 weeks from discovery to launch. The timeline depends on feature scope, third-party integrations, and your feedback cadence. We prioritise shipping a working product that validates your market hypothesis over a feature-complete release."
+      },
+      {
+        "q": "Do you handle both design and development?",
+        "a": "Yes. Our in-house team covers product strategy, UX/UI design, front-end and back-end engineering, database architecture, cloud infrastructure, and QA testing. You work with one team through the entire product lifecycle."
+      },
+      {
+        "q": "What tech stack do you use for SaaS products?",
+        "a": "We build on battle-tested stacks suited to your product requirements: Next.js or React for front-end, Node.js or Python for back-end, PostgreSQL or MongoDB for data, and AWS or GCP for infrastructure. We integrate Stripe for billing, Auth0 for authentication, and standard SaaS tooling for analytics and onboarding."
+      },
+      {
+        "q": "Can you help us after launch?",
+        "a": "Absolutely. We offer ongoing retainer support covering feature development, performance optimisation, bug fixes, infrastructure scaling, and product analytics. Many clients keep us as their embedded engineering team through the growth phase."
+      },
+      {
+        "q": "How much does SaaS development cost in Toronto?",
+        "a": "SaaS product development is scoped per project. MVPs typically start at $25,000 CAD and scale depending on complexity. We also offer ongoing engineering retainers starting at $3,500 CAD/month as part of our Growth plan. Contact us for a detailed estimate based on your product vision."
+      }
+    ],
+    "ctaH2": "Ready to Turn Your SaaS Idea into a Real Product?",
+    "ctaP": "Book a free product discovery call and leave with a clear scope, timeline, and budget estimate.",
+    "ctaBtn1": {
+      "text": "Book Discovery Call ->",
+      "href": "https://boomymarketing.com/contact.html"
+    },
+    "ctaBtn2": {
+      "text": "View Pricing Plans",
+      "href": "https://boomymarketing.com/pricing.html"
+    }
+  },
+  {
+    "slug": "social-media",
+    "title": "Social Media Marketing Toronto — Management | Boomy",
+    "metaDescription": "Social media management and marketing for Toronto businesses. Content creation, community management, growth strategy, and analytics across Instagram, LinkedIn.",
+    "canonical": "https://boomymarketing.com/services/social-media",
+    "heroBadge": "&#128247; Social Media Management",
+    "heroH1": "Social Media That <span>Builds Your Brand and Drives Revenue</span>",
+    "heroP": "Inconsistent posting, generic content, and zero strategy are the silent killers of social media ROI. We manage your social presence end-to-end — from platform strategy and content creation to community management and performance analytics — so your brand shows up consistently and compellingly where your audience spends their time.",
+    "heroStats": [
+      {
+        "num": "6.8x",
+        "label": "Average engagement increase in 90 days"
+      },
+      {
+        "num": "127%",
+        "label": "Average follower growth year one"
+      },
+      {
+        "num": "5",
+        "label": "Platforms actively managed"
+      }
+    ],
+    "heroVisualItems": [],
+    "whatIsLabel": "What We Manage",
+    "whatIsTitle": "Complete Social Media Management for Toronto Businesses",
+    "whatIsText": [
+      "Every platform. Every content format. Every aspect of your social presence, handled professionally."
+    ],
+    "whatIsCards": [],
+    "servicesSectionLabel": "What We Manage",
+    "servicesSectionTitle": "Complete Social Media Management for Toronto Businesses",
+    "servicesSectionSub": "Every platform. Every content format. Every aspect of your social presence, handled professionally.",
+    "cards": [
+      {
+        "icon": "&#128247;",
+        "title": "Instagram Management",
+        "text": "Feed posts, Reels, Stories, and carousel content designed for the Instagram algorithm. We develop a cohesive visual aesthetic, write engaging captions, use strategic hashtag research, and build genuine community through consistent engagement with your followers and target audience."
+      },
+      {
+        "icon": "&#128188;",
+        "title": "LinkedIn Management",
+        "text": "Thought leadership content, company page management, and personal brand building for executives. LinkedIn drives B2B lead generation at a scale no other organic channel matches. We create content that positions your brand as the authoritative voice in your industry and generates inbound inquiry."
+      },
+      {
+        "icon": "&#127911;",
+        "title": "TikTok Management",
+        "text": "Short-form vertical video strategy and content creation for brands targeting audiences under 45. TikTok's algorithm offers organic reach opportunities that far exceed any other platform — a well-crafted video can reach tens of thousands of your ideal customers with zero ad spend."
+      },
+      {
+        "icon": "&#128250;",
+        "title": "YouTube & Shorts",
+        "text": "Long-form video strategy and YouTube Shorts content that builds a searchable video library for your brand. YouTube content has exceptional longevity — videos rank in Google search and continue attracting views for years after publication, making it a compounding content asset."
+      },
+      {
+        "icon": "&#127760;",
+        "title": "Facebook Management",
+        "text": "Page management, group building, event promotion, and community engagement for brands with Facebook-active audiences. Particularly effective for local Toronto businesses, B2C brands targeting 35+ demographics, and community-oriented businesses like restaurants, fitness studios, and event venues."
+      },
+      {
+        "icon": "&#128200;",
+        "title": "Analytics & Reporting",
+        "text": "Monthly reports cover follower growth, reach, impressions, engagement rate, story views, and direct business outcomes (website clicks, DMs, profile visits). We analyse what content performs and continuously refine strategy based on real audience behaviour data."
+      }
+    ],
+    "processLabel": "",
+    "processTitle": "",
+    "processSub": "",
+    "steps": [],
+    "resultsLabel": "",
+    "resultsTitle": "",
+    "resultsSub": "",
+    "results": [],
+    "faqLabel": "FAQ",
+    "faqTitle": "Social Media Marketing Frequently Asked Questions",
+    "faqs": [
+      {
+        "q": "Which social media platforms do you manage?",
+        "a": "We manage Instagram, LinkedIn, Facebook, TikTok, YouTube (including Shorts), Pinterest, and X. We'll recommend the right platform mix based on where your target audience actually spends time — not just popular platforms. Most clients focus on 2-3 platforms to build genuine depth rather than spreading thin across every channel simultaneously."
+      },
+      {
+        "q": "How often will you post on our social media accounts?",
+        "a": "Posting frequency depends on your package and platform. Typical management includes 3-5 feed posts per week per platform plus daily or near-daily Stories on Instagram. We prioritise quality and consistency — a strong post 4 times per week outperforms a mediocre post every day, and the algorithm rewards accounts with consistent engagement, not just volume."
+      },
+      {
+        "q": "Do you create the content, or do we need to provide it?",
+        "a": "We handle end-to-end content creation — copywriting, graphic design, video editing, and caption writing. We work from your brand guidelines and do quarterly content briefings. If you have existing photography or video assets, we incorporate those into our content planning. You approve all content before it goes live through our collaborative approval system."
+      },
+      {
+        "q": "How long does it take to see results from social media management?",
+        "a": "Organic social media growth takes time. Expect 3-6 months of consistent, quality content before meaningful audience growth and engagement benchmarks are established. Accounts with an existing base often see faster results. For faster growth, we recommend combining organic social management with paid Meta Ads and influencer partnerships — our integrated approach accelerates results significantly."
+      },
+      {
+        "q": "How do you measure social media success?",
+        "a": "We track platform metrics (follower growth, reach, impressions, engagement rate, video views, saves and shares) alongside business outcomes (website clicks, lead form submissions, DMs). Monthly reports include all key metrics with trend analysis and strategic recommendations — benchmarked against your industry, not just your own historical performance."
+      }
+    ],
+    "ctaH2": "Ready for a Social Media Presence That Actually Grows Your Business?",
+    "ctaP": "Get a free social media audit. We'll review your current profiles, identify what's working, and show you exactly what's holding your growth back.",
+    "ctaBtn1": {
+      "text": "Get Free Social Audit ->",
+      "href": "https://boomymarketing.com/contact.html"
+    },
+    "ctaBtn2": {
+      "text": "See Content Marketing",
+      "href": "https://boomymarketing.com/services/content-marketing.html"
+    }
+  },
+  {
+    "slug": "voice-ai",
+    "title": "Voice AI Solutions Toronto — AI Phone Agents | Boomy",
+    "metaDescription": "AI voice agents and phone systems for Toronto businesses. 24/7 AI receptionist, automated appointment booking, inbound call handling, and outbound voice campaigns.",
+    "canonical": "https://boomymarketing.com/services/voice-ai",
+    "heroBadge": "&#128222; AI Voice Agents",
+    "heroH1": "AI Phone Agents That <span>Answer, Qualify &amp; Book 24/7</span>",
+    "heroP": "Every missed call is a missed opportunity. Our AI voice agents handle inbound calls around the clock — answering questions, qualifying leads, booking appointments, and routing complex issues to your team — with natural, brand-aligned conversation that callers actually enjoy. Deploy your AI receptionist in 2-3 weeks.",
+    "heroStats": [
+      {
+        "num": "24/7",
+        "label": "Always-on call handling"
+      },
+      {
+        "num": "92%",
+        "label": "Caller satisfaction rate"
+      },
+      {
+        "num": "70%",
+        "label": "Cost saving vs. human receptionist"
+      }
+    ],
+    "heroVisualItems": [],
+    "whatIsLabel": "The Problem We Solve",
+    "whatIsTitle": "How Many Calls Is Your Business Missing Right Now?",
+    "whatIsText": [
+      "Research shows that 85% of callers whose calls go unanswered will not call back — they'll simply contact a competitor. For most Toronto businesses, this represents enormous lost revenue. Yet hiring dedicated reception staff costs $45,000-$65,000 CAD per year per person, and even then, calls after hours, during lunch, and on weekends go unanswered.",
+      "AI voice agents solve this entirely. They answer every call instantly, handle the majority of inquiries completely autonomously, and seamlessly hand off to a human when genuinely needed — all for a fraction of the cost of even part-time reception staff. For businesses in healthcare, legal, real estate, home services, and hospitality, Voice AI is now a competitive necessity, not a luxury."
+    ],
+    "whatIsCards": [],
+    "servicesSectionLabel": "The Problem We Solve",
+    "servicesSectionTitle": "How Many Calls Is Your Business Missing Right Now?",
+    "servicesSectionSub": "",
+    "cards": [
+      {
+        "icon": "&#128222;",
+        "title": "AI Inbound Receptionist",
+        "text": "A fully conversational AI that answers your business phone, greets callers professionally, understands their needs, and provides accurate information from your knowledge base. Handles FAQs, business hours, directions, service inquiries, pricing questions, and more — without putting callers on hold."
+      },
+      {
+        "icon": "&#128197;",
+        "title": "Appointment Booking Agent",
+        "text": "AI that checks your real-time calendar availability and books appointments directly during the call — integrating with Calendly, Acuity, Google Calendar, and most scheduling systems. Sends confirmation and reminder messages automatically. Zero double-bookings, zero no-shows from poor communication."
+      },
+      {
+        "icon": "&#127919;",
+        "title": "Lead Qualification Agent",
+        "text": "An AI that conducts a structured discovery conversation with inbound callers — asking qualification questions, scoring lead quality, and routing high-value opportunities to your sales team in real time while handling lower-priority inquiries autonomously. Never waste a salesperson's time on unqualified leads."
+      },
+      {
+        "icon": "&#128172;",
+        "title": "Outbound Voice Campaigns",
+        "text": "AI-powered outbound calling for appointment reminders, payment follow-ups, customer satisfaction surveys, re-engagement campaigns, and event invitations. Reach hundreds of contacts per hour with personalised, natural-sounding conversations at a cost no human calling team can match."
+      },
+      {
+        "icon": "&#128274;",
+        "title": "After-Hours Coverage",
+        "text": "Capture leads and serve customers outside business hours. Your AI agent handles all after-hours calls, collects contact details, logs inquiries in your CRM, and sends automatic summaries to your team each morning — so no opportunity is ever lost to a closed sign."
+      },
+      {
+        "icon": "&#128202;",
+        "title": "Call Analytics & Transcription",
+        "text": "Every call is automatically transcribed, summarised, and logged to your CRM. Track call volume, common questions, booking rates, and sentiment trends. Use real caller data to continuously improve your products, services, and AI agent responses over time."
+      }
+    ],
+    "processLabel": "Our Process",
+    "processTitle": "How We Deploy Your AI Voice Agent",
+    "processSub": "",
+    "steps": [
+      {
+        "num": "1",
+        "title": "Discovery",
+        "text": "We map your typical call types, common questions, escalation scenarios, and business rules — everything the AI needs to handle calls the way your best receptionist would."
+      },
+      {
+        "num": "2",
+        "title": "Voice & Persona Design",
+        "text": "We select the voice, accent, and conversational style that fits your brand. Your AI agent gets a name, personality, and tone guidelines aligned with how your business speaks."
+      },
+      {
+        "num": "3",
+        "title": "Knowledge Base Build",
+        "text": "We compile and structure your business information — services, pricing, hours, policies, FAQs — into the AI's knowledge base so it can answer questions accurately."
+      },
+      {
+        "num": "4",
+        "title": "Integration Setup",
+        "text": "We connect your AI agent to your phone system, CRM, calendar, and any other relevant tools. Call logs and bookings flow automatically into your existing workflow."
+      },
+      {
+        "num": "5",
+        "title": "Testing & Refinement",
+        "text": "We conduct dozens of test call scenarios — including edge cases and difficult callers — and refine responses until the agent performs to your satisfaction before going live."
+      },
+      {
+        "num": "6",
+        "title": "Launch & Optimise",
+        "text": "Go live with monitoring and weekly review of call transcripts during the first month. We continuously refine the agent based on real call data to improve performance over time."
+      }
+    ],
+    "resultsLabel": "",
+    "resultsTitle": "",
+    "resultsSub": "",
+    "results": [],
+    "faqLabel": "FAQ",
+    "faqTitle": "Voice AI Frequently Asked Questions",
+    "faqs": [
+      {
+        "q": "How realistic does the AI voice agent sound?",
+        "a": "Modern AI voice agents built on platforms like ElevenLabs, Deepgram, and Cartesia produce voices that are highly natural — with appropriate pacing, pauses, and tone variation that closely mirrors human speech. We customise the voice, accent, and personality to match your brand. All agents comply with call disclosure requirements where legally mandated under Canadian telecommunications regulations."
+      },
+      {
+        "q": "What can an AI phone agent actually do?",
+        "a": "AI voice agents can answer inbound calls 24/7, greet callers by name when their number is recognised, answer FAQs from your knowledge base, collect caller information, qualify leads, book appointments directly into your calendar, transfer calls to staff when needed, take messages, and trigger follow-up texts or emails after the call. They handle the majority of call types completely autonomously."
+      },
+      {
+        "q": "Will it work with my existing phone system?",
+        "a": "Yes. We integrate with most VoIP and business phone systems including RingCentral, 8x8, Vonage, Twilio, and standard SIP-based systems. We can also provision a new dedicated phone number or configure call forwarding from your existing number. Integration typically takes 1-2 weeks from kickoff to live deployment."
+      },
+      {
+        "q": "What happens when a caller needs to speak to a human?",
+        "a": "We configure intelligent escalation rules. The AI can seamlessly transfer calls to a live team member when requested or when it detects situations it cannot resolve — complex complaints, urgent issues, or high-value prospects. After-hours escalations go to voicemail with an immediate transcription emailed to the relevant person so nothing is missed the next morning."
+      },
+      {
+        "q": "Is Voice AI compliant with Canadian privacy laws?",
+        "a": "Yes. We build all voice AI systems in compliance with PIPEDA and applicable provincial privacy legislation. This includes call recording disclosures, appropriate data retention policies, and handling data deletion requests. Call transcripts and personal information are stored securely and never sold to third parties. We advise on all compliance requirements during onboarding."
+      }
+    ],
+    "ctaH2": "Hear Your AI Agent in Action",
+    "ctaP": "Call our demo line and experience what your AI receptionist could sound and feel like for your customers. Then let's talk about building yours.",
+    "ctaBtn1": {
+      "text": "Request a Live Demo ->",
+      "href": "https://boomymarketing.com/contact.html"
+    },
+    "ctaBtn2": {
+      "text": "See AI Automations",
+      "href": "https://boomymarketing.com/services/ai-automations.html"
+    }
+  },
+  {
+    "slug": "web-design",
+    "title": "Web Design Toronto — Fast Converting Websites | Boomy",
+    "metaDescription": "Toronto web design agency building fast, beautiful, high-converting websites. Custom design, CMS development, e-commerce, and landing pages that grow your business.",
+    "canonical": "https://boomymarketing.com/services/web-design",
+    "heroBadge": "&#127760; Web Design & Development",
+    "heroH1": "Websites That <span>Convert Visitors Into Customers</span>",
+    "heroP": "A great website does two things: it earns trust and it drives action. We design and develop custom websites for Toronto businesses that load fast, rank on Google, look exceptional on every device, and convert visitors at industry-beating rates — because beautiful design and performance are not trade-offs.",
+    "heroStats": [
+      {
+        "num": "2.4s",
+        "label": "Average page load time we deliver"
+      },
+      {
+        "num": "47%",
+        "label": "Average conversion rate improvement"
+      },
+      {
+        "num": "100",
+        "label": "Target Google PageSpeed score"
+      }
+    ],
+    "heroVisualItems": [],
+    "whatIsLabel": "Why Your Website Matters",
+    "whatIsTitle": "Your Website Is Your Most Important Sales Asset",
+    "whatIsText": [
+      "In Toronto's competitive market, your website is often the first — and sometimes only — impression a potential customer has of your business. Research consistently shows that 75% of people judge a company's credibility based on its website design, and 53% of mobile visitors abandon a page that takes more than three seconds to load. A slow, outdated, or poorly structured website doesn't just fail to convert — it actively drives customers to your competitors.",
+      "We build websites engineered for the full visitor journey: capturing attention, communicating your value proposition clearly, building trust through social proof and professional design, and making it effortless for visitors to take the next step — whether that's booking a call, making a purchase, or submitting a lead form."
+    ],
+    "whatIsCards": [],
+    "servicesSectionLabel": "Why Your Website Matters",
+    "servicesSectionTitle": "Your Website Is Your Most Important Sales Asset",
+    "servicesSectionSub": "",
+    "cards": [
+      {
+        "icon": "&#127760;",
+        "title": "Corporate & Business Websites",
+        "text": "Professional multi-page websites that position your brand credibly, communicate your services clearly, and give potential clients everything they need to choose you with confidence. Designed for B2B and service businesses across Toronto's competitive market."
+      },
+      {
+        "icon": "&#128722;",
+        "title": "E-commerce Websites",
+        "text": "Shopify and custom e-commerce builds optimised for high conversion rates. We focus on product discovery, friction-free checkout flows, mobile shopping experience, and post-purchase sequences that maximise lifetime customer value."
+      },
+      {
+        "icon": "&#128640;",
+        "title": "Landing Pages & Funnels",
+        "text": "Standalone conversion pages built for specific campaigns, paid traffic, or product launches. Every element — headline, layout, social proof, CTA — is strategically placed to maximise the conversion rate for a single, specific goal."
+      },
+      {
+        "icon": "&#9999;&#65039;",
+        "title": "Content & Blog Sites",
+        "text": "Content-driven websites designed to attract organic traffic and establish thought leadership. Built with SEO architecture from the ground up — proper URL structure, internal linking, schema, and a CMS that makes publishing new content fast and friction-free."
+      },
+      {
+        "icon": "&#128203;",
+        "title": "Web Applications",
+        "text": "Custom web app development for client portals, booking systems, directory sites, SaaS dashboards, and other interactive applications that require custom functionality beyond what standard CMS platforms can provide."
+      },
+      {
+        "icon": "&#128260;",
+        "title": "Redesign & Optimisation",
+        "text": "Already have a website? We audit, redesign, and optimise existing sites for speed, conversions, and SEO. Often more cost-effective than building from scratch — with immediate measurable impact on your existing traffic."
+      }
+    ],
+    "processLabel": "Our Process",
+    "processTitle": "Our Web Design & Development Process",
+    "processSub": "",
+    "steps": [
+      {
+        "num": "1",
+        "title": "Discovery",
+        "text": "We learn your business, audience, competitors, and goals. We audit your current site if one exists and define clear success metrics before designing anything."
+      },
+      {
+        "num": "2",
+        "title": "Strategy & UX",
+        "text": "Site architecture, user journey mapping, content hierarchy, and conversion flow design — the strategic blueprint that guides every subsequent design decision."
+      },
+      {
+        "num": "3",
+        "title": "Design",
+        "text": "High-fidelity mockups in Figma for all key pages. You review and provide feedback before a single line of code is written — ensuring the design is exactly right."
+      },
+      {
+        "num": "4",
+        "title": "Development",
+        "text": "Clean, semantic code built to your approved designs. We build on the agreed platform (WordPress, Webflow, Shopify, or custom) with performance and security as core priorities."
+      },
+      {
+        "num": "5",
+        "title": "QA & Testing",
+        "text": "Cross-browser testing, mobile device testing, form testing, speed optimisation, and final SEO audit before anything goes live. No launches without sign-off."
+      },
+      {
+        "num": "6",
+        "title": "Launch & Support",
+        "text": "Seamless launch with DNS management, redirect setup, and GA4 configuration. Post-launch support and training so you can manage your site with confidence."
+      }
+    ],
+    "resultsLabel": "",
+    "resultsTitle": "",
+    "resultsSub": "",
+    "results": [],
+    "faqLabel": "FAQ",
+    "faqTitle": "Web Design Frequently Asked Questions",
+    "faqs": [
+      {
+        "q": "How much does a website cost in Toronto?",
+        "a": "Website costs vary by complexity. A professional brochure website typically ranges from $3,500-$8,000 CAD. E-commerce sites range from $6,000-$25,000+. Custom web applications start from $15,000. All projects are quoted on a fixed-price basis after a scoping call — no surprises or scope creep billing."
+      },
+      {
+        "q": "How long does it take to build a website?",
+        "a": "A standard business website takes 4-8 weeks from kickoff to launch. E-commerce projects typically take 6-12 weeks. Timeline depends on the number of pages, custom functionality required, and how quickly you can provide content and approvals. We provide a detailed project schedule with clear milestones at project start."
+      },
+      {
+        "q": "Do you build on WordPress, Webflow, or custom code?",
+        "a": "We build on the platform that best suits your needs. WordPress for content-heavy sites and clients who want easy self-management. Webflow for pixel-perfect design control with a visual CMS. Shopify for e-commerce. Custom HTML/CSS/JS for maximum performance. We'll recommend the right choice based on your specific requirements, technical comfort level, and long-term maintenance needs."
+      },
+      {
+        "q": "Is SEO included in the website build?",
+        "a": "Yes — SEO fundamentals are built into every site: clean semantic HTML, fast page loads, proper heading hierarchy, meta tag framework, schema markup, XML sitemap, robots.txt, mobile responsiveness, and Core Web Vitals optimisation. We build the technical SEO foundation; our ongoing SEO service builds the content and authority on top of it."
+      },
+      {
+        "q": "Will I be able to update the website myself?",
+        "a": "Absolutely. We build with user-friendly CMS platforms and provide training so you can update text, images, blog posts, and products independently. For clients who prefer full hands-off management, we offer ongoing content updates as part of our marketing retainers — whatever works best for your team."
+      }
+    ],
+    "ctaH2": "Ready for a Website That Works as Hard as You Do?",
+    "ctaP": "Get a free website audit. We'll analyse your current site and show you exactly what's costing you conversions.",
+    "ctaBtn1": {
+      "text": "Get Free Website Audit ->",
+      "href": "https://boomymarketing.com/contact.html"
+    },
+    "ctaBtn2": {
+      "text": "View Pricing",
+      "href": "https://boomymarketing.com/pricing.html"
+    }
+  }
+]
