@@ -1,0 +1,248 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact Boomy Marketing Agency',
+    description: 'Book a free 30-minute strategy call or send us a message. We respond within 1 business day.',
+    url: 'https://boomymarketing.com/contact/',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'MarketingAgency',
+    name: 'Boomy Marketing Agency',
+    telephone: '+16473701888',
+    email: 'care@boomymarketing.com',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '240 Richmond St W',
+      addressLocality: 'Toronto',
+      addressRegion: 'ON',
+      postalCode: 'M5V 1V6',
+      addressCountry: 'CA',
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'],
+      opens: '09:00',
+      closes: '18:00',
+    },
+  },
+];
+---
+
+<BaseLayout
+  title="Contact Boomy Marketing Agency | Book a Free Strategy Call"
+  description="Book a free 30-minute strategy call or send us a message. We'll audit your marketing, find your biggest growth opportunities, and show you exactly what Boomy can do — at no cost."
+  canonical="https://boomymarketing.com/contact/"
+  schema={schema}
+>
+  <Nav />
+
+  <main id="main-content">
+    <section class="page-hero" aria-labelledby="contact-heading">
+      <div class="page-hero-inner">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a><span>/</span><span aria-current="page">Contact</span>
+        </nav>
+        <div class="section-label reveal">📞 Let's Talk</div>
+        <h1 id="contact-heading" class="reveal">
+          Book Your Free<br />
+          <span class="gradient-text">30-Minute Strategy Call</span>
+        </h1>
+        <p class="reveal">We'll audit your current marketing, find your biggest growth levers, and show you exactly what Boomy can do for your business — at no cost and no obligation.</p>
+      </div>
+    </section>
+
+    <section class="contact-section" aria-labelledby="contact-form-heading">
+      <div class="contact-inner">
+        <div class="contact-info reveal-left">
+          <h2 id="contact-form-heading">Get in <span class="gradient-text">Touch</span></h2>
+          <p>We respond to every enquiry within one business day. Prefer to talk directly? Call us or book a time below.</p>
+
+          <div class="info-card">
+            <div class="info-icon">📍</div>
+            <div>
+              <div class="info-label">Office Address</div>
+              <div class="info-value">240 Richmond St W<br />Toronto, ON M5V 1V6, Canada</div>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon">📞</div>
+            <div>
+              <div class="info-label">Phone</div>
+              <div class="info-value"><a href="tel:+16473701888">(647) 370-1888</a></div>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon">✉️</div>
+            <div>
+              <div class="info-label">Email</div>
+              <div class="info-value"><a href="mailto:care@boomymarketing.com">care@boomymarketing.com</a></div>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon">🕒</div>
+            <div>
+              <div class="info-label">Office Hours</div>
+              <div class="info-value">Monday – Friday<br />9:00 AM – 6:00 PM ET</div>
+            </div>
+          </div>
+
+          <div class="cta-call-card">
+            <h3>📅 Book a Strategy Call</h3>
+            <p>30 minutes. No fluff. We'll show you your top 3 growth opportunities and give you a custom action plan — completely free.</p>
+            <a
+              href="https://calendly.com/boomymarketing"
+              class="btn btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="width:100%;border-radius:var(--r-md);"
+            >Book on Calendly →</a>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap reveal-right">
+          <div class="form-title">Send Us a Message</div>
+          <div class="form-sub">Tell us about your business and goals. We'll be in touch within 1 business day.</div>
+
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="fname">First Name <span class="req">*</span></label>
+                <input class="form-input" type="text" id="fname" name="fname" placeholder="Marcus" required autocomplete="given-name" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="lname">Last Name <span class="req">*</span></label>
+                <input class="form-input" type="text" id="lname" name="lname" placeholder="Taylor" required autocomplete="family-name" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="email">Email <span class="req">*</span></label>
+                <input class="form-input" type="email" id="email" name="email" placeholder="marcus@company.com" required autocomplete="email" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone</label>
+                <input class="form-input" type="tel" id="phone" name="phone" placeholder="(647) 370-1888" autocomplete="tel" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="service">Service Interested In <span class="req">*</span></label>
+              <select class="form-select form-input" id="service" name="service" required>
+                <option value="" disabled selected>Select a service...</option>
+                <option value="seo">SEO &amp; AI SEO</option>
+                <option value="ecommerce-seo">E-commerce SEO (Shopify / WooCommerce)</option>
+                <option value="geo">GEO — Generative Engine Optimization</option>
+                <option value="google-ads">Google Ads Management</option>
+                <option value="meta-ads">Meta Ads (Facebook + Instagram)</option>
+                <option value="ai-automations">AI Automations</option>
+                <option value="ai-development">AI Development</option>
+                <option value="web-design">Web Design &amp; Development</option>
+                <option value="saas">SaaS Product Development</option>
+                <option value="voice-ai">Voice AI Agents</option>
+                <option value="email-marketing">Email Marketing</option>
+                <option value="ai-outbound">AI Outbound / AI SDR</option>
+                <option value="social-media">Social Media Marketing</option>
+                <option value="content-marketing">Content Marketing</option>
+                <option value="ppc">PPC &amp; Paid Search</option>
+                <option value="multiple">Multiple Services / Not Sure</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="budget">Monthly Budget (CAD) <span class="req">*</span></label>
+              <select class="form-select form-input" id="budget" name="budget" required>
+                <option value="" disabled selected>Select budget range...</option>
+                <option value="under-1500">Under $1,500/mo</option>
+                <option value="1500-3500">$1,500 – $3,500/mo</option>
+                <option value="3500-7500">$3,500 – $7,500/mo</option>
+                <option value="7500-15000">$7,500 – $15,000/mo</option>
+                <option value="15000plus">$15,000+/mo</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="message">Tell Us About Your Goals <span class="req">*</span></label>
+              <textarea
+                class="form-textarea"
+                id="message"
+                name="message"
+                placeholder="What are you trying to achieve? What is your biggest marketing challenge right now?"
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-consent">
+              <input type="checkbox" id="consent" name="consent" required />
+              <label for="consent">
+                I agree to receive marketing communications from Boomy Marketing. I understand I can unsubscribe at any time. View our
+                <a href="/privacy-policy" style="color:var(--accent-orange)">Privacy Policy</a>.
+              </label>
+            </div>
+
+            <button type="submit" class="form-submit">Send My Message — It's Free</button>
+          </form>
+
+          <div class="success-msg" id="successMsg" role="status" aria-live="polite">
+            <div class="success-icon">✅</div>
+            <h3 style="margin-bottom:8px">Message Sent!</h3>
+            <p style="color:var(--text-sec)">We'll be in touch within 1 business day. Check your inbox for a confirmation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-section" aria-label="Office location map">
+      <div class="map-inner">
+        <h2 style="text-align:center;font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:32px;">
+          Find Us in <span class="gradient-text">Downtown Toronto</span>
+        </h2>
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2887.031!2d-79.3905!3d43.6496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s240+Richmond+St+W+Toronto!5e0!3m2!1sen!2sca!4v1710000000000"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Boomy Marketing office at 240 Richmond St W, Toronto"
+            aria-label="Google Maps showing Boomy Marketing office location in Toronto"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('contactForm') as HTMLFormElement | null;
+  const successMsg = document.getElementById('successMsg');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const data = Object.fromEntries(new FormData(form));
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        if (successMsg) successMsg.style.display = 'block';
+      }
+    } catch {
+      // fail silently — user sees the form still
+    }
+  });
+</script>

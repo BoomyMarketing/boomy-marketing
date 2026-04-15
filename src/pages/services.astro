@@ -1,0 +1,299 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
+
+const serviceCards = [
+  {
+    href: '/local/toronto/seo-agency/',
+    icon: '🔍',
+    name: 'SEO & AI SEO',
+    desc: 'Technical SEO, topical authority, and AI-assisted content strategy that dominates Google rankings in Canadian markets. We build organic visibility that compounds month over month — turning Google into your highest-ROI lead source.',
+    metric: 'Avg. +187% organic traffic in 6 months',
+  },
+  {
+    href: '/services/ecommerce-seo',
+    icon: '🛒',
+    name: 'E-commerce SEO',
+    desc: 'Shopify, WooCommerce & BigCommerce SEO that grows organic revenue — not just rankings. Product page optimization, category architecture, schema markup, and link building for Canadian online stores.',
+    metric: '312% avg organic traffic growth in 6 months',
+  },
+  {
+    href: '/local/toronto/seo-agency/',
+    icon: '🧠',
+    name: 'GEO — Generative Engine Optimization',
+    desc: 'Optimize your brand to appear in AI-generated answers from ChatGPT, Google AI Mode, and Perplexity. In 2026, 93% of AI searches end without a click — unless your brand is the answer. We make sure it is.',
+    metric: 'Cited in AI Overviews & ChatGPT answers',
+  },
+  {
+    href: '/local/toronto/google-ads-agency/',
+    icon: '🎯',
+    name: 'Google Ads Management',
+    desc: 'Search, Shopping, Display, and Performance Max campaigns managed by certified Google Ads experts. We don\'t just set up campaigns — we optimize them weekly to squeeze maximum return from every dollar of ad spend.',
+    metric: 'Average 4–8x ROAS for Canadian clients',
+  },
+  {
+    href: '/local/toronto/digital-marketing-agency/',
+    icon: '📱',
+    name: 'Meta Ads',
+    desc: 'Facebook and Instagram advertising that finds your ideal Canadian customer and converts them efficiently. Creative testing, audience segmentation, and full-funnel campaigns — from cold traffic to loyal buyers.',
+    metric: '3.2x average ROAS across Meta campaigns',
+  },
+  {
+    href: '/local/toronto/ai-automation-agency/',
+    icon: '🤖',
+    name: 'AI Automations',
+    desc: 'Automate lead follow-up, onboarding, reporting, and customer communication with custom AI workflows. Our clients recover an average of 15+ hours per week that were previously spent on repetitive tasks.',
+    metric: '15+ hrs/week saved per client on average',
+  },
+  {
+    href: '/local/toronto/ai-development-company/',
+    icon: '🔧',
+    name: 'AI Development',
+    desc: 'Custom AI agents, LLM integrations, and bespoke AI tools built for your specific business needs. From intelligent chatbots to complex agentic workflows — we engineer everything in-house, without third-party templates.',
+    metric: 'Built on GPT-4o, Claude & Gemini APIs',
+  },
+  {
+    href: '/local/toronto/web-design-company/',
+    icon: '🌐',
+    name: 'Web Design & Development',
+    desc: 'Conversion-optimized websites that load fast, look incredible, and turn visitors into leads. Every design is tested against real user behaviour, Core Web Vitals standards, and your specific business conversion goals.',
+    metric: 'Sub-2s load time. Core Web Vitals green.',
+  },
+  {
+    href: '/local/toronto/digital-marketing-agency/',
+    icon: '📦',
+    name: 'SaaS Product Development',
+    desc: 'From MVP to market-ready SaaS product. We design, build, and launch software products with a growth-first architecture — built to scale from day one, with built-in analytics and conversion tracking.',
+    metric: 'MVP to launch in 8–12 weeks',
+  },
+  {
+    href: '/local/toronto/ai-automation-agency/',
+    icon: '🎙️',
+    name: 'Voice AI Agents',
+    desc: 'Deploy intelligent voice agents that handle inbound calls, qualify leads, book appointments, and answer FAQs — 24/7, without hiring more staff. Our voice AI integrates with your CRM and calendar in days, not months.',
+    metric: '24/7 call handling — zero missed leads',
+  },
+  {
+    href: '/local/toronto/email-marketing-agency/',
+    icon: '📧',
+    name: 'Email Marketing',
+    desc: 'Automated email sequences, lifecycle campaigns, and deep segmentation that turn cold lists into loyal buyers. We engineer every campaign around revenue, not vanity metrics like open rates.',
+    metric: '48% higher open rates than industry avg.',
+  },
+  {
+    href: '/local/toronto/digital-marketing-agency/',
+    icon: '📤',
+    name: 'AI Outbound / AI SDR',
+    desc: 'AI-powered sales development that researches prospects, personalizes outreach at scale, and books qualified meetings directly into your calendar. Your pipeline fills itself while your team focuses on closing.',
+    metric: '3–5x more booked meetings vs. manual outreach',
+  },
+  {
+    href: '/local/toronto/social-media-marketing-agency/',
+    icon: '📸',
+    name: 'Social Media Marketing',
+    desc: 'Strategy, content creation, community management, and paid growth across Instagram, LinkedIn, TikTok, and Facebook. We build audiences that engage — and then convert them into paying customers.',
+    metric: 'Content calendar + paid + organic growth',
+  },
+  {
+    href: '/local/toronto/content-marketing-agency/',
+    icon: '✍️',
+    name: 'Content Marketing',
+    desc: 'Long-form content, pillar pages, thought leadership, and topical cluster strategies that build domain authority and drive consistent organic traffic — compounding in value every month you\'re live.',
+    metric: 'Topical authority + AI citation readiness',
+  },
+  {
+    href: '/local/toronto/google-ads-agency/',
+    icon: '💰',
+    name: 'PPC & Paid Search',
+    desc: 'Full-spectrum paid search management across Google, Bing, and programmatic networks. Every dollar tracked, every ad split-tested, every campaign optimized for cost-per-lead — not just clicks.',
+    metric: 'Every dollar tracked to revenue',
+  },
+];
+
+const industries = [
+  { icon: '🏠', name: 'Real Estate', desc: 'SEO, Google Ads & landing pages for agents and brokerages' },
+  { icon: '⚖️', name: 'Legal & Professional Services', desc: 'Local SEO, Google Ads & reputation management for law firms' },
+  { icon: '🍽️', name: 'Restaurants & Hospitality', desc: 'Local search visibility, social media & Google Maps ranking' },
+  { icon: '🛒', name: 'E-Commerce', desc: 'Shopping campaigns, SEO & email automation for online stores' },
+  { icon: '💻', name: 'SaaS & Tech', desc: 'B2B SEO, LinkedIn ads & AI-powered outbound for software companies' },
+  { icon: '🏥', name: 'Healthcare & Medical', desc: 'Local SEO, PPC & patient acquisition for clinics and practitioners' },
+  { icon: '🔨', name: 'Home Services & Trades', desc: 'Google Local Service Ads, maps ranking & review management' },
+  { icon: '💼', name: 'Financial Services', desc: 'Compliant paid ads, SEO & content marketing for finance firms' },
+  { icon: '🎓', name: 'Education & Coaching', desc: 'Funnel-based paid ads, email sequences & webinar marketing' },
+];
+
+const faqs = [
+  {
+    q: 'What digital marketing services does Boomy Marketing offer?',
+    a: 'Boomy Marketing Agency offers 14 AI-powered services: SEO & AI SEO, Generative Engine Optimization (GEO), Google Ads Management, Meta Ads, AI Automations, AI Development, Web Design & Development, SaaS Product Development, Voice AI Agents, Email Marketing, AI Outbound / AI SDR, Social Media Marketing, Content Marketing, and PPC & Paid Search. Every service is available individually or as part of a full-stack growth package.',
+  },
+  {
+    q: 'How much do Boomy Marketing\'s services cost?',
+    a: 'SEO packages start from $1,497/month. Full-service digital marketing retainers start from $2,500/month. Google Ads and Meta Ads management fees start from $800/month (plus ad spend). AI Automation projects are quoted based on scope. All packages include a dedicated senior strategist, weekly reporting, and no lock-in contracts.',
+    link: { href: '/pricing', text: 'See full pricing →' },
+  },
+  {
+    q: 'How long does it take to see results from digital marketing?',
+    a: 'It depends on the service. Google Ads and Meta Ads generate leads within the first 2 weeks as soon as campaigns go live. SEO delivers measurable organic traffic growth within 3–6 months, with compounding results over 12+ months. AI Automations typically show ROI within 30 days through time savings and improved lead response speed. We set clear milestones at the start of every engagement so you always know what to expect and when.',
+  },
+  {
+    q: 'Does Boomy Marketing work with small businesses?',
+    a: 'Yes — over 60% of our 500+ clients are small-to-medium Canadian businesses. We work with local restaurants, law firms, contractors, clinics, real estate agents, and e-commerce stores alongside larger national brands. Our packages are designed to deliver enterprise-level strategy at small business budgets, without the overhead of a large agency.',
+  },
+  {
+    q: 'What makes Boomy Marketing different from other Toronto agencies?',
+    a: 'Three things: First, AI is at our core — built in since 2020, not added as a buzzword. Every campaign uses proprietary AI tools for research, optimization, and reporting that generic agencies don\'t have access to. Second, you work with a senior strategist — not a junior account manager. Third, we have no long-term lock-in contracts. We earn your business every month through results, not paperwork.',
+  },
+  {
+    q: 'Do you serve businesses outside Toronto?',
+    a: 'Absolutely. Boomy Marketing Agency serves businesses across 26+ Canadian cities including Vancouver, Calgary, Ottawa, Edmonton, Mississauga, Hamilton, Brampton, Markham, Burnaby, Surrey, Kelowna, and more. All services are delivered remotely with the same senior team that serves our Toronto clients.',
+    link: { href: '/locations', text: 'See all locations →' },
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Digital Marketing Services — Boomy Marketing Agency',
+  description: '14 AI-powered digital marketing services for Canadian businesses. SEO, Google Ads, Meta Ads, AI Automations, Web Design & more.',
+  url: 'https://boomymarketing.com/services/',
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://boomymarketing.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://boomymarketing.com/services/' },
+    ],
+  },
+};
+---
+
+<BaseLayout
+  title="Digital Marketing Services | SEO, Google Ads, AI & More — Boomy"
+  description="14 AI-powered digital marketing services for Canadian businesses. SEO, Google Ads, Meta Ads, AI Automations, Web Design & more. No lock-in contracts."
+  canonical="https://boomymarketing.com/services/"
+  schema={schema}
+>
+  <Nav />
+
+  <section class="page-hero" aria-labelledby="services-heading">
+    <div class="page-hero-inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><span aria-current="page">Services</span>
+      </nav>
+      <div class="section-label reveal">⚡ What We Do</div>
+      <h1 id="services-heading" class="reveal">
+        Full-Stack Digital Marketing Services<br />
+        <span class="gradient-text">For Canadian Businesses That Want Results</span>
+      </h1>
+      <p class="reveal">Boomy Marketing Agency delivers 14 AI-powered digital marketing services built around one goal: generating more leads, more sales, and more revenue for your business. Since 2020, we've helped 500+ Canadian businesses across Toronto, Vancouver, Calgary, and 26+ cities grow faster using AI-first strategies that traditional agencies simply can't match. No lock-in contracts. No junior account managers. Just a senior team, real results, and full transparency.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-label="All services">
+    <div class="services-grid">
+      {serviceCards.map((card) => (
+        <a href={card.href} class="service-card reveal">
+          <span class="service-icon">{card.icon}</span>
+          <h2 class="service-name">{card.name}</h2>
+          <p class="service-desc">{card.desc}</p>
+          <span class="service-metric">{card.metric}</span>
+          <span class="service-more">Learn more →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="stats-section" aria-label="Boomy Marketing results">
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Canadian businesses grown since 2020</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number">98%</div>
+        <div class="stat-label">Client retention rate — because results keep them</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number">4–8x</div>
+        <div class="stat-label">Average ROAS on Google Ads campaigns</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-number">$50M+</div>
+        <div class="stat-label">Revenue generated for clients across Canada</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="industries-section" aria-labelledby="industries-heading">
+    <div class="section-container">
+      <div class="section-header">
+        <div class="section-label">🏗️ Who We Serve</div>
+        <h2 id="industries-heading" class="section-title">Industries We <span class="gradient-text">Specialize In</span></h2>
+        <p class="section-sub">From local service businesses to national e-commerce brands — our digital marketing strategies are built around your specific industry, competition, and buyer journey.</p>
+      </div>
+      <div class="industries-grid">
+        {industries.map((item) => (
+          <div class="industry-item reveal">
+            <span class="industry-icon">{item.icon}</span>
+            <div>
+              <div class="industry-name">{item.name}</div>
+              <div class="industry-desc">{item.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section" aria-labelledby="faq-heading">
+    <div class="faq-container">
+      <div class="section-header">
+        <div class="section-label">❓ Common Questions</div>
+        <h2 id="faq-heading" class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
+      </div>
+      <div class="faq-grid">
+        {faqs.map((item) => (
+          <div class="faq-item reveal">
+            <button class="faq-q" aria-expanded="false">
+              {item.q}
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <div class="faq-a">
+              <p>
+                {item.a}
+                {item.link && <> <a href={item.link.href} style="color:var(--accent-orange)">{item.link.text}</a></>}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" aria-labelledby="cta-services-heading">
+    <div class="cta-inner">
+      <div class="section-label" style="display:inline-flex;margin-bottom:20px;">🚀 Not Sure Where to Start?</div>
+      <h2 id="cta-services-heading">Book a Free Strategy Call<br /><span class="gradient-text">We'll Find Your Biggest Win</span></h2>
+      <p>In 30 minutes, we'll audit your current marketing, identify your top growth opportunities, and recommend exactly which services will drive the fastest results for your business.</p>
+      <div class="cta-buttons">
+        <a href="/contact" class="btn btn-primary" style="background:linear-gradient(135deg,var(--accent-orange),var(--accent-yellow));color:var(--bg-darkest);font-size:1.05rem;padding:17px 38px;">Book Free Strategy Call →</a>
+        <a href="/pricing" class="btn btn-ghost">View Pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.faq-q').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      btn.closest('.faq-item')?.classList.toggle('open');
+    });
+  });
+</script>

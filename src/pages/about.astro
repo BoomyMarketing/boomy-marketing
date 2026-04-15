@@ -1,0 +1,319 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import StatsBar from '@components/StatsBar.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About Boomy Marketing Agency",
+  "url": "https://boomymarketing.com/about",
+  "description": "Toronto's AI-first digital marketing agency. Founded 2020. 500+ clients, 98% retention, $50M+ revenue generated.",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Boomy Marketing Agency",
+    "foundingDate": "2020",
+    "address": { "@type": "PostalAddress", "streetAddress": "240 Richmond St W", "addressLocality": "Toronto", "addressRegion": "ON", "postalCode": "M5V 1V6", "addressCountry": "CA" }
+  }
+};
+
+const pageStyle = `
+  .page-hero { min-height: 60vh; padding: calc(var(--nav-h) + 60px) 5% 80px; display: flex; align-items: center; background: radial-gradient(ellipse at 20% 50%, rgba(124,58,237,.25) 0%, transparent 60%), radial-gradient(ellipse at 80% 30%, rgba(255,107,53,.12) 0%, transparent 50%), linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-deep) 50%, var(--bg-darkest) 100%); }
+  .page-hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; text-align: center; }
+  .page-hero h1 { font-size: clamp(2.4rem, 5.5vw, 4.2rem); font-weight: 900; line-height: 1.08; margin-bottom: 24px; letter-spacing: -.02em; }
+  .page-hero p { font-size: 1.15rem; color: var(--text-sec); max-width: 640px; margin: 0 auto 40px; line-height: 1.75; }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; justify-content: center; margin-bottom: 28px; font-size: .85rem; color: var(--text-muted); }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color .2s; }
+  .breadcrumb a:hover, .breadcrumb span { color: var(--accent-orange); }
+  .story { background: var(--bg-darkest); }
+  .story-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; }
+  .story-text h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; margin-bottom: 24px; }
+  .story-text p { color: var(--text-sec); line-height: 1.8; margin-bottom: 20px; }
+  .story-visual { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 48px; text-align: center; position: relative; overflow: hidden; }
+  .story-year { font-family: 'Berkshire Swash', cursive; font-size: 6rem; font-weight: 400; background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+  .story-year-label { font-size: 1rem; color: var(--text-sec); margin-top: 8px; }
+  .results-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; max-width: 1200px; margin: 0 auto; }
+  .result-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 36px 28px; position: relative; overflow: hidden; transition: transform .3s,border-color .3s; }
+  .result-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow)); }
+  .result-card:hover { transform: translateY(-5px); border-color: rgba(255,107,53,.3); }
+  .result-industry { font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-orange); margin-bottom: 12px; }
+  .result-headline { font-size: 2rem; font-weight: 900; background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+  .result-metric { font-size: .9rem; color: var(--text-sec); margin-bottom: 20px; }
+  .result-divider { height: 1px; background: rgba(255,255,255,.08); margin-bottom: 20px; }
+  .result-detail { font-size: .88rem; color: var(--text-sec); line-height: 1.7; }
+  .result-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .result-tag { font-size: .75rem; font-weight: 600; padding: 4px 12px; border-radius: 100px; background: rgba(255,107,53,.12); border: 1px solid rgba(255,107,53,.2); color: rgba(255,255,255,.8); }
+  .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+  .team-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 36px 24px; text-align: center; transition: transform .3s,border-color .3s,box-shadow .3s; }
+  .team-card:hover { transform: translateY(-6px); border-color: rgba(255,107,53,.35); box-shadow: 0 20px 60px rgba(255,107,53,.15); }
+  .team-avatar { width: 88px; height: 88px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 20px; box-shadow: 0 8px 30px rgba(255,107,53,.3); }
+  .team-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+  .team-role { font-size: .85rem; color: var(--accent-orange); font-weight: 600; margin-bottom: 12px; }
+  .team-bio { font-size: .88rem; color: var(--text-sec); line-height: 1.65; }
+  .process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+  .process-step { position: relative; }
+  .process-step:not(:last-child)::after { content: '→'; position: absolute; right: -18px; top: 32px; font-size: 1.4rem; color: rgba(255,107,53,.4); z-index: 1; }
+  .step-num { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 900; color: var(--bg-darkest); margin-bottom: 20px; }
+  .step-timing { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-orange); margin-bottom: 8px; }
+  .step-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+  .step-desc { font-size: .87rem; color: var(--text-sec); line-height: 1.7; }
+  .values-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+  .value-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 36px 24px; text-align: center; transition: transform .3s,border-color .3s; position: relative; overflow: hidden; }
+  .value-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow)); opacity: 0; transition: opacity .3s; }
+  .value-card:hover { transform: translateY(-4px); border-color: rgba(255,107,53,.3); }
+  .value-card:hover::after { opacity: 1; }
+  .value-icon { font-size: 2.8rem; margin-bottom: 20px; display: block; }
+  .value-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+  .value-desc { font-size: .88rem; color: var(--text-sec); line-height: 1.65; }
+  .faq-about-grid { max-width: 800px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid rgba(255,255,255,.08); }
+  .faq-q { width: 100%; background: none; border: none; color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 1.02rem; font-weight: 600; text-align: left; padding: 22px 0; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; transition: color .2s; }
+  .faq-q:hover { color: var(--accent-orange); }
+  .faq-q::after { content: '+'; font-size: 1.4rem; font-weight: 300; color: var(--accent-orange); flex-shrink: 0; transition: transform .3s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .38s; }
+  .faq-item.open .faq-a { max-height: 300px; }
+  .faq-a p { padding-bottom: 22px; font-size: .96rem; color: var(--text-sec); line-height: 1.75; }
+  .cta-section { position: relative; padding: 110px 5%; background: linear-gradient(135deg, var(--bg-deep) 0%, #3a1444 40%, #c04520 100%); overflow: hidden; }
+  .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(124,58,237,.4) 0%, transparent 55%), radial-gradient(ellipse at 80% 50%, rgba(255,107,53,.3) 0%, transparent 55%); pointer-events: none; }
+  .cta-inner { max-width: 760px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+  .cta-inner h2 { font-size: clamp(2.4rem,5vw,4rem); font-weight: 900; margin-bottom: 16px; letter-spacing: -.02em; }
+  .cta-inner > p { font-size: 1.1rem; color: rgba(255,255,255,.85); margin-bottom: 48px; line-height: 1.7; }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  @media (max-width: 1024px) { .team-grid,.values-grid { grid-template-columns: repeat(2,1fr); } .results-grid { grid-template-columns: 1fr 1fr; } .process-steps { grid-template-columns: repeat(2,1fr); } .process-step:nth-child(2)::after { display: none; } }
+  @media (max-width: 768px) { .story-inner { grid-template-columns: 1fr; gap: 48px; } .team-grid { grid-template-columns: 1fr 1fr; } .values-grid { grid-template-columns: 1fr 1fr; } .results-grid { grid-template-columns: 1fr; } .process-steps { grid-template-columns: repeat(2,1fr); } .process-step::after { display: none !important; } }
+  @media (max-width: 480px) { .team-grid,.values-grid,.process-steps { grid-template-columns: 1fr; } }
+`;
+---
+
+<BaseLayout
+  title="About Boomy Marketing Agency — Toronto's AI-First Digital Agency"
+  description="Founded in 2020, Boomy Marketing is Toronto's AI-powered digital agency. 500+ clients, 98% retention rate, $50M+ revenue generated for Canadian businesses."
+  canonical="https://boomymarketing.com/about"
+  schema={schema}
+  pageStyle={pageStyle}
+>
+
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+<div class="progress-bar" id="progressBar"></div>
+<canvas id="starfield" aria-hidden="true"></canvas>
+<div class="site-wrapper">
+<main id="main-content">
+
+  <section class="page-hero" aria-labelledby="about-heading">
+    <div class="page-hero-inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><span aria-current="page">About</span>
+      </nav>
+      <div class="section-label reveal">🏢 Our Story</div>
+      <h1 id="about-heading" class="reveal">Toronto's Most Forward-Thinking<br /><span class="gradient-text">Digital Agency</span></h1>
+      <p class="reveal">We founded Boomy Marketing in 2020 with one bold idea: what if you combined AI with marketing strategy before anyone else did? Five years later, we have helped 500+ Canadian businesses grow faster than they thought possible.</p>
+    </div>
+  </section>
+
+  <StatsBar />
+
+  <section class="section story" aria-labelledby="story-heading">
+    <div class="story-inner">
+      <div class="story-text reveal-left">
+        <div class="section-label">📖 Our Origin</div>
+        <h2 id="story-heading">Built on the Belief That <span class="gradient-text">AI Changes Everything</span></h2>
+        <p>Boomy Marketing was born at 240 Richmond St W, Toronto — right in the heart of the city's creative and tech district. Our founders had watched too many promising businesses burn through marketing budgets at traditional agencies that delivered thick reports, vague metrics, and zero accountability.</p>
+        <p>In 2020, when AI tools became powerful enough to embed into real marketing workflows, we made a deliberate bet: build an agency from the ground up with AI at its core — not bolted on as an afterthought, but woven into every strategy, every campaign, and every deliverable.</p>
+        <p>That bet paid off. By 2022, Boomy had grown to 150+ active clients and expanded beyond Toronto to serve businesses in Vancouver, Calgary, Ottawa, and Montreal. Today, we're Canada's go-to agency for businesses that want to grow fast and turn their marketing budget into a predictable revenue engine.</p>
+        <a href="/contact" class="btn btn-primary" style="margin-top:16px;">Work With Us &rarr;</a>
+      </div>
+      <div class="story-visual reveal-right">
+        <div class="story-year">2020</div>
+        <div class="story-year-label">Founded in Toronto, Ontario</div>
+        <div style="margin-top:32px; display:flex; flex-direction:column; gap:16px; text-align:left;">
+          <div style="background:rgba(255,107,53,.1); border:1px solid rgba(255,107,53,.2); border-radius:12px; padding:16px 20px;">
+            <div style="font-weight:700; margin-bottom:4px;">📍 240 Richmond St W</div>
+            <div style="font-size:.87rem; color:var(--text-sec);">Toronto, ON M5V 1V6, Canada</div>
+          </div>
+          <div style="background:rgba(255,210,63,.08); border:1px solid rgba(255,210,63,.15); border-radius:12px; padding:16px 20px;">
+            <div style="font-weight:700; margin-bottom:4px;">🤖 AI-First Since Day One</div>
+            <div style="font-size:.87rem; color:var(--text-sec);">Integrated AI into every service from the start</div>
+          </div>
+          <div style="background:rgba(124,58,237,.1); border:1px solid rgba(124,58,237,.2); border-radius:12px; padding:16px 20px;">
+            <div style="font-weight:700; margin-bottom:4px;">🇨🇦 Canadian-Owned</div>
+            <div style="font-size:.87rem; color:var(--text-sec);">Proudly serving Canadian businesses nationwide</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section results" aria-labelledby="results-heading">
+    <div class="section-header">
+      <div class="section-label reveal">📈 Results That Prove It</div>
+      <h2 class="section-title reveal" id="results-heading">Real Results for<br /><span class="gradient-text">Real Canadian Businesses</span></h2>
+      <p class="section-sub reveal">We don't showcase hypothetical projections. Every number below is a real outcome from a real client campaign.</p>
+    </div>
+    <div class="results-grid">
+      <div class="result-card reveal">
+        <div class="result-industry">Toronto Law Firm</div>
+        <div class="result-headline">+312%</div>
+        <div class="result-metric">Organic traffic growth in 5 months</div>
+        <div class="result-divider"></div>
+        <p class="result-detail">A personal injury law firm in Yorkville had a beautiful website nobody found. We rebuilt their technical SEO, created 28 topically-clustered content pieces, and built 40+ citations. Month 5: ranked #1 for "personal injury lawyer Toronto." Monthly organic leads went from 8 to 61.</p>
+        <div class="result-tags"><span class="result-tag">SEO</span><span class="result-tag">Content</span><span class="result-tag">Local SEO</span></div>
+      </div>
+      <div class="result-card reveal">
+        <div class="result-industry">E-Commerce Brand (Canada-Wide)</div>
+        <div class="result-headline">6.2x ROAS</div>
+        <div class="result-metric">On $180K Google Ads spend in Q1 2025</div>
+        <div class="result-divider"></div>
+        <p class="result-detail">A Canadian outdoor gear brand was running Google Shopping in-house with a 2.1x ROAS. We rebuilt their feed structure, layered in Performance Max with custom audience signals, and implemented our AI-driven bidding framework. Within 90 days: 6.2x ROAS — $1.1M in attributed revenue.</p>
+        <div class="result-tags"><span class="result-tag">Google Ads</span><span class="result-tag">Shopping</span><span class="result-tag">AI Bidding</span></div>
+      </div>
+      <div class="result-card reveal">
+        <div class="result-industry">Vancouver Restaurant Group</div>
+        <div class="result-headline">+40%</div>
+        <div class="result-metric">Online reservations in 60 days</div>
+        <div class="result-divider"></div>
+        <p class="result-detail">A 3-location Vancouver restaurant group had weak digital presence. We optimised all GBP profiles, rebuilt reservation landing pages, and launched a 6-email welcome sequence. Reservation conversions jumped from 1.4% to 4.1% — a 40% increase in total online bookings.</p>
+        <div class="result-tags"><span class="result-tag">Local SEO</span><span class="result-tag">Web Design</span><span class="result-tag">Email</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section team" aria-labelledby="team-heading" style="background:linear-gradient(180deg, var(--bg-darkest) 0%, var(--bg-deep) 50%, var(--bg-darkest) 100%);">
+    <div class="section-header">
+      <div class="section-label reveal">👥 The Team</div>
+      <h2 class="section-title reveal" id="team-heading">The People Behind<br /><span class="gradient-text">Your Growth</span></h2>
+      <p class="section-sub reveal">A tight-knit team of marketing specialists, AI engineers, and data scientists — obsessed with one thing: your results.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar">👨‍💼</div>
+        <div class="team-name">Marcus T.</div>
+        <div class="team-role">Chief Executive Officer</div>
+        <p class="team-bio">15 years in digital marketing. Marcus founded Boomy after running growth at two VC-backed SaaS startups. His obsession: building systems that scale.</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">👩‍💻</div>
+        <div class="team-name">Sofia M.</div>
+        <div class="team-role">Head of SEO</div>
+        <p class="team-bio">Former Google partner consultant with deep expertise in technical SEO and topical authority. Sofia has ranked over 200 websites to page one in competitive Canadian markets.</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">🧑‍💻</div>
+        <div class="team-name">Dev K.</div>
+        <div class="team-role">AI Lead</div>
+        <p class="team-bio">MSc in Machine Learning from University of Toronto. Dev architects every AI automation, voice AI agent, and custom AI solution we ship.</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">👩‍📊</div>
+        <div class="team-name">Priya C.</div>
+        <div class="team-role">Ads Director</div>
+        <p class="team-bio">Managed over $20M in Google and Meta ad spend for Canadian businesses. Built Boomy's proprietary bidding framework delivering consistent 4–8x ROAS.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section process" aria-labelledby="process-heading" style="background:var(--bg-darkest);">
+    <div class="section-header">
+      <div class="section-label reveal">⚙️ How We Work</div>
+      <h2 class="section-title reveal" id="process-heading">Our Process: From Audit<br /><span class="gradient-text">to Measurable Results</span></h2>
+      <p class="section-sub reveal">Every Boomy engagement follows the same four-phase methodology — a proven system executed with precision.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num">1</div>
+        <div class="step-timing">Week 1–2</div>
+        <div class="step-title">Deep Audit & Strategy</div>
+        <p class="step-desc">We audit your website, ad accounts, content, and competitors. We identify the highest-leverage opportunities and build a 90-day roadmap prioritised by expected ROI.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">2</div>
+        <div class="step-timing">Month 1</div>
+        <div class="step-title">Technical Foundation</div>
+        <p class="step-desc">We fix what's broken before building what's new. Technical SEO corrections, CRO on key pages, ad account restructuring, and tracking verification.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">3</div>
+        <div class="step-timing">Month 2–3</div>
+        <div class="step-title">Execution & Scaling</div>
+        <p class="step-desc">Content production, link-building campaigns, paid media scaling, email automation sequences, and AI outbound where applicable.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">4</div>
+        <div class="step-timing">Month 4+</div>
+        <div class="step-title">Optimise & Compound</div>
+        <p class="step-desc">We analyse performance data monthly, A/B test continuously, expand what's working, and cut what's not. Most clients see their best results in months 4–6.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section values" aria-labelledby="values-heading" style="background:var(--bg-darkest);">
+    <div class="section-header">
+      <div class="section-label reveal">🎯 What We Stand For</div>
+      <h2 class="section-title reveal" id="values-heading">The Principles That<br /><span class="gradient-text">Drive Every Decision</span></h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal"><span class="value-icon">📊</span><div class="value-title">Data-First</div><p class="value-desc">Every strategy, every bid adjustment, every content decision is grounded in real data. We never guess — we measure, analyse, and act on evidence.</p></div>
+      <div class="value-card reveal"><span class="value-icon">🔍</span><div class="value-title">Transparent</div><p class="value-desc">You see everything we see. Real-time dashboards, honest reporting, and clear explanations of what worked and what didn't. No black boxes, no hidden fees.</p></div>
+      <div class="value-card reveal"><span class="value-icon">🤖</span><div class="value-title">AI-Powered</div><p class="value-desc">AI isn't a buzzword at Boomy — it's our competitive advantage. From automated content to predictive bid management and AI outbound.</p></div>
+      <div class="value-card reveal"><span class="value-icon">🏆</span><div class="value-title">Results-Only</div><p class="value-desc">We don't celebrate vanity metrics. Impressions and followers mean nothing unless they convert to revenue. Every KPI traces directly to your bottom line.</p></div>
+    </div>
+  </section>
+
+  <section class="section faq-about" aria-labelledby="faq-about-heading" style="background:linear-gradient(180deg, var(--bg-darkest) 0%, var(--bg-deep) 100%);">
+    <div class="section-header">
+      <div class="section-label reveal">❓ Common Questions</div>
+      <h2 class="section-title reveal" id="faq-about-heading">Frequently Asked<br /><span class="gradient-text">About Boomy</span></h2>
+    </div>
+    <div class="faq-about-grid">
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Where is Boomy Marketing located?</button><div class="faq-a" role="region"><p>Boomy Marketing is headquartered at 240 Richmond St W, Toronto, ON M5V 1V6 — in the heart of Toronto's creative and tech district. We serve clients across Canada from coast to coast, including Vancouver, Calgary, Ottawa, and Montreal, fully remotely.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">When was Boomy Marketing founded and how large is the team?</button><div class="faq-a" role="region"><p>Boomy was founded in 2020 with a core team of 4 specialists. Today we are a team of 20+ marketing professionals, AI engineers, and data analysts. We've completed 500+ projects and maintain a 98% client retention rate.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">What industries does Boomy Marketing work with?</button><div class="faq-a" role="region"><p>We work with real estate, legal, healthcare, e-commerce, SaaS and tech startups, restaurants and hospitality, financial services, home services, and professional services. Our AI-first methodology adapts to any industry.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">How is Boomy different from other digital marketing agencies in Toronto?</button><div class="faq-a" role="region"><p>Most agencies still run marketing the way it was run in 2018. Boomy was built AI-first from day one. We use AI for keyword clustering, predictive bidding, content gap analysis, and automated reporting. We deliver results 40–60% faster at the same budget.</p></div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false">Does Boomy Marketing work with small businesses and startups?</button><div class="faq-a" role="region"><p>Yes. We work with businesses of all sizes — from solo practitioners to Series B SaaS companies. Our pricing starts at $997/month for SMBs and scales based on scope.</p></div></div>
+    </div>
+  </section>
+
+  <section class="cta-section" aria-labelledby="cta-heading">
+    <div class="cta-inner">
+      <div class="section-label" style="display:inline-flex; margin-bottom:20px;">🚀 Ready to Grow?</div>
+      <h2 id="cta-heading">Let's Build Something<br /><span class="gradient-text">Remarkable Together</span></h2>
+      <p>Book a free 30-minute strategy call. We'll audit your current marketing, identify your biggest opportunities, and show you exactly how Boomy can get you there.</p>
+      <div class="cta-buttons">
+        <a href="/contact" class="btn btn-primary" style="background:linear-gradient(135deg,var(--accent-orange),var(--accent-yellow));color:var(--bg-darkest);font-size:1.05rem;padding:17px 38px;box-shadow:0 12px 40px rgba(255,107,53,.45);">Book a Free Strategy Call &rarr;</a>
+        <a href="/services" class="btn btn-ghost">View All Services</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement!;
+      item.classList.toggle('open');
+      q.setAttribute('aria-expanded', item.classList.contains('open') ? 'true' : 'false');
+    });
+  });
+
+  window.addEventListener('load', () => {
+    if (typeof (window as any).gsap === 'undefined') return;
+    const gsap = (window as any).gsap;
+    const ScrollTrigger = (window as any).ScrollTrigger;
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray('.reveal').forEach((el: Element) => {
+      gsap.fromTo(el, { opacity: 0, y: 38 }, { opacity: 1, y: 0, duration: 0.72, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
+    });
+    gsap.utils.toArray('.reveal-left').forEach((el: Element) => {
+      gsap.fromTo(el, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.75, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
+    });
+    gsap.utils.toArray('.reveal-right').forEach((el: Element) => {
+      gsap.fromTo(el, { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 0.75, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
+    });
+  });
+</script>
+
+</BaseLayout>

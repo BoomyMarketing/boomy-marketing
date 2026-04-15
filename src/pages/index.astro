@@ -1,10 +1,8 @@
 ---
-/**
- * index.astro — Homepage scaffold (Phase 0)
- * Content migration from index.html happens in Phase 2.
- * This file exists to verify Astro builds successfully.
- */
 import BaseLayout from '@layouts/BaseLayout.astro';
+import StatsBar from '@components/StatsBar.astro';
+import CTASection from '@components/CTASection.astro';
+import LocationLinks from '@components/LocationLinks.astro';
 
 const schema = {
   "@context": "https://schema.org",
@@ -12,15 +10,16 @@ const schema = {
   "name": "Boomy Marketing Agency",
   "url": "https://boomymarketing.com",
   "description": "Award-winning digital marketing agency based in Toronto specialising in SEO, paid advertising, social media, web design, email marketing, and analytics.",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Toronto",
-    "addressRegion": "ON",
-    "addressCountry": "CA"
-  },
+  "address": { "@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" },
   "telephone": "+16473701888",
   "email": "care@boomymarketing.com",
   "foundingDate": "2020",
+  "areaServed": [
+    {"@type":"City","name":"Toronto","containedInPlace":{"@type":"Province","name":"Ontario","addressCountry":"CA"}},
+    {"@type":"City","name":"Vancouver","containedInPlace":{"@type":"Province","name":"British Columbia","addressCountry":"CA"}},
+    {"@type":"City","name":"Calgary","containedInPlace":{"@type":"Province","name":"Alberta","addressCountry":"CA"}},
+    {"@type":"Country","name":"Canada"}
+  ],
   "sameAs": [
     "https://instagram.com/boomymarketing",
     "https://linkedin.com/company/boomymarketing",
@@ -33,9 +32,124 @@ const pageStyle = `
   /* HERO */
   .hero { min-height: 100vh; min-height: 100dvh; padding: var(--nav-h) 5% 80px; display: flex; align-items: center; position: relative; overflow: hidden; }
   .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%; }
+  #heroBadge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,210,63,.12); border: 1px solid rgba(255,210,63,.3); border-radius: 100px; padding: 6px 16px; font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-yellow); margin-bottom: 24px; }
+  #heroBadge span { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-yellow); animation: pulseGreen 2s ease-in-out infinite; }
+  @keyframes pulseGreen { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.6)} }
+  #hero-heading { font-size: clamp(2.6rem, 6vw, 5.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -.03em; margin-bottom: 8px; }
+  .booming-word { font-family: "Berkshire Swash", cursive; font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 400; line-height: 1; background: linear-gradient(90deg, var(--accent-orange) 0%, var(--accent-yellow) 40%, var(--accent-orange) 80%, var(--accent-yellow) 100%); background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: sweepGradient 3s linear infinite; display: block; margin-bottom: 22px; }
+  @keyframes sweepGradient { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+  .hero-sub { font-size: 1.1rem; color: var(--text-sec); line-height: 1.75; margin-bottom: 40px; max-width: 500px; }
+  .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; height: 520px; }
+  .planet { width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #b06aff 0%, var(--bg-deep) 28%, var(--accent-orange) 62%, var(--accent-yellow) 100%); box-shadow: 0 0 60px rgba(255,107,53,.5),0 0 120px rgba(255,107,53,.2),inset 0 0 40px rgba(124,58,237,.4); position: relative; z-index: 5; animation: planetPulse 5s ease-in-out infinite; }
+  @keyframes planetPulse { 0%,100%{box-shadow:0 0 60px rgba(255,107,53,.5),0 0 120px rgba(255,107,53,.2),inset 0 0 40px rgba(124,58,237,.4)} 50%{box-shadow:0 0 85px rgba(255,107,53,.72),0 0 165px rgba(255,107,53,.3),inset 0 0 60px rgba(124,58,237,.55)} }
+  .orbit-ring { position: absolute; border-radius: 50%; }
+  .orbit-1 { width: 280px; height: 280px; border: 1.5px solid rgba(255,107,53,.3); }
+  .orbit-2 { width: 380px; height: 380px; border: 1.5px solid rgba(255,210,63,.2); }
+  .orbit-3 { width: 480px; height: 480px; border: 1.5px solid rgba(124,58,237,.15); }
+  .orbit-1-wrap { position: absolute; width: 280px; height: 280px; border-radius: 50%; animation: orbitSpin 8s linear infinite; }
+  .orbit-2-wrap { position: absolute; width: 380px; height: 380px; border-radius: 50%; animation: orbitSpin 14s linear infinite reverse; }
+  .orbit-3-wrap { position: absolute; width: 480px; height: 480px; border-radius: 50%; animation: orbitSpin 20s linear infinite; }
+  @keyframes orbitSpin { to { transform: rotate(360deg); } }
+  .ring-dot { position: absolute; border-radius: 50%; top: 50%; left: 50%; }
+  .orbit-1-wrap .ring-dot { width: 34px; height: 34px; background: radial-gradient(circle at 35% 35%, #FFD23F, #FF6B35); box-shadow: 0 0 16px rgba(255,210,63,.85); transform: translate(-50%,-140px); }
+  .orbit-2-wrap .ring-dot { width: 20px; height: 20px; background: radial-gradient(circle at 35% 35%, #a78bfa, #7C3AED); box-shadow: 0 0 12px rgba(124,58,237,.85); transform: translate(-50%,-190px); }
+  .orbit-3-wrap .ring-dot { width: 13px; height: 13px; background: radial-gradient(circle at 35% 35%, #fff, #e2e8f0); box-shadow: 0 0 8px rgba(255,255,255,.9); transform: translate(-50%,-240px); }
+  .float-tag { position: absolute; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(8px); border-radius: 12px; padding: 10px 16px; font-size: .78rem; font-weight: 600; white-space: nowrap; z-index: 6; }
+  .float-tag-1 { top: 10%; right: 2%; animation: floatTag 4s ease-in-out infinite; }
+  .float-tag-2 { bottom: 15%; right: 0%; animation: floatTag 4s ease-in-out 1.5s infinite; }
+  .float-tag-3 { bottom: 28%; left: 0%; animation: floatTag 4s ease-in-out .8s infinite; }
+  @keyframes floatTag { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  /* SERVICES */
+  .services { background: linear-gradient(180deg, var(--bg-darkest) 0%, var(--bg-deep) 50%, var(--bg-darkest) 100%); }
+  .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+  .service-card { display: block; text-decoration: none; color: inherit; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 36px 28px; transition: transform var(--transition-base),box-shadow var(--transition-base),border-color var(--transition-base); position: relative; overflow: hidden; backdrop-filter: blur(8px); }
+  .service-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg,rgba(255,107,53,.06),rgba(255,210,63,.03)); opacity: 0; transition: opacity .3s; border-radius: inherit; }
+  .service-card::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg,var(--accent-orange),var(--accent-yellow)); opacity: 0; transition: opacity .3s; }
+  .service-card:hover { border-color: rgba(255,107,53,.35); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(255,107,53,.15); }
+  .service-card:hover::before,.service-card:hover::after { opacity: 1; }
+  .service-icon { font-size: 2.6rem; margin-bottom: 20px; display: block; line-height: 1; }
+  .service-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+  .service-desc { font-size: .9rem; color: var(--text-sec); line-height: 1.7; }
+  .service-more { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-size: .85rem; font-weight: 600; color: var(--accent-orange); transition: gap .2s ease; }
+  .service-more:hover { gap: 10px; }
+  /* WHY */
+  .why-boomy { background: var(--bg-darkest); overflow: hidden; }
+  .why-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; }
+  .why-left h2 { font-size: clamp(2.8rem,5.5vw,5rem); font-weight: 900; line-height: 1; letter-spacing: -.03em; }
+  .why-left h2 .line-2 { background: linear-gradient(135deg,var(--accent-orange),var(--accent-yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .why-left p { margin-top: 24px; color: var(--text-sec); line-height: 1.75; }
+  .why-accent-bar { width: 60px; height: 4px; background: linear-gradient(90deg,var(--accent-orange),var(--accent-yellow)); border-radius: 2px; margin-top: 28px; }
+  .why-bullets { display: flex; flex-direction: column; gap: 18px; }
+  .why-bullet { display: flex; gap: 18px; align-items: flex-start; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-md); padding: 22px 24px; transition: border-color .3s ease,background .3s ease; }
+  .why-bullet:hover { border-color: rgba(255,107,53,.3); background: rgba(255,107,53,.06); }
+  .why-check { width: 28px; height: 28px; min-width: 28px; background: linear-gradient(135deg,var(--accent-orange),var(--accent-yellow)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .8rem; color: var(--bg-darkest); font-weight: 900; margin-top: 2px; }
+  .why-bullet-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+  .why-bullet-content p { font-size: .88rem; color: var(--text-sec); line-height: 1.65; }
+  /* BENTO */
+  .results { background: linear-gradient(180deg,var(--bg-darkest),var(--bg-deep)); }
+  .bento-grid { display: grid; grid-template-columns: repeat(12,1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+  .bento-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 36px; position: relative; overflow: hidden; transition: transform var(--transition-base),box-shadow var(--transition-base),border-color var(--transition-base); }
+  .bento-card:hover { border-color: rgba(255,107,53,.3); transform: translateY(-4px); box-shadow: 0 16px 50px rgba(255,107,53,.12); }
+  .bento-1 { grid-column: span 7; } .bento-2 { grid-column: span 5; } .bento-3,.bento-4,.bento-5 { grid-column: span 4; }
+  .bento-label { font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+  .bento-metric { font-size: clamp(3rem,5vw,5rem); font-weight: 900; background: linear-gradient(135deg,var(--accent-orange),var(--accent-yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; letter-spacing: -.03em; }
+  .bento-desc { font-size: .9rem; color: var(--text-sec); margin-top: 10px; line-height: 1.65; }
+  .bento-tag { display: inline-block; background: rgba(255,107,53,.15); border: 1px solid rgba(255,107,53,.25); color: var(--accent-orange); font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-top: 16px; }
+  .bento-glow { position: absolute; width: 130px; height: 130px; border-radius: 50%; background: radial-gradient(circle,rgba(255,107,53,.2),transparent 70%); bottom: -35px; right: -35px; pointer-events: none; }
+  /* PROCESS */
+  .process { background: var(--bg-darkest); }
+  .process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; max-width: 1200px; margin: 0 auto; position: relative; }
+  .process-steps::before { content: ""; position: absolute; top: 38px; left: calc(12.5% + 28px); right: calc(12.5% + 28px); height: 2px; background: linear-gradient(90deg,var(--accent-orange),var(--accent-yellow),var(--accent-orange)); z-index: 0; }
+  .process-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+  .step-number { width: 76px; height: 76px; border-radius: 50%; flex-shrink: 0; background: linear-gradient(135deg,var(--accent-orange),var(--accent-yellow)); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 24px; box-shadow: 0 8px 30px rgba(255,107,53,.4); }
+  .step-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+  .step-desc { font-size: .87rem; color: var(--text-sec); line-height: 1.65; }
+  /* CTA */
+  .btn-cta { background: linear-gradient(135deg,var(--accent-orange),var(--accent-yellow)); color: var(--bg-darkest); font-size: 1.05rem; padding: 17px 38px; box-shadow: 0 12px 40px rgba(255,107,53,.45); }
+  .btn-cta:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 22px 62px rgba(255,107,53,.6); }
+  .cta-form { display: flex; gap: 12px; max-width: 520px; margin: 0 auto 12px; }
+  .cta-input { flex: 1; padding: 16px 22px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); border-radius: 100px; color: #fff; font-size: .95rem; font-family: "Inter",sans-serif; outline: none; transition: border-color .2s ease,background .2s ease; }
+  .cta-input::placeholder { color: rgba(255,255,255,.5); }
+  .cta-input:focus { border-color: rgba(255,255,255,.65); background: rgba(255,255,255,.17); }
+  .cta-note { font-size: .8rem; color: rgba(255,255,255,.55); margin-top: 8px; }
+  .cta-trust { display: flex; align-items: center; justify-content: center; gap: 28px; margin-top: 44px; flex-wrap: wrap; }
+  .cta-trust-item { display: flex; align-items: center; gap: 8px; font-size: .85rem; color: rgba(255,255,255,.7); }
+  .cta-trust-icon { color: var(--accent-yellow); font-size: 1.1rem; }
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2,1fr); }
+    .bento-1,.bento-2 { grid-column: span 12; }
+    .bento-3,.bento-4,.bento-5 { grid-column: span 4; }
+  }
   @media (max-width: 768px) {
-    .hero-inner { grid-template-columns: 1fr; }
-    .hero-visual { display: none; }
+    .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+    .hero-visual { height: 360px; order: -1; }
+    .hero-sub { margin: 0 auto 40px; }
+    .hero-buttons { justify-content: center; }
+    .orbit-1-wrap,.orbit-ring.orbit-1 { width: 200px; height: 200px; }
+    .orbit-2-wrap,.orbit-ring.orbit-2 { width: 280px; height: 280px; }
+    .orbit-3-wrap,.orbit-ring.orbit-3 { width: 340px; height: 340px; }
+    .orbit-1-wrap .ring-dot { transform: translate(-50%,-100px); }
+    .orbit-2-wrap .ring-dot { transform: translate(-50%,-140px); }
+    .orbit-3-wrap .ring-dot { transform: translate(-50%,-170px); }
+    .planet { width: 130px; height: 130px; }
+    .float-tag-3 { display: none; }
+    .services-grid { grid-template-columns: 1fr; }
+    .why-inner { grid-template-columns: 1fr; gap: 48px; }
+    .why-left { text-align: center; }
+    .why-accent-bar { margin: 28px auto 0; }
+    .bento-3,.bento-4,.bento-5 { grid-column: span 12; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 36px; }
+    .process-steps::before { display: none; }
+    .cta-form { flex-direction: column; }
+    .cta-input { border-radius: var(--r-md); }
+    .btn-cta { border-radius: var(--r-md); width: 100%; justify-content: center; }
+  }
+  @media (max-width: 480px) {
+    .process-steps { grid-template-columns: 1fr; }
+    .cta-trust { gap: 16px; }
+    .float-tag-1,.float-tag-2 { display: none; }
   }
 `;
 ---
@@ -49,14 +163,312 @@ const pageStyle = `
   schema={schema}
   pageStyle={pageStyle}
 >
-  <!-- Phase 0 scaffold: content will be migrated from index.html in Phase 2 -->
-  <section class="hero section">
-    <div class="hero-inner container">
-      <div>
-        <h1>Launch Your Business Into The Stratosphere</h1>
-        <p>Toronto's AI-powered digital marketing agency. Full migration in progress.</p>
-        <a href="/contact" class="btn btn-primary">Get Started</a>
+
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+<div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Page reading progress"></div>
+<canvas id="starfield" aria-hidden="true"></canvas>
+
+<div class="site-wrapper">
+<main id="main-content">
+
+  <!-- HERO -->
+  <section class="hero" id="hero" aria-labelledby="hero-heading">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge" id="heroBadge">
+          <span aria-hidden="true">🚀</span>
+          <span>Award-Winning Digital Agency</span>
+        </div>
+        <h1 id="hero-heading">
+          Launch Your Business<br />Into The <span>Stratosphere</span>
+        </h1>
+        <span class="booming-word" aria-label="Booming">BOOMING</span>
+        <p class="hero-sub">Data-driven marketing that puts your brand light-years ahead of the competition. From search to social, we engineer growth with precision and purpose.</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary magnetic-btn" aria-label="Start your marketing mission with Boomy">
+            Start Your Mission
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#results" class="btn btn-ghost magnetic-btn">See Our Work</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="float-tag float-tag-1">📈 +340% Traffic</div>
+        <div class="float-tag float-tag-2">⚡ 8x ROAS</div>
+        <div class="float-tag float-tag-3">🎯 60% Lower CPL</div>
+        <div class="orbit-ring orbit-1"></div>
+        <div class="orbit-ring orbit-2"></div>
+        <div class="orbit-ring orbit-3"></div>
+        <div class="orbit-1-wrap"><div class="ring-dot"></div></div>
+        <div class="orbit-2-wrap"><div class="ring-dot"></div></div>
+        <div class="orbit-3-wrap"><div class="ring-dot"></div></div>
+        <div class="planet"></div>
       </div>
     </div>
   </section>
+
+  <StatsBar />
+
+  <!-- SERVICES -->
+  <section class="section services" id="services" aria-labelledby="services-heading">
+    <div class="section-header">
+      <div class="section-label reveal">⚡ What We Do</div>
+      <h2 class="section-title reveal" id="services-heading">Full-Stack Marketing<br /><span class="gradient-text">For Ambitious Brands</span></h2>
+      <p class="section-sub reveal">Every service is engineered to drive measurable results&mdash;no vanity metrics, no fluff. Only growth that impacts your actual bottom line.</p>
+    </div>
+    <div class="services-grid">
+      <a href="/services/ecommerce-seo" class="service-card" aria-label="E-commerce SEO service">
+        <span class="service-icon" aria-hidden="true">🛒</span>
+        <h3 class="service-name">E-commerce SEO</h3>
+        <p class="service-desc">Shopify, WooCommerce &amp; BigCommerce SEO that grows organic revenue — not just rankings. Our e-commerce clients average 312% organic traffic growth in 6 months and $1.2M+ in annual organic revenue.</p>
+        <span class="service-more" aria-hidden="true">Learn more &rarr;</span>
+      </a>
+      <a href="/services/seo" class="service-card" aria-label="SEO and Content Marketing service">
+        <span class="service-icon" aria-hidden="true">🔍</span>
+        <h3 class="service-name">SEO &amp; Content Marketing</h3>
+        <p class="service-desc">We build topical authority that compounds over time. Technical SEO audits, keyword cluster strategy, and content architecture that puts you at position one — and keeps you there.</p>
+        <span class="service-more" aria-hidden="true">Learn more &rarr;</span>
+      </a>
+      <a href="/services/google-ads" class="service-card" aria-label="Paid Advertising service">
+        <span class="service-icon" aria-hidden="true">🎯</span>
+        <h3 class="service-name">Paid Advertising</h3>
+        <p class="service-desc">Google, Meta, LinkedIn, TikTok&mdash;multi-platform paid campaigns that consistently deliver 5x+ ROAS. Our proprietary bidding framework eliminates wasted spend on every dollar.</p>
+        <span class="service-more" aria-hidden="true">Learn more &rarr;</span>
+      </a>
+      <a href="/services/social-media" class="service-card" aria-label="Social Media Marketing service">
+        <span class="service-icon" aria-hidden="true">📱</span>
+        <h3 class="service-name">Social Media Marketing</h3>
+        <p class="service-desc">We turn your social channels into genuine revenue engines. Strategy, content creation, community management, and influencer partnerships aligned to your business targets.</p>
+        <span class="service-more" aria-hidden="true">Learn more &rarr;</span>
+      </a>
+      <a href="/services/web-design" class="service-card" aria-label="Web Design and Development service">
+        <span class="service-icon" aria-hidden="true">🌐</span>
+        <h3 class="service-name">Web Design &amp; Development</h3>
+        <p class="service-desc">Conversion-optimised websites that load in under 2 seconds and turn visitors into leads. Core Web Vitals scores in the green. Your site becomes your highest-performing sales rep.</p>
+        <span class="service-more" aria-hidden="true">Learn more &rarr;</span>
+      </a>
+      <a href="/services/email-marketing" class="service-card" aria-label="Email Marketing service">
+        <span class="service-icon" aria-hidden="true">📧</span>
+        <h3 class="service-name">Email Marketing</h3>
+        <p class="service-desc">Email still delivers $42 ROI for every dollar spent. We build automated nurture sequences and lifecycle campaigns that convert cold leads into loyal buyers on autopilot.</p>
+        <span class="service-more" aria-hidden="true">Learn more &rarr;</span>
+      </a>
+      <a href="/services" class="service-card" aria-label="Analytics and Reporting service">
+        <span class="service-icon" aria-hidden="true">📊</span>
+        <h3 class="service-name">Analytics &amp; Reporting</h3>
+        <p class="service-desc">GA4, server-side tracking, custom Looker Studio dashboards, and attribution modelling that gives you full-funnel visibility from first click to closed deal. Every dollar justified.</p>
+        <span class="service-more" aria-hidden="true">Learn more &rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- WHY BOOMY -->
+  <section class="section why-boomy" id="about" aria-labelledby="why-heading">
+    <div class="why-inner">
+      <div class="why-left reveal-left">
+        <div class="section-label">🏆 Why Choose Us</div>
+        <h2 id="why-heading">WHY<br /><span class="line-2">CHOOSE</span><br />BOOMY?</h2>
+        <p>We are not a vendor&mdash;we are your growth partner. Toronto-based, globally minded, and obsessively focused on outcomes that matter to your business, not just your vanity dashboard. Twelve years in orbit means we have navigated every market cycle and know how to consistently win through all of them.</p>
+        <div class="why-accent-bar"></div>
+      </div>
+      <div class="why-bullets reveal-right">
+        <div class="why-bullet">
+          <div class="why-check" aria-hidden="true">✓</div>
+          <div class="why-bullet-content">
+            <h3>No Long-Term Lock-Ins</h3>
+            <p>We earn your business every month. Month-to-month agreements mean we are always performing at peak level. Your results are our contract renewal.</p>
+          </div>
+        </div>
+        <div class="why-bullet">
+          <div class="why-check" aria-hidden="true">✓</div>
+          <div class="why-bullet-content">
+            <h3>Dedicated Senior Strategy Team</h3>
+            <p>Every client receives a dedicated strategist, account manager, and specialist pod. No junior handoffs, no account-roulette between staff.</p>
+          </div>
+        </div>
+        <div class="why-bullet">
+          <div class="why-check" aria-hidden="true">✓</div>
+          <div class="why-bullet-content">
+            <h3>Transparent Real-Time Reporting</h3>
+            <p>Live dashboards, weekly performance calls, and zero-fluff reporting. You see every dollar spent and every test we run in real time.</p>
+          </div>
+        </div>
+        <div class="why-bullet">
+          <div class="why-check" aria-hidden="true">✓</div>
+          <div class="why-bullet-content">
+            <h3>Performance-Tied Pricing</h3>
+            <p>Genuine skin in the game. Our fee structure includes performance bonuses tied directly to KPIs we define together before a single campaign launches.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS BENTO GRID -->
+  <section class="section results" id="results" aria-labelledby="results-heading">
+    <div class="section-header">
+      <div class="section-label reveal">🚀 Client Results</div>
+      <h2 class="section-title reveal" id="results-heading">Numbers That <span class="gradient-text">Speak Louder</span></h2>
+      <p class="section-sub reveal">Real outcomes from real campaigns. Every metric belongs to an actual Boomy client&mdash;anonymised, verified, and never manufactured.</p>
+    </div>
+    <div class="bento-grid">
+      <div class="bento-card bento-1 reveal-left">
+        <div class="bento-label">E-Commerce / Google Ads + SEO / 9 Months</div>
+        <div class="bento-metric">340%</div>
+        <p class="bento-desc">Organic traffic increase for a Toronto-based e-commerce brand. 68 keywords to page one, lifting monthly visitors from 12,000 to 53,000 and annual online revenue by $280,000. Google Shopping campaigns achieved 6.2x ROAS while spending 22% less.</p>
+        <span class="bento-tag">SEO + Content + PPC</span>
+        <div class="bento-glow"></div>
+      </div>
+      <div class="bento-card bento-2 reveal-right">
+        <div class="bento-label">B2B SaaS / Meta + LinkedIn / 60 Days</div>
+        <div class="bento-metric">8x</div>
+        <p class="bento-desc">Return on ad spend for a SaaS platform. Rebuilt targeting architecture, dropping cost-per-MQL from $420 to $52 within 60 days while scaling monthly qualified pipeline by 340%.</p>
+        <span class="bento-tag">Paid Advertising</span>
+        <div class="bento-glow"></div>
+      </div>
+      <div class="bento-card bento-3 reveal">
+        <div class="bento-label">Health &amp; Wellness / Google Ads</div>
+        <div class="bento-metric">60%</div>
+        <p class="bento-desc">Lower cost per lead through smart bidding restructure, audience layering, and 14-variant CRO testing across landing pages during a focused 45-day sprint.</p>
+        <span class="bento-tag">Paid Ads + CRO</span>
+        <div class="bento-glow"></div>
+      </div>
+      <div class="bento-card bento-4 reveal">
+        <div class="bento-label">Retail Brand / Social + Influencer</div>
+        <div class="bento-metric">2.3M</div>
+        <p class="bento-desc">Total impressions in a single product launch, driving 18,000 new followers and $140K direct attributed revenue within 14 days of campaign activation.</p>
+        <span class="bento-tag">Social Media</span>
+        <div class="bento-glow"></div>
+      </div>
+      <div class="bento-card bento-5 reveal">
+        <div class="bento-label">Professional Services / Email</div>
+        <div class="bento-metric">52%</div>
+        <p class="bento-desc">Average open rate across automated 7-touch nurture sequences&mdash;outperforming the 21% industry average by more than 2.5x and generating a 19% MQL conversion rate.</p>
+        <span class="bento-tag">Email Marketing</span>
+        <div class="bento-glow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section process" id="process" aria-labelledby="process-heading">
+    <div class="section-header">
+      <div class="section-label reveal">🛸 How We Work</div>
+      <h2 class="section-title reveal" id="process-heading">Your Launch <span class="gradient-text">Sequence</span></h2>
+      <p class="section-sub reveal">A clear four-phase process that takes you from strategy to orbit&mdash;with complete transparency and zero surprises at every stage.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-number" aria-label="Step 1">🔭</div>
+        <h3 class="step-title">Discovery &amp; Audit</h3>
+        <p class="step-desc">We deep-dive into your business, market position, competitor landscape, and current marketing performance with zero assumptions. You receive a comprehensive audit within 5 business days of onboarding.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-number" aria-label="Step 2">🗺</div>
+        <h3 class="step-title">Strategy &amp; Roadmap</h3>
+        <p class="step-desc">We build a 90-day growth roadmap precisely tailored to your goals and budget. Every channel and campaign has a defined objective and measurable KPI. You approve everything before a cent of ad spend is committed.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-number" aria-label="Step 3">🚀</div>
+        <h3 class="step-title">Launch &amp; Optimise</h3>
+        <p class="step-desc">Campaigns go live using our 47-point launch checklist. We monitor performance daily during the critical first 30 days, running continuous A/B tests on creative, copy, audiences, and landing pages.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-number" aria-label="Step 4">📈</div>
+        <h3 class="step-title">Scale &amp; Report</h3>
+        <p class="step-desc">Once we identify what converts reliably, we scale it with discipline. Weekly reviews, monthly strategy sessions, and a live dashboard give you constant visibility into CAC, ROAS, LTV, and pipeline.</p>
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    label="📡 Ready for Liftoff?"
+    heading="Ready to"
+    headingHighlight="Launch?"
+    body="Share your email below and we will send over a complimentary 15-minute strategy session. No sales pitch, no obligation — just a candid look at your single biggest growth opportunity right now."
+  />
+
+  <LocationLinks />
+
+</main>
+</div>
+
+<script>
+function handleFormSubmit(e: Event) {
+  e.preventDefault();
+  const form = e.target as HTMLFormElement;
+  const inp = document.getElementById('emailInput') as HTMLInputElement;
+  const msg = document.getElementById('formMessage') as HTMLElement;
+  const val = inp.value.trim();
+
+  if (!val || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+    inp.style.borderColor = '#ff4d4d';
+    inp.setAttribute('aria-invalid', 'true');
+    inp.focus();
+    return;
+  }
+  inp.style.borderColor = '';
+  inp.setAttribute('aria-invalid', 'false');
+
+  const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    inp.value = '';
+    btn.textContent = '✓ You\'re on the launchpad!';
+    btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
+    btn.style.color = '#fff';
+    msg.textContent = 'We\'ll be in touch within 1 business day. Check your inbox!';
+    msg.style.color = '#86efac';
+  }, 900);
+}
+
+// Make handleFormSubmit globally accessible (called from inline onsubmit)
+(window as any).handleFormSubmit = handleFormSubmit;
+
+// GSAP animations
+window.addEventListener('load', () => {
+  if (typeof (window as any).gsap === 'undefined') return;
+  const gsap = (window as any).gsap;
+  const ScrollTrigger = (window as any).ScrollTrigger;
+  gsap.registerPlugin(ScrollTrigger);
+
+  const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  heroTl
+    .from('#heroBadge',    { opacity: 0, y: 30, duration: 0.6 })
+    .from('#hero-heading', { opacity: 0, y: 45, duration: 0.7 }, '-=0.3')
+    .from('.booming-word', { opacity: 0, scale: 0.82, duration: 0.65 }, '-=0.4')
+    .from('.hero-sub',     { opacity: 0, y: 24, duration: 0.55 }, '-=0.35')
+    .from('.hero-buttons', { opacity: 0, y: 20, duration: 0.5  }, '-=0.3')
+    .from('.hero-visual',  { opacity: 0, scale: 0.86, duration: 0.9, ease: 'back.out(1.4)' }, '-=0.7')
+    .from('.float-tag',    { opacity: 0, y: 18, stagger: 0.14, duration: 0.5 }, '-=0.55');
+
+  gsap.utils.toArray('.reveal').forEach((el: Element) => {
+    gsap.fromTo(el, { opacity: 0, y: 38 }, { opacity: 1, y: 0, duration: 0.72, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
+  });
+  gsap.utils.toArray('.reveal-left').forEach((el: Element) => {
+    gsap.fromTo(el, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.75, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
+  });
+  gsap.utils.toArray('.reveal-right').forEach((el: Element) => {
+    gsap.fromTo(el, { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 0.75, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } });
+  });
+  gsap.utils.toArray('.service-card').forEach((card: Element, i: number) => {
+    gsap.fromTo(card, { opacity: 0, y: 52, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.65, ease: 'power2.out',
+      delay: (i % 3) * 0.1, scrollTrigger: { trigger: card, start: 'top 91%', toggleActions: 'play none none none' } });
+  });
+  gsap.utils.toArray('.bento-card').forEach((card: Element, i: number) => {
+    gsap.fromTo(card, { opacity: 0, y: 42 }, { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', delay: i * 0.1,
+      scrollTrigger: { trigger: card, start: 'top 91%', toggleActions: 'play none none none' } });
+  });
+  gsap.utils.toArray('.stat-value').forEach((el: Element) => {
+    ScrollTrigger.create({ trigger: el, start: 'top 92%', once: true,
+      onEnter: () => gsap.from(el, { scale: 0.65, opacity: 0, duration: 0.55, ease: 'back.out(1.8)' }) });
+  });
+});
+</script>
+
 </BaseLayout>

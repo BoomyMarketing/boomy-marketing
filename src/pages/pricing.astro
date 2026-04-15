@@ -1,0 +1,218 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
+
+const plans = [
+  {
+    name: 'Starter',
+    price: '$1,500',
+    tagline: 'For businesses ready to build a foundation. SEO + one marketing channel, monthly reporting.',
+    featured: false,
+    enterprise: false,
+    features: [
+      { text: 'Full technical SEO audit & fix', included: true },
+      { text: 'Keyword strategy (up to 50 target terms)', included: true },
+      { text: '4 SEO-optimized blog posts/mo', included: true },
+      { text: '1 paid channel (Google OR Meta)', included: true },
+      { text: 'Monthly performance report', included: true },
+      { text: 'Email support (48h response)', included: true },
+      { text: 'Google Analytics 4 setup', included: true },
+      { text: 'Bi-weekly strategy calls', included: false },
+      { text: 'AI automations', included: false },
+      { text: 'Web design work', included: false },
+    ],
+    cta: { text: 'Get Started →', href: '/contact', style: 'btn-outline-orange' },
+  },
+  {
+    name: 'Growth',
+    price: '$3,500',
+    tagline: 'For scaling businesses. Full SEO + paid ads + web updates + AI automations, bi-weekly calls.',
+    featured: true,
+    enterprise: false,
+    features: [
+      { text: 'Everything in Starter', included: true },
+      { text: 'Google Ads + Meta Ads management', included: true },
+      { text: '8 SEO blog posts + landing pages/mo', included: true },
+      { text: 'Web design updates (up to 8 hrs/mo)', included: true },
+      { text: 'Basic AI automation (2 workflows)', included: true },
+      { text: 'Bi-weekly strategy calls', included: true },
+      { text: 'Bi-weekly performance reports', included: true },
+      { text: 'Priority Slack channel access', included: true },
+      { text: 'Conversion rate optimization', included: true },
+      { text: 'Dedicated account team', included: false },
+    ],
+    cta: { text: 'Get Started →', href: '/contact', style: 'btn-primary' },
+  },
+  {
+    name: 'Scale',
+    price: '$7,500',
+    tagline: 'Full-stack marketing with a dedicated team. AI development, all channels, maximum velocity.',
+    featured: false,
+    enterprise: false,
+    features: [
+      { text: 'Everything in Growth', included: true },
+      { text: 'Dedicated 3-person account team', included: true },
+      { text: 'All paid channels managed', included: true },
+      { text: 'Custom AI development (10 hrs/mo)', included: true },
+      { text: 'Voice AI agent deployment', included: true },
+      { text: 'AI outbound / SDR setup', included: true },
+      { text: 'Weekly strategy calls', included: true },
+      { text: 'Real-time Looker Studio dashboard', included: true },
+      { text: 'Priority 4h response SLA', included: true },
+      { text: 'Quarterly executive review', included: true },
+    ],
+    cta: { text: 'Get Started →', href: '/contact', style: 'btn-outline-orange' },
+  },
+  {
+    name: 'Enterprise',
+    price: 'Custom',
+    tagline: 'For enterprise brands with complex needs. Custom scope, custom team, custom SLA.',
+    featured: false,
+    enterprise: true,
+    features: [
+      { text: 'Everything in Scale', included: true },
+      { text: 'Fully custom service scope', included: true },
+      { text: 'Dedicated senior strategist', included: true },
+      { text: 'Custom AI product development', included: true },
+      { text: 'Multi-brand or multi-market', included: true },
+      { text: 'White-label reporting available', included: true },
+      { text: 'API integrations & custom builds', included: true },
+      { text: 'Quarterly on-site strategy sessions', included: true },
+      { text: 'Executive-level reporting', included: true },
+      { text: 'Flexible billing terms', included: true },
+    ],
+    cta: { text: 'Get a Custom Quote →', href: '/contact', style: 'btn-ghost' },
+  },
+];
+
+const faqs = [
+  {
+    q: 'What is the minimum commitment?',
+    a: 'We ask for an initial 3-month commitment on all plans to give strategies enough time to show results. After that, it\'s month-to-month with 30 days notice to cancel. We don\'t believe in locking clients into long contracts — we keep you because of results.',
+  },
+  {
+    q: 'Can I upgrade or downgrade my plan?',
+    a: 'Yes — you can upgrade at any time and the change takes effect immediately. Downgrades take effect at the start of the next billing cycle. We\'ll always recommend the right plan for your current stage of growth.',
+  },
+  {
+    q: 'Do you charge a setup fee?',
+    a: 'No setup fees on any plan. The first month includes onboarding — account setup, tracking installation, strategy development, and access to your client dashboard. Everything is included in your monthly rate from day one.',
+  },
+  {
+    q: 'What does "AI development included" mean on the Scale plan?',
+    a: 'Scale clients receive 10 hours/month of custom AI development from our Dev K. and AI team. This covers building custom workflows, LLM integrations, voice agents, AI chatbots, or any other AI tool specific to your business needs. Additional hours can be purchased at $185 CAD/hr.',
+  },
+  {
+    q: 'Do prices include ad spend?',
+    a: 'No — management fees are separate from ad spend. Your ad budget goes directly to Google or Meta; we manage the campaigns on top of that. We recommend minimum $1,500 CAD/mo in ad spend for Google Ads and $1,000 CAD/mo for Meta Ads to see meaningful results.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Pricing — Boomy Marketing Agency',
+  description: 'Transparent CAD pricing for digital marketing services. Starter from $1,500/mo, Growth $3,500/mo, Scale $7,500/mo, Enterprise custom.',
+  url: 'https://boomymarketing.com/pricing/',
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://boomymarketing.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Pricing', item: 'https://boomymarketing.com/pricing/' },
+    ],
+  },
+};
+---
+
+<BaseLayout
+  title="Pricing — Digital Marketing Packages in CAD | Boomy Marketing"
+  description="Transparent CAD pricing. Starter $1,500/mo · Growth $3,500/mo · Scale $7,500/mo · Enterprise custom. No hidden fees. Cancel after 3 months."
+  canonical="https://boomymarketing.com/pricing/"
+  schema={schema}
+>
+  <Nav />
+
+  <section class="page-hero" aria-labelledby="pricing-heading">
+    <div class="page-hero-inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><span aria-current="page">Pricing</span>
+      </nav>
+      <div class="section-label reveal">💰 Transparent Pricing</div>
+      <h1 id="pricing-heading" class="reveal">
+        Simple, Honest Pricing<br />
+        <span class="gradient-text">In CAD — No Surprises</span>
+      </h1>
+      <p class="reveal">No hidden fees. No surprise invoices. Every package includes clear deliverables, direct access to your team, and real-time performance dashboards. Cancel anytime after 3 months.</p>
+    </div>
+  </section>
+
+  <section class="pricing-section" aria-labelledby="plans-heading">
+    <h2 class="reveal" id="plans-heading" style="text-align:center;font-size:clamp(1.8rem,3.5vw,2.8rem);margin-bottom:48px;">
+      Choose Your <span class="gradient-text">Growth Plan</span>
+    </h2>
+    <div class="pricing-grid">
+      {plans.map((plan) => (
+        <div
+          class:list={['pricing-card', 'reveal', { featured: plan.featured, enterprise: plan.enterprise }]}
+          style={plan.enterprise ? 'background:rgba(124,58,237,.08);border-color:rgba(124,58,237,.3);' : ''}
+        >
+          {plan.featured && <div class="featured-badge">Most Popular</div>}
+          <div class="plan-name" style={plan.enterprise ? 'color:#a78bfa;' : ''}>{plan.name}</div>
+          <div class="plan-price" style={plan.enterprise ? 'font-size:2rem;' : ''}>
+            {plan.price} {!plan.enterprise && <span>CAD/mo</span>}
+          </div>
+          <div class="plan-tagline">{plan.tagline}</div>
+          <ul class="plan-features">
+            {plan.features.map((f) => (
+              <li class:list={[{ 'not-included': !f.included }]}>{f.text}</li>
+            ))}
+          </ul>
+          <a href={plan.cta.href} class:list={['btn', plan.cta.style]} style="width:100%;border-radius:var(--r-md);">
+            {plan.cta.text}
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <div style="text-align:center;margin-top:48px;color:var(--text-sec);font-size:.9rem;">
+      All prices in CAD. HST added where applicable. Month-to-month after initial 3-month commitment. Prices subject to change — locked in once contract signed.
+    </div>
+  </section>
+
+  <section class="faq-section" aria-labelledby="faq-heading">
+    <div class="faq-inner">
+      <h2 class="faq-title reveal" id="faq-heading">Pricing <span class="gradient-text">FAQs</span></h2>
+      {faqs.map((item) => (
+        <div class="faq-item">
+          <div class="faq-q">
+            {item.q} <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-a"><p>{item.a}</p></div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="cta-section" aria-labelledby="cta-pricing-heading">
+    <div class="cta-inner">
+      <div class="section-label" style="display:inline-flex;margin-bottom:20px;">📞 Free 30-Min Call</div>
+      <h2 id="cta-pricing-heading">Not Sure Which Plan Is Right?<br /><span class="gradient-text">Let's Figure It Out Together</span></h2>
+      <p>Book a free strategy call and we'll recommend the exact plan and services that match your goals and budget. Zero pressure, zero obligation.</p>
+      <div class="cta-buttons">
+        <a href="/contact" class="btn btn-primary" style="background:linear-gradient(135deg,var(--accent-orange),var(--accent-yellow));color:var(--bg-darkest);font-size:1.05rem;padding:17px 38px;">Book Free Strategy Call →</a>
+        <a href="/services" class="btn btn-ghost">View All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.faq-q').forEach((el) => {
+    el.addEventListener('click', () => {
+      el.closest('.faq-item')?.classList.toggle('open');
+    });
+  });
+</script>
