@@ -148,7 +148,7 @@
     /* SERVICES */
     .services { background: linear-gradient(180deg, var(--bg-darkest) 0%, var(--bg-deep) 50%, var(--bg-darkest) 100%); }
     .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
-    .service-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 36px 28px; transition: transform var(--transition-base),box-shadow var(--transition-base),border-color var(--transition-base); position: relative; overflow: hidden; backdrop-filter: blur(8px); }
+    .service-card { display: block; text-decoration: none; color: inherit; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 36px 28px; transition: transform var(--transition-base),box-shadow var(--transition-base),border-color var(--transition-base); position: relative; overflow: hidden; backdrop-filter: blur(8px); }
     .service-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg,rgba(255,107,53,.06),rgba(255,210,63,.03)); opacity: 0; transition: opacity .3s; border-radius: inherit; }
     .service-card::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg,var(--accent-orange),var(--accent-yellow)); opacity: 0; transition: opacity .3s; }
     .service-card:hover { border-color: rgba(255,107,53,.35); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(255,107,53,.15); }
@@ -378,7 +378,7 @@
 
     <div class="services-grid">
 
-      <article class="service-card" aria-label="E-commerce SEO service">
+      <a href="services/ecommerce-seo.html" class="service-card" aria-label="E-commerce SEO service">
         <span class="service-icon" aria-hidden="true">&#x1F6D2;</span>
         <h3 class="service-name">E-commerce SEO</h3>
         <p class="service-desc">
@@ -387,10 +387,10 @@
           ready to reduce their paid ad dependency. Our e-commerce clients average 312% organic traffic
           growth in 6 months and $1.2M+ in annual organic revenue.
         </p>
-        <span class="service-more" role="link" tabindex="0" aria-label="Learn more about E-commerce SEO">Learn more &rarr;</span>
-      </article>
+        <span class="service-more" aria-hidden="true">Learn more &rarr;</span>
+      </a>
 
-      <article class="service-card" aria-label="SEO and Content Marketing service">
+      <a href="services/seo.html" class="service-card" aria-label="SEO and Content Marketing service">
         <span class="service-icon" aria-hidden="true">&#x1F50D;</span>
         <h3 class="service-name">SEO &amp; Content Marketing</h3>
         <p class="service-desc">
@@ -399,10 +399,10 @@
           and guide is built to rank, convert, and build genuine trust with your ideal buyers. Organic traffic
           that keeps delivering ROI long after the campaign ends.
         </p>
-        <span class="service-more" role="link" tabindex="0" aria-label="Learn more about SEO and Content Marketing">Learn more &rarr;</span>
-      </article>
+        <span class="service-more" aria-hidden="true">Learn more &rarr;</span>
+      </a>
 
-      <article class="service-card" aria-label="Paid Advertising service">
+      <a href="services/google-ads.html" class="service-card" aria-label="Paid Advertising service">
         <span class="service-icon" aria-hidden="true">&#x1F3AF;</span>
         <h3 class="service-name">Paid Advertising</h3>
         <p class="service-desc">
@@ -411,10 +411,10 @@
           likely to convert. Full creative testing cycles, weekly bid optimisations, and absolutely zero
           set-and-forget campaign management. Your budget works as hard as we do.
         </p>
-        <span class="service-more" role="link" tabindex="0" aria-label="Learn more about Paid Advertising">Learn more &rarr;</span>
-      </article>
+        <span class="service-more" aria-hidden="true">Learn more &rarr;</span>
+      </a>
 
-      <article class="service-card" aria-label="Social Media Marketing service">
+      <a href="services/social-media.html" class="service-card" aria-label="Social Media Marketing service">
         <span class="service-icon" aria-hidden="true">&#x1F4F1;</span>
         <h3 class="service-name">Social Media Marketing</h3>
         <p class="service-desc">
@@ -423,10 +423,10 @@
           We grow engaged audiences that actually purchase, not just follow. Every post earns its place in
           your feed through rigorous performance tracking and creative iteration.
         </p>
-        <span class="service-more" role="link" tabindex="0" aria-label="Learn more about Social Media">Learn more &rarr;</span>
-      </article>
+        <span class="service-more" aria-hidden="true">Learn more &rarr;</span>
+      </a>
 
-      <article class="service-card" aria-label="Web Design and Development service">
+      <a href="services/web-design.html" class="service-card" aria-label="Web Design and Development service">
         <span class="service-icon" aria-hidden="true">&#x1F310;</span>
         <h3 class="service-name">Web Design &amp; Development</h3>
         <p class="service-desc">
@@ -435,10 +435,10 @@
           Core Web Vitals scores in the green. Your website becomes your highest-performing sales representative,
           working 24 hours a day without a salary or sick days.
         </p>
-        <span class="service-more" role="link" tabindex="0" aria-label="Learn more about Web Design">Learn more &rarr;</span>
-      </article>
+        <span class="service-more" aria-hidden="true">Learn more &rarr;</span>
+      </a>
 
-      <article class="service-card" aria-label="Email Marketing service">
+      <a href="services/email-marketing.html" class="service-card" aria-label="Email Marketing service">
         <span class="service-icon" aria-hidden="true">&#x1F4E7;</span>
         <h3 class="service-name">Email Marketing</h3>
         <p class="service-desc">
@@ -447,10 +447,10 @@
           loyal repeat buyers on autopilot. Our average client open rate sits 48% above industry benchmarks
           because every send is a conversation, not a broadcast.
         </p>
-        <span class="service-more" role="link" tabindex="0" aria-label="Learn more about Email Marketing">Learn more &rarr;</span>
-      </article>
+        <span class="service-more" aria-hidden="true">Learn more &rarr;</span>
+      </a>
 
-      <article class="service-card" aria-label="Analytics and Reporting service">
+      <a href="services.html" class="service-card" aria-label="Analytics and Reporting service">
         <span class="service-icon" aria-hidden="true">&#x1F4CA;</span>
         <h3 class="service-name">Analytics &amp; Reporting</h3>
         <p class="service-desc">
@@ -459,8 +459,8 @@
           first click to closed deal. Every touchpoint accounted for, every decision backed by clean data,
           every dollar of spend justified with evidence.
         </p>
-        <span class="service-more" role="link" tabindex="0" aria-label="Learn more about Analytics">Learn more &rarr;</span>
-      </article>
+        <span class="service-more" aria-hidden="true">Learn more &rarr;</span>
+      </a>
 
     </div>
   </section>
