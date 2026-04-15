@@ -1,0 +1,2 @@
+/* Re-export existing CSS — will be inlined via BaseLayout during migration */
+/* This file exists as Astro entry point; actual styles live in /assets/css/main.css */

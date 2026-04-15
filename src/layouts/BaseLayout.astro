@@ -1,0 +1,111 @@
+---
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  schema?: object | object[];
+  robots?: string;
+  pageStyle?: string; // page-specific inline CSS
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogTitle,
+  ogDescription,
+  ogImage = 'https://boomymarketing.com/og-image.png',
+  schema,
+  robots = 'index, follow',
+  pageStyle,
+} = Astro.props;
+
+const canonicalUrl = canonical ?? `https://boomymarketing.com${Astro.url.pathname}`;
+const resolvedOgTitle = ogTitle ?? title;
+const resolvedOgDesc = ogDescription ?? description;
+
+// Normalize schema to array for consistent rendering
+const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+---
+
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="robots" content={robots} />
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
+  <link rel="icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
+  <meta name="theme-color" content="#100930" />
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={resolvedOgTitle} />
+  <meta property="og:description" content={resolvedOgDesc} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_CA" />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Boomy Marketing Agency — Digital Marketing in Toronto, Canada" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:title" content={resolvedOgTitle} />
+  <meta name="twitter:description" content={resolvedOgDesc} />
+
+  <!-- Schema.org JSON-LD -->
+  {schemas.map((s) => (
+    <script type="application/ld+json" set:html={JSON.stringify(s)} />
+  ))}
+
+  <!-- Fonts (preloaded, noscript fallback) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <script>
+    // Load fonts async to avoid render-blocking
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap';
+    document.head.appendChild(link);
+  </script>
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@400;600;700&display=swap" />
+  </noscript>
+
+  <!-- GSAP (animations) -->
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+  <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" />
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Shared CSS & JS (cached across all pages) -->
+  <link rel="preload" href="/assets/css/main.css" as="style" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <script defer src="/assets/js/main.js"></script>
+
+  <!-- Page-specific CSS -->
+  {pageStyle && <style set:html={pageStyle} />}
+</head>
+<body>
+  <Nav />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

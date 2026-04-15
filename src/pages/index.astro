@@ -1,0 +1,62 @@
+---
+/**
+ * index.astro — Homepage scaffold (Phase 0)
+ * Content migration from index.html happens in Phase 2.
+ * This file exists to verify Astro builds successfully.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "MarketingAgency",
+  "name": "Boomy Marketing Agency",
+  "url": "https://boomymarketing.com",
+  "description": "Award-winning digital marketing agency based in Toronto specialising in SEO, paid advertising, social media, web design, email marketing, and analytics.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Toronto",
+    "addressRegion": "ON",
+    "addressCountry": "CA"
+  },
+  "telephone": "+16473701888",
+  "email": "care@boomymarketing.com",
+  "foundingDate": "2020",
+  "sameAs": [
+    "https://instagram.com/boomymarketing",
+    "https://linkedin.com/company/boomymarketing",
+    "https://x.com/DMABOOMY",
+    "https://facebook.com/boomymarketing"
+  ]
+};
+
+const pageStyle = `
+  /* HERO */
+  .hero { min-height: 100vh; min-height: 100dvh; padding: var(--nav-h) 5% 80px; display: flex; align-items: center; position: relative; overflow: hidden; }
+  .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%; }
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+  }
+`;
+---
+
+<BaseLayout
+  title="Boomy Marketing Agency — Toronto's Premier Digital Agency"
+  description="Boomy Marketing Agency is Toronto's AI-powered digital marketing agency. SEO, Google Ads, social media, and web design that puts your brand light-years ahead."
+  canonical="https://boomymarketing.com"
+  ogTitle="Boomy Marketing Agency — Launch Your Business Into The Stratosphere"
+  ogDescription="Data-driven marketing that puts your brand light-years ahead. Toronto's premier digital agency."
+  schema={schema}
+  pageStyle={pageStyle}
+>
+  <!-- Phase 0 scaffold: content will be migrated from index.html in Phase 2 -->
+  <section class="hero section">
+    <div class="hero-inner container">
+      <div>
+        <h1>Launch Your Business Into The Stratosphere</h1>
+        <p>Toronto's AI-powered digital marketing agency. Full migration in progress.</p>
+        <a href="/contact" class="btn btn-primary">Get Started</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
