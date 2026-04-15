@@ -240,6 +240,11 @@ Allow: /local/victoria/social-media-marketing-agency
 Allow: /local/victoria/web-design-company
 Allow: /local/windsor/ai-automation-agency
 Allow: /local/windsor/ai-development-company
+Allow: /local/windsor/content-marketing-agency
+Allow: /local/windsor/digital-marketing-agency
+Allow: /local/windsor/email-marketing-agency
+Allow: /local/windsor/google-ads-agency
+Allow: /local/windsor/seo-agency
 
 # Block unpublished local pages
 Disallow: /local/
