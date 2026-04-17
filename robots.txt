@@ -250,6 +250,11 @@ Allow: /local/vancouver/google-ads-agency
 Allow: /local/vancouver/seo-agency
 Allow: /local/vancouver/seo-company
 Allow: /local/vancouver/social-media-marketing-agency
+Allow: /local/vancouver/web-design-company
+Allow: /local/victoria/ai-automation-agency
+Allow: /local/victoria/ai-development-company
+Allow: /local/victoria/content-marketing-agency
+Allow: /local/victoria/digital-marketing-agency
 
 # Block unpublished local pages
 Disallow: /local/
