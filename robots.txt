@@ -255,6 +255,11 @@ Allow: /local/victoria/ai-automation-agency
 Allow: /local/victoria/ai-development-company
 Allow: /local/victoria/content-marketing-agency
 Allow: /local/victoria/digital-marketing-agency
+Allow: /local/victoria/ecommerce-seo-agency
+Allow: /local/victoria/email-marketing-agency
+Allow: /local/victoria/google-ads-agency
+Allow: /local/victoria/seo-agency
+Allow: /local/victoria/seo-company
 
 # Block unpublished local pages
 Disallow: /local/
