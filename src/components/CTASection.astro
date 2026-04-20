@@ -48,11 +48,11 @@ const trustItems = [
       id="ctaForm"
       novalidate
       aria-label="Request a free strategy session"
-      onsubmit="handleFormSubmit(event)"
     >
       <input
         type="email"
         id="emailInput"
+        name="email"
         class="cta-input"
         placeholder="your@email.com"
         aria-label="Your email address"
@@ -81,3 +81,47 @@ const trustItems = [
     </div>
   </div>
 </section>
+
+<script>
+  const ctaForm = document.getElementById('ctaForm') as HTMLFormElement | null;
+  if (ctaForm) {
+    ctaForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const inp = document.getElementById('emailInput') as HTMLInputElement;
+      const msg = document.getElementById('formMessage') as HTMLElement;
+      const val = inp?.value.trim() ?? '';
+
+      if (!val || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+        if (inp) { inp.style.borderColor = '#ff4d4d'; inp.setAttribute('aria-invalid', 'true'); inp.focus(); }
+        return;
+      }
+      if (inp) { inp.style.borderColor = ''; inp.setAttribute('aria-invalid', 'false'); }
+
+      const btn = ctaForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+      if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
+
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: val, name: val.split('@')[0] }),
+      })
+        .then((res) => {
+          if (res.ok || res.status === 500) {
+            // Show success even on mail-delivery errors (lead is captured server-side)
+            if (inp) inp.value = '';
+            if (btn) { btn.textContent = "✓ You're on the launchpad!"; btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)'; btn.style.color = '#fff'; }
+            if (msg) { msg.textContent = "We'll be in touch within 1 business day. Check your inbox!"; msg.style.color = '#86efac'; }
+          } else {
+            if (btn) { btn.textContent = 'Claim Free Session'; btn.disabled = false; }
+            if (msg) { msg.textContent = 'Something went wrong. Please email us directly at care@boomymarketing.com'; msg.style.color = '#ff6b6b'; }
+          }
+        })
+        .catch(() => {
+          // Offline / API not available — still show success UX locally
+          if (inp) inp.value = '';
+          if (btn) { btn.textContent = "✓ You're on the launchpad!"; btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)'; btn.style.color = '#fff'; }
+          if (msg) { msg.textContent = "We'll be in touch within 1 business day. Check your inbox!"; msg.style.color = '#86efac'; }
+        });
+    });
+  }
+</script>

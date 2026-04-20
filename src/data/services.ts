@@ -644,7 +644,7 @@ export const SERVICES_DATA = [
     },
     ctaBtn2: {
       text: "See SEO Services",
-      href: "https://boomymarketing.com/services/seo.html"
+      href: "https://boomymarketing.com/services/content-marketing"
     }
   },
   {
@@ -1088,7 +1088,7 @@ export const SERVICES_DATA = [
     },
     ctaBtn2: {
       text: "See SEO Services",
-      href: "https://boomymarketing.com/services/seo.html"
+      href: "https://boomymarketing.com/services/content-marketing"
     }
   },
   {

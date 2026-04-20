@@ -562,6 +562,72 @@
     line-height: 1.7;
   }
   .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  /* CTA email form (CTASection component — used on all pages) */
+  .cta-form {
+    display: flex;
+    gap: 12px;
+    max-width: 520px;
+    margin: 0 auto 12px;
+  }
+  .cta-input {
+    flex: 1;
+    padding: 16px 22px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 100px;
+    color: #fff;
+    font-size: max(16px, 0.95rem);
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .cta-input::placeholder { color: rgba(255,255,255,0.5); }
+  .cta-input:focus {
+    border-color: rgba(255,255,255,0.65);
+    background: rgba(255,255,255,0.17);
+  }
+  .cta-note {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.55);
+    margin-top: 8px;
+  }
+  .cta-trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    margin-top: 44px;
+    flex-wrap: wrap;
+  }
+  .cta-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+  }
+  .cta-trust-icon { color: var(--accent-yellow); font-size: 1.1rem; }
+
+  /* btn-cta variant */
+  .btn-cta {
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+    color: var(--bg-darkest);
+    font-size: 1.05rem;
+    padding: 17px 38px;
+    box-shadow: 0 12px 40px rgba(255,107,53,0.45);
+  }
+  .btn-cta:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 22px 62px rgba(255,107,53,0.6);
+    color: var(--bg-darkest);
+  }
+
+  @media (max-width: 768px) {
+    .cta-form { flex-direction: column; }
+    .cta-input { border-radius: var(--r-md); }
+    .btn-cta { border-radius: var(--r-md); width: 100%; justify-content: center; }
+  }
 }
 
 /* ================================================================

@@ -1,0 +1,340 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CTASection from '@components/CTASection.astro';
+import { SERVICES_DATA } from '@data/services';
+
+export async function getStaticPaths() {
+  return SERVICES_DATA.map((svc) => ({
+    params: { slug: svc.slug },
+    props: { svc },
+  }));
+}
+
+const { svc } = Astro.props;
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": svc.title,
+    "description": svc.metaDescription,
+    "url": svc.canonical,
+    "provider": {
+      "@type": "MarketingAgency",
+      "name": "Boomy Marketing Agency",
+      "url": "https://boomymarketing.com",
+      "telephone": "+16473701888",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Toronto",
+        "addressRegion": "ON",
+        "addressCountry": "CA"
+      }
+    }
+  },
+  ...(svc.faqs.length > 0 ? [{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": svc.faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a
+      }
+    }))
+  }] : []),
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://boomymarketing.com" },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://boomymarketing.com/services" },
+      { "@type": "ListItem", "position": 3, "name": svc.title.split('|')[0].trim(), "item": svc.canonical }
+    ]
+  }
+];
+
+const pageStyle = `
+  /* HERO */
+  .page-hero { min-height: 70vh; padding: calc(var(--nav-h) + 80px) 5% 100px; display: flex; align-items: center; position: relative; overflow: hidden; background: radial-gradient(ellipse at 20% 50%, rgba(124,58,237,.2) 0%, transparent 55%), radial-gradient(ellipse at 80% 30%, rgba(255,107,53,.12) 0%, transparent 50%), linear-gradient(180deg, var(--bg-darkest) 0%, var(--bg-deep) 100%); }
+  .page-hero::before { content: ""; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events: none; }
+  .page-hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center; }
+  .hero-left { display: flex; flex-direction: column; gap: 0; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,210,63,.12); border: 1px solid rgba(255,210,63,.3); border-radius: 100px; padding: 7px 18px; font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-yellow); margin-bottom: 28px; align-self: flex-start; }
+  .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-yellow); animation: pulseGreen 2s ease-in-out infinite; }
+  @keyframes pulseGreen { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.6)} }
+  .page-hero h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900; line-height: 1.06; letter-spacing: -.03em; margin-bottom: 24px; }
+  .page-hero h1 span { background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-sub { font-size: 1.05rem; color: var(--text-sec); line-height: 1.78; margin-bottom: 40px; max-width: 520px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-stats { display: flex; flex-direction: column; gap: 16px; }
+  .hero-stat-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 20px 24px; display: flex; align-items: center; gap: 18px; transition: border-color .3s, transform .3s; }
+  .hero-stat-card:hover { border-color: rgba(255,107,53,.3); transform: translateX(6px); }
+  .hero-stat-num { font-size: 1.9rem; font-weight: 900; background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; white-space: nowrap; flex-shrink: 0; }
+  .hero-stat-label { font-size: .88rem; color: var(--text-sec); line-height: 1.4; }
+  /* BREADCRUMB */
+  .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; font-size: .82rem; color: var(--text-muted); flex-wrap: wrap; }
+  .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color .2s; }
+  .breadcrumb a:hover { color: var(--accent-orange); }
+  .breadcrumb-sep { color: rgba(255,255,255,.2); }
+  .breadcrumb-cur { color: var(--text-sec); }
+  /* WHAT IS */
+  .what-is { background: var(--bg-darkest); }
+  .what-is-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; max-width: 1200px; margin: 0 auto; }
+  .what-is-left h2 { font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 900; line-height: 1.1; margin-bottom: 24px; }
+  .what-is-left p { color: var(--text-sec); line-height: 1.8; margin-bottom: 18px; font-size: .96rem; }
+  .what-is-cards { display: flex; flex-direction: column; gap: 16px; }
+  .wi-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-md); padding: 20px 24px; }
+  .wi-card-title { font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
+  .wi-card-text { font-size: .87rem; color: var(--text-sec); line-height: 1.6; }
+  /* SERVICES GRID */
+  .svc-grid { background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-darkest) 100%); }
+  .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+  .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 32px 28px; transition: transform .3s, border-color .3s, box-shadow .3s; position: relative; overflow: hidden; }
+  .card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow)); opacity: 0; transition: opacity .3s; }
+  .card:hover { transform: translateY(-6px); border-color: rgba(255,107,53,.35); box-shadow: 0 20px 60px rgba(255,107,53,.12); }
+  .card:hover::before { opacity: 1; }
+  .card-icon { font-size: 2.2rem; margin-bottom: 18px; display: block; line-height: 1; }
+  .card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+  .card p { font-size: .88rem; color: var(--text-sec); line-height: 1.65; }
+  /* HERO VISUAL (service icons grid) */
+  .hero-visual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .hv-item { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-md); padding: 16px 18px; display: flex; align-items: center; gap: 14px; transition: border-color .3s; }
+  .hv-item:hover { border-color: rgba(255,107,53,.3); }
+  .hv-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .hv-strong { font-size: .9rem; font-weight: 700; margin-bottom: 3px; }
+  .hv-sub { font-size: .78rem; color: var(--text-sec); }
+  /* PROCESS */
+  .process { background: var(--bg-darkest); }
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1200px; margin: 0 auto; position: relative; }
+  .step { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 32px 28px; position: relative; }
+  .step-num { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 900; color: var(--bg-darkest); margin-bottom: 20px; box-shadow: 0 6px 24px rgba(255,107,53,.35); }
+  .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+  .step p { font-size: .87rem; color: var(--text-sec); line-height: 1.65; }
+  /* RESULTS */
+  .results { background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-darkest) 100%); }
+  .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+  .result-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 32px 24px; text-align: center; position: relative; overflow: hidden; transition: transform .3s, border-color .3s; }
+  .result-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow)); }
+  .result-card:hover { transform: translateY(-5px); border-color: rgba(255,107,53,.3); }
+  .result-num { font-size: 2.4rem; font-weight: 900; background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 10px; }
+  .result-label { font-size: .82rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; }
+  /* FAQ */
+  .faq { background: var(--bg-darkest); }
+  .faq-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-md); overflow: hidden; }
+  .faq-q { width: 100%; background: none; border: none; color: var(--text-primary); font-size: 1rem; font-weight: 600; padding: 22px 24px; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; line-height: 1.4; transition: color .2s; }
+  .faq-q:hover { color: var(--accent-orange); }
+  .faq-icon { font-size: 1.2rem; flex-shrink: 0; transition: transform .3s; color: var(--accent-orange); }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-a { display: none; padding: 0 24px 22px; font-size: .92rem; color: var(--text-sec); line-height: 1.78; border-top: 1px solid rgba(255,255,255,.06); padding-top: 18px; }
+  .faq-item.open .faq-a { display: block; }
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .page-hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    .hero-stats { flex-direction: row; flex-wrap: wrap; }
+    .hero-stat-card { flex: 1; min-width: 200px; }
+    .what-is-inner { grid-template-columns: 1fr; gap: 48px; }
+    .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    .steps-grid { grid-template-columns: repeat(2, 1fr); }
+    .results-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .page-hero { padding: calc(var(--nav-h) + 40px) 5% 60px; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-visual-grid { grid-template-columns: 1fr; }
+  }
+`;
+---
+
+<BaseLayout
+  title={svc.title}
+  description={svc.metaDescription}
+  canonical={svc.canonical}
+  schema={schema}
+  pageStyle={pageStyle}
+>
+
+  <!-- HERO -->
+  <section class="page-hero" aria-labelledby="svc-h1">
+    <div class="page-hero-inner">
+      <div class="hero-left">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span class="breadcrumb-sep" aria-hidden="true">›</span>
+          <a href="/services">Services</a>
+          <span class="breadcrumb-sep" aria-hidden="true">›</span>
+          <span class="breadcrumb-cur">{svc.title.split('|')[0].trim()}</span>
+        </nav>
+
+        {svc.heroBadge && (
+          <div class="hero-badge">
+            <span class="hero-badge-dot" aria-hidden="true"></span>
+            <span set:html={svc.heroBadge} />
+          </div>
+        )}
+
+        <h1 id="svc-h1" set:html={svc.heroH1} />
+        <p class="hero-sub">{svc.heroP}</p>
+
+        <div class="hero-actions">
+          <a href="/contact" class="btn btn-primary magnetic-btn">Get Free Strategy Session</a>
+          <a href="/services" class="btn btn-ghost">All Services</a>
+        </div>
+      </div>
+
+      {svc.heroStats.length > 0 && (
+        <div class="hero-stats" aria-label="Key statistics">
+          {svc.heroStats.map((s) => (
+            <div class="hero-stat-card reveal">
+              <div class="hero-stat-num">{s.num}</div>
+              <div class="hero-stat-label">{s.label}</div>
+            </div>
+          ))}
+          {svc.heroVisualItems.slice(0, 2).map((item) => (
+            <div class="hv-item reveal">
+              <span class="hv-icon" aria-hidden="true" set:html={item.icon} />
+              <div>
+                <div class="hv-strong">{item.title}</div>
+                <div class="hv-sub">{item.sub}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- WHAT IS -->
+  {svc.whatIsTitle && (
+    <section class="section what-is" aria-labelledby="what-is-heading">
+      <div class="what-is-inner">
+        <div class="what-is-left">
+          {svc.whatIsLabel && <div class="section-label reveal">{svc.whatIsLabel}</div>}
+          <h2 id="what-is-heading" class="reveal" set:html={svc.whatIsTitle} />
+          {svc.whatIsText.map((para) => (
+            <p class="reveal">{para}</p>
+          ))}
+        </div>
+        {svc.heroVisualItems.length > 2 && (
+          <div class="what-is-cards">
+            {svc.heroVisualItems.slice(2).map((item) => (
+              <div class="hv-item reveal">
+                <span class="hv-icon" aria-hidden="true" set:html={item.icon} />
+                <div>
+                  <div class="hv-strong">{item.title}</div>
+                  <div class="hv-sub">{item.sub}</div>
+                </div>
+              </div>
+            ))}
+            {svc.whatIsCards.map((c) => (
+              <div class="wi-card reveal">
+                <div class="wi-card-title">{c.title}</div>
+                <div class="wi-card-text">{c.text}</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- SERVICES / CARDS -->
+  {svc.cards.length > 0 && (
+    <section class="section svc-grid" aria-labelledby="cards-heading">
+      <div class="section-header">
+        {svc.servicesSectionLabel && <div class="section-label reveal">{svc.servicesSectionLabel}</div>}
+        <h2 class="section-title reveal" id="cards-heading" set:html={svc.servicesSectionTitle} />
+        {svc.servicesSectionSub && <p class="section-sub reveal">{svc.servicesSectionSub}</p>}
+      </div>
+      <div class="cards-grid">
+        {svc.cards.map((card) => (
+          <div class="card reveal">
+            <span class="card-icon" aria-hidden="true" set:html={card.icon} />
+            <h3>{card.title}</h3>
+            <p>{card.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- PROCESS / STEPS -->
+  {svc.steps.length > 0 && (
+    <section class="section process" aria-labelledby="process-heading">
+      <div class="section-header">
+        {svc.processLabel && <div class="section-label reveal">{svc.processLabel}</div>}
+        <h2 class="section-title reveal" id="process-heading" set:html={svc.processTitle} />
+        {svc.processSub && <p class="section-sub reveal">{svc.processSub}</p>}
+      </div>
+      <div class="steps-grid">
+        {svc.steps.map((step) => (
+          <div class="step reveal">
+            <div class="step-num" aria-hidden="true">{step.num}</div>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- RESULTS -->
+  {svc.results.length > 0 && (
+    <section class="section results" aria-labelledby="results-heading">
+      <div class="section-header">
+        {svc.resultsLabel && <div class="section-label reveal">{svc.resultsLabel}</div>}
+        <h2 class="section-title reveal" id="results-heading" set:html={svc.resultsTitle} />
+        {svc.resultsSub && <p class="section-sub reveal">{svc.resultsSub}</p>}
+      </div>
+      <div class="results-grid">
+        {svc.results.map((r) => (
+          <div class="result-card reveal">
+            <div class="result-num">{r.num}</div>
+            <div class="result-label">{r.label}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- FAQ -->
+  {svc.faqs.length > 0 && (
+    <section class="section faq" aria-labelledby="faq-heading">
+      <div class="section-header">
+        {svc.faqLabel && <div class="section-label reveal">{svc.faqLabel}</div>}
+        <h2 class="section-title reveal" id="faq-heading" set:html={svc.faqTitle} />
+      </div>
+      <div class="faq-list" role="list">
+        {svc.faqs.map((faq, i) => (
+          <div class="faq-item reveal" role="listitem" id={`faq-${i}`}>
+            <button
+              class="faq-q"
+              aria-expanded="false"
+              aria-controls={`faq-a-${i}`}
+            >
+              {faq.q}
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a" id={`faq-a-${i}`} role="region">
+              {faq.a}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <CTASection
+    label="📡 Ready to Grow?"
+    heading="Let's Build Your"
+    headingHighlight="Growth Engine"
+    body="Tell us about your business and we'll map out a custom strategy in a free 15-minute session. No contracts, no commitments."
+  />
+
+</BaseLayout>
+

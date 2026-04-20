@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import Nav from '@components/Nav.astro';
-import Footer from '@components/Footer.astro';
 
 const serviceCards = [
   {
@@ -166,6 +164,65 @@ const schema = {
     ],
   },
 };
+
+const pageStyle = `
+  /* SERVICES GRID */
+  .section { padding: 80px 5%; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+  .service-card { display: flex; flex-direction: column; gap: 12px; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 32px 28px; text-decoration: none; color: var(--text-primary); transition: transform .3s, border-color .3s, box-shadow .3s; position: relative; overflow: hidden; }
+  .service-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow)); opacity: 0; transition: opacity .3s; }
+  .service-card:hover { transform: translateY(-6px); border-color: rgba(255,107,53,.35); box-shadow: 0 20px 60px rgba(255,107,53,.12); }
+  .service-card:hover::before { opacity: 1; }
+  .service-icon { font-size: 2.2rem; line-height: 1; }
+  .service-name { font-size: 1.1rem; font-weight: 700; }
+  .service-desc { font-size: .88rem; color: var(--text-sec); line-height: 1.65; flex: 1; }
+  .service-metric { font-size: .8rem; font-weight: 700; color: var(--accent-orange); padding: 5px 12px; background: rgba(255,107,53,.1); border: 1px solid rgba(255,107,53,.2); border-radius: 100px; align-self: flex-start; }
+  .service-more { font-size: .88rem; font-weight: 600; color: var(--accent-orange); }
+  /* STATS */
+  .stats-section { background: var(--bg-darkest); padding: 80px 5%; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+  .stat-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 36px 24px; text-align: center; transition: transform .3s, border-color .3s; }
+  .stat-card:hover { transform: translateY(-5px); border-color: rgba(255,107,53,.3); }
+  .stat-number { font-size: 2.6rem; font-weight: 900; background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 10px; }
+  .stat-label { font-size: .85rem; color: var(--text-sec); line-height: 1.4; }
+  /* INDUSTRIES */
+  .industries-section { background: var(--bg-deep); padding: 80px 5%; }
+  .section-container { max-width: 1200px; margin: 0 auto; }
+  .industries-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+  .industry-item { display: flex; align-items: flex-start; gap: 14px; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-md); padding: 20px 22px; transition: border-color .2s; }
+  .industry-item:hover { border-color: rgba(255,107,53,.3); }
+  .industry-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .industry-name { font-size: .95rem; font-weight: 700; margin-bottom: 4px; }
+  .industry-desc { font-size: .83rem; color: var(--text-sec); line-height: 1.5; }
+  /* FAQ */
+  .faq-section { background: var(--bg-darkest); padding: 80px 5%; }
+  .faq-container { max-width: 900px; margin: 0 auto; }
+  .faq-grid { display: flex; flex-direction: column; gap: 0; }
+  .faq-item { border-bottom: 1px solid var(--card-border); }
+  .faq-q { width: 100%; background: none; border: none; color: var(--text-primary); font-size: .98rem; font-weight: 600; padding: 22px 0; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; line-height: 1.4; transition: color .2s; }
+  .faq-q:hover { color: var(--accent-orange); }
+  .faq-q svg { flex-shrink: 0; transition: transform .3s; color: var(--accent-orange); }
+  .faq-item.open .faq-q svg { transform: rotate(45deg); }
+  .faq-a { display: none; padding-bottom: 20px; font-size: .92rem; color: var(--text-sec); line-height: 1.78; }
+  .faq-item.open .faq-a { display: block; }
+  /* CTA */
+  .cta-section { background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-darkest) 100%); padding: 100px 5%; text-align: center; }
+  .cta-inner { max-width: 680px; margin: 0 auto; }
+  .cta-inner h2 { font-size: clamp(2rem,4vw,3rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+  .cta-inner p { color: var(--text-sec); line-height: 1.75; margin-bottom: 40px; }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .industries-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .industries-grid { grid-template-columns: 1fr; }
+  }
+`;
 ---
 
 <BaseLayout
@@ -173,9 +230,8 @@ const schema = {
   description="14 AI-powered digital marketing services for Canadian businesses. SEO, Google Ads, Meta Ads, AI Automations, Web Design & more. No lock-in contracts."
   canonical="https://boomymarketing.com/services/"
   schema={schema}
+  {pageStyle}
 >
-  <Nav />
-
   <section class="page-hero" aria-labelledby="services-heading">
     <div class="page-hero-inner">
       <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -285,15 +341,5 @@ const schema = {
     </div>
   </section>
 
-  <Footer />
 </BaseLayout>
 
-<script>
-  document.querySelectorAll<HTMLButtonElement>('.faq-q').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!expanded));
-      btn.closest('.faq-item')?.classList.toggle('open');
-    });
-  });
-</script>

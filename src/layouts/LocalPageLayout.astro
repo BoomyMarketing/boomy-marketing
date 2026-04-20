@@ -17,52 +17,57 @@
 
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumb from '@components/Breadcrumb.astro';
-import type { LocalPageData, FAQItem } from '@data/types';
+import type { City } from '@data/cities';
+import type { LocalService } from '@data/localServices';
 
 interface Props {
-  page: LocalPageData;
-  faqs?: FAQItem[];
+  city: City;
+  service: LocalService;
+  faqs?: Array<{question: string, answer: string}>;
   pageStyle?: string;
 }
 
-const { page, faqs = [], pageStyle } = Astro.props;
+const { city, service, faqs = [], pageStyle } = Astro.props;
 
-const canonicalUrl = `https://boomymarketing.com${page.canonicalPath}`;
+const title = `${service.displayName} in ${city.displayName} | Boomy Marketing`;
+const description = `${service.displayName} in ${city.displayName}, ${city.provinceCode}. Boomy Marketing Agency — measurable results, more leads, better ROI. Book a free strategy session.`;
+const canonicalUrl = `https://boomymarketing.com/local/${city.slug}/${service.slug}`;
 
 // ─── LocalBusiness + MarketingAgency schema ───────────────────────────────
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "MarketingAgency"],
   "name": "Boomy Marketing Agency",
-  "description": `${page.serviceName} services in ${page.cityName}`,
+  "description": `${service.displayName} services in ${city.displayName}`,
   "url": canonicalUrl,
   "telephone": "+16473701888",
   "email": "care@boomymarketing.com",
   "address": {
     "@type": "PostalAddress",
-    "addressLocality": page.cityName,
-    "addressRegion": page.province,
+    "addressLocality": city.displayName,
+    "addressRegion": city.provinceCode,
     "addressCountry": "CA",
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": page.geo.latitude,
-    "longitude": page.geo.longitude,
+    "latitude": city.latitude,
+    "longitude": city.longitude,
   },
-  "priceRange": "$$",
+  "priceRange": service.priceRange,
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": page.serviceName,
-    "itemListElement": [
-      { "@type": "Offer", "name": `${page.serviceName} - Starter`, "price": "$1,500 CAD/mo", "priceCurrency": "CAD" },
-      { "@type": "Offer", "name": `${page.serviceName} - Growth`,  "price": "$3,500 CAD/mo", "priceCurrency": "CAD" },
-      { "@type": "Offer", "name": `${page.serviceName} - Scale`,   "price": "$7,500 CAD/mo", "priceCurrency": "CAD" },
-    ],
+    "name": service.displayName,
+    "itemListElement": service.offers.map(offer => ({
+      "@type": "Offer",
+      "name": offer.name,
+      "price": offer.price,
+      "priceCurrency": offer.currency
+    }))
   },
-  "areaServed": [
-    { "@type": "City", "name": page.cityName },
-    ...page.nearbyCities.map((c) => ({ "@type": "City", "name": c })),
-  ],
+  "areaServed": city.areaServed.map(area => ({
+    "@type": "City",
+    "name": area
+  })),
   "dateModified": new Date().toISOString().split('T')[0],
 };
 
@@ -81,7 +86,7 @@ const faqSchema = faqs.length > 0 ? {
 const breadcrumbItems = [
   { label: 'Home', href: '/' },
   { label: 'Local', href: '/local' },
-  { label: `${page.serviceName} in ${page.cityName}` },
+  { label: `${service.displayName} in ${city.displayName}` },
 ];
 
 // Combine schemas (BaseLayout handles the array)
@@ -92,8 +97,8 @@ const schemas = [
 ---
 
 <BaseLayout
-  title={page.title}
-  description={page.description}
+  title={title}
+  description={description}
   canonical={canonicalUrl}
   schema={schemas}
   pageStyle={pageStyle}

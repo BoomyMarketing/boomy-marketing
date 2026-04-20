@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import Nav from '@components/Nav.astro';
-import Footer from '@components/Footer.astro';
 
 const plans = [
   {
@@ -123,6 +121,48 @@ const schema = {
     ],
   },
 };
+
+const pageStyle = `
+  .page-hero { padding: calc(var(--nav-h) + 80px) 5% 80px; text-align: center; background: radial-gradient(ellipse at 50% 0%, rgba(124,58,237,.25) 0%, transparent 60%), linear-gradient(180deg, var(--bg-darkest) 0%, var(--bg-deep) 100%); }
+  .page-hero-inner { max-width: 780px; margin: 0 auto; }
+  .page-hero h1 { font-size: clamp(2.4rem,5vw,4rem); font-weight: 900; line-height: 1.06; letter-spacing: -.03em; margin-bottom: 24px; }
+  .page-hero p { font-size: 1.05rem; color: var(--text-sec); line-height: 1.75; max-width: 580px; margin: 0 auto; }
+  .pricing-section { background: var(--bg-deep); padding: 80px 5%; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1300px; margin: 0 auto; }
+  .pricing-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-lg); padding: 36px 28px; display: flex; flex-direction: column; gap: 0; position: relative; transition: transform .3s, border-color .3s, box-shadow .3s; }
+  .pricing-card:hover { transform: translateY(-6px); border-color: rgba(255,107,53,.3); box-shadow: 0 20px 60px rgba(255,107,53,.1); }
+  .pricing-card.featured { border-color: var(--accent-orange); box-shadow: 0 0 0 1px var(--accent-orange), 0 24px 80px rgba(255,107,53,.18); }
+  .featured-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg,var(--accent-orange),var(--accent-yellow)); color: var(--bg-darkest); font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 5px 16px; border-radius: 100px; white-space: nowrap; }
+  .plan-name { font-size: .82rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-orange); margin-bottom: 12px; }
+  .plan-price { font-size: 2.6rem; font-weight: 900; line-height: 1; letter-spacing: -.03em; margin-bottom: 6px; }
+  .plan-price span { font-size: 1rem; font-weight: 500; color: var(--text-muted); }
+  .plan-tagline { font-size: .85rem; color: var(--text-sec); line-height: 1.55; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--card-border); }
+  .plan-features { list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .plan-features li { font-size: .88rem; color: var(--text-sec); padding-left: 22px; position: relative; line-height: 1.4; }
+  .plan-features li::before { content: "✓"; position: absolute; left: 0; color: var(--accent-orange); font-weight: 700; }
+  .plan-features li.not-included { color: var(--text-muted); text-decoration: line-through; opacity: .5; }
+  .plan-features li.not-included::before { content: "✗"; color: var(--text-muted); }
+  .btn-outline-orange { border: 2px solid var(--accent-orange); color: var(--accent-orange); background: transparent; text-align: center; justify-content: center; transition: background .2s, color .2s; }
+  .btn-outline-orange:hover { background: var(--accent-orange); color: var(--bg-darkest); }
+  .faq-section { background: var(--bg-darkest); padding: 80px 5%; }
+  .faq-inner { max-width: 800px; margin: 0 auto; }
+  .faq-title { font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 900; margin-bottom: 40px; text-align: center; }
+  .faq-item { border-bottom: 1px solid var(--card-border); }
+  .faq-q { width: 100%; background: none; border: none; color: var(--text-primary); font-size: .98rem; font-weight: 600; padding: 22px 0; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; line-height: 1.4; transition: color .2s; }
+  .faq-q:hover { color: var(--accent-orange); }
+  .faq-toggle { font-size: 1.4rem; color: var(--accent-orange); flex-shrink: 0; transition: transform .3s; }
+  .faq-item.open .faq-toggle { transform: rotate(45deg); }
+  .faq-a { display: none; padding-bottom: 20px; font-size: .92rem; color: var(--text-sec); line-height: 1.78; }
+  .faq-a p { margin: 0; }
+  .faq-item.open .faq-a { display: block; }
+  .cta-section { background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-darkest) 100%); padding: 100px 5%; text-align: center; }
+  .cta-inner { max-width: 680px; margin: 0 auto; }
+  .cta-inner h2 { font-size: clamp(2rem,4vw,3rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+  .cta-inner p { color: var(--text-sec); line-height: 1.75; margin-bottom: 40px; }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  @media (max-width: 1100px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .pricing-grid { grid-template-columns: 1fr; } }
+`;
 ---
 
 <BaseLayout
@@ -130,9 +170,8 @@ const schema = {
   description="Transparent CAD pricing. Starter $1,500/mo · Growth $3,500/mo · Scale $7,500/mo · Enterprise custom. No hidden fees. Cancel after 3 months."
   canonical="https://boomymarketing.com/pricing/"
   schema={schema}
+  {pageStyle}
 >
-  <Nav />
-
   <section class="page-hero" aria-labelledby="pricing-heading">
     <div class="page-hero-inner">
       <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -206,13 +245,5 @@ const schema = {
     </div>
   </section>
 
-  <Footer />
 </BaseLayout>
 
-<script>
-  document.querySelectorAll<HTMLElement>('.faq-q').forEach((el) => {
-    el.addEventListener('click', () => {
-      el.closest('.faq-item')?.classList.toggle('open');
-    });
-  });
-</script>

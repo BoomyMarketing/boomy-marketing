@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import Nav from '@components/Nav.astro';
-import Footer from '@components/Footer.astro';
 
 const schema = [
   {
@@ -33,6 +31,56 @@ const schema = [
     },
   },
 ];
+
+const pageStyle = `
+  /* CONTACT SECTION */
+  .contact-section { background: var(--bg-deep); padding: 80px 5%; }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; max-width: 1200px; margin: 0 auto; align-items: start; }
+  .contact-info h2 { font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 900; line-height: 1.1; margin-bottom: 16px; }
+  .contact-info > p { color: var(--text-sec); line-height: 1.75; margin-bottom: 32px; font-size: .96rem; }
+  .info-card { display: flex; align-items: flex-start; gap: 16px; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-md); padding: 18px 20px; margin-bottom: 12px; transition: border-color .2s; }
+  .info-card:hover { border-color: rgba(255,107,53,.3); }
+  .info-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+  .info-label { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+  .info-value { font-size: .92rem; color: var(--text-primary); line-height: 1.5; }
+  .info-value a { color: var(--accent-orange); text-decoration: none; }
+  .info-value a:hover { text-decoration: underline; }
+  .cta-call-card { background: linear-gradient(135deg, rgba(255,107,53,.1), rgba(255,210,63,.06)); border: 1px solid rgba(255,107,53,.3); border-radius: var(--r-lg); padding: 28px 24px; margin-top: 20px; }
+  .cta-call-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+  .cta-call-card p { font-size: .88rem; color: var(--text-sec); line-height: 1.65; margin-bottom: 20px; }
+  /* FORM */
+  .contact-form-wrap { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--r-xl, 20px); padding: 40px 36px; }
+  .form-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 8px; }
+  .form-sub { font-size: .88rem; color: var(--text-sec); margin-bottom: 28px; line-height: 1.5; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .form-label { font-size: .83rem; font-weight: 600; color: var(--text-sec); }
+  .req { color: var(--accent-orange); }
+  .form-input { background: var(--bg-deep); border: 1px solid var(--card-border); border-radius: var(--r-sm, 8px); padding: 12px 14px; color: var(--text-primary); font-size: .92rem; width: 100%; transition: border-color .2s, box-shadow .2s; outline: none; }
+  .form-input:focus { border-color: var(--accent-orange); box-shadow: 0 0 0 3px rgba(255,107,53,.15); }
+  .form-input::placeholder { color: var(--text-muted); }
+  select.form-input { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a0a0b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+  select.form-input option { background: var(--bg-deep, #1a0a4a); color: var(--text-primary, #fff); }
+  .form-textarea { min-height: 130px; resize: vertical; font-family: inherit; }
+  .form-consent { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; font-size: .82rem; color: var(--text-muted); line-height: 1.5; }
+  .form-consent input { margin-top: 3px; flex-shrink: 0; accent-color: var(--accent-orange); }
+  .form-submit { width: 100%; background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); color: var(--bg-darkest); border: none; border-radius: var(--r-md); padding: 16px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: opacity .2s, transform .2s; }
+  .form-submit:hover { opacity: .9; transform: translateY(-2px); }
+  .success-msg { display: none; text-align: center; padding: 40px 20px; }
+  .success-msg.visible { display: block; }
+  .success-icon { font-size: 3rem; margin-bottom: 16px; }
+  /* MAP */
+  .map-section { background: var(--bg-darkest); padding: 80px 5%; }
+  .map-inner { max-width: 1200px; margin: 0 auto; }
+  .map-wrap { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--card-border); height: 420px; }
+  .map-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .contact-inner { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-form-wrap { padding: 28px 20px; }
+  }
+`;
 ---
 
 <BaseLayout
@@ -40,11 +88,9 @@ const schema = [
   description="Book a free 30-minute strategy call or send us a message. We'll audit your marketing, find your biggest growth opportunities, and show you exactly what Boomy can do — at no cost."
   canonical="https://boomymarketing.com/contact/"
   schema={schema}
+  {pageStyle}
 >
-  <Nav />
-
-  <main id="main-content">
-    <section class="page-hero" aria-labelledby="contact-heading">
+  <section class="page-hero" aria-labelledby="contact-heading">
       <div class="page-hero-inner">
         <nav class="breadcrumb" aria-label="Breadcrumb">
           <a href="/">Home</a><span>/</span><span aria-current="page">Contact</span>
@@ -171,7 +217,7 @@ const schema = [
             <div class="form-group">
               <label class="form-label" for="message">Tell Us About Your Goals <span class="req">*</span></label>
               <textarea
-                class="form-textarea"
+                class="form-input form-textarea"
                 id="message"
                 name="message"
                 placeholder="What are you trying to achieve? What is your biggest marketing challenge right now?"
@@ -189,6 +235,10 @@ const schema = [
 
             <button type="submit" class="form-submit">Send My Message — It's Free</button>
           </form>
+
+          <div id="formError" role="alert" style="display:none;margin-top:16px;padding:14px 18px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:var(--r-sm);font-size:.88rem;color:#fca5a5;">
+            Something went wrong. Please email us directly at <a href="mailto:care@boomymarketing.com" style="color:var(--accent-orange)">care@boomymarketing.com</a> or call <a href="tel:+16473701888" style="color:var(--accent-orange)">(647) 370-1888</a>.
+          </div>
 
           <div class="success-msg" id="successMsg" role="status" aria-live="polite">
             <div class="success-icon">✅</div>
@@ -215,9 +265,6 @@ const schema = [
         </div>
       </div>
     </section>
-  </main>
-
-  <Footer />
 </BaseLayout>
 
 <script>
@@ -230,19 +277,39 @@ const schema = [
       form.reportValidity();
       return;
     }
-    const data = Object.fromEntries(new FormData(form));
+
+    const raw = Object.fromEntries(new FormData(form)) as Record<string, string>;
+    // Combine first + last name into what the API expects
+    const payload = {
+      name: `${raw.fname ?? ''} ${raw.lname ?? ''}`.trim(),
+      email: raw.email,
+      phone: raw.phone || undefined,
+      service: raw.service || undefined,
+      message: raw.message || undefined,
+    };
+
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const origText = btn?.textContent ?? '';
+    if (btn) { btn.textContent = 'Sending…'; btn.disabled = true; }
+
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
       if (res.ok) {
         form.style.display = 'none';
-        if (successMsg) successMsg.style.display = 'block';
+        if (successMsg) successMsg.classList.add('visible');
+      } else {
+        if (btn) { btn.textContent = origText; btn.disabled = false; }
+        const errEl = document.getElementById('formError');
+        if (errEl) errEl.style.display = 'block';
       }
     } catch {
-      // fail silently — user sees the form still
+      if (btn) { btn.textContent = origText; btn.disabled = false; }
+      const errEl = document.getElementById('formError');
+      if (errEl) errEl.style.display = 'block';
     }
   });
 </script>

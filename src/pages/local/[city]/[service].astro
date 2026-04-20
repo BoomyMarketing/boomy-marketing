@@ -1,0 +1,467 @@
+---
+import LocalPageLayout from '@layouts/LocalPageLayout.astro';
+import { CITIES_DATA } from '@data/cities';
+import { LOCAL_SERVICES_DATA } from '@data/localServices';
+
+export function getStaticPaths() {
+  const paths = [];
+  
+  // Generate all city/service combinations
+  CITIES_DATA.forEach(city => {
+    LOCAL_SERVICES_DATA.forEach(service => {
+      // Check if this combination exists in the current local/ structure
+      // (Some cities don't have all services)
+      paths.push({
+        params: { 
+          city: city.slug, 
+          service: service.slug 
+        },
+        props: { city, service }
+      });
+    });
+  });
+  
+  return paths;
+}
+
+const { city, service } = Astro.props;
+
+// Generate FAQs dynamically
+const faqs = [
+  {
+    question: `How much does ${service.displayName} cost in ${city.displayName}?`,
+    answer: `The cost of ${service.displayName} in ${city.displayName} varies depending on the scope of work, the competitiveness of your niche, and your specific growth goals. Boomy Marketing offers flexible packages starting from ${service.offers[0]?.price}, with tailored solutions for businesses of every size — from solo traders to multi-location enterprises. We strongly recommend booking a free strategy consultation so we can assess your situation and provide an accurate, itemised quote rather than a generic estimate that may not reflect your actual needs.`
+  },
+  {
+    question: `How long does ${service.displayName} take to show results in ${city.displayName}?`,
+    answer: service.slug.includes('web-design') || service.slug.includes('web-development') || service.slug.includes('ai-development') 
+      ? `Most ${city.displayName} business websites are completed within 4-8 weeks from project kickoff. Timeline depends on project complexity, content readiness, and revision cycles. Our streamlined design process includes regular checkpoints and client reviews to ensure your project stays on schedule while meeting all quality standards.`
+      : `Most ${city.displayName} businesses begin seeing meaningful improvements within 60 to 90 days of launching a ${service.displayName} campaign — particularly in terms of keyword rankings, website traffic, and lead quality. However, truly sustainable and compounding results typically build over 6 to 12 months as domain authority grows and strategies mature. Boomy Marketing provides detailed monthly reporting so you can track every metric transparently, and our team is always available to explain what the data means for your business.`
+  },
+  {
+    question: `Why choose Boomy Marketing for ${service.displayName} in ${city.displayName}?`,
+    answer: `Boomy Marketing combines deep local knowledge of the ${city.displayName} market with cutting-edge digital marketing techniques and a genuine commitment to client outcomes. Our team has a proven track record of delivering measurable ROI for ${city.displayName} businesses across a wide range of industries including professional services, e-commerce, healthcare, and hospitality. We're not just a vendor — we become a long-term growth partner invested in your success, with no lock-in contracts and full transparency on every decision we make.`
+  },
+  {
+    question: `How does Boomy Marketing approach ${service.displayName} for ${city.displayName}'s market?`,
+    answer: `Boomy Marketing's approach to ${service.displayName} in ${city.displayName} begins with thorough market research and competitor analysis specific to your local landscape. We identify the search terms your ideal customers are actually using, audit what your competitors are doing well and where they're vulnerable, and build a bespoke strategy that targets the highest-value opportunities first. Every campaign is continuously monitored and optimised based on real performance data, with strategy adjustments made proactively rather than reactively.`
+  },
+  {
+    question: `Is ${city.displayName} a competitive market for ${service.slug}?`,
+    answer: `Yes, ${city.displayName} is an increasingly competitive market for ${service.slug}. With more businesses investing in digital marketing every year, a strategic and well-executed approach has become essential to stand out from the crowd. The good news is that many ${city.displayName} competitors are still relying on outdated tactics, which creates real opportunities for businesses willing to invest properly. Boomy Marketing specialises in identifying and capturing these gaps to help clients dominate local search results ahead of the competition.`
+  },
+  {
+    question: `Do you serve businesses outside ${city.displayName} downtown?`,
+    answer: `Absolutely. Boomy Marketing serves businesses throughout the entire ${city.displayName}, ${city.provinceCode}, Canada area, not just the city centre. Whether you're based in the suburbs, an industrial estate, or a surrounding town, our ${service.displayName} strategies are designed to capture local search traffic from wherever your customers are — and wherever they're searching from. We create geo-targeted pages and localised content that ensures your business appears for searches across the full geographic area you serve.`
+  }
+];
+
+// Generate service-specific content
+const getServiceContent = () => {
+  switch(service.slug) {
+    case 'seo-agency':
+    case 'seo-company':
+      return {
+        title: `Affordable ${service.displayName} for ${city.displayName} Businesses`,
+        description: `Expert ${service.displayName} in ${city.displayName}, ${city.provinceCode}. Boomy Marketing Agency delivers measurable results — higher rankings, more leads, better ROI. Free strategy session.`,
+        ctaPrimary: 'Get Free Strategy Session',
+        ctaSecondary: 'See Our Services',
+        processSteps: [
+          { num: '1', title: 'Discovery & Audit', desc: `Comprehensive analysis of your current digital presence, competitor landscape, and market opportunities specific to ${city.displayName}.` },
+          { num: '2', title: 'Strategy Development', desc: `Custom ${service.displayName.toLowerCase()} roadmap tailored to your business goals and the ${city.displayName} market dynamics.` },
+          { num: '3', title: 'Implementation', desc: 'Systematic execution of technical optimisations, content creation, and link building campaigns.' },
+          { num: '4', title: 'Monitor & Optimise', desc: 'Continuous performance tracking with monthly strategy refinements based on real data.' }
+        ]
+      };
+    
+    case 'web-design-company':
+    case 'web-development-company':
+      return {
+        title: `Top ${service.displayName} in ${city.displayName}`,
+        description: `${service.displayName} in ${city.displayName}, ${city.provinceCode}. Boomy Marketing Agency — measurable results, more leads, better ROI. Book a free strategy session.`,
+        ctaPrimary: 'Get Free Project Quote',
+        ctaSecondary: 'View Our Work',
+        processSteps: [
+          { num: '1', title: 'Discovery & Strategy', desc: `Comprehensive analysis of your business goals, target audience, and competitive landscape in the ${city.displayName} market.` },
+          { num: '2', title: 'Design & Prototyping', desc: 'Custom design mockups and interactive prototypes that showcase your website\'s look, feel, and functionality.' },
+          { num: '3', title: 'Development & Testing', desc: 'Professional development using modern frameworks, with rigorous testing across all devices and browsers.' },
+          { num: '4', title: 'Launch & Optimisation', desc: 'Careful launch process with performance monitoring and initial optimisations based on real user data.' }
+        ]
+      };
+    
+    case 'google-ads-agency':
+    case 'ppc-agency':
+      return {
+        title: `Expert ${service.displayName} for ${city.displayName} Businesses`,
+        description: `${service.displayName} in ${city.displayName}, ${city.provinceCode}. Boomy Marketing Agency delivers profitable paid campaigns — higher ROAS, more qualified leads. Free strategy session.`,
+        ctaPrimary: 'Get Free Ads Audit',
+        ctaSecondary: 'See Case Studies',
+        processSteps: [
+          { num: '1', title: 'Account Audit', desc: `Deep dive into your current ad performance, keyword strategy, and competitive landscape in the ${city.displayName} market.` },
+          { num: '2', title: 'Campaign Strategy', desc: 'Custom Google Ads roadmap with targeting, budget allocation, and creative strategy tailored to your business goals.' },
+          { num: '3', title: 'Setup & Launch', desc: 'Professional account setup, campaign creation, and systematic testing of ads, keywords, and landing pages.' },
+          { num: '4', title: 'Optimise & Scale', desc: 'Continuous bid optimisation, A/B testing, and strategic budget scaling based on performance data.' }
+        ]
+      };
+    
+    default:
+      return {
+        title: `Professional ${service.displayName} for ${city.displayName} Businesses`,
+        description: `${service.displayName} in ${city.displayName}, ${city.provinceCode}. Boomy Marketing Agency — measurable results, more leads, better ROI. Book a free strategy session.`,
+        ctaPrimary: 'Get Free Consultation',
+        ctaSecondary: 'Learn More',
+        processSteps: [
+          { num: '1', title: 'Discovery & Analysis', desc: `Thorough assessment of your current situation and opportunities in the ${city.displayName} market.` },
+          { num: '2', title: 'Strategy Development', desc: `Custom ${service.displayName.toLowerCase()} plan tailored to your business goals and market dynamics.` },
+          { num: '3', title: 'Implementation', desc: 'Systematic execution of the strategy with regular monitoring and adjustments.' },
+          { num: '4', title: 'Results & Optimisation', desc: 'Performance tracking and continuous improvements based on real data and market feedback.' }
+        ]
+      };
+  }
+};
+
+const content = getServiceContent();
+
+const pageStyle = `
+  .local-hero {
+    background: linear-gradient(135deg, var(--bg-deep) 0%, var(--bg-darkest) 100%);
+    padding: calc(var(--nav-h) + 80px) 5% 80px;
+    text-align: center;
+  }
+  .local-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .local-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,107,53,.12);
+    border: 1px solid rgba(255,107,53,.3);
+    color: var(--accent-orange);
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .local-hero h1 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    margin-bottom: 20px;
+  }
+  .local-hero .highlight {
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .local-hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-sec);
+    line-height: 1.65;
+    margin-bottom: 40px;
+  }
+  .local-hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .local-content {
+    background: var(--bg-darkest);
+    padding: 80px 5%;
+  }
+  .local-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+  }
+  .local-main h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .local-main p {
+    color: var(--text-sec);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .local-sidebar {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--r-lg);
+    padding: 32px;
+    position: sticky;
+    top: calc(var(--nav-h) + 20px);
+  }
+  .sidebar-cta h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .sidebar-cta p {
+    font-size: .9rem;
+    color: var(--text-sec);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .sidebar-features {
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 0;
+  }
+  .sidebar-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .85rem;
+    color: var(--text-sec);
+    margin-bottom: 8px;
+  }
+  .sidebar-features li::before {
+    content: '✓';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: var(--accent-orange);
+    color: var(--bg-darkest);
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: .7rem;
+    flex-shrink: 0;
+  }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin: 40px 0;
+  }
+  .process-step {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--r-md);
+    padding: 24px;
+    text-align: center;
+  }
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--accent-orange);
+    color: var(--bg-darkest);
+    border-radius: 50%;
+    font-weight: 900;
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+  .step-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .step-desc {
+    font-size: .85rem;
+    color: var(--text-sec);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .faq-section {
+    background: linear-gradient(180deg, var(--bg-darkest) 0%, var(--bg-deep) 100%);
+    padding: 80px 5%;
+  }
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--r-md);
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .faq-question {
+    padding: 20px 24px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background var(--transition-base);
+  }
+  .faq-question:hover {
+    background: rgba(255,255,255,.03);
+  }
+  .faq-answer {
+    padding: 0 24px 20px;
+    color: var(--text-sec);
+    line-height: 1.65;
+  }
+  @media (max-width: 768px) {
+    .local-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .local-sidebar {
+      position: static;
+    }
+    .local-hero-buttons {
+      justify-content: center;
+    }
+    .process-steps {
+      grid-template-columns: 1fr;
+    }
+  }
+`;
+---
+
+<LocalPageLayout city={city} service={service} faqs={faqs} pageStyle={pageStyle}>
+  
+  <!-- HERO -->
+  <section class="local-hero">
+    <div class="local-hero-content">
+      <div class="local-badge">
+        <span>{service.icon}</span>
+        <span>{service.displayName} in {city.displayName}</span>
+      </div>
+      <h1>{content.title}</h1>
+      <p class="local-hero-desc">{content.description}</p>
+      <div class="local-hero-buttons">
+        <a href="#contact" class="btn btn-primary">{content.ctaPrimary}</a>
+        <a href="#services" class="btn btn-ghost">{content.ctaSecondary}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section class="local-content">
+    <div class="local-grid">
+      
+      <!-- MAIN CONTENT -->
+      <div class="local-main">
+        <h2>Professional {service.displayName} Services in {city.displayName}</h2>
+        
+        <p>
+          Looking for results-driven {service.displayName.toLowerCase()} in {city.displayName}? Boomy Marketing Agency specialises in delivering measurable growth for {city.displayName} businesses through strategic digital marketing campaigns that actually move the needle on your bottom line.
+        </p>
+        
+        <p>
+          Our {city.displayName}-based team understands the local market dynamics, competitive landscape, and customer behaviour patterns that drive success in the {city.province} market. We don't do cookie-cutter campaigns — every strategy is custom-built around your specific business objectives, target audience, and growth goals.
+        </p>
+        
+        <p>
+          From initial strategy to ongoing optimisation, we handle every aspect of your {service.displayName.toLowerCase()} campaign with the precision and accountability that growing businesses demand. Our clients in {city.displayName} typically see meaningful improvements within the first 60-90 days, with compounding results that build month over month.
+        </p>
+        
+        <h2>Why {city.displayName} Businesses Choose Boomy Marketing</h2>
+        
+        <p>
+          <strong>Local Expertise:</strong> We understand {city.displayName}'s business landscape, from the competitive downtown core to the growing markets across {city.areaServed.slice(0, 4).join(', ')}. This local knowledge translates into strategies that actually work in your specific market.
+        </p>
+        
+        <p>
+          <strong>Transparent Reporting:</strong> You'll receive detailed monthly reports showing exactly what we've accomplished, which tactics are driving results, and where your investment is generating the highest ROI. No fluff metrics — just the numbers that matter to your business.
+        </p>
+        
+        <p>
+          <strong>No Lock-In Contracts:</strong> We earn your business every month through consistent performance. Our month-to-month agreements mean you stay because we deliver results, not because you're contractually obligated.
+        </p>
+        
+        <h2>Our {service.displayName} Process for {city.displayName} Businesses</h2>
+        
+        <div class="process-steps">
+          {content.processSteps.map((step) => (
+            <div class="process-step">
+              <div class="step-number">{step.num}</div>
+              <h3 class="step-title">{step.title}</h3>
+              <p class="step-desc">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <!-- SIDEBAR CTA -->
+      <div class="local-sidebar">
+        <div class="sidebar-cta">
+          <h3>Ready to Grow Your {city.displayName} Business?</h3>
+          <p>Book a free 15-minute strategy session to discover your biggest growth opportunities.</p>
+          
+          <ul class="sidebar-features">
+            <li>Custom growth strategy for {city.displayName}</li>
+            <li>Competitive analysis</li>
+            <li>ROI projections</li>
+            <li>No sales pressure</li>
+          </ul>
+          
+          <a href="#contact" class="btn btn-primary" style="width: 100%; justify-content: center;">
+            Book Free Consultation
+          </a>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="faq-section">
+    <div class="faq-container">
+      <h2 style="text-align: center; margin-bottom: 40px; font-size: clamp(1.8rem, 4vw, 2.5rem);">
+        Frequently Asked Questions
+      </h2>
+      
+      {faqs.map((faq) => (
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>{faq.question}</span>
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+</LocalPageLayout>
+
+<script>
+  // FAQ toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
+      const icon = question.querySelector('span:last-child');
+      
+      // Initially hide all answers
+      answer.style.display = 'none';
+      
+      question.addEventListener('click', function() {
+        const isOpen = answer.style.display !== 'none';
+        
+        if (isOpen) {
+          answer.style.display = 'none';
+          icon.textContent = '+';
+        } else {
+          answer.style.display = 'block';
+          icon.textContent = '−';
+        }
+      });
+    });
+  });
+</script>

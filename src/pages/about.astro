@@ -288,14 +288,6 @@ const pageStyle = `
 </div>
 
 <script>
-  document.querySelectorAll('.faq-q').forEach(q => {
-    q.addEventListener('click', () => {
-      const item = q.parentElement!;
-      item.classList.toggle('open');
-      q.setAttribute('aria-expanded', item.classList.contains('open') ? 'true' : 'false');
-    });
-  });
-
   window.addEventListener('load', () => {
     if (typeof (window as any).gsap === 'undefined') return;
     const gsap = (window as any).gsap;

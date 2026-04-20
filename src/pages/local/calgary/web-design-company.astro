@@ -1,0 +1,414 @@
+---
+import LocalPageLayout from '@layouts/LocalPageLayout.astro';
+import { CITIES_DATA } from '@data/cities';
+import { LOCAL_SERVICES_DATA } from '@data/localServices';
+
+const citySlug = 'calgary';
+const serviceSlug = 'web-design-company';
+
+const city = CITIES_DATA.find(c => c.slug === citySlug);
+const service = LOCAL_SERVICES_DATA.find(s => s.slug === serviceSlug);
+
+if (!city || !service) {
+  return Astro.redirect('/404');
+}
+
+const faqs = [
+  {
+    question: `How much does ${service.displayName} cost in ${city.displayName}?`,
+    answer: `The cost of ${service.displayName} services in ${city.displayName} varies based on project scope, functionality requirements, and design complexity. Boomy Marketing offers website design packages starting from ${service.offers[0]?.price}, with custom solutions for businesses of all sizes. We provide detailed project estimates during our free consultation, ensuring complete transparency in pricing before any work begins.`
+  },
+  {
+    question: `How long does website design take for ${city.displayName} businesses?`,
+    answer: `Most ${city.displayName} business websites are completed within 4-8 weeks from project kickoff. Timeline depends on project complexity, content readiness, and revision cycles. Our streamlined design process includes regular checkpoints and client reviews to ensure your project stays on schedule while meeting all quality standards.`
+  },
+  {
+    question: `Do you provide ongoing website maintenance for ${city.displayName} businesses?`,
+    answer: `Yes, we offer comprehensive website maintenance packages for all ${city.displayName} clients. This includes security updates, performance optimisation, content updates, and technical support. Our maintenance plans ensure your website continues performing at peak levels long after launch.`
+  },
+  {
+    question: `What makes Boomy Marketing different from other ${city.displayName} web design companies?`,
+    answer: `Boomy Marketing focuses on conversion-optimised design backed by data and user research. Unlike typical ${city.displayName} design agencies, we build websites specifically to generate leads and sales, not just look good. Every design decision is tested and validated to ensure maximum business impact for our clients.`
+  },
+  {
+    question: `Do you work with ${city.displayName} e-commerce businesses?`,
+    answer: `Absolutely. We specialise in e-commerce website design for ${city.displayName} businesses, including Shopify, WooCommerce, and custom solutions. Our e-commerce designs focus on user experience, conversion optimisation, and seamless checkout processes that maximise online sales.`
+  },
+  {
+    question: `Can you help with website content for ${city.displayName} businesses?`,
+    answer: `Yes, our team includes experienced copywriters who create compelling website content optimised for both users and search engines. We understand the ${city.displayName} market and can craft messaging that resonates with your local audience while driving conversions.`
+  }
+];
+
+const pageStyle = `
+  .local-hero {
+    background: linear-gradient(135deg, var(--bg-deep) 0%, var(--bg-darkest) 100%);
+    padding: calc(var(--nav-h) + 80px) 5% 80px;
+    text-align: center;
+  }
+  .local-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .local-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,107,53,.12);
+    border: 1px solid rgba(255,107,53,.3);
+    color: var(--accent-orange);
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .local-hero h1 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    margin-bottom: 20px;
+  }
+  .local-hero .highlight {
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .local-hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-sec);
+    line-height: 1.65;
+    margin-bottom: 40px;
+  }
+  .local-hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .local-content {
+    background: var(--bg-darkest);
+    padding: 80px 5%;
+  }
+  .local-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+  }
+  .local-main h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .local-main p {
+    color: var(--text-sec);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .local-sidebar {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--r-lg);
+    padding: 32px;
+    position: sticky;
+    top: calc(var(--nav-h) + 20px);
+  }
+  .sidebar-cta h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .sidebar-cta p {
+    font-size: .9rem;
+    color: var(--text-sec);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .sidebar-features {
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 0;
+  }
+  .sidebar-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .85rem;
+    color: var(--text-sec);
+    margin-bottom: 8px;
+  }
+  .sidebar-features li::before {
+    content: '✓';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: var(--accent-orange);
+    color: var(--bg-darkest);
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: .7rem;
+    flex-shrink: 0;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin: 40px 0;
+  }
+  .service-item {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--r-md);
+    padding: 24px;
+    transition: transform var(--transition-base), border-color var(--transition-base);
+  }
+  .service-item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,107,53,.3);
+  }
+  .service-item h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--accent-orange);
+  }
+  .service-item p {
+    font-size: .9rem;
+    color: var(--text-sec);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .faq-section {
+    background: linear-gradient(180deg, var(--bg-darkest) 0%, var(--bg-deep) 100%);
+    padding: 80px 5%;
+  }
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--r-md);
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .faq-question {
+    padding: 20px 24px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background var(--transition-base);
+  }
+  .faq-question:hover {
+    background: rgba(255,255,255,.03);
+  }
+  .faq-answer {
+    padding: 0 24px 20px;
+    color: var(--text-sec);
+    line-height: 1.65;
+  }
+  @media (max-width: 768px) {
+    .local-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .local-sidebar {
+      position: static;
+    }
+    .local-hero-buttons {
+      justify-content: center;
+    }
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+`;
+---
+
+<LocalPageLayout city={city} service={service} faqs={faqs} pageStyle={pageStyle}>
+  
+  <!-- HERO -->
+  <section class="local-hero">
+    <div class="local-hero-content">
+      <div class="local-badge">
+        <span>{service.icon}</span>
+        <span>{service.displayName} in {city.displayName}</span>
+      </div>
+      <h1>Top <span class="highlight">{service.displayName}</span> in {city.displayName}</h1>
+      <p class="local-hero-desc">
+        {service.displayName} in {city.displayName}, {city.provinceCode}. Boomy Marketing Agency — measurable results, more leads, better ROI. Book a free strategy session.
+      </p>
+      <div class="local-hero-buttons">
+        <a href="#contact" class="btn btn-primary">Get Free Project Quote</a>
+        <a href="#services" class="btn btn-ghost">View Our Work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section class="local-content">
+    <div class="local-grid">
+      
+      <!-- MAIN CONTENT -->
+      <div class="local-main">
+        <h2>Professional Website Design for {city.displayName} Businesses</h2>
+        
+        <p>
+          Looking for a {service.displayName.toLowerCase()} in {city.displayName} that actually drives business results? Boomy Marketing specialises in conversion-optimised website design that turns visitors into customers for {city.displayName} businesses across all industries.
+        </p>
+        
+        <p>
+          Our {city.displayName}-based design team understands what works in the Alberta market. We don't just create beautiful websites — we build strategic digital assets that generate leads, increase sales, and provide measurable ROI for your business investment.
+        </p>
+        
+        <p>
+          From responsive design to Core Web Vitals optimisation, every website we create is built for performance, user experience, and search engine visibility. Our clients in {city.displayName} typically see increased lead generation within 30 days of their new website launch.
+        </p>
+        
+        <h2>Our {service.displayName} Services in {city.displayName}</h2>
+        
+        <div class="services-grid">
+          <div class="service-item">
+            <h3>Custom Website Design</h3>
+            <p>Bespoke designs tailored to your brand, audience, and business goals. Every element optimised for conversions and user experience.</p>
+          </div>
+          <div class="service-item">
+            <h3>E-commerce Development</h3>
+            <p>Shopify, WooCommerce, and custom e-commerce solutions designed to maximise online sales for {city.displayName} retailers.</p>
+          </div>
+          <div class="service-item">
+            <h3>Mobile Optimisation</h3>
+            <p>Responsive designs that perform flawlessly across all devices, ensuring great user experience for mobile visitors.</p>
+          </div>
+          <div class="service-item">
+            <h3>Speed Optimisation</h3>
+            <p>Core Web Vitals optimisation ensuring your website loads in under 2 seconds for better user experience and SEO rankings.</p>
+          </div>
+          <div class="service-item">
+            <h3>CMS Integration</h3>
+            <p>Easy-to-use content management systems that let you update your website without technical knowledge.</p>
+          </div>
+          <div class="service-item">
+            <h3>SEO Foundation</h3>
+            <p>Technical SEO setup, schema markup, and optimised content structure to help your website rank in {city.displayName} searches.</p>
+          </div>
+        </div>
+        
+        <h2>Why {city.displayName} Businesses Choose Boomy Marketing</h2>
+        
+        <p>
+          <strong>Local Market Knowledge:</strong> We understand {city.displayName}'s business landscape, from downtown corporate offices to growing suburban markets across {city.areaServed.slice(0, 3).join(', ')}. This local insight ensures your website resonates with your target audience.
+        </p>
+        
+        <p>
+          <strong>Conversion-Focused Design:</strong> Every design decision is made with one goal in mind — turning visitors into customers. We use data-driven design principles, A/B testing, and user research to maximise your website's performance.
+        </p>
+        
+        <p>
+          <strong>Ongoing Support:</strong> Your website is a long-term investment. We provide comprehensive maintenance, security updates, and performance monitoring to ensure continued success.
+        </p>
+        
+        <h2>Our Website Design Process for {city.displayName} Businesses</h2>
+        
+        <p>
+          <strong>1. Discovery & Strategy (Week 1):</strong> Comprehensive analysis of your business goals, target audience, and competitive landscape in the {city.displayName} market.
+        </p>
+        
+        <p>
+          <strong>2. Design & Prototyping (Week 2-3):</strong> Custom design mockups and interactive prototypes that showcase your website's look, feel, and functionality.
+        </p>
+        
+        <p>
+          <strong>3. Development & Testing (Week 4-6):</strong> Professional development using modern frameworks, with rigorous testing across all devices and browsers.
+        </p>
+        
+        <p>
+          <strong>4. Launch & Optimisation (Week 7-8):</strong> Careful launch process with performance monitoring and initial optimisations based on real user data.
+        </p>
+      </div>
+      
+      <!-- SIDEBAR CTA -->
+      <div class="local-sidebar">
+        <div class="sidebar-cta">
+          <h3>Ready for a New Website?</h3>
+          <p>Get a free project quote and timeline for your {city.displayName} business website.</p>
+          
+          <ul class="sidebar-features">
+            <li>Custom design proposal</li>
+            <li>Detailed project timeline</li>
+            <li>Transparent pricing</li>
+            <li>No obligation consultation</li>
+          </ul>
+          
+          <a href="#contact" class="btn btn-primary" style="width: 100%; justify-content: center;">
+            Get Free Quote
+          </a>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="faq-section">
+    <div class="faq-container">
+      <h2 style="text-align: center; margin-bottom: 40px; font-size: clamp(1.8rem, 4vw, 2.5rem);">
+        Frequently Asked Questions
+      </h2>
+      
+      {faqs.map((faq) => (
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>{faq.question}</span>
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+</LocalPageLayout>
+
+<script>
+  // FAQ toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
+      const icon = question.querySelector('span:last-child');
+      
+      // Initially hide all answers
+      answer.style.display = 'none';
+      
+      question.addEventListener('click', function() {
+        const isOpen = answer.style.display !== 'none';
+        
+        if (isOpen) {
+          answer.style.display = 'none';
+          icon.textContent = '+';
+        } else {
+          answer.style.display = 'block';
+          icon.textContent = '−';
+        }
+      });
+    });
+  });
+</script>

@@ -298,11 +298,22 @@ const initFaqAccordion = () => {
 ================================================================ */
 document.addEventListener('DOMContentLoaded', () => {
   initStarfield();
-  initNavbar();
   initProgressBar();
   initHamburger();
   initMagneticButtons();
   initFaqAccordion();
+  
+  // DEBUG: Track all link clicks
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('a')) {
+      const link = e.target.closest('a');
+      console.log('🔗 Link clicked:', {
+        href: link.href,
+        text: link.textContent.trim(),
+        target: link
+      });
+    }
+  });
 });
 
 window.addEventListener('load', initRevealAnimations);
