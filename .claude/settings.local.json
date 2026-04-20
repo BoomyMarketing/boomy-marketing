@@ -9,7 +9,11 @@
       "Bash(curl -s \"http://localhost:4322/pricing\")",
       "Bash(grep -r \"starfield\" dist/local/toronto/seo-agency/)",
       "Bash(grep -r \"starfield\" dist/services/meta-ads/)",
-      "Bash(git add .)"
+      "Bash(git add .)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat(astro): complete Astro SSG migration with performance optimizations\n\nMajor improvements:\n• Migrate all 451 pages to Astro 4.0 SSG architecture\n• Add starfield canvas background to all pages via BaseLayout\n• Fix JavaScript navigation errors (remove non-existent initNavbar)\n• Optimize assets: CSS/JS externalized, GSAP with defer\n• Modernize to ES2022+ with prefers-reduced-motion support\n• Implement CSS @layer architecture for better maintainability\n• Add comprehensive local pages system with dynamic routing\n• Performance: index.html reduced from 82KB to 51KB (-38%)\n\nTechnical changes:\n• BaseLayout.astro: add global starfield canvas element\n• main.js: remove initNavbar() call, add debug link tracking\n• All local pages now use LocalPageLayout → BaseLayout structure\n• 451 static pages generated successfully in 8.1 seconds\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push origin astro-migration)",
+      "Bash(git add .claude/settings.local.json)",
+      "Bash(git commit -m \"chore: update Claude Code allowed commands\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")"
     ],
     "deny": [],
     "ask": []
