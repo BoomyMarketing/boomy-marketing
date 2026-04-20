@@ -4,6 +4,7 @@ Allow: /local/abbotsford/ai-automation-agency
 Allow: /local/abbotsford/ai-development-company
 Allow: /local/abbotsford/content-marketing-agency
 Allow: /local/abbotsford/digital-marketing-agency
+Allow: /local/abbotsford/ecommerce-seo-agency
 Allow: /local/abbotsford/email-marketing-agency
 Allow: /local/abbotsford/google-ads-agency
 Allow: /local/abbotsford/seo-agency
@@ -14,6 +15,7 @@ Allow: /local/barrie/ai-automation-agency
 Allow: /local/barrie/ai-development-company
 Allow: /local/barrie/content-marketing-agency
 Allow: /local/barrie/digital-marketing-agency
+Allow: /local/barrie/ecommerce-seo-agency
 Allow: /local/barrie/email-marketing-agency
 Allow: /local/barrie/google-ads-agency
 Allow: /local/barrie/seo-agency
@@ -24,6 +26,7 @@ Allow: /local/brampton/ai-automation-agency
 Allow: /local/brampton/ai-development-company
 Allow: /local/brampton/content-marketing-agency
 Allow: /local/brampton/digital-marketing-agency
+Allow: /local/brampton/ecommerce-seo-agency
 Allow: /local/brampton/email-marketing-agency
 Allow: /local/brampton/google-ads-agency
 Allow: /local/brampton/seo-agency
@@ -34,6 +37,7 @@ Allow: /local/burlington/ai-automation-agency
 Allow: /local/burlington/ai-development-company
 Allow: /local/burlington/content-marketing-agency
 Allow: /local/burlington/digital-marketing-agency
+Allow: /local/burlington/ecommerce-seo-agency
 Allow: /local/burlington/email-marketing-agency
 Allow: /local/burlington/google-ads-agency
 Allow: /local/burlington/seo-agency
@@ -44,6 +48,7 @@ Allow: /local/burnaby/ai-automation-agency
 Allow: /local/burnaby/ai-development-company
 Allow: /local/burnaby/content-marketing-agency
 Allow: /local/burnaby/digital-marketing-agency
+Allow: /local/burnaby/ecommerce-seo-agency
 Allow: /local/burnaby/email-marketing-agency
 Allow: /local/burnaby/google-ads-agency
 Allow: /local/burnaby/seo-agency
@@ -54,6 +59,7 @@ Allow: /local/calgary/ai-automation-agency
 Allow: /local/calgary/ai-development-company
 Allow: /local/calgary/content-marketing-agency
 Allow: /local/calgary/digital-marketing-agency
+Allow: /local/calgary/ecommerce-seo-agency
 Allow: /local/calgary/email-marketing-agency
 Allow: /local/calgary/google-ads-agency
 Allow: /local/calgary/seo-agency
@@ -65,6 +71,7 @@ Allow: /local/charlottetown/ai-automation-agency
 Allow: /local/charlottetown/ai-development-company
 Allow: /local/charlottetown/content-marketing-agency
 Allow: /local/charlottetown/digital-marketing-agency
+Allow: /local/charlottetown/ecommerce-seo-agency
 Allow: /local/charlottetown/email-marketing-agency
 Allow: /local/charlottetown/google-ads-agency
 Allow: /local/charlottetown/seo-agency
@@ -75,20 +82,24 @@ Allow: /local/coquitlam/ai-automation-agency
 Allow: /local/coquitlam/ai-development-company
 Allow: /local/coquitlam/content-marketing-agency
 Allow: /local/coquitlam/digital-marketing-agency
+Allow: /local/coquitlam/ecommerce-seo-agency
 Allow: /local/edmonton/ai-automation-agency
 Allow: /local/edmonton/ai-development-company
 Allow: /local/edmonton/content-marketing-agency
 Allow: /local/edmonton/digital-marketing-agency
+Allow: /local/edmonton/ecommerce-seo-agency
 Allow: /local/edmonton/email-marketing-agency
 Allow: /local/edmonton/google-ads-agency
 Allow: /local/edmonton/seo-agency
 Allow: /local/edmonton/seo-company
 Allow: /local/edmonton/social-media-marketing-agency
 Allow: /local/edmonton/web-design-company
+Allow: /local/guelph/ecommerce-seo-agency
 Allow: /local/halifax/ai-automation-agency
 Allow: /local/halifax/ai-development-company
 Allow: /local/halifax/content-marketing-agency
 Allow: /local/halifax/digital-marketing-agency
+Allow: /local/halifax/ecommerce-seo-agency
 Allow: /local/halifax/email-marketing-agency
 Allow: /local/halifax/google-ads-agency
 Allow: /local/halifax/seo-agency
@@ -99,22 +110,27 @@ Allow: /local/hamilton/ai-automation-agency
 Allow: /local/hamilton/ai-development-company
 Allow: /local/hamilton/content-marketing-agency
 Allow: /local/hamilton/digital-marketing-agency
+Allow: /local/hamilton/ecommerce-seo-agency
 Allow: /local/hamilton/email-marketing-agency
 Allow: /local/hamilton/google-ads-agency
 Allow: /local/hamilton/seo-agency
 Allow: /local/hamilton/seo-company
 Allow: /local/hamilton/social-media-marketing-agency
 Allow: /local/hamilton/web-design-company
+Allow: /local/kelowna/ecommerce-seo-agency
+Allow: /local/kingston/ecommerce-seo-agency
 Allow: /local/kitchener/ai-automation-agency
 Allow: /local/kitchener/ai-development-company
 Allow: /local/kitchener/content-marketing-agency
 Allow: /local/kitchener/digital-marketing-agency
+Allow: /local/kitchener/ecommerce-seo-agency
 Allow: /local/kitchener/email-marketing-agency
 Allow: /local/kitchener/google-ads-agency
 Allow: /local/kitchener/seo-agency
 Allow: /local/kitchener/seo-company
 Allow: /local/kitchener/social-media-marketing-agency
 Allow: /local/kitchener/web-design-company
+Allow: /local/london-ontario/ecommerce-seo-agency
 Allow: /local/markham/ai-automation-agency
 Allow: /local/markham/ai-development-company
 Allow: /local/markham/content-marketing-agency
@@ -129,12 +145,14 @@ Allow: /local/mississauga/ai-automation-agency
 Allow: /local/mississauga/ai-development-company
 Allow: /local/mississauga/content-marketing-agency
 Allow: /local/mississauga/digital-marketing-agency
+Allow: /local/mississauga/ecommerce-seo-agency
 Allow: /local/mississauga/email-marketing-agency
 Allow: /local/mississauga/google-ads-agency
 Allow: /local/mississauga/seo-agency
 Allow: /local/mississauga/seo-company
 Allow: /local/mississauga/social-media-marketing-agency
 Allow: /local/mississauga/web-design-company
+Allow: /local/north-vancouver/ecommerce-seo-agency
 Allow: /local/oakville/ai-automation-agency
 Allow: /local/oakville/ai-development-company
 Allow: /local/oakville/content-marketing-agency
@@ -159,6 +177,7 @@ Allow: /local/ottawa/ai-automation-agency
 Allow: /local/ottawa/ai-development-company
 Allow: /local/ottawa/content-marketing-agency
 Allow: /local/ottawa/digital-marketing-agency
+Allow: /local/ottawa/ecommerce-seo-agency
 Allow: /local/ottawa/email-marketing-agency
 Allow: /local/ottawa/google-ads-agency
 Allow: /local/ottawa/seo-agency
@@ -185,6 +204,7 @@ Allow: /local/richmond-hill/seo-agency
 Allow: /local/richmond-hill/seo-company
 Allow: /local/richmond-hill/social-media-marketing-agency
 Allow: /local/richmond-hill/web-design-company
+Allow: /local/richmond/ecommerce-seo-agency
 Allow: /local/saskatoon/ai-automation-agency
 Allow: /local/saskatoon/ai-development-company
 Allow: /local/saskatoon/content-marketing-agency
@@ -199,6 +219,7 @@ Allow: /local/surrey/ai-automation-agency
 Allow: /local/surrey/ai-development-company
 Allow: /local/surrey/content-marketing-agency
 Allow: /local/surrey/digital-marketing-agency
+Allow: /local/surrey/ecommerce-seo-agency
 Allow: /local/surrey/email-marketing-agency
 Allow: /local/surrey/google-ads-agency
 Allow: /local/surrey/seo-agency
@@ -210,6 +231,7 @@ Allow: /local/toronto/ai-automation-agency
 Allow: /local/toronto/ai-development-company
 Allow: /local/toronto/content-marketing-agency
 Allow: /local/toronto/digital-marketing-agency
+Allow: /local/toronto/ecommerce-seo-agency
 Allow: /local/toronto/email-marketing-agency
 Allow: /local/toronto/google-ads-agency
 Allow: /local/toronto/ppc-agency
@@ -222,6 +244,7 @@ Allow: /local/vancouver/ai-automation-agency
 Allow: /local/vancouver/ai-development-company
 Allow: /local/vancouver/content-marketing-agency
 Allow: /local/vancouver/digital-marketing-agency
+Allow: /local/vancouver/ecommerce-seo-agency
 Allow: /local/vancouver/email-marketing-agency
 Allow: /local/vancouver/google-ads-agency
 Allow: /local/vancouver/seo-agency
@@ -232,19 +255,21 @@ Allow: /local/victoria/ai-automation-agency
 Allow: /local/victoria/ai-development-company
 Allow: /local/victoria/content-marketing-agency
 Allow: /local/victoria/digital-marketing-agency
+Allow: /local/victoria/ecommerce-seo-agency
 Allow: /local/victoria/email-marketing-agency
 Allow: /local/victoria/google-ads-agency
 Allow: /local/victoria/seo-agency
 Allow: /local/victoria/seo-company
 Allow: /local/victoria/social-media-marketing-agency
 Allow: /local/victoria/web-design-company
+Allow: /local/waterloo/ecommerce-seo-agency
 Allow: /local/windsor/ai-automation-agency
 Allow: /local/windsor/ai-development-company
 Allow: /local/windsor/content-marketing-agency
 Allow: /local/windsor/digital-marketing-agency
+Allow: /local/windsor/ecommerce-seo-agency
 Allow: /local/windsor/email-marketing-agency
 Allow: /local/windsor/google-ads-agency
-Allow: /local/windsor/seo-agency
 
 # Block unpublished local pages
 Disallow: /local/
@@ -265,12 +290,6 @@ User-agent: PerplexityBot
 Allow: /
 
 User-agent: anthropic-ai
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://boomymarketing.com/sitemap.xml
