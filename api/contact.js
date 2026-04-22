@@ -1,8 +1,7 @@
-const nodemailer = require('nodemailer');
-
 const SITE_LABEL = 'Boomy Marketing';
 const FROM_EMAIL = 'Boomy Marketing <onboarding@resend.dev>';
 const TO_EMAILS  = ['boomymarketing.com@gmail.com', 'evgeniygalyas@gmail.com'];
+const RESEND_URL = 'https://api.resend.com/emails';
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -35,28 +34,42 @@ module.exports = async (req, res) => {
     `Time: ${new Date().toISOString()}`,
   ].join('\n');
 
-  try {
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.resend.com',
-      port: 465,
-      secure: true,
-      auth: {
-        user: 'resend',
-        pass: process.env.RESEND_API_KEY,
-      },
-    });
+  const escapeHtml = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const html = `<pre style="font-family:system-ui,Segoe UI,monospace;white-space:pre-wrap;font-size:14px">${escapeHtml(text)}</pre>`;
 
-    await transporter.sendMail({
-      from: FROM_EMAIL,
-      to: TO_EMAILS,
-      replyTo: `"${name}" <${email}>`,
-      subject,
-      text,
-    });
-
-    return res.status(200).json({ success: true });
-  } catch (err) {
-    console.error('Mail error:', err.message);
-    return res.status(500).json({ error: 'Failed to send email' });
+  async function sendOne(to) {
+    try {
+      const r = await fetch(RESEND_URL, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: FROM_EMAIL,
+          to: [to],
+          reply_to: email,
+          subject,
+          text,
+          html,
+        }),
+      });
+      const data = await r.json().catch(() => ({}));
+      return { to, ok: r.ok, status: r.status, data };
+    } catch (err) {
+      return { to, ok: false, error: err.message };
+    }
   }
+
+  const results = await Promise.all(TO_EMAILS.map(sendOne));
+  const delivered = results.filter(r => r.ok).map(r => r.to);
+  const failed = results.filter(r => !r.ok);
+
+  console.log(`Contact form [${SITE_LABEL}] results:`, JSON.stringify(results));
+
+  if (delivered.length === 0) {
+    return res.status(500).json({ error: 'Failed to send email', details: failed });
+  }
+
+  return res.status(200).json({ success: true, delivered, failed: failed.length ? failed : undefined });
 };
