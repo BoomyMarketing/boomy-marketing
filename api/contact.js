@@ -1,8 +1,8 @@
 const nodemailer = require('nodemailer');
 
-const SITE_LABEL  = 'Boomy Marketing';
-const GMAIL_USER  = 'boomymarketing.com@gmail.com';
-const TO_EMAIL    = 'boomymarketing.com@gmail.com';
+const SITE_LABEL = 'Boomy Marketing';
+const FROM_EMAIL = 'Boomy Marketing <onboarding@resend.dev>';
+const TO_EMAILS  = ['boomymarketing.com@gmail.com', 'evgeniygalyas@gmail.com'];
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -37,18 +37,18 @@ module.exports = async (req, res) => {
 
   try {
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
+      host: 'smtp.resend.com',
+      port: 465,
+      secure: true,
       auth: {
-        user: GMAIL_USER,
-        pass: process.env.GMAIL_PASS,
+        user: 'resend',
+        pass: process.env.RESEND_API_KEY,
       },
     });
 
     await transporter.sendMail({
-      from: `"${SITE_LABEL}" <${GMAIL_USER}>`,
-      to: TO_EMAIL,
+      from: FROM_EMAIL,
+      to: TO_EMAILS,
       replyTo: `"${name}" <${email}>`,
       subject,
       text,
