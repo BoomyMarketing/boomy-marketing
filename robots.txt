@@ -275,6 +275,11 @@ Allow: /local/windsor/seo-company
 Allow: /local/windsor/social-media-marketing-agency
 Allow: /local/windsor/web-design-company
 Allow: /local/winnipeg/ai-automation-agency
+Allow: /local/winnipeg/ai-development-company
+Allow: /local/winnipeg/content-marketing-agency
+Allow: /local/winnipeg/digital-marketing-agency
+Allow: /local/winnipeg/email-marketing-agency
+Allow: /local/winnipeg/google-ads-agency
 
 # Block unpublished local pages
 Disallow: /local/
