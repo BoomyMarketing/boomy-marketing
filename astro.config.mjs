@@ -3,6 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import fs from 'node:fs';
 import fsp from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const root = process.cwd();
 
@@ -73,12 +74,19 @@ function legacyStaticPages() {
         server.middlewares.stack.unshift({ route: '', handle: handler });
       },
 
-      // Production build: copy local/ and assets/ into dist/
+      // Production build: copy legacy dirs + SEO root files into dist/
       'astro:build:done': async ({ dir }) => {
-        for (const dirName of ['local', 'assets', 'services']) {
+        const distRoot = fileURLToPath(dir);
+        for (const dirName of ['local', 'assets', 'services', 'sitemap']) {
           const src = path.join(root, dirName);
           if (fs.existsSync(src)) {
-            await copyDir(src, new URL(dirName + '/', dir).pathname.replace(/^\/([A-Z]:)/, '$1'));
+            await copyDir(src, path.join(distRoot, dirName));
+          }
+        }
+        for (const fileName of ['sitemap.xml', 'robots.txt', 'llms.txt']) {
+          const src = path.join(root, fileName);
+          if (fs.existsSync(src)) {
+            await fsp.copyFile(src, path.join(distRoot, fileName));
           }
         }
       },
