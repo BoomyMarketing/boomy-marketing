@@ -77,13 +77,13 @@ function legacyStaticPages() {
       // Production build: copy legacy dirs + SEO root files into dist/
       'astro:build:done': async ({ dir }) => {
         const distRoot = fileURLToPath(dir);
-        for (const dirName of ['local', 'assets', 'services', 'sitemap']) {
+        for (const dirName of ['local', 'assets', 'services', 'sitemap', 'locations']) {
           const src = path.join(root, dirName);
           if (fs.existsSync(src)) {
             await copyDir(src, path.join(distRoot, dirName));
           }
         }
-        for (const fileName of ['sitemap.xml', 'robots.txt', 'llms.txt']) {
+        for (const fileName of ['sitemap.xml', 'robots.txt', 'llms.txt', 'manifest.json']) {
           const src = path.join(root, fileName);
           if (fs.existsSync(src)) {
             await fsp.copyFile(src, path.join(distRoot, fileName));
