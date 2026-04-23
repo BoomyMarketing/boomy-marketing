@@ -280,6 +280,10 @@ Allow: /local/winnipeg/content-marketing-agency
 Allow: /local/winnipeg/digital-marketing-agency
 Allow: /local/winnipeg/email-marketing-agency
 Allow: /local/winnipeg/google-ads-agency
+Allow: /local/winnipeg/seo-agency
+Allow: /local/winnipeg/seo-company
+Allow: /local/winnipeg/social-media-marketing-agency
+Allow: /local/winnipeg/web-design-company
 
 # Block unpublished local pages
 Disallow: /local/
