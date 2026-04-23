@@ -33,7 +33,7 @@ const pageStyle = `
   .hero { min-height: 100vh; min-height: 100dvh; padding: var(--nav-h) 5% 80px; display: flex; align-items: center; position: relative; overflow: hidden; }
   .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%; }
   #heroBadge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,210,63,.12); border: 1px solid rgba(255,210,63,.3); border-radius: 100px; padding: 6px 16px; font-size: .78rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-yellow); margin-bottom: 24px; }
-  #heroBadge span { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-yellow); animation: pulseGreen 2s ease-in-out infinite; }
+  #heroBadge .hero-badge-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-yellow); animation: pulseGreen 2s ease-in-out infinite; flex-shrink: 0; }
   @keyframes pulseGreen { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.6)} }
   #hero-heading { font-size: clamp(2.6rem, 6vw, 5.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -.03em; margin-bottom: 8px; }
   .booming-word { font-family: "Berkshire Swash", cursive; font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 400; line-height: 1; background: linear-gradient(90deg, var(--accent-orange) 0%, var(--accent-yellow) 40%, var(--accent-orange) 80%, var(--accent-yellow) 100%); background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: sweepGradient 3s linear infinite; display: block; margin-bottom: 22px; }
@@ -181,7 +181,7 @@ const pageStyle = `
     <div class="hero-inner">
       <div class="hero-text">
         <div class="hero-badge" id="heroBadge">
-          <span aria-hidden="true">🚀</span>
+          <span class="hero-badge-dot" aria-hidden="true"></span>
           <span>Award-Winning Digital Agency</span>
         </div>
         <h1 id="hero-heading">
