@@ -45,15 +45,28 @@
     --space-2xl: 3rem;
     --space-3xl: 4rem;
 
-    /* Fluid typography */
-    --text-xs:   clamp(0.75rem,  1.5vw,  0.875rem);
-    --text-sm:   clamp(0.875rem, 1.8vw,  1rem);
-    --text-base: clamp(1rem,     2vw,    1.125rem);
-    --text-lg:   clamp(1.125rem, 2.5vw,  1.25rem);
-    --text-xl:   clamp(1.25rem,  3vw,    1.5rem);
-    --text-2xl:  clamp(1.5rem,   4vw,    2rem);
-    --text-3xl:  clamp(2rem,     5vw,    3rem);
-    --text-hero: clamp(2.5rem,   6vw,    4.5rem);
+    /* Fluid typography — tuned for 320px → 1920px */
+    --text-xs:   clamp(0.75rem,  0.7rem + 0.2vw,   0.875rem); /* 12→14px */
+    --text-sm:   clamp(0.875rem, 0.83rem + 0.25vw, 1rem);     /* 14→16px */
+    --text-base: clamp(1rem,     0.95rem + 0.3vw,  1.125rem); /* 16→18px */
+    --text-lg:   clamp(1.125rem, 1.05rem + 0.4vw,  1.25rem);  /* 18→20px */
+    --text-xl:   clamp(1.25rem,  1.15rem + 0.5vw,  1.5rem);   /* 20→24px */
+    --text-2xl:  clamp(1.5rem,   1.35rem + 0.75vw, 1.875rem); /* 24→30px — H3 */
+    --text-3xl:  clamp(1.75rem,  1.5rem + 1.25vw,  2.25rem);  /* 28→36px — H2 sm */
+    --text-4xl:  clamp(2rem,     1.7rem + 1.5vw,   2.75rem);  /* 32→44px — H2 lg */
+    --text-hero: clamp(2rem,     5vw + 1rem,        5rem);     /* 32→80px — H1 */
+
+    /* Typography helpers */
+    --leading-heading: 1.15;
+    --leading-body:    1.65;
+    --tracking-heading: -0.02em;
+    --tracking-caps:    0.08em;
+    --fw-regular:  400;
+    --fw-medium:   500;
+    --fw-semibold: 600;
+    --fw-bold:     700;
+    --fw-extrabold: 800;
+    --fw-black:    900;
 
     /* Motion */
     --ease:            cubic-bezier(0.4,0,0.2,1);
