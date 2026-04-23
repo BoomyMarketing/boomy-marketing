@@ -83,11 +83,30 @@ function legacyStaticPages() {
             await copyDir(src, path.join(distRoot, dirName));
           }
         }
-        for (const fileName of ['sitemap.xml', 'robots.txt', 'llms.txt', 'manifest.json']) {
+        for (const fileName of ['robots.txt', 'llms.txt', 'manifest.json']) {
           const src = path.join(root, fileName);
           if (fs.existsSync(src)) {
             await fsp.copyFile(src, path.join(distRoot, fileName));
           }
+        }
+      },
+    },
+  };
+}
+
+// Runs AFTER @astrojs/sitemap. Renames sitemap-index.xml → sitemap.xml so
+// the URL already submitted to Google Search Console keeps working.
+function renameSitemapIndex() {
+  return {
+    name: 'rename-sitemap-index',
+    hooks: {
+      'astro:build:done': async ({ dir }) => {
+        const distRoot = fileURLToPath(dir);
+        const sitemapIndex = path.join(distRoot, 'sitemap-index.xml');
+        const sitemapTarget = path.join(distRoot, 'sitemap.xml');
+        if (fs.existsSync(sitemapIndex)) {
+          if (fs.existsSync(sitemapTarget)) await fsp.rm(sitemapTarget);
+          await fsp.rename(sitemapIndex, sitemapTarget);
         }
       },
     },
@@ -99,12 +118,13 @@ export default defineConfig({
   output: 'static',
   integrations: [
     legacyStaticPages(),
-    // sitemap({
-    //   changefreq: 'weekly',
-    //   priority: 0.7,
-    //   lastmod: new Date(),
-    //   filter: (page) => !page.includes('/404') && !page.includes('/error'),
-    // }),
+    sitemap({
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+      filter: (page) => !page.includes('/404') && !page.includes('/error'),
+    }),
+    renameSitemapIndex(),
   ],
   build: {
     format: 'directory',
