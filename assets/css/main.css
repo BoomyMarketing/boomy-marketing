@@ -637,7 +637,7 @@
   .footer {
     background: var(--bg-darkest);
     border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 70px 5% 32px;
+    padding: 80px 5% 32px;
     /* container-type only on isolated footer — safe */
     container-type: inline-size;
     container-name: footer;
