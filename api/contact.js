@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Name and valid email required' });
   }
 
-  const subject = `NEW LEAD [${SITE_LABEL}]${service ? ` — ${service}` : ''}${city ? ` in ${city}` : ''}`;
+  const subject = `🔥 NEW LEAD [${SITE_LABEL}]${service ? ` — ${service}` : ''}${city ? ` in ${city}` : ''}`;
   const text = [
     `NEW LEAD — ${SITE_LABEL}`,
     '='.repeat(40),
