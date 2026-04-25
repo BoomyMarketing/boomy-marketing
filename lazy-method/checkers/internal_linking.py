@@ -112,6 +112,7 @@ class Checker(BaseChecker):
             legal_links = [
                 a for a in footer.find_all("a", href=True)
                 if re.search(r"privacy|terms|cookie|legal", a["href"], re.I)
+                or re.search(r"privacy|terms|cookie|legal", a.get_text(), re.I)
             ]
         result.add(CheckResult(
             "footer_legal_links",

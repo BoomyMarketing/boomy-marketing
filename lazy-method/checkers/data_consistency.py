@@ -62,12 +62,16 @@ class Checker(BaseChecker):
                 result.add(CheckResult("phone_mentioned_multiple_times", True, "n/a (non-local)"))
 
             # Find any other phone-like sequences and warn if they don't match
+            # Exclude ISO dates (YYYY-MM-DD) and short numbers
             phone_pattern = re.compile(r"\+?\d[\d\s().-]{8,}\d")
+            _iso_date = re.compile(r"\b\d{4}-\d{2}-\d{2}\b")
             mentions = phone_pattern.findall(body_text)
             inconsistent = []
             for m in mentions:
+                if _iso_date.search(m):
+                    continue  # skip dates like 2025-11-29
                 d = _digits(m)
-                if len(d) < 7:
+                if len(d) < 10:  # require at least 10 digits for a real phone
                     continue
                 if any(v in d or d in v for v in variants):
                     continue
