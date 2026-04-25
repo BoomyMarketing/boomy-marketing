@@ -1,0 +1,74 @@
+{
+  "_schema_version": 1,
+
+  "site": {
+    "name": "Boomy Marketing",
+    "domain": "boomymarketing.com",
+    "language": "en-CA",
+    "country": "CA",
+    "currency": "CAD"
+  },
+
+  "business": {
+    "niche": "generic",
+    "is_local": true,
+    "schema_type": "Organization",
+    "founded_year": 2023,
+    "review_count": 0,
+    "rating": 0,
+    "team_size": null
+  },
+
+  "contact": {
+    "email": "hello@boomymarketing.com",
+    "phone": "+1-647-370-1888",
+    "address": "Toronto, ON, Canada",
+    "service_area": "Greater Toronto Area"
+  },
+
+  "brand": {
+    "primary_color": "#FF6B35",
+    "secondary_color": "#100930",
+    "logo_path": "/assets/logo.svg",
+    "font_family": "Inter"
+  },
+
+  "thresholds": {
+    "word_count": [800, 3500],
+    "title_length": [40, 70],
+    "meta_desc_length": [140, 170],
+    "h2_count": [4, 14],
+    "h3_count_min": 3,
+    "internal_links_min": 5,
+    "external_links_max": 12,
+    "images_min": 1,
+    "reading_level": [7, 12],
+    "faq_count_min": 3,
+    "paragraph_max_sentences": 6,
+    "section_max_words": 600,
+    "duplicate_sentence_max": 3
+  },
+
+  "rules": {
+    "no_cross_link_domains": ["lumoaiagency.com", "bambinoagency.com", "aivopa.com"],
+    "required_mentions_in_h1_or_first_paragraph": ["Boomy"],
+    "required_schemas": ["Organization", "Service", "FAQPage", "BreadcrumbList"],
+    "no_fake_urgency_phrases": [
+      "only X spots left",
+      "limited time",
+      "act now",
+      "don't miss out"
+    ]
+  },
+
+  "niche_overrides": {
+    "niche": "generic",
+    "schema_type": "Organization",
+    "is_local": true,
+    "required_schemas": ["Organization", "BreadcrumbList"],
+    "required_cta_types": ["contact_form"],
+    "required_trust_signals": [],
+    "psychology_focus": [],
+    "forbidden_psychology": ["fake_scarcity", "fake_countdown", "false_urgency"]
+  }
+}

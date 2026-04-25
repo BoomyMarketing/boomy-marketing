@@ -1,0 +1,60 @@
+name: Lazy Method QA
+
+on:
+  pull_request:
+    paths:
+      - "**/*.html"
+      - "lazy-method/**"
+      - "lazy-config.json"
+  push:
+    branches:
+      - main
+    paths:
+      - "**/*.html"
+      - "lazy-method/**"
+      - "lazy-config.json"
+
+jobs:
+  lazy-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install beautifulsoup4 lxml
+
+      - name: Find changed HTML files
+        id: changed
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.base_ref }}"
+            git fetch origin "$BASE" --depth=1
+            FILES=$(git diff --name-only "origin/$BASE"...HEAD -- '*.html' | tr '\n' ' ')
+          else
+            FILES=$(git diff --name-only HEAD~1 HEAD -- '*.html' | tr '\n' ' ')
+          fi
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+
+      - name: Run Lazy Method on changed pages
+        if: steps.changed.outputs.files != ''
+        run: |
+          if [ ! -f lazy-config.json ]; then
+            echo "lazy-config.json not found in repo root — skipping QA gate."
+            exit 0
+          fi
+          if [ ! -f lazy-method/lazy-check.py ]; then
+            echo "lazy-method/ tooling not in this repo — skipping QA gate."
+            exit 0
+          fi
+          python lazy-method/lazy-check.py --config=lazy-config.json --ci ${{ steps.changed.outputs.files }}
