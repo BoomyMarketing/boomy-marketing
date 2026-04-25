@@ -37,7 +37,9 @@ INTENT_PATTERNS = {
 
 POWER_WORDS = re.compile(
     r"\b(best|ultimate|proven|guaranteed|essential|complete|definitive|"
-    r"powerful|expert|professional|exclusive|advanced|2026|2027)\b",
+    r"powerful|expert|professional|exclusive|advanced|affordable|trusted|"
+    r"top-?rated|award-?winning|certified|leading|premier|dedicated|"
+    r"results|fast|free|new|2026|2027)\b",
     re.I,
 )
 

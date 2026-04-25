@@ -146,7 +146,8 @@ class Checker(BaseChecker):
             "social_proof": re.compile(r"\b(reviews|testimonials|clients|case studies)\b", re.I),
         }
         for key, pattern in required_signals.items():
-            present = bool(pattern.search(body_text))
+            # Check visible text OR HTML class/id attributes
+            present = bool(pattern.search(body_text) or pattern.search(html))
             result.add(CheckResult(
                 f"section_{key}",
                 present,

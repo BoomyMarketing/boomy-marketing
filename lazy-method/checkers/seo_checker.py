@@ -202,7 +202,10 @@ class Checker(BaseChecker):
         if is_local:
             phone = self.contact.get("phone", "")
             phone_digits = re.sub(r"[^\d]", "", phone)
-            phone_in_text = phone_digits in re.sub(r"[^\d]", "", body_text)
+            page_digits = re.sub(r"[^\d]", "", body_text)
+            # Match either full number or last 10 digits (local format without country code)
+            phone_local = phone_digits[-10:] if len(phone_digits) >= 10 else phone_digits
+            phone_in_text = phone_digits in page_digits or phone_local in page_digits
             result.add(CheckResult(
                 "phone_present_on_page",
                 phone_in_text,
@@ -284,9 +287,10 @@ class Checker(BaseChecker):
             "no <nav> element found" if not nav else "ok",
         ))
 
-        nav_links = nav.find_all("a") if nav else []
+        # Count unique destinations (mobile+desktop navs duplicate links)
+        nav_hrefs = list({a["href"] for a in nav.find_all("a", href=True)} if nav else set())
         result.add(CheckResult(
             "navigation_max_seven_top_level",
-            len(nav_links) <= 7 or nav is None,
-            f"{len(nav_links)} top-level nav links (max 7)" if len(nav_links) > 7 else "ok",
+            len(nav_hrefs) <= 7 or nav is None,
+            f"{len(nav_hrefs)} top-level nav links (max 7)" if len(nav_hrefs) > 7 else "ok",
         ))

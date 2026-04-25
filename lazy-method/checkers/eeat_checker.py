@@ -183,15 +183,19 @@ class Checker(BaseChecker):
         ))
 
         # Trustworthiness (3)
+        # Strip https:// and SVG xmlns declarations before checking for bare http://
+        _html_stripped = html.replace("https://", "").replace('xmlns="http://', "")
         result.add(CheckResult(
             "https_only_resources",
-            "http://" not in html.replace("https://", ""),
+            "http://" not in _html_stripped,
             "page references http:// resources",
         ))
 
-        privacy_or_terms_link = bool(soup.find("a", href=re.compile(
-            r"privacy|terms|cookie", re.I,
-        )))
+        # Check href OR link text for privacy/terms/cookie
+        privacy_or_terms_link = bool(
+            soup.find("a", href=re.compile(r"privacy|terms|cookie", re.I))
+            or soup.find("a", string=re.compile(r"privacy|terms|cookie", re.I))
+        )
         result.add(CheckResult(
             "privacy_terms_link_present",
             privacy_or_terms_link,

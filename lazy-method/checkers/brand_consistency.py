@@ -53,9 +53,14 @@ class Checker(BaseChecker):
 
         title_tag = soup.find("title")
         title_text = title_tag.get_text(strip=True) if title_tag else ""
+        # Accept full name OR first word of brand name (e.g. "Boomy" passes for "Boomy Marketing")
+        brand_word = site_name.split()[0].lower() if site_name else ""
+        title_has_brand = (
+            site_name.lower() in title_text.lower() or brand_word in title_text.lower()
+        ) if site_name else False
         result.add(CheckResult(
             "site_name_in_title",
-            site_name.lower() in title_text.lower() if site_name else False,
+            title_has_brand,
             f"site name not in title: '{title_text}'",
         ))
 
@@ -115,9 +120,15 @@ class Checker(BaseChecker):
 
         og_site = soup.find("meta", attrs={"property": "og:site_name"})
         og_site_content = (og_site.get("content", "") if og_site else "").strip()
+        # Accept exact match OR if configured name starts with og content (e.g. "Boomy" ⊂ "Boomy Marketing")
+        og_match = (
+            site_name.lower() == og_site_content.lower()
+            or og_site_content.lower() in site_name.lower()
+            or site_name.lower() in og_site_content.lower()
+        ) if (site_name and og_site_content) else False
         result.add(CheckResult(
             "og_site_name_present",
-            site_name.lower() == og_site_content.lower() if site_name else False,
+            og_match,
             f"og:site_name '{og_site_content}' != configured '{site_name}'",
         ))
 

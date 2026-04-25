@@ -215,11 +215,11 @@ class Checker(BaseChecker):
         ))
 
         nav = soup.find("nav")
-        nav_links = nav.find_all("a") if nav else []
+        nav_unique = list({a["href"] for a in nav.find_all("a", href=True)} if nav else set())
         result.add(CheckResult(
             "navigation_max_seven_items",
-            len(nav_links) <= 7 or nav is None,
-            f"{len(nav_links)} top-level nav links",
+            len(nav_unique) <= 7 or nav is None,
+            f"{len(nav_unique)} top-level nav links",
         ))
 
         result.add(CheckResult(

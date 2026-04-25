@@ -85,7 +85,9 @@ class Checker(BaseChecker):
         cfg_email = (self.contact.get("email") or "").lower()
         if cfg_email:
             email_re = re.compile(r"[A-Za-z0-9_.+-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-.]+")
-            mentions = {m.lower() for m in email_re.findall(html)}
+            # Exclude emails that only appear in placeholder= attributes (not real content)
+            html_no_placeholders = re.sub(r'placeholder="[^"]*"', '', html)
+            mentions = {m.lower() for m in email_re.findall(html_no_placeholders)}
             personal_emails = {e for e in mentions if not e.endswith(self.site.get("domain", ""))}
             domain_email_present = cfg_email in mentions or any(
                 cfg_email in m for m in mentions

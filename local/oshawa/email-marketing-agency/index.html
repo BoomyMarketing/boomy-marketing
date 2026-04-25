@@ -32,9 +32,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Schema: LocalBusiness + Service -->
-    <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": ["LocalBusiness", "MarketingAgency"], "name": "Boomy Marketing Agency", "description": "Email Marketing Agency services in Oshawa", "url": "https://boomymarketing.com/local/oshawa/email-marketing-agency", "telephone": "+16473701888", "email": "care@boomymarketing.com", "address": {"@type": "PostalAddress", "addressLocality": "Oshawa", "addressRegion": "ON", "addressCountry": "CA"}, "geo": {"@type": "GeoCoordinates", "latitude": 43.8971, "longitude": -78.8658}, "priceRange": "$$", "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Email Marketing Agency", "itemListElement": [{"@type": "Offer", "name": "Email Marketing Agency - Starter", "price": "$1,500 CAD/mo", "priceCurrency": "CAD"}, {"@type": "Offer", "name": "Email Marketing Agency - Growth", "price": "$3,500 CAD/mo", "priceCurrency": "CAD"}, {"@type": "Offer", "name": "Email Marketing Agency - Scale", "price": "$7,500 CAD/mo", "priceCurrency": "CAD"}]}, "datePublished": "2026-05-20", "dateModified": "2026-04-14", "areaServed": [{"@type": "City", "name": "Oshawa"}, {"@type": "City", "name": "Whitby"}, {"@type": "City", "name": "Ajax"}, {"@type": "City", "name": "Pickering"}, {"@type": "City", "name": "Clarington"}]}
-    </script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": ["LocalBusiness", "MarketingAgency"], "name": "Boomy Marketing Agency", "description": "Email Marketing Agency services in Oshawa", "url": "https://boomymarketing.com/local/oshawa/email-marketing-agency", "telephone": "+16473701888", "email": "care@boomymarketing.com", "address": {"@type": "PostalAddress", "addressLocality": "Oshawa", "addressRegion": "ON", "addressCountry": "CA"}, "geo": {"@type": "GeoCoordinates", "latitude": 43.8971, "longitude": -78.8658}, "priceRange": "$$", "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Email Marketing Agency", "itemListElement": [{"@type": "Offer", "name": "Email Marketing Agency - Starter", "price": "$1,500 CAD/mo", "priceCurrency": "CAD"}, {"@type": "Offer", "name": "Email Marketing Agency - Growth", "price": "$3,500 CAD/mo", "priceCurrency": "CAD"}, {"@type": "Offer", "name": "Email Marketing Agency - Scale", "price": "$7,500 CAD/mo", "priceCurrency": "CAD"}]}, "datePublished": "2026-05-20", "dateModified": "2026-04-14", "areaServed": [{"@type": "City", "name": "Oshawa"}, {"@type": "City", "name": "Whitby"}, {"@type": "City", "name": "Ajax"}, {"@type": "City", "name": "Pickering"}, {"@type": "City", "name": "Clarington"}], "@id": "https://boomymarketing.com/#organization", "sameAs": ["https://www.facebook.com/boomymarketing", "https://www.instagram.com/boomymarketing", "https://www.linkedin.com/company/boomy-marketing", "https://twitter.com/boomymarketing"]}</script>
 
     <!-- Schema: FAQPage -->
     <script type="application/ld+json">
@@ -1497,9 +1495,22 @@
         .social-link { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.7); text-decoration: none; transition: all .3s ease; }
         .social-link:hover { background: rgba(255,107,53,.15); border-color: rgba(255,107,53,.4); color: #FF6B35; transform: translateY(-2px); }
         .social-link svg { width: 18px; height: 18px; fill: currentColor; }
-</style>
+
+        @media (max-width: 1024px) {
+            .reveal-right, .reveal-left { transform: translateY(20px); }
+            .reveal-right.visible, .reveal-left.visible { transform: translateY(0); }
+        }
+        
+        /* Accessibility: focus-visible */
+        :focus-visible { outline: 2px solid var(--primary, #FF6B35); outline-offset: 3px; border-radius: 3px; }
+        :focus:not(:focus-visible) { outline: none; }
+        </style>
   <meta property="og:locale" content="en_CA">
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "@id": "https://boomymarketing.com/local/oshawa/email-marketing-agency#service", "name": "Email Marketing Agency", "serviceType": "Email Marketing Agency", "provider": {"@type": "Organization", "@id": "https://boomymarketing.com/#organization", "name": "Boomy Marketing"}, "areaServed": {"@type": "City", "name": "Oshawa"}, "url": "https://boomymarketing.com/local/oshawa/email-marketing-agency"}</script>
+  <meta name="author" content="Boomy Marketing Team">
 </head>
+<a href="#main-content" class="skip-to-content" style="position:absolute;left:-9999px;top:0;z-index:9999;padding:8px 16px;background:#fff;color:#000;text-decoration:none;font-weight:700;" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Skip to main content</a>
 <body>
 
     <!-- Read progress bar -->
@@ -1541,7 +1552,7 @@
     </nav>
 
     <!-- ── HERO ──────────────────────────────────────────────────────── -->
-    <section class="hero" aria-labelledby="hero-heading">
+    <section id="main-content" class="hero" aria-labelledby="hero-heading">
         <canvas id="hero-particles" aria-hidden="true"></canvas>
         <div class="hero-orb-1" aria-hidden="true"></div>
         <div class="hero-orb-2" aria-hidden="true"></div>
@@ -1554,6 +1565,7 @@
                     <span>Email Marketing Agency · Oshawa</span>
                 </div>
                 <h1 id="hero-heading">Affordable Email Marketing Agency for <span class="accent-word">Oshawa</span> Businesses</h1>
+        <time class="publish-date" datetime="2026-05-20" style="display:none">Published: 2026-05-20</time>
                 <p class="hero-subtitle">Grow your Oshawa business with proven Email Marketing Agency strategies</p>
                 <div class="hero-actions">
                     <a href="https://boomymarketing.com/contact" class="btn btn-primary btn-cta-glow">
@@ -1927,6 +1939,7 @@
         </ul>
         <h4 style="margin-top:24px">Contact</h4>
         <div class="footer-contact-item"><span class="fc-text"><a href="tel:+16473701888">(647) 370-1888</a></span></div>
+        <div class="footer-contact-item"><span class="fc-text"><a href="https://maps.google.com/?q=Boomy+Marketing+Toronto+ON" target="_blank" rel="noopener noreferrer" class="directions-link" aria-label="Get directions to Oshawa">Get Directions &rarr;</a></span></div>
         <div class="footer-contact-item"><span class="fc-text"><a href="mailto:care@boomymarketing.com">care@boomymarketing.com</a></span></div>
       </div>
     </div>
