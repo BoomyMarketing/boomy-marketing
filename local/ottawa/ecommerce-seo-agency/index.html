@@ -722,7 +722,7 @@ img{max-width:100%;height:auto;display:block}
             <p style="margin-bottom:12px;">Get a free e-commerce SEO audit. No commitment, no pressure &mdash; just actionable insights for your store.</p>
             <p style="font-size:.92rem;color:rgba(255,255,255,.6);margin-bottom:36px;">&#x1F4AC; Prefer to message? Fill the form below &mdash; we&apos;ll reply in 5 minutes.</p>
 
-            <form id="bookingForm" action="/api/submit.php" method="POST" class="booking-form">
+            <form id="bookingForm" action="/api/contact" method="POST" class="booking-form">
                 <input type="hidden" name="subject" value="NEW BOOMY LEAD &mdash; E-commerce SEO Agency in Ottawa">
                 <input type="hidden" name="service" value="ecommerce seo agency">
                 <input type="hidden" name="city" value="Ottawa">
@@ -868,7 +868,7 @@ img{max-width:100%;height:auto;display:block}
       btn.disabled = true;
       btn.textContent = 'Sending...';
       try {
-        await fetch(form.action, { method: 'POST', body: new FormData(form) });
+        await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify((function () { var __d = {}; new FormData(form).forEach(function (v, k) { __d[k] = v; }); __d.source = location.pathname; return __d; })()) });
         document.getElementById('formSuccess').style.display = 'block';
         form.reset();
       } catch { document.getElementById('formSuccess').style.display = 'block'; }
@@ -905,5 +905,6 @@ img{max-width:100%;height:auto;display:block}
   }
 
     </script>
+<!-- booking-form-v2 -->
 </body>
 </html>

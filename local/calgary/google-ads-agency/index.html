@@ -1844,7 +1844,7 @@
             <p style="font-size:0.92rem;color:rgba(255,255,255,0.6);margin-bottom:36px;">&#x1F4AC; Prefer to message? Fill the form below — we'll get back to you in 5 minutes.</p>
 
             <!-- Booking Form -->
-            <form id="bookingForm" action="/api/submit.php" method="POST" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:36px;text-align:left;max-width:600px;margin:0 auto 36px;">
+            <form id="bookingForm" action="/api/contact" method="POST" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:36px;text-align:left;max-width:600px;margin:0 auto 36px;">
                 <input type="hidden" name="subject" value="NEW BOOMY LEAD — Google Ads Agency in Calgary">
                 <input type="hidden" name="service" value="google ads agency">
                 <input type="hidden" name="city" value="Calgary">
@@ -2102,10 +2102,7 @@
                 var success = document.getElementById('formSuccess');
                 btn.disabled = true;
                 btn.textContent = 'Sending...';
-                fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    body: new FormData(bookingForm)
-                }).then(function(r) { return r.json(); }).then(function(data) {
+                fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify((function () { var __d = {}; new FormData(bookingForm).forEach(function (v, k) { __d[k] = v; }); __d.source = location.pathname; return __d; })()) }).then(function(r) { return r.json(); }).then(function(data) {
                     if (data.success) {
                         success.style.display = 'block';
                         bookingForm.reset();
