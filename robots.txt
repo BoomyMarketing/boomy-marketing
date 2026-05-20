@@ -306,7 +306,4 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
-User-agent: OAI-SearchBot
-Allow: /
-
 Sitemap: https://boomymarketing.com/sitemap.xml
