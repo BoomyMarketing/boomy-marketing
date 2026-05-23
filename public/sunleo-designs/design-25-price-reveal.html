@@ -381,14 +381,6 @@
           </div>
           <p class="giga-num text-7xl mt-3 tabnum"><sup>$</sup><span id="calcTotal">1,080</span></p>
           <div class="mt-3 grid grid-cols-2 gap-3 mono">
-            <div class="border border-[var(--hair)] p-3">
-              <p class="text-[var(--gray)]">AFFIRM · 24 MO</p>
-              <p class="tabnum mt-1 text-lg font-medium"><span id="calcAffirm">$45</span>/mo</p>
-            </div>
-            <div class="border border-[var(--hair)] p-3">
-              <p class="text-[var(--gray)]">KLARNA · 4×</p>
-              <p class="tabnum mt-1 text-lg font-medium"><span id="calcKlarna">$270</span></p>
-            </div>
           </div>
         </div>
 
@@ -404,8 +396,6 @@
   <div class="max-w-[1480px] mx-auto px-6 py-7 grid grid-cols-2 md:grid-cols-6 gap-6 items-center text-center mono">
     <div><p class="text-[var(--gray)]">BBB</p><p class="display text-2xl mt-1 text-[var(--ink)]">A+</p></div>
     <div><p class="text-[var(--gray)]">TOP CHOICE</p><p class="display text-2xl mt-1">2025–26</p></div>
-    <div><p class="text-[var(--gray)]">AFFIRM</p><p class="display text-2xl mt-1 text-[var(--blue)]">0% APR</p></div>
-    <div><p class="text-[var(--gray)]">KLARNA</p><p class="display text-2xl mt-1">PAY 4×</p></div>
     <div><p class="text-[var(--gray)]">GOOGLE</p><p class="display text-2xl mt-1">4.9 ★</p></div>
     <div><p class="text-[var(--gray)]">REVIEWS</p><p class="display text-2xl mt-1 tabnum">2,418</p></div>
   </div>
@@ -773,30 +763,7 @@
   </div>
 </section>
 
-<!-- 11. BNPL -->
-<section class="border-b-2 border-[var(--ink)]">
-  <div class="max-w-[1480px] mx-auto px-6 py-16">
-    <div class="border-2 border-[var(--ink)] grid md:grid-cols-2">
-      <div class="p-12 border-r-2 border-[var(--ink)]">
-        <p class="mono text-[var(--blue)]">PAY-LATER MATH</p>
-        <h2 class="display text-5xl md:text-6xl mt-4 leading-[.95]">
-          A whole-home order. <span class="text-[var(--blue)]">$0</span> today.
-        </h2>
-        <p class="mt-5 text-lg opacity-90 max-w-md leading-relaxed">Affirm, Klarna, Afterpay, Sezzle. 0% APR · 24 months · pre-qualified at checkout. Your calculator number, paid over time.</p>
-      </div>
-      <div class="p-12 grid grid-cols-2 gap-6 items-center bg-[var(--gray-3)]">
-        <div><p class="mono opacity-70">A $3,240 ORDER · 24 MO</p><p class="display text-5xl mt-2 text-[var(--blue)] tabnum">$135<span class="text-2xl opacity-70">/mo</span></p></div>
-        <div><p class="mono opacity-70">A $3,240 ORDER · PAY 4×</p><p class="display text-5xl mt-2 tabnum">$810<span class="text-2xl opacity-70">/qtr</span></p></div>
-        <div class="col-span-2 flex flex-wrap gap-4 mt-4 items-center">
-          <div class="display text-2xl ital">Affirm</div>
-          <div class="display text-2xl">Klarna</div>
-          <div class="display text-2xl ital">afterpay</div>
-          <div class="display text-2xl">Sezzle</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- 12. JOURNAL -->
 <section class="border-b-2 border-[var(--ink)]">
@@ -998,10 +965,10 @@
           <span class="mono opacity-70">4.9 · 2,418 REVIEWS · TRUSTPILOT</span>
         </div>
         <div class="mt-6 flex gap-3 flex-wrap">
-          <span class="display text-xl">Affirm</span>
-          <span class="display text-xl ital">Klarna</span>
-          <span class="display text-xl">afterpay</span>
-          <span class="display text-xl ital">Sezzle</span>
+          
+          
+          
+          
           <span class="display text-xl">Visa</span>
         </div>
       </div>
@@ -1117,10 +1084,7 @@
   const calcProd = document.getElementById('calcProd');
   const calcQty = document.getElementById('calcQty');
   const calcPerWindow = document.getElementById('calcPerWindow');
-  const calcTotal = document.getElementById('calcTotal');
-  const calcAffirm = document.getElementById('calcAffirm');
-  const calcKlarna = document.getElementById('calcKlarna');
-  let calcMotor = 0;
+  const calcTotal = document.getElementById('calcTotal');  let calcMotor = 0;
   document.querySelectorAll('.calc-motor').forEach(b => {
     b.addEventListener('click', () => {
       document.querySelectorAll('.calc-motor').forEach(x => {
@@ -1144,10 +1108,7 @@
     if(qty >= 16) discount = 0.86;
     total = Math.round(total * discount);
     calcPerWindow.textContent = `$${perWindow.toLocaleString()}`;
-    calcTotal.textContent = total.toLocaleString();
-    calcAffirm.textContent = `$${Math.round(total/24).toLocaleString()}`;
-    calcKlarna.textContent = `$${Math.round(total/4).toLocaleString()}`;
-  }
+    calcTotal.textContent = total.toLocaleString();  }
   [calcW, calcH, calcProd, calcQty].forEach(el => el.addEventListener('input', recalc));
   recalc();
 
