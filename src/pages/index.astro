@@ -156,6 +156,13 @@ const pageStyle = `
     .process-steps { grid-template-columns: 1fr; }
     .float-tag-1,.float-tag-2 { display: none; }
   }
+  /* TICKER */
+  .ticker-section { background: rgba(0,0,0,0.3); border-top: 1px solid rgba(255,107,53,0.1); border-bottom: 1px solid rgba(255,107,53,0.1); padding: 18px 0; overflow: hidden; }
+  .ticker-track { display: flex; width: max-content; animation: ticker-scroll 32s linear infinite; }
+  .ticker-track:hover { animation-play-state: paused; }
+  @keyframes ticker-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .ticker-item { display: inline-flex; align-items: center; gap: 10px; padding: 0 36px; white-space: nowrap; font-size: 0.78rem; font-weight: 700; color: var(--accent-orange); letter-spacing: 0.09em; text-transform: uppercase; }
+  .ticker-sep { color: rgba(255,107,53,0.35); font-size: 0.7rem; }
 `;
 ---
 
@@ -210,6 +217,27 @@ const pageStyle = `
       </div>
     </div>
   </section>
+
+  <div class="ticker-section" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-item">SEO &amp; Content <span class="ticker-sep">&#x2736;</span></div>
+      <div class="ticker-item">Google Ads <span class="ticker-sep">&#x2736;</span></div>
+      <div class="ticker-item">Meta Ads <span class="ticker-sep">&#x2736;</span></div>
+      <div class="ticker-item">AI Automation <span class="ticker-sep">&#x2736;</span></div>
+      <div class="ticker-item">Web Design <span class="ticker-sep">&#x2736;</span></div>
+      <div class="ticker-item">Email Marketing <span class="ticker-sep">&#x2736;</span></div>
+      <div class="ticker-item">Growth Strategy <span class="ticker-sep">&#x2736;</span></div>
+      <div class="ticker-item">Data-Driven Results <span class="ticker-sep">&#x2736;</span></div>
+      <div class="ticker-item">SEO &amp; Content <span class="ticker-sep">&#x2736;</span></div>
+      <div class="ticker-item">Google Ads <span class="ticker-sep">&#x2736;</span></div>
+      <div class="ticker-item">Meta Ads <span class="ticker-sep">&#x2736;</span></div>
+      <div class="ticker-item">AI Automation <span class="ticker-sep">&#x2736;</span></div>
+      <div class="ticker-item">Web Design <span class="ticker-sep">&#x2736;</span></div>
+      <div class="ticker-item">Email Marketing <span class="ticker-sep">&#x2736;</span></div>
+      <div class="ticker-item">Growth Strategy <span class="ticker-sep">&#x2736;</span></div>
+      <div class="ticker-item">Data-Driven Results <span class="ticker-sep">&#x2736;</span></div>
+    </div>
+  </div>
 
   <StatsBar />
 
