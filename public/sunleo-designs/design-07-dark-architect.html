@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SunLeo Practice — Window Architecture, Calgary</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #060606;
+    --ink-2: #0D0D0D;
+    --ink-3: #161616;
+    --bone: #EEE9DC;
+    --bone-2: #DAD3C2;
+    --gold: #C39A4A;
+    --gold-2: #8C6924;
+    --rust: #A14728;
+    --rule: rgba(238,233,220,0.10);
+    --rule-2: rgba(238,233,220,0.22);
+  }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Newsreader', serif; font-weight: 300; background: var(--ink); color: var(--bone); -webkit-font-smoothing: antialiased; }
+  .display { font-family: 'DM Serif Display', serif; letter-spacing: -0.015em; }
+  .ital { font-family: 'DM Serif Display', serif; font-style: italic; }
+  .mono { font-family: 'IBM Plex Mono', monospace; font-weight: 400; }
+  .micro { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .hair { border-color: var(--rule); }
+  .hair2 { border-color: var(--rule-2); }
+  .blueprint {
+    background-image:
+      linear-gradient(var(--rule) 1px, transparent 1px),
+      linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+  .crosshair {
+    background:
+      linear-gradient(currentColor, currentColor) center / 10px 1px no-repeat,
+      linear-gradient(currentColor, currentColor) center / 1px 10px no-repeat;
+  }
+  .plate-num { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.3em; }
+  .reveal { overflow: hidden; }
+  .reveal img { transition: transform 2s cubic-bezier(.2,.7,.2,1), filter 1.5s ease; filter: grayscale(50%); }
+  .reveal:hover img { transform: scale(1.04); filter: grayscale(0%); }
+  .corner-tick { position: relative; }
+  .corner-tick::before, .corner-tick::after { content: ""; position: absolute; width: 12px; height: 12px; }
+  .corner-tick::before { top: 0; left: 0; border-top: 1px solid var(--gold); border-left: 1px solid var(--gold); }
+  .corner-tick::after { bottom: 0; right: 0; border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+  .btn-gold { border: 1px solid var(--gold); color: var(--gold); transition: all .5s ease; }
+  .btn-gold:hover { background: var(--gold); color: var(--ink); letter-spacing: 0.32em; }
+  .underline-drift { background: linear-gradient(currentColor, currentColor) bottom left / 0% 1px no-repeat; padding-bottom: 4px; transition: background-size 1s cubic-bezier(.2,.7,.2,1); }
+  .underline-drift:hover { background-size: 100% 1px; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .anim { opacity: 0; animation: fadeUp 1.2s cubic-bezier(.2,.7,.2,1) forwards; }
+  .d1 { animation-delay: .05s } .d2 { animation-delay: .25s } .d3 { animation-delay: .45s } .d4 { animation-delay: .65s }
+  .nm { font-family: 'IBM Plex Mono', monospace; font-feature-settings: "tnum"; }
+  .gold-rule { background: linear-gradient(to right, var(--gold), transparent); height: 1px; }
+
+/* ============ MOBILE RESPONSIVE PATCH ============ */
+html, body { overflow-x: hidden; max-width: 100vw; }
+img, svg, video { max-width: 100%; height: auto; }
+
+@media (max-width: 1023px) {
+  /* Force lg:grid-cols-12 sections to stack on tablet/mobile */
+  section .grid.lg\:grid-cols-12,
+  section .grid.md\:grid-cols-12 {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  section .grid.lg\:grid-cols-12 > *,
+  section .grid.md\:grid-cols-12 > * {
+    min-width: 0;
+    width: 100%;
+  }
+  /* Tighten section padding */
+  section { padding-left: 1rem !important; padding-right: 1rem !important; }
+  section.no-padding-override { padding: revert !important; }
+  /* Marquee cards width cap */
+  .marquee article, .marquee .card { max-width: 280px !important; min-width: 240px !important; }
+}
+
+@media (max-width: 767px) {
+  /* Display text clamps */
+  h1 { font-size: clamp(2rem, 9vw, 3.5rem) !important; line-height: 1.05 !important; }
+  h2 { font-size: clamp(1.5rem, 7vw, 2.5rem) !important; line-height: 1.1 !important; }
+  /* Heavy display text */
+  .display, .didot, .serif.text-7xl, .serif.text-8xl, .serif.text-9xl,
+  [style*="font-size: 120"], [style*="font-size: 140"], [style*="font-size: 170"] {
+    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    line-height: 0.95 !important;
+  }
+  /* Touch targets 44px */
+  button, a[class*="btn"], a[role="button"] {
+    min-height: 44px;
+  }
+  /* Inputs prevent iOS zoom */
+  input, textarea, select { font-size: 16px !important; }
+  /* Disable hover transforms on touch */
+  .card:hover, *[class*="hover:translate"]:hover, *[class*="hover:scale"]:hover {
+    transform: none !important;
+  }
+  /* Big grids collapse */
+  .grid.grid-cols-6 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-5 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-4:not(.grid-rows-2) { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-3 { grid-template-columns: repeat(1, 1fr) !important; }
+  /* Comparison tables: wrap (if direct child grid-cols-4) in overflow-x scroll behavior */
+  .comparison-table, table.comparison { display: block !important; overflow-x: auto !important; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Disable cursor-follow effects on touch devices */
+  .cursor-trail, .sunbeam-cursor, .glow-dot, .mouse-trail {
+    display: none !important;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="border-b hair">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-10 py-3 flex items-center justify-between gap-3 micro text-stone-500 text-[9px] md:text-[10px]">
+    <span class="truncate">SunLeo Practice / Vol IV</span>
+    <span class="hidden lg:inline">By appointment — Mon / Thu</span>
+    <span class="text-[var(--gold)] whitespace-nowrap">+1.403.555.1234</span>
+  </div>
+</div>
+
+<!-- Nav -->
+<header class="border-b hair">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-10 py-4 md:py-7 flex items-center justify-between gap-3">
+    <a href="#" class="display text-xl md:text-3xl tracking-tight">SunLeo<span class="text-[var(--gold)]"> / </span><span class="ital text-[var(--gold)]" style="font-size: 0.65em">Practice</span></a>
+    <nav class="hidden md:flex gap-6 lg:gap-9 micro">
+      <a href="#index" class="underline-drift hover:text-[var(--gold)]">Index</a>
+      <a href="#products" class="underline-drift hover:text-[var(--gold)]">Catalogue</a>
+      <a href="#practice" class="underline-drift hover:text-[var(--gold)]">Practice</a>
+      <a href="#field" class="underline-drift hover:text-[var(--gold)]">Field Notes</a>
+      <a href="#book" class="underline-drift hover:text-[var(--gold)]">Brief</a>
+    </nav>
+    <a href="#book" class="btn-gold micro px-3 md:px-5 py-2 md:py-3 whitespace-nowrap text-[9px] md:text-[10px]">Submit Brief →</a>
+  </div>
+</header>
+
+<!-- Issue tag -->
+<section id="index" class="border-b hair">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-10 py-3 flex flex-wrap gap-3 md:gap-6 micro text-stone-500">
+    <span>— Vol IV</span><span>Issue 012</span><span>Spring 2026</span><span class="text-[var(--gold)] hidden sm:inline">Window Architecture for the Considered Home</span>
+  </div>
+</section>
+
+<!-- Hero -->
+<section class="border-b hair">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-10 py-12 md:py-24 grid grid-cols-12 gap-6 md:gap-8 items-end relative">
+
+    <!-- Floating plate number top right -->
+    <div class="absolute top-6 right-4 md:top-12 md:right-10 micro text-[var(--gold)] anim d1">Plate 01 / 12</div>
+
+    <div class="col-span-12 md:col-span-7 anim d2 relative">
+      <div class="micro text-stone-500 mb-6 md:mb-8">— Cover · I</div>
+      <h1 class="display text-[15vw] md:text-[200px] leading-[0.86]">
+        Light,<br/>
+        <span class="ital text-[var(--gold)]" style="font-size: 0.78em">drawn</span><br/>
+        to scale.
+      </h1>
+    </div>
+
+    <aside class="col-span-12 md:col-span-5 anim d3 relative">
+      <!-- Caliper-style image frame -->
+      <div class="relative corner-tick p-3">
+        <div class="reveal">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200" class="w-full h-80 md:h-[560px] object-cover" alt=""/>
+        </div>
+        <!-- measurement marks -->
+        <div class="absolute -left-4 md:-left-6 top-3 bottom-3 flex flex-col justify-between text-[var(--gold)] nm text-xs">
+          <span>—</span><span>—</span><span>—</span><span>—</span>
+        </div>
+        <div class="absolute -bottom-6 left-3 right-3 flex justify-between text-[var(--gold)] nm text-xs">
+          <span>|</span><span>|</span><span>|</span><span>|</span>
+        </div>
+      </div>
+      <p class="plate-num text-stone-500 mt-6 md:mt-8">FIG. 01</p>
+      <p class="mt-2 ital text-lg md:text-xl text-stone-300 leading-snug">— Cellular system, south elevation. Mount Royal, March 2026. Drawn at 1:5.</p>
+    </aside>
+
+    <div class="col-span-12 md:col-span-8 anim d4 mt-6 md:mt-10">
+      <div class="gold-rule"></div>
+      <p class="display ital text-xl md:text-3xl text-stone-300 mt-6 md:mt-8 max-w-3xl leading-snug">
+        — A small practice of window-treatment architects. We do not retail. We brief, draft and install — one room at a time.
+      </p>
+      <div class="mt-8 md:mt-12 flex flex-wrap gap-4 md:gap-6 items-center">
+        <a href="#book" class="btn-gold micro px-6 md:px-9 py-4 md:py-5">Submit a Brief →</a>
+        <a href="#products" class="micro underline-drift text-stone-400 hover:text-[var(--gold)]">View Catalogue</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Statement -->
+<section class="border-b hair bg-[var(--ink-2)]">
+  <div class="max-w-[1100px] mx-auto px-4 md:px-10 py-16 md:py-32 text-center relative">
+    <p class="micro text-stone-500">— Statement of the Practice</p>
+    <div class="mt-6 md:mt-10 flex items-center justify-center gap-4">
+      <span class="block w-12 md:w-16 h-px bg-[var(--gold)]"></span>
+      <span class="text-[var(--gold)] text-xs">✦</span>
+      <span class="block w-12 md:w-16 h-px bg-[var(--gold)]"></span>
+    </div>
+    <p class="display ital text-2xl sm:text-3xl md:text-5xl mt-6 md:mt-10 leading-snug text-stone-200">
+      &ldquo;A window is the only architectural element <span class="text-[var(--gold)]">that moves with the day.</span> Treating it well is treating time well.&rdquo;
+    </p>
+    <p class="micro text-[var(--gold)] mt-8 md:mt-12">Leo Aban — Principal</p>
+  </div>
+</section>
+
+<!-- Catalogue -->
+<section id="products" class="border-b hair">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-10 py-16 md:py-24">
+    <div class="grid grid-cols-12 gap-4 md:gap-8 items-end mb-10 md:mb-14">
+      <p class="col-span-12 md:col-span-1 micro text-stone-500">02 /</p>
+      <h2 class="col-span-12 md:col-span-7 display text-5xl sm:text-6xl md:text-9xl leading-[0.95]">Catalogue</h2>
+      <p class="col-span-12 md:col-span-4 micro text-stone-500 leading-relaxed">Ten product systems. Drawn at 1:5. Specified to the millimetre. Available on application.</p>
+    </div>
+    <div class="gold-rule mb-8 md:mb-12"></div>
+
+    <div class="grid grid-cols-12 gap-x-6 md:gap-x-8 gap-y-12 md:gap-y-20">
+      <article class="col-span-12 md:col-span-4 corner-tick p-3">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1000" class="w-full h-72 object-cover" alt=""/></div>
+        <p class="plate-num text-[var(--gold)] mt-5">SL / 01</p>
+        <h3 class="display text-4xl mt-1">Roller System</h3>
+        <p class="mono text-xs text-stone-500 mt-2">Single-cell tubular motor option. Sheer 1% — blackout 100%.</p>
+      </article>
+      <article class="col-span-12 md:col-span-4 corner-tick p-3">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?w=1000" class="w-full h-72 object-cover" alt=""/></div>
+        <p class="plate-num text-[var(--gold)] mt-5">SL / 02</p>
+        <h3 class="display text-4xl mt-1">Zebra Composite</h3>
+        <p class="mono text-xs text-stone-500 mt-2">Bonded sheer + opaque bands. Continuous transmittance.</p>
+      </article>
+      <article class="col-span-12 md:col-span-4 corner-tick p-3">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1617104551722-3b2d51366400?w=1000" class="w-full h-72 object-cover" alt=""/></div>
+        <p class="plate-num text-[var(--gold)] mt-5">SL / 03</p>
+        <h3 class="display text-4xl mt-1">Faux Wood</h3>
+        <p class="mono text-xs text-stone-500 mt-2">Extruded polymer. 50 / 63 mm. Moisture-stable.</p>
+      </article>
+      <article class="col-span-12 md:col-span-4 corner-tick p-3">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1000" class="w-full h-72 object-cover" alt=""/></div>
+        <p class="plate-num text-[var(--gold)] mt-5">SL / 04</p>
+        <h3 class="display text-4xl mt-1">Cellular</h3>
+        <p class="mono text-xs text-stone-500 mt-2">Double-cell. R-7.4 at 38 mm pleat.</p>
+      </article>
+      <article class="col-span-12 md:col-span-4 corner-tick p-3">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1633113216288-a4d6b35066d5?w=1000" class="w-full h-72 object-cover" alt=""/></div>
+        <p class="plate-num text-[var(--gold)] mt-5">SL / 05</p>
+        <h3 class="display text-4xl mt-1">Roman Fabric</h3>
+        <p class="mono text-xs text-stone-500 mt-2">Folding tape system. Internal or external mount.</p>
+      </article>
+      <article class="col-span-12 md:col-span-4 corner-tick p-3">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1000" class="w-full h-72 object-cover" alt=""/></div>
+        <p class="plate-num text-[var(--gold)] mt-5">SL / 06</p>
+        <h3 class="display text-4xl mt-1">Skylight</h3>
+        <p class="mono text-xs text-stone-500 mt-2">Spring-tensioned guide rail. Cordless.</p>
+      </article>
+      <article class="col-span-12 md:col-span-4 corner-tick p-3">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1000" class="w-full h-72 object-cover" alt=""/></div>
+        <p class="plate-num text-[var(--gold)] mt-5">SL / 07</p>
+        <h3 class="display text-4xl mt-1">Perfect Fit</h3>
+        <p class="mono text-xs text-stone-500 mt-2">Compatible with European tilt-turn glazing.</p>
+      </article>
+      <article class="col-span-12 md:col-span-4 corner-tick p-3">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=1000" class="w-full h-72 object-cover" alt=""/></div>
+        <p class="plate-num text-[var(--gold)] mt-5">SL / 08</p>
+        <h3 class="display text-4xl mt-1">Printed Film</h3>
+        <p class="mono text-xs text-stone-500 mt-2">Adhesive optical film. Commission available.</p>
+      </article>
+      <article class="col-span-12 md:col-span-4 corner-tick p-3">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=1000" class="w-full h-72 object-cover" alt=""/></div>
+        <p class="plate-num text-[var(--gold)] mt-5">SL / 09</p>
+        <h3 class="display text-4xl mt-1">Motorised</h3>
+        <p class="mono text-xs text-stone-500 mt-2">Wireless DC. 42 dB. Solar Li-ion cell.</p>
+      </article>
+      <article class="col-span-12 corner-tick p-3 mt-6">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1618219740975-d40978bb7378?w=1800" class="w-full h-[420px] object-cover" alt=""/></div>
+        <div class="grid grid-cols-12 items-end mt-6">
+          <div class="col-span-12 md:col-span-8">
+            <p class="plate-num text-[var(--gold)]">SL / 10 — Bespoke</p>
+            <h3 class="display text-5xl md:text-6xl mt-1">Custom Made-to-Measure</h3>
+            <p class="mono text-xs text-stone-500 mt-3 max-w-xl">Drafted in CAD against the architect's drawings. For arched, angled, and irregular openings.</p>
+          </div>
+          <div class="col-span-12 md:col-span-4 md:text-right">
+            <p class="micro text-stone-500">By application only</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Practice -->
+<section id="practice" class="border-b hair bg-[var(--ink-2)] blueprint">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-10 py-16 md:py-28 grid grid-cols-12 gap-6 md:gap-10 relative">
+    <div class="col-span-12 md:col-span-5">
+      <p class="micro text-stone-500 mb-4 md:mb-6">03 / The Practice</p>
+      <h2 class="display text-4xl sm:text-5xl md:text-7xl leading-[0.95]"><span class="ital text-[var(--gold)]">Quiet rooms.</span><br/>Precise drawings.</h2>
+    </div>
+    <div class="col-span-12 md:col-span-7 grid sm:grid-cols-2 gap-x-8 md:gap-x-12 gap-y-8 md:gap-y-12">
+      <div class="border-t hair2 pt-5">
+        <p class="plate-num text-[var(--gold)]">i.</p>
+        <h3 class="display text-2xl mt-2">Survey · draft · install</h3>
+        <p class="mono text-xs text-stone-400 mt-2 leading-relaxed">The same workflow as the architects we collaborate with.</p>
+      </div>
+      <div class="border-t hair2 pt-5">
+        <p class="plate-num text-[var(--gold)]">ii.</p>
+        <h3 class="display text-2xl mt-2">Principal-led</h3>
+        <p class="mono text-xs text-stone-400 mt-2 leading-relaxed">No subcontracted labour. Two projects per week, maximum.</p>
+      </div>
+      <div class="border-t hair2 pt-5">
+        <p class="plate-num text-[var(--gold)]">iii.</p>
+        <h3 class="display text-2xl mt-2">Spec-grade</h3>
+        <p class="mono text-xs text-stone-400 mt-2 leading-relaxed">Lifetime mechanism guarantee. Documentation provided on completion.</p>
+      </div>
+      <div class="border-t hair2 pt-5">
+        <p class="plate-num text-[var(--gold)]">iv.</p>
+        <h3 class="display text-2xl mt-2">Trade programme</h3>
+        <p class="mono text-xs text-stone-400 mt-2 leading-relaxed">For architects, designers and developers on application.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Field notes -->
+<section id="field" class="border-b hair">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-10 py-16 md:py-24">
+    <p class="micro text-stone-500 mb-3">04 / Field Notes</p>
+    <h2 class="display text-4xl sm:text-5xl md:text-8xl leading-[0.95] mb-10 md:mb-16">From the page<br/><span class="ital text-[var(--gold)]">of the client.</span></h2>
+
+    <div class="grid grid-cols-12 gap-8 md:gap-12 border-t hair pt-8 md:pt-12">
+      <figure class="col-span-12 md:col-span-4">
+        <p class="plate-num text-[var(--gold)]">Excerpt 01</p>
+        <blockquote class="display ital text-2xl mt-4 leading-snug text-stone-200">&ldquo;The drawings were as careful as our architect's. There was a level of precision we hadn't seen from a trade.&rdquo;</blockquote>
+        <figcaption class="micro text-stone-500 mt-6">G.W. · Sloane Mews</figcaption>
+      </figure>
+      <figure class="col-span-12 md:col-span-4">
+        <p class="plate-num text-[var(--gold)]">Excerpt 02</p>
+        <blockquote class="display ital text-2xl mt-4 leading-snug text-stone-200">&ldquo;Two visits, three drawings, one perfectly fitted roman. They worked the way we work.&rdquo;</blockquote>
+        <figcaption class="micro text-stone-500 mt-6">J.N. · Roxboro</figcaption>
+      </figure>
+      <figure class="col-span-12 md:col-span-4">
+        <p class="plate-num text-[var(--gold)]">Excerpt 03</p>
+        <blockquote class="display ital text-2xl mt-4 leading-snug text-stone-200">&ldquo;Cellular shades on a 6-storey atrium. They drafted, sourced and lifted in a single morning.&rdquo;</blockquote>
+        <figcaption class="micro text-stone-500 mt-6">D.M. · Eau Claire</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Brief CTA -->
+<section id="book" class="border-b hair blueprint">
+  <div class="max-w-[1100px] mx-auto px-4 md:px-10 py-16 md:py-24 relative">
+    <div class="absolute top-4 right-4 md:top-8 md:right-10 micro text-[var(--gold)]">— Plate 12 / 12</div>
+    <p class="micro text-stone-500 text-center mb-4 md:mb-6">05 / Submit a Brief</p>
+    <h2 class="display text-4xl sm:text-5xl md:text-8xl text-center leading-[0.95]">Begin with a <span class="ital text-[var(--gold)]">drawing.</span></h2>
+    <p class="text-center text-stone-400 mt-6 md:mt-8 max-w-lg mx-auto leading-relaxed text-sm md:text-base">Send rough dimensions, photographs, or your architect's plans. We respond with a survey date within 48 hours.</p>
+
+    <form class="mt-10 md:mt-16 grid md:grid-cols-2 gap-x-6 md:gap-x-10 gap-y-6 md:gap-y-8 mono text-sm">
+      <div>
+        <label class="micro text-stone-500">01 / Name</label>
+        <input class="w-full bg-transparent border-b hair2 py-3 mt-2 focus:outline-none focus:border-[var(--gold)] transition" />
+      </div>
+      <div>
+        <label class="micro text-stone-500">02 / Email</label>
+        <input class="w-full bg-transparent border-b hair2 py-3 mt-2 focus:outline-none focus:border-[var(--gold)] transition" />
+      </div>
+      <div>
+        <label class="micro text-stone-500">03 / Project location</label>
+        <input class="w-full bg-transparent border-b hair2 py-3 mt-2 focus:outline-none focus:border-[var(--gold)] transition" />
+      </div>
+      <div>
+        <label class="micro text-stone-500">04 / Phone</label>
+        <input class="w-full bg-transparent border-b hair2 py-3 mt-2 focus:outline-none focus:border-[var(--gold)] transition" />
+      </div>
+      <div class="md:col-span-2">
+        <label class="micro text-stone-500">05 / Brief</label>
+        <textarea rows="3" class="w-full bg-transparent border-b hair2 py-3 mt-2 focus:outline-none focus:border-[var(--gold)] transition"></textarea>
+      </div>
+      <button class="md:col-span-2 btn-gold micro py-5 mt-6">Submit Brief →</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="max-w-[1500px] mx-auto px-4 md:px-10 py-12 md:py-16 grid grid-cols-2 md:grid-cols-12 gap-6 md:gap-10 micro">
+    <div class="col-span-2 md:col-span-4">
+      <p class="display text-3xl md:text-4xl text-bone tracking-tight">SunLeo<span class="text-[var(--gold)]"> /</span></p>
+      <p class="mt-4 normal-case tracking-normal text-stone-400 leading-relaxed">A small architectural-window practice based in Calgary, Alberta. Established 2017.</p>
+    </div>
+    <div class="md:col-span-3">
+      <p class="text-[var(--gold)] mb-3">Studio</p>
+      <p class="text-stone-300 normal-case tracking-normal">No. 17 · Inglewood, Calgary AB<br/>By appointment</p>
+    </div>
+    <div class="md:col-span-3">
+      <p class="text-[var(--gold)] mb-3">Contact</p>
+      <p class="text-stone-300 normal-case tracking-normal">+1 403 555 1234<br/>practice@sunleo.ca</p>
+    </div>
+    <div class="col-span-2 md:col-span-2">
+      <p class="text-[var(--gold)] mb-3">Index</p>
+      <ul class="space-y-1 text-stone-300 normal-case tracking-normal"><li>Catalogue</li><li>Practice</li><li>Trade</li></ul>
+    </div>
+  </div>
+  <div class="border-t hair py-5 text-center micro text-stone-600">— MMXXVI · SunLeo Practice —</div>
+</footer>
+
+</body>
+</html>

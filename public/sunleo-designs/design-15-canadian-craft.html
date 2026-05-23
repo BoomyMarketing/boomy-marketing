@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SunLeo — Calgary-Made Custom Blinds Since 2017 | Canadian Craft Atelier</title>
+<meta name="description" content="Independent Calgary blind-makers. Hand-cut in Inglewood, installed in your home. Forest-green heritage, mountain-modern aesthetic. Free in-home measure across Treaty 7." />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --cream: #F2EBDB;
+    --cream-2: #E5DABE;
+    --forest: #1F3D2E;
+    --forest-2: #2A5340;
+    --copper: #B47242;
+    --copper-light: #D08B4D;
+    --ink: #1A2422;
+    --ochre: #C49846;
+    --moss: #6F8559;
+  }
+  body {
+    font-family: 'Work Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-weight: 400;
+  }
+  .serif { font-family: 'Fraunces', serif; font-variation-settings: "SOFT" 50, "WONK" 0; }
+  .serif-italic { font-family: 'Fraunces', serif; font-style: italic; font-variation-settings: "SOFT" 100, "WONK" 1; }
+  .display { font-family: 'Fraunces', serif; font-variation-settings: "SOFT" 30, "WONK" 0, "opsz" 144; font-weight: 600; letter-spacing: -.02em; }
+  .uphair { letter-spacing: .22em; text-transform: uppercase; font-size: 11px; font-weight: 500; }
+  .underline-grow { background-image: linear-gradient(currentColor,currentColor); background-position: 0 100%; background-repeat: no-repeat; background-size: 100% 1px; transition: background-size .4s; }
+  .underline-grow:hover { background-size: 0 1px; }
+  .btn-forest {
+    background: var(--forest); color: var(--cream);
+    padding: 16px 32px; border-radius: 999px;
+    text-transform: uppercase; letter-spacing: .12em; font-size: 11px; font-weight: 600;
+    transition: all .2s;
+    display: inline-block;
+  }
+  .btn-forest:hover { background: var(--forest-2); transform: translateY(-2px); }
+  .btn-copper {
+    background: var(--copper); color: var(--cream);
+    padding: 16px 32px; border-radius: 999px;
+    text-transform: uppercase; letter-spacing: .12em; font-size: 11px; font-weight: 600;
+    transition: all .2s; display: inline-block;
+  }
+  .btn-copper:hover { background: var(--copper-light); transform: translateY(-2px); }
+  .btn-ghost {
+    border: 1.5px solid var(--ink); color: var(--ink);
+    padding: 16px 32px; border-radius: 999px;
+    text-transform: uppercase; letter-spacing: .12em; font-size: 11px; font-weight: 600;
+    transition: all .2s; display: inline-block;
+  }
+  .btn-ghost:hover { background: var(--ink); color: var(--cream); }
+  .card-shadow { box-shadow: 0 30px 60px -40px rgba(26,36,34,0.4); }
+  .leaf-bg {
+    background-image: radial-gradient(ellipse at top, rgba(31,61,46,0.06), transparent 60%);
+  }
+  .mountain-divider {
+    background: linear-gradient(180deg, var(--cream) 0%, var(--cream-2) 100%);
+    position: relative;
+  }
+  .star { color: var(--ochre); }
+  .price-strike { text-decoration: line-through; opacity: .5; }
+  .pill { border-radius: 999px; border: 1px solid var(--forest); padding: 6px 14px; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; }
+  details[open] .acc { transform: rotate(45deg); }
+  .acc { transition: transform .25s; }
+  .scrollx { animation: scrollx 45s linear infinite; }
+  @keyframes scrollx { from {transform:translateX(0);} to {transform:translateX(-50%);} }
+  .topo {
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(31,61,46,.04) 1px, transparent 0),
+      radial-gradient(circle at 50% 60%, rgba(180,114,66,.04) 1px, transparent 0);
+    background-size: 40px 40px, 60px 60px;
+  }
+  ::selection { background: var(--copper); color: var(--cream); }
+
+/* ============ MOBILE RESPONSIVE PATCH ============ */
+html, body { overflow-x: hidden; max-width: 100vw; }
+img, svg, video { max-width: 100%; height: auto; }
+
+@media (max-width: 1023px) {
+  /* Force lg:grid-cols-12 sections to stack on tablet/mobile */
+  section .grid.lg\:grid-cols-12,
+  section .grid.md\:grid-cols-12 {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  section .grid.lg\:grid-cols-12 > *,
+  section .grid.md\:grid-cols-12 > * {
+    min-width: 0;
+    width: 100%;
+  }
+  /* Tighten section padding */
+  section { padding-left: 1rem !important; padding-right: 1rem !important; }
+  section.no-padding-override { padding: revert !important; }
+  /* Marquee cards width cap */
+  .marquee article, .marquee .card { max-width: 280px !important; min-width: 240px !important; }
+}
+
+@media (max-width: 767px) {
+  /* Display text clamps */
+  h1 { font-size: clamp(2rem, 9vw, 3.5rem) !important; line-height: 1.05 !important; }
+  h2 { font-size: clamp(1.5rem, 7vw, 2.5rem) !important; line-height: 1.1 !important; }
+  /* Heavy display text */
+  .display, .didot, .serif.text-7xl, .serif.text-8xl, .serif.text-9xl,
+  [style*="font-size: 120"], [style*="font-size: 140"], [style*="font-size: 170"] {
+    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    line-height: 0.95 !important;
+  }
+  /* Touch targets 44px */
+  button, a[class*="btn"], a[role="button"] {
+    min-height: 44px;
+  }
+  /* Inputs prevent iOS zoom */
+  input, textarea, select { font-size: 16px !important; }
+  /* Disable hover transforms on touch */
+  .card:hover, *[class*="hover:translate"]:hover, *[class*="hover:scale"]:hover {
+    transform: none !important;
+  }
+  /* Big grids collapse */
+  .grid.grid-cols-6 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-5 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-4:not(.grid-rows-2) { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-3 { grid-template-columns: repeat(1, 1fr) !important; }
+  /* Comparison tables: wrap (if direct child grid-cols-4) in overflow-x scroll behavior */
+  .comparison-table, table.comparison { display: block !important; overflow-x: auto !important; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Disable cursor-follow effects on touch devices */
+  .cursor-trail, .sunbeam-cursor, .glow-dot, .mouse-trail {
+    display: none !important;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============ TOP TRUST BAR ============ -->
+<div class="bg-[#1F3D2E] text-[#F2EBDB] text-xs py-2">
+  <div class="max-w-[1500px] mx-auto px-6 flex items-center justify-between flex-wrap gap-2">
+    <div class="flex items-center gap-5">
+      <span class="uphair text-[#D08B4D]">🍁 Locally made in Inglewood since 2017</span>
+      <span class="hidden md:inline opacity-60">·</span>
+      <span class="hidden md:inline">Free measure across Treaty 7 territory</span>
+    </div>
+    <div class="flex items-center gap-5">
+      <a href="tel:+14035550199" class="uphair">(403) 555 0199</a>
+      <span class="opacity-50">·</span>
+      <a href="#" class="uphair">Sign In</a>
+      <span class="opacity-50">·</span>
+      <span class="uphair">EN · FR</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="sticky top-0 z-30 bg-[#F2EBDB]/95 backdrop-blur border-b border-[#1F3D2E]/20">
+  <div class="max-w-[1500px] mx-auto px-6 py-5 flex items-center justify-between">
+    <a href="#" class="flex items-baseline gap-2">
+      <div class="flex items-center gap-2">
+        <svg width="36" height="36" viewBox="0 0 40 40" class="text-[#1F3D2E]"><path d="M20 4 L36 24 L28 24 L20 14 L12 24 L4 24 Z" fill="currentColor"/><path d="M14 28 L20 22 L26 28" stroke="#B47242" stroke-width="2" fill="none"/></svg>
+        <div>
+          <p class="display text-2xl leading-none">SunLeo</p>
+          <p class="uphair text-[#B47242] mt-0.5">Calgary · est. 2017</p>
+        </div>
+      </div>
+    </a>
+    <nav class="hidden lg:flex items-center gap-7 text-sm">
+      <a href="#" class="underline-grow">Shades</a>
+      <a href="#" class="underline-grow">Blinds</a>
+      <a href="#" class="underline-grow">Drapery</a>
+      <a href="#" class="underline-grow">Shutters</a>
+      <a href="#" class="underline-grow">Motorisation</a>
+      <a href="#" class="underline-grow">Our Story</a>
+      <a href="#" class="underline-grow">Journal</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <button class="w-10 h-10 rounded-full border border-[#1F3D2E]/25 flex items-center justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
+      <a href="#book" class="btn-forest hidden md:inline-block">Book Free Visit</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="relative leaf-bg topo">
+  <div class="max-w-[1500px] mx-auto px-6 pt-16 pb-24 grid lg:grid-cols-12 gap-10 items-end">
+    <div class="lg:col-span-6">
+      <p class="uphair text-[#B47242]">From the foothills · Volume IX</p>
+      <h1 class="display text-[clamp(56px,8.5vw,128px)] leading-[0.88] mt-6">
+        <span class="serif-italic text-[#1F3D2E]">Calgary's</span><br/>
+        own window<br/>
+        makers, since<br/>
+        <span class="text-[#B47242]">'17.</span>
+      </h1>
+      <p class="mt-8 text-lg max-w-xl leading-relaxed">
+        Independently owned, hand-cut in Inglewood, installed across Treaty 7 territory by Calgarians who know what -32° and a Chinook in the same week does to a window. <span class="serif-italic">No franchise. No subcontractor.</span> Just us.
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="#book" class="btn-forest">Book Free In-Home Visit →</a>
+        <a href="#swatch" class="btn-ghost">Free Swatch Kit</a>
+      </div>
+
+      <div class="mt-12 grid grid-cols-3 gap-6 max-w-md">
+        <div>
+          <p class="serif text-4xl text-[#1F3D2E]">9</p>
+          <p class="text-xs text-[#1A2422]/60 mt-1">Years in YYC</p>
+        </div>
+        <div>
+          <p class="serif text-4xl text-[#1F3D2E]">3,427</p>
+          <p class="text-xs text-[#1A2422]/60 mt-1">Calgary homes</p>
+        </div>
+        <div>
+          <p class="serif text-4xl text-[#1F3D2E]">100%</p>
+          <p class="text-xs text-[#1A2422]/60 mt-1">Local craft</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-6">
+      <div class="relative">
+        <img src="https://picsum.photos/seed/sunleocan001/1200/1400" class="w-full h-[720px] object-cover card-shadow rounded-[20px]" alt="Mount Royal home with forest-green drapery" />
+        <div class="absolute -left-6 top-8 bg-[#1F3D2E] text-[#F2EBDB] p-5 card-shadow max-w-[230px] rounded-2xl">
+          <p class="uphair text-[#D08B4D]">Top Choice Calgary</p>
+          <p class="display text-3xl mt-2 leading-tight">'24, '25,<br/><span class="serif-italic">'26.</span></p>
+          <p class="text-xs mt-3 opacity-90">Window covering category · 3 yrs running</p>
+        </div>
+        <div class="absolute -right-6 bottom-10 bg-[#B47242] text-[#F2EBDB] p-5 card-shadow max-w-[230px] rounded-2xl">
+          <p class="uphair text-white/80">Treaty 7 Acknowledgement</p>
+          <p class="serif text-lg mt-2 leading-snug">Built &amp; installed on the traditional territories of the Niitsitapi, Tsuut'ina, Stoney Nakoda &amp; Métis Region 3.</p>
+        </div>
+      </div>
+      <div class="mt-4 flex items-center justify-between text-xs">
+        <span class="uphair text-[#B47242]">Plate I · Inglewood atelier — May 2026</span>
+        <div class="flex items-center gap-2">
+          <span class="star">★★★★★</span><span><b>4.9</b> · 2,418 reviews</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST STRIP ============ -->
+<section class="border-y border-[#1F3D2E]/20 bg-[#E5DABE]">
+  <div class="max-w-[1500px] mx-auto px-6 py-6 grid grid-cols-2 md:grid-cols-6 gap-6 items-center text-sm">
+    <div class="serif text-2xl">Affirm</div>
+    <div class="serif text-2xl serif-italic">Klarna</div>
+    <div class="serif text-2xl">Afterpay</div>
+    <div class="font-semibold">BBB A+</div>
+    <div class="flex items-center gap-2"><span class="star">★★★★★</span><span><b>4.9</b> Trustpilot</span></div>
+    <div class="text-xs">Top Choice Calgary <b>'24 · '25 · '26</b></div>
+  </div>
+</section>
+
+<!-- ============ STORY ============ -->
+<section class="max-w-[1500px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-12 items-start">
+  <div class="lg:col-span-4 sticky top-32">
+    <p class="uphair text-[#B47242]">A founder's note</p>
+    <p class="display text-5xl mt-3 leading-[0.95]">From the<br/>Inglewood<br/>atelier.</p>
+    <img src="https://picsum.photos/seed/sunleocan100/240/240" class="mt-7 w-40 h-40 object-cover rounded-full border-4 border-[#B47242]" alt="Iris" />
+    <p class="mt-5"><b class="serif text-2xl">Iris Laframboise</b><br/><span class="serif-italic text-[#B47242]">Founder &amp; Lead Designer</span></p>
+    <p class="text-sm mt-2 opacity-70">11 yrs dressing Calgary windows · NCIDQ certified · Mother of two, Westhaven resident.</p>
+  </div>
+  <div class="lg:col-span-8">
+    <div class="space-y-7 text-lg leading-relaxed max-w-2xl">
+      <p class="serif text-3xl md:text-4xl leading-[1.2]">In 2017, I rented a 400-square-foot bay on 9 Ave SE and bought one sewing machine. We had three orders the first month — and two of them were from neighbours.</p>
+      <p>Nine years later we've dressed <b>3,427 Calgary homes</b>. Same address. Same machine (and four more). Iris still signs every order; that part hasn't changed.</p>
+      <p>We're independent, family-owned, and stubbornly Calgary-made. Every blind, shade, and drapery panel that leaves our shop has been touched by hand at least twice — once when we cut it, once when we hang it on your wall.</p>
+      <p class="serif-italic text-2xl text-[#1F3D2E]">There is no Hunter Douglas dealer above me, no franchise behind me, no installer subcontracted under me. Just us. Just Calgary.</p>
+      <p class="opacity-70 text-sm">— Iris</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCT GRID ============ -->
+<section id="shop" class="mountain-divider py-24">
+  <div class="max-w-[1500px] mx-auto px-6">
+    <div class="flex flex-wrap items-end justify-between mb-14 gap-5">
+      <div>
+        <p class="uphair text-[#B47242]">The atelier collection</p>
+        <h2 class="display text-6xl md:text-7xl mt-3 leading-[0.92]">
+          Hand-made,<br/>
+          <span class="serif-italic text-[#1F3D2E]">honestly</span> priced.
+        </h2>
+      </div>
+      <a href="#" class="underline-grow uphair">View All Products →</a>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+      <a href="#" class="group block bg-[#F2EBDB] rounded-3xl overflow-hidden border border-[#1F3D2E]/15 card-shadow">
+        <div class="relative aspect-[5/6] overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleocan201/700/840" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="" />
+          <span class="absolute top-4 left-4 bg-[#1F3D2E] text-[#F2EBDB] px-3 py-1.5 rounded-full text-xs uppercase tracking-wider">Featured</span>
+          <span class="absolute top-4 right-4 bg-[#B47242] text-white px-3 py-1.5 rounded-full text-xs uppercase tracking-wider">Made in YYC</span>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-2 text-xs"><span class="star">★★★★★</span> <span class="opacity-70"><b>4.9</b> · 612</span></div>
+          <h3 class="serif text-2xl mt-2">Foothill Linen Roller</h3>
+          <p class="text-sm opacity-65 mt-1">Hand-loomed Belgian linen · 14 Calgary colourways</p>
+          <div class="mt-4 flex items-end justify-between">
+            <div><p class="uphair text-[#B47242] text-xs">From</p><p class="serif text-2xl">$189</p></div>
+            <span class="text-xs opacity-60">5–8 day turnaround</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="group block bg-[#F2EBDB] rounded-3xl overflow-hidden border border-[#1F3D2E]/15 card-shadow">
+        <div class="relative aspect-[5/6] overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleocan202/700/840" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="" />
+          <span class="absolute top-4 left-4 bg-[#6F8559] text-white px-3 py-1.5 rounded-full text-xs uppercase tracking-wider">New '26</span>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-2 text-xs"><span class="star">★★★★★</span> <span class="opacity-70"><b>4.9</b> · 1,204</span></div>
+          <h3 class="serif text-2xl mt-2">Chinook Honeycomb</h3>
+          <p class="text-sm opacity-65 mt-1">R-5 insulation · -32° rated · saves on heating</p>
+          <div class="mt-4 flex items-end justify-between">
+            <div><p class="uphair text-[#B47242] text-xs">From</p><p class="serif text-2xl">$219</p></div>
+            <span class="text-xs opacity-60">5–8 days</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="group block bg-[#F2EBDB] rounded-3xl overflow-hidden border border-[#1F3D2E]/15 card-shadow">
+        <div class="relative aspect-[5/6] overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleocan203/700/840" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="" />
+          <span class="absolute top-4 left-4 bg-[#1F3D2E] text-[#F2EBDB] px-3 py-1.5 rounded-full text-xs uppercase tracking-wider">Hand-sewn</span>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-2 text-xs"><span class="star">★★★★★</span> <span class="opacity-70"><b>4.9</b> · 287</span></div>
+          <h3 class="serif text-2xl mt-2">Banff Roman Shade</h3>
+          <p class="text-sm opacity-65 mt-1">Hand-sewn pleats · 92 designer fabrics</p>
+          <div class="mt-4 flex items-end justify-between">
+            <div><p class="uphair text-[#B47242] text-xs">From</p><p class="serif text-2xl">$249</p></div>
+            <span class="text-xs opacity-60">8–10 days</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="group block bg-[#F2EBDB] rounded-3xl overflow-hidden border border-[#1F3D2E]/15 card-shadow">
+        <div class="relative aspect-[5/6] overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleocan204/700/840" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="" />
+          <span class="absolute top-4 right-4 bg-[#C49846] text-[#1A2422] px-3 py-1.5 rounded-full text-xs uppercase tracking-wider">Bestseller</span>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-2 text-xs"><span class="star">★★★★★</span> <span class="opacity-70"><b>4.7</b> · 904</span></div>
+          <h3 class="serif text-2xl mt-2">Bow Valley Wood Blinds</h3>
+          <p class="text-sm opacity-65 mt-1">FSC basswood · 2" or 2½" · 12 Calgary stains</p>
+          <div class="mt-4 flex items-end justify-between">
+            <div><p class="uphair text-[#B47242] text-xs">From</p><p class="serif text-2xl">$129</p></div>
+            <span class="text-xs opacity-60">5–7 days</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="group block bg-[#F2EBDB] rounded-3xl overflow-hidden border border-[#1F3D2E]/15 card-shadow">
+        <div class="relative aspect-[5/6] overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleocan205/700/840" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="" />
+          <span class="absolute top-4 left-4 bg-[#1F3D2E] text-[#F2EBDB] px-3 py-1.5 rounded-full text-xs uppercase tracking-wider">Editor's pick</span>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-2 text-xs"><span class="star">★★★★★</span> <span class="opacity-70"><b>4.9</b> · 188</span></div>
+          <h3 class="serif text-2xl mt-2">Kananaskis Pinch-Pleat</h3>
+          <p class="text-sm opacity-65 mt-1">Floor-to-ceiling drapery · 220 fabrics</p>
+          <div class="mt-4 flex items-end justify-between">
+            <div><p class="uphair text-[#B47242] text-xs">From</p><p class="serif text-2xl">$389</p></div>
+            <span class="text-xs opacity-60">10–12 days</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="group block bg-[#F2EBDB] rounded-3xl overflow-hidden border border-[#1F3D2E]/15 card-shadow">
+        <div class="relative aspect-[5/6] overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleocan206/700/840" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="" />
+          <span class="absolute top-4 right-4 bg-[#B47242] text-white px-3 py-1.5 rounded-full text-xs uppercase tracking-wider">FSC</span>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-2 text-xs"><span class="star">★★★★★</span> <span class="opacity-70"><b>4.8</b> · 411</span></div>
+          <h3 class="serif text-2xl mt-2">Aspen Woven Wood</h3>
+          <p class="text-sm opacity-65 mt-1">Sustainable bamboo · 14 weaves</p>
+          <div class="mt-4 flex items-end justify-between">
+            <div><p class="uphair text-[#B47242] text-xs">From</p><p class="serif text-2xl">$229</p></div>
+            <span class="text-xs opacity-60">5–8 days</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="group block bg-[#F2EBDB] rounded-3xl overflow-hidden border border-[#1F3D2E]/15 card-shadow">
+        <div class="relative aspect-[5/6] overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleocan207/700/840" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="" />
+          <span class="absolute top-4 left-4 bg-[#6F8559] text-white px-3 py-1.5 rounded-full text-xs uppercase tracking-wider">Smart-home</span>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-2 text-xs"><span class="star">★★★★★</span> <span class="opacity-70"><b>4.9</b> · 318</span></div>
+          <h3 class="serif text-2xl mt-2">Westhaven Motorised Roller</h3>
+          <p class="text-sm opacity-65 mt-1">Matter / HomeKit / Alexa / Google</p>
+          <div class="mt-4 flex items-end justify-between">
+            <div><p class="uphair text-[#B47242] text-xs">From</p><p class="serif text-2xl">$429</p></div>
+            <span class="text-xs opacity-60">8–10 days</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="group block bg-[#F2EBDB] rounded-3xl overflow-hidden border border-[#1F3D2E]/15 card-shadow">
+        <div class="relative aspect-[5/6] overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleocan208/700/840" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="" />
+          <span class="absolute top-4 right-4 bg-[#1F3D2E] text-[#F2EBDB] px-3 py-1.5 rounded-full text-xs uppercase tracking-wider">Final sale</span>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-2 text-xs"><span class="star">★★★★★</span> <span class="opacity-70"><b>4.9</b> · 226</span></div>
+          <h3 class="serif text-2xl mt-2">Rocky Mtn Plantation Shutter</h3>
+          <p class="text-sm opacity-65 mt-1">Basswood · 18 Calgary stains</p>
+          <div class="mt-4 flex items-end justify-between">
+            <div><p class="uphair text-[#B47242] text-xs">From</p><p class="serif text-2xl">$32 / sf</p></div>
+            <span class="text-xs opacity-60">3–4 weeks</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="group block bg-[#F2EBDB] rounded-3xl overflow-hidden border border-[#1F3D2E]/15 card-shadow">
+        <div class="relative aspect-[5/6] overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleocan209/700/840" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="" />
+          <span class="absolute top-4 left-4 bg-[#B47242] text-white px-3 py-1.5 rounded-full text-xs uppercase tracking-wider">New</span>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-2 text-xs"><span class="star">★★★★★</span> <span class="opacity-70"><b>4.8</b> · 162</span></div>
+          <h3 class="serif text-2xl mt-2">Elbow River S-Wave Sheers</h3>
+          <p class="text-sm opacity-65 mt-1">Belgian voile · whisper-soft drape</p>
+          <div class="mt-4 flex items-end justify-between">
+            <div><p class="uphair text-[#B47242] text-xs">From</p><p class="serif text-2xl">$219</p></div>
+            <span class="text-xs opacity-60">7–9 days</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="group block bg-[#F2EBDB] rounded-3xl overflow-hidden border border-[#1F3D2E]/15 card-shadow lg:col-start-2">
+        <div class="relative aspect-[5/6] overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleocan210/700/840" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="" />
+          <span class="absolute top-4 left-4 bg-[#1F3D2E] text-[#F2EBDB] px-3 py-1.5 rounded-full text-xs uppercase tracking-wider">Layered</span>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center gap-2 text-xs"><span class="star">★★★★★</span> <span class="opacity-70"><b>4.9</b> · 96</span></div>
+          <h3 class="serif text-2xl mt-2">Heritage Layered Linen + Blackout</h3>
+          <p class="text-sm opacity-65 mt-1">Double-track · west-facing rooms</p>
+          <div class="mt-4 flex items-end justify-between">
+            <div><p class="uphair text-[#B47242] text-xs">From</p><p class="serif text-2xl">$549</p></div>
+            <span class="text-xs opacity-60">10–14 days</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3-STEP CRAFT PROCESS ============ -->
+<section class="max-w-[1500px] mx-auto px-6 py-24">
+  <div class="text-center max-w-3xl mx-auto">
+    <p class="uphair text-[#B47242]">The craft, simply</p>
+    <h2 class="display text-6xl md:text-7xl mt-3 leading-[0.95]">
+      Three slow,<br/>
+      <span class="serif-italic text-[#1F3D2E]">deliberate</span> steps.
+    </h2>
+  </div>
+  <div class="mt-16 grid md:grid-cols-3 gap-8 relative">
+    <div class="bg-[#F2EBDB] border border-[#1F3D2E]/15 rounded-3xl p-7 card-shadow relative">
+      <p class="display text-7xl text-[#B47242] leading-none">01</p>
+      <h3 class="serif text-3xl mt-4">Order swatches, free.</h3>
+      <p class="mt-3 opacity-75">8 hand-cut fabric samples, shipped overnight from our Inglewood shop. Touch the linen, hold it up to your wall in real Calgary light.</p>
+      <img src="https://picsum.photos/seed/sunleocanstep1/600/350" class="w-full h-44 object-cover rounded-2xl mt-5" alt="" />
+    </div>
+    <div class="bg-[#1F3D2E] text-[#F2EBDB] rounded-3xl p-7 card-shadow relative">
+      <p class="display text-7xl text-[#D08B4D] leading-none">02</p>
+      <h3 class="serif text-3xl mt-4">Pick — at home, with help.</h3>
+      <p class="mt-3 opacity-90">A SunLeo designer comes to your door, fabric kit in hand. 60 minutes, honest opinion, written quote within 24 h. No deposit.</p>
+      <img src="https://picsum.photos/seed/sunleocanstep2/600/350" class="w-full h-44 object-cover rounded-2xl mt-5" alt="" />
+    </div>
+    <div class="bg-[#F2EBDB] border border-[#1F3D2E]/15 rounded-3xl p-7 card-shadow relative">
+      <p class="display text-7xl text-[#B47242] leading-none">03</p>
+      <h3 class="serif text-3xl mt-4">We install — same week.</h3>
+      <p class="mt-3 opacity-75">Two installers, drop cloths, slippers indoors. Old hardware removed &amp; recycled. Average 5–8 days from quote to your bedroom.</p>
+      <img src="https://picsum.photos/seed/sunleocanstep3/600/350" class="w-full h-44 object-cover rounded-2xl mt-5" alt="" />
+    </div>
+  </div>
+</section>
+
+<!-- ============ HEAVY SOCIAL PROOF ============ -->
+<section class="bg-[#1F3D2E] text-[#F2EBDB] py-24">
+  <div class="max-w-[1500px] mx-auto px-6">
+    <div class="text-center mb-14">
+      <p class="uphair text-[#D08B4D]">From Calgarians</p>
+      <h2 class="display text-6xl md:text-7xl mt-3 leading-[0.95]">2,418 honest <span class="serif-italic text-[#D08B4D]">reviews.</span></h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="bg-[#F2EBDB]/5 border border-[#F2EBDB]/15 rounded-2xl p-6">
+        <div class="flex items-center gap-3 mb-3"><img src="https://picsum.photos/seed/sunleocanrev1/80/80" class="w-12 h-12 rounded-full object-cover" alt="" /><div><p class="font-semibold">Marisol H.</p><p class="text-xs opacity-70">Mahogany SE</p></div></div>
+        <div class="text-[#D08B4D]">★★★★★</div>
+        <p class="mt-3 text-sm opacity-90 leading-relaxed">"They've been my window people since 2019 — three homes now. Iris remembers what fabric I had in our last place."</p>
+        <p class="text-xs opacity-60 mt-3">14 May 2026 · Foothill Linen × 12</p>
+      </div>
+      <div class="bg-[#F2EBDB]/5 border border-[#F2EBDB]/15 rounded-2xl p-6">
+        <div class="flex items-center gap-3 mb-3"><img src="https://picsum.photos/seed/sunleocanrev2/80/80" class="w-12 h-12 rounded-full object-cover" alt="" /><div><p class="font-semibold">Wren K.</p><p class="text-xs opacity-70">Mount Royal SW</p></div></div>
+        <div class="text-[#D08B4D]">★★★★★</div>
+        <p class="mt-3 text-sm opacity-90 leading-relaxed">"23 heritage windows, four mornings. They patched plaster, vacuumed, took our old blinds to be recycled. No chaos."</p>
+        <p class="text-xs opacity-60 mt-3">07 May 2026 · Kananaskis Pinch-Pleat × 23</p>
+      </div>
+      <div class="bg-[#F2EBDB]/5 border border-[#F2EBDB]/15 rounded-2xl p-6">
+        <div class="flex items-center gap-3 mb-3"><img src="https://picsum.photos/seed/sunleocanrev3/80/80" class="w-12 h-12 rounded-full object-cover" alt="" /><div><p class="font-semibold">Devyn T.</p><p class="text-xs opacity-70">Bridgeland NE</p></div></div>
+        <div class="text-[#D08B4D]">★★★★★</div>
+        <p class="mt-3 text-sm opacity-90 leading-relaxed">"Their Chinook honeycomb cut our ENMAX bill by 18% in winter. They quoted that exact number — it was almost spooky."</p>
+        <p class="text-xs opacity-60 mt-3">01 May 2026 · Chinook Honeycomb × 8</p>
+      </div>
+      <div class="bg-[#F2EBDB]/5 border border-[#F2EBDB]/15 rounded-2xl p-6">
+        <div class="flex items-center gap-3 mb-3"><img src="https://picsum.photos/seed/sunleocanrev4/80/80" class="w-12 h-12 rounded-full object-cover" alt="" /><div><p class="font-semibold">Esmé R.</p><p class="text-xs opacity-70">Inglewood SE</p></div></div>
+        <div class="text-[#D08B4D]">★★★★★</div>
+        <p class="mt-3 text-sm opacity-90 leading-relaxed">"Live three blocks from the shop. Walked in, saw the linen, walked out 40 minutes later with a measure appt. Installed eight days later."</p>
+        <p class="text-xs opacity-60 mt-3">23 Apr 2026 · Banff Roman × 6</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPARISON ============ -->
+<section class="max-w-[1500px] mx-auto px-6 py-24">
+  <div class="text-center mb-12">
+    <p class="uphair text-[#B47242]">Honest comparison</p>
+    <h2 class="display text-6xl md:text-7xl mt-3 leading-[0.95]">Independent. <span class="serif-italic text-[#1F3D2E]">Not</span> a franchise.</h2>
+  </div>
+  <div class="border border-[#1F3D2E]/20 rounded-3xl overflow-hidden">
+    <div class="grid grid-cols-4 bg-[#E5DABE]">
+      <div class="p-5 serif text-2xl serif-italic">The Comparison</div>
+      <div class="p-5 text-center border-l border-[#1F3D2E]/15"><div class="serif text-2xl text-[#1F3D2E]">SunLeo</div><div class="uphair text-[#B47242] mt-1">Independent</div></div>
+      <div class="p-5 text-center border-l border-[#1F3D2E]/15"><div class="font-semibold text-lg">Big-box</div><div class="uphair opacity-60 mt-1">Home Depot</div></div>
+      <div class="p-5 text-center border-l border-[#1F3D2E]/15"><div class="font-semibold text-lg">Hunter Douglas</div><div class="uphair opacity-60 mt-1">Franchise</div></div>
+    </div>
+    <div class="grid grid-cols-4 border-t border-[#1F3D2E]/15"><div class="p-5">Owner reachable by name</div><div class="p-5 text-center border-l text-[#6F8559] font-bold">✓ Email Iris direct</div><div class="p-5 text-center border-l">No</div><div class="p-5 text-center border-l">Through dealer</div></div>
+    <div class="grid grid-cols-4 border-t border-[#1F3D2E]/15 bg-[#F2EBDB]/40"><div class="p-5">Made in Calgary</div><div class="p-5 text-center border-l text-[#6F8559] font-bold">✓ Inglewood shop</div><div class="p-5 text-center border-l">No</div><div class="p-5 text-center border-l">USA / Mexico</div></div>
+    <div class="grid grid-cols-4 border-t border-[#1F3D2E]/15"><div class="p-5">Installation by</div><div class="p-5 text-center border-l text-[#6F8559] font-bold">✓ SunLeo team</div><div class="p-5 text-center border-l">Subcontractor</div><div class="p-5 text-center border-l">Sub-subcontractor</div></div>
+    <div class="grid grid-cols-4 border-t border-[#1F3D2E]/15 bg-[#F2EBDB]/40"><div class="p-5">Turnaround</div><div class="p-5 text-center border-l text-[#6F8559] font-bold">5–8 days</div><div class="p-5 text-center border-l">3–5 wks</div><div class="p-5 text-center border-l">6–10 wks</div></div>
+    <div class="grid grid-cols-4 border-t border-[#1F3D2E]/15"><div class="p-5">Free Calgary measure</div><div class="p-5 text-center border-l text-[#6F8559] font-bold">✓ Always</div><div class="p-5 text-center border-l">$75 fee</div><div class="p-5 text-center border-l">Sometimes</div></div>
+    <div class="grid grid-cols-4 border-t border-[#1F3D2E]/15 bg-[#F2EBDB]/40"><div class="p-5">Warranty</div><div class="p-5 text-center border-l text-[#6F8559] font-bold">Lifetime · transferable</div><div class="p-5 text-center border-l">1–5 yrs</div><div class="p-5 text-center border-l">Lifetime</div></div>
+    <div class="grid grid-cols-4 border-t border-[#1F3D2E]/15"><div class="p-5">Pays Calgary taxes</div><div class="p-5 text-center border-l text-[#6F8559] font-bold">✓ Treaty 7 territory</div><div class="p-5 text-center border-l">US head office</div><div class="p-5 text-center border-l">CO head office</div></div>
+  </div>
+</section>
+
+<!-- ============ BUILT FOR CALGARY (heavy local) ============ -->
+<section class="bg-[#E5DABE] py-24 leaf-bg">
+  <div class="max-w-[1500px] mx-auto px-6 grid lg:grid-cols-12 gap-12">
+    <div class="lg:col-span-5">
+      <p class="uphair text-[#B47242]">A Calgary atlas</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[0.95]">
+        Built for the <span class="serif-italic text-[#1F3D2E]">city</span><br/>
+        we both live in.
+      </h2>
+      <p class="mt-6 opacity-85 text-lg max-w-lg">
+        From Mount Royal's heritage casements to Mahogany's lakefront walls of glass, from Bowness bungalows to Bridgeland brownstones — we've measured them all. Map below shows every SunLeo install since 2017.
+      </p>
+      <div class="mt-8 grid grid-cols-3 gap-4">
+        <div class="bg-[#F2EBDB] p-4 rounded-2xl"><p class="serif text-3xl">3,427</p><p class="uphair text-[#B47242] text-xs mt-1">Homes</p></div>
+        <div class="bg-[#F2EBDB] p-4 rounded-2xl"><p class="serif text-3xl">94</p><p class="uphair text-[#B47242] text-xs mt-1">Neighbourhoods</p></div>
+        <div class="bg-[#F2EBDB] p-4 rounded-2xl"><p class="serif text-3xl">9</p><p class="uphair text-[#B47242] text-xs mt-1">Years</p></div>
+      </div>
+      <div class="mt-8 flex flex-wrap gap-2">
+        <span class="pill">Mount Royal</span>
+        <span class="pill">Britannia</span>
+        <span class="pill">Inglewood</span>
+        <span class="pill">Aspen Estates</span>
+        <span class="pill">Mahogany</span>
+        <span class="pill">Bridgeland</span>
+        <span class="pill">Tuscany</span>
+        <span class="pill">Bearspaw</span>
+        <span class="pill">Springbank</span>
+        <span class="pill">Bowness</span>
+        <span class="pill">+ 84 more</span>
+      </div>
+    </div>
+    <div class="lg:col-span-7">
+      <div class="relative">
+        <img src="https://picsum.photos/seed/sunleocanmap/1000/700" class="w-full h-[560px] object-cover rounded-3xl card-shadow" alt="Calgary map" />
+        <div class="absolute bottom-4 left-4 right-4 grid grid-cols-3 gap-3">
+          <div class="bg-[#F2EBDB] p-3 rounded-2xl"><p class="uphair text-[#B47242] text-xs">Before · 1957 bungalow</p><img src="https://picsum.photos/seed/sunleocanbef/300/200" class="w-full h-24 object-cover rounded-xl mt-1" alt="" /></div>
+          <div class="bg-[#F2EBDB] p-3 rounded-2xl"><p class="uphair text-[#B47242] text-xs">During · Inglewood reno</p><img src="https://picsum.photos/seed/sunleocandur/300/200" class="w-full h-24 object-cover rounded-xl mt-1" alt="" /></div>
+          <div class="bg-[#F2EBDB] p-3 rounded-2xl"><p class="uphair text-[#B47242] text-xs">After · Britannia 2026</p><img src="https://picsum.photos/seed/sunleocanaft/300/200" class="w-full h-24 object-cover rounded-xl mt-1" alt="" /></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SMART HOME ============ -->
+<section class="max-w-[1500px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-12 items-center">
+  <div class="lg:col-span-6 order-2 lg:order-1">
+    <img src="https://picsum.photos/seed/sunleocansmart/900/700" class="w-full h-[520px] object-cover rounded-3xl card-shadow" alt="" />
+  </div>
+  <div class="lg:col-span-6 order-1 lg:order-2">
+    <p class="uphair text-[#B47242]">Westhaven smart</p>
+    <h2 class="display text-6xl md:text-7xl mt-3 leading-[0.95]">
+      Old-world craft.<br/>
+      <span class="serif-italic text-[#1F3D2E]">New-world</span> motors.
+    </h2>
+    <p class="mt-6 opacity-85 text-lg max-w-lg">Our motorisation line is built on Matter 1.4 — pairs with Apple HomeKit, Google, Alexa, even Home Assistant. 28 dB whisper-motor. 7-year battery. Designed in Calgary, engineered in Norway, assembled in our Inglewood shop.</p>
+    <div class="mt-7 grid grid-cols-2 md:grid-cols-4 gap-2">
+      <span class="pill text-center">Matter 1.4</span>
+      <span class="pill text-center">HomeKit</span>
+      <span class="pill text-center">Alexa</span>
+      <span class="pill text-center">Google</span>
+    </div>
+    <a href="#" class="mt-8 inline-block btn-forest">Shop Motorised Westhaven →</a>
+  </div>
+</section>
+
+<!-- ============ BNPL ============ -->
+<section class="bg-[#1F3D2E] text-[#F2EBDB] py-20">
+  <div class="max-w-[1500px] mx-auto px-6 grid lg:grid-cols-12 gap-10 items-center">
+    <div class="lg:col-span-7">
+      <p class="uphair text-[#D08B4D]">Buy now · pay later</p>
+      <h2 class="display text-6xl md:text-7xl mt-3 leading-[0.95]">
+        A whole home,<br/>
+        <span class="serif-italic text-[#D08B4D]">$48</span> a month.
+      </h2>
+      <p class="mt-6 max-w-lg opacity-90">Affirm at 0% APR over 24 months. Klarna, Afterpay &amp; PayBright also welcome. Pre-qualify in 30 seconds, no impact to credit score.</p>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <span class="bg-[#F2EBDB] text-[#1F3D2E] px-4 py-2 rounded-full text-sm font-semibold">Affirm</span>
+        <span class="bg-[#F2EBDB] text-[#1F3D2E] px-4 py-2 rounded-full text-sm font-semibold">Klarna</span>
+        <span class="bg-[#F2EBDB] text-[#1F3D2E] px-4 py-2 rounded-full text-sm font-semibold">Afterpay</span>
+        <span class="bg-[#F2EBDB] text-[#1F3D2E] px-4 py-2 rounded-full text-sm font-semibold">PayBright</span>
+      </div>
+      <a href="#" class="mt-8 inline-block btn-copper">Pre-Qualify in 30s →</a>
+    </div>
+    <div class="lg:col-span-5">
+      <img src="https://picsum.photos/seed/sunleocanbnpl/600/700" class="w-full h-[440px] object-cover rounded-3xl" alt="" />
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOG / JOURNAL ============ -->
+<section class="max-w-[1500px] mx-auto px-6 py-24">
+  <div class="flex flex-wrap items-end justify-between mb-12 gap-5">
+    <div>
+      <p class="uphair text-[#B47242]">From the workshop</p>
+      <h2 class="display text-6xl md:text-7xl mt-2 leading-[0.95]">Field <span class="serif-italic text-[#1F3D2E]">notes.</span></h2>
+    </div>
+    <a href="#" class="underline-grow uphair">All entries →</a>
+  </div>
+  <div class="grid md:grid-cols-3 gap-8">
+    <a href="#" class="group block">
+      <img src="https://picsum.photos/seed/sunleocanblog1/700/500" class="w-full h-72 object-cover rounded-3xl group-hover:scale-[1.02] transition duration-500" alt="" />
+      <p class="uphair text-[#B47242] mt-5">15 May 2026 · 7 min read</p>
+      <h3 class="serif text-3xl mt-2 leading-tight">How a Chinook actually moves through a Calgary kitchen</h3>
+      <p class="mt-2 text-sm opacity-75">A seven-minute essay on solar gain, prairie wind, and why west-facing rooms need double-track drapery.</p>
+    </a>
+    <a href="#" class="group block">
+      <img src="https://picsum.photos/seed/sunleocanblog2/700/500" class="w-full h-72 object-cover rounded-3xl group-hover:scale-[1.02] transition duration-500" alt="" />
+      <p class="uphair text-[#B47242] mt-5">28 Apr 2026 · 5 min read</p>
+      <h3 class="serif text-3xl mt-2 leading-tight">2026's most-ordered Calgary fabric: Oat Milk linen</h3>
+      <p class="mt-2 text-sm opacity-75">Warm neutrals beat cool greys for the first time in 10 years. The story behind the shift.</p>
+    </a>
+    <a href="#" class="group block">
+      <img src="https://picsum.photos/seed/sunleocanblog3/700/500" class="w-full h-72 object-cover rounded-3xl group-hover:scale-[1.02] transition duration-500" alt="" />
+      <p class="uphair text-[#B47242] mt-5">12 Apr 2026 · 9 min read</p>
+      <h3 class="serif text-3xl mt-2 leading-tight">A Britannia bungalow, 23 windows, four mornings.</h3>
+      <p class="mt-2 text-sm opacity-75">The full reno story — quote, fabric, install, and the dog who slept through the whole thing.</p>
+    </a>
+  </div>
+</section>
+
+<!-- ============ AS SEEN IN ============ -->
+<section class="border-y border-[#1F3D2E]/20 bg-[#E5DABE]">
+  <div class="max-w-[1500px] mx-auto px-6 py-10">
+    <p class="text-center uphair text-[#B47242] mb-6">Featured in</p>
+    <div class="overflow-hidden">
+      <div class="flex gap-14 scrollx items-center whitespace-nowrap">
+        <span class="serif text-3xl opacity-80">Calgary Herald</span>
+        <span class="serif text-3xl serif-italic opacity-80">AVENUE</span>
+        <span class="serif text-3xl opacity-80">Western Living</span>
+        <span class="serif text-3xl serif-italic opacity-80">Houzz</span>
+        <span class="serif text-3xl opacity-80">House &amp; Home</span>
+        <span class="serif text-3xl serif-italic opacity-80">CBC Alberta</span>
+        <span class="serif text-3xl opacity-80">CTV Calgary</span>
+        <span class="serif text-3xl serif-italic opacity-80">Globe &amp; Mail</span>
+        <span class="serif text-3xl opacity-80">Calgary Herald</span>
+        <span class="serif text-3xl serif-italic opacity-80">AVENUE</span>
+        <span class="serif text-3xl opacity-80">Western Living</span>
+        <span class="serif text-3xl serif-italic opacity-80">Houzz</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTAGRAM ============ -->
+<section class="max-w-[1500px] mx-auto px-6 py-24">
+  <div class="text-center mb-12">
+    <p class="uphair text-[#B47242]">@sunleocalgary</p>
+    <h2 class="display text-5xl md:text-7xl mt-3 leading-[0.95]">Tagged in <span class="serif-italic text-[#1F3D2E]">YYC</span> living rooms.</h2>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <a href="#" class="group block aspect-square overflow-hidden rounded-3xl"><img src="https://picsum.photos/seed/sunleocanig1/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+    <a href="#" class="group block aspect-square overflow-hidden rounded-3xl"><img src="https://picsum.photos/seed/sunleocanig2/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+    <a href="#" class="group block aspect-square overflow-hidden rounded-3xl"><img src="https://picsum.photos/seed/sunleocanig3/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+    <a href="#" class="group block aspect-square overflow-hidden rounded-3xl"><img src="https://picsum.photos/seed/sunleocanig4/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+    <a href="#" class="group block aspect-square overflow-hidden rounded-3xl"><img src="https://picsum.photos/seed/sunleocanig5/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+    <a href="#" class="group block aspect-square overflow-hidden rounded-3xl"><img src="https://picsum.photos/seed/sunleocanig6/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+    <a href="#" class="group block aspect-square overflow-hidden rounded-3xl"><img src="https://picsum.photos/seed/sunleocanig7/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+    <a href="#" class="group block aspect-square overflow-hidden rounded-3xl"><img src="https://picsum.photos/seed/sunleocanig8/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+  </div>
+</section>
+
+<!-- ============ TRADE ============ -->
+<section class="bg-[#1F3D2E] text-[#F2EBDB] py-24">
+  <div class="max-w-[1500px] mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center">
+    <div class="lg:col-span-7">
+      <p class="uphair text-[#D08B4D]">For trade</p>
+      <h2 class="display text-6xl md:text-7xl mt-3 leading-[0.95]">For the people who<br/><span class="serif-italic text-[#D08B4D]">build</span> Calgary.</h2>
+      <p class="mt-6 opacity-90 max-w-xl text-lg">Up to 35% trade pricing, NET-30 terms, dedicated coordinator, fabric library on loan, and a direct line to Iris. Over 380 Calgary spec homes since 2017.</p>
+      <a href="#" class="mt-8 inline-block btn-copper">Open Trade Account →</a>
+    </div>
+    <div class="lg:col-span-5">
+      <div class="bg-[#F2EBDB]/5 border border-[#F2EBDB]/15 rounded-3xl p-7">
+        <p class="uphair text-[#D08B4D]">Trade partner</p>
+        <p class="serif text-3xl mt-3 serif-italic">"They're the only window vendor I let into a finished home unsupervised."</p>
+        <p class="mt-5 text-sm">— Hattie Renwick · <b>Renwick &amp; Co. Design</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="max-w-[1500px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-12">
+  <div class="lg:col-span-4">
+    <p class="uphair text-[#B47242]">Honest answers</p>
+    <h2 class="display text-5xl md:text-6xl mt-3 leading-[0.95]">Frequently <span class="serif-italic text-[#1F3D2E]">asked.</span></h2>
+    <p class="mt-5 opacity-80">Or email iris@sunleo.ca — yes, the founder, yes, she actually reads them.</p>
+  </div>
+  <div class="lg:col-span-8 space-y-2">
+    <details class="border-b border-[#1F3D2E]/20 pb-4" open><summary class="flex items-center justify-between cursor-pointer py-4"><span class="serif text-2xl">How much for a typical Calgary home?</span><span class="acc serif text-3xl text-[#B47242]">+</span></summary><p class="opacity-80 leading-relaxed pb-3">12–16 windows in a 2,400 sq ft home lands between <b>$4,200 and $11,400</b>. Bedroom-only refresh starts at $890. Free written quote within 24 h of your in-home visit, no signature required.</p></details>
+    <details class="border-b border-[#1F3D2E]/20 pb-4"><summary class="flex items-center justify-between cursor-pointer py-4"><span class="serif text-2xl">What areas do you serve?</span><span class="acc serif text-3xl text-[#B47242]">+</span></summary><p class="opacity-80 leading-relaxed pb-3">All of Calgary plus Cochrane, Airdrie, Okotoks, Bearspaw, Springbank, Chestermere, Strathmore, High River, Bragg Creek — anywhere within 60 km of downtown. No travel fee, ever.</p></details>
+    <details class="border-b border-[#1F3D2E]/20 pb-4"><summary class="flex items-center justify-between cursor-pointer py-4"><span class="serif text-2xl">Are you really independently owned?</span><span class="acc serif text-3xl text-[#B47242]">+</span></summary><p class="opacity-80 leading-relaxed pb-3">Yes — Iris is the sole owner since founding in 2017. No outside investors, no franchise, no licensing. Same address, same family.</p></details>
+    <details class="border-b border-[#1F3D2E]/20 pb-4"><summary class="flex items-center justify-between cursor-pointer py-4"><span class="serif text-2xl">How fast can you install?</span><span class="acc serif text-3xl text-[#B47242]">+</span></summary><p class="opacity-80 leading-relaxed pb-3">5–8 business days for standard collections; 10–12 days for custom drapery. Install date confirmed the same day you approve the quote.</p></details>
+    <details class="border-b border-[#1F3D2E]/20 pb-4"><summary class="flex items-center justify-between cursor-pointer py-4"><span class="serif text-2xl">What's your warranty?</span><span class="acc serif text-3xl text-[#B47242]">+</span></summary><p class="opacity-80 leading-relaxed pb-3">Lifetime, transferable to new homeowners. We've replaced 11-year-old cordless mechanisms free of charge — same week.</p></details>
+    <details class="border-b border-[#1F3D2E]/20 pb-4"><summary class="flex items-center justify-between cursor-pointer py-4"><span class="serif text-2xl">Do you remove our old blinds?</span><span class="acc serif text-3xl text-[#B47242]">+</span></summary><p class="opacity-80 leading-relaxed pb-3">Yes — removal and recycling are included with every install, at no extra cost. We patch screw holes and leave each room cleaner than we found it.</p></details>
+    <details class="border-b border-[#1F3D2E]/20 pb-4"><summary class="flex items-center justify-between cursor-pointer py-4"><span class="serif text-2xl">Cordless &amp; child-safe?</span><span class="acc serif text-3xl text-[#B47242]">+</span></summary><p class="opacity-80 leading-relaxed pb-3">Cordless or motorised by default on every product. WCMA-certified child-safe — standard, not an upcharge.</p></details>
+    <details class="border-b border-[#1F3D2E]/20 pb-4"><summary class="flex items-center justify-between cursor-pointer py-4"><span class="serif text-2xl">Where's your shop?</span><span class="acc serif text-3xl text-[#B47242]">+</span></summary><p class="opacity-80 leading-relaxed pb-3">1217 9 Ave SE in Inglewood — between Without Papers Pizza and the river path. Free street parking after 6, paid lot on the corner. Tue–Sat 10–6. Drop in, see &amp; touch every fabric.</p></details>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section id="book" class="relative">
+  <img src="https://picsum.photos/seed/sunleocancta/1800/900" class="absolute inset-0 w-full h-full object-cover" alt="" />
+  <div class="absolute inset-0 bg-[#1F3D2E]/80"></div>
+  <div class="relative max-w-[1500px] mx-auto px-6 py-28 text-[#F2EBDB] text-center">
+    <p class="uphair text-[#D08B4D]">Begin</p>
+    <h2 class="display text-6xl md:text-9xl mt-5 leading-[0.95]">Book your<br/>free <span class="serif-italic text-[#D08B4D]">visit.</span></h2>
+    <p class="mt-8 max-w-2xl mx-auto text-lg opacity-90">A SunLeo designer at your door in 48 h, fabric kit in hand. No deposit, no obligation, no upsell. Just an honest conversation.</p>
+    <form class="mt-10 max-w-md mx-auto bg-[#F2EBDB] text-[#1A2422] p-6 rounded-3xl card-shadow text-left">
+      <div class="grid grid-cols-2 gap-3">
+        <input placeholder="Your name" class="bg-white border border-[#1F3D2E]/30 px-4 py-3 text-sm rounded-xl" />
+        <input placeholder="Postal code" class="bg-white border border-[#1F3D2E]/30 px-4 py-3 text-sm rounded-xl" />
+      </div>
+      <input placeholder="Phone" class="w-full mt-3 bg-white border border-[#1F3D2E]/30 px-4 py-3 text-sm rounded-xl" />
+      <button class="w-full mt-3 btn-forest">Schedule Free Visit →</button>
+      <p class="text-xs mt-3 opacity-70 text-center">Average reply <b>12 min</b> · Tue–Sat, 9–6 MT</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-[#1F3D2E] text-[#E5DABE] pt-20 pb-10">
+  <div class="max-w-[1500px] mx-auto px-6">
+    <div class="grid md:grid-cols-6 gap-10 pb-12 border-b border-[#F2EBDB]/15">
+      <div class="md:col-span-2">
+        <p class="display text-4xl">SunLeo<span class="text-[#B47242]">.</span></p>
+        <p class="uphair text-[#D08B4D] mt-2">Independent · Calgary · est. 2017</p>
+        <p class="mt-5 text-sm opacity-85 max-w-sm">Locally owned. Locally made. Locally installed. Iris signs every order, every time.</p>
+        <div class="mt-5 flex items-center gap-3">
+          <span class="bg-[#6F8559] px-3 py-1.5 rounded-full text-xs">★ 4.9 Trustpilot</span>
+          <span class="bg-[#F2EBDB]/10 px-3 py-1.5 rounded-full text-xs">BBB A+</span>
+        </div>
+        <div class="mt-5 flex gap-4 text-sm opacity-80"><a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">Houzz</a><a href="#">TikTok</a></div>
+      </div>
+      <div><p class="uphair text-[#D08B4D] mb-4">Shop</p><ul class="space-y-2 text-sm opacity-90"><li><a href="#">Foothill Linen Roller</a></li><li><a href="#">Chinook Honeycomb</a></li><li><a href="#">Banff Roman</a></li><li><a href="#">Bow Valley Wood</a></li><li><a href="#">Kananaskis Drapery</a></li><li><a href="#">Westhaven Motorised</a></li></ul></div>
+      <div><p class="uphair text-[#D08B4D] mb-4">Help</p><ul class="space-y-2 text-sm opacity-90"><li><a href="#">How to Measure</a></li><li><a href="#">FAQ</a></li><li><a href="#">Warranty</a></li><li><a href="#">Track Order</a></li><li><a href="#">Returns</a></li><li><a href="#">Live Chat</a></li></ul></div>
+      <div><p class="uphair text-[#D08B4D] mb-4">Atelier</p><ul class="space-y-2 text-sm opacity-90"><li><a href="#">Our Story</a></li><li><a href="#">Trade</a></li><li><a href="#">Hospitality</a></li><li><a href="#">Press</a></li><li><a href="#">Journal</a></li><li><a href="#">Careers</a></li></ul></div>
+      <div><p class="uphair text-[#D08B4D] mb-4">Visit</p><p class="text-sm opacity-90 leading-relaxed">1217 9 Ave SE<br/>Inglewood T2G 0T1<br/>403 555 0199<br/>hello@sunleo.ca</p><p class="text-xs mt-3 opacity-70">Tue–Sat · 10–6 MT</p></div>
+    </div>
+    <div class="py-8 grid md:grid-cols-2 gap-6 items-center border-b border-[#F2EBDB]/15">
+      <div><p class="uphair text-[#D08B4D]">The SunLeo dispatch</p><p class="serif text-2xl mt-2 serif-italic">A letter from the atelier, twice a season.</p></div>
+      <form class="flex"><input type="email" placeholder="you@calgary.ca" class="flex-1 bg-transparent border border-[#F2EBDB]/30 px-5 py-4 text-sm focus:outline-none focus:border-[#D08B4D] rounded-l-full" /><button class="bg-[#F2EBDB] text-[#1F3D2E] uphair px-6 rounded-r-full">Subscribe</button></form>
+    </div>
+    <div class="pt-8 grid md:grid-cols-2 gap-6 items-center">
+      <div class="flex flex-wrap gap-4 text-xs opacity-70"><span>© 2026 SunLeo Atelier Inc. Calgary, AB.</span><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility (AODA)</a></div>
+      <div class="flex flex-wrap items-center gap-2 justify-start md:justify-end"><span class="bg-[#F2EBDB]/10 px-3 py-1.5 text-xs rounded-full">VISA</span><span class="bg-[#F2EBDB]/10 px-3 py-1.5 text-xs rounded-full">Mastercard</span><span class="bg-[#F2EBDB]/10 px-3 py-1.5 text-xs rounded-full">Amex</span><span class="bg-[#F2EBDB]/10 px-3 py-1.5 text-xs rounded-full">Affirm</span><span class="bg-[#F2EBDB]/10 px-3 py-1.5 text-xs rounded-full">Apple Pay</span></div>
+    </div>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="#" class="border border-[#F2EBDB]/25 px-4 py-3 flex items-center gap-2 text-xs rounded-2xl"><b>App Store</b> · SunLeo iOS · Spring '26</a>
+      <a href="#" class="border border-[#F2EBDB]/25 px-4 py-3 flex items-center gap-2 text-xs rounded-2xl"><b>Google Play</b> · SunLeo Android · Spring '26</a>
+    </div>
+    <p class="mt-8 text-xs opacity-60">SunLeo Atelier operates on the traditional territories of the Niitsitapi (Blackfoot Confederacy), Tsuut'ina, Stoney Nakoda, and Métis Region 3. We pay rent to Calgary's first stewards.</p>
+  </div>
+</footer>
+
+<!-- side panel -->
+<div class="fixed right-3 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-2 z-40">
+  <button class="w-12 h-12 bg-[#1F3D2E] text-[#F2EBDB] rounded-full hover:bg-[#2A5340] flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></button>
+  <button class="w-12 h-12 bg-[#F2EBDB] border border-[#1F3D2E]/20 rounded-full flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+  <button class="w-12 h-12 bg-[#B47242] text-white rounded-full flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg></button>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SunLeo — A Quiet House of Light, Calgary</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=GFS+Didot&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #F1E9D8;
+    --paper-warm: #ECE1CB;
+    --vellum: #DCCFB1;
+    --ink: #1A1410;
+    --ink-soft: #2C231C;
+    --umber: #6B4A2B;
+    --umber-deep: #4A3220;
+    --gilt: #B08145;
+    --rust: #8E4A2C;
+  }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Fraunces', serif; background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .didot { font-family: 'GFS Didot', serif; }
+  .corm { font-family: 'Cormorant Garamond', serif; }
+  .micro { font-family: 'Fraunces', serif; font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 500; }
+  .hair { border-color: rgba(26,20,16,0.18); }
+  .grain { background-image: radial-gradient(rgba(74,50,32,0.06) 1px, transparent 1px), radial-gradient(rgba(74,50,32,0.04) 1px, transparent 1px); background-size: 3px 3px, 7px 7px; background-position: 0 0, 1px 1px; }
+  .stipple { background-image: radial-gradient(rgba(26,20,16,0.5) 0.5px, transparent 0.5px); background-size: 3px 3px; }
+  .vignette { box-shadow: inset 0 0 120px rgba(26,20,16,0.18); }
+  .reveal { overflow: hidden; }
+  .reveal img { transition: transform 1.8s cubic-bezier(.2,.7,.2,1), filter 1.8s ease; filter: saturate(0.85); }
+  .reveal:hover img { transform: scale(1.04); filter: saturate(1); }
+  .underline-grow { background-image: linear-gradient(currentColor, currentColor); background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size .6s cubic-bezier(.2,.7,.2,1); padding-bottom: 6px; }
+  .underline-grow:hover { background-size: 100% 1px; }
+  .btn-ink { background: var(--ink); color: var(--paper); transition: all .4s ease; }
+  .btn-ink:hover { background: var(--umber-deep); letter-spacing: 0.24em; }
+  .figure-no { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; color: var(--umber); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .anim { opacity: 0; animation: fadeUp 1.2s cubic-bezier(.2,.7,.2,1) forwards; }
+  .d1 { animation-delay: .05s } .d2 { animation-delay: .25s } .d3 { animation-delay: .45s } .d4 { animation-delay: .65s }
+  .num-circle { width: 56px; height: 56px; border: 1px solid var(--ink); border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; }
+  .ornament::before, .ornament::after { content: "✦"; color: var(--gilt); margin: 0 0.6em; font-size: 0.7em; vertical-align: middle; }
+
+/* ============ MOBILE RESPONSIVE PATCH ============ */
+html, body { overflow-x: hidden; max-width: 100vw; }
+img, svg, video { max-width: 100%; height: auto; }
+
+@media (max-width: 1023px) {
+  /* Force lg:grid-cols-12 sections to stack on tablet/mobile */
+  section .grid.lg\:grid-cols-12,
+  section .grid.md\:grid-cols-12 {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  section .grid.lg\:grid-cols-12 > *,
+  section .grid.md\:grid-cols-12 > * {
+    min-width: 0;
+    width: 100%;
+  }
+  /* Tighten section padding */
+  section { padding-left: 1rem !important; padding-right: 1rem !important; }
+  section.no-padding-override { padding: revert !important; }
+  /* Marquee cards width cap */
+  .marquee article, .marquee .card { max-width: 280px !important; min-width: 240px !important; }
+}
+
+@media (max-width: 767px) {
+  /* Display text clamps */
+  h1 { font-size: clamp(2rem, 9vw, 3.5rem) !important; line-height: 1.05 !important; }
+  h2 { font-size: clamp(1.5rem, 7vw, 2.5rem) !important; line-height: 1.1 !important; }
+  /* Heavy display text */
+  .display, .didot, .serif.text-7xl, .serif.text-8xl, .serif.text-9xl,
+  [style*="font-size: 120"], [style*="font-size: 140"], [style*="font-size: 170"] {
+    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    line-height: 0.95 !important;
+  }
+  /* Touch targets 44px */
+  button, a[class*="btn"], a[role="button"] {
+    min-height: 44px;
+  }
+  /* Inputs prevent iOS zoom */
+  input, textarea, select { font-size: 16px !important; }
+  /* Disable hover transforms on touch */
+  .card:hover, *[class*="hover:translate"]:hover, *[class*="hover:scale"]:hover {
+    transform: none !important;
+  }
+  /* Big grids collapse */
+  .grid.grid-cols-6 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-5 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-4:not(.grid-rows-2) { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-3 { grid-template-columns: repeat(1, 1fr) !important; }
+  /* Comparison tables: wrap (if direct child grid-cols-4) in overflow-x scroll behavior */
+  .comparison-table, table.comparison { display: block !important; overflow-x: auto !important; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Disable cursor-follow effects on touch devices */
+  .cursor-trail, .sunbeam-cursor, .glow-dot, .mouse-trail {
+    display: none !important;
+  }
+}
+
+</style>
+</head>
+<body class="grain">
+
+<div class="border-b hair">
+  <div class="max-w-[1480px] mx-auto px-4 md:px-8 py-3 flex items-center justify-between gap-3 text-[9px] md:text-[10px] tracking-[0.24em] md:tracking-[0.32em] uppercase">
+    <span class="text-[var(--umber)] hidden sm:block">Complimentary In-Home Audience</span>
+    <span class="text-[var(--umber)] sm:hidden">In-Home Audience</span>
+    <span class="hidden lg:block">Calgary &amp; Foothills · Estd. MMXVII</span>
+    <a href="tel:+14035551234" class="hover:text-[var(--rust)] underline-grow whitespace-nowrap">+1 / 403 / 555 / 1234</a>
+  </div>
+</div>
+
+<header class="border-b hair">
+  <div class="max-w-[1480px] mx-auto px-4 md:px-8 py-6 md:py-8 grid grid-cols-2 lg:grid-cols-12 items-center md:items-end gap-4 md:gap-6">
+    <div class="hidden lg:block lg:col-span-3"><p class="micro text-[var(--umber)]">An atelier of</p><p class="micro text-[var(--umber)]">window treatments</p></div>
+    <a href="#" class="lg:col-span-6 lg:text-center"><span class="didot text-[36px] sm:text-[52px] lg:text-[68px] leading-none tracking-tight inline-block relative">SunLeo<span class="absolute -right-3 -top-2 text-[var(--gilt)] text-base lg:text-2xl">✦</span></span></a>
+    <nav class="hidden lg:flex lg:col-span-3 justify-end gap-6 lg:gap-8 micro">
+      <a href="#collections" class="underline-grow">Collections</a>
+      <a href="#atelier" class="underline-grow">Atelier</a>
+      <a href="#journal" class="underline-grow">Journal</a>
+      <a href="#visit" class="underline-grow">Visit</a>
+    </nav>
+    <a href="#visit" class="lg:hidden justify-self-end btn-ink micro px-4 py-2 text-[10px]">Visit →</a>
+  </div>
+</header>
+
+<section class="border-b hair">
+  <div class="max-w-[1480px] mx-auto px-4 md:px-8 pt-16 md:pt-24 pb-16 md:pb-28 grid grid-cols-12 gap-6 md:gap-8 relative">
+    <div class="hidden md:block absolute left-8 top-24 micro text-[var(--umber)] anim d1">— No. 12, Spring</div>
+    <div class="absolute right-8 top-24 micro text-[var(--umber)] anim d1 hidden lg:block">— Folio I &nbsp;&middot;&nbsp; pp. 01 – 04</div>
+
+    <div class="col-span-12 md:col-span-7 anim d2 md:mt-12">
+      <h1 class="didot text-[14vw] sm:text-[12vw] md:text-[12vw] lg:text-[170px] leading-[0.86] tracking-[-0.02em]">The quiet<br/><em class="italic text-[var(--umber)]" style="font-weight:400;">art of</em><br/>letting light <em class="italic text-[var(--rust)]">in.</em></h1>
+    </div>
+
+    <aside class="col-span-12 md:col-span-5 md:pl-8 anim d3 self-end">
+      <div class="reveal mb-6 md:mb-8"><img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1400" class="w-full h-64 sm:h-80 md:h-[440px] object-cover" alt=""/></div>
+      <p class="figure-no text-sm">Pl. I</p>
+      <p class="corm italic text-[var(--ink-soft)] text-base md:text-lg leading-snug mt-1">— A west-facing drawing-room in Mount Royal. Linen sheers in oat, dressed to the floor. Photographed at five past four, as the chinook arrived.</p>
+    </aside>
+
+    <div class="col-span-12 md:col-span-7 md:pr-12 anim d4 mt-4 md:mt-6">
+      <p class="corm text-lg md:text-2xl leading-[1.5] text-[var(--ink-soft)] max-w-xl">SunLeo is a quiet practice of <em>window-treatment makers</em> at the foot of the Rockies. We arrive at your home with samples, a tape, and an hour of patient listening. We leave with the measure of your light.</p>
+      <div class="mt-8 md:mt-12 flex flex-wrap items-center gap-4 md:gap-6">
+        <a href="#visit" class="btn-ink micro px-6 sm:px-10 py-4 sm:py-5">Request an Audience &nbsp;→</a>
+        <a href="tel:+14035551234" class="didot text-xl md:text-3xl text-[var(--ink)] underline-grow">+1 403 555 1234</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="border-b hair bg-[var(--paper-warm)] overflow-hidden">
+  <div class="max-w-[1480px] mx-auto px-4 md:px-8 py-4 md:py-6 flex items-center gap-6 md:gap-12 didot text-[var(--ink-soft)] text-xl md:text-3xl whitespace-nowrap overflow-x-auto">
+    <span class="ornament">Linen</span><span class="ornament italic corm">Silk</span><span class="ornament">Oat</span><span class="ornament italic corm">Ivory</span><span class="ornament">Walnut</span><span class="ornament italic corm">Plaster</span><span class="ornament">Cane</span><span class="ornament italic corm">Wool</span>
+  </div>
+</section>
+
+<section class="border-b hair">
+  <div class="max-w-[1100px] mx-auto px-4 md:px-8 py-16 md:py-28 text-center">
+    <p class="micro text-[var(--umber)]">An editor's note</p>
+    <div class="my-6 md:my-8 flex items-center justify-center gap-4"><span class="block w-12 h-px bg-[var(--ink)]"></span><span class="text-[var(--gilt)]">✦</span><span class="block w-12 h-px bg-[var(--ink)]"></span></div>
+    <p class="corm italic text-2xl sm:text-3xl md:text-5xl leading-snug text-[var(--ink-soft)]">&ldquo;Light is the only material we work with that <span class="text-[var(--rust)]">cannot be stockpiled.</span> One has to treat it slowly, in the room, in the season, in the very hour one finds it.&rdquo;</p>
+    <p class="micro text-[var(--umber)] mt-8 md:mt-10">Leo Aban &nbsp;·&nbsp; Principal &amp; Founder</p>
+  </div>
+</section>
+
+<section id="collections" class="border-b hair">
+  <div class="max-w-[1480px] mx-auto px-4 md:px-8 pt-16 md:pt-24 pb-16 md:pb-28">
+    <div class="grid grid-cols-12 gap-6 md:gap-8 items-end mb-10 md:mb-16">
+      <p class="col-span-12 md:col-span-2 micro text-[var(--umber)]">— Folio II</p>
+      <h2 class="col-span-12 md:col-span-7 didot text-5xl sm:text-6xl md:text-[110px] leading-[0.95]">A library<br/><em class="corm italic">of</em> ten.</h2>
+      <p class="col-span-12 md:col-span-3 corm italic text-lg md:text-xl text-[var(--ink-soft)] leading-snug">Ten window-treatment systems, drawn at 1:5 in our Inglewood studio. Each available in a curated palette of fabrics, considered for the Alberta light.</p>
+    </div>
+
+    <div class="grid grid-cols-12 gap-x-6 md:gap-x-8 gap-y-12 md:gap-y-24">
+      <article class="col-span-12 md:col-span-7">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1400" class="w-full h-80 md:h-[620px] object-cover" alt=""/></div>
+        <div class="mt-6 md:mt-8 grid grid-cols-12 items-end gap-3 md:gap-6">
+          <p class="col-span-3 md:col-span-2 figure-no text-2xl md:text-3xl italic">no. 01</p>
+          <h3 class="col-span-9 md:col-span-7 didot text-3xl sm:text-4xl md:text-5xl">Roller Blinds</h3>
+          <p class="col-span-12 md:col-span-3 micro text-[var(--umber)]">— Modern essential</p>
+        </div>
+        <p class="corm italic text-lg md:text-xl text-[var(--ink-soft)] mt-3 max-w-xl">The white shirt of the window. From a 1% sheer to total blackout — endlessly versatile, never wrong.</p>
+      </article>
+
+      <article class="col-span-12 md:col-span-5">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?w=1000" class="w-full h-80 md:h-[620px] object-cover" alt=""/></div>
+        <div class="mt-6 md:mt-8 grid grid-cols-12 items-end gap-3 md:gap-6"><p class="col-span-3 md:col-span-2 figure-no text-2xl md:text-3xl italic">no. 02</p><h3 class="col-span-9 md:col-span-7 didot text-3xl sm:text-4xl md:text-5xl">Zebra Shades</h3></div>
+        <p class="corm italic text-lg md:text-xl text-[var(--ink-soft)] mt-3">Alternating bands of sheer and solid &mdash; privacy with a whisper of light.</p>
+      </article>
+
+      <article class="col-span-12 md:col-span-4">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1617104551722-3b2d51366400?w=900" class="w-full h-72 object-cover" alt=""/></div>
+        <p class="figure-no italic text-2xl mt-5">no. 03</p>
+        <h3 class="didot text-4xl mt-1">Faux Wood</h3>
+        <p class="corm italic text-lg text-[var(--ink-soft)] mt-2">Timber's warmth, polymer's resilience.</p>
+      </article>
+      <article class="col-span-12 md:col-span-4">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900" class="w-full h-72 object-cover" alt=""/></div>
+        <p class="figure-no italic text-2xl mt-5">no. 04</p>
+        <h3 class="didot text-4xl mt-1">Cellular</h3>
+        <p class="corm italic text-lg text-[var(--ink-soft)] mt-2">Honeycomb cells. The warmest treatment we offer.</p>
+      </article>
+      <article class="col-span-12 md:col-span-4">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1633113216288-a4d6b35066d5?w=900" class="w-full h-72 object-cover" alt=""/></div>
+        <p class="figure-no italic text-2xl mt-5">no. 05</p>
+        <h3 class="didot text-4xl mt-1">Roman</h3>
+        <p class="corm italic text-lg text-[var(--ink-soft)] mt-2">The soft fall, the gathered hem.</p>
+      </article>
+
+      <div class="col-span-12 my-4 text-center didot text-3xl text-[var(--ink-soft)]"><span class="text-[var(--gilt)]">✦</span> <em class="corm italic">interlude</em> <span class="text-[var(--gilt)]">✦</span></div>
+
+      <article class="col-span-12 md:col-span-7">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1400" class="w-full h-[460px] object-cover" alt=""/></div>
+        <p class="figure-no italic text-2xl mt-5">no. 06</p>
+        <h3 class="didot text-5xl mt-1">Skylight Blinds</h3>
+        <p class="corm italic text-xl text-[var(--ink-soft)] mt-2 max-w-md">Tension-fitted for the upward gaze. For vaulted rooms beneath the Alberta sun.</p>
+      </article>
+      <article class="col-span-12 md:col-span-5">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1000" class="w-full h-[460px] object-cover" alt=""/></div>
+        <p class="figure-no italic text-2xl mt-5">no. 07</p>
+        <h3 class="didot text-5xl mt-1">Perfect Fit</h3>
+        <p class="corm italic text-xl text-[var(--ink-soft)] mt-2 max-w-md">A clipped frame. No drilling, no scar to the casement.</p>
+      </article>
+
+      <article class="col-span-12 md:col-span-4">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900" class="w-full h-72 object-cover" alt=""/></div>
+        <p class="figure-no italic text-2xl mt-5">no. 08</p>
+        <h3 class="didot text-4xl mt-1">Printed Films</h3>
+        <p class="corm italic text-lg text-[var(--ink-soft)] mt-2">From frosted minimalism to commissioned print.</p>
+      </article>
+      <article class="col-span-12 md:col-span-4">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=900" class="w-full h-72 object-cover" alt=""/></div>
+        <p class="figure-no italic text-2xl mt-5">no. 09</p>
+        <h3 class="didot text-4xl mt-1">Motorised</h3>
+        <p class="corm italic text-lg text-[var(--ink-soft)] mt-2">Whisper motors, hidden cells.</p>
+      </article>
+      <article class="col-span-12 md:col-span-4">
+        <div class="reveal"><img src="https://images.unsplash.com/photo-1618219740975-d40978bb7378?w=900" class="w-full h-72 object-cover" alt=""/></div>
+        <p class="figure-no italic text-2xl mt-5">no. 10</p>
+        <h3 class="didot text-4xl mt-1">Made-to-Measure</h3>
+        <p class="corm italic text-lg text-[var(--ink-soft)] mt-2">For arches, bays, irregulars. Drawn for the room.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="atelier" class="border-b hair bg-[var(--ink)] text-[var(--paper)]">
+  <div class="max-w-[1480px] mx-auto px-4 md:px-8 py-16 md:py-32 grid grid-cols-12 gap-6 md:gap-8 relative">
+    <div class="absolute top-6 right-4 md:top-8 md:right-8 micro text-[var(--gilt)]">— Folio III</div>
+    <div class="col-span-12 md:col-span-5 mt-8 md:mt-0">
+      <h2 class="didot text-5xl sm:text-6xl md:text-9xl leading-[0.92]">Slow craft.<br/><em class="corm italic text-[var(--gilt)]">Quiet rooms.</em></h2>
+      <p class="corm italic text-lg md:text-xl text-[var(--paper-warm)] mt-6 md:mt-10 max-w-md leading-snug">We do not retail. We do not subcontract. We do not hurry. Each commission is measured, drawn, fabricated and installed by the same pair of hands.</p>
+    </div>
+    <div class="col-span-12 md:col-span-7 md:pl-12 grid grid-cols-1 sm:grid-cols-2 gap-x-6 md:gap-x-10 gap-y-10 md:gap-y-14">
+      <div><span class="num-circle didot text-2xl md:text-3xl text-[var(--gilt)] border-[var(--gilt)]">i</span><h3 class="didot text-2xl md:text-3xl mt-4 md:mt-6">One pair of hands</h3><p class="corm italic text-base md:text-lg text-[var(--paper-warm)] mt-2 leading-snug">The maker who measures is the maker who installs.</p></div>
+      <div><span class="num-circle didot text-2xl md:text-3xl text-[var(--gilt)] border-[var(--gilt)]">ii</span><h3 class="didot text-2xl md:text-3xl mt-4 md:mt-6">Lifetime mechanism</h3><p class="corm italic text-base md:text-lg text-[var(--paper-warm)] mt-2 leading-snug">Guaranteed for as long as you live in the home.</p></div>
+      <div><span class="num-circle didot text-2xl md:text-3xl text-[var(--gilt)] border-[var(--gilt)]">iii</span><h3 class="didot text-2xl md:text-3xl mt-4 md:mt-6">No showroom</h3><p class="corm italic text-base md:text-lg text-[var(--paper-warm)] mt-2 leading-snug">Four hundred swatches, brought to your sofa.</p></div>
+      <div><span class="num-circle didot text-2xl md:text-3xl text-[var(--gilt)] border-[var(--gilt)]">iv</span><h3 class="didot text-2xl md:text-3xl mt-4 md:mt-6">Of Inglewood</h3><p class="corm italic text-base md:text-lg text-[var(--paper-warm)] mt-2 leading-snug">Founded in 2017 on 9th Avenue, Calgary.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="journal" class="border-b hair">
+  <div class="max-w-[1480px] mx-auto px-4 md:px-8 py-16 md:py-28">
+    <div class="grid grid-cols-12 gap-6 md:gap-8 items-end mb-10 md:mb-14">
+      <p class="col-span-12 md:col-span-2 micro text-[var(--umber)]">— Folio IV</p>
+      <h2 class="col-span-12 md:col-span-7 didot text-5xl sm:text-6xl md:text-[100px] leading-[0.95]">In their own <em class="corm italic">words.</em></h2>
+      <p class="col-span-12 md:col-span-3 corm italic text-base md:text-lg text-[var(--ink-soft)]">Letters received, in the hand of the client.</p>
+    </div>
+    <div class="grid grid-cols-12 gap-6 md:gap-10">
+      <figure class="col-span-12 md:col-span-4 border-t border-[var(--ink)] pt-6"><p class="figure-no italic text-2xl">Excerpt i.</p><blockquote class="didot text-2xl leading-snug text-[var(--ink-soft)] mt-3">&ldquo;Leo arrived with a hand-drawn floor plan and a leather wallet of samples. I have never been so politely overwhelmed.&rdquo;</blockquote><figcaption class="micro text-[var(--umber)] mt-6">Eleanor R. — Britannia</figcaption></figure>
+      <figure class="col-span-12 md:col-span-4 border-t border-[var(--ink)] pt-6"><p class="figure-no italic text-2xl">Excerpt ii.</p><blockquote class="didot text-2xl leading-snug text-[var(--ink-soft)] mt-3">&ldquo;The motorised roller in the nursery is so quiet I forget it is moving. Worth every shilling.&rdquo;</blockquote><figcaption class="micro text-[var(--umber)] mt-6">Daniel T. — Aspen Woods</figcaption></figure>
+      <figure class="col-span-12 md:col-span-4 border-t border-[var(--ink)] pt-6"><p class="figure-no italic text-2xl">Excerpt iii.</p><blockquote class="didot text-2xl leading-snug text-[var(--ink-soft)] mt-3">&ldquo;Quote was honest. Install was clean. Six months on, not a rattle in the house.&rdquo;</blockquote><figcaption class="micro text-[var(--umber)] mt-6">Marisa K. — Tuscany</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="visit" class="border-b hair bg-[var(--paper-warm)] vignette relative overflow-hidden">
+  <div class="absolute -top-24 -left-24 w-72 md:w-96 h-72 md:h-96 stipple opacity-30 rounded-full"></div>
+  <div class="absolute -bottom-24 -right-24 w-72 md:w-96 h-72 md:h-96 stipple opacity-30 rounded-full"></div>
+  <div class="max-w-[1100px] mx-auto px-4 md:px-8 py-16 md:py-32 text-center relative">
+    <p class="micro text-[var(--umber)]">— Folio V · A correspondence</p>
+    <h2 class="didot text-5xl sm:text-6xl md:text-[140px] leading-[0.88] mt-6 md:mt-8">Begin <em class="corm italic text-[var(--rust)]">with</em><br/>a visit.</h2>
+    <p class="corm italic text-lg md:text-2xl text-[var(--ink-soft)] mt-6 md:mt-10 max-w-xl mx-auto leading-snug">Tell us where you live and at what hour your light is best. We arrive with tea-coloured samples, a tape, and an hour of patience.</p>
+    <form class="mt-10 md:mt-16 max-w-2xl mx-auto grid grid-cols-6 gap-x-4 md:gap-x-8 gap-y-6 md:gap-y-10 text-left">
+      <div class="col-span-6 md:col-span-3"><label class="micro text-[var(--umber)]">i. Name</label><input class="w-full bg-transparent border-b hair py-3 didot text-xl md:text-2xl focus:outline-none focus:border-[var(--rust)] transition-colors"/></div>
+      <div class="col-span-6 md:col-span-3"><label class="micro text-[var(--umber)]">ii. Telephone</label><input class="w-full bg-transparent border-b hair py-3 didot text-xl md:text-2xl focus:outline-none focus:border-[var(--rust)] transition-colors"/></div>
+      <div class="col-span-6"><label class="micro text-[var(--umber)]">iii. Quarter of the city</label><input class="w-full bg-transparent border-b hair py-3 didot text-xl md:text-2xl focus:outline-none focus:border-[var(--rust)] transition-colors"/></div>
+      <button class="col-span-6 btn-ink micro py-5 md:py-6 mt-2 md:mt-4">Post the Brief &nbsp;✦&nbsp; Request a Visit</button>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-[var(--ink)] text-[var(--paper-warm)]">
+  <div class="max-w-[1480px] mx-auto px-4 md:px-8 py-12 md:py-20 grid grid-cols-12 gap-6 md:gap-8">
+    <div class="col-span-12 md:col-span-5"><p class="didot text-4xl md:text-6xl text-[var(--paper)]">SunLeo<span class="text-[var(--gilt)]"> ✦</span></p><p class="corm italic text-base md:text-xl mt-4 max-w-sm leading-snug">A small atelier of window-treatment makers in Inglewood, Calgary.</p></div>
+    <div class="col-span-6 md:col-span-2"><p class="micro text-[var(--gilt)] mb-3 md:mb-4">House</p><ul class="space-y-2 didot text-lg md:text-xl"><li>Atelier</li><li>Trade</li><li>Journal</li></ul></div>
+    <div class="col-span-6 md:col-span-2"><p class="micro text-[var(--gilt)] mb-3 md:mb-4">Quarters</p><ul class="space-y-2 didot text-lg md:text-xl"><li>Mount Royal</li><li>Britannia</li><li>Tuscany</li><li>Bearspaw</li></ul></div>
+    <div class="col-span-12 md:col-span-3"><p class="micro text-[var(--gilt)] mb-3 md:mb-4">Studio</p><p class="didot text-lg md:text-xl leading-snug">By appointment.<br/>Inglewood, Calgary AB<br/>+1 403 555 1234<br/>post@sunleo.ca</p></div>
+  </div>
+  <div class="border-t border-[var(--umber-deep)] py-6 text-center micro text-[var(--gilt)]">— MMXXVI &nbsp;·&nbsp; SunLeo Atelier &nbsp;·&nbsp; All folios reserved —</div>
+</footer>
+
+</body>
+</html>

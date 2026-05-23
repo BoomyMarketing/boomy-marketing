@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SunLeo // OS — Smart Blinds for the Connected Home</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #07070D;
+    --bg-1: #0E0F1A;
+    --bg-2: #161827;
+    --line: rgba(140,160,255,0.10);
+    --line-2: rgba(140,160,255,0.22);
+    --text: #E8E8F0;
+    --text-2: #9CA3C7;
+    --text-3: #5C6488;
+    --aurora-1: #6B8AFF;
+    --aurora-2: #B57DFF;
+    --aurora-3: #FF7DB5;
+    --citrus: #DCFF6B;
+    --hot: #FF5C8A;
+    --mint: #4DFFCE;
+  }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Geist', sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+  .mono { font-family: 'Geist Mono', monospace; }
+  .serif { font-family: 'Instrument Serif', serif; }
+  .ital { font-family: 'Instrument Serif', serif; font-style: italic; }
+  .micro { font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .hair { border-color: var(--line); }
+  .hair2 { border-color: var(--line-2); }
+  .grid-bg {
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .aurora {
+    background:
+      radial-gradient(40% 40% at 20% 30%, var(--aurora-1) 0%, transparent 60%),
+      radial-gradient(40% 40% at 80% 70%, var(--aurora-2) 0%, transparent 60%),
+      radial-gradient(40% 30% at 60% 20%, var(--aurora-3) 0%, transparent 60%);
+    filter: blur(80px);
+    opacity: 0.4;
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, var(--aurora-1) 0%, var(--aurora-2) 50%, var(--aurora-3) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .gradient-text-citrus {
+    background: linear-gradient(135deg, var(--citrus) 0%, var(--mint) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glass {
+    background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--line-2);
+  }
+  .gradient-border {
+    position: relative;
+    background: var(--bg-1);
+  }
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--aurora-1), var(--aurora-2), var(--aurora-3));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+  @keyframes blink { 50% { opacity: 0.3; } }
+  .blink { animation: blink 1.6s ease-in-out infinite; }
+  @keyframes scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+  .scan-line { background: linear-gradient(180deg, transparent 0%, rgba(91,233,255,0.08) 50%, transparent 100%); animation: scan 6s linear infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .float { animation: float 6s ease-in-out infinite; }
+  @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+  .shimmer {
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+  }
+  @keyframes draw { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
+  .draw-svg { stroke-dasharray: 1000; animation: draw 4s ease-out forwards; }
+  .glow-cursor { transition: all .3s ease; }
+  .glow-cursor:hover { box-shadow: 0 0 40px rgba(107,138,255,0.4); }
+  .dot-pattern {
+    background-image: radial-gradient(rgba(140,160,255,0.2) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+  .nav-link:hover .arrow { transform: translate(2px,-2px); }
+  .arrow { transition: transform .3s ease; }
+
+/* ============ MOBILE RESPONSIVE PATCH ============ */
+html, body { overflow-x: hidden; max-width: 100vw; }
+img, svg, video { max-width: 100%; height: auto; }
+
+@media (max-width: 1023px) {
+  /* Force lg:grid-cols-12 sections to stack on tablet/mobile */
+  section .grid.lg\:grid-cols-12,
+  section .grid.md\:grid-cols-12 {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  section .grid.lg\:grid-cols-12 > *,
+  section .grid.md\:grid-cols-12 > * {
+    min-width: 0;
+    width: 100%;
+  }
+  /* Tighten section padding */
+  section { padding-left: 1rem !important; padding-right: 1rem !important; }
+  section.no-padding-override { padding: revert !important; }
+  /* Marquee cards width cap */
+  .marquee article, .marquee .card { max-width: 280px !important; min-width: 240px !important; }
+}
+
+@media (max-width: 767px) {
+  /* Display text clamps */
+  h1 { font-size: clamp(2rem, 9vw, 3.5rem) !important; line-height: 1.05 !important; }
+  h2 { font-size: clamp(1.5rem, 7vw, 2.5rem) !important; line-height: 1.1 !important; }
+  /* Heavy display text */
+  .display, .didot, .serif.text-7xl, .serif.text-8xl, .serif.text-9xl,
+  [style*="font-size: 120"], [style*="font-size: 140"], [style*="font-size: 170"] {
+    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    line-height: 0.95 !important;
+  }
+  /* Touch targets 44px */
+  button, a[class*="btn"], a[role="button"] {
+    min-height: 44px;
+  }
+  /* Inputs prevent iOS zoom */
+  input, textarea, select { font-size: 16px !important; }
+  /* Disable hover transforms on touch */
+  .card:hover, *[class*="hover:translate"]:hover, *[class*="hover:scale"]:hover {
+    transform: none !important;
+  }
+  /* Big grids collapse */
+  .grid.grid-cols-6 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-5 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-4:not(.grid-rows-2) { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-3 { grid-template-columns: repeat(1, 1fr) !important; }
+  /* Comparison tables: wrap (if direct child grid-cols-4) in overflow-x scroll behavior */
+  .comparison-table, table.comparison { display: block !important; overflow-x: auto !important; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Disable cursor-follow effects on touch devices */
+  .cursor-trail, .sunbeam-cursor, .glow-dot, .mouse-trail {
+    display: none !important;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- System bar -->
+<div class="border-b hair bg-[var(--bg-1)]">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-8 py-2.5 flex items-center justify-between gap-3 mono text-[9px] md:text-[10px] text-[var(--text-3)]">
+    <span class="truncate"><span class="text-[var(--mint)] blink">●</span> SYS://OS <span class="hidden sm:inline">&middot; v4.2.0</span> <span class="hidden md:inline">&middot; Free site survey across YYC</span></span>
+    <span class="hidden lg:block">Apple HomeKit · Google Home · Amazon Alexa · Matter Ready</span>
+    <a href="tel:+14035551234" class="hover:text-[var(--text)] whitespace-nowrap">+1.403.555.1234</a>
+  </div>
+</div>
+
+<!-- Nav -->
+<header class="border-b hair sticky top-0 z-40 backdrop-blur-xl bg-[var(--bg)]/80">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-8 py-3 md:py-5 flex items-center justify-between gap-3">
+    <a href="#" class="flex items-center gap-2 md:gap-3 nav-link">
+      <div class="w-8 h-8 md:w-9 md:h-9 rounded-xl gradient-border flex items-center justify-center">
+        <span class="serif text-base md:text-xl gradient-text">S</span>
+      </div>
+      <span class="text-base md:text-xl tracking-tight">SunLeo<span class="text-[var(--text-3)]">//</span><span class="mono text-xs md:text-sm gradient-text">os</span></span>
+    </a>
+    <nav class="hidden md:flex gap-6 lg:gap-8 mono text-xs uppercase tracking-widest">
+      <a href="#products" class="hover:text-[var(--text)] text-[var(--text-2)]">Hardware</a>
+      <a href="#integration" class="hover:text-[var(--text)] text-[var(--text-2)]">Integrations</a>
+      <a href="#how" class="hover:text-[var(--text)] text-[var(--text-2)]">Flow</a>
+      <a href="#reviews" class="hover:text-[var(--text)] text-[var(--text-2)]">Signal</a>
+    </nav>
+    <a href="#book" class="nav-link relative overflow-hidden text-xs md:text-sm bg-gradient-to-r from-[var(--aurora-1)] to-[var(--aurora-2)] text-black font-medium px-3 md:px-5 py-2 md:py-2.5 rounded-full hover:opacity-95 transition glow-cursor whitespace-nowrap">
+      Book Survey <span class="arrow inline-block ml-1">↗</span>
+    </a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0 grid-bg"></div>
+  <div class="absolute inset-0 aurora"></div>
+  <div class="absolute inset-0 dot-pattern opacity-30 pointer-events-none"></div>
+
+  <div class="max-w-[1500px] mx-auto px-4 md:px-8 pt-16 md:pt-28 pb-16 md:pb-32 grid lg:grid-cols-12 gap-8 md:gap-12 items-center relative">
+    <div class="lg:col-span-7">
+      <div class="inline-flex items-center gap-2 mono text-[10px] uppercase tracking-widest text-[var(--mint)] border hair2 rounded-full px-3 py-1.5 mb-6 md:mb-10 bg-[var(--bg-1)]/60 backdrop-blur">
+        <span class="blink">●</span> v4.2 // Matter native · 8-yr battery
+      </div>
+      <h1 class="text-[14vw] lg:text-[160px] leading-[0.88] tracking-[-0.04em] font-light">
+        Light, on<br/>
+        <span class="gradient-text font-normal">command.</span><br/>
+        <em class="serif italic font-normal text-[var(--text-2)]" style="font-size: 0.7em">— spoken or scheduled.</em>
+      </h1>
+      <p class="mt-6 md:mt-12 text-[var(--text-2)] text-base md:text-xl max-w-xl leading-relaxed">
+        Whisper-quiet motors. Solar-charged cells. Native HomeKit, Alexa, Google Home and Matter. <span class="text-[var(--text)]">Designed in Calgary</span>, fitted by our crew, controlled by your voice.
+      </p>
+
+      <div class="mt-8 md:mt-12 flex flex-wrap gap-3 items-center">
+        <a href="#book" class="bg-gradient-to-r from-[var(--aurora-1)] to-[var(--aurora-2)] text-black font-medium px-6 md:px-7 py-3 md:py-4 rounded-full hover:opacity-95 transition glow-cursor text-sm md:text-base">Book free survey ↗</a>
+        <a href="#products" class="border hair2 px-6 md:px-7 py-3 md:py-4 rounded-full text-xs md:text-sm hover:bg-[var(--bg-1)] transition">Explore hardware</a>
+      </div>
+
+      <div class="mt-10 md:mt-16 grid grid-cols-3 max-w-xl gap-4 md:gap-6 mono text-xs">
+        <div>
+          <p class="gradient-text text-2xl md:text-3xl serif">42 dB</p>
+          <p class="text-[var(--text-3)] mt-1 text-[10px] md:text-xs">Quieter than a whisper</p>
+        </div>
+        <div>
+          <p class="gradient-text text-2xl md:text-3xl serif">8 yrs</p>
+          <p class="text-[var(--text-3)] mt-1 text-[10px] md:text-xs">Solar battery life</p>
+        </div>
+        <div>
+          <p class="gradient-text text-2xl md:text-3xl serif">&lt;0.1s</p>
+          <p class="text-[var(--text-3)] mt-1 text-[10px] md:text-xs">Voice response</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Device dashboard -->
+    <div class="lg:col-span-5 float mt-8 lg:mt-0">
+      <div class="gradient-border rounded-[28px] overflow-hidden relative">
+        <div class="absolute inset-0 scan-line pointer-events-none"></div>
+        <div class="p-4 md:p-6 relative">
+          <!-- header -->
+          <div class="flex items-center justify-between mono text-[10px] text-[var(--text-3)] uppercase tracking-widest mb-5">
+            <span class="text-[var(--mint)]">● SunLeo OS</span>
+            <span>09:42 · 17°C</span>
+          </div>
+
+          <p class="mono text-[10px] text-[var(--text-3)]">// ACTIVE SCENE</p>
+          <h3 class="serif text-3xl mt-1">Morning · Living room</h3>
+
+          <div class="mt-5 rounded-2xl overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=1000" class="w-full h-56 object-cover" alt=""/>
+          </div>
+
+          <!-- gauges -->
+          <div class="mt-5 space-y-3 mono text-sm">
+            <div class="glass rounded-xl px-4 py-3 flex items-center justify-between">
+              <div>
+                <p class="text-[var(--text)]">Living · West</p>
+                <p class="text-[10px] text-[var(--text-3)] mt-0.5">Roller · solar 96%</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-[var(--mint)] text-lg">68%</span>
+                <div class="w-16 h-2 bg-[var(--bg-2)] rounded-full overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-[var(--mint)] to-[var(--aurora-1)]" style="width: 68%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="glass rounded-xl px-4 py-3 flex items-center justify-between">
+              <div>
+                <p class="text-[var(--text)]">Kitchen · South</p>
+                <p class="text-[10px] text-[var(--text-3)] mt-0.5">Zebra · battery 100%</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-[var(--mint)] text-lg">42%</span>
+                <div class="w-16 h-2 bg-[var(--bg-2)] rounded-full overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-[var(--mint)] to-[var(--aurora-1)]" style="width: 42%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="glass rounded-xl px-4 py-3 flex items-center justify-between">
+              <div>
+                <p class="text-[var(--text)]">Bedroom · East</p>
+                <p class="text-[10px] text-[var(--text-3)] mt-0.5">Blackout · plugged</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-[var(--hot)] text-lg">12%</span>
+                <div class="w-16 h-2 bg-[var(--bg-2)] rounded-full overflow-hidden">
+                  <div class="h-full bg-[var(--hot)]" style="width: 12%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- voice -->
+          <div class="mt-5 rounded-xl px-4 py-4 border hair2 bg-[var(--bg-1)] flex items-center gap-3 relative overflow-hidden">
+            <div class="absolute inset-0 shimmer pointer-events-none"></div>
+            <div class="relative flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[var(--hot)] blink"></span>
+              <span class="w-2 h-4 bg-[var(--aurora-1)] rounded-full"></span>
+              <span class="w-2 h-6 bg-[var(--aurora-2)] rounded-full"></span>
+              <span class="w-2 h-3 bg-[var(--aurora-3)] rounded-full"></span>
+              <span class="w-2 h-5 bg-[var(--aurora-1)] rounded-full"></span>
+            </div>
+            <p class="mono text-sm text-[var(--text)] flex-1">"Hey Google, raise the bedroom blinds."</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Integrations -->
+<section id="integration" class="border-y hair bg-[var(--bg-1)]">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-8 py-10 md:py-14">
+    <p class="text-center mono text-[10px] uppercase tracking-widest text-[var(--text-3)] mb-6 md:mb-8">// NATIVE INTEGRATION</p>
+    <div class="flex flex-wrap items-center justify-center gap-x-6 md:gap-x-14 gap-y-4 md:gap-y-6 opacity-90">
+      <span class="serif text-xl md:text-3xl tracking-tight">Apple HomeKit</span>
+      <span class="serif text-xl md:text-3xl tracking-tight">Google Home</span>
+      <span class="serif text-xl md:text-3xl tracking-tight">Amazon Alexa</span>
+      <span class="serif text-xl md:text-3xl tracking-tight">SmartThings</span>
+      <span class="serif text-xl md:text-3xl tracking-tight">Matter</span>
+      <span class="serif text-xl md:text-3xl tracking-tight">Control4</span>
+    </div>
+  </div>
+</section>
+
+<!-- Products / hardware stack -->
+<section id="products" class="max-w-[1500px] mx-auto px-4 md:px-8 py-16 md:py-28 relative">
+  <div class="grid md:grid-cols-12 gap-6 md:gap-10 items-end mb-10 md:mb-16">
+    <div class="md:col-span-8">
+      <p class="mono text-[var(--mint)] text-[10px] uppercase tracking-widest mb-3">// HARDWARE_STACK</p>
+      <h2 class="text-4xl sm:text-5xl md:text-8xl font-light leading-[0.92] tracking-tight">
+        Ten hardware lines.<br/>
+        <span class="gradient-text-citrus">One operating system.</span>
+      </h2>
+    </div>
+    <p class="md:col-span-4 text-[var(--text-2)] leading-relaxed text-sm md:text-base">Every SunLeo product ships with the same brain. Mix motorised rollers and zebras across the home — they all speak to one app.</p>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-12 gap-3 md:gap-4">
+    <!-- Card 01 -->
+    <div class="md:col-span-3 glass rounded-2xl p-5 hover:border-[var(--aurora-1)] transition">
+      <div class="rounded-xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=600" class="w-full h-36 object-cover" alt=""/></div>
+      <p class="mono text-[10px] text-[var(--mint)]">SL.01</p>
+      <h3 class="text-lg mt-1">Roller</h3>
+      <p class="text-[var(--text-3)] text-sm mt-1">Solar Li-ion. 8-yr battery.</p>
+    </div>
+    <div class="md:col-span-3 glass rounded-2xl p-5 hover:border-[var(--aurora-1)] transition">
+      <div class="rounded-xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?w=600" class="w-full h-36 object-cover" alt=""/></div>
+      <p class="mono text-[10px] text-[var(--mint)]">SL.02</p>
+      <h3 class="text-lg mt-1">Zebra</h3>
+      <p class="text-[var(--text-3)] text-sm mt-1">Dual-fabric · app-tuned.</p>
+    </div>
+    <div class="md:col-span-3 glass rounded-2xl p-5 hover:border-[var(--aurora-1)] transition">
+      <div class="rounded-xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1617104551722-3b2d51366400?w=600" class="w-full h-36 object-cover" alt=""/></div>
+      <p class="mono text-[10px] text-[var(--mint)]">SL.03</p>
+      <h3 class="text-lg mt-1">Faux Wood</h3>
+      <p class="text-[var(--text-3)] text-sm mt-1">Tilt-motor + cordless lift.</p>
+    </div>
+    <div class="md:col-span-3 glass rounded-2xl p-5 hover:border-[var(--aurora-1)] transition">
+      <div class="rounded-xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600" class="w-full h-36 object-cover" alt=""/></div>
+      <p class="mono text-[10px] text-[var(--mint)]">SL.04</p>
+      <h3 class="text-lg mt-1">Cellular</h3>
+      <p class="text-[var(--text-3)] text-sm mt-1">R-7.4 · Nest/Ecobee pair.</p>
+    </div>
+    <div class="md:col-span-3 glass rounded-2xl p-5 hover:border-[var(--aurora-1)] transition">
+      <div class="rounded-xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1633113216288-a4d6b35066d5?w=600" class="w-full h-36 object-cover" alt=""/></div>
+      <p class="mono text-[10px] text-[var(--mint)]">SL.05</p>
+      <h3 class="text-lg mt-1">Roman</h3>
+      <p class="text-[var(--text-3)] text-sm mt-1">Hidden battery in valance.</p>
+    </div>
+    <div class="md:col-span-3 glass rounded-2xl p-5 hover:border-[var(--aurora-1)] transition">
+      <div class="rounded-xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600" class="w-full h-36 object-cover" alt=""/></div>
+      <p class="mono text-[10px] text-[var(--mint)]">SL.06</p>
+      <h3 class="text-lg mt-1">Skylight</h3>
+      <p class="text-[var(--text-3)] text-sm mt-1">Rain + temp sensors.</p>
+    </div>
+    <div class="md:col-span-3 glass rounded-2xl p-5 hover:border-[var(--aurora-1)] transition">
+      <div class="rounded-xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600" class="w-full h-36 object-cover" alt=""/></div>
+      <p class="mono text-[10px] text-[var(--mint)]">SL.07</p>
+      <h3 class="text-lg mt-1">Perfect Fit</h3>
+      <p class="text-[var(--text-3)] text-sm mt-1">Clip-on motor module.</p>
+    </div>
+    <div class="md:col-span-3 glass rounded-2xl p-5 hover:border-[var(--aurora-1)] transition">
+      <div class="rounded-xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=600" class="w-full h-36 object-cover" alt=""/></div>
+      <p class="mono text-[10px] text-[var(--mint)]">SL.08</p>
+      <h3 class="text-lg mt-1">PDLC Films</h3>
+      <p class="text-[var(--text-3)] text-sm mt-1">Switchable, opaque on tap.</p>
+    </div>
+
+    <!-- Flagship -->
+    <div class="col-span-2 md:col-span-6 gradient-border rounded-2xl p-4 md:p-6 relative overflow-hidden">
+      <div class="absolute inset-0 scan-line pointer-events-none"></div>
+      <div class="grid grid-cols-2 gap-4 md:gap-5 items-center relative">
+        <div class="rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=900" class="w-full h-32 md:h-44 object-cover" alt=""/></div>
+        <div>
+          <p class="mono text-[10px] text-[var(--mint)]">SL.09 · FLAGSHIP</p>
+          <h3 class="text-lg md:text-2xl mt-1">Motorised System</h3>
+          <p class="text-[var(--text-2)] text-xs md:text-sm mt-2">The full SunLeo OS experience.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bespoke -->
+    <div class="col-span-2 md:col-span-6 glass rounded-2xl p-4 md:p-6">
+      <div class="grid grid-cols-2 gap-4 md:gap-5 items-center">
+        <div>
+          <p class="mono text-[10px] text-[var(--mint)]">SL.10 · BESPOKE</p>
+          <h3 class="text-lg md:text-2xl mt-1">Made-to-Measure</h3>
+          <p class="text-[var(--text-2)] text-xs md:text-sm mt-2">Arched, angled, two-storey. Drawn in CAD before fabrication.</p>
+        </div>
+        <div class="rounded-xl overflow-hidden"><img src="https://images.unsplash.com/photo-1618219740975-d40978bb7378?w=900" class="w-full h-32 md:h-44 object-cover" alt=""/></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How / flow -->
+<section id="how" class="border-y hair bg-[var(--bg-1)]">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-8 py-16 md:py-24 relative">
+    <p class="mono text-[var(--mint)] text-[10px] uppercase tracking-widest mb-3">// FLOW</p>
+    <h2 class="text-3xl sm:text-4xl md:text-7xl font-light leading-[0.92] tracking-tight mb-10 md:mb-16">Survey → Fabricate → Deploy.</h2>
+
+    <!-- connector line -->
+    <svg class="absolute left-0 right-0 top-1/2 w-full h-16 hidden md:block pointer-events-none" viewBox="0 0 1500 60">
+      <path d="M 100 30 Q 750 -20, 1400 30" class="draw-svg" stroke="url(#grad-line)" stroke-width="1" fill="none" />
+      <defs><linearGradient id="grad-line" x1="0" x2="1"><stop offset="0" stop-color="#6B8AFF"/><stop offset="0.5" stop-color="#B57DFF"/><stop offset="1" stop-color="#FF7DB5"/></linearGradient></defs>
+    </svg>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 relative">
+      <div class="glass rounded-2xl p-6 md:p-8 hover:border-[var(--aurora-1)] transition">
+        <p class="mono text-[var(--mint)] text-[10px] uppercase tracking-widest">STEP 01</p>
+        <p class="serif text-5xl md:text-7xl gradient-text mt-2">i.</p>
+        <h3 class="text-xl md:text-2xl mt-4 md:mt-5">Free site survey</h3>
+        <p class="text-[var(--text-3)] mt-2 leading-relaxed text-sm md:text-base">Our tech laser-measures every opening and maps your Wi-Fi mesh to the windows.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 md:p-8 hover:border-[var(--aurora-2)] transition">
+        <p class="mono text-[var(--aurora-2)] text-[10px] uppercase tracking-widest">STEP 02</p>
+        <p class="serif text-5xl md:text-7xl gradient-text mt-2">ii.</p>
+        <h3 class="text-xl md:text-2xl mt-4 md:mt-5">Calgary-made fabrication</h3>
+        <p class="text-[var(--text-3)] mt-2 leading-relaxed text-sm md:text-base">Manufactured in our Inglewood facility. 5-business-day turnaround.</p>
+      </div>
+      <div class="glass rounded-2xl p-6 md:p-8 hover:border-[var(--aurora-3)] transition">
+        <p class="mono text-[var(--aurora-3)] text-[10px] uppercase tracking-widest">STEP 03</p>
+        <p class="serif text-5xl md:text-7xl gradient-text mt-2">iii.</p>
+        <h3 class="text-xl md:text-2xl mt-4 md:mt-5">Install &amp; commission</h3>
+        <p class="text-[var(--text-3)] mt-2 leading-relaxed text-sm md:text-base">Mounted, paired, scenes scripted. We don't leave until your voice command works.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Signal / reviews -->
+<section id="reviews" class="max-w-[1500px] mx-auto px-4 md:px-8 py-16 md:py-28">
+  <p class="mono text-[var(--mint)] text-[10px] uppercase tracking-widest mb-3">// SIGNAL</p>
+  <h2 class="text-3xl sm:text-4xl md:text-7xl font-light leading-[0.92] tracking-tight mb-10 md:mb-16">From the connected homes <em class="serif italic gradient-text">of Calgary.</em></h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+    <figure class="glass rounded-2xl p-6 md:p-7">
+      <div class="text-[var(--mint)] mono text-sm">★★★★★</div>
+      <p class="mt-3 md:mt-4 text-[var(--text)] leading-relaxed text-sm md:text-base">&ldquo;Full-house install, zero connectivity issues. SunLeo OS picked up my HomeKit network in seconds.&rdquo;</p>
+      <figcaption class="mt-4 md:mt-5 mono text-[10px] uppercase tracking-widest text-[var(--text-3)]">Aaron F. · Software Engineer · Aspen Woods</figcaption>
+    </figure>
+    <figure class="glass rounded-2xl p-6 md:p-7">
+      <div class="text-[var(--mint)] mono text-sm">★★★★★</div>
+      <p class="mt-3 md:mt-4 text-[var(--text)] leading-relaxed text-sm md:text-base">&ldquo;Coming from Lutron. The SunLeo system is genuinely as good and half the price.&rdquo;</p>
+      <figcaption class="mt-4 md:mt-5 mono text-[10px] uppercase tracking-widest text-[var(--text-3)]">Priya G. · Architect · Cliff Bungalow</figcaption>
+    </figure>
+    <figure class="glass rounded-2xl p-6 md:p-7">
+      <div class="text-[var(--mint)] mono text-sm">★★★★★</div>
+      <p class="mt-3 md:mt-4 text-[var(--text)] leading-relaxed text-sm md:text-base">&ldquo;Solar charging means I've never thought about batteries. Two years in, dashboards still show 96%.&rdquo;</p>
+      <figcaption class="mt-4 md:mt-5 mono text-[10px] uppercase tracking-widest text-[var(--text-3)]">Min-Jae L. · Smart-Home Builder · Tuscany</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="book" class="relative overflow-hidden border-y hair">
+  <div class="absolute inset-0 grid-bg"></div>
+  <div class="absolute inset-0 aurora"></div>
+  <div class="max-w-[1100px] mx-auto px-4 md:px-8 py-16 md:py-32 text-center relative">
+    <p class="mono text-[var(--mint)] text-[10px] uppercase tracking-widest mb-4">// INITIATE</p>
+    <h2 class="text-4xl sm:text-5xl md:text-8xl font-light leading-[0.92] tracking-tight">Initiate <em class="serif italic gradient-text">survey.</em></h2>
+    <p class="mt-6 md:mt-8 text-[var(--text-2)] max-w-xl mx-auto text-sm md:text-base">No deposits. No pressure. Just an evaluation of what your home can become.</p>
+    <form class="mt-8 md:mt-12 max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-3 mono text-sm">
+      <input class="glass rounded-xl px-4 py-4 placeholder-[var(--text-3)]" placeholder="Name"/>
+      <input class="glass rounded-xl px-4 py-4 placeholder-[var(--text-3)]" placeholder="Postal"/>
+      <input class="glass rounded-xl px-4 py-4 placeholder-[var(--text-3)]" placeholder="Phone"/>
+      <button class="sm:col-span-3 bg-gradient-to-r from-[var(--aurora-1)] via-[var(--aurora-2)] to-[var(--aurora-3)] text-black font-medium py-4 md:py-5 rounded-xl mt-2 hover:opacity-95 transition glow-cursor">Initiate Survey ↗</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[var(--bg)] border-t hair">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-8 py-10 md:py-14 grid grid-cols-2 md:grid-cols-12 gap-6 md:gap-10 text-sm">
+    <div class="col-span-2 md:col-span-5">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg gradient-border flex items-center justify-center"><span class="serif text-sm gradient-text">S</span></div>
+        <span class="text-xl">SunLeo<span class="text-[var(--text-3)]">//</span><span class="mono text-xs gradient-text">os</span></span>
+      </div>
+      <p class="mt-4 text-[var(--text-3)] leading-relaxed max-w-sm">Smart blinds, designed in Calgary, built for the connected home.</p>
+    </div>
+    <div class="md:col-span-2"><p class="mono text-[10px] text-[var(--mint)] uppercase tracking-widest mb-3">// HARDWARE</p><ul class="space-y-1 text-[var(--text-2)]"><li>Motorised</li><li>Roller</li><li>Zebra</li><li>Cellular</li></ul></div>
+    <div class="md:col-span-2"><p class="mono text-[10px] text-[var(--mint)] uppercase tracking-widest mb-3">// COVERAGE</p><ul class="space-y-1 text-[var(--text-2)]"><li>Calgary</li><li>Airdrie</li><li>Cochrane</li><li>Okotoks</li></ul></div>
+    <div class="col-span-2 md:col-span-3"><p class="mono text-[10px] text-[var(--mint)] uppercase tracking-widest mb-3">// CONTACT</p><p class="text-[var(--text-2)]">+1 403 555 1234<br/>hi@sunleo.ca<br/>Inglewood, YYC</p></div>
+  </div>
+  <div class="border-t hair py-5 text-center mono text-[10px] uppercase tracking-widest text-[var(--text-3)]">© MMXXVI · SunLeo Systems · v4.2.0</div>
+</footer>
+
+</body>
+</html>

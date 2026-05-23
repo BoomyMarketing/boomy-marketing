@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SunLeo — The Calgary Map · 47 pins, every district, this month alone</title>
+<meta name="description" content="A hand-drawn cartography of every Calgary install this month. Tap a pin: see who, where, what fabric, and the date Iris arrived."/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=Public+Sans:wght@300;400;500;600&family=Caveat:wght@400;500;700&display=swap" rel="stylesheet"/>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+<link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet"/>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<style>
+  :root{
+    --ivory:   #F5F0E6;
+    --ivory-2: #E9E1CF;
+    --sage:    #7A8264;
+    --sage-2:  #5C634A;
+    --navy:    #15294A;
+    --navy-2:  #0E1B33;
+    --red:     #C8392D;
+    --red-2:   #A02C22;
+    --gold:    #E5C77A;
+    --ink:     #15140E;
+    --hair:    rgba(21,20,14,.16);
+    --hair-ivory: rgba(245,240,230,.20);
+  }
+  *{ -webkit-font-smoothing: antialiased;}
+  html, body{ background: var(--ivory); color: var(--ink); font-family: 'Public Sans', sans-serif; font-weight: 400;}
+  .display{ font-family: 'Spectral', serif; font-weight: 500; letter-spacing:-.005em;}
+  .serif{ font-family: 'Spectral', serif; font-weight: 300;}
+  .ital{ font-style: italic;}
+  .mono{ font-family: 'IBM Plex Sans', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: .26em; text-transform: uppercase;}
+  .hand{ font-family: 'Caveat', cursive; font-weight: 500;}
+  .tabnum{ font-variant-numeric: tabular-nums;}
+
+  body::before{
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 100; opacity: .08;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='280' height='280'><filter id='n'><feTurbulence baseFrequency='.88' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.55'/></svg>");
+    mix-blend-mode: multiply;
+  }
+
+  .btn-navy{ background: var(--navy); color: var(--ivory); padding: 16px 28px; font-family:'IBM Plex Sans', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; border-radius: 4px; transition: background .3s, transform .3s; display:inline-flex; align-items:center; gap: 12px;}
+  .btn-navy:hover{ background: var(--navy-2); transform: translateY(-2px);}
+  .btn-red{ background: var(--red); color: var(--ivory); padding: 16px 28px; font-family:'IBM Plex Sans', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; border-radius: 4px; transition: background .3s, transform .3s; display:inline-flex; align-items:center; gap: 12px;}
+  .btn-red:hover{ background: var(--red-2); transform: translateY(-2px);}
+  .btn-ghost{ background: transparent; color: var(--ink); padding: 15px 28px; font-family:'IBM Plex Sans', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; border: 1px solid var(--ink); border-radius: 4px; transition: all .3s; display:inline-flex; align-items:center; gap: 12px;}
+  .btn-ghost:hover{ background: var(--ink); color: var(--ivory);}
+
+  @keyframes pinPulse{ 0%{ transform: scale(1); opacity:.9;} 50%{ transform: scale(1.4); opacity:.4;} 100%{ transform: scale(1); opacity:.9;}}
+  .pin-svg{ cursor: pointer; transition: transform .3s;}
+  .pin-svg:hover{ transform: scale(1.2);}
+  .pin-ring{ animation: pinPulse 2.6s infinite;}
+
+  .stars{ letter-spacing:.16em; color: var(--red);}
+
+  .mq{ display:flex; gap: 70px; animation: mq 50s linear infinite;}
+  @keyframes mq{ from{ transform: translateX(0);} to{ transform: translateX(-50%);}}
+
+  @keyframes pulse{ 0%{ box-shadow: 0 0 0 0 rgba(200,57,45,.5);} 70%{ box-shadow: 0 0 0 12px rgba(200,57,45,0);} 100%{ box-shadow: 0 0 0 0 rgba(200,57,45,0);}}
+  .pulse-dot{ display:inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--red); animation: pulse 2s infinite; vertical-align: middle;}
+
+  @keyframes notIn{ from{ transform: translateY(20px); opacity:0;} to{ transform: translateY(0); opacity:1;}}
+  .notif-in{ animation: notIn .8s cubic-bezier(.16,1,.3,1);}
+
+  details summary{ list-style:none; cursor: pointer;}
+  details summary::-webkit-details-marker{ display:none;}
+  details[open] .chev{ transform: rotate(45deg);}
+  .chev{ transition: transform .4s cubic-bezier(.16,1,.3,1);}
+
+  .pin-modal{ background: var(--ivory); border: 1px solid var(--ink);}
+
+  .compass{ font-family: 'Spectral', serif; font-weight: 700; color: var(--navy);}
+
+  .map-paper{
+    background:
+      linear-gradient(rgba(122,130,100,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(122,130,100,.06) 1px, transparent 1px),
+      var(--ivory);
+    background-size: 40px 40px;
+    background-position: 0 0;
+    position: relative;
+  }
+
+  .counter-ring{ border: 1px solid var(--ink); padding: 30px 36px; background: var(--ivory);}
+
+  .pin-row{ transition: background .3s; cursor: pointer; }
+  .pin-row:hover{ background: var(--ivory-2); }
+
+  .district-chip{ font-family: 'IBM Plex Sans', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; background: var(--navy); color: var(--ivory);}
+
+  .arrow-curl{ stroke: var(--red); stroke-width: 1.5; fill: none; stroke-linecap: round;}
+
+  @media (prefers-reduced-motion: reduce){ *,*::before,*::after{ animation: none !important; transition: none !important;}}
+
+  /* ========================================================== */
+  /* === MOBILE RESPONSIVE PATCH ================================ */
+  /* ========================================================== */
+  html, body { overflow-x: hidden; max-width: 100vw; }
+  img, svg, video { max-width: 100%; height: auto; }
+  svg { display: block; }
+
+  /* Force grid lg:grid-cols-12 to stack on <lg */
+  @media (max-width: 1023px) {
+    section .grid.lg\:grid-cols-12,
+    div.grid.lg\:grid-cols-12 { display: flex !important; flex-direction: column !important; }
+    section .grid.lg\:grid-cols-12 > *,
+    div.grid.lg\:grid-cols-12 > * { min-width: 0 !important; width: 100% !important; }
+  }
+
+  @media (max-width: 767px) {
+    /* Buttons */
+    .btn-navy, .btn-red, .btn-ghost {
+      padding: 14px 22px;
+      font-size: 12px;
+      letter-spacing: .1em;
+      min-height: 44px;
+    }
+    .btn-navy:hover, .btn-red:hover { transform: none; }
+
+    /* Pin markers larger for fingertip selection.
+       Enlarged hit circle radius from 14 → 32 = ~12 CSS px on a 390px screen / 1600 viewBox.
+       Combined with the surrounding 9-radius visible dot, the visual is preserved while the tap target grows. */
+    .pin-svg circle:first-of-type { r: 36; fill: rgba(200,57,45,.10); }   /* invisible-ish hit ring */
+    .pin-svg circle:last-of-type  { r: 10; }                                /* visible dot stays small */
+    .pin-svg:hover { transform: none; }
+    .pin-svg rect { transform-box: fill-box; transform-origin: center; transform: scale(2.0); }  /* atelier square marker scaled too */
+
+    /* Map needs to be tall enough to be useful on phone — increase aspect ratio */
+    .map-paper.aspect-\[16\/10\] { aspect-ratio: 4/5 !important; }
+
+    /* Stat ring counter */
+    .counter-ring { padding: 20px 22px; }
+
+    /* iOS form zoom prevention */
+    input, textarea, select { font-size: 16px !important; }
+
+    /* Marquee tighter */
+    .mq { gap: 36px; animation-duration: 40s; }
+
+    /* District chip smaller */
+    .district-chip { font-size: 9.5px; padding: 3px 8px; letter-spacing: .1em; }
+
+    /* Disable hover row tint (sticky-state on touch) */
+    .pin-row:hover { background: transparent !important; }
+
+    /* Reduce paper-grid background density so SVG map remains legible */
+    .map-paper { background-size: 28px 28px; }
+
+    /* === MODAL: fit mobile viewport with scrolling === */
+    #pinModal { padding: 12px !important; align-items: flex-start !important; overflow-y: auto !important; }
+    #pinModal .pin-modal {
+      max-width: calc(100vw - 24px) !important;
+      max-height: calc(100vh - 24px) !important;
+      overflow-y: auto !important;
+      padding: 20px !important;
+      margin-top: 12px;
+    }
+    #pinModal h3.display { font-size: 32px !important; line-height: 1 !important; }
+    #pinModal .grid.grid-cols-2 { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+    #pinModal #pinClose { font-size: 11px; padding: 6px 8px; min-height: 32px; }
+
+    /* Grids */
+    section .grid.grid-cols-3:not(.grid-rows-2) { grid-template-columns: 1fr !important; }
+    section .grid.grid-cols-4:not(.grid-rows-2) { grid-template-columns: repeat(2, 1fr) !important; }
+    section .grid.grid-cols-4.grid-rows-2 { grid-template-columns: repeat(2, 1fr) !important; }
+    .grid.grid-cols-2.md\:grid-cols-4 { grid-template-columns: repeat(2, 1fr) !important; }
+    .grid.grid-cols-2.md\:grid-cols-6 { grid-template-columns: repeat(3, 1fr) !important; }
+    .grid.md\:grid-cols-3:not(.grid-cols-2):not(.grid-cols-1) { grid-template-columns: 1fr !important; }
+
+    /* VS table grid-cols-4 → 2-col cards on mobile */
+    section[id="vs"] .grid.grid-cols-4 {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 0;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--hair) !important;
+    }
+    section[id="vs"] .grid.grid-cols-4.mono { display: none !important; }
+    section[id="vs"] .grid.grid-cols-4 > div:first-child {
+      grid-column: 1 / -1 !important;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      opacity: .65;
+      padding: 12px 14px 4px !important;
+    }
+
+    /* Big display text scaling */
+    h1.display { font-size: clamp(40px, 11vw, 64px) !important; line-height: .9 !important; }
+    h2.display { font-size: clamp(32px, 9vw, 54px) !important; line-height: .92 !important; }
+
+    /* Search/cart icon buttons */
+    button.w-9.h-9 { width: 44px !important; height: 44px !important; }
+
+    /* Header CTA tightening */
+    header a.btn-red, header a.btn-navy {
+      padding: 8px 10px !important;
+      font-size: 10px !important;
+      letter-spacing: .06em !important;
+      min-height: 36px !important;
+    }
+    /* Hide logo tagline */
+    header .mono.text-\[var\(--sage\)\] { display: none !important; }
+    /* Tighten header padding */
+    header .max-w-\[1480px\] { padding-left: 12px !important; padding-right: 12px !important; }
+    header .flex.items-center.gap-3 { gap: 6px !important; }
+  }
+</style>
+</head>
+
+<body class="overflow-x-hidden">
+
+<!-- 1. STICKY TOP TRUST BAR -->
+<div class="bg-[var(--navy)] text-[var(--ivory)] text-xs">
+  <div class="max-w-[1480px] mx-auto px-6 py-2.5 flex justify-between items-center flex-wrap gap-y-2">
+    <div class="flex items-center gap-6">
+      <span class="mono text-[var(--gold)]">— The Calgary Map · Vol. I · MMXXVI</span>
+      <span class="hidden md:inline opacity-80">Every install. Pinned. Live.</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <span class="hidden md:inline opacity-80">Mon–Sat · 9–18h</span>
+      <a href="tel:5879010240" class="underline decoration-[var(--red)] underline-offset-4">+1 587 901 0240</a>
+      <span class="opacity-70">EN · FR</span>
+    </div>
+  </div>
+</div>
+
+<!-- 2. STICKY HEADER -->
+<header class="sticky top-0 z-40 bg-[var(--ivory)]/95 backdrop-blur border-b border-[var(--hair)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#" class="flex items-baseline gap-3">
+      <span class="display text-3xl">SunLeo<span class="text-[var(--red)]">.</span></span>
+      <span class="mono text-[var(--sage)]">— THE MAP</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-7 text-sm">
+      <a href="#map" class="hover:text-[var(--red)] transition">The Map</a>
+      <a href="#log" class="hover:text-[var(--red)] transition">Recent Pins</a>
+      <a href="#shop" class="hover:text-[var(--red)] transition">Shop</a>
+      <a href="#vs" class="hover:text-[var(--red)] transition">Differences</a>
+      <a href="#book" class="hover:text-[var(--red)] transition">Pin My Home</a>
+    </nav>
+    <div class="flex items-center gap-3 text-sm">
+      <button aria-label="Search" class="w-9 h-9 border border-[var(--hair)] flex items-center justify-center hover:bg-[var(--navy)] hover:text-[var(--ivory)] transition rounded">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </button>
+      <button aria-label="Cart" class="relative w-9 h-9 border border-[var(--hair)] flex items-center justify-center hover:bg-[var(--navy)] hover:text-[var(--ivory)] transition rounded">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/></svg>
+      </button>
+      <a href="#book" class="btn-red text-[12px] py-3 px-5">Pin My Home →</a>
+    </div>
+  </div>
+</header>
+
+<!-- SCARCITY BANNER -->
+<div class="bg-[var(--red)] text-[var(--ivory)] text-sm">
+  <div class="max-w-[1480px] mx-auto px-6 py-3 flex items-center justify-center gap-4 flex-wrap">
+    <span class="pulse-dot" style="background: var(--ivory);"></span>
+    <span class="mono">— This week's chart</span>
+    <span><b class="display ital text-lg">3 install slots</b> remaining for the week of 26 May. Iris is in <b>Tuscany NW</b> Friday.</span>
+    <a href="#book" class="underline decoration-[var(--ivory)] underline-offset-4">Pin a slot →</a>
+  </div>
+</div>
+
+<!-- 3. HERO -->
+<section class="relative" id="map">
+  <div class="max-w-[1480px] mx-auto px-6 pt-16 pb-8 grid lg:grid-cols-12 gap-8 items-end">
+    <div class="lg:col-span-5">
+      <p class="mono text-[var(--sage)]">— Issue Nº 01 · A field cartography</p>
+      <h1 class="display text-[clamp(60px,8.5vw,140px)] leading-[.9] mt-6 -tracking-[.01em]">
+        This month<br/>in your <span class="ital text-[var(--red)]">Calgary.</span>
+      </h1>
+      <p class="mt-7 text-lg leading-relaxed max-w-md serif">
+        A live cartography of every SunLeo install this month — pinned by neighbourhood, dated, with the fabric and the first name of the family who chose it. Tap any pin.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#log" class="btn-navy">Read the install log →</a>
+        <a href="#book" class="btn-ghost">Pin my home</a>
+      </div>
+    </div>
+
+    <div class="lg:col-span-7">
+      <div class="grid grid-cols-3 gap-3 mb-4">
+        <div class="counter-ring text-center">
+          <p class="display text-6xl tabnum text-[var(--red)]"><span data-counter="47">0</span></p>
+          <p class="mono mt-2 text-[var(--sage-2)]">— Installs this month</p>
+        </div>
+        <div class="counter-ring text-center">
+          <p class="display text-6xl tabnum text-[var(--navy)]"><span data-counter="6">0</span></p>
+          <p class="mono mt-2 text-[var(--sage-2)]">— Neighbourhoods</p>
+        </div>
+        <div class="counter-ring text-center">
+          <p class="display text-6xl tabnum text-[var(--sage)]"><span data-counter="0">0</span></p>
+          <p class="mono mt-2 text-[var(--sage-2)]">— Complaints in '26</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-[1480px] mx-auto px-6 pb-20">
+    <div class="map-paper border border-[var(--ink)] relative aspect-[16/10]">
+      <div class="absolute top-5 right-6 z-10">
+        <svg width="80" height="80" viewBox="0 0 80 80" class="compass">
+          <circle cx="40" cy="40" r="36" fill="var(--ivory)" stroke="var(--ink)" stroke-width="1"/>
+          <line x1="40" y1="8" x2="40" y2="72" stroke="var(--ink)" stroke-width="1"/>
+          <line x1="8" y1="40" x2="72" y2="40" stroke="var(--ink)" stroke-width="1"/>
+          <polygon points="40,6 36,16 40,12 44,16" fill="var(--red)"/>
+          <text x="40" y="6" fill="var(--red)" font-size="10" text-anchor="middle" font-weight="700">N</text>
+          <text x="40" y="78" fill="var(--ink)" font-size="9" text-anchor="middle">S</text>
+          <text x="7" y="43" fill="var(--ink)" font-size="9" text-anchor="middle">W</text>
+          <text x="73" y="43" fill="var(--ink)" font-size="9" text-anchor="middle">E</text>
+        </svg>
+      </div>
+
+      <div class="absolute bottom-5 left-6 z-10 mono text-[var(--sage-2)]">
+        <div class="flex items-center gap-2">
+          <div class="h-px w-16 bg-[var(--ink)]"></div>
+          <span>5 km</span>
+        </div>
+        <p class="mt-1">— Scale · approx</p>
+      </div>
+
+      <div class="absolute bottom-5 right-6 z-10 bg-[var(--ivory)] border border-[var(--ink)] px-4 py-3 text-xs">
+        <p class="mono text-[var(--sage-2)]">— Legend</p>
+        <div class="mt-2 flex flex-col gap-1.5">
+          <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-[var(--red)]"></span><span>Install this month</span></div>
+          <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-[var(--navy)]"></span><span>Install this year</span></div>
+          <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-[var(--sage)]"></span><span>Iris's atelier</span></div>
+        </div>
+      </div>
+
+      <svg viewBox="0 0 1600 1000" class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice">
+        <path d="M 200 200 L 1400 200 L 1450 350 L 1480 520 L 1430 720 L 1280 850 L 900 880 L 600 870 L 350 760 L 220 580 L 170 380 Z" fill="rgba(122,130,100,.07)" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="5 4"/>
+
+        <path d="M 180 470 Q 380 420 580 460 T 980 480 Q 1180 510 1380 480" stroke="var(--navy)" stroke-width="3" fill="none" opacity=".5"/>
+        <text x="380" y="455" fill="var(--navy)" font-family="Spectral" font-style="italic" font-size="14" opacity=".7">Bow River</text>
+
+        <line x1="800" y1="200" x2="800" y2="900" stroke="var(--ink)" stroke-width=".5" opacity=".3" stroke-dasharray="3 3"/>
+        <line x1="170" y1="500" x2="1480" y2="500" stroke="var(--ink)" stroke-width=".5" opacity=".3" stroke-dasharray="3 3"/>
+
+        <text x="500" y="280" fill="var(--sage-2)" font-family="Spectral" font-size="22" font-style="italic" font-weight="500" letter-spacing="3">NW</text>
+        <text x="1100" y="280" fill="var(--sage-2)" font-family="Spectral" font-size="22" font-style="italic" font-weight="500" letter-spacing="3">NE</text>
+        <text x="500" y="780" fill="var(--sage-2)" font-family="Spectral" font-size="22" font-style="italic" font-weight="500" letter-spacing="3">SW</text>
+        <text x="1100" y="780" fill="var(--sage-2)" font-family="Spectral" font-size="22" font-style="italic" font-weight="500" letter-spacing="3">SE</text>
+
+        <text x="320" y="330" fill="var(--ink)" font-family="Caveat" font-size="22" opacity=".7">Tuscany</text>
+        <text x="640" y="380" fill="var(--ink)" font-family="Caveat" font-size="22" opacity=".7">Hillhurst</text>
+        <text x="700" y="540" fill="var(--ink)" font-family="Caveat" font-size="22" opacity=".7">Mount Royal</text>
+        <text x="930" y="450" fill="var(--ink)" font-family="Caveat" font-size="22" opacity=".7">Bridgeland</text>
+        <text x="1130" y="540" fill="var(--ink)" font-family="Caveat" font-size="22" opacity=".7">Inglewood</text>
+        <text x="500" y="690" fill="var(--ink)" font-family="Caveat" font-size="22" opacity=".7">Britannia</text>
+        <text x="1180" y="780" fill="var(--ink)" font-family="Caveat" font-size="22" opacity=".7">Mahogany</text>
+        <text x="340" y="600" fill="var(--ink)" font-family="Caveat" font-size="22" opacity=".7">Bowness</text>
+
+        <g class="pin-svg" data-name="Iris's atelier" data-district="Inglewood SE" data-product="The studio" data-date="Open since 2017" data-first="Iris L.">
+          <rect x="1240" y="540" width="14" height="14" fill="var(--sage)" stroke="var(--ink)" stroke-width="2" transform="rotate(45 1247 547)"/>
+          <text x="1265" y="552" fill="var(--sage-2)" font-family="Spectral" font-size="13" font-style="italic">atelier</text>
+        </g>
+
+        <g class="pin-svg" data-name="Hattie F." data-district="Mount Royal SW" data-product="Linen Roller, Oat Milk" data-date="11 May 2026" data-first="Hattie">
+          <circle cx="720" cy="540" r="14" fill="rgba(200,57,45,.18)" class="pin-ring"/>
+          <circle cx="720" cy="540" r="7" fill="var(--red)" stroke="var(--ink)" stroke-width="1.5"/>
+        </g>
+        <g class="pin-svg" data-name="Esmé R." data-district="Britannia SW" data-product="Blackout Cellular" data-date="9 May 2026" data-first="Esmé">
+          <circle cx="540" cy="700" r="14" fill="rgba(200,57,45,.18)" class="pin-ring"/>
+          <circle cx="540" cy="700" r="7" fill="var(--red)" stroke="var(--ink)" stroke-width="1.5"/>
+        </g>
+        <g class="pin-svg" data-name="Tomislav P." data-district="Bridgeland NE" data-product="Drapery Panels" data-date="7 May 2026" data-first="Tomislav">
+          <circle cx="940" cy="460" r="14" fill="rgba(200,57,45,.18)" class="pin-ring"/>
+          <circle cx="940" cy="460" r="7" fill="var(--red)" stroke="var(--ink)" stroke-width="1.5"/>
+        </g>
+        <g class="pin-svg" data-name="Wren D." data-district="Aspen Estates SW" data-product="Motorised Roller" data-date="5 May 2026" data-first="Wren">
+          <circle cx="350" cy="660" r="14" fill="rgba(200,57,45,.18)" class="pin-ring"/>
+          <circle cx="350" cy="660" r="7" fill="var(--red)" stroke="var(--ink)" stroke-width="1.5"/>
+        </g>
+        <g class="pin-svg" data-name="Devin K." data-district="Tuscany NW" data-product="Zebra Sheer" data-date="3 May 2026" data-first="Devin">
+          <circle cx="340" cy="340" r="14" fill="rgba(200,57,45,.18)" class="pin-ring"/>
+          <circle cx="340" cy="340" r="7" fill="var(--red)" stroke="var(--ink)" stroke-width="1.5"/>
+        </g>
+        <g class="pin-svg" data-name="Marisol H." data-district="Mahogany SE" data-product="Blackout Cellular" data-date="1 May 2026" data-first="Marisol">
+          <circle cx="1200" cy="800" r="14" fill="rgba(200,57,45,.18)" class="pin-ring"/>
+          <circle cx="1200" cy="800" r="7" fill="var(--red)" stroke="var(--ink)" stroke-width="1.5"/>
+        </g>
+        <g class="pin-svg" data-name="Lior B." data-district="Bowness NW" data-product="Linen Roller" data-date="22 Apr 2026" data-first="Lior">
+          <circle cx="280" cy="500" r="14" fill="rgba(200,57,45,.18)" class="pin-ring"/>
+          <circle cx="280" cy="500" r="7" fill="var(--red)" stroke="var(--ink)" stroke-width="1.5"/>
+        </g>
+        <g class="pin-svg" data-name="Astrid L." data-district="Hillhurst NW" data-product="Honeycomb Cellular" data-date="20 Apr 2026" data-first="Astrid">
+          <circle cx="660" cy="380" r="14" fill="rgba(200,57,45,.18)" class="pin-ring"/>
+          <circle cx="660" cy="380" r="7" fill="var(--red)" stroke="var(--ink)" stroke-width="1.5"/>
+        </g>
+        <g class="pin-svg" data-name="Robin O." data-district="Aspen Estates SW" data-product="Drapery Panels" data-date="18 Apr 2026" data-first="Robin">
+          <circle cx="320" cy="700" r="14" fill="rgba(200,57,45,.18)" class="pin-ring"/>
+          <circle cx="320" cy="700" r="7" fill="var(--red)" stroke="var(--ink)" stroke-width="1.5"/>
+        </g>
+        <g class="pin-svg" data-name="Felipe S." data-district="Bankview SW" data-product="Roman Shade" data-date="15 Apr 2026" data-first="Felipe">
+          <circle cx="690" cy="640" r="14" fill="rgba(200,57,45,.18)" class="pin-ring"/>
+          <circle cx="690" cy="640" r="7" fill="var(--red)" stroke="var(--ink)" stroke-width="1.5"/>
+        </g>
+
+        <g class="pin-svg" data-name="Otis P." data-district="Renfrew NE" data-product="Motorised Roller" data-date="Feb 2026" data-first="Otis">
+          <circle cx="1080" cy="380" r="5" fill="var(--navy)" stroke="var(--ink)" stroke-width="1"/>
+        </g>
+        <g class="pin-svg" data-name="Mira Z." data-district="Sundance SE" data-product="Cellular" data-date="Jan 2026" data-first="Mira">
+          <circle cx="1380" cy="820" r="5" fill="var(--navy)" stroke="var(--ink)" stroke-width="1"/>
+        </g>
+        <g class="pin-svg" data-name="Quincy W." data-district="Beltline SW" data-product="Motorised" data-date="Dec 2025" data-first="Quincy">
+          <circle cx="820" cy="600" r="5" fill="var(--navy)" stroke="var(--ink)" stroke-width="1"/>
+        </g>
+        <g class="pin-svg" data-name="Saskia J." data-district="Mission SW" data-product="Roller" data-date="Nov 2025" data-first="Saskia">
+          <circle cx="840" cy="640" r="5" fill="var(--navy)" stroke="var(--ink)" stroke-width="1"/>
+        </g>
+        <g class="pin-svg" data-name="Rune L." data-district="Sunnyside NW" data-product="Shutters" data-date="Oct 2025" data-first="Rune">
+          <circle cx="780" cy="420" r="5" fill="var(--navy)" stroke="var(--ink)" stroke-width="1"/>
+        </g>
+        <g class="pin-svg" data-name="Linnea K." data-district="Hillhurst NW" data-product="Blackout" data-date="Sep 2025" data-first="Linnea">
+          <circle cx="640" cy="420" r="5" fill="var(--navy)" stroke="var(--ink)" stroke-width="1"/>
+        </g>
+        <g class="pin-svg" data-name="Cyrus T." data-district="Altadore SW" data-product="Linen Roller" data-date="Aug 2025" data-first="Cyrus">
+          <circle cx="600" cy="680" r="5" fill="var(--navy)" stroke="var(--ink)" stroke-width="1"/>
+        </g>
+        <g class="pin-svg" data-name="Petra C." data-district="Acadia SE" data-product="Roman" data-date="Jul 2025" data-first="Petra">
+          <circle cx="1020" cy="700" r="5" fill="var(--navy)" stroke="var(--ink)" stroke-width="1"/>
+        </g>
+        <g class="pin-svg" data-name="Knox H." data-district="Auburn Bay SE" data-product="Blackout" data-date="Jun 2025" data-first="Knox">
+          <circle cx="1320" cy="760" r="5" fill="var(--navy)" stroke="var(--ink)" stroke-width="1"/>
+        </g>
+        <g class="pin-svg" data-name="Indigo M." data-district="Cliff Bungalow" data-product="Drapery" data-date="May 2025" data-first="Indigo">
+          <circle cx="780" cy="640" r="5" fill="var(--navy)" stroke="var(--ink)" stroke-width="1"/>
+        </g>
+        <g class="pin-svg" data-name="Anouk M." data-district="Killarney SW" data-product="Roller" data-date="Apr 2025" data-first="Anouk">
+          <circle cx="560" cy="600" r="5" fill="var(--navy)" stroke="var(--ink)" stroke-width="1"/>
+        </g>
+        <g class="pin-svg" data-name="Ezra N." data-district="Lake Bonavista" data-product="Shutter" data-date="Mar 2025" data-first="Ezra">
+          <circle cx="1140" cy="700" r="5" fill="var(--navy)" stroke="var(--ink)" stroke-width="1"/>
+        </g>
+        <g class="pin-svg" data-name="Mathilda E." data-district="Cranston SE" data-product="Honeycomb" data-date="Feb 2025" data-first="Mathilda">
+          <circle cx="1280" cy="720" r="5" fill="var(--navy)" stroke="var(--ink)" stroke-width="1"/>
+        </g>
+        <g class="pin-svg" data-name="Soren H." data-district="Kingsland SW" data-product="Linen" data-date="Jan 2025" data-first="Soren">
+          <circle cx="780" cy="700" r="5" fill="var(--navy)" stroke="var(--ink)" stroke-width="1"/>
+        </g>
+      </svg>
+
+      <div class="absolute top-5 left-6 z-10 max-w-[280px]">
+        <p class="hand text-2xl text-[var(--red)] leading-tight">— tap any pin for a story.</p>
+        <svg width="80" height="40" viewBox="0 0 80 40" class="mt-1">
+          <path class="arrow-curl" d="M 5 8 Q 20 30 60 28" />
+          <polygon points="60,28 54,24 56,32" fill="var(--red)"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PIN MODAL -->
+<div id="pinModal" class="hidden fixed inset-0 z-50 bg-[var(--navy)]/80 backdrop-blur-sm items-center justify-center p-6">
+  <div class="max-w-2xl pin-modal p-10 relative">
+    <button id="pinClose" class="absolute top-4 right-4 mono opacity-60 hover:opacity-100">— Close (esc)</button>
+    <p class="mono text-[var(--red)]">— Pin detail · MMXXVI</p>
+    <h3 class="display text-5xl mt-4 leading-[.95]" id="pinTitle">A home in Mount Royal.</h3>
+    <div class="mt-6 grid grid-cols-2 gap-6">
+      <div><p class="mono text-[var(--sage-2)]">— Family</p><p class="display text-2xl mt-2" id="pinFamily">Hattie F.</p></div>
+      <div><p class="mono text-[var(--sage-2)]">— District</p><p class="display text-2xl mt-2" id="pinDistrict">Mount Royal SW</p></div>
+      <div><p class="mono text-[var(--sage-2)]">— Fabric</p><p class="display text-2xl mt-2" id="pinProduct">Linen Roller, Oat Milk</p></div>
+      <div><p class="mono text-[var(--sage-2)]">— Installed</p><p class="display text-2xl mt-2" id="pinDate">11 May 2026</p></div>
+    </div>
+    <p class="mt-7 serif italic text-lg opacity-90">A quiet kitchen renovation, six windows facing east. We solved morning glare with a sheer Belgian linen in oat milk, cordless, hand-pull.</p>
+    <div class="mt-7 flex gap-3">
+      <a href="#book" class="btn-red">Pin my home next →</a>
+      <a href="#shop" class="btn-ghost">See the fabric</a>
+    </div>
+  </div>
+</div>
+
+<!-- 4. TRUST STRIP -->
+<section class="border-y border-[var(--hair)] bg-[var(--ivory-2)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-7 grid grid-cols-2 md:grid-cols-6 gap-6 items-center text-center mono">
+    <div><p class="text-[var(--sage-2)]">— BBB</p><p class="display text-2xl mt-1">A+</p></div>
+    <div><p class="text-[var(--sage-2)]">— Top Choice</p><p class="display text-2xl mt-1 ital">2025–26</p></div>
+    <div><p class="text-[var(--sage-2)]">— Affirm</p><p class="display text-2xl mt-1">0% APR</p></div>
+    <div><p class="text-[var(--sage-2)]">— Klarna</p><p class="display text-2xl mt-1">Pay 4×</p></div>
+    <div><p class="text-[var(--sage-2)]">— Google</p><p class="display text-2xl mt-1">4.9 ★</p></div>
+    <div><p class="text-[var(--sage-2)]">— Reviews</p><p class="display text-2xl mt-1 tabnum">2,418</p></div>
+  </div>
+</section>
+
+<!-- 5. PIN LOG -->
+<section class="max-w-[1480px] mx-auto px-6 py-24" id="log">
+  <div class="grid lg:grid-cols-12 gap-10 items-end mb-14">
+    <div class="lg:col-span-7">
+      <p class="mono text-[var(--red)]">— The pin log · 10 of 47</p>
+      <h2 class="display text-7xl md:text-8xl leading-[.88] mt-4 -tracking-[.01em]">
+        Read the <span class="ital text-[var(--red)]">log.</span>
+      </h2>
+    </div>
+    <div class="lg:col-span-5 text-lg leading-relaxed opacity-90 serif">
+      The ten most recent installs, by district. Tap a row to read the install story. The other 37 live in the archive.
+    </div>
+  </div>
+
+  <div class="border border-[var(--ink)] bg-[var(--ivory)]">
+    <div class="grid grid-cols-12 mono text-[10.5px] border-b border-[var(--ink)] bg-[var(--ivory-2)]">
+      <div class="col-span-1 p-4">№</div>
+      <div class="col-span-2 p-4 border-l border-[var(--hair)]">DATE</div>
+      <div class="col-span-3 p-4 border-l border-[var(--hair)]">FAMILY</div>
+      <div class="col-span-3 p-4 border-l border-[var(--hair)]">DISTRICT</div>
+      <div class="col-span-2 p-4 border-l border-[var(--hair)]">FABRIC</div>
+      <div class="col-span-1 p-4 border-l border-[var(--hair)]">★</div>
+    </div>
+    <div class="pin-row grid grid-cols-12 border-b border-[var(--hair)]" data-name="Hattie F." data-district="Mount Royal SW" data-product="Linen Roller" data-date="11 May 2026">
+      <div class="col-span-1 p-5 display text-xl tabnum">01</div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">11 May 2026</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)] display text-xl">Hattie F.</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)]"><span class="district-chip">Mount Royal SW</span></div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">Linen Roller</div>
+      <div class="col-span-1 p-5 border-l border-[var(--hair)] stars">★★★★★</div>
+    </div>
+    <div class="pin-row grid grid-cols-12 border-b border-[var(--hair)] bg-[var(--ivory-2)]" data-name="Esmé R." data-district="Britannia SW" data-product="Blackout Cellular" data-date="9 May 2026">
+      <div class="col-span-1 p-5 display text-xl tabnum">02</div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">9 May 2026</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)] display text-xl">Esmé R.</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)]"><span class="district-chip">Britannia SW</span></div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">Blackout Cellular</div>
+      <div class="col-span-1 p-5 border-l border-[var(--hair)] stars">★★★★★</div>
+    </div>
+    <div class="pin-row grid grid-cols-12 border-b border-[var(--hair)]" data-name="Tomislav P." data-district="Bridgeland NE" data-product="Drapery Panel" data-date="7 May 2026">
+      <div class="col-span-1 p-5 display text-xl tabnum">03</div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">7 May 2026</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)] display text-xl">Tomislav P.</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)]"><span class="district-chip">Bridgeland NE</span></div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">Drapery Panel</div>
+      <div class="col-span-1 p-5 border-l border-[var(--hair)] stars">★★★★★</div>
+    </div>
+    <div class="pin-row grid grid-cols-12 border-b border-[var(--hair)] bg-[var(--ivory-2)]" data-name="Wren D." data-district="Aspen Estates SW" data-product="Motorised Roller" data-date="5 May 2026">
+      <div class="col-span-1 p-5 display text-xl tabnum">04</div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">5 May 2026</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)] display text-xl">Wren D.</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)]"><span class="district-chip">Aspen Estates SW</span></div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">Motorised Roller</div>
+      <div class="col-span-1 p-5 border-l border-[var(--hair)] stars">★★★★★</div>
+    </div>
+    <div class="pin-row grid grid-cols-12 border-b border-[var(--hair)]" data-name="Devin K." data-district="Tuscany NW" data-product="Zebra Sheer" data-date="3 May 2026">
+      <div class="col-span-1 p-5 display text-xl tabnum">05</div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">3 May 2026</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)] display text-xl">Devin K.</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)]"><span class="district-chip">Tuscany NW</span></div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">Zebra Sheer</div>
+      <div class="col-span-1 p-5 border-l border-[var(--hair)] stars">★★★★★</div>
+    </div>
+    <div class="pin-row grid grid-cols-12 border-b border-[var(--hair)] bg-[var(--ivory-2)]" data-name="Marisol H." data-district="Mahogany SE" data-product="Blackout Cellular" data-date="1 May 2026">
+      <div class="col-span-1 p-5 display text-xl tabnum">06</div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">1 May 2026</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)] display text-xl">Marisol H.</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)]"><span class="district-chip">Mahogany SE</span></div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">Blackout Cellular</div>
+      <div class="col-span-1 p-5 border-l border-[var(--hair)] stars">★★★★★</div>
+    </div>
+    <div class="pin-row grid grid-cols-12 border-b border-[var(--hair)]" data-name="Lior B." data-district="Bowness NW" data-product="Linen Roller" data-date="22 Apr 2026">
+      <div class="col-span-1 p-5 display text-xl tabnum">07</div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">22 Apr 2026</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)] display text-xl">Lior B.</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)]"><span class="district-chip">Bowness NW</span></div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">Linen Roller</div>
+      <div class="col-span-1 p-5 border-l border-[var(--hair)] stars">★★★★★</div>
+    </div>
+    <div class="pin-row grid grid-cols-12 border-b border-[var(--hair)] bg-[var(--ivory-2)]" data-name="Astrid L." data-district="Hillhurst NW" data-product="Honeycomb Cellular" data-date="20 Apr 2026">
+      <div class="col-span-1 p-5 display text-xl tabnum">08</div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">20 Apr 2026</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)] display text-xl">Astrid L.</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)]"><span class="district-chip">Hillhurst NW</span></div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">Honeycomb Cellular</div>
+      <div class="col-span-1 p-5 border-l border-[var(--hair)] stars">★★★★★</div>
+    </div>
+    <div class="pin-row grid grid-cols-12 border-b border-[var(--hair)]" data-name="Robin O." data-district="Aspen Estates SW" data-product="Drapery Panel" data-date="18 Apr 2026">
+      <div class="col-span-1 p-5 display text-xl tabnum">09</div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">18 Apr 2026</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)] display text-xl">Robin O.</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)]"><span class="district-chip">Aspen Estates SW</span></div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">Drapery Panel</div>
+      <div class="col-span-1 p-5 border-l border-[var(--hair)] stars">★★★★★</div>
+    </div>
+    <div class="pin-row grid grid-cols-12 bg-[var(--ivory-2)]" data-name="Felipe S." data-district="Bankview SW" data-product="Roman Shade" data-date="15 Apr 2026">
+      <div class="col-span-1 p-5 display text-xl tabnum">10</div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">15 Apr 2026</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)] display text-xl">Felipe S.</div>
+      <div class="col-span-3 p-5 border-l border-[var(--hair)]"><span class="district-chip">Bankview SW</span></div>
+      <div class="col-span-2 p-5 border-l border-[var(--hair)] serif italic">Roman Shade</div>
+      <div class="col-span-1 p-5 border-l border-[var(--hair)] stars">★★★★★</div>
+    </div>
+  </div>
+
+  <div class="mt-10 text-center">
+    <a href="#" class="btn-ghost">Read all 47 pin stories →</a>
+  </div>
+</section>
+
+<!-- 6. PRODUCT GRID -->
+<section class="bg-[var(--ivory-2)] border-y border-[var(--hair)]" id="shop">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <div class="grid lg:grid-cols-12 gap-10 items-end mb-14">
+      <div class="lg:col-span-7">
+        <p class="mono text-[var(--red)]">— The catalogue · Vol. I</p>
+        <h2 class="display text-7xl md:text-8xl leading-[.88] mt-4 -tracking-[.01em]">
+          Ten <span class="ital text-[var(--red)]">fabrics.</span><br/>One Calgary.
+        </h2>
+      </div>
+      <div class="lg:col-span-5 text-lg leading-relaxed serif">
+        Every product below has been pinned somewhere on this map. Numbers are starting prices, installed, per Calgary-standard window.
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a href="#" class="block bg-[var(--ivory)] border border-[var(--ink)] overflow-hidden hover:shadow-[0_20px_40px_-20px_rgba(21,20,14,.3)] transition">
+        <div class="relative">
+          <img src="https://picsum.photos/seed/sunleomp01/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 district-chip">Nº 01 · Linen</span>
+          <span class="absolute top-3 right-3 bg-[var(--ivory)] text-[var(--red)] display text-lg px-3 py-1 border border-[var(--ink)] ital">from $180</span>
+        </div>
+        <div class="p-5 border-t border-[var(--hair)]">
+          <p class="display text-2xl">Linen Roller</p>
+          <p class="mono text-[var(--sage-2)] mt-1">— Belgian linen · 14 colourways</p>
+          <div class="flex items-center justify-between mt-3"><p class="stars">★★★★★</p><p class="mono opacity-70">4.9 · 612 pinned</p></div>
+        </div>
+      </a>
+      <a href="#" class="block bg-[var(--ivory)] border border-[var(--ink)] overflow-hidden hover:shadow-[0_20px_40px_-20px_rgba(21,20,14,.3)] transition">
+        <div class="relative">
+          <img src="https://picsum.photos/seed/sunleomp02/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 district-chip">Nº 02 · Cellular</span>
+          <span class="absolute top-3 right-3 bg-[var(--ivory)] text-[var(--red)] display text-lg px-3 py-1 border border-[var(--ink)] ital">from $290</span>
+        </div>
+        <div class="p-5 border-t border-[var(--hair)]">
+          <p class="display text-2xl">Honeycomb Cellular</p>
+          <p class="mono text-[var(--sage-2)] mt-1">— R-5 · sub-zero rated</p>
+          <div class="flex items-center justify-between mt-3"><p class="stars">★★★★★</p><p class="mono opacity-70">4.9 · 1,204 pinned</p></div>
+        </div>
+      </a>
+      <a href="#" class="block bg-[var(--ivory)] border border-[var(--ink)] overflow-hidden hover:shadow-[0_20px_40px_-20px_rgba(21,20,14,.3)] transition">
+        <div class="relative">
+          <img src="https://picsum.photos/seed/sunleomp03/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 district-chip">Nº 03 · Roman</span>
+          <span class="absolute top-3 right-3 bg-[var(--ivory)] text-[var(--red)] display text-lg px-3 py-1 border border-[var(--ink)] ital">from $340</span>
+        </div>
+        <div class="p-5 border-t border-[var(--hair)]">
+          <p class="display text-2xl">Roman Shade</p>
+          <p class="mono text-[var(--sage-2)] mt-1">— Hand-folded · 22 fabrics</p>
+          <div class="flex items-center justify-between mt-3"><p class="stars">★★★★★</p><p class="mono opacity-70">4.9 · 388 pinned</p></div>
+        </div>
+      </a>
+      <a href="#" class="block bg-[var(--ivory)] border border-[var(--ink)] overflow-hidden hover:shadow-[0_20px_40px_-20px_rgba(21,20,14,.3)] transition">
+        <div class="relative">
+          <img src="https://picsum.photos/seed/sunleomp04/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 district-chip" style="background:var(--red)">Nº 04 · Motorised</span>
+          <span class="absolute top-3 right-3 bg-[var(--ivory)] text-[var(--red)] display text-lg px-3 py-1 border border-[var(--ink)] ital">from $480</span>
+        </div>
+        <div class="p-5 border-t border-[var(--hair)]">
+          <p class="display text-2xl">Motorised Roller</p>
+          <p class="mono text-[var(--sage-2)] mt-1">— Matter 1.4 · 7-yr battery</p>
+          <div class="flex items-center justify-between mt-3"><p class="stars">★★★★★</p><p class="mono opacity-70">4.9 · 522 pinned</p></div>
+        </div>
+      </a>
+      <a href="#" class="block bg-[var(--ivory)] border border-[var(--ink)] overflow-hidden hover:shadow-[0_20px_40px_-20px_rgba(21,20,14,.3)] transition">
+        <div class="relative">
+          <img src="https://picsum.photos/seed/sunleomp05/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 district-chip">Nº 05 · Zebra</span>
+          <span class="absolute top-3 right-3 bg-[var(--ivory)] text-[var(--red)] display text-lg px-3 py-1 border border-[var(--ink)] ital">from $220</span>
+        </div>
+        <div class="p-5 border-t border-[var(--hair)]">
+          <p class="display text-2xl">Zebra Sheer</p>
+          <p class="mono text-[var(--sage-2)] mt-1">— Dual-band · UV blocking</p>
+          <div class="flex items-center justify-between mt-3"><p class="stars">★★★★★</p><p class="mono opacity-70">4.9 · 270 pinned</p></div>
+        </div>
+      </a>
+      <a href="#" class="block bg-[var(--ivory)] border border-[var(--ink)] overflow-hidden hover:shadow-[0_20px_40px_-20px_rgba(21,20,14,.3)] transition">
+        <div class="relative">
+          <img src="https://picsum.photos/seed/sunleomp06/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 district-chip">Nº 06 · Shutter</span>
+          <span class="absolute top-3 right-3 bg-[var(--ivory)] text-[var(--red)] display text-lg px-3 py-1 border border-[var(--ink)] ital">from $620</span>
+        </div>
+        <div class="p-5 border-t border-[var(--hair)]">
+          <p class="display text-2xl">Basswood Shutter</p>
+          <p class="mono text-[var(--sage-2)] mt-1">— 12 stains · custom</p>
+          <div class="flex items-center justify-between mt-3"><p class="stars">★★★★★</p><p class="mono opacity-70">4.9 · 162 pinned</p></div>
+        </div>
+      </a>
+      <a href="#" class="block bg-[var(--ivory)] border border-[var(--ink)] overflow-hidden hover:shadow-[0_20px_40px_-20px_rgba(21,20,14,.3)] transition">
+        <div class="relative">
+          <img src="https://picsum.photos/seed/sunleomp07/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 district-chip">Nº 07 · Faux Wood</span>
+          <span class="absolute top-3 right-3 bg-[var(--ivory)] text-[var(--red)] display text-lg px-3 py-1 border border-[var(--ink)] ital">from $148</span>
+        </div>
+        <div class="p-5 border-t border-[var(--hair)]">
+          <p class="display text-2xl">Faux Wood Blind</p>
+          <p class="mono text-[var(--sage-2)] mt-1">— Humidity-stable</p>
+          <div class="flex items-center justify-between mt-3"><p class="stars">★★★★★</p><p class="mono opacity-70">4.8 · 905 pinned</p></div>
+        </div>
+      </a>
+      <a href="#" class="block bg-[var(--ivory)] border border-[var(--ink)] overflow-hidden hover:shadow-[0_20px_40px_-20px_rgba(21,20,14,.3)] transition">
+        <div class="relative">
+          <img src="https://picsum.photos/seed/sunleomp08/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 district-chip">Nº 08 · Skylight</span>
+          <span class="absolute top-3 right-3 bg-[var(--ivory)] text-[var(--red)] display text-lg px-3 py-1 border border-[var(--ink)] ital">from $410</span>
+        </div>
+        <div class="p-5 border-t border-[var(--hair)]">
+          <p class="display text-2xl">Skylight Cellular</p>
+          <p class="mono text-[var(--sage-2)] mt-1">— Made-to-shape</p>
+          <div class="flex items-center justify-between mt-3"><p class="stars">★★★★★</p><p class="mono opacity-70">4.9 · 84 pinned</p></div>
+        </div>
+      </a>
+      <a href="#" class="block bg-[var(--ivory)] border border-[var(--ink)] overflow-hidden hover:shadow-[0_20px_40px_-20px_rgba(21,20,14,.3)] transition">
+        <div class="relative">
+          <img src="https://picsum.photos/seed/sunleomp09/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 district-chip">Nº 09 · Drapery</span>
+          <span class="absolute top-3 right-3 bg-[var(--ivory)] text-[var(--red)] display text-lg px-3 py-1 border border-[var(--ink)] ital">from $390</span>
+        </div>
+        <div class="p-5 border-t border-[var(--hair)]">
+          <p class="display text-2xl">Drapery Panel</p>
+          <p class="mono text-[var(--sage-2)] mt-1">— 60 fabrics · lined · pleated</p>
+          <div class="flex items-center justify-between mt-3"><p class="stars">★★★★★</p><p class="mono opacity-70">4.9 · 311 pinned</p></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. RITUAL -->
+<section class="bg-[var(--navy)] text-[var(--ivory)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <p class="mono" style="color: var(--gold)">— The ritual</p>
+    <h2 class="display text-7xl md:text-8xl mt-4 leading-[.88]">
+      Three steps. <span class="ital" style="color: var(--gold)">One pin.</span>
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-1 mt-14 border border-[var(--hair-ivory)]">
+      <div class="p-10 border-r border-[var(--hair-ivory)]">
+        <p class="display text-8xl ital" style="color: var(--gold);">I.</p>
+        <h3 class="display text-3xl mt-6">Drop a pin online.</h3>
+        <p class="serif mt-3 opacity-80 leading-relaxed">Enter your address. Iris reads the audit personally and emails three recommendations within four hours.</p>
+        <p class="mono mt-6" style="color: var(--gold)">— Day 01 · Free</p>
+      </div>
+      <div class="p-10 border-r border-[var(--hair-ivory)]">
+        <p class="display text-8xl ital" style="color: var(--gold);">II.</p>
+        <h3 class="display text-3xl mt-6">Iris drives to the pin.</h3>
+        <p class="serif mt-3 opacity-80 leading-relaxed">Within 48 hours she arrives with a laser, fabric samples, and a camera. No deposit, no commitment.</p>
+        <p class="mono mt-6" style="color: var(--gold)">— Day 02–04 · No deposit</p>
+      </div>
+      <div class="p-10">
+        <p class="display text-8xl ital" style="color: var(--gold);">III.</p>
+        <h3 class="display text-3xl mt-6">Two installers, one morning.</h3>
+        <p class="serif mt-3 opacity-80 leading-relaxed">9 AM to noon. The pin turns red on this map. Ten-year atelier guarantee.</p>
+        <p class="mono mt-6" style="color: var(--gold)">— Day 08–10 · One morning</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. REVIEWS -->
+<section class="max-w-[1480px] mx-auto px-6 py-24">
+  <div class="grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-3">
+      <p class="mono text-[var(--red)]">— Pinned voices</p>
+      <h2 class="display text-5xl md:text-6xl mt-4 leading-[.95]">2,418 <span class="ital text-[var(--red)]">pins.</span></h2>
+      <div class="stars text-2xl mt-5">★★★★★</div>
+      <p class="mono mt-3 opacity-70">— 4.9 weighted average</p>
+    </div>
+    <div class="lg:col-span-9 grid md:grid-cols-2 gap-1 border border-[var(--ink)]">
+      <article class="p-7 border-r border-[var(--hair)] hover:bg-[var(--ivory-2)] transition">
+        <div class="stars">★★★★★</div>
+        <p class="display text-2xl mt-4 leading-snug">"I found SunLeo because I saw the pin two streets away. Iris had installed for our neighbour the week before."</p>
+        <div class="mt-5 flex items-center gap-4">
+          <img src="https://picsum.photos/seed/sunleompr01/80/80" class="w-12 h-12 object-cover rounded-full" alt=""/>
+          <div><p class="display text-lg">Hattie F.</p><p class="mono opacity-60">— Mount Royal SW · MMXXVI</p></div>
+        </div>
+      </article>
+      <article class="p-7 hover:bg-[var(--ivory-2)] transition">
+        <div class="stars">★★★★★</div>
+        <p class="display text-2xl mt-4 leading-snug">"The map sold me. I could see 47 pins on Calgary before I picked up the phone."</p>
+        <div class="mt-5 flex items-center gap-4">
+          <img src="https://picsum.photos/seed/sunleompr02/80/80" class="w-12 h-12 object-cover rounded-full" alt=""/>
+          <div><p class="display text-lg">Tomislav P.</p><p class="mono opacity-60">— Bridgeland NE · MMXXVI</p></div>
+        </div>
+      </article>
+      <article class="p-7 border-r border-t border-[var(--hair)] hover:bg-[var(--ivory-2)] transition">
+        <div class="stars">★★★★★</div>
+        <p class="display text-2xl mt-4 leading-snug">"Pin showed up the day after install. My partner sent it to her parents in Vancouver."</p>
+        <div class="mt-5 flex items-center gap-4">
+          <img src="https://picsum.photos/seed/sunleompr03/80/80" class="w-12 h-12 object-cover rounded-full" alt=""/>
+          <div><p class="display text-lg">Esmé R.</p><p class="mono opacity-60">— Britannia SW · MMXXVI</p></div>
+        </div>
+      </article>
+      <article class="p-7 border-t border-[var(--hair)] hover:bg-[var(--ivory-2)] transition">
+        <div class="stars">★★★★★</div>
+        <p class="display text-2xl mt-4 leading-snug">"Pinned and proud. Quoted four shops — SunLeo was the only one with a public install map."</p>
+        <div class="mt-5 flex items-center gap-4">
+          <img src="https://picsum.photos/seed/sunleompr04/80/80" class="w-12 h-12 object-cover rounded-full" alt=""/>
+          <div><p class="display text-lg">Wren D.</p><p class="mono opacity-60">— Aspen Estates SW · MMXXVI</p></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 9. COMPARISON -->
+<section class="bg-[var(--ivory-2)] border-y border-[var(--hair)]" id="vs">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <p class="mono text-[var(--red)]">— On the differences</p>
+    <h2 class="display text-7xl md:text-8xl mt-4 leading-[.88]">A <span class="ital text-[var(--red)]">map</span> of choices.</h2>
+
+    <div class="mt-14 border border-[var(--ink)] bg-[var(--ivory)]">
+      <div class="grid grid-cols-4 mono text-xs border-b border-[var(--ink)] bg-[var(--ivory-2)]">
+        <div class="p-5">— Criterion</div>
+        <div class="p-5 border-l border-[var(--hair)] text-[var(--red)]">— SunLeo</div>
+        <div class="p-5 border-l border-[var(--hair)] opacity-70">— Hunter Douglas</div>
+        <div class="p-5 border-l border-[var(--hair)] opacity-70">— Home Depot</div>
+      </div>
+      <div class="grid grid-cols-4 border-b border-[var(--hair)]">
+        <div class="p-5 serif italic">Public install map</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl">Yes · 47 pins</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl opacity-70">No</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl opacity-70">No</div>
+      </div>
+      <div class="grid grid-cols-4 border-b border-[var(--hair)]">
+        <div class="p-5 serif italic">Same-week measurement</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl">Yes</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl opacity-70">7–10 days</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl opacity-70">DIY only</div>
+      </div>
+      <div class="grid grid-cols-4 border-b border-[var(--hair)]">
+        <div class="p-5 serif italic">Deposit required</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl">$0</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl opacity-70">50%</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl opacity-70">100%</div>
+      </div>
+      <div class="grid grid-cols-4 border-b border-[var(--hair)]">
+        <div class="p-5 serif italic">Install crew</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl">Same 2 humans</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl opacity-70">Subcontracted</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl opacity-70">DIY</div>
+      </div>
+      <div class="grid grid-cols-4">
+        <div class="p-5 serif italic">Atelier guarantee</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl">10 years</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl opacity-70">7 years</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl opacity-70">90 days</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. BUILT FOR CALGARY -->
+<section class="max-w-[1480px] mx-auto px-6 py-24">
+  <div class="grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-5">
+      <p class="mono text-[var(--red)]">— Built for Calgary</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.9]">A practice <span class="ital text-[var(--red)]">of place.</span></h2>
+      <p class="mt-7 text-lg leading-relaxed max-w-md serif">
+        Chinook winds, dry winters, east-facing morning glare, west-mountain afternoon dazzle. We design for Calgary's specific weather — not a national catalogue.
+      </p>
+
+      <div class="mt-10 flex flex-wrap gap-2">
+        <span class="district-chip">Tuscany NW</span>
+        <span class="district-chip">Mount Royal SW</span>
+        <span class="district-chip">Inglewood SE</span>
+        <span class="district-chip">Britannia SW</span>
+        <span class="district-chip">Bridgeland NE</span>
+        <span class="district-chip">Mahogany SE</span>
+        <span class="district-chip">Aspen Estates SW</span>
+        <span class="district-chip">Bowness NW</span>
+        <span class="district-chip">+ 34 more</span>
+      </div>
+    </div>
+    <div class="lg:col-span-7">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="border border-[var(--ink)] bg-[var(--ivory)] p-5">
+          <p class="display text-6xl tabnum text-[var(--red)]"><span data-counter="3400">3,400</span></p>
+          <p class="mono mt-2 text-[var(--sage-2)]">— Windows since 2017</p>
+        </div>
+        <div class="border border-[var(--ink)] bg-[var(--ivory)] p-5">
+          <p class="display text-6xl tabnum text-[var(--navy)]"><span data-counter="42">0</span></p>
+          <p class="mono mt-2 text-[var(--sage-2)]">— Calgary districts served</p>
+        </div>
+        <div class="border border-[var(--ink)] bg-[var(--ivory)] p-5">
+          <p class="display text-6xl tabnum text-[var(--sage)]"><span data-counter="11">0</span></p>
+          <p class="mono mt-2 text-[var(--sage-2)]">— Years atelier</p>
+        </div>
+        <div class="border border-[var(--ink)] bg-[var(--ivory)] p-5">
+          <p class="display text-6xl tabnum">4.9 <span class="text-[var(--red)]">★</span></p>
+          <p class="mono mt-2 text-[var(--sage-2)]">— 2,418 reviews</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. SMART HOME -->
+<section class="bg-[var(--navy)] text-[var(--ivory)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-7">
+      <p class="mono" style="color: var(--gold)">— Quiet automation</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.9]">
+        Voice that <span class="ital" style="color: var(--gold)">whispers.</span>
+      </h2>
+      <p class="serif mt-6 text-lg leading-relaxed opacity-90 max-w-xl">
+        Every motorised SunLeo is Matter 1.4 native. Alexa, Google Home, Apple HomeKit, SmartThings. 28 dB at one metre, 7-year battery, 320 ms voice latency. No bridge, no monthly cloud bill.
+      </p>
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-1 border border-[var(--hair-ivory)]">
+        <div class="p-5 border-r border-[var(--hair-ivory)]"><p class="display text-2xl">Matter</p><p class="mono mt-1" style="color: var(--gold)">v1.4</p></div>
+        <div class="p-5 border-r border-[var(--hair-ivory)]"><p class="display text-2xl">Alexa</p><p class="mono mt-1" style="color: var(--gold)">Native</p></div>
+        <div class="p-5 border-r border-[var(--hair-ivory)]"><p class="display text-2xl">Google</p><p class="mono mt-1" style="color: var(--gold)">Home</p></div>
+        <div class="p-5"><p class="display text-2xl">Apple</p><p class="mono mt-1" style="color: var(--gold)">HomeKit</p></div>
+      </div>
+    </div>
+    <div class="lg:col-span-5">
+      <div class="aspect-square relative overflow-hidden border border-[var(--hair-ivory)]">
+        <img src="https://picsum.photos/seed/sunleompsmart/600/600" class="absolute inset-0 w-full h-full object-cover" alt=""/>
+        <div class="absolute bottom-4 left-4 bg-[var(--navy)]/85 backdrop-blur border border-[var(--hair-ivory)] p-3">
+          <p class="mono" style="color: var(--gold)">— Voice latency</p>
+          <p class="display text-3xl mt-1">320 <span class="ital opacity-70">ms</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. BNPL -->
+<section class="max-w-[1480px] mx-auto px-6 py-12">
+  <div class="border border-[var(--ink)] p-12 grid md:grid-cols-2 gap-8 items-center bg-[var(--ivory-2)]">
+    <div>
+      <p class="mono text-[var(--red)]">— Patient money</p>
+      <h2 class="display text-5xl md:text-6xl mt-4 leading-[.92]">Pay in <span class="ital text-[var(--red)]">four.</span></h2>
+      <p class="mt-5 text-lg opacity-90 max-w-md leading-relaxed serif">Affirm, Klarna, Afterpay, Sezzle. 0% APR · 24 months · pre-qualified at checkout.</p>
+    </div>
+    <div class="flex flex-wrap gap-4 items-center justify-end">
+      <div class="display text-3xl ital">Affirm</div>
+      <div class="display text-3xl">Klarna</div>
+      <div class="display text-3xl ital">afterpay</div>
+      <div class="display text-3xl">Sezzle</div>
+    </div>
+  </div>
+</section>
+
+<!-- 13. JOURNAL -->
+<section class="max-w-[1480px] mx-auto px-6 py-24">
+  <div class="flex justify-between items-end mb-12 flex-wrap gap-4">
+    <div>
+      <p class="mono text-[var(--red)]">— Cartographic notes</p>
+      <h2 class="display text-5xl md:text-6xl mt-4 leading-[.95]">Field <span class="ital text-[var(--red)]">notes.</span></h2>
+    </div>
+    <a href="#" class="mono underline decoration-[var(--red)] underline-offset-4">All 47 entries →</a>
+  </div>
+  <div class="grid md:grid-cols-3 gap-1 border border-[var(--ink)]">
+    <article class="p-1 bg-[var(--ivory)] border-r border-[var(--hair)] hover:bg-[var(--ivory-2)] transition">
+      <img src="https://picsum.photos/seed/sunleompbl1/600/420" class="w-full h-[260px] object-cover" alt=""/>
+      <div class="p-6">
+        <p class="mono text-[var(--sage-2)]">— Entry 011 · Cartography</p>
+        <h3 class="display text-2xl mt-3 leading-snug">Why we map every install.</h3>
+        <p class="serif italic mt-3 opacity-80">A defence of public maps in a private industry — and the four objections we used to have.</p>
+      </div>
+    </article>
+    <article class="p-1 bg-[var(--ivory)] border-r border-[var(--hair)] hover:bg-[var(--ivory-2)] transition">
+      <img src="https://picsum.photos/seed/sunleompbl2/600/420" class="w-full h-[260px] object-cover" alt=""/>
+      <div class="p-6">
+        <p class="mono text-[var(--sage-2)]">— Entry 010 · Density</p>
+        <h3 class="display text-2xl mt-3 leading-snug">The Calgary districts with the most install density.</h3>
+        <p class="serif italic mt-3 opacity-80">Mount Royal, Tuscany, Inglewood. Three neighbourhoods, four reasons.</p>
+      </div>
+    </article>
+    <article class="p-1 bg-[var(--ivory)] hover:bg-[var(--ivory-2)] transition">
+      <img src="https://picsum.photos/seed/sunleompbl3/600/420" class="w-full h-[260px] object-cover" alt=""/>
+      <div class="p-6">
+        <p class="mono text-[var(--sage-2)]">— Entry 009 · Compass</p>
+        <h3 class="display text-2xl mt-3 leading-snug">How a Calgary east-facing window differs from a west one.</h3>
+        <p class="serif italic mt-3 opacity-80">A short defence of dry-mountain glare and why your fabrics need to know.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 14. AS SEEN IN -->
+<section class="border-y border-[var(--hair)] py-10 bg-[var(--ivory-2)] overflow-hidden">
+  <p class="mono text-center text-[var(--sage-2)] mb-6">— As cartographically seen in</p>
+  <div class="mq">
+    <div class="flex items-center gap-20 shrink-0">
+      <span class="display text-4xl ital">Avenue Calgary</span>
+      <span class="display text-4xl">Western Living</span>
+      <span class="display text-4xl ital">Calgary Herald</span>
+      <span class="display text-4xl">House &amp; Home</span>
+      <span class="display text-4xl ital">Style at Home</span>
+      <span class="display text-4xl">Globe &amp; Mail</span>
+    </div>
+    <div class="flex items-center gap-20 shrink-0" aria-hidden="true">
+      <span class="display text-4xl ital">Avenue Calgary</span>
+      <span class="display text-4xl">Western Living</span>
+      <span class="display text-4xl ital">Calgary Herald</span>
+      <span class="display text-4xl">House &amp; Home</span>
+      <span class="display text-4xl ital">Style at Home</span>
+      <span class="display text-4xl">Globe &amp; Mail</span>
+    </div>
+  </div>
+</section>
+
+<!-- 15. INSTAGRAM -->
+<section class="max-w-[1480px] mx-auto px-6 py-24">
+  <div class="flex justify-between items-end mb-10 flex-wrap gap-4">
+    <div>
+      <p class="mono text-[var(--red)]">— Instagram</p>
+      <h2 class="display text-5xl md:text-6xl mt-4">@sunleo<span class="ital text-[var(--red)]">.map</span></h2>
+    </div>
+    <a href="#" class="mono underline decoration-[var(--red)] underline-offset-4">14.2k followers · follow →</a>
+  </div>
+  <div class="grid grid-cols-4 grid-rows-2 gap-1 border border-[var(--ink)]">
+    <img src="https://picsum.photos/seed/sunleompig01/360/360" class="w-full aspect-square object-cover" alt=""/>
+    <img src="https://picsum.photos/seed/sunleompig02/360/360" class="w-full aspect-square object-cover" alt=""/>
+    <img src="https://picsum.photos/seed/sunleompig03/360/360" class="w-full aspect-square object-cover" alt=""/>
+    <img src="https://picsum.photos/seed/sunleompig04/360/360" class="w-full aspect-square object-cover" alt=""/>
+    <img src="https://picsum.photos/seed/sunleompig05/360/360" class="w-full aspect-square object-cover" alt=""/>
+    <img src="https://picsum.photos/seed/sunleompig06/360/360" class="w-full aspect-square object-cover" alt=""/>
+    <img src="https://picsum.photos/seed/sunleompig07/360/360" class="w-full aspect-square object-cover" alt=""/>
+    <img src="https://picsum.photos/seed/sunleompig08/360/360" class="w-full aspect-square object-cover" alt=""/>
+  </div>
+</section>
+
+<!-- 16. TRADE -->
+<section class="bg-[var(--red)] text-[var(--ivory)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-7">
+      <p class="mono" style="color: #FFD9C0">— For the trade</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.92]">
+        Calgary designers, <span class="ital" style="color:#FFD9C0">pinned.</span>
+      </h2>
+      <p class="serif mt-6 text-lg leading-relaxed max-w-xl opacity-90">
+        20% trade discount, dedicated installer, lead-time guarantee, white-label invoices. 38 Calgary interior designers and 11 custom builders pin with us.
+      </p>
+      <a href="#" class="mt-8 inline-flex items-center gap-3 mono bg-[var(--ivory)] text-[var(--red)] px-6 py-3 rounded font-bold">Apply to the programme →</a>
+    </div>
+    <div class="lg:col-span-5 serif italic text-xl leading-relaxed">
+      "I show the map to clients. It's the easiest sell I've ever made — 38 designers pinned, 11 builders, every district in Calgary."
+      <span class="block mt-6 mono not-italic" style="color:#FFD9C0">— Eloise Whitcombe · principal · Whitcombe + Co</span>
+    </div>
+  </div>
+</section>
+
+<!-- 17. FAQ -->
+<section class="max-w-[1480px] mx-auto px-6 py-24" id="faq">
+  <div class="grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-4">
+      <p class="mono text-[var(--red)]">— Map answers</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.9]">Eight <span class="ital text-[var(--red)]">pin</span> questions.</h2>
+    </div>
+    <div class="lg:col-span-8 border-t border-[var(--hair)]">
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">Is the map really live?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="serif mt-4 opacity-80 leading-relaxed max-w-2xl">Every install becomes a pin within 48 hours. Pins from this month are red; older are navy. Iris updates the map personally on Sunday evenings.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">Will my address appear on it?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="serif mt-4 opacity-80 leading-relaxed max-w-2xl">Only the district and first name. Pin coordinates are anonymised to 200-metre cells. If you'd rather not appear at all, tell us during measurement and we will skip you.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">What about the install story?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="serif mt-4 opacity-80 leading-relaxed max-w-2xl">Each pin story is written by Iris, after the install, with a paragraph about the room, the fabric, and the one detail that made the project memorable. You see it before it goes live.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">Where do you deliver?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="serif mt-4 opacity-80 leading-relaxed max-w-2xl">Greater Calgary, Airdrie, Cochrane, Okotoks, Chestermere. Outside that, we partner with the closest atelier in our trade network.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">Do you do commercial?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="serif mt-4 opacity-80 leading-relaxed max-w-2xl">Yes, under 80 windows. Boutique hotels, restaurants, dental offices, executive boardrooms. These appear as a separate pin colour on the map (yellow).</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">What's the guarantee?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="serif mt-4 opacity-80 leading-relaxed max-w-2xl">Ten-year atelier guarantee on craft, fit, and your peace of mind. Lifetime on hardware. Eight clients asked for a remake last year — we did them all.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">How quickly is a pin added?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="serif mt-4 opacity-80 leading-relaxed max-w-2xl">Same day as install. Stories follow within the week. You receive an email with your pin link the morning after.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">Who is Iris?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="serif mt-4 opacity-80 leading-relaxed max-w-2xl">Iris Laframboise. NCIDQ-certified. Born in Trois-Rivières, Calgary since 2014. Started SunLeo in 2017. Has personally pinned 3,400 windows. She also updates this map.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 18. FINAL CTA -->
+<section class="bg-[var(--navy)] text-[var(--ivory)]" id="book">
+  <div class="max-w-[1480px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-10 items-center">
+    <div class="lg:col-span-6">
+      <p class="mono" style="color: var(--gold)">— Pin your home</p>
+      <h2 class="display text-7xl md:text-8xl mt-4 leading-[.85]">
+        Be the next <span class="ital" style="color: var(--gold)">red pin.</span>
+      </h2>
+      <p class="serif mt-7 text-xl max-w-lg leading-relaxed opacity-90">
+        Send Iris your address. She'll arrive within the week with a laser, fabric, and a camera. Your pin goes live the morning after install.
+      </p>
+    </div>
+    <div class="lg:col-span-6 border border-[var(--hair-ivory)] p-8 bg-[var(--navy-2)]">
+      <p class="mono" style="color: var(--gold)">— Drop a pin · free</p>
+      <div class="mt-6 space-y-4">
+        <div>
+          <label class="mono opacity-70">— Name</label>
+          <input type="text" placeholder="First name" class="w-full mt-2 bg-transparent border-b border-[var(--ivory)] py-3 outline-none text-xl text-[var(--ivory)] placeholder:opacity-40"/>
+        </div>
+        <div>
+          <label class="mono opacity-70">— Email</label>
+          <input type="email" placeholder="you@home.com" class="w-full mt-2 bg-transparent border-b border-[var(--ivory)] py-3 outline-none text-xl text-[var(--ivory)] placeholder:opacity-40"/>
+        </div>
+        <div>
+          <label class="mono opacity-70">— Calgary district</label>
+          <input type="text" placeholder="e.g. Tuscany NW" class="w-full mt-2 bg-transparent border-b border-[var(--ivory)] py-3 outline-none text-xl text-[var(--ivory)] placeholder:opacity-40"/>
+        </div>
+        <div>
+          <label class="mono opacity-70">— Window count</label>
+          <input type="number" placeholder="6" class="w-full mt-2 bg-transparent border-b border-[var(--ivory)] py-3 outline-none text-xl text-[var(--ivory)] placeholder:opacity-40"/>
+        </div>
+        <button class="btn-red mt-6 w-full justify-center">Pin my home →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 19. MEGA FOOTER -->
+<footer class="bg-[var(--ivory)] text-[var(--ink)] border-t border-[var(--hair)] py-20">
+  <div class="max-w-[1480px] mx-auto px-6">
+    <div class="grid lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-4">
+        <span class="display text-4xl">SunLeo<span class="text-[var(--red)]">.</span></span>
+        <p class="serif italic mt-5 text-lg leading-relaxed max-w-md opacity-90">Calgary's pinned window-treatment atelier since 2017. 3,400 pins. One designer. One map.</p>
+        <div class="mt-8 flex items-center gap-5">
+          <div class="stars text-xl">★★★★★</div>
+          <span class="mono opacity-70">— 4.9 · 2,418 reviews</span>
+        </div>
+        <div class="mt-6 flex gap-3 flex-wrap">
+          <span class="display text-xl">Affirm</span>
+          <span class="display text-xl ital">Klarna</span>
+          <span class="display text-xl">afterpay</span>
+          <span class="display text-xl ital">Sezzle</span>
+        </div>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--sage-2)]">— Shop</p>
+        <ul class="mt-5 space-y-2 serif text-lg">
+          <li><a class="hover:text-[var(--red)] transition" href="#">Roller</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Cellular</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Roman</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Motorised</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Shutter</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--sage-2)]">— The Map</p>
+        <ul class="mt-5 space-y-2 serif text-lg">
+          <li><a class="hover:text-[var(--red)] transition" href="#">Pin Log</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Districts</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Atelier</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Methodology</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--sage-2)]">— Help</p>
+        <ul class="mt-5 space-y-2 serif text-lg">
+          <li><a class="hover:text-[var(--red)] transition" href="#">FAQ</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Returns</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Guarantee</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--sage-2)]">— Contact</p>
+        <ul class="mt-5 space-y-2 serif text-lg">
+          <li>+1 587 901 0240</li>
+          <li class="underline decoration-[var(--red)] underline-offset-4">map@sunleo.ca</li>
+          <li class="opacity-80 text-base">Mon–Sat · 9–18</li>
+          <li class="opacity-80 text-base">Calgary, AB</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-[var(--hair)] mt-16 pt-8 flex flex-wrap justify-between gap-4 mono opacity-60">
+      <p>© MMXXVI SunLeo · Calgary, Alberta · Treaty 7 land</p>
+      <p>— Privacy · Terms · Accessibility · Cookies</p>
+    </div>
+  </div>
+</footer>
+
+<!-- 20. STICKY SIDE PANEL -->
+<div class="fixed right-3 top-1/2 -translate-y-1/2 z-30 hidden md:flex flex-col gap-2">
+  <button class="w-11 h-11 rounded bg-[var(--navy)] text-[var(--ivory)] flex items-center justify-center hover:bg-[var(--red)] transition" aria-label="Chat">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </button>
+  <button class="w-11 h-11 rounded bg-[var(--ivory)] text-[var(--navy)] border border-[var(--navy)] flex items-center justify-center hover:bg-[var(--navy)] hover:text-[var(--ivory)] transition" aria-label="Save">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+  </button>
+  <button class="w-11 h-11 rounded bg-[var(--ivory)] text-[var(--navy)] border border-[var(--navy)] flex items-center justify-center hover:bg-[var(--navy)] hover:text-[var(--ivory)] transition" aria-label="Share">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+  </button>
+</div>
+
+<!-- LIVE NOTIF -->
+<div id="liveNotif" class="hidden md:flex fixed left-5 bottom-24 z-40 max-w-xs bg-[var(--ivory)] border border-[var(--ink)] p-4 gap-3 items-start notif-in">
+  <span class="pulse-dot mt-1.5"></span>
+  <div>
+    <p class="mono text-[var(--sage-2)]">— New pin · 2 min ago</p>
+    <p class="serif italic mt-1 text-sm"><span class="display not-italic" id="liveName">Marisol H.</span> just pinned <b><span id="liveCity">Mahogany SE</span></b>.</p>
+  </div>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="fixed top-4 right-4 z-40 bg-[var(--red)] text-[var(--ivory)] px-4 py-2 mono text-xs flex items-center gap-3 rounded">
+  <span class="pulse-dot" style="background: var(--ivory);"></span>
+  <span>— Spring chart closes</span>
+  <span class="tabnum" id="cd">--d --h --m --s</span>
+</div>
+
+<!-- STICKY BOTTOM -->
+<div class="fixed bottom-0 inset-x-0 z-30 bg-[var(--navy)] text-[var(--ivory)] py-3 px-6 flex flex-wrap items-center justify-between gap-3 border-t-2 border-[var(--red)]">
+  <div class="flex items-center gap-3 text-sm">
+    <span class="pulse-dot" style="background: var(--gold);"></span>
+    <span class="mono" style="color: var(--gold)">— 3 install slots · week of 26 May</span>
+    <span class="serif italic">Next: Mon 02 Jun.</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <a href="#map" class="mono underline decoration-[var(--red)] underline-offset-4">See the map</a>
+    <a href="#book" class="btn-red text-[12px] py-2.5 px-4">Pin my home →</a>
+  </div>
+</div>
+
+<!-- EXIT MODAL -->
+<div id="exitModal" class="hidden fixed inset-0 z-50 bg-[var(--navy)]/85 backdrop-blur-sm items-center justify-center p-6">
+  <div class="max-w-xl bg-[var(--ivory)] p-10 border border-[var(--ink)] relative">
+    <button id="exitClose" class="absolute top-4 right-4 mono opacity-60 hover:opacity-100">— Close (esc)</button>
+    <p class="mono text-[var(--red)]">— Before you leave</p>
+    <h3 class="display text-4xl mt-4 leading-tight">Eight free <span class="ital text-[var(--red)]">linen samples.</span></h3>
+    <p class="serif italic mt-4 opacity-90 leading-relaxed">A boxed set of Belgian linen and cellular swatches. Posted in 48 hours, free. No call.</p>
+    <div class="mt-6 flex items-end gap-3">
+      <input type="email" placeholder="your address" class="flex-1 bg-transparent border-b border-[var(--ink)] py-3 outline-none text-lg"/>
+      <button class="btn-red">Send</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const lenis = new Lenis({ lerp: 0.08 });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+  }
+  AOS.init({ once: true, duration: 800, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
+
+  const pinModal = document.getElementById('pinModal');
+  const pinTitle = document.getElementById('pinTitle');
+  const pinFamily = document.getElementById('pinFamily');
+  const pinDistrict = document.getElementById('pinDistrict');
+  const pinProduct = document.getElementById('pinProduct');
+  const pinDate = document.getElementById('pinDate');
+  function openPin(el){
+    pinFamily.textContent = el.dataset.name || '—';
+    pinDistrict.textContent = el.dataset.district || '—';
+    pinProduct.textContent = el.dataset.product || '—';
+    pinDate.textContent = el.dataset.date || '—';
+    pinTitle.textContent = `A home in ${el.dataset.district || 'Calgary'}.`;
+    pinModal.classList.remove('hidden');
+    pinModal.classList.add('flex');
+  }
+  document.querySelectorAll('.pin-svg').forEach(p => p.addEventListener('click', () => openPin(p)));
+  document.getElementById('pinClose').addEventListener('click', () => { pinModal.classList.add('hidden'); pinModal.classList.remove('flex'); });
+  document.querySelectorAll('.pin-row').forEach(row => row.addEventListener('click', () => openPin(row)));
+
+  const cdEl = document.getElementById('cd');
+  const endDate = new Date(Date.now() + 1000*60*60*24*5 + 1000*60*60*8);
+  function tickCd(){
+    const diff = endDate - new Date();
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    cdEl.textContent = `${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+  }
+  setInterval(tickCd, 1000); tickCd();
+
+  const notif = document.getElementById('liveNotif');
+  const liveName = document.getElementById('liveName');
+  const liveCity = document.getElementById('liveCity');
+  const events = [
+    { name:'Marisol H.', city:'Mahogany SE' },
+    { name:'Devin K.', city:'Tuscany NW' },
+    { name:'Wren D.', city:'Mount Royal SW' },
+    { name:'Tomislav P.', city:'Bridgeland NE' },
+    { name:'Hattie F.', city:'Aspen Estates' },
+    { name:'Esmé R.', city:'Britannia SW' },
+  ];
+  let ev = 0;
+  function showNotif(){
+    if(!notif) return;
+    const e = events[ev % events.length];
+    liveName.textContent = e.name;
+    liveCity.textContent = e.city;
+    notif.classList.remove('hidden','notif-in');
+    notif.offsetWidth;
+    notif.classList.add('flex','notif-in');
+    ev++;
+    setTimeout(() => notif.classList.add('hidden'), 6000);
+  }
+  setTimeout(showNotif, 4500);
+  setInterval(showNotif, 13000);
+
+  document.querySelectorAll('[data-counter]').forEach(el => {
+    const target = parseInt(el.getAttribute('data-counter'),10);
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          let n = 0;
+          const step = Math.max(1, Math.floor(target/60));
+          const t = setInterval(() => {
+            n += step; if(n >= target){ n = target; clearInterval(t); }
+            el.textContent = n.toLocaleString();
+          }, 20);
+          obs.disconnect();
+        }
+      });
+    });
+    obs.observe(el);
+  });
+
+  const exitModal = document.getElementById('exitModal');
+  let exitFired = false;
+  document.addEventListener('mouseout', (e) => {
+    if(!exitFired && e.clientY < 10 && e.relatedTarget == null){
+      exitFired = true;
+      exitModal.classList.remove('hidden');
+      exitModal.classList.add('flex');
+    }
+  });
+  document.getElementById('exitClose')?.addEventListener('click', () => {
+    exitModal.classList.add('hidden');
+    exitModal.classList.remove('flex');
+  });
+  document.addEventListener('keyup', (e) => {
+    if(e.key === 'Escape'){
+      if(exitModal.classList.contains('flex')){ exitModal.classList.add('hidden'); exitModal.classList.remove('flex'); }
+      if(pinModal.classList.contains('flex')){ pinModal.classList.add('hidden'); pinModal.classList.remove('flex'); }
+    }
+  });
+</script>
+</body>
+</html>

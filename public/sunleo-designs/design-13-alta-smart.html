@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SunLeo Smart Shades — Matter / HomeKit / Alexa Calgary Installer</title>
+<meta name="description" content="Calgary's premier smart-home window covering specialist. Matter-native, HomeKit, Alexa, Google. Sunrise routines, voice control, R-5 cellular. Free in-home demo." />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #07091A;
+    --bg-2: #0C1029;
+    --surface: #131836;
+    --line: rgba(110,138,255,0.18);
+    --electric: #4DE3FF;
+    --violet: #7B5BFF;
+    --lime: #B6FF6B;
+    --warn: #FF6B6B;
+    --text: #E6E9FF;
+    --text-dim: #8C95C4;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Sora', sans-serif;
+    background-image:
+      radial-gradient(60% 50% at 20% 0%, rgba(77,227,255,0.10), transparent 60%),
+      radial-gradient(40% 40% at 100% 30%, rgba(123,91,255,0.12), transparent 60%),
+      linear-gradient(180deg, var(--bg), var(--bg-2) 60%);
+    min-height: 100vh;
+  }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .ker { letter-spacing: -.02em; }
+  .uphair { font-family: 'JetBrains Mono', monospace; letter-spacing: .18em; text-transform: uppercase; font-size: 11px; }
+  .gradient-text { background: linear-gradient(120deg, #4DE3FF 0%, #7B5BFF 60%, #B6FF6B 110%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .gradient-border { background: linear-gradient(135deg, rgba(77,227,255,.6), rgba(123,91,255,.6)); padding: 1px; border-radius: 16px; }
+  .glass { background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); border: 1px solid var(--line); border-radius: 16px; backdrop-filter: blur(20px); }
+  .glow {
+    box-shadow: 0 0 0 1px var(--line), 0 30px 90px -30px rgba(77,227,255,0.35);
+  }
+  .btn-primary {
+    background: linear-gradient(120deg, #4DE3FF, #7B5BFF);
+    color: #07091A; font-weight: 600; padding: 14px 28px; border-radius: 12px;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 60px -20px rgba(77,227,255,.6); }
+  .btn-ghost { border: 1px solid rgba(230,233,255,.25); color: var(--text); padding: 14px 28px; border-radius: 12px; transition: all .2s; }
+  .btn-ghost:hover { background: rgba(255,255,255,.05); border-color: #4DE3FF; }
+  .dot-grid {
+    background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .scan-line::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(77,227,255,0.06) 50%, transparent 100%);
+    background-size: 100% 8px; pointer-events: none;
+  }
+  @keyframes pulse-dot { 0%,100% { opacity: 1; transform: scale(1);} 50% { opacity: .5; transform: scale(1.4);} }
+  .pulse { animation: pulse-dot 1.6s ease-in-out infinite; }
+  @keyframes scrollx { from { transform: translateX(0);} to { transform: translateX(-50%);} }
+  .scrollx { animation: scrollx 45s linear infinite; }
+  details[open] summary svg { transform: rotate(180deg); }
+  details summary svg { transition: transform .2s; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; border-radius: 999px;
+    border: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    text-transform: uppercase; letter-spacing: .15em;
+  }
+  .live-dot { width: 6px; height: 6px; border-radius: 99px; background: #B6FF6B; box-shadow: 0 0 12px #B6FF6B; }
+  .waveform path { stroke-dasharray: 200; stroke-dashoffset: 200; animation: dash 3s linear infinite; }
+  @keyframes dash { to { stroke-dashoffset: -200; } }
+  .num-display { font-variant-numeric: tabular-nums; }
+  ::selection { background: #4DE3FF; color: #07091A; }
+
+/* ============ MOBILE RESPONSIVE PATCH ============ */
+html, body { overflow-x: hidden; max-width: 100vw; }
+img, svg, video { max-width: 100%; height: auto; }
+
+@media (max-width: 1023px) {
+  /* Force lg:grid-cols-12 sections to stack on tablet/mobile */
+  section .grid.lg\:grid-cols-12,
+  section .grid.md\:grid-cols-12 {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  section .grid.lg\:grid-cols-12 > *,
+  section .grid.md\:grid-cols-12 > * {
+    min-width: 0;
+    width: 100%;
+  }
+  /* Tighten section padding */
+  section { padding-left: 1rem !important; padding-right: 1rem !important; }
+  section.no-padding-override { padding: revert !important; }
+  /* Marquee cards width cap */
+  .marquee article, .marquee .card { max-width: 280px !important; min-width: 240px !important; }
+}
+
+@media (max-width: 767px) {
+  /* Display text clamps */
+  h1 { font-size: clamp(2rem, 9vw, 3.5rem) !important; line-height: 1.05 !important; }
+  h2 { font-size: clamp(1.5rem, 7vw, 2.5rem) !important; line-height: 1.1 !important; }
+  /* Heavy display text */
+  .display, .didot, .serif.text-7xl, .serif.text-8xl, .serif.text-9xl,
+  [style*="font-size: 120"], [style*="font-size: 140"], [style*="font-size: 170"] {
+    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    line-height: 0.95 !important;
+  }
+  /* Touch targets 44px */
+  button, a[class*="btn"], a[role="button"] {
+    min-height: 44px;
+  }
+  /* Inputs prevent iOS zoom */
+  input, textarea, select { font-size: 16px !important; }
+  /* Disable hover transforms on touch */
+  .card:hover, *[class*="hover:translate"]:hover, *[class*="hover:scale"]:hover {
+    transform: none !important;
+  }
+  /* Big grids collapse */
+  .grid.grid-cols-6 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-5 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-4:not(.grid-rows-2) { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-3 { grid-template-columns: repeat(1, 1fr) !important; }
+  /* Comparison tables: wrap (if direct child grid-cols-4) in overflow-x scroll behavior */
+  .comparison-table, table.comparison { display: block !important; overflow-x: auto !important; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Disable cursor-follow effects on touch devices */
+  .cursor-trail, .sunbeam-cursor, .glow-dot, .mouse-trail {
+    display: none !important;
+  }
+}
+
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<!-- ============ TOP TRUST BAR ============ -->
+<div class="border-b border-[rgba(110,138,255,0.18)]">
+  <div class="max-w-[1500px] mx-auto px-3 sm:px-6 py-2 flex items-center justify-between text-[10px] sm:text-xs gap-2">
+    <div class="flex items-center gap-2 sm:gap-5 mono min-w-0">
+      <span class="live-dot inline-block shrink-0"></span>
+      <span class="uphair text-[#4DE3FF] shrink-0">SYS · ONLINE</span>
+      <span class="hidden md:inline opacity-60">|</span>
+      <span class="hidden md:inline uphair">CALGARY · YYC · MT</span>
+      <span class="hidden md:inline opacity-60">|</span>
+      <span class="hidden md:inline uphair">SUNRISE 05:42 · SUNSET 21:14</span>
+    </div>
+    <div class="flex items-center gap-2 sm:gap-5 mono shrink-0">
+      <a href="tel:+14035550199" class="uphair">+1 403 555 0199</a>
+      <span class="hidden sm:inline opacity-40">/</span>
+      <a href="#" class="uphair hidden sm:inline">EN · FR</a>
+      <span class="hidden sm:inline opacity-40">/</span>
+      <a href="#" class="uphair hidden sm:inline">⌘ SIGN IN</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="sticky top-0 z-30 backdrop-blur bg-[#07091A]/80 border-b border-[rgba(110,138,255,0.18)]">
+  <div class="max-w-[1500px] mx-auto px-3 sm:px-6 py-3 sm:py-4 flex items-center gap-3 sm:gap-8">
+    <a href="#" class="flex items-center gap-2.5 min-w-0">
+      <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl gradient-border flex items-center justify-center shrink-0">
+        <div class="w-full h-full rounded-xl bg-[#07091A] flex items-center justify-center">
+          <span class="gradient-text font-bold text-base sm:text-lg">⌘</span>
+        </div>
+      </div>
+      <div class="min-w-0">
+        <p class="font-bold text-base sm:text-lg leading-none">SunLeo<span class="text-[#4DE3FF]">.</span>os</p>
+        <p class="uphair text-[#8C95C4] mt-0.5 hidden sm:block">Smart Windows · v3.2</p>
+      </div>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-7 text-sm">
+      <a href="#" class="hover:text-[#4DE3FF] transition">Shades</a>
+      <a href="#" class="hover:text-[#4DE3FF] transition">Drapery</a>
+      <a href="#" class="hover:text-[#4DE3FF] transition">Motors</a>
+      <a href="#" class="hover:text-[#4DE3FF] transition">Hubs</a>
+      <a href="#" class="hover:text-[#4DE3FF] transition">Integrations</a>
+      <a href="#" class="hover:text-[#4DE3FF] transition">For Builders</a>
+      <a href="#" class="hover:text-[#4DE3FF] transition">Docs</a>
+    </nav>
+
+    <div class="ml-auto flex items-center gap-2 sm:gap-3">
+      <span class="chip hidden sm:inline-flex"><span class="live-dot pulse"></span> 2 SHADES LIVE</span>
+      <a href="#book" class="btn-primary text-xs sm:text-sm" style="padding:10px 16px;">Book Demo →</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0 dot-grid opacity-40"></div>
+  <div class="max-w-[1500px] mx-auto px-4 sm:px-6 pt-10 sm:pt-16 lg:pt-20 pb-14 sm:pb-20 lg:pb-28 grid lg:grid-cols-12 gap-8 sm:gap-10 items-center relative">
+
+    <div class="lg:col-span-7">
+      <span class="chip"><span class="live-dot pulse"></span> SHIPPING NOW · MATTER 1.4 NATIVE</span>
+      <h1 class="ker text-[44px] sm:text-[60px] md:text-[80px] lg:text-[clamp(58px,8vw,128px)] font-bold leading-[0.95] sm:leading-[0.92] mt-5 sm:mt-7">
+        Windows that <span class="gradient-text">listen</span><br/>
+        to your Calgary<br/>
+        morning.
+      </h1>
+      <p class="mt-6 sm:mt-7 text-base sm:text-lg text-[#B7BFE5] max-w-xl">
+        SunLeo motorized shades + drapery. Matter 1.4 native. Whisper-quiet 28 dB. Sunrise routines, voice control, occupancy sensing — engineered for Calgary's Chinook light and -32° winters.
+      </p>
+
+      <div class="mt-7 sm:mt-9 flex flex-wrap gap-3">
+        <a href="#book" class="btn-primary">Book Free In-Home Demo</a>
+        <a href="#" class="btn-ghost">Compare vs Lutron / Somfy →</a>
+      </div>
+
+      <div class="mt-8 sm:mt-10 grid grid-cols-3 gap-3 sm:gap-4 max-w-2xl">
+        <div>
+          <p class="mono text-[#4DE3FF] text-xl sm:text-3xl num-display">28 dB</p>
+          <p class="text-xs text-[#8C95C4]">Whisper motor</p>
+        </div>
+        <div>
+          <p class="mono text-[#4DE3FF] text-xl sm:text-3xl num-display">7 yr</p>
+          <p class="text-xs text-[#8C95C4]">Battery life</p>
+        </div>
+        <div>
+          <p class="mono text-[#4DE3FF] text-xl sm:text-3xl num-display">320 ms</p>
+          <p class="text-xs text-[#8C95C4]">Voice latency</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Voice-control demo card -->
+    <div class="lg:col-span-5">
+      <div class="gradient-border">
+        <div class="bg-[#0C1029] p-5 sm:p-7 rounded-2xl scan-line relative">
+          <div class="flex items-center justify-between mb-5">
+            <div class="flex items-center gap-2">
+              <span class="live-dot pulse"></span>
+              <span class="mono text-[10px] sm:text-xs uppercase text-[#4DE3FF]">Voice · listening</span>
+            </div>
+            <span class="mono text-[10px] sm:text-xs text-[#8C95C4]">// 7:42 AM YYC</span>
+          </div>
+
+          <div class="space-y-3 sm:space-y-4">
+            <div class="bg-[#131836] rounded-2xl p-3 sm:p-4 ml-4 sm:ml-12">
+              <p class="uphair text-[#8C95C4] mb-1">You</p>
+              <p class="font-medium text-sm sm:text-base">"Hey Google, raise the bedroom blinds to 40%."</p>
+              <svg class="waveform mt-3" width="100%" height="22" viewBox="0 0 200 22">
+                <path d="M0 11 Q 5 4 10 11 T 20 11 T 30 11 T 40 11 T 50 11 T 60 11 T 70 11 T 80 11 T 90 11 T 100 11 T 110 11 T 120 11 T 130 11 T 140 11 T 150 11 T 160 11 T 170 11 T 180 11 T 200 11" stroke="#4DE3FF" stroke-width="2" fill="none"/>
+              </svg>
+            </div>
+            <div class="bg-gradient-to-br from-[#4DE3FF]/15 to-[#7B5BFF]/15 rounded-2xl p-3 sm:p-4 mr-4 sm:mr-12 border border-[#4DE3FF]/20">
+              <p class="uphair text-[#B6FF6B] mb-1">SunLeo.os</p>
+              <p class="font-medium text-sm sm:text-base">Raising 3 shades to 40%. Sunrise routine resumes at 8:15 AM.</p>
+            </div>
+            <div class="bg-[#131836] rounded-2xl p-3 sm:p-4 ml-4 sm:ml-12">
+              <p class="uphair text-[#8C95C4] mb-1">You</p>
+              <p class="font-medium text-sm sm:text-base">"And dim the living room to 'movie'."</p>
+            </div>
+            <div class="bg-gradient-to-br from-[#4DE3FF]/15 to-[#7B5BFF]/15 rounded-2xl p-3 sm:p-4 mr-4 sm:mr-12 border border-[#4DE3FF]/20">
+              <p class="uphair text-[#B6FF6B] mb-1">SunLeo.os</p>
+              <p class="font-medium text-sm sm:text-base">Movie scene activated. 4 blackout shades closing now.</p>
+            </div>
+          </div>
+
+          <div class="mt-5 sm:mt-6 flex items-center justify-between pt-3 sm:pt-4 border-t border-[rgba(110,138,255,0.18)] flex-wrap gap-2">
+            <span class="mono text-[10px] sm:text-xs text-[#8C95C4]">via Matter 1.4 · HomeKit · Google · Alexa</span>
+            <span class="mono text-[10px] sm:text-xs text-[#B6FF6B]">320 ms ⚡</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 flex items-center gap-3 text-xs text-[#8C95C4] flex-wrap">
+        <span class="chip" style="border-color:#B6FF6B33;color:#B6FF6B"><span class="live-dot"></span> WORKS LIVE</span>
+        <span class="text-[10px] sm:text-xs">Verified by Apple Home, Google Home &amp; Amazon Alexa</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST STRIP ============ -->
+<section class="border-y border-[rgba(110,138,255,0.18)] py-5 sm:py-6">
+  <div class="max-w-[1500px] mx-auto px-4 sm:px-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-6 items-center">
+    <div class="flex items-center gap-2"><span class="mono font-bold text-base sm:text-lg gradient-text">▲</span><span class="mono text-xs sm:text-sm">MATTER</span></div>
+    <div class="flex items-center gap-2"><span class="mono font-bold text-base sm:text-lg gradient-text">⌂</span><span class="mono text-xs sm:text-sm">HomeKit</span></div>
+    <div class="flex items-center gap-2"><span class="mono font-bold text-base sm:text-lg gradient-text">A.</span><span class="mono text-xs sm:text-sm">Alexa</span></div>
+    <div class="flex items-center gap-2"><span class="mono font-bold text-base sm:text-lg gradient-text">G.</span><span class="mono text-xs sm:text-sm">Google Home</span></div>
+    <div class="flex items-center gap-2 text-[#B6FF6B]"><span class="live-dot"></span><span class="mono text-[10px] sm:text-xs">4.9 Trustpilot · 2,418</span></div>
+    <div class="mono text-[10px] sm:text-xs text-[#8C95C4]"><b class="text-[#E6E9FF]">BBB A+ &amp; CSA</b> certified</div>
+  </div>
+</section>
+
+<!-- ============ STORY / DEMO 3D ============ -->
+<section class="max-w-[1500px] mx-auto px-4 sm:px-6 py-14 sm:py-20 lg:py-24">
+  <div class="grid lg:grid-cols-12 gap-8 sm:gap-12 items-center">
+    <div class="lg:col-span-5">
+      <span class="uphair text-[#4DE3FF]">// 01 · Built for Matter</span>
+      <h2 class="ker text-4xl sm:text-5xl md:text-6xl font-bold mt-4 leading-[0.95]">
+        Matter <span class="gradient-text">1.4</span><br/>
+        means it works,<br/>
+        with everything,<br/>
+        forever.
+      </h2>
+      <p class="mt-5 sm:mt-6 text-[#B7BFE5] text-base sm:text-lg max-w-lg">
+        Every SunLeo motor is a certified Matter 1.4 device. No bridges, no hubs, no waiting for firmware drama. Pair with Apple Home, Google, Alexa, SmartThings — even Home Assistant. Future-proof, by spec.
+      </p>
+      <ul class="mt-8 space-y-3 mono text-sm">
+        <li class="flex items-start gap-3"><span class="text-[#B6FF6B]">✓</span> Thread + WiFi border-routing (no extra hub)</li>
+        <li class="flex items-start gap-3"><span class="text-[#B6FF6B]">✓</span> Works with any Matter controller, today &amp; tomorrow</li>
+        <li class="flex items-start gap-3"><span class="text-[#B6FF6B]">✓</span> CSA-certified, fingerprinted serials, OTA-signed firmware</li>
+        <li class="flex items-start gap-3"><span class="text-[#B6FF6B]">✓</span> Multi-admin, multi-fabric, multi-room</li>
+      </ul>
+    </div>
+
+    <div class="lg:col-span-7">
+      <div class="glass p-5 sm:p-7 glow">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex gap-2">
+            <span class="w-3 h-3 rounded-full bg-[#FF6B6B]"></span>
+            <span class="w-3 h-3 rounded-full bg-[#FFD93D]"></span>
+            <span class="w-3 h-3 rounded-full bg-[#B6FF6B]"></span>
+          </div>
+          <p class="mono text-[10px] sm:text-xs text-[#8C95C4] truncate">/sunleo.os/network/devices</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="bg-[#131836] rounded-xl p-4 border border-[rgba(110,138,255,0.18)] relative">
+            <span class="absolute top-2 right-2 live-dot pulse"></span>
+            <p class="mono text-[10px] text-[#8C95C4]">SHADE · BEDROOM-01</p>
+            <p class="ker text-3xl mt-2 num-display">42<span class="text-sm text-[#8C95C4]">%</span></p>
+            <div class="mt-2 h-1 bg-[#0C1029] rounded-full overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-[#4DE3FF] to-[#7B5BFF]" style="width:42%"></div>
+            </div>
+            <p class="mono text-[10px] mt-2 text-[#B6FF6B]">ONLINE · 96% BATT</p>
+          </div>
+          <div class="bg-[#131836] rounded-xl p-4 border border-[rgba(110,138,255,0.18)] relative">
+            <span class="absolute top-2 right-2 live-dot"></span>
+            <p class="mono text-[10px] text-[#8C95C4]">SHADE · LIVING-02</p>
+            <p class="ker text-3xl mt-2 num-display">100<span class="text-sm text-[#8C95C4]">%</span></p>
+            <div class="mt-2 h-1 bg-[#0C1029] rounded-full overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-[#4DE3FF] to-[#7B5BFF]" style="width:100%"></div>
+            </div>
+            <p class="mono text-[10px] mt-2 text-[#B6FF6B]">ONLINE · 88% BATT</p>
+          </div>
+          <div class="bg-[#131836] rounded-xl p-4 border border-[rgba(110,138,255,0.18)] relative">
+            <span class="absolute top-2 right-2 live-dot pulse"></span>
+            <p class="mono text-[10px] text-[#8C95C4]">DRAPERY · STUDY-01</p>
+            <p class="ker text-3xl mt-2 num-display">0<span class="text-sm text-[#8C95C4]">%</span></p>
+            <div class="mt-2 h-1 bg-[#0C1029] rounded-full overflow-hidden">
+              <div class="h-1 bg-gradient-to-r from-[#4DE3FF] to-[#7B5BFF]" style="width:0%"></div>
+            </div>
+            <p class="mono text-[10px] mt-2 text-[#B6FF6B]">ONLINE · 100% BATT</p>
+          </div>
+        </div>
+
+        <!-- compat checker -->
+        <div class="mt-5 sm:mt-6 bg-[#0C1029] rounded-xl p-4 sm:p-5 border border-[rgba(110,138,255,0.18)]">
+          <p class="uphair text-[#4DE3FF] mb-3">▸ Smart Home Compatibility Checker</p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mono text-xs">
+            <label class="flex items-center gap-2"><input type="checkbox" checked class="accent-[#4DE3FF]"> Apple Home</label>
+            <label class="flex items-center gap-2"><input type="checkbox" checked class="accent-[#4DE3FF]"> Google Home</label>
+            <label class="flex items-center gap-2"><input type="checkbox" checked class="accent-[#4DE3FF]"> Amazon Alexa</label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="accent-[#4DE3FF]"> SmartThings</label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="accent-[#4DE3FF]"> Home Assistant</label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="accent-[#4DE3FF]"> Hubitat</label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="accent-[#4DE3FF]"> Lutron Caséta</label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="accent-[#4DE3FF]"> IFTTT</label>
+          </div>
+          <p class="mt-3 mono text-[10px] text-[#B6FF6B]">✓ COMPATIBLE WITH 3 OF YOUR SYSTEMS · NO HUB NEEDED</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCT GRID ============ -->
+<section class="max-w-[1500px] mx-auto px-4 sm:px-6 py-14 sm:py-20 lg:py-24">
+  <div class="flex flex-wrap items-end justify-between mb-8 sm:mb-12 gap-5">
+    <div>
+      <span class="uphair text-[#4DE3FF]">// 02 · Hardware</span>
+      <h2 class="ker text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mt-3 leading-[0.95]">The lineup.</h2>
+    </div>
+    <a href="#" class="mono text-sm text-[#4DE3FF]">VIEW FULL CATALOGUE →</a>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+    <!-- 1 -->
+    <div class="glass p-6 relative group hover:border-[#4DE3FF]/40 transition">
+      <span class="absolute top-4 right-4 chip text-[#B6FF6B]" style="border-color:#B6FF6B33"><span class="live-dot"></span> FEATURED</span>
+      <img src="https://picsum.photos/seed/sunleotech201/600/400" class="w-full h-44 sm:h-56 object-cover rounded-xl mb-5" alt="" />
+      <p class="mono text-xs text-[#8C95C4]">SunLeo Q-Series</p>
+      <h3 class="ker text-2xl font-semibold mt-1">Qore™ Motor Roller</h3>
+      <p class="text-sm text-[#B7BFE5] mt-2">28 dB whisper. 7-year Li-ion. Matter 1.4 native. Up to 7 m wide.</p>
+      <div class="mt-4 flex items-center justify-between">
+        <div>
+          <span class="mono text-[10px] text-[#8C95C4]">FROM</span>
+          <p class="ker text-2xl font-bold">$429<span class="text-sm text-[#8C95C4]">/window</span></p>
+        </div>
+        <a href="#" class="text-[#4DE3FF] text-sm">Configure →</a>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="glass p-6 relative group hover:border-[#4DE3FF]/40 transition">
+      <img src="https://picsum.photos/seed/sunleotech202/600/400" class="w-full h-44 sm:h-56 object-cover rounded-xl mb-5" alt="" />
+      <p class="mono text-xs text-[#8C95C4]">SunLeo W-Series</p>
+      <h3 class="ker text-2xl font-semibold mt-1">Insulate™ Cellular</h3>
+      <p class="text-sm text-[#B7BFE5] mt-2">R-5 honeycomb. Sub-zero proven. -32° wind-rated for Calgary winters.</p>
+      <div class="mt-4 flex items-center justify-between">
+        <div>
+          <span class="mono text-[10px] text-[#8C95C4]">FROM</span>
+          <p class="ker text-2xl font-bold">$389<span class="text-sm text-[#8C95C4]">/window</span></p>
+        </div>
+        <a href="#" class="text-[#4DE3FF] text-sm">Configure →</a>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="glass p-6 relative group hover:border-[#4DE3FF]/40 transition">
+      <span class="absolute top-4 right-4 chip text-[#7B5BFF]" style="border-color:#7B5BFF33">NEW · 2026</span>
+      <img src="https://picsum.photos/seed/sunleotech203/600/400" class="w-full h-44 sm:h-56 object-cover rounded-xl mb-5" alt="" />
+      <p class="mono text-xs text-[#8C95C4]">SunLeo D-Series</p>
+      <h3 class="ker text-2xl font-semibold mt-1">Drape™ S-Wave Motor</h3>
+      <p class="text-sm text-[#B7BFE5] mt-2">For drapery up to 80 lb. Wave-form motion. Imperceptibly silent.</p>
+      <div class="mt-4 flex items-center justify-between">
+        <div>
+          <span class="mono text-[10px] text-[#8C95C4]">FROM</span>
+          <p class="ker text-2xl font-bold">$619<span class="text-sm text-[#8C95C4]">/track</span></p>
+        </div>
+        <a href="#" class="text-[#4DE3FF] text-sm">Configure →</a>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="glass p-6 relative group hover:border-[#4DE3FF]/40 transition">
+      <img src="https://picsum.photos/seed/sunleotech204/600/400" class="w-full h-44 sm:h-56 object-cover rounded-xl mb-5" alt="" />
+      <p class="mono text-xs text-[#8C95C4]">SunLeo R-Series</p>
+      <h3 class="ker text-2xl font-semibold mt-1">Relax™ Roman Shade</h3>
+      <p class="text-sm text-[#B7BFE5] mt-2">Hand-sewn pleat, motorised at 0.2 m/s. 92 fabrics.</p>
+      <div class="mt-4 flex items-center justify-between">
+        <div>
+          <span class="mono text-[10px] text-[#8C95C4]">FROM</span>
+          <p class="ker text-2xl font-bold">$489<span class="text-sm text-[#8C95C4]">/window</span></p>
+        </div>
+        <a href="#" class="text-[#4DE3FF] text-sm">Configure →</a>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="glass p-6 relative group hover:border-[#4DE3FF]/40 transition">
+      <img src="https://picsum.photos/seed/sunleotech205/600/400" class="w-full h-44 sm:h-56 object-cover rounded-xl mb-5" alt="" />
+      <p class="mono text-xs text-[#8C95C4]">SunLeo F-Series</p>
+      <h3 class="ker text-2xl font-semibold mt-1">Flora™ Woven Wood</h3>
+      <p class="text-sm text-[#B7BFE5] mt-2">FSC-bamboo, certified sustainable. 14 weaves.</p>
+      <div class="mt-4 flex items-center justify-between">
+        <div>
+          <span class="mono text-[10px] text-[#8C95C4]">FROM</span>
+          <p class="ker text-2xl font-bold">$329<span class="text-sm text-[#8C95C4]">/window</span></p>
+        </div>
+        <a href="#" class="text-[#4DE3FF] text-sm">Configure →</a>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="glass p-6 relative group hover:border-[#4DE3FF]/40 transition">
+      <span class="absolute top-4 right-4 chip" style="border-color:#FF6B6B33;color:#FF6B6B">FINAL SALE</span>
+      <img src="https://picsum.photos/seed/sunleotech206/600/400" class="w-full h-44 sm:h-56 object-cover rounded-xl mb-5" alt="" />
+      <p class="mono text-xs text-[#8C95C4]">SunLeo S-Series</p>
+      <h3 class="ker text-2xl font-semibold mt-1">Shutter™ Plantation</h3>
+      <p class="text-sm text-[#B7BFE5] mt-2">Basswood, motorised tilt. Limited 2026 release.</p>
+      <div class="mt-4 flex items-center justify-between">
+        <div>
+          <span class="mono text-[10px] text-[#8C95C4]">FROM</span>
+          <p class="ker text-2xl font-bold">$58<span class="text-sm text-[#8C95C4]">/sq ft</span></p>
+        </div>
+        <a href="#" class="text-[#4DE3FF] text-sm">Configure →</a>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="glass p-6 relative group hover:border-[#4DE3FF]/40 transition">
+      <img src="https://picsum.photos/seed/sunleotech207/600/400" class="w-full h-44 sm:h-56 object-cover rounded-xl mb-5" alt="" />
+      <p class="mono text-xs text-[#8C95C4]">SunLeo Hub</p>
+      <h3 class="ker text-2xl font-semibold mt-1">Halo™ Smart Hub</h3>
+      <p class="text-sm text-[#B7BFE5] mt-2">Optional. Adds geofence routines, sun-tracking, occupancy.</p>
+      <div class="mt-4 flex items-center justify-between">
+        <div>
+          <span class="mono text-[10px] text-[#8C95C4]">FROM</span>
+          <p class="ker text-2xl font-bold">$159</p>
+        </div>
+        <a href="#" class="text-[#4DE3FF] text-sm">Configure →</a>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="glass p-6 relative group hover:border-[#4DE3FF]/40 transition">
+      <img src="https://picsum.photos/seed/sunleotech208/600/400" class="w-full h-44 sm:h-56 object-cover rounded-xl mb-5" alt="" />
+      <p class="mono text-xs text-[#8C95C4]">SunLeo Sensor</p>
+      <h3 class="ker text-2xl font-semibold mt-1">Lumen™ Sun Sensor</h3>
+      <p class="text-sm text-[#B7BFE5] mt-2">Adapts shades to UV index, room occupancy, temperature.</p>
+      <div class="mt-4 flex items-center justify-between">
+        <div>
+          <span class="mono text-[10px] text-[#8C95C4]">FROM</span>
+          <p class="ker text-2xl font-bold">$89</p>
+        </div>
+        <a href="#" class="text-[#4DE3FF] text-sm">Configure →</a>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="glass p-6 relative group hover:border-[#4DE3FF]/40 transition">
+      <span class="absolute top-4 right-4 chip text-[#B6FF6B]" style="border-color:#B6FF6B33"><span class="live-dot"></span> EXCLUSIVE</span>
+      <img src="https://picsum.photos/seed/sunleotech209/600/400" class="w-full h-44 sm:h-56 object-cover rounded-xl mb-5" alt="" />
+      <p class="mono text-xs text-[#8C95C4]">SunLeo Z-Series</p>
+      <h3 class="ker text-2xl font-semibold mt-1">Zone™ Dual Roller</h3>
+      <p class="text-sm text-[#B7BFE5] mt-2">Day &amp; night in one cassette. Two motors, one window.</p>
+      <div class="mt-4 flex items-center justify-between">
+        <div>
+          <span class="mono text-[10px] text-[#8C95C4]">FROM</span>
+          <p class="ker text-2xl font-bold">$649<span class="text-sm text-[#8C95C4]">/window</span></p>
+        </div>
+        <a href="#" class="text-[#4DE3FF] text-sm">Configure →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPARISON VS LUTRON / SOMFY ============ -->
+<section class="max-w-[1500px] mx-auto px-4 sm:px-6 py-14 sm:py-20 lg:py-24">
+  <div class="text-center mb-10 sm:mb-14">
+    <span class="uphair text-[#4DE3FF]">// 03 · Comparison</span>
+    <h2 class="ker text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mt-3 leading-[0.95]">SunLeo vs.<br/>Lutron Serena · Somfy.</h2>
+    <p class="mt-4 text-[#B7BFE5] max-w-2xl mx-auto text-sm sm:text-base">Real engineering specs, audited. The deeper you go into smart-home, the more these numbers matter.</p>
+  </div>
+
+  <div class="glass overflow-x-auto">
+    <div class="min-w-[640px]">
+    <div class="grid grid-cols-4 bg-[#131836] mono text-xs sm:text-sm">
+      <div class="p-3 sm:p-5 uppercase tracking-wider">Spec</div>
+      <div class="p-3 sm:p-5 text-center border-l border-[rgba(110,138,255,0.18)]">
+        <span class="gradient-text font-bold text-base sm:text-lg">SunLeo Qore™</span>
+      </div>
+      <div class="p-3 sm:p-5 text-center border-l border-[rgba(110,138,255,0.18)]">
+        Lutron Serena
+      </div>
+      <div class="p-3 sm:p-5 text-center border-l border-[rgba(110,138,255,0.18)]">
+        Somfy WireFree
+      </div>
+    </div>
+    <div class="text-xs sm:text-sm">
+      <div class="grid grid-cols-4 border-t border-[rgba(110,138,255,0.18)]">
+        <div class="p-5">Matter 1.4 native</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)] text-[#B6FF6B] font-bold">✓ Native</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)]">Via bridge</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)]">Roadmap</div>
+      </div>
+      <div class="grid grid-cols-4 border-t border-[rgba(110,138,255,0.18)] bg-[#0C1029]/40">
+        <div class="p-5">Motor noise (dB)</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)] text-[#B6FF6B] font-bold num-display">28 dB</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)] num-display">36 dB</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)] num-display">41 dB</div>
+      </div>
+      <div class="grid grid-cols-4 border-t border-[rgba(110,138,255,0.18)]">
+        <div class="p-5">Battery life</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)] text-[#B6FF6B] font-bold">7 years</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)]">5 years</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)]">3 years</div>
+      </div>
+      <div class="grid grid-cols-4 border-t border-[rgba(110,138,255,0.18)] bg-[#0C1029]/40">
+        <div class="p-5">Voice latency</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)] text-[#B6FF6B] font-bold">320 ms</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)]">~ 600 ms</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)]">~ 900 ms</div>
+      </div>
+      <div class="grid grid-cols-4 border-t border-[rgba(110,138,255,0.18)]">
+        <div class="p-5">Max width (m)</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)] text-[#B6FF6B] font-bold">7.0 m</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)]">3.7 m</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)]">4.8 m</div>
+      </div>
+      <div class="grid grid-cols-4 border-t border-[rgba(110,138,255,0.18)] bg-[#0C1029]/40">
+        <div class="p-5">Sub-zero rating</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)] text-[#B6FF6B] font-bold">-40° C</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)]">-20° C</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)]">-25° C</div>
+      </div>
+      <div class="grid grid-cols-4 border-t border-[rgba(110,138,255,0.18)]">
+        <div class="p-5">Hub required</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)] text-[#B6FF6B] font-bold">No (Thread)</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)]">Yes ($79)</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)]">Yes ($129)</div>
+      </div>
+      <div class="grid grid-cols-4 border-t border-[rgba(110,138,255,0.18)] bg-[#0C1029]/40">
+        <div class="p-5">Local-control fallback</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)] text-[#B6FF6B] font-bold">✓ Offline-first</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)]">Cloud-dependent</div>
+        <div class="p-5 text-center border-l border-[rgba(110,138,255,0.18)]">Cloud-dependent</div>
+      </div>
+      <div class="grid grid-cols-4 border-t border-[rgba(110,138,255,0.18)]">
+        <div class="p-3 sm:p-5">Open API (REST + MQTT)</div>
+        <div class="p-3 sm:p-5 text-center border-l border-[rgba(110,138,255,0.18)] text-[#B6FF6B] font-bold">✓ Documented</div>
+        <div class="p-3 sm:p-5 text-center border-l border-[rgba(110,138,255,0.18)]">Limited</div>
+        <div class="p-3 sm:p-5 text-center border-l border-[rgba(110,138,255,0.18)]">No</div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3-STEP ============ -->
+<section class="max-w-[1500px] mx-auto px-4 sm:px-6 py-14 sm:py-20 lg:py-24">
+  <div class="text-center mb-10 sm:mb-12">
+    <span class="uphair text-[#4DE3FF]">// 04 · Installation</span>
+    <h2 class="ker text-4xl sm:text-5xl md:text-6xl font-bold mt-3 leading-[0.95]">Three steps. Zero<br/>chaos.</h2>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
+    <div class="glass p-5 sm:p-7">
+      <div class="flex items-center justify-between mb-5">
+        <span class="mono text-3xl gradient-text font-bold">01.</span>
+        <span class="chip">01:30 · MEASURE</span>
+      </div>
+      <h3 class="ker text-2xl font-semibold mt-2">Free in-home survey</h3>
+      <p class="mt-3 text-sm text-[#B7BFE5]">A Calgary engineer with a laser, a network scanner, and a tablet. We map every window, sun-path, and your WiFi/Thread mesh. 90 minutes.</p>
+    </div>
+    <div class="glass p-7">
+      <div class="flex items-center justify-between mb-5">
+        <span class="mono text-3xl gradient-text font-bold">02.</span>
+        <span class="chip">05–08 D · BUILD</span>
+      </div>
+      <h3 class="ker text-2xl font-semibold mt-2">Pair, configure, swatch</h3>
+      <p class="mt-3 text-sm text-[#B7BFE5]">Order 8 free swatches, choose fabric, sign-off in our visualiser. We pre-pair every motor in-shop before it leaves Inglewood.</p>
+    </div>
+    <div class="glass p-7">
+      <div class="flex items-center justify-between mb-5">
+        <span class="mono text-3xl gradient-text font-bold">03.</span>
+        <span class="chip">1–2 D · DEPLOY</span>
+      </div>
+      <h3 class="ker text-2xl font-semibold mt-2">Install + integrate</h3>
+      <p class="mt-3 text-sm text-[#B7BFE5]">Two engineers, one morning. We hook your shades into your HomeKit / Google / Alexa, demo every routine, leave you a printable cheatsheet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="bg-[#0C1029] py-14 sm:py-20 lg:py-24 border-y border-[rgba(110,138,255,0.18)]">
+  <div class="max-w-[1500px] mx-auto px-4 sm:px-6">
+    <div class="flex flex-wrap items-end justify-between mb-8 sm:mb-12 gap-4">
+      <div>
+        <span class="uphair text-[#4DE3FF]">// 05 · Calgary Users</span>
+        <h2 class="ker text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mt-3 leading-[0.95]">Operators say.</h2>
+      </div>
+      <div class="flex items-center gap-3 mono text-xs sm:text-sm flex-wrap">
+        <span class="chip text-[#B6FF6B]" style="border-color:#B6FF6B33"><span class="live-dot"></span> 4.9 TRUSTPILOT</span>
+        <span>2,418 reviews</span>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="glass p-6">
+        <div class="flex items-center gap-3 mb-3">
+          <img src="https://picsum.photos/seed/sunleotech501/80/80" class="w-10 h-10 rounded-full" alt="" />
+          <div>
+            <p class="font-semibold">Wren H.</p>
+            <p class="mono text-xs text-[#8C95C4]">// Aspen Estates · YYC</p>
+          </div>
+        </div>
+        <div class="text-[#B6FF6B] text-sm">★★★★★</div>
+        <p class="mt-2 text-sm text-[#B7BFE5]">"Paired 11 shades into HomeKit in one tap. They follow Calgary sunset like clockwork. Genuinely the cleanest smart-home install we've ever had."</p>
+        <p class="mono text-xs text-[#8C95C4] mt-4">12.05.2026 · QORE × 11</p>
+      </div>
+      <div class="glass p-6">
+        <div class="flex items-center gap-3 mb-3">
+          <img src="https://picsum.photos/seed/sunleotech502/80/80" class="w-10 h-10 rounded-full" alt="" />
+          <div>
+            <p class="font-semibold">Esfir Z.</p>
+            <p class="mono text-xs text-[#8C95C4]">// Britannia · YYC</p>
+          </div>
+        </div>
+        <div class="text-[#B6FF6B] text-sm">★★★★★</div>
+        <p class="mt-2 text-sm text-[#B7BFE5]">"Replaced our Lutron Serena setup. Quieter motors, no hub, no cloud lag. Wife noticed within a day."</p>
+        <p class="mono text-xs text-[#8C95C4] mt-4">07.05.2026 · QORE + DRAPE × 14</p>
+      </div>
+      <div class="glass p-6">
+        <div class="flex items-center gap-3 mb-3">
+          <img src="https://picsum.photos/seed/sunleotech503/80/80" class="w-10 h-10 rounded-full" alt="" />
+          <div>
+            <p class="font-semibold">Tomislav P.</p>
+            <p class="mono text-xs text-[#8C95C4]">// Mahogany · YYC</p>
+          </div>
+        </div>
+        <div class="text-[#B6FF6B] text-sm">★★★★★</div>
+        <p class="mt-2 text-sm text-[#B7BFE5]">"Home Assistant integration via local API was &lt; 10 minutes. They published the YAML. Hardware nerd-approved."</p>
+        <p class="mono text-xs text-[#8C95C4] mt-4">01.05.2026 · INSULATE × 8 + HUB</p>
+      </div>
+      <div class="glass p-6">
+        <div class="flex items-center gap-3 mb-3">
+          <img src="https://picsum.photos/seed/sunleotech504/80/80" class="w-10 h-10 rounded-full" alt="" />
+          <div>
+            <p class="font-semibold">Linnea Ø.</p>
+            <p class="mono text-xs text-[#8C95C4]">// Inglewood · YYC</p>
+          </div>
+        </div>
+        <div class="text-[#B6FF6B] text-sm">★★★★★</div>
+        <p class="mt-2 text-sm text-[#B7BFE5]">"-32° in February, motors didn't blink. R-5 honeycomb cut my heating bill by 18% per ENMAX."</p>
+        <p class="mono text-xs text-[#8C95C4] mt-4">28.04.2026 · INSULATE × 12</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CALGARY MAP ============ -->
+<section class="max-w-[1500px] mx-auto px-4 sm:px-6 py-14 sm:py-20 lg:py-24">
+  <div class="grid lg:grid-cols-12 gap-8 sm:gap-10 items-center">
+    <div class="lg:col-span-5">
+      <span class="uphair text-[#4DE3FF]">// 06 · Calgary deployments</span>
+      <h2 class="ker text-4xl sm:text-5xl md:text-6xl font-bold mt-3 leading-[0.95]">
+        <span class="num-display gradient-text">3,427</span> homes,<br/>
+        <span class="num-display">94</span> neighbourhoods,<br/>
+        <span class="num-display">0</span> cloud outages.
+      </h2>
+      <p class="mt-5 sm:mt-6 text-[#B7BFE5] max-w-md text-sm sm:text-base">SunLeo motors run on a Thread mesh — local-first. Even if your internet drops, your shades still wake with the Calgary sunrise.</p>
+      <div class="mt-6 sm:mt-8 grid grid-cols-2 gap-3 sm:gap-4">
+        <div class="glass p-4">
+          <p class="mono text-[10px] sm:text-xs text-[#8C95C4]">CALGARY UPTIME 30D</p>
+          <p class="ker text-2xl sm:text-3xl mt-1 num-display text-[#B6FF6B]">100.0%</p>
+        </div>
+        <div class="glass p-4">
+          <p class="mono text-[10px] sm:text-xs text-[#8C95C4]">AVG INSTALL TIME</p>
+          <p class="ker text-2xl sm:text-3xl mt-1 num-display">5.2d</p>
+        </div>
+        <div class="glass p-4">
+          <p class="mono text-[10px] sm:text-xs text-[#8C95C4]">SUPPORT REPLY</p>
+          <p class="ker text-2xl sm:text-3xl mt-1 num-display">12 min</p>
+        </div>
+        <div class="glass p-4">
+          <p class="mono text-[10px] sm:text-xs text-[#8C95C4]">ENERGY SAVED 2025</p>
+          <p class="ker text-2xl sm:text-3xl mt-1 num-display">1.4 GWh</p>
+        </div>
+      </div>
+    </div>
+    <div class="lg:col-span-7 relative">
+      <div class="glass p-2 relative overflow-hidden scan-line">
+        <img src="https://picsum.photos/seed/sunleotechmap/1000/700" class="w-full h-[320px] sm:h-[420px] lg:h-[500px] object-cover rounded-xl" alt="Calgary smart-home map" />
+        <span class="absolute top-4 left-4 sm:top-6 sm:left-6 chip"><span class="live-dot pulse"></span> LIVE · 3,427 NODES</span>
+      </div>
+      <div class="absolute top-4 right-4 sm:top-8 sm:right-8 glass p-3 sm:p-4 max-w-[160px] sm:max-w-[220px]">
+        <p class="mono text-[10px] sm:text-xs text-[#8C95C4]">REGION_HIGHLIGHT</p>
+        <p class="ker text-base sm:text-xl font-semibold mt-1">SW Quadrant</p>
+        <p class="mono text-[10px] sm:text-xs text-[#B6FF6B] mt-1">1,184 active homes</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BNPL / PAY ============ -->
+<section class="max-w-[1500px] mx-auto px-4 sm:px-6 py-14 sm:py-20 lg:py-24">
+  <div class="glass p-6 sm:p-10 lg:p-16 grid lg:grid-cols-12 gap-8 sm:gap-10 items-center relative overflow-hidden">
+    <div class="absolute inset-0 dot-grid opacity-30"></div>
+    <div class="lg:col-span-7 relative">
+      <span class="uphair text-[#4DE3FF]">// 07 · Financing</span>
+      <h2 class="ker text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mt-3 leading-[0.95]">Whole house.<br/><span class="gradient-text">$96</span> / month.</h2>
+      <p class="mt-5 sm:mt-6 text-[#B7BFE5] text-base sm:text-lg max-w-lg">A motorised, Matter-native, 16-window smart-home install — financed at 0% APR with Affirm over 24 months. Pre-qualify in 30 sec, no credit impact.</p>
+      <div class="mt-6 sm:mt-7 flex flex-wrap gap-2 sm:gap-3">
+        <span class="chip">affirm)</span>
+        <span class="chip">Klarna.</span>
+        <span class="chip">afterpay&lt;&gt;</span>
+        <span class="chip">PayBright</span>
+      </div>
+      <a href="#" class="mt-6 sm:mt-8 inline-block btn-primary">Pre-Qualify · 30s →</a>
+    </div>
+    <div class="lg:col-span-5 relative">
+      <img src="https://picsum.photos/seed/sunleotechbnpl/600/700" class="w-full h-[320px] sm:h-[400px] lg:h-[440px] object-cover rounded-2xl" alt="" />
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOURNAL ============ -->
+<section class="max-w-[1500px] mx-auto px-4 sm:px-6 py-14 sm:py-20 lg:py-24">
+  <div class="flex flex-wrap items-end justify-between mb-8 sm:mb-12 gap-4">
+    <div>
+      <span class="uphair text-[#4DE3FF]">// 08 · /journal</span>
+      <h2 class="ker text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mt-3 leading-[0.95]">Engineering notes.</h2>
+    </div>
+    <a href="#" class="mono text-sm text-[#4DE3FF]">VIEW ALL POSTS →</a>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+    <a href="#" class="glass overflow-hidden hover:border-[#4DE3FF]/40 transition block">
+      <img src="https://picsum.photos/seed/sunleotechblog1/700/450" class="w-full h-52 object-cover" alt="" />
+      <div class="p-6">
+        <p class="mono text-xs text-[#4DE3FF]">// MATTER · 10 MIN READ</p>
+        <h3 class="ker text-2xl font-semibold mt-3 leading-tight">Why we shipped Matter 1.4 the day it dropped</h3>
+        <p class="mt-3 text-sm text-[#B7BFE5]">A founder essay on protocol bets, Thread border-routing, and what spec compliance really costs.</p>
+        <p class="mono text-xs text-[#8C95C4] mt-4">// 14.05.2026</p>
+      </div>
+    </a>
+    <a href="#" class="glass overflow-hidden hover:border-[#4DE3FF]/40 transition block">
+      <img src="https://picsum.photos/seed/sunleotechblog2/700/450" class="w-full h-52 object-cover" alt="" />
+      <div class="p-6">
+        <p class="mono text-xs text-[#4DE3FF]">// CASE STUDY · 7 MIN</p>
+        <h3 class="ker text-2xl font-semibold mt-3 leading-tight">An 18-shade Britannia install, end-to-end</h3>
+        <p class="mt-3 text-sm text-[#B7BFE5]">Network diagrams, Thread node placement, voice latency under load.</p>
+        <p class="mono text-xs text-[#8C95C4] mt-4">// 06.05.2026</p>
+      </div>
+    </a>
+    <a href="#" class="glass overflow-hidden hover:border-[#4DE3FF]/40 transition block">
+      <img src="https://picsum.photos/seed/sunleotechblog3/700/450" class="w-full h-52 object-cover" alt="" />
+      <div class="p-6">
+        <p class="mono text-xs text-[#4DE3FF]">// FIELD · 6 MIN</p>
+        <h3 class="ker text-2xl font-semibold mt-3 leading-tight">-32°C and our motors didn't blink</h3>
+        <p class="mt-3 text-sm text-[#B7BFE5]">A field log from the February 2026 cold snap. Battery telemetry, motor torque, what surprised us.</p>
+        <p class="mono text-xs text-[#8C95C4] mt-4">// 24.04.2026</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ AS SEEN IN ============ -->
+<section class="border-y border-[rgba(110,138,255,0.18)] py-8 sm:py-10 bg-[#0C1029]">
+  <p class="text-center uphair text-[#4DE3FF] mb-5 sm:mb-7">// As seen in</p>
+  <div class="overflow-hidden">
+    <div class="flex gap-8 sm:gap-16 scrollx items-center whitespace-nowrap">
+      <span class="mono text-xl sm:text-2xl opacity-80">The Verge</span>
+      <span class="mono text-xl sm:text-2xl opacity-80">WIRED</span>
+      <span class="mono text-xl sm:text-2xl opacity-80">CNET</span>
+      <span class="mono text-xl sm:text-2xl opacity-80">Calgary Herald</span>
+      <span class="mono text-xl sm:text-2xl opacity-80">Matter Alpha Daily</span>
+      <span class="mono text-xl sm:text-2xl opacity-80">9to5Mac</span>
+      <span class="mono text-xl sm:text-2xl opacity-80">Stacey on IoT</span>
+      <span class="mono text-xl sm:text-2xl opacity-80">Western Living</span>
+      <span class="mono text-xl sm:text-2xl opacity-80">The Verge</span>
+      <span class="mono text-xl sm:text-2xl opacity-80">WIRED</span>
+      <span class="mono text-xl sm:text-2xl opacity-80">CNET</span>
+      <span class="mono text-xl sm:text-2xl opacity-80">Calgary Herald</span>
+      <span class="mono text-xl sm:text-2xl opacity-80">Matter Alpha Daily</span>
+      <span class="mono text-xl sm:text-2xl opacity-80">9to5Mac</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTAGRAM ============ -->
+<section class="max-w-[1500px] mx-auto px-4 sm:px-6 py-14 sm:py-20 lg:py-24">
+  <div class="flex flex-wrap items-end justify-between mb-8 sm:mb-10 gap-4">
+    <div>
+      <span class="uphair text-[#4DE3FF]">// 09 · @sunleo.os</span>
+      <h2 class="ker text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mt-3 leading-[0.95]">Tagged in YYC.</h2>
+    </div>
+    <a href="#" class="btn-ghost text-sm">Follow @sunleo.os →</a>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <a href="#" class="glass overflow-hidden aspect-square block group"><img src="https://picsum.photos/seed/sunleotechig1/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+    <a href="#" class="glass overflow-hidden aspect-square block group"><img src="https://picsum.photos/seed/sunleotechig2/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+    <a href="#" class="glass overflow-hidden aspect-square block group"><img src="https://picsum.photos/seed/sunleotechig3/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+    <a href="#" class="glass overflow-hidden aspect-square block group"><img src="https://picsum.photos/seed/sunleotechig4/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+    <a href="#" class="glass overflow-hidden aspect-square block group"><img src="https://picsum.photos/seed/sunleotechig5/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+    <a href="#" class="glass overflow-hidden aspect-square block group"><img src="https://picsum.photos/seed/sunleotechig6/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+    <a href="#" class="glass overflow-hidden aspect-square block group"><img src="https://picsum.photos/seed/sunleotechig7/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+    <a href="#" class="glass overflow-hidden aspect-square block group"><img src="https://picsum.photos/seed/sunleotechig8/500/500" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="" /></a>
+  </div>
+</section>
+
+<!-- ============ TRADE ============ -->
+<section class="max-w-[1500px] mx-auto px-4 sm:px-6 py-14 sm:py-20 lg:py-24">
+  <div class="grid lg:grid-cols-12 gap-8 sm:gap-10 items-center">
+    <div class="lg:col-span-7">
+      <span class="uphair text-[#4DE3FF]">// 10 · For builders</span>
+      <h2 class="ker text-4xl sm:text-5xl md:text-6xl font-bold mt-3 leading-[0.95]">
+        For the people who<br/>
+        spec the windows<br/>
+        <span class="gradient-text">before drywall.</span>
+      </h2>
+      <p class="mt-5 sm:mt-6 text-[#B7BFE5] max-w-xl text-base sm:text-lg">
+        Custom-home builders, smart-home integrators, AV/CI shops — talk to our trade desk for net-30 pricing, white-label deployment, signed firmware, BACnet bridging, and on-site engineer support.
+      </p>
+      <div class="mt-6 sm:mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="glass p-4">
+          <p class="mono text-xs text-[#4DE3FF]">DISCOUNT</p>
+          <p class="ker text-2xl font-bold mt-1">Up to 35%</p>
+        </div>
+        <div class="glass p-4">
+          <p class="mono text-xs text-[#4DE3FF]">TERMS</p>
+          <p class="ker text-2xl font-bold mt-1">NET-30</p>
+        </div>
+        <div class="glass p-4">
+          <p class="mono text-xs text-[#4DE3FF]">DESIGNER</p>
+          <p class="ker text-2xl font-bold mt-1">Dedicated</p>
+        </div>
+        <div class="glass p-4">
+          <p class="mono text-xs text-[#4DE3FF]">REGION</p>
+          <p class="ker text-2xl font-bold mt-1">AB · BC · SK</p>
+        </div>
+      </div>
+      <a href="#" class="mt-6 sm:mt-8 inline-block btn-primary">Open Trade Account →</a>
+    </div>
+    <div class="lg:col-span-5">
+      <div class="glass p-5 sm:p-7">
+        <p class="uphair text-[#B6FF6B]">// Partner deployment</p>
+        <p class="ker text-xl sm:text-2xl font-semibold mt-2">Alpine Custom Homes · Springbank Estates</p>
+        <div class="mt-4 grid grid-cols-3 gap-3 mono text-xs">
+          <div><p class="text-[#8C95C4]">UNITS</p><p class="ker text-lg sm:text-xl text-[#4DE3FF] num-display">47</p></div>
+          <div><p class="text-[#8C95C4]">WINDOWS</p><p class="ker text-lg sm:text-xl text-[#4DE3FF] num-display">1,184</p></div>
+          <div><p class="text-[#8C95C4]">DEPLOYED</p><p class="ker text-lg sm:text-xl text-[#4DE3FF] num-display">2024–26</p></div>
+        </div>
+        <p class="mt-5 text-sm italic text-[#B7BFE5]">"SunLeo handed us a firmware-signed, Matter-ready spec we could put in the architectural drawings two years before the first slab. Game-changer for spec-home margins."</p>
+        <p class="mt-4 mono text-xs text-[#8C95C4]">// Ronan T. — Alpine Custom Homes</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="max-w-[1500px] mx-auto px-4 sm:px-6 py-14 sm:py-20 lg:py-24">
+  <div class="grid lg:grid-cols-12 gap-8 sm:gap-12">
+    <div class="lg:col-span-4">
+      <span class="uphair text-[#4DE3FF]">// 11 · /docs</span>
+      <h2 class="ker text-4xl sm:text-5xl md:text-6xl font-bold mt-3 leading-[0.95]">Frequently raised tickets.</h2>
+      <p class="mt-5 sm:mt-6 text-[#B7BFE5] text-sm sm:text-base">More in our public docs at <span class="mono text-[#4DE3FF]">/docs</span>. Or ping <span class="mono text-[#4DE3FF]">@sunleo</span> on Discord, replies usually under 30 min.</p>
+    </div>
+    <div class="lg:col-span-8 space-y-3">
+      <details class="glass p-5" open>
+        <summary class="cursor-pointer font-semibold text-lg flex items-center justify-between">Does it really work without internet?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <p class="mt-3 text-sm text-[#B7BFE5]">Yes — Thread mesh is fully local. Scenes, schedules, and voice control via local Apple/Google hubs all work offline. Cloud is only for OTA firmware and remote-away control.</p>
+      </details>
+      <details class="glass p-5">
+        <summary class="cursor-pointer font-semibold text-lg flex items-center justify-between">Will it work with Home Assistant?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <p class="mt-3 text-sm text-[#B7BFE5]">Yes, two ways — via Matter Thread (zero-config) or our local REST/MQTT API. We publish YAML examples and a HACS integration. Both are stable.</p>
+      </details>
+      <details class="glass p-5">
+        <summary class="cursor-pointer font-semibold text-lg flex items-center justify-between">How much for a typical Calgary home?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <p class="mt-3 text-sm text-[#B7BFE5]">12–16 motorised windows in a 2,400 sq ft home: $5,400–$13,800 installed, including firmware setup, integration, and a 30-min user training session. Pay-over-time at $96/mo (24×, 0% APR).</p>
+      </details>
+      <details class="glass p-5">
+        <summary class="cursor-pointer font-semibold text-lg flex items-center justify-between">Battery vs hardwired?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <p class="mt-3 text-sm text-[#B7BFE5]">Battery (7-year Li-ion) is standard. Hardwired option available pre-rough-in for new builds — talk to our trade desk.</p>
+      </details>
+      <details class="glass p-5">
+        <summary class="cursor-pointer font-semibold text-lg flex items-center justify-between">How loud are the motors really?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <p class="mt-3 text-sm text-[#B7BFE5]">28 dB at 1m, measured in our anechoic-foam test cabinet. Quieter than a library whisper. We have demo units at the Inglewood lab — book a hands-on session.</p>
+      </details>
+      <details class="glass p-5">
+        <summary class="cursor-pointer font-semibold text-lg flex items-center justify-between">What's the firmware update policy?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <p class="mt-3 text-sm text-[#B7BFE5]">Signed OTA updates from our public release channel. Every release is documented in the changelog at /docs/firmware. You can pin/rollback any version. Always.</p>
+      </details>
+      <details class="glass p-5">
+        <summary class="cursor-pointer font-semibold text-lg flex items-center justify-between">Cordless &amp; child-safe?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <p class="mt-3 text-sm text-[#B7BFE5]">All motorised &amp; cordless options are WCMA-certified child-safe. The standard offering, not an upcharge.</p>
+      </details>
+      <details class="glass p-5">
+        <summary class="cursor-pointer font-semibold text-lg flex items-center justify-between">Warranty?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <p class="mt-3 text-sm text-[#B7BFE5]">Lifetime on hardware, fabric, motor &amp; firmware compatibility. Transferable to new homeowners. 100% of repairs done in-house in Inglewood — never sub-contracted.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section id="book" class="relative py-14 sm:py-20 lg:py-24 overflow-hidden">
+  <div class="absolute inset-0 dot-grid opacity-30"></div>
+  <div class="absolute inset-0" style="background: radial-gradient(60% 70% at 50% 100%, rgba(77,227,255,0.15), transparent 70%);"></div>
+  <div class="relative max-w-3xl mx-auto px-4 sm:px-6 text-center">
+    <span class="uphair text-[#4DE3FF]">// boot.sequence start</span>
+    <h2 class="ker text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mt-4 leading-[0.95]">
+      Schedule your<br/>
+      <span class="gradient-text">free demo.</span>
+    </h2>
+    <p class="mt-5 sm:mt-6 text-base sm:text-lg text-[#B7BFE5] max-w-xl mx-auto">A Calgary engineer at your door in 48 hours, demo kit in hand. We'll show you Matter pairing live, voice routines, and a no-pressure quote before we leave.</p>
+    <form class="mt-8 sm:mt-10 max-w-md mx-auto glass p-5 sm:p-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
+        <div>
+          <label class="mono text-xs text-[#8C95C4]">FULL_NAME</label>
+          <input class="w-full mt-1 bg-[#0C1029] border border-[rgba(110,138,255,0.18)] rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#4DE3FF]" placeholder="Wren Halifax" />
+        </div>
+        <div>
+          <label class="mono text-xs text-[#8C95C4]">POSTAL</label>
+          <input class="w-full mt-1 bg-[#0C1029] border border-[rgba(110,138,255,0.18)] rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#4DE3FF]" placeholder="T2T 0X3" />
+        </div>
+      </div>
+      <div class="mt-3 text-left">
+        <label class="mono text-xs text-[#8C95C4]">SMART_HOME (so we bring the right demo unit)</label>
+        <select class="w-full mt-1 bg-[#0C1029] border border-[rgba(110,138,255,0.18)] rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#4DE3FF]">
+          <option>Apple HomeKit</option>
+          <option>Google Home</option>
+          <option>Amazon Alexa</option>
+          <option>SmartThings</option>
+          <option>Home Assistant</option>
+          <option>None yet — talk me through it</option>
+        </select>
+      </div>
+      <button type="button" class="w-full mt-4 btn-primary">Schedule Free Demo →</button>
+      <p class="mono text-[10px] text-[#8C95C4] mt-3 text-center">CALGARY · COCHRANE · AIRDRIE · OKOTOKS · NO TRAVEL FEE</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-[rgba(110,138,255,0.18)] pt-12 sm:pt-16 pb-6 sm:pb-8 mt-8 sm:mt-12">
+  <div class="max-w-[1500px] mx-auto px-4 sm:px-6">
+    <div class="grid grid-cols-2 md:grid-cols-6 gap-6 sm:gap-10 pb-8 sm:pb-12 border-b border-[rgba(110,138,255,0.18)]">
+      <div class="col-span-2 md:col-span-2">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl gradient-border flex items-center justify-center">
+            <div class="w-full h-full rounded-xl bg-[#07091A] flex items-center justify-center"><span class="gradient-text font-bold text-lg">⌘</span></div>
+          </div>
+          <p class="font-bold text-lg">SunLeo<span class="text-[#4DE3FF]">.</span>os</p>
+        </div>
+        <p class="mono text-xs text-[#4DE3FF] mt-3">// CALGARY · v3.2.4 · MATTER 1.4</p>
+        <p class="mt-5 text-sm text-[#B7BFE5] max-w-sm">Smart-home native shades, drapery &amp; sensors, engineered &amp; supported from Inglewood, Calgary.</p>
+        <div class="mt-5 flex gap-3 text-sm">
+          <a href="#" class="text-[#8C95C4] hover:text-[#4DE3FF]">GitHub</a>
+          <a href="#" class="text-[#8C95C4] hover:text-[#4DE3FF]">Discord</a>
+          <a href="#" class="text-[#8C95C4] hover:text-[#4DE3FF]">YouTube</a>
+          <a href="#" class="text-[#8C95C4] hover:text-[#4DE3FF]">Twitter</a>
+        </div>
+      </div>
+      <div>
+        <p class="uphair text-[#4DE3FF] mb-4">Hardware</p>
+        <ul class="space-y-2 text-sm text-[#B7BFE5]">
+          <li><a href="#">Qore™ Roller</a></li>
+          <li><a href="#">Insulate™ Cellular</a></li>
+          <li><a href="#">Drape™ Track</a></li>
+          <li><a href="#">Halo™ Hub</a></li>
+          <li><a href="#">Lumen™ Sensor</a></li>
+          <li><a href="#">Compare</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="uphair text-[#4DE3FF] mb-4">Integrations</p>
+        <ul class="space-y-2 text-sm text-[#B7BFE5]">
+          <li><a href="#">Apple HomeKit</a></li>
+          <li><a href="#">Google Home</a></li>
+          <li><a href="#">Alexa</a></li>
+          <li><a href="#">Home Assistant</a></li>
+          <li><a href="#">Open API</a></li>
+          <li><a href="#">SmartThings</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="uphair text-[#4DE3FF] mb-4">Resources</p>
+        <ul class="space-y-2 text-sm text-[#B7BFE5]">
+          <li><a href="#">/docs</a></li>
+          <li><a href="#">/changelog</a></li>
+          <li><a href="#">/status</a></li>
+          <li><a href="#">/security</a></li>
+          <li><a href="#">Trade</a></li>
+          <li><a href="#">Engineering blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="uphair text-[#4DE3FF] mb-4">Calgary HQ</p>
+        <p class="text-sm text-[#B7BFE5] leading-relaxed">1217 9 Ave SE<br/>Inglewood T2G 0T1<br/>+1 403 555 0199<br/>os@sunleo.ca</p>
+        <p class="mono text-xs text-[#8C95C4] mt-3">Tue–Sat 10:00–18:00 MT</p>
+      </div>
+    </div>
+
+    <div class="py-6 sm:py-8 grid md:grid-cols-2 gap-5 items-center border-b border-[rgba(110,138,255,0.18)]">
+      <div>
+        <p class="mono text-xs text-[#4DE3FF]">// CHANGELOG.RSS</p>
+        <p class="ker text-xl sm:text-2xl font-semibold mt-1">Subscribe to firmware releases &amp; engineering posts</p>
+      </div>
+      <form class="flex flex-wrap sm:flex-nowrap">
+        <input type="email" placeholder="dev@your-home.ca" class="flex-1 min-w-0 bg-[#0C1029] border border-[rgba(110,138,255,0.18)] rounded-l-lg sm:rounded-l-lg rounded-r-none px-4 sm:px-5 py-3 sm:py-4 text-sm focus:outline-none focus:border-[#4DE3FF] mono" />
+        <button class="btn-primary rounded-l-none">Subscribe →</button>
+      </form>
+    </div>
+
+    <div class="pt-8 grid md:grid-cols-2 gap-6 items-center">
+      <div class="flex flex-wrap gap-4 text-xs text-[#8C95C4] mono">
+        <span>// © 2026 SunLeo Operating Systems Inc.</span>
+        <a href="#">/privacy</a><a href="#">/terms</a><a href="#">/security.txt</a><a href="#">/accessibility</a>
+      </div>
+      <div class="flex flex-wrap items-center gap-3 justify-start md:justify-end mono text-xs">
+        <span class="chip">VISA</span><span class="chip">Mastercard</span><span class="chip">AMEX</span><span class="chip">Affirm</span><span class="chip">Klarna</span><span class="chip">Apple Pay</span>
+      </div>
+    </div>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="#" class="glass px-4 py-3 flex items-center gap-3 text-xs"><span></span><span><b>App Store</b><br/><span class="text-[#8C95C4]">SunLeo iOS</span></span></a>
+      <a href="#" class="glass px-4 py-3 flex items-center gap-3 text-xs"><span></span><span><b>Google Play</b><br/><span class="text-[#8C95C4]">SunLeo Android</span></span></a>
+    </div>
+  </div>
+</footer>
+
+<!-- sticky side panel -->
+<div class="fixed right-3 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-2 z-40">
+  <button class="w-11 h-11 rounded-xl gradient-border"><div class="w-full h-full rounded-xl bg-[#07091A] flex items-center justify-center text-[#4DE3FF]"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></div></button>
+  <button class="w-11 h-11 rounded-xl glass text-[#B6FF6B] flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+  <button class="w-11 h-11 rounded-xl glass text-[#4DE3FF] flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg></button>
+</div>
+
+
+</body>
+</html>

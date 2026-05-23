@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SunLeo — Before / After · Drag the slider · 3,400 Calgary transformations</title>
+<meta name="description" content="Drag the slider. Watch yellowed vinyl turn into Belgian linen. Six real Calgary rooms, six dramatic transformations. The work speaks first."/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Archivo:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+<link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet"/>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<style>
+  :root{
+    --black:  #000000;
+    --bone:   #F8F5F0;
+    --bone-2: #ECE7DE;
+    --red:    #FF2400;
+    --orange: #FF7A00;
+    --gray:   #7C7C7C;
+    --gray-2: #C2C2C2;
+    --hair:   rgba(0,0,0,.14);
+    --hair-bone: rgba(248,245,240,.22);
+  }
+  *{ -webkit-font-smoothing: antialiased; }
+  html, body{ background: var(--bone); color: var(--black); font-family: 'Archivo', sans-serif; font-weight: 400; letter-spacing:-.005em; }
+  .display{ font-family: 'Fraunces', serif; font-weight: 900; letter-spacing:-.035em; }
+  .display-it{ font-family: 'Fraunces', serif; font-weight: 400; font-style: italic; letter-spacing: -.02em; }
+  .mono{ font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .15em; text-transform: uppercase; }
+  .heavy{ font-family: 'Archivo', sans-serif; font-weight: 800; letter-spacing: -.02em;}
+  .tabnum{ font-variant-numeric: tabular-nums; }
+  .ital{ font-style: italic; }
+
+  /* Heavy borders */
+  .ed-border{ border: 3px solid var(--black); }
+  .ed-border-r{ border-right: 3px solid var(--black); }
+  .ed-border-b{ border-bottom: 3px solid var(--black); }
+  .ed-border-t{ border-top: 3px solid var(--black); }
+
+  /* Buttons */
+  .btn-red{ background: var(--red); color: var(--bone); padding: 16px 32px; font-family:'Archivo', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; transition: background .3s, transform .3s; display: inline-flex; align-items: center; gap: 12px; border: 3px solid var(--black); box-shadow: 5px 5px 0 var(--black); }
+  .btn-red:hover{ transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--black); }
+  .btn-orange{ background: var(--orange); color: var(--black); padding: 16px 32px; font-family:'Archivo', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; transition: background .3s, transform .3s; display: inline-flex; align-items: center; gap: 12px; border: 3px solid var(--black); box-shadow: 5px 5px 0 var(--black);}
+  .btn-orange:hover{ transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--black);}
+  .btn-black{ background: var(--black); color: var(--bone); padding: 16px 32px; font-family:'Archivo', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; transition: background .3s, transform .3s; display: inline-flex; align-items: center; gap: 12px; border: 3px solid var(--black); box-shadow: 5px 5px 0 var(--red); }
+  .btn-black:hover{ transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--red); }
+  .btn-ghost{ background: transparent; color: var(--black); padding: 15px 32px; font-family:'Archivo', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; transition: all .3s; display: inline-flex; align-items: center; gap: 12px; border: 3px solid var(--black);}
+  .btn-ghost:hover{ background: var(--black); color: var(--bone); }
+
+  /* Stars */
+  .stars{ letter-spacing:.18em; color: var(--red); }
+
+  /* Marquee */
+  .mq{ display: flex; gap: 60px; animation: mq 50s linear infinite;}
+  @keyframes mq{ from{ transform: translateX(0);} to{ transform: translateX(-50%);}}
+  .mq-rev{ animation-direction: reverse; }
+
+  /* Pulse */
+  @keyframes pulse{ 0%{ box-shadow: 0 0 0 0 rgba(255,36,0,.5);} 70%{ box-shadow: 0 0 0 14px rgba(255,36,0,0);} 100%{ box-shadow: 0 0 0 0 rgba(255,36,0,0);} }
+  .pulse-dot{ display:inline-block; width:8px; height:8px; border-radius:50%; background: var(--red); animation: pulse 2s infinite; vertical-align: middle; }
+
+  /* Before/After slider */
+  .ba-frame{ position: relative; overflow: hidden; user-select: none; touch-action: none; cursor: col-resize;}
+  .ba-frame img{ display: block; width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; pointer-events: none;}
+  .ba-overlay{ clip-path: inset(0 var(--inset, 50%) 0 0); transition: clip-path .15s linear;}
+  .ba-handle{
+    position: absolute; top: 0; bottom: 0; left: calc(100% - var(--inset, 50%));
+    width: 4px; background: var(--bone);
+    transform: translateX(-50%); pointer-events: none; box-shadow: 0 0 0 2px var(--black);
+  }
+  .ba-grip{
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 56px; height: 56px; background: var(--red); border: 3px solid var(--black);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--bone); font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 22px;
+    box-shadow: 4px 4px 0 var(--black);
+  }
+  .ba-tag{ position: absolute; top: 16px; padding: 6px 10px; background: var(--black); color: var(--bone); font-family:'Space Mono', monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase;}
+  .ba-tag.before{ left: 16px; }
+  .ba-tag.after{ right: 16px; background: var(--red);}
+
+  /* Scene dots */
+  .scene-dot{ width: 14px; height: 14px; border: 3px solid var(--black); background: var(--bone); cursor: pointer; transition: background .25s, transform .25s;}
+  .scene-dot:hover{ transform: scale(1.1);}
+  .scene-dot.active{ background: var(--red); }
+
+  /* Accordion */
+  details summary{ list-style:none; cursor: pointer; }
+  details summary::-webkit-details-marker{ display:none; }
+  details[open] .chev{ transform: rotate(45deg);}
+  .chev{ transition: transform .4s cubic-bezier(.16,1,.3,1);}
+
+  /* Notif */
+  @keyframes notIn{ from{ transform: translateY(20px); opacity:0;} to{ transform: translateY(0); opacity:1;}}
+  .notif-in{ animation: notIn .7s cubic-bezier(.16,1,.3,1);}
+
+  /* Drop cap headline accents */
+  .stamp{ display:inline-block; padding: 4px 10px; background: var(--red); color: var(--bone); transform: rotate(-2deg); font-family:'Archivo', sans-serif; font-weight: 900; letter-spacing: -.01em;}
+  .stamp-blk{ background: var(--black);}
+  .stamp-org{ background: var(--orange); color: var(--black);}
+
+  /* Spotlight on hover for products */
+  .grid-hover img{ transition: transform .6s cubic-bezier(.16,1,.3,1), filter .6s;}
+  .grid-hover:hover img{ transform: scale(1.04);}
+
+  /* Halftone background for hero */
+  .halftone{
+    background-image: radial-gradient(circle at 0.5px 0.5px, rgba(0,0,0,.18) 0.5px, transparent 0);
+    background-size: 6px 6px;
+  }
+
+  /* Photo frame caliper corners */
+  .caliper{ position: absolute; width: 16px; height: 16px; border: 3px solid var(--bone); }
+  .caliper.tl{ top: 8px; left: 8px; border-right: 0; border-bottom: 0;}
+  .caliper.tr{ top: 8px; right: 8px; border-left: 0; border-bottom: 0;}
+  .caliper.bl{ bottom: 8px; left: 8px; border-right: 0; border-top: 0;}
+  .caliper.br{ bottom: 8px; right: 8px; border-left: 0; border-top: 0;}
+
+  /* Reveal */
+  .rv{ opacity: 0; transform: translateY(20px); transition: opacity 1s, transform 1s;}
+  .rv.in{ opacity: 1; transform: translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){ *,*::before,*::after{ animation: none !important; transition: none !important;}}
+
+  /* ========================================================== */
+  /* === MOBILE RESPONSIVE PATCH ================================ */
+  /* ========================================================== */
+  html, body { overflow-x: hidden; max-width: 100vw; }
+  img, svg, video { max-width: 100%; height: auto; }
+
+  /* Force grid lg:grid-cols-12 to stack on <lg — preserves BA layout in single column */
+  @media (max-width: 1023px) {
+    section .grid.lg\:grid-cols-12,
+    div.grid.lg\:grid-cols-12 { display: flex !important; flex-direction: column !important; }
+    section .grid.lg\:grid-cols-12 > *,
+    div.grid.lg\:grid-cols-12 > * { min-width: 0 !important; width: 100% !important; }
+  }
+
+  @media (max-width: 767px) {
+    /* Tighter button padding so neo-brutalist shadows don't push beyond viewport */
+    .btn-red, .btn-orange, .btn-black, .btn-ghost {
+      padding: 14px 22px;
+      font-size: 13px;
+      box-shadow: 4px 4px 0 var(--black);
+      min-height: 44px;
+    }
+    .btn-red:hover, .btn-orange:hover, .btn-black:hover { transform: none; box-shadow: 4px 4px 0 var(--black); }
+
+    /* Heavy borders thinner on small screens */
+    .ed-border { border-width: 2px; }
+
+    /* Stamp rotation flat on mobile so it doesn't push out */
+    .stamp { transform: rotate(0); }
+
+    /* B/A grip a little bigger for fingers */
+    .ba-grip { width: 60px; height: 60px; font-size: 22px; box-shadow: 3px 3px 0 var(--black); }
+    .ba-tag { font-size: 9px; padding: 5px 8px; top: 10px; }
+    .ba-tag.before { left: 10px; }
+    .ba-tag.after { right: 10px; }
+
+    /* iOS form zoom prevention */
+    input, textarea, select { font-size: 16px !important; }
+
+    /* Marquee tighter */
+    .mq { gap: 36px; animation-duration: 40s; }
+
+    /* Disable hover-scale on touch */
+    .grid-hover:hover img { transform: none !important; }
+
+    /* Scene dots — keep 14px visual but expand tap area to 44px via padding (box-shadow doesn't extend hit) */
+    .scene-dot {
+      position: relative;
+      margin: 0 12px;
+    }
+    .scene-dot::after {
+      content: '';
+      position: absolute;
+      inset: -15px;
+      /* Invisible tap target */
+    }
+    .scene-dot:hover { transform: none; }
+    #sceneDots { gap: 12px !important; padding: 14px 0; }
+
+    /* Prev/next scene buttons full 44px */
+    #prevScene, #nextScene { width: 44px !important; height: 44px !important; }
+
+    /* Search/cart icon buttons */
+    button.w-9.h-9 { width: 44px !important; height: 44px !important; }
+
+    /* Instagram-style 4×2 grid forced → single column on mobile */
+    section .grid.grid-cols-4.grid-rows-2 {
+      grid-template-columns: 1fr !important;
+      grid-template-rows: auto !important;
+      gap: 12px;
+    }
+
+    /* Other big grids → 1 or 2 cols */
+    section .grid.grid-cols-4:not(.grid-rows-2) { grid-template-columns: repeat(2, 1fr) !important; }
+    section .grid.grid-cols-3 { grid-template-columns: 1fr !important; }
+    .grid.grid-cols-2.md\:grid-cols-4 { grid-template-columns: repeat(2, 1fr) !important; }
+    .grid.grid-cols-2.md\:grid-cols-6 { grid-template-columns: repeat(3, 1fr) !important; }
+    .grid.md\:grid-cols-3:not(.grid-cols-2):not(.grid-cols-1) { grid-template-columns: 1fr !important; }
+
+    /* === VS. comparison table grid-cols-4 → 2-col cards on mobile === */
+    #vs .grid.grid-cols-4:not(.grid-rows-2),
+    section[id="vs"] .grid.grid-cols-4 {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 0;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--hair) !important;
+    }
+    #vs .grid.grid-cols-4.mono { display: none !important; }
+    #vs .grid.grid-cols-4 > div:first-child {
+      grid-column: 1 / -1 !important;
+      border-right: 0 !important;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      opacity: .65;
+      padding: 12px 14px 4px !important;
+    }
+    #vs .grid.grid-cols-4 > div:nth-child(n+2) {
+      border-right: 0 !important;
+      padding: 10px 14px !important;
+      font-size: 14px !important;
+    }
+
+    /* Big hero display text */
+    h1.display { font-size: clamp(40px, 11vw, 64px) !important; line-height: .9 !important; }
+    h2.display { font-size: clamp(32px, 9vw, 54px) !important; line-height: .92 !important; }
+
+    /* BA frame extra: ensure dragging slider doesn't conflict with body scroll on mobile */
+    .ba-frame { overscroll-behavior: contain; aspect-ratio: 3/4 !important; }
+    /* Side-by-side BA pairs in cols-12 grids — make the image first, copy second */
+    section .grid.lg\:grid-cols-12 .ba-frame { order: -1; }
+
+    /* Header BOOK MEASURE CTA clipped at right — tighten padding so it fits */
+    header a.btn-red, header a.btn-orange, header a.btn-black {
+      padding: 8px 12px !important;
+      font-size: 10.5px !important;
+      letter-spacing: .08em !important;
+      min-height: 36px !important;
+      box-shadow: 2px 2px 0 var(--black) !important;
+    }
+    /* Hide logo /B-A/MMXXVI tagline on small phones */
+    header .mono.text-\[var\(--gray\)\] { display: none !important; }
+    /* Reduce header padding */
+    header .max-w-\[1480px\] { padding-left: 12px !important; padding-right: 12px !important; }
+    header .flex.items-center.gap-3 { gap: 6px !important; }
+  }
+</style>
+</head>
+
+<body class="overflow-x-hidden">
+
+<!-- 1. STICKY TOP TRUST BAR -->
+<div class="bg-[var(--black)] text-[var(--bone)] text-xs">
+  <div class="max-w-[1480px] mx-auto px-6 py-2.5 flex justify-between items-center flex-wrap gap-y-2">
+    <div class="flex items-center gap-6">
+      <span class="mono text-[var(--red)]">[BEFORE / AFTER]</span>
+      <span class="hidden md:inline opacity-80">3,400 transformations · FREE measure · NO deposit</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <span class="hidden md:inline opacity-80">MON–SAT · 9–18h</span>
+      <a href="tel:5879010240" class="underline decoration-[var(--red)] underline-offset-4 mono">+1 587 901 0240</a>
+      <span class="opacity-70 mono">EN · FR</span>
+    </div>
+  </div>
+</div>
+
+<!-- 2. STICKY HEADER -->
+<header class="sticky top-0 z-40 bg-[var(--bone)]/95 backdrop-blur ed-border-b">
+  <div class="max-w-[1480px] mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#" class="flex items-baseline gap-2">
+      <span class="display text-3xl tracking-tight">SunLeo<span class="text-[var(--red)]">.</span></span>
+      <span class="mono text-[var(--gray)]">/B-A/MMXXVI</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-7 mono">
+      <a href="#scenes" class="hover:text-[var(--red)] transition">SCENES</a>
+      <a href="#shop" class="hover:text-[var(--red)] transition">SHOP</a>
+      <a href="#vs" class="hover:text-[var(--red)] transition">VS.</a>
+      <a href="#wall" class="hover:text-[var(--red)] transition">WALL</a>
+      <a href="#book" class="hover:text-[var(--red)] transition">BOOK</a>
+    </nav>
+    <div class="flex items-center gap-3 mono">
+      <button aria-label="Search" class="w-9 h-9 ed-border flex items-center justify-center hover:bg-[var(--black)] hover:text-[var(--bone)] transition">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </button>
+      <button aria-label="Cart" class="relative w-9 h-9 ed-border flex items-center justify-center hover:bg-[var(--black)] hover:text-[var(--bone)] transition">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/></svg>
+      </button>
+      <a href="#book" class="btn-red text-[12px] py-3 px-5">BOOK MEASURE →</a>
+    </div>
+  </div>
+</header>
+
+<!-- SCARCITY BANNER -->
+<div class="bg-[var(--red)] text-[var(--bone)] text-sm ed-border-b">
+  <div class="max-w-[1480px] mx-auto px-6 py-3 flex items-center justify-center gap-4 flex-wrap">
+    <span class="pulse-dot" style="background: var(--bone);"></span>
+    <span class="mono">[LIVE]</span>
+    <span><b class="heavy text-lg">3 INSTALL SLOTS</b> remaining for the week of 26 MAY · Next available <b>MON 02 JUN</b>.</span>
+    <a href="#book" class="underline decoration-[var(--bone)] underline-offset-4 heavy">RESERVE →</a>
+  </div>
+</div>
+
+<!-- 3. HERO — DRAGGABLE BEFORE/AFTER -->
+<section class="relative bg-[var(--bone)]" id="hero">
+  <div class="max-w-[1480px] mx-auto px-6 pt-14 pb-8">
+    <div class="grid lg:grid-cols-12 gap-8 items-center mb-10">
+      <div class="lg:col-span-7">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="stamp">№ 01</span>
+          <span class="mono opacity-70">VOL. III · BRUTAL OPTICS · CALGARY</span>
+        </div>
+        <h1 class="display leading-[.82] text-[clamp(68px,10vw,178px)]">
+          DRAG.<br/>
+          <span class="display-it text-[var(--red)]">Don't</span><br/>
+          IMAGINE.
+        </h1>
+      </div>
+      <div class="lg:col-span-5 lg:pl-8 lg:border-l-4 border-[var(--black)]">
+        <p class="text-xl leading-relaxed max-w-md">
+          Yellowed vinyl on the left. Belgian linen on the right. <b>One mouse drag separates them.</b> Six real Calgary rooms, six dramatic transformations. The work speaks first.
+        </p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="#scenes" class="btn-red">SCROLL THROUGH 6 SCENES →</a>
+          <a href="#book" class="btn-ghost">BOOK MEASURE</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Big draggable BA -->
+    <div class="ed-border bg-[var(--black)] p-4 relative">
+      <div class="ba-frame" id="ba1" style="aspect-ratio: 16/9;">
+        <img src="https://picsum.photos/seed/sunleobaAB1after/1600/900" alt="after"/>
+        <div class="ba-overlay absolute inset-0">
+          <img src="https://picsum.photos/seed/sunleobaAB1before/1600/900" alt="before"/>
+        </div>
+        <span class="ba-tag before">BEFORE · 2017</span>
+        <span class="ba-tag after">AFTER · MMXXVI</span>
+        <div class="ba-handle">
+          <div class="ba-grip">⇔</div>
+        </div>
+      </div>
+      <!-- Scene caption -->
+      <div class="mt-4 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="mono text-[var(--bone)]/60">SCENE № <span id="sceneNum">01</span> / 06</p>
+          <h3 class="display text-3xl md:text-5xl text-[var(--bone)] mt-2"><span id="sceneTitle">Tuscany NW kitchen.</span></h3>
+          <p class="text-[var(--bone-2)] mt-2" id="sceneDesc">Old yellowed vinyl mini-blinds vs. fresh Belgian linen roller in oat milk. Installed: III.MMXXVI · 6 windows · $1,580.</p>
+        </div>
+        <!-- Scene picker -->
+        <div class="flex items-center gap-3">
+          <div class="flex gap-2" id="sceneDots">
+            <button class="scene-dot active" data-scene="1" aria-label="Scene 1"></button>
+            <button class="scene-dot" data-scene="2" aria-label="Scene 2"></button>
+            <button class="scene-dot" data-scene="3" aria-label="Scene 3"></button>
+            <button class="scene-dot" data-scene="4" aria-label="Scene 4"></button>
+            <button class="scene-dot" data-scene="5" aria-label="Scene 5"></button>
+            <button class="scene-dot" data-scene="6" aria-label="Scene 6"></button>
+          </div>
+          <div class="flex gap-2 ml-3">
+            <button id="prevScene" class="w-10 h-10 bg-[var(--bone)] text-[var(--black)] ed-border heavy">←</button>
+            <button id="nextScene" class="w-10 h-10 bg-[var(--red)] text-[var(--bone)] ed-border heavy">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. TRUST STRIP -->
+<section class="ed-border-t ed-border-b bg-[var(--bone-2)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-7 grid grid-cols-2 md:grid-cols-6 gap-6 items-center text-center mono">
+    <div><p class="text-[var(--gray)]">BBB</p><p class="heavy text-2xl mt-1">A+</p></div>
+    <div><p class="text-[var(--gray)]">TOP CHOICE</p><p class="heavy text-2xl mt-1">2025–26</p></div>
+    <div><p class="text-[var(--gray)]">AFFIRM</p><p class="heavy text-2xl mt-1 text-[var(--red)]">0% APR</p></div>
+    <div><p class="text-[var(--gray)]">KLARNA</p><p class="heavy text-2xl mt-1">PAY 4×</p></div>
+    <div><p class="text-[var(--gray)]">GOOGLE</p><p class="heavy text-2xl mt-1">4.9 ★</p></div>
+    <div><p class="text-[var(--gray)]">REVIEWS</p><p class="heavy text-2xl mt-1 tabnum">2,418</p></div>
+  </div>
+</section>
+
+<!-- 5. VERTICAL BEFORE/AFTER SCROLL — 6 more -->
+<section class="bg-[var(--bone)]" id="scenes">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <div class="grid lg:grid-cols-12 gap-10 items-end mb-14">
+      <div class="lg:col-span-7">
+        <p class="mono text-[var(--red)]">SCROLL VERTICAL · MORE TRANSFORMATIONS</p>
+        <h2 class="display text-7xl md:text-8xl mt-4 leading-[.85]">
+          Six more <span class="display-it text-[var(--red)]">drags.</span>
+        </h2>
+      </div>
+      <div class="lg:col-span-5 text-lg leading-relaxed">
+        Each pair is a real Calgary install — same camera, same time of day, same lens. The only thing that changed is the window treatment.
+      </div>
+    </div>
+
+    <!-- Stacked BA scenes -->
+    <div class="space-y-12">
+
+      <!-- Scene A -->
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 ed-border bg-[var(--black)] p-3 relative">
+          <div class="ba-frame ba-static" data-before="https://picsum.photos/seed/sunleobaS1b/1200/800" data-after="https://picsum.photos/seed/sunleobaS1a/1200/800" style="aspect-ratio: 3/2;">
+            <img src="https://picsum.photos/seed/sunleobaS1a/1200/800" alt="after"/>
+            <div class="ba-overlay absolute inset-0">
+              <img src="https://picsum.photos/seed/sunleobaS1b/1200/800" alt="before"/>
+            </div>
+            <span class="ba-tag before">BEFORE</span>
+            <span class="ba-tag after">AFTER</span>
+            <div class="ba-handle"><div class="ba-grip">⇔</div></div>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <p class="mono text-[var(--red)]">SCENE · A</p>
+          <h3 class="display text-5xl md:text-6xl mt-3 leading-[.92]">Bedroom. <span class="display-it">Mount Royal.</span></h3>
+          <p class="mt-4 text-lg leading-relaxed opacity-90">East-facing master, dirty mini-blinds vs. blackout cellular. Installed II.MMXXVI · 4 windows · $1,180.</p>
+          <p class="mt-3 mono text-[var(--gray)]">FAMILY: ESMÉ R. · 4.9 ★</p>
+          <a href="#" class="mt-6 inline-flex items-center gap-3 heavy underline decoration-[var(--red)] underline-offset-8 decoration-2 text-lg">READ THE INSTALL STORY →</a>
+        </div>
+      </div>
+
+      <!-- Scene B (reverse) -->
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-5 lg:order-2">
+          <p class="mono text-[var(--red)]">SCENE · B</p>
+          <h3 class="display text-5xl md:text-6xl mt-3 leading-[.92]">Living. <span class="display-it">Inglewood SE.</span></h3>
+          <p class="mt-4 text-lg leading-relaxed opacity-90">90s vertical blinds vs. floor-to-ceiling Belgian linen drapery. Installed I.MMXXVI · 9 windows · $2,940.</p>
+          <p class="mt-3 mono text-[var(--gray)]">FAMILY: TOMISLAV P. · 5.0 ★</p>
+          <a href="#" class="mt-6 inline-flex items-center gap-3 heavy underline decoration-[var(--red)] underline-offset-8 decoration-2 text-lg">READ THE INSTALL STORY →</a>
+        </div>
+        <div class="lg:col-span-7 lg:order-1 ed-border bg-[var(--black)] p-3 relative">
+          <div class="ba-frame ba-static" data-before="https://picsum.photos/seed/sunleobaS2b/1200/800" data-after="https://picsum.photos/seed/sunleobaS2a/1200/800" style="aspect-ratio: 3/2;">
+            <img src="https://picsum.photos/seed/sunleobaS2a/1200/800" alt="after"/>
+            <div class="ba-overlay absolute inset-0">
+              <img src="https://picsum.photos/seed/sunleobaS2b/1200/800" alt="before"/>
+            </div>
+            <span class="ba-tag before">BEFORE</span>
+            <span class="ba-tag after">AFTER</span>
+            <div class="ba-handle"><div class="ba-grip">⇔</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene C -->
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 ed-border bg-[var(--black)] p-3 relative">
+          <div class="ba-frame ba-static" data-before="https://picsum.photos/seed/sunleobaS3b/1200/800" data-after="https://picsum.photos/seed/sunleobaS3a/1200/800" style="aspect-ratio: 3/2;">
+            <img src="https://picsum.photos/seed/sunleobaS3a/1200/800" alt="after"/>
+            <div class="ba-overlay absolute inset-0">
+              <img src="https://picsum.photos/seed/sunleobaS3b/1200/800" alt="before"/>
+            </div>
+            <span class="ba-tag before">BEFORE</span>
+            <span class="ba-tag after">AFTER</span>
+            <div class="ba-handle"><div class="ba-grip">⇔</div></div>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <p class="mono text-[var(--red)]">SCENE · C</p>
+          <h3 class="display text-5xl md:text-6xl mt-3 leading-[.92]">Nursery. <span class="display-it">Britannia SW.</span></h3>
+          <p class="mt-4 text-lg leading-relaxed opacity-90">Sun-bleached curtains vs. cordless blackout cellular. Baby naps reliably. Installed XI.MMXXV · 2 windows · $640.</p>
+          <p class="mt-3 mono text-[var(--gray)]">FAMILY: WREN D. · 5.0 ★</p>
+          <a href="#" class="mt-6 inline-flex items-center gap-3 heavy underline decoration-[var(--red)] underline-offset-8 decoration-2 text-lg">READ THE INSTALL STORY →</a>
+        </div>
+      </div>
+
+      <!-- Scene D -->
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-5 lg:order-2">
+          <p class="mono text-[var(--red)]">SCENE · D</p>
+          <h3 class="display text-5xl md:text-6xl mt-3 leading-[.92]">Office. <span class="display-it">Aspen Estates.</span></h3>
+          <p class="mt-4 text-lg leading-relaxed opacity-90">Glare-heavy west window vs. dual-band zebra sheer. Screen-friendly during Calgary mountain glare hours. XII.MMXXV · 3 windows · $720.</p>
+          <p class="mt-3 mono text-[var(--gray)]">FAMILY: HATTIE F. · 4.9 ★</p>
+          <a href="#" class="mt-6 inline-flex items-center gap-3 heavy underline decoration-[var(--red)] underline-offset-8 decoration-2 text-lg">READ THE INSTALL STORY →</a>
+        </div>
+        <div class="lg:col-span-7 lg:order-1 ed-border bg-[var(--black)] p-3 relative">
+          <div class="ba-frame ba-static" data-before="https://picsum.photos/seed/sunleobaS4b/1200/800" data-after="https://picsum.photos/seed/sunleobaS4a/1200/800" style="aspect-ratio: 3/2;">
+            <img src="https://picsum.photos/seed/sunleobaS4a/1200/800" alt="after"/>
+            <div class="ba-overlay absolute inset-0">
+              <img src="https://picsum.photos/seed/sunleobaS4b/1200/800" alt="before"/>
+            </div>
+            <span class="ba-tag before">BEFORE</span>
+            <span class="ba-tag after">AFTER</span>
+            <div class="ba-handle"><div class="ba-grip">⇔</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene E -->
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 ed-border bg-[var(--black)] p-3 relative">
+          <div class="ba-frame ba-static" data-before="https://picsum.photos/seed/sunleobaS5b/1200/800" data-after="https://picsum.photos/seed/sunleobaS5a/1200/800" style="aspect-ratio: 3/2;">
+            <img src="https://picsum.photos/seed/sunleobaS5a/1200/800" alt="after"/>
+            <div class="ba-overlay absolute inset-0">
+              <img src="https://picsum.photos/seed/sunleobaS5b/1200/800" alt="before"/>
+            </div>
+            <span class="ba-tag before">BEFORE</span>
+            <span class="ba-tag after">AFTER</span>
+            <div class="ba-handle"><div class="ba-grip">⇔</div></div>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <p class="mono text-[var(--red)]">SCENE · E</p>
+          <h3 class="display text-5xl md:text-6xl mt-3 leading-[.92]">Basement. <span class="display-it">Mahogany SE.</span></h3>
+          <p class="mt-4 text-lg leading-relaxed opacity-90">Egress windows with vinyl mini vs. motorised blackout roller — Matter 1.4 native. X.MMXXV · 3 windows · $1,560.</p>
+          <p class="mt-3 mono text-[var(--gray)]">FAMILY: DEVIN K. · 5.0 ★</p>
+          <a href="#" class="mt-6 inline-flex items-center gap-3 heavy underline decoration-[var(--red)] underline-offset-8 decoration-2 text-lg">READ THE INSTALL STORY →</a>
+        </div>
+      </div>
+
+      <!-- Scene F -->
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-5 lg:order-2">
+          <p class="mono text-[var(--red)]">SCENE · F</p>
+          <h3 class="display text-5xl md:text-6xl mt-3 leading-[.92]">Skylight. <span class="display-it">Bowness NW.</span></h3>
+          <p class="mt-4 text-lg leading-relaxed opacity-90">Bare skylight vs. shaped honeycomb cellular. Room temp drop of 6°C in summer. IX.MMXXV · 1 window · $410.</p>
+          <p class="mt-3 mono text-[var(--gray)]">FAMILY: LIOR · 4.9 ★</p>
+          <a href="#" class="mt-6 inline-flex items-center gap-3 heavy underline decoration-[var(--red)] underline-offset-8 decoration-2 text-lg">READ THE INSTALL STORY →</a>
+        </div>
+        <div class="lg:col-span-7 lg:order-1 ed-border bg-[var(--black)] p-3 relative">
+          <div class="ba-frame ba-static" data-before="https://picsum.photos/seed/sunleobaS6b/1200/800" data-after="https://picsum.photos/seed/sunleobaS6a/1200/800" style="aspect-ratio: 3/2;">
+            <img src="https://picsum.photos/seed/sunleobaS6a/1200/800" alt="after"/>
+            <div class="ba-overlay absolute inset-0">
+              <img src="https://picsum.photos/seed/sunleobaS6b/1200/800" alt="before"/>
+            </div>
+            <span class="ba-tag before">BEFORE</span>
+            <span class="ba-tag after">AFTER</span>
+            <div class="ba-handle"><div class="ba-grip">⇔</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 6. PRODUCT GRID -->
+<section class="bg-[var(--bone-2)] ed-border-t ed-border-b" id="shop">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <div class="grid lg:grid-cols-12 gap-10 items-end mb-14">
+      <div class="lg:col-span-7">
+        <p class="mono text-[var(--red)]">THE SHOP · 10 PRODUCTS</p>
+        <h2 class="display text-7xl md:text-8xl mt-4 leading-[.85]">
+          BUILD <span class="display-it text-[var(--red)]">your</span><br/>AFTER.
+        </h2>
+      </div>
+      <div class="lg:col-span-5 text-lg leading-relaxed">
+        Every product on this grid is in the Calgary wall above. Same fabric, same crew, same prices for ten years running.
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a href="#" class="block grid-hover ed-border bg-[var(--bone)] relative">
+        <div class="relative overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleobap01/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 stamp">№ 01</span>
+          <span class="absolute top-3 right-3 stamp-blk stamp">FROM $180</span>
+        </div>
+        <div class="p-5 ed-border-t">
+          <p class="display text-2xl">Linen Roller</p>
+          <p class="mono text-[var(--gray)] mt-1">BELGIAN LINEN · 14 COLOURWAYS</p>
+          <div class="flex items-center justify-between mt-3">
+            <p class="stars">★★★★★</p>
+            <p class="mono">4.9 · 612</p>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="block grid-hover ed-border bg-[var(--bone)] relative">
+        <div class="relative overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleobap02/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 stamp">№ 02</span>
+          <span class="absolute top-3 right-3 stamp-blk stamp">FROM $290</span>
+        </div>
+        <div class="p-5 ed-border-t">
+          <p class="display text-2xl">Honeycomb Cellular</p>
+          <p class="mono text-[var(--gray)] mt-1">R-5 · SUB-ZERO RATED</p>
+          <div class="flex items-center justify-between mt-3">
+            <p class="stars">★★★★★</p>
+            <p class="mono">4.9 · 1,204</p>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="block grid-hover ed-border bg-[var(--bone)] relative">
+        <div class="relative overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleobap03/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 stamp">№ 03</span>
+          <span class="absolute top-3 right-3 stamp-blk stamp">FROM $340</span>
+        </div>
+        <div class="p-5 ed-border-t">
+          <p class="display text-2xl">Roman Shade</p>
+          <p class="mono text-[var(--gray)] mt-1">HAND-FOLDED · 22 FABRICS</p>
+          <div class="flex items-center justify-between mt-3">
+            <p class="stars">★★★★★</p>
+            <p class="mono">4.9 · 388</p>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="block grid-hover ed-border bg-[var(--bone)] relative">
+        <div class="relative overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleobap04/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 stamp">№ 04</span>
+          <span class="absolute top-3 right-3 stamp-org stamp">SMART</span>
+        </div>
+        <div class="p-5 ed-border-t">
+          <p class="display text-2xl">Motorised Roller</p>
+          <p class="mono text-[var(--gray)] mt-1">MATTER 1.4 · FROM $480</p>
+          <div class="flex items-center justify-between mt-3">
+            <p class="stars">★★★★★</p>
+            <p class="mono">4.9 · 522</p>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="block grid-hover ed-border bg-[var(--bone)] relative">
+        <div class="relative overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleobap05/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 stamp">№ 05</span>
+          <span class="absolute top-3 right-3 stamp-blk stamp">FROM $220</span>
+        </div>
+        <div class="p-5 ed-border-t">
+          <p class="display text-2xl">Zebra Sheer</p>
+          <p class="mono text-[var(--gray)] mt-1">DUAL-BAND · UV BLOCKING</p>
+          <div class="flex items-center justify-between mt-3">
+            <p class="stars">★★★★★</p>
+            <p class="mono">4.9 · 270</p>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="block grid-hover ed-border bg-[var(--bone)] relative">
+        <div class="relative overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleobap06/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 stamp">№ 06</span>
+          <span class="absolute top-3 right-3 stamp-blk stamp">FROM $620</span>
+        </div>
+        <div class="p-5 ed-border-t">
+          <p class="display text-2xl">Basswood Shutter</p>
+          <p class="mono text-[var(--gray)] mt-1">12 STAINS · CUSTOM</p>
+          <div class="flex items-center justify-between mt-3">
+            <p class="stars">★★★★★</p>
+            <p class="mono">4.9 · 162</p>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="block grid-hover ed-border bg-[var(--bone)] relative">
+        <div class="relative overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleobap07/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 stamp">№ 07</span>
+          <span class="absolute top-3 right-3 stamp-blk stamp">FROM $148</span>
+        </div>
+        <div class="p-5 ed-border-t">
+          <p class="display text-2xl">Faux Wood Blind</p>
+          <p class="mono text-[var(--gray)] mt-1">HUMIDITY-STABLE</p>
+          <div class="flex items-center justify-between mt-3">
+            <p class="stars">★★★★★</p>
+            <p class="mono">4.8 · 905</p>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="block grid-hover ed-border bg-[var(--bone)] relative">
+        <div class="relative overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleobap08/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 stamp">№ 08</span>
+          <span class="absolute top-3 right-3 stamp-blk stamp">FROM $410</span>
+        </div>
+        <div class="p-5 ed-border-t">
+          <p class="display text-2xl">Skylight Cellular</p>
+          <p class="mono text-[var(--gray)] mt-1">MADE-TO-SHAPE</p>
+          <div class="flex items-center justify-between mt-3">
+            <p class="stars">★★★★★</p>
+            <p class="mono">4.9 · 84</p>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="block grid-hover ed-border bg-[var(--bone)] relative">
+        <div class="relative overflow-hidden">
+          <img src="https://picsum.photos/seed/sunleobap09/700/700" class="w-full aspect-square object-cover" alt=""/>
+          <span class="absolute top-3 left-3 stamp">№ 09</span>
+          <span class="absolute top-3 right-3 stamp-blk stamp">FROM $390</span>
+        </div>
+        <div class="p-5 ed-border-t">
+          <p class="display text-2xl">Drapery Panel</p>
+          <p class="mono text-[var(--gray)] mt-1">60 FABRICS · LINED</p>
+          <div class="flex items-center justify-between mt-3">
+            <p class="stars">★★★★★</p>
+            <p class="mono">4.9 · 311</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. RITUAL -->
+<section class="bg-[var(--black)] text-[var(--bone)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <p class="mono text-[var(--red)]">FROM BEFORE TO AFTER · IN 3 STEPS</p>
+    <h2 class="display text-7xl md:text-9xl mt-4 leading-[.85]">
+      THREE STEPS.<br/>
+      <span class="display-it text-[var(--orange)]">One</span> MORNING.
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-1 mt-16 border border-[var(--bone)]/20">
+      <div class="p-10 border-r border-[var(--bone)]/20">
+        <p class="display text-9xl text-[var(--red)]">01.</p>
+        <h3 class="display text-3xl mt-6">Snap a photo.</h3>
+        <p class="mt-3 opacity-80 leading-relaxed">Send us a phone photo of the windows in question. We respond with three product recommendations + a starting price within 4 hours.</p>
+        <p class="mono text-[var(--orange)] mt-6">DAY 01 · FREE</p>
+      </div>
+      <div class="p-10 border-r border-[var(--bone)]/20">
+        <p class="display text-9xl text-[var(--red)]">02.</p>
+        <h3 class="display text-3xl mt-6">In-home measure.</h3>
+        <p class="mt-3 opacity-80 leading-relaxed">An installer arrives with samples and a laser. No deposit, no commitment. You see fabric in your light, in your home.</p>
+        <p class="mono text-[var(--orange)] mt-6">DAY 02–04 · NO DEPOSIT</p>
+      </div>
+      <div class="p-10">
+        <p class="display text-9xl text-[var(--red)]">03.</p>
+        <h3 class="display text-3xl mt-6">After.</h3>
+        <p class="mt-3 opacity-80 leading-relaxed">Two-person crew, 9 AM, no mess. We hand you the before-and-after photo on the way out, for your own records.</p>
+        <p class="mono text-[var(--orange)] mt-6">DAY 08–10 · ONE MORNING</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. REVIEWS -->
+<section class="bg-[var(--bone)] ed-border-b">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <div class="grid lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-3">
+        <p class="mono text-[var(--red)]">CALGARY VOICES</p>
+        <h2 class="display text-5xl md:text-6xl mt-4 leading-[.9]">2,418 <span class="display-it">afters.</span></h2>
+        <div class="stars text-2xl mt-5">★★★★★</div>
+        <p class="mono mt-3 text-[var(--gray)]">4.9 WEIGHTED · GOOGLE + TRUSTPILOT</p>
+      </div>
+      <div class="lg:col-span-9 grid md:grid-cols-2 gap-6">
+        <article class="ed-border bg-[var(--bone)] p-7">
+          <div class="stars">★★★★★</div>
+          <p class="display text-2xl mt-4 leading-snug">"The before-and-after photo they handed us still gets shared with friends. It really is that dramatic."</p>
+          <div class="mt-5 flex items-center gap-4">
+            <img src="https://picsum.photos/seed/sunleobar01/80/80" class="w-12 h-12 object-cover ed-border" style="border-width:2px;" alt=""/>
+            <div><p class="heavy text-lg">HATTIE F.</p><p class="mono text-[var(--gray)]">MOUNT ROYAL · MMXXVI</p></div>
+          </div>
+        </article>
+        <article class="ed-border bg-[var(--bone)] p-7">
+          <div class="stars">★★★★★</div>
+          <p class="display text-2xl mt-4 leading-snug">"Drag-slider sold us. We could see what 90s vertical blinds looked like next to drapery in the actual room."</p>
+          <div class="mt-5 flex items-center gap-4">
+            <img src="https://picsum.photos/seed/sunleobar02/80/80" class="w-12 h-12 object-cover ed-border" style="border-width:2px;" alt=""/>
+            <div><p class="heavy text-lg">TOMISLAV P.</p><p class="mono text-[var(--gray)]">BRIDGELAND · MMXXVI</p></div>
+          </div>
+        </article>
+        <article class="ed-border bg-[var(--bone)] p-7">
+          <div class="stars">★★★★★</div>
+          <p class="display text-2xl mt-4 leading-snug">"Six minutes per window. Baby naps. Wife happy. Husband redundant. 5 stars."</p>
+          <div class="mt-5 flex items-center gap-4">
+            <img src="https://picsum.photos/seed/sunleobar03/80/80" class="w-12 h-12 object-cover ed-border" style="border-width:2px;" alt=""/>
+            <div><p class="heavy text-lg">ESMÉ R.</p><p class="mono text-[var(--gray)]">BRITANNIA · MMXXVI</p></div>
+          </div>
+        </article>
+        <article class="ed-border bg-[var(--bone)] p-7">
+          <div class="stars">★★★★★</div>
+          <p class="display text-2xl mt-4 leading-snug">"Quoted four shops. SunLeo was the only one that showed actual before/after photos. Easy pick."</p>
+          <div class="mt-5 flex items-center gap-4">
+            <img src="https://picsum.photos/seed/sunleobar04/80/80" class="w-12 h-12 object-cover ed-border" style="border-width:2px;" alt=""/>
+            <div><p class="heavy text-lg">WREN D.</p><p class="mono text-[var(--gray)]">ASPEN ESTATES · MMXXVI</p></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. COMPARISON -->
+<section class="bg-[var(--bone-2)]" id="vs">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <p class="mono text-[var(--red)]">VS · WHO ELSE PROMISES AN AFTER?</p>
+    <h2 class="display text-7xl md:text-8xl mt-4 leading-[.85]">SUNLEO <span class="display-it text-[var(--red)]">vs.</span> THEM.</h2>
+
+    <div class="mt-14 ed-border bg-[var(--bone)]">
+      <div class="grid grid-cols-4 mono text-[11px] ed-border-b">
+        <div class="p-4 ed-border-r">CRITERION</div>
+        <div class="p-4 ed-border-r text-[var(--red)]">SUNLEO</div>
+        <div class="p-4 ed-border-r text-[var(--gray)]">HUNTER DOUGLAS</div>
+        <div class="p-4 text-[var(--gray)]">HOME DEPOT</div>
+      </div>
+      <div class="grid grid-cols-4 border-b border-[var(--hair)]">
+        <div class="p-5 ed-border-r heavy text-xl">Before/after photos</div>
+        <div class="p-5 ed-border-r heavy text-xl text-[var(--red)]">YES · 3,400</div>
+        <div class="p-5 ed-border-r heavy text-xl text-[var(--gray)]">No</div>
+        <div class="p-5 heavy text-xl text-[var(--gray)]">No</div>
+      </div>
+      <div class="grid grid-cols-4 border-b border-[var(--hair)] bg-[var(--bone-2)]">
+        <div class="p-5 ed-border-r heavy text-xl">Free measure</div>
+        <div class="p-5 ed-border-r heavy text-xl text-[var(--red)]">YES · SAME WEEK</div>
+        <div class="p-5 ed-border-r heavy text-xl text-[var(--gray)]">7–10 days</div>
+        <div class="p-5 heavy text-xl text-[var(--gray)]">DIY</div>
+      </div>
+      <div class="grid grid-cols-4 border-b border-[var(--hair)]">
+        <div class="p-5 ed-border-r heavy text-xl">Deposit</div>
+        <div class="p-5 ed-border-r heavy text-xl text-[var(--red)]">$0</div>
+        <div class="p-5 ed-border-r heavy text-xl text-[var(--gray)]">50%</div>
+        <div class="p-5 heavy text-xl text-[var(--gray)]">100%</div>
+      </div>
+      <div class="grid grid-cols-4 border-b border-[var(--hair)] bg-[var(--bone-2)]">
+        <div class="p-5 ed-border-r heavy text-xl">Install crew</div>
+        <div class="p-5 ed-border-r heavy text-xl text-[var(--red)]">SAME 2 HUMANS</div>
+        <div class="p-5 ed-border-r heavy text-xl text-[var(--gray)]">Subcontracted</div>
+        <div class="p-5 heavy text-xl text-[var(--gray)]">DIY</div>
+      </div>
+      <div class="grid grid-cols-4">
+        <div class="p-5 ed-border-r heavy text-xl">Atelier guarantee</div>
+        <div class="p-5 ed-border-r heavy text-xl text-[var(--red)]">10 YEARS</div>
+        <div class="p-5 ed-border-r heavy text-xl text-[var(--gray)]">7 years</div>
+        <div class="p-5 heavy text-xl text-[var(--gray)]">90 days</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. BUILT FOR CALGARY -->
+<section class="bg-[var(--bone)] ed-border-b">
+  <div class="max-w-[1480px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-5">
+      <p class="mono text-[var(--red)]">PINNED ALL OVER CALGARY</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.9]">
+        Every <span class="display-it text-[var(--red)]">district.</span><br/>Same crew.
+      </h2>
+      <p class="mt-7 text-lg leading-relaxed max-w-md">
+        Tuscany to Mahogany, Inglewood to Aspen Estates. The same two-person install crew, the same van, the same boots through every door.
+      </p>
+
+      <div class="mt-10 grid grid-cols-3 gap-6">
+        <div><p class="display text-5xl tabnum"><span data-counter="3400">3,400</span></p><p class="mono mt-2 opacity-70">AFTERS · '17</p></div>
+        <div><p class="display text-5xl tabnum"><span data-counter="42">0</span></p><p class="mono mt-2 opacity-70">DISTRICTS</p></div>
+        <div><p class="display text-5xl tabnum"><span data-counter="11">0</span></p><p class="mono mt-2 opacity-70">YEARS</p></div>
+      </div>
+    </div>
+    <div class="lg:col-span-7">
+      <div class="aspect-[5/4] relative overflow-hidden ed-border bg-[var(--bone-2)]">
+        <img src="https://picsum.photos/seed/sunleobamap/900/700" class="absolute inset-0 w-full h-full object-cover opacity-90" alt=""/>
+        <div class="absolute inset-0" style="background: radial-gradient(circle at 50% 50%, transparent 30%, rgba(248,245,240,.45));"></div>
+        <!-- Pins -->
+        <span class="absolute top-[20%] left-[18%] w-3 h-3 rounded-full bg-[var(--red)] ring-4 ring-[var(--red)]/30"></span>
+        <span class="absolute top-[28%] left-[34%] w-3 h-3 rounded-full bg-[var(--red)] ring-4 ring-[var(--red)]/30"></span>
+        <span class="absolute top-[42%] left-[28%] w-3 h-3 rounded-full bg-[var(--red)] ring-4 ring-[var(--red)]/30"></span>
+        <span class="absolute top-[48%] left-[52%] w-3 h-3 rounded-full bg-[var(--red)] ring-4 ring-[var(--red)]/30"></span>
+        <span class="absolute top-[36%] left-[58%] w-3 h-3 rounded-full bg-[var(--red)] ring-4 ring-[var(--red)]/30"></span>
+        <span class="absolute top-[60%] left-[40%] w-3 h-3 rounded-full bg-[var(--red)] ring-4 ring-[var(--red)]/30"></span>
+        <span class="absolute top-[68%] left-[64%] w-3 h-3 rounded-full bg-[var(--red)] ring-4 ring-[var(--red)]/30"></span>
+        <span class="absolute top-[52%] left-[76%] w-3 h-3 rounded-full bg-[var(--red)] ring-4 ring-[var(--red)]/30"></span>
+        <div class="absolute bottom-4 left-4 bg-[var(--bone)] ed-border px-4 py-3">
+          <p class="mono text-[var(--gray)]">CALGARY · '26 INSTALLS</p>
+          <p class="heavy text-3xl mt-1">42 / 42 DISTRICTS</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. SMART HOME -->
+<section class="bg-[var(--black)] text-[var(--bone)] ed-border-b">
+  <div class="max-w-[1480px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-7">
+      <p class="mono text-[var(--orange)]">SMART HOME · MATTER 1.4</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.9]">
+        SHOUT.<br/><span class="display-it text-[var(--orange)]">Or whisper.</span>
+      </h2>
+      <p class="mt-6 text-lg leading-relaxed max-w-xl opacity-90">
+        Every motorised SunLeo is Matter 1.4. 28 dB at 1 m. 7-year battery. 320 ms voice latency. Alexa · Google Home · Apple HomeKit · SmartThings.
+      </p>
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-1 border border-[var(--bone)]/20">
+        <div class="p-5 border-r border-[var(--bone)]/20"><p class="heavy text-2xl">MATTER</p><p class="mono mt-1 text-[var(--orange)]">v1.4</p></div>
+        <div class="p-5 border-r border-[var(--bone)]/20"><p class="heavy text-2xl">ALEXA</p><p class="mono mt-1 text-[var(--orange)]">NATIVE</p></div>
+        <div class="p-5 border-r border-[var(--bone)]/20"><p class="heavy text-2xl">GOOGLE</p><p class="mono mt-1 text-[var(--orange)]">HOME</p></div>
+        <div class="p-5"><p class="heavy text-2xl">APPLE</p><p class="mono mt-1 text-[var(--orange)]">HOMEKIT</p></div>
+      </div>
+    </div>
+    <div class="lg:col-span-5">
+      <div class="aspect-square relative overflow-hidden ed-border" style="border-color:var(--bone);">
+        <img src="https://picsum.photos/seed/sunleobasmart/600/600" class="absolute inset-0 w-full h-full object-cover" alt=""/>
+        <span class="caliper tl"></span><span class="caliper tr"></span>
+        <span class="caliper bl"></span><span class="caliper br"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. BNPL -->
+<section class="bg-[var(--bone)] ed-border-b">
+  <div class="max-w-[1480px] mx-auto px-6 py-12">
+    <div class="ed-border p-12 grid md:grid-cols-2 gap-8 items-center bg-[var(--orange)]">
+      <div>
+        <p class="mono text-[var(--black)]">PAY-LATER</p>
+        <h2 class="display text-5xl md:text-6xl mt-4 leading-[.9]">
+          0% APR.<br/>0% SURPRISE.
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed max-w-md">Affirm, Klarna, Afterpay, Sezzle. 24 months, no interest, no deposit. The after, paid over time.</p>
+      </div>
+      <div class="flex flex-wrap gap-4 items-center justify-end">
+        <div class="display text-3xl">Affirm</div>
+        <div class="display text-3xl">Klarna</div>
+        <div class="display text-3xl ital">afterpay</div>
+        <div class="display text-3xl">Sezzle</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13. JOURNAL -->
+<section class="bg-[var(--bone)] ed-border-b">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <div class="flex justify-between items-end mb-12 flex-wrap gap-4">
+      <div>
+        <p class="mono text-[var(--red)]">FIELD JOURNAL</p>
+        <h2 class="display text-5xl md:text-6xl mt-4 leading-[.95]">Before <span class="display-it text-[var(--red)]">notes.</span></h2>
+      </div>
+      <a href="#" class="mono underline decoration-[var(--red)] underline-offset-4">ALL 47 →</a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <article class="ed-border bg-[var(--bone)]">
+        <img src="https://picsum.photos/seed/sunleobabl1/600/420" class="w-full h-[260px] object-cover" alt=""/>
+        <div class="p-6 ed-border-t">
+          <p class="mono text-[var(--red)]">№ 011</p>
+          <h3 class="display text-2xl mt-3 leading-snug">Why a 2017 install still looks better than a 2024 install down the street.</h3>
+        </div>
+      </article>
+      <article class="ed-border bg-[var(--bone)]">
+        <img src="https://picsum.photos/seed/sunleobabl2/600/420" class="w-full h-[260px] object-cover" alt=""/>
+        <div class="p-6 ed-border-t">
+          <p class="mono text-[var(--red)]">№ 010</p>
+          <h3 class="display text-2xl mt-3 leading-snug">The honest before-photo: a defence of un-staged interiors.</h3>
+        </div>
+      </article>
+      <article class="ed-border bg-[var(--bone)]">
+        <img src="https://picsum.photos/seed/sunleobabl3/600/420" class="w-full h-[260px] object-cover" alt=""/>
+        <div class="p-6 ed-border-t">
+          <p class="mono text-[var(--red)]">№ 009</p>
+          <h3 class="display text-2xl mt-3 leading-snug">Eight Calgary homes where the after surprised everyone — including the homeowner.</h3>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 14. AS SEEN IN -->
+<section class="ed-border-b py-10 bg-[var(--bone-2)] overflow-hidden">
+  <p class="mono text-center text-[var(--red)] mb-6">AS BLATANTLY SEEN IN</p>
+  <div class="mq">
+    <div class="flex items-center gap-20 shrink-0">
+      <span class="heavy text-4xl">CALGARY HERALD</span>
+      <span class="heavy text-4xl">AVENUE</span>
+      <span class="heavy text-4xl">WESTERN LIVING</span>
+      <span class="heavy text-4xl">HOUSE &amp; HOME</span>
+      <span class="heavy text-4xl">STYLE AT HOME</span>
+      <span class="heavy text-4xl">GLOBE &amp; MAIL</span>
+    </div>
+    <div class="flex items-center gap-20 shrink-0" aria-hidden="true">
+      <span class="heavy text-4xl">CALGARY HERALD</span>
+      <span class="heavy text-4xl">AVENUE</span>
+      <span class="heavy text-4xl">WESTERN LIVING</span>
+      <span class="heavy text-4xl">HOUSE &amp; HOME</span>
+      <span class="heavy text-4xl">STYLE AT HOME</span>
+      <span class="heavy text-4xl">GLOBE &amp; MAIL</span>
+    </div>
+  </div>
+</section>
+
+<!-- 15. INSTAGRAM -->
+<section class="bg-[var(--bone)] ed-border-b">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <div class="flex justify-between items-end mb-10 flex-wrap gap-4">
+      <div>
+        <p class="mono text-[var(--red)]">INSTAGRAM</p>
+        <h2 class="display text-5xl md:text-6xl mt-4">@sunleo<span class="text-[var(--red)]">/drag</span></h2>
+      </div>
+      <a href="#" class="mono underline decoration-[var(--red)] underline-offset-4">14.2k FOLLOWERS →</a>
+    </div>
+    <div class="grid grid-cols-4 grid-rows-2 gap-3">
+      <img src="https://picsum.photos/seed/sunleobaig01/360/360" class="w-full aspect-square object-cover ed-border" alt=""/>
+      <img src="https://picsum.photos/seed/sunleobaig02/360/360" class="w-full aspect-square object-cover ed-border" alt=""/>
+      <img src="https://picsum.photos/seed/sunleobaig03/360/360" class="w-full aspect-square object-cover ed-border" alt=""/>
+      <img src="https://picsum.photos/seed/sunleobaig04/360/360" class="w-full aspect-square object-cover ed-border" alt=""/>
+      <img src="https://picsum.photos/seed/sunleobaig05/360/360" class="w-full aspect-square object-cover ed-border" alt=""/>
+      <img src="https://picsum.photos/seed/sunleobaig06/360/360" class="w-full aspect-square object-cover ed-border" alt=""/>
+      <img src="https://picsum.photos/seed/sunleobaig07/360/360" class="w-full aspect-square object-cover ed-border" alt=""/>
+      <img src="https://picsum.photos/seed/sunleobaig08/360/360" class="w-full aspect-square object-cover ed-border" alt=""/>
+    </div>
+  </div>
+</section>
+
+<!-- 16. TRADE -->
+<section class="bg-[var(--red)] text-[var(--bone)] ed-border-b">
+  <div class="max-w-[1480px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-7">
+      <p class="mono text-[var(--orange)]">TRADE</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.9]">
+        DESIGNERS,<br/>
+        <span class="display-it text-[var(--orange)]">show</span> your before.
+      </h2>
+      <p class="mt-6 text-lg leading-relaxed max-w-xl opacity-90">
+        20% trade discount. Dedicated installer. Lead-time guarantee. White-label invoices. 38 Calgary designers + 11 builders use us today.
+      </p>
+      <a href="#" class="mt-8 inline-flex items-center gap-3 heavy bg-[var(--bone)] text-[var(--red)] px-6 py-3 ed-border" style="border-color: var(--bone);">APPLY →</a>
+    </div>
+    <div class="lg:col-span-5 display text-3xl leading-snug">
+      "Iris's before-and-after photos sell my projects to clients faster than any rendering I make."
+      <p class="mono mt-6 text-[var(--orange)] font-normal">— ELOISE WHITCOMBE · PRINCIPAL · WHITCOMBE + CO</p>
+    </div>
+  </div>
+</section>
+
+<!-- 17. FAQ -->
+<section class="bg-[var(--bone)] ed-border-b" id="faq">
+  <div class="max-w-[1480px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-4">
+      <p class="mono text-[var(--red)]">QUESTIONS</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.9]">Eight <span class="display-it text-[var(--red)]">befores.</span></h2>
+    </div>
+    <div class="lg:col-span-8 ed-border-t">
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">Are these photos really real?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">Every single one. Same camera, same time of day, same lens. The only edit we do is colour correction. We will not stage a before — that defeats the point.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">Can you do my home next?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">Yes — and we will photograph the before during the measurement visit, free, and hand you the after-photo on install day. Many clients use the pair on their own social media.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">How long is a measurement?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">30–45 minutes for a typical home. Free, no deposit. We arrive with samples, a laser, and a camera.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">How long is an install?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">One morning for a typical 8-window home. 9 AM to noon. Two installers. No mess.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">What's the guarantee?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">Ten-year atelier guarantee on craft and fit. Lifetime on hardware. If you hate the after, we re-make it. Eight clients asked last year — we did them all.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">Do you do commercial?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">Yes, under 80 windows. Boutique hotels, restaurants, dental, executive boardrooms.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">Calgary only?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">Greater Calgary, Airdrie, Cochrane, Okotoks, Chestermere. Anything our van can reach by dinner.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">Can I see more befores?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">Yes — the wall above shows 6. The archive holds 3,400. Request access during the free measurement visit.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 18. FINAL CTA -->
+<section class="bg-[var(--black)] text-[var(--bone)] ed-border-b" id="book">
+  <div class="max-w-[1480px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-10 items-center">
+    <div class="lg:col-span-6">
+      <p class="mono text-[var(--orange)]">BOOK YOUR AFTER</p>
+      <h2 class="display text-7xl md:text-8xl mt-4 leading-[.85]">
+        Your <span class="display-it text-[var(--orange)]">after</span><br/>starts<br/>9 AM Friday.
+      </h2>
+      <p class="mt-7 text-xl max-w-lg leading-relaxed opacity-90">
+        Pick a 30-minute measurement window. We arrive with a laser, samples, and a camera. The before-photo is free, the after is ten days away.
+      </p>
+    </div>
+    <div class="lg:col-span-6 ed-border bg-[var(--bone)] text-[var(--black)] p-8" style="border-color: var(--bone);">
+      <p class="mono text-[var(--red)]">BOOK A MEASUREMENT</p>
+      <div class="mt-6 space-y-4">
+        <div>
+          <label class="mono text-[var(--gray)]">FIRST NAME</label>
+          <input type="text" placeholder="First name" class="w-full mt-2 ed-border bg-white px-4 py-3 outline-none font-medium"/>
+        </div>
+        <div>
+          <label class="mono text-[var(--gray)]">EMAIL</label>
+          <input type="email" placeholder="you@home.com" class="w-full mt-2 ed-border bg-white px-4 py-3 outline-none font-medium"/>
+        </div>
+        <div>
+          <label class="mono text-[var(--gray)]">CALGARY DISTRICT</label>
+          <input type="text" placeholder="e.g. Tuscany NW" class="w-full mt-2 ed-border bg-white px-4 py-3 outline-none font-medium"/>
+        </div>
+        <div>
+          <label class="mono text-[var(--gray)]">WINDOW COUNT</label>
+          <input type="number" placeholder="6" class="w-full mt-2 ed-border bg-white px-4 py-3 outline-none font-medium"/>
+        </div>
+        <button class="btn-red w-full justify-center mt-3">RESERVE MEASUREMENT →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 19. MEGA FOOTER -->
+<footer class="bg-[var(--bone)] text-[var(--black)] py-20">
+  <div class="max-w-[1480px] mx-auto px-6">
+    <div class="grid lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-4">
+        <span class="display text-4xl">SunLeo<span class="text-[var(--red)]">.</span></span>
+        <p class="mt-5 text-lg leading-relaxed max-w-md opacity-90">Calgary's most photographed window-treatment brand. 3,400 befores, 3,400 afters, all real.</p>
+        <div class="mt-8 flex items-center gap-5">
+          <div class="stars text-xl">★★★★★</div>
+          <span class="mono opacity-70">4.9 · 2,418 REVIEWS</span>
+        </div>
+        <div class="mt-6 flex gap-3 flex-wrap">
+          <span class="display text-xl">Affirm</span>
+          <span class="display text-xl">Klarna</span>
+          <span class="display text-xl ital">afterpay</span>
+          <span class="display text-xl">Sezzle</span>
+        </div>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--gray)]">SHOP</p>
+        <ul class="mt-5 space-y-2 text-lg">
+          <li><a class="hover:text-[var(--red)] transition" href="#">Roller</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Cellular</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Roman</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Motorised</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Shutter</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--gray)]">WORK</p>
+        <ul class="mt-5 space-y-2 text-lg">
+          <li><a class="hover:text-[var(--red)] transition" href="#">Scenes</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Wall</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Trade</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Journal</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--gray)]">HELP</p>
+        <ul class="mt-5 space-y-2 text-lg">
+          <li><a class="hover:text-[var(--red)] transition" href="#">FAQ</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Returns</a></li>
+          <li><a class="hover:text-[var(--red)] transition" href="#">Guarantee</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--gray)]">CONTACT</p>
+        <ul class="mt-5 space-y-2 text-lg">
+          <li>+1 587 901 0240</li>
+          <li class="underline decoration-[var(--red)] underline-offset-4">drag@sunleo.ca</li>
+          <li class="opacity-80 text-base">MON–SAT · 9–18</li>
+          <li class="opacity-80 text-base">CALGARY, AB</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ed-border-t mt-16 pt-8 flex flex-wrap justify-between gap-4 mono opacity-60">
+      <p>© MMXXVI SUNLEO · CALGARY · TREATY 7</p>
+      <p>PRIVACY · TERMS · ACCESSIBILITY · COOKIES</p>
+    </div>
+  </div>
+</footer>
+
+<!-- 20. STICKY SIDE -->
+<div class="fixed right-3 top-1/2 -translate-y-1/2 z-30 hidden md:flex flex-col gap-2">
+  <button class="w-11 h-11 bg-[var(--black)] text-[var(--bone)] ed-border flex items-center justify-center hover:bg-[var(--red)] transition" aria-label="Chat">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </button>
+  <button class="w-11 h-11 bg-[var(--bone)] text-[var(--black)] ed-border flex items-center justify-center hover:bg-[var(--black)] hover:text-[var(--bone)] transition" aria-label="Save">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+  </button>
+  <button class="w-11 h-11 bg-[var(--bone)] text-[var(--black)] ed-border flex items-center justify-center hover:bg-[var(--black)] hover:text-[var(--bone)] transition" aria-label="Share">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+  </button>
+</div>
+
+<!-- LIVE NOTIF -->
+<div id="liveNotif" class="hidden md:flex fixed left-5 bottom-24 z-40 max-w-xs bg-[var(--bone)] ed-border p-4 gap-3 items-start notif-in">
+  <span class="pulse-dot mt-1.5"></span>
+  <div>
+    <p class="mono text-[var(--red)]">[LIVE · 2 MIN AGO]</p>
+    <p class="mt-1 text-sm leading-snug"><span class="heavy" id="liveName">Marisol H.</span> from <span class="heavy" id="liveCity">Mahogany SE</span> just <span id="liveAct">booked the measure.</span></p>
+  </div>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="fixed top-4 right-4 z-40 bg-[var(--red)] text-[var(--bone)] ed-border px-4 py-2 mono text-xs flex items-center gap-3" style="border-color: var(--black);">
+  <span class="pulse-dot" style="background: var(--bone);"></span>
+  <span>SPRING ENDS</span>
+  <span class="tabnum heavy" id="cd">--d --h --m --s</span>
+</div>
+
+<!-- STICKY BOTTOM -->
+<div class="fixed bottom-0 inset-x-0 z-30 bg-[var(--black)] text-[var(--bone)] py-3 px-6 flex flex-wrap items-center justify-between gap-3 ed-border-t" style="border-color: var(--red); border-top-width: 3px;">
+  <div class="flex items-center gap-3 text-sm">
+    <span class="pulse-dot" style="background: var(--orange);"></span>
+    <span class="mono text-[var(--orange)]">3 SLOTS · WEEK OF 26 MAY</span>
+    <span class="opacity-80">Next available <b>MON 02 JUN</b>.</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <a href="#scenes" class="mono underline decoration-[var(--red)] underline-offset-4">SEE 6 SCENES</a>
+    <a href="#book" class="btn-orange text-[12px] py-2.5 px-4">BOOK MEASURE →</a>
+  </div>
+</div>
+
+<!-- EXIT MODAL -->
+<div id="exitModal" class="hidden fixed inset-0 z-50 bg-[var(--black)]/85 backdrop-blur-sm items-center justify-center p-6">
+  <div class="max-w-xl bg-[var(--bone)] p-10 ed-border relative">
+    <button id="exitClose" class="absolute top-4 right-4 mono opacity-60 hover:opacity-100">CLOSE · ESC</button>
+    <p class="mono text-[var(--red)]">BEFORE YOU LEAVE</p>
+    <h3 class="display text-5xl mt-4 leading-[.92]">Eight free <span class="display-it text-[var(--red)]">linen samples.</span></h3>
+    <p class="mt-4 leading-relaxed">Belgian linen, posted in 48 hours. Yours to keep. No call.</p>
+    <div class="mt-6 flex items-end gap-3">
+      <input type="email" placeholder="your email" class="flex-1 ed-border bg-white px-4 py-3 outline-none font-medium"/>
+      <button class="btn-red">SEND</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const lenis = new Lenis({ lerp: 0.08 });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+  }
+  AOS.init({ once: true, duration: 700, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
+
+  // Initialise all BA sliders
+  function initBA(frame){
+    let dragging = false;
+    function setInset(percent){
+      const inset = Math.max(0, Math.min(100, percent));
+      frame.style.setProperty('--inset', (100 - inset) + '%');
+    }
+    function fromEvent(e){
+      const rect = frame.getBoundingClientRect();
+      const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+      const pct = (x / rect.width) * 100;
+      setInset(pct);
+    }
+    frame.addEventListener('mousedown', (e) => { dragging = true; fromEvent(e); });
+    frame.addEventListener('touchstart', (e) => { dragging = true; fromEvent(e); }, { passive: true });
+    window.addEventListener('mousemove', (e) => { if(dragging) fromEvent(e); });
+    window.addEventListener('touchmove', (e) => { if(dragging) fromEvent(e); }, { passive: true });
+    window.addEventListener('mouseup', () => dragging = false);
+    window.addEventListener('touchend', () => dragging = false);
+    // Initial drift animation
+    setInset(50);
+    let t = 50, dir = 1;
+    let driftStop = false;
+    frame.addEventListener('mousedown', () => driftStop = true);
+    frame.addEventListener('touchstart', () => driftStop = true);
+    const drift = setInterval(() => {
+      if(driftStop){ clearInterval(drift); return; }
+      t += dir * 0.3;
+      if(t > 62 || t < 38) dir *= -1;
+      setInset(t);
+    }, 50);
+  }
+
+  document.querySelectorAll('.ba-frame').forEach(initBA);
+
+  // Scene picker (hero only)
+  const scenes = [
+    { num: '01', title: 'Tuscany NW kitchen.', desc: 'Old yellowed vinyl mini-blinds vs. fresh Belgian linen roller in oat milk. Installed: III.MMXXVI · 6 windows · $1,580.', b:'https://picsum.photos/seed/sunleobaAB1before/1600/900', a:'https://picsum.photos/seed/sunleobaAB1after/1600/900' },
+    { num: '02', title: 'Inglewood SE living.', desc: '90s vertical blinds vs. floor-to-ceiling Belgian linen drapery. I.MMXXVI · 9 windows · $2,940.', b:'https://picsum.photos/seed/sunleobaAB2before/1600/900', a:'https://picsum.photos/seed/sunleobaAB2after/1600/900' },
+    { num: '03', title: 'Mount Royal bedroom.', desc: 'East-facing master, dirty mini-blinds vs. blackout cellular. II.MMXXVI · 4 windows · $1,180.', b:'https://picsum.photos/seed/sunleobaAB3before/1600/900', a:'https://picsum.photos/seed/sunleobaAB3after/1600/900' },
+    { num: '04', title: 'Britannia nursery.', desc: 'Sun-bleached curtains vs. cordless blackout cellular. Baby naps reliably. XI.MMXXV · 2 windows · $640.', b:'https://picsum.photos/seed/sunleobaAB4before/1600/900', a:'https://picsum.photos/seed/sunleobaAB4after/1600/900' },
+    { num: '05', title: 'Aspen Estates office.', desc: 'Glare-heavy west window vs. dual-band zebra sheer. Screen-friendly. XII.MMXXV · 3 windows · $720.', b:'https://picsum.photos/seed/sunleobaAB5before/1600/900', a:'https://picsum.photos/seed/sunleobaAB5after/1600/900' },
+    { num: '06', title: 'Mahogany SE basement.', desc: 'Egress windows with vinyl mini vs. motorised blackout roller — Matter 1.4. X.MMXXV · 3 windows · $1,560.', b:'https://picsum.photos/seed/sunleobaAB6before/1600/900', a:'https://picsum.photos/seed/sunleobaAB6after/1600/900' },
+  ];
+  let sceneIdx = 0;
+  const ba1 = document.getElementById('ba1');
+  const sceneNum = document.getElementById('sceneNum');
+  const sceneTitle = document.getElementById('sceneTitle');
+  const sceneDesc = document.getElementById('sceneDesc');
+  const dots = document.querySelectorAll('#sceneDots .scene-dot');
+
+  function setScene(i){
+    sceneIdx = (i + scenes.length) % scenes.length;
+    const s = scenes[sceneIdx];
+    sceneNum.textContent = s.num;
+    sceneTitle.textContent = s.title;
+    sceneDesc.textContent = s.desc;
+    const imgs = ba1.querySelectorAll('img');
+    imgs[0].src = s.a;
+    imgs[1].src = s.b;
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === sceneIdx));
+  }
+  dots.forEach((d, idx) => d.addEventListener('click', () => setScene(idx)));
+  document.getElementById('prevScene').addEventListener('click', () => setScene(sceneIdx - 1));
+  document.getElementById('nextScene').addEventListener('click', () => setScene(sceneIdx + 1));
+
+  // Countdown
+  const cdEl = document.getElementById('cd');
+  const endDate = new Date(Date.now() + 1000*60*60*24*5 + 1000*60*60*8);
+  function tickCd(){
+    const diff = endDate - new Date();
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    cdEl.textContent = `${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+  }
+  setInterval(tickCd, 1000); tickCd();
+
+  // Live notif
+  const notif = document.getElementById('liveNotif');
+  const liveName = document.getElementById('liveName');
+  const liveCity = document.getElementById('liveCity');
+  const liveAct = document.getElementById('liveAct');
+  const events = [
+    { name:'Marisol H.', city:'Mahogany SE', act:'booked the measure.' },
+    { name:'Devin K.', city:'Tuscany NW', act:'ordered Linen Roller.' },
+    { name:'Wren D.', city:'Mount Royal', act:'reserved install slot.' },
+    { name:'Tomislav P.', city:'Bridgeland', act:'downloaded swatches.' },
+    { name:'Hattie F.', city:'Aspen Estates', act:'upgraded to motorised.' },
+  ];
+  let ev = 0;
+  function showNotif(){
+    if(!notif) return;
+    const e = events[ev % events.length];
+    liveName.textContent = e.name;
+    liveCity.textContent = e.city;
+    liveAct.textContent = e.act;
+    notif.classList.remove('hidden','notif-in');
+    notif.offsetWidth;
+    notif.classList.add('flex','notif-in');
+    ev++;
+    setTimeout(() => notif.classList.add('hidden'), 6000);
+  }
+  setTimeout(showNotif, 4500);
+  setInterval(showNotif, 13000);
+
+  // Counters
+  document.querySelectorAll('[data-counter]').forEach(el => {
+    const target = parseInt(el.getAttribute('data-counter'),10);
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          let n = 0;
+          const step = Math.max(1, Math.floor(target/60));
+          const t = setInterval(() => {
+            n += step; if(n >= target){ n = target; clearInterval(t); }
+            el.textContent = n.toLocaleString();
+          }, 20);
+          obs.disconnect();
+        }
+      });
+    });
+    obs.observe(el);
+  });
+
+  // Exit intent
+  const exitModal = document.getElementById('exitModal');
+  let exitFired = false;
+  document.addEventListener('mouseout', (e) => {
+    if(!exitFired && e.clientY < 10 && e.relatedTarget == null){
+      exitFired = true;
+      exitModal.classList.remove('hidden');
+      exitModal.classList.add('flex');
+    }
+  });
+  document.getElementById('exitClose')?.addEventListener('click', () => {
+    exitModal.classList.add('hidden');
+    exitModal.classList.remove('flex');
+  });
+  document.addEventListener('keyup', (e) => {
+    if(e.key === 'Escape' && exitModal.classList.contains('flex')){
+      exitModal.classList.add('hidden'); exitModal.classList.remove('flex');
+    }
+  });
+</script>
+</body>
+</html>

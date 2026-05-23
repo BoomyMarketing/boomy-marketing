@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SunLeo — Live Configurator | Build Your Blinds in Real-Time · Calgary</title>
+<meta name="description" content="Drag, tap, see. Configure your custom blinds with live preview, instant pricing, and monthly payments. Free in-home measure. Made in Calgary."/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+<link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet"/>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<style>
+  :root{
+    --navy: #0F2942;
+    --paper: #FAFAF7;
+    --coral: #FF6B5B;
+    --yellow: #F5D77E;
+    --ink: #0A1626;
+    --line: rgba(15,41,66,.12);
+    --line-strong: rgba(15,41,66,.25);
+  }
+  *{ -webkit-font-smoothing: antialiased; }
+  html, body { background: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif; }
+  .display{ font-family: 'Space Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.025em; }
+  .mono{ font-variant-numeric: tabular-nums; }
+
+  /* ===== Hero room ===== */
+  .room{
+    position:relative; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden;
+    background: linear-gradient(180deg, #DDD8CC 0%, #C9C2B3 100%);
+    box-shadow: 0 30px 60px -20px rgba(15,41,66,.3);
+  }
+  .room::before{
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(50% 30% at 30% 80%, rgba(15,41,66,.15), transparent 60%),
+      linear-gradient(180deg, transparent 0% 60%, rgba(15,41,66,.18) 100%);
+  }
+  /* Window frame */
+  .window{
+    position:absolute; left: 8%; right: 8%; top: 8%; bottom: 18%;
+    background: linear-gradient(180deg, #FFE7B5 0%, #FFC97A 60%, #FF9D55 100%);
+    border-radius: 6px;
+    box-shadow:
+      0 0 0 12px var(--ink),
+      0 0 0 20px #DCD4C5,
+      0 30px 50px -20px rgba(0,0,0,.4),
+      inset 0 0 80px rgba(255,255,255,.4);
+    overflow: hidden;
+  }
+  .window::before, .window::after{
+    content:''; position:absolute; background: var(--ink); opacity:.4;
+  }
+  .window::before{ left:50%; top:0; bottom:0; width: 8px; transform: translateX(-50%); }
+  .window::after{ left:0; right:0; top:50%; height: 8px; transform: translateY(-50%); }
+
+  /* Outside scene */
+  .scene{
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, #FFE9BC 0%, #FFC07A 35%, #FF8D5B 60%, #6F3F4B 100%);
+  }
+  .mountains{ position:absolute; bottom:30%; left:0; right:0; }
+
+  /* The blind */
+  .blind-wrap{
+    position:absolute; left: 0; right: 0; top: 0; bottom: 0;
+    overflow:hidden;
+  }
+  .blind{
+    position:absolute; left:0; right:0; top:0;
+    background:
+      repeating-linear-gradient(180deg, rgba(0,0,0,.06) 0 1px, transparent 1px 8px),
+      var(--blind-color, #E8E2D2);
+    box-shadow: 0 8px 20px rgba(0,0,0,.25), inset 0 -3px 0 rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.4);
+    height: var(--blind-h, 70%);
+    transition: height .8s cubic-bezier(.16,1,.3,1), background .5s;
+  }
+  .blind-handle{
+    position:absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+    width: 38px; height: 4px; background: rgba(0,0,0,.4); border-radius: 4px;
+  }
+
+  /* Floor lamp + chair shapes for room feel */
+  .lamp{
+    position:absolute; left: 6%; bottom: 5%; width: 4px; height: 200px; background: var(--ink);
+  }
+  .lamp::after{
+    content:''; position:absolute; top:-50px; left:-30px; width:64px; height:64px;
+    background: radial-gradient(circle, #F8D873, #C8985A 70%, #5C4630);
+    border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+    box-shadow: 0 0 80px rgba(248,216,115,.6);
+  }
+  .chair{
+    position:absolute; right: 4%; bottom: 0; width: 28%; height: 38%;
+    background: linear-gradient(180deg, #3D5A6F 0%, #1E2F40 100%);
+    border-radius: 14px 14px 4px 4px;
+  }
+  .chair::before{
+    content:''; position:absolute; top: 30%; left: 8%; right: 8%; bottom: 12%;
+    background: linear-gradient(180deg, #4A6B82, #2A3F52);
+    border-radius: 8px;
+  }
+  .floor{ position:absolute; left:0; right:0; bottom:0; height:14%; background: linear-gradient(180deg, #6B5B43 0%, #443523 100%); }
+
+  /* ===== Color swatches ===== */
+  .swatch{ width:44px; height:44px; border-radius:8px; cursor:pointer; transition: transform .25s, box-shadow .25s, outline .25s; outline: 2px solid transparent; outline-offset: 4px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.1); }
+  .swatch:hover{ transform: scale(1.08); }
+  .swatch.active{ outline-color: var(--coral); }
+
+  /* ===== Buttons ===== */
+  .btn-coral{ background: var(--coral); color: #fff; padding: 14px 26px; border-radius: 999px; font-weight: 600; transition: transform .35s, background .35s, box-shadow .35s; box-shadow: 0 10px 30px -10px rgba(255,107,91,.55); }
+  .btn-coral:hover{ background:#E85645; transform: translateY(-2px); }
+  .btn-navy{ background: var(--navy); color: var(--paper); padding: 14px 26px; border-radius: 999px; font-weight: 600; transition: transform .35s, background .35s; }
+  .btn-navy:hover{ background:#070F1C; transform: translateY(-2px); }
+  .btn-ghost{ border: 1.5px solid var(--ink); color: var(--ink); padding: 12px 24px; border-radius: 999px; font-weight: 600; transition: all .35s; }
+  .btn-ghost:hover{ background: var(--ink); color: var(--paper); }
+
+  /* ===== Range slider ===== */
+  input[type=range]{ -webkit-appearance:none; height: 4px; border-radius: 2px; background: var(--line-strong); width: 100%; outline:none;}
+  input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:22px; height:22px; border-radius:50%; background: var(--coral); cursor: pointer; box-shadow: 0 0 0 4px rgba(255,107,91,.18); transition: transform .2s;}
+  input[type=range]::-webkit-slider-thumb:hover{ transform: scale(1.15);}
+  input[type=range]::-moz-range-thumb{ width:22px; height:22px; border-radius:50%; background: var(--coral); border:none; cursor:pointer;}
+
+  /* ===== Toggle ===== */
+  .toggle{ position: relative; width: 56px; height: 30px; background: var(--line-strong); border-radius: 999px; cursor: pointer; transition: background .3s; }
+  .toggle::after{ content:''; position:absolute; top: 3px; left: 3px; width: 24px; height: 24px; background: white; border-radius: 50%; transition: left .3s cubic-bezier(.16,1,.3,1); box-shadow: 0 2px 6px rgba(0,0,0,.2); }
+  .toggle.on{ background: var(--coral); }
+  .toggle.on::after{ left: 29px; }
+
+  /* ===== 3D tilt ===== */
+  .tilt{ transition: transform .6s cubic-bezier(.16,1,.3,1); transform-style: preserve-3d; }
+  .tilt:hover{ transform: rotateY(-7deg) rotateX(5deg) translateY(-4px); }
+
+  /* ===== Marquee ===== */
+  .marquee{ display:flex; gap: 56px; animation: marquee 28s linear infinite; }
+  @keyframes marquee{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* ===== Pulse dot ===== */
+  .dot-pulse{ position: relative; }
+  .dot-pulse::after{ content:''; position:absolute; inset:-6px; border-radius:50%; background: rgba(255,107,91,.4); animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{transform:scale(.8); opacity:.7} 50%{transform:scale(1.4); opacity:0}}
+
+  /* ===== FAQ ===== */
+  details summary{ list-style:none; cursor:pointer; }
+  details summary::-webkit-details-marker{ display:none; }
+  details[open] .chev{ transform: rotate(45deg); }
+  .chev{ transition: transform .4s cubic-bezier(.16,1,.3,1); }
+
+  /* ===== Notif ===== */
+  @keyframes notifIn{ from{transform: translateY(20px); opacity:0;} to{transform: translateY(0); opacity:1;}}
+  .notif-in{ animation: notifIn .6s cubic-bezier(.16,1,.3,1);}
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+  ::-webkit-scrollbar{ width:10px;} ::-webkit-scrollbar-thumb{ background:#ccc; }
+
+  /* ========================================================== */
+  /* === MOBILE RESPONSIVE PATCH ================================ */
+  /* ========================================================== */
+  html, body { overflow-x: hidden; max-width: 100vw; }
+  img, svg, video { max-width: 100%; height: auto; }
+
+  /* Sticky left column collapses on mobile so room+controls scroll naturally */
+  @media (max-width: 1023px) {
+    .lg\:sticky { position: static !important; }
+
+    /* CRITICAL: Tailwind's `grid` is unconditional — force flex column at <lg */
+    section .max-w-\[1320px\].grid { display: flex !important; flex-direction: column !important; }
+    section .max-w-\[1320px\].grid > * { min-width: 0 !important; width: 100% !important; }
+  }
+
+  @media (max-width: 767px) {
+    /* Step number scaling (was 120px) */
+    .display.text-\[120px\] { font-size: 64px !important; }
+
+    /* Hero H1 (clamp 48-108) — fine but cap on phones */
+    h1.display { font-size: clamp(40px, 11vw, 64px) !important; }
+
+    /* Disable hover-only 3D tilt on touch */
+    .tilt:hover { transform: none !important; }
+    .product-card:hover { transform: none !important; }
+
+    /* Larger swatches for fat fingers */
+    .swatch { width: 44px !important; height: 44px !important; }
+
+    /* Range slider track + thumb — bigger touch target via padding */
+    input[type=range] { height: 30px !important; padding: 13px 0 !important; background-clip: content-box !important; }
+    input[type=range]::-webkit-slider-thumb { width: 28px !important; height: 28px !important; }
+    input[type=range]::-moz-range-thumb { width: 28px !important; height: 28px !important; }
+
+    /* iOS form zoom prevention */
+    input, textarea, select { font-size: 16px !important; }
+
+    /* Touch target min */
+    .btn-coral, .btn-navy, .btn-ghost { min-height: 44px; padding: 12px 22px; }
+
+    /* Buttons inside configurator card (4-button type grid) */
+    .type-btn { min-height: 44px !important; }
+
+    /* Toggle: 56px width is fine, but ensure tap target wraps it */
+    .toggle { width: 60px !important; height: 32px !important; }
+    .toggle::after { width: 26px !important; height: 26px !important; }
+    .toggle.on::after { left: 31px !important; }
+
+    /* Marquee — softer + narrower cards */
+    .marquee { animation-duration: 42s; gap: 24px !important; }
+    .marquee .flex.gap-6 { gap: 16px !important; }
+    .marquee article.min-w-\[420px\] { min-width: 280px !important; padding: 16px !important; }
+    .marquee article p { font-size: 15px !important; }
+
+    /* Room aspect-ratio remains 4/3 but cap height so it fits viewport */
+    .room { max-height: 70vh; }
+
+    /* Configurator card padding tightening */
+    .bg-white.rounded-2xl.p-6 { padding: 18px !important; }
+
+    /* Round arrow nav buttons / circle buttons → touch friendly */
+    .w-10.h-10.rounded-full { width: 44px !important; height: 44px !important; }
+
+    /* Avoid Get-quote CTA shrinking too much */
+    .btn-coral.\!text-\[13px\] { font-size: 13px !important; padding: 10px 14px !important; }
+  }
+</style>
+</head>
+<body class="relative">
+
+<!-- Trust bar -->
+<div class="bg-[var(--ink)] text-[var(--paper)] text-[12px] tracking-[.18em] uppercase">
+  <div class="max-w-[1320px] mx-auto px-5 py-2.5 flex items-center justify-between gap-4">
+    <span class="flex items-center gap-2"><span class="dot-pulse w-2 h-2 rounded-full bg-[var(--coral)]"></span> Live · 12 measures booked today</span>
+    <div class="hidden md:flex items-center gap-5">
+      <a href="tel:4035550199">(403) 555-0199</a>
+      <span class="opacity-60">MON–SAT 9–6</span>
+      <span>FREE IN-HOME MEASURE</span>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-[var(--paper)]/90 backdrop-blur-md border-b border-[var(--line)]">
+  <div class="max-w-[1320px] mx-auto px-5 py-3 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2">
+      <svg width="34" height="34" viewBox="0 0 40 40"><rect x="6" y="6" width="28" height="28" rx="6" fill="#0F2942"/><rect x="10" y="10" width="20" height="3" fill="#F5D77E"/><rect x="10" y="15" width="20" height="3" fill="#F5D77E" opacity=".6"/><rect x="10" y="20" width="20" height="3" fill="#F5D77E" opacity=".4"/></svg>
+      <span class="display text-2xl">SunLeo</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-7 text-[14px]">
+      <a class="hover:text-[var(--coral)] transition" href="#">Configurator</a>
+      <a class="hover:text-[var(--coral)] transition" href="#">Shop</a>
+      <a class="hover:text-[var(--coral)] transition" href="#">Motorization</a>
+      <a class="hover:text-[var(--coral)] transition" href="#">Smart Home</a>
+      <a class="hover:text-[var(--coral)] transition" href="#">Calgary</a>
+      <a class="hover:text-[var(--coral)] transition" href="#">Trade</a>
+    </nav>
+    <div class="flex items-center gap-3 text-[13px]">
+      <span class="hidden md:inline">⌕</span>
+      <span class="hidden md:inline">Cart · 0</span>
+      <a href="#book" class="btn-coral !py-2 !px-5 text-[13px]">Free Measure</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========= HERO: LIVE CONFIGURATOR ========= -->
+<section class="py-10 lg:py-14 relative">
+  <div class="max-w-[1320px] mx-auto px-5 grid lg:grid-cols-12 gap-8 items-start">
+    <!-- Left: copy + controls -->
+    <div class="lg:col-span-5 lg:sticky lg:top-24">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--yellow)]/30 border border-[var(--yellow)] text-[12px] mb-5">
+        <span class="dot-pulse w-1.5 h-1.5 rounded-full bg-[var(--coral)]"></span>
+        Live preview · prices update in real-time
+      </div>
+      <h1 class="display text-[clamp(48px,7vw,108px)] leading-[0.95] mb-6">
+        Drag.<br/>Tap.<br/><span class="text-[var(--coral)]">See it.</span>
+      </h1>
+      <p class="text-[17px] leading-[1.7] opacity-80 max-w-[480px] mb-8">
+        Configure your custom blinds with live preview. Watch the price recalculate, the colour swap, the motor toggle — then we'll build it in our Calgary atelier in 8 days.
+      </p>
+
+      <!-- Controls -->
+      <div class="bg-white rounded-2xl p-6 border border-[var(--line)] shadow-xl space-y-5">
+        <!-- product type -->
+        <div>
+          <div class="flex items-center justify-between mb-3"><label class="text-[12px] uppercase tracking-widest opacity-60">Type</label><span class="text-[11px] opacity-50" id="typeName">Roller · Light Filtering</span></div>
+          <div class="grid grid-cols-4 gap-2 text-[12px]">
+            <button data-type="roller" class="type-btn active py-2.5 px-2 rounded-lg border border-[var(--line)] hover:border-[var(--coral)] transition">Roller</button>
+            <button data-type="cellular" class="type-btn py-2.5 px-2 rounded-lg border border-[var(--line)] hover:border-[var(--coral)] transition">Cellular</button>
+            <button data-type="zebra" class="type-btn py-2.5 px-2 rounded-lg border border-[var(--line)] hover:border-[var(--coral)] transition">Zebra</button>
+            <button data-type="roman" class="type-btn py-2.5 px-2 rounded-lg border border-[var(--line)] hover:border-[var(--coral)] transition">Roman</button>
+          </div>
+        </div>
+
+        <!-- color -->
+        <div>
+          <div class="flex items-center justify-between mb-3"><label class="text-[12px] uppercase tracking-widest opacity-60">Fabric tone</label><span class="text-[11px] opacity-50" id="colorName">Stone Linen</span></div>
+          <div class="flex flex-wrap gap-2.5">
+            <button class="swatch active" style="background:#E8E2D2" data-color="#E8E2D2" data-name="Stone Linen"></button>
+            <button class="swatch" style="background:#F1EAD7" data-color="#F1EAD7" data-name="Bone"></button>
+            <button class="swatch" style="background:#C7A574" data-color="#C7A574" data-name="Toasted Oat"></button>
+            <button class="swatch" style="background:#7A5847" data-color="#7A5847" data-name="Espresso"></button>
+            <button class="swatch" style="background:#3D4F5C" data-color="#3D4F5C" data-name="Slate"></button>
+            <button class="swatch" style="background:#0F2942" data-color="#0F2942" data-name="Midnight"></button>
+            <button class="swatch" style="background:#FF6B5B" data-color="#FF6B5B" data-name="Coral"></button>
+            <button class="swatch" style="background:#F5D77E" data-color="#F5D77E" data-name="Yellow"></button>
+          </div>
+        </div>
+
+        <!-- opening -->
+        <div>
+          <div class="flex items-center justify-between mb-3"><label class="text-[12px] uppercase tracking-widest opacity-60">Open / Close</label><span class="text-[11px] mono opacity-70"><span id="openPct">30</span>%</span></div>
+          <input type="range" id="openSlider" min="0" max="100" value="30"/>
+          <div class="flex justify-between text-[10px] opacity-50 mt-1"><span>OPEN</span><span>CLOSED</span></div>
+        </div>
+
+        <!-- width -->
+        <div>
+          <div class="flex items-center justify-between mb-3"><label class="text-[12px] uppercase tracking-widest opacity-60">Width</label><span class="text-[11px] mono opacity-70"><span id="widthN">48</span>"</span></div>
+          <input type="range" id="widthSlider" min="24" max="96" value="48"/>
+        </div>
+
+        <!-- motor -->
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-[14px] font-semibold">Motorization</div>
+            <div class="text-[12px] opacity-60">+ $189 · Whisper-quiet 38dB · HomeKit ready</div>
+          </div>
+          <div class="toggle" id="motorToggle"></div>
+        </div>
+
+        <!-- blackout -->
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-[14px] font-semibold">Blackout liner</div>
+            <div class="text-[12px] opacity-60">+ $89 · 100% room-darkening</div>
+          </div>
+          <div class="toggle" id="blackoutToggle"></div>
+        </div>
+
+        <!-- Price -->
+        <div class="border-t border-[var(--line)] pt-5">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-[12px] uppercase tracking-widest opacity-60">Your price</div>
+              <div class="display text-[40px] leading-none mono">$<span id="priceTotal">259</span></div>
+              <div class="text-[12px] opacity-70 mt-1">or <span id="monthly">22</span>/mo · 0% APR with Affirm</div>
+            </div>
+            <a href="#book" class="btn-coral !text-[13px] !py-3 !px-5">Get this quote →</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-[12px] opacity-60 mt-4 flex items-center gap-2"><span>✓</span> Save your build · Email to your spouse · Print quote</p>
+    </div>
+
+    <!-- Right: room preview -->
+    <div class="lg:col-span-7 relative">
+      <div class="room" id="room">
+        <!-- Outside view -->
+        <div class="window" id="windowFrame">
+          <div class="scene" id="scene">
+            <svg class="mountains" viewBox="0 0 600 200" preserveAspectRatio="none" width="100%" height="120">
+              <path d="M0 200 L80 80 L130 130 L200 40 L290 110 L360 60 L450 140 L530 50 L600 130 L600 200 Z" fill="#5A3B47" opacity=".8"/>
+              <path d="M0 200 L60 120 L130 160 L210 100 L300 150 L380 120 L460 170 L540 120 L600 180 L600 200 Z" fill="#3A2530" opacity=".9"/>
+            </svg>
+          </div>
+          <div class="blind-wrap">
+            <div class="blind" id="blind"><div class="blind-handle"></div></div>
+          </div>
+        </div>
+        <div class="floor"></div>
+        <div class="lamp"></div>
+        <div class="chair"></div>
+
+        <!-- HUD overlay -->
+        <div class="absolute top-4 left-4 bg-white/85 backdrop-blur rounded-xl px-3 py-2 text-[11px] uppercase tracking-widest border border-[var(--line)] flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-[var(--coral)] dot-pulse"></span>
+          Live preview
+        </div>
+        <div class="absolute bottom-4 right-4 bg-[var(--ink)] text-[var(--paper)] rounded-xl px-4 py-3 text-[13px]">
+          <div class="text-[10px] uppercase tracking-widest opacity-60">Configured</div>
+          <div class="mono"><span id="hudType">Roller · Light Filtering</span></div>
+          <div class="text-[11px] opacity-70 mt-1"><span id="hudColor">Stone Linen</span> · <span id="hudW">48</span>" wide</div>
+        </div>
+      </div>
+
+      <!-- Live stats card -->
+      <div class="mt-5 grid grid-cols-3 gap-4">
+        <div class="bg-white rounded-xl p-4 border border-[var(--line)]"><div class="text-[11px] uppercase tracking-widest opacity-60">In stock</div><div class="display text-2xl mono">312<span class="text-[var(--coral)]"> tones</span></div></div>
+        <div class="bg-white rounded-xl p-4 border border-[var(--line)]"><div class="text-[11px] uppercase tracking-widest opacity-60">Lead time</div><div class="display text-2xl mono">8<span class="text-[var(--coral)]"> days</span></div></div>
+        <div class="bg-white rounded-xl p-4 border border-[var(--line)]"><div class="text-[11px] uppercase tracking-widest opacity-60">Reviews</div><div class="display text-2xl mono">4.9<span class="text-[var(--coral)]"> ★</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust strip -->
+<section class="border-y border-[var(--line)] bg-white">
+  <div class="max-w-[1320px] mx-auto px-5 py-5 flex flex-wrap items-center justify-between gap-5 text-[12px] uppercase tracking-widest opacity-80">
+    <span>★ BBB A+ Accredited</span>
+    <span>● Top Choice Calgary 2024</span>
+    <span>♦ Houzz Best of 2024</span>
+    <span>◐ Affirm · Klarna · Pay in 4</span>
+    <span>★ Google 4.9 · 1,247</span>
+    <span>○ Bonded · Licensed · WCB</span>
+  </div>
+</section>
+
+<!-- ========= HOW IT WORKS ========= -->
+<section class="py-28 bg-[var(--paper)]">
+  <div class="max-w-[1320px] mx-auto px-5">
+    <p class="text-[12px] uppercase tracking-widest opacity-60 mb-4">§ 02 · The process</p>
+    <h2 class="display text-[clamp(40px,5.6vw,84px)] leading-[1] mb-16 max-w-[820px]">From cursor to curtain rod in three steps.</h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-2xl p-8 border border-[var(--line)] tilt">
+        <div class="display text-[120px] leading-none text-[var(--coral)] mb-4">01</div>
+        <h3 class="display text-3xl mb-3">Configure live</h3>
+        <p class="opacity-80 text-[15px] leading-relaxed">Use the configurator above to lock in type, tone, and motorization. Save the build as a PDF or email.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-8 border border-[var(--line)] tilt">
+        <div class="display text-[120px] leading-none text-[var(--yellow)] mb-4">02</div>
+        <h3 class="display text-3xl mb-3">Free measure</h3>
+        <p class="opacity-80 text-[15px] leading-relaxed">A specialist visits within 48 hours, confirms your spec, and prints the final quote. No deposit, no obligation.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-8 border border-[var(--line)] tilt">
+        <div class="display text-[120px] leading-none text-[var(--navy)] mb-4">03</div>
+        <h3 class="display text-3xl mb-3">Calgary install</h3>
+        <p class="opacity-80 text-[15px] leading-relaxed">Two-person crew, drop cloths, motor pairing tested. White-glove install with a one-year tune-up included.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========= PRODUCT GRID 3x3 ========= -->
+<section class="py-28 bg-white">
+  <div class="max-w-[1320px] mx-auto px-5">
+    <div class="flex items-end justify-between mb-12 flex-wrap gap-6">
+      <div>
+        <p class="text-[12px] uppercase tracking-widest opacity-60 mb-4">§ 03 · Pre-configured</p>
+        <h2 class="display text-[clamp(36px,5vw,72px)] leading-[1]">Ten ready-to-build setups.</h2>
+      </div>
+      <div class="flex items-center gap-3">
+        <button class="text-[12px] px-4 py-1.5 rounded-full border border-[var(--line)]">Sort: Bestselling</button>
+        <button class="text-[12px] px-4 py-1.5 rounded-full border border-[var(--line)]">All rooms</button>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a href="#" class="tilt block bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)]">
+        <div class="aspect-[4/3] overflow-hidden relative"><img src="https://picsum.photos/seed/conf01/700/520" class="w-full h-full object-cover"/><span class="absolute top-3 left-3 bg-[var(--coral)] text-white text-[10px] uppercase tracking-widest px-2 py-1 rounded-full">Bestseller</span></div>
+        <div class="p-5">
+          <div class="flex items-center justify-between mb-1"><h3 class="display text-xl">Roller · Light Filtering</h3><span class="text-[12px] mono">★ 4.9</span></div>
+          <p class="text-[13px] opacity-70 mb-3">28 tones · Cordless · 8-day Calgary build.</p>
+          <div class="flex items-center justify-between text-[14px]"><span class="opacity-50 line-through mono">$269</span><span class="font-semibold mono">from $189 · $17/mo</span></div>
+        </div>
+      </a>
+      <a href="#" class="tilt block bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)]">
+        <div class="aspect-[4/3] overflow-hidden"><img src="https://picsum.photos/seed/conf02/700/520" class="w-full h-full object-cover"/></div>
+        <div class="p-5"><div class="flex items-center justify-between mb-1"><h3 class="display text-xl">Roller · Blackout</h3><span class="text-[12px] mono">★ 4.9</span></div><p class="text-[13px] opacity-70 mb-3">100% room-darkening · Side channels.</p><div class="flex items-center justify-between text-[14px]"><span class="opacity-50 line-through mono">$329</span><span class="font-semibold mono">from $229 · $21/mo</span></div></div>
+      </a>
+      <a href="#" class="tilt block bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)]">
+        <div class="aspect-[4/3] overflow-hidden"><img src="https://picsum.photos/seed/conf03/700/520" class="w-full h-full object-cover"/></div>
+        <div class="p-5"><div class="flex items-center justify-between mb-1"><h3 class="display text-xl">Honeycomb Cellular</h3><span class="text-[12px] mono">★ 5.0</span></div><p class="text-[13px] opacity-70 mb-3">R-5.0 insulation · Top-down/bottom-up.</p><div class="flex items-center justify-between text-[14px]"><span class="opacity-50 line-through mono">$429</span><span class="font-semibold mono">from $329 · $29/mo</span></div></div>
+      </a>
+      <a href="#" class="tilt block bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)]">
+        <div class="aspect-[4/3] overflow-hidden relative"><img src="https://picsum.photos/seed/conf04/700/520" class="w-full h-full object-cover"/><span class="absolute top-3 left-3 bg-[var(--yellow)] text-[var(--ink)] text-[10px] uppercase tracking-widest px-2 py-1 rounded-full">New</span></div>
+        <div class="p-5"><div class="flex items-center justify-between mb-1"><h3 class="display text-xl">Zebra · Day/Night</h3><span class="text-[12px] mono">★ 4.8</span></div><p class="text-[13px] opacity-70 mb-3">Alternating sheer/solid bands.</p><div class="flex items-center justify-between text-[14px]"><span class="opacity-50 line-through mono">$349</span><span class="font-semibold mono">from $259 · $23/mo</span></div></div>
+      </a>
+      <a href="#" class="tilt block bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)]">
+        <div class="aspect-[4/3] overflow-hidden"><img src="https://picsum.photos/seed/conf05/700/520" class="w-full h-full object-cover"/></div>
+        <div class="p-5"><div class="flex items-center justify-between mb-1"><h3 class="display text-xl">Roman Shades</h3><span class="text-[12px] mono">★ 4.9</span></div><p class="text-[13px] opacity-70 mb-3">Hobbled or flat · 48 fabrics.</p><div class="flex items-center justify-between text-[14px]"><span class="opacity-50 line-through mono">$489</span><span class="font-semibold mono">from $389 · $34/mo</span></div></div>
+      </a>
+      <a href="#" class="tilt block bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)]">
+        <div class="aspect-[4/3] overflow-hidden"><img src="https://picsum.photos/seed/conf06/700/520" class="w-full h-full object-cover"/></div>
+        <div class="p-5"><div class="flex items-center justify-between mb-1"><h3 class="display text-xl">Wood Venetians</h3><span class="text-[12px] mono">★ 4.9</span></div><p class="text-[13px] opacity-70 mb-3">Basswood · 2" slats.</p><div class="flex items-center justify-between text-[14px]"><span class="opacity-50 line-through mono">$399</span><span class="font-semibold mono">from $319 · $28/mo</span></div></div>
+      </a>
+      <a href="#" class="tilt block bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)]">
+        <div class="aspect-[4/3] overflow-hidden"><img src="https://picsum.photos/seed/conf07/700/520" class="w-full h-full object-cover"/></div>
+        <div class="p-5"><div class="flex items-center justify-between mb-1"><h3 class="display text-xl">Faux Wood</h3><span class="text-[12px] mono">★ 4.7</span></div><p class="text-[13px] opacity-70 mb-3">Humidity-proof · UV stable.</p><div class="flex items-center justify-between text-[14px]"><span class="opacity-50 line-through mono">$229</span><span class="font-semibold mono">from $169 · $15/mo</span></div></div>
+      </a>
+      <a href="#" class="tilt block bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)]">
+        <div class="aspect-[4/3] overflow-hidden"><img src="https://picsum.photos/seed/conf08/700/520" class="w-full h-full object-cover"/></div>
+        <div class="p-5"><div class="flex items-center justify-between mb-1"><h3 class="display text-xl">Plantation Shutters</h3><span class="text-[12px] mono">★ 5.0</span></div><p class="text-[13px] opacity-70 mb-3">Hardwood · poly · hybrid.</p><div class="flex items-center justify-between text-[14px]"><span class="opacity-50 line-through mono">$1,290</span><span class="font-semibold mono">from $989 · $87/mo</span></div></div>
+      </a>
+      <a href="#" class="tilt block bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)]">
+        <div class="aspect-[4/3] overflow-hidden relative"><img src="https://picsum.photos/seed/conf09/700/520" class="w-full h-full object-cover"/><span class="absolute top-3 left-3 bg-[var(--navy)] text-[var(--paper)] text-[10px] uppercase tracking-widest px-2 py-1 rounded-full">Motor</span></div>
+        <div class="p-5"><div class="flex items-center justify-between mb-1"><h3 class="display text-xl">Motorized Drapery</h3><span class="text-[12px] mono">★ 4.9</span></div><p class="text-[13px] opacity-70 mb-3">Lutron rails · whisper 38 dB.</p><div class="flex items-center justify-between text-[14px]"><span class="opacity-50 line-through mono">$1,490</span><span class="font-semibold mono">from $1,189 · $104/mo</span></div></div>
+      </a>
+      <a href="#" class="tilt block bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)]">
+        <div class="aspect-[4/3] overflow-hidden"><img src="https://picsum.photos/seed/conf10/700/520" class="w-full h-full object-cover"/></div>
+        <div class="p-5"><div class="flex items-center justify-between mb-1"><h3 class="display text-xl">Outdoor Solar</h3><span class="text-[12px] mono">★ 4.8</span></div><p class="text-[13px] opacity-70 mb-3">Pergolas · wind-rated.</p><div class="flex items-center justify-between text-[14px]"><span class="opacity-50 line-through mono">$789</span><span class="font-semibold mono">from $629 · $55/mo</span></div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========= REVIEWS ========= -->
+<section class="py-28 bg-[var(--paper)] overflow-hidden">
+  <div class="max-w-[1320px] mx-auto px-5">
+    <div class="flex items-end justify-between mb-12 flex-wrap gap-5">
+      <div>
+        <p class="text-[12px] uppercase tracking-widest opacity-60 mb-4">§ 04 · Reviews</p>
+        <h2 class="display text-[clamp(36px,5vw,72px)] leading-[1]">1,247 builds. 4.9 ★.</h2>
+      </div>
+      <div class="flex gap-3"><button class="w-10 h-10 rounded-full border border-[var(--line)]">‹</button><button class="w-10 h-10 rounded-full border border-[var(--line)]">›</button></div>
+    </div>
+  </div>
+  <div class="marquee">
+    <div class="flex gap-6 pr-6">
+      <article class="min-w-[420px] bg-white border border-[var(--line)] rounded-2xl p-6">
+        <div class="text-[var(--coral)] text-[15px] mb-3">★★★★★</div>
+        <p class="display text-[20px] leading-snug mb-4">"Used the configurator on a Sunday, measure was Tuesday, install was 9 days later. Magic."</p>
+        <div class="flex items-center gap-3"><img src="https://picsum.photos/seed/confr1/64/64" class="w-10 h-10 rounded-full"/><div class="text-[13px]"><div class="font-semibold">Sarah V.</div><div class="opacity-60">Tuscany · 2 weeks ago</div></div></div>
+      </article>
+      <article class="min-w-[420px] bg-white border border-[var(--line)] rounded-2xl p-6">
+        <div class="text-[var(--coral)] text-[15px] mb-3">★★★★★</div>
+        <p class="display text-[20px] leading-snug mb-4">"The HomeKit pairing took 30 seconds. The blinds drop themselves at sunset. Witchcraft."</p>
+        <div class="flex items-center gap-3"><img src="https://picsum.photos/seed/confr2/64/64" class="w-10 h-10 rounded-full"/><div class="text-[13px]"><div class="font-semibold">Marcus D.</div><div class="opacity-60">Mount Royal · 1 month ago</div></div></div>
+      </article>
+      <article class="min-w-[420px] bg-white border border-[var(--line)] rounded-2xl p-6">
+        <div class="text-[var(--coral)] text-[15px] mb-3">★★★★★</div>
+        <p class="display text-[20px] leading-snug mb-4">"The live price gave us exactly what we paid. No surprise upcharges."</p>
+        <div class="flex items-center gap-3"><img src="https://picsum.photos/seed/confr3/64/64" class="w-10 h-10 rounded-full"/><div class="text-[13px]"><div class="font-semibold">Priya K.</div><div class="opacity-60">Bridgeland · 6 weeks ago</div></div></div>
+      </article>
+      <article class="min-w-[420px] bg-white border border-[var(--line)] rounded-2xl p-6">
+        <div class="text-[var(--coral)] text-[15px] mb-3">★★★★★</div>
+        <p class="display text-[20px] leading-snug mb-4">"22 windows, three weeks, no drama. I'd recommend SunLeo to my mother."</p>
+        <div class="flex items-center gap-3"><img src="https://picsum.photos/seed/confr4/64/64" class="w-10 h-10 rounded-full"/><div class="text-[13px]"><div class="font-semibold">Liam O.</div><div class="opacity-60">Aspen Woods · 3 weeks ago</div></div></div>
+      </article>
+    </div>
+    <div class="flex gap-6 pr-6" aria-hidden="true">
+      <article class="min-w-[420px] bg-white border border-[var(--line)] rounded-2xl p-6"><div class="text-[var(--coral)] text-[15px] mb-3">★★★★★</div><p class="display text-[20px] leading-snug mb-4">"Used the configurator on a Sunday, measure was Tuesday, install was 9 days later. Magic."</p><div class="flex items-center gap-3"><img src="https://picsum.photos/seed/confr1/64/64" class="w-10 h-10 rounded-full"/><div class="text-[13px]"><div class="font-semibold">Sarah V.</div><div class="opacity-60">Tuscany · 2 weeks ago</div></div></div></article>
+      <article class="min-w-[420px] bg-white border border-[var(--line)] rounded-2xl p-6"><div class="text-[var(--coral)] text-[15px] mb-3">★★★★★</div><p class="display text-[20px] leading-snug mb-4">"The HomeKit pairing took 30 seconds. The blinds drop themselves at sunset. Witchcraft."</p><div class="flex items-center gap-3"><img src="https://picsum.photos/seed/confr2/64/64" class="w-10 h-10 rounded-full"/><div class="text-[13px]"><div class="font-semibold">Marcus D.</div><div class="opacity-60">Mount Royal · 1 month ago</div></div></div></article>
+      <article class="min-w-[420px] bg-white border border-[var(--line)] rounded-2xl p-6"><div class="text-[var(--coral)] text-[15px] mb-3">★★★★★</div><p class="display text-[20px] leading-snug mb-4">"The live price gave us exactly what we paid. No surprise upcharges."</p><div class="flex items-center gap-3"><img src="https://picsum.photos/seed/confr3/64/64" class="w-10 h-10 rounded-full"/><div class="text-[13px]"><div class="font-semibold">Priya K.</div><div class="opacity-60">Bridgeland · 6 weeks ago</div></div></div></article>
+      <article class="min-w-[420px] bg-white border border-[var(--line)] rounded-2xl p-6"><div class="text-[var(--coral)] text-[15px] mb-3">★★★★★</div><p class="display text-[20px] leading-snug mb-4">"22 windows, three weeks, no drama. I'd recommend SunLeo to my mother."</p><div class="flex items-center gap-3"><img src="https://picsum.photos/seed/confr4/64/64" class="w-10 h-10 rounded-full"/><div class="text-[13px]"><div class="font-semibold">Liam O.</div><div class="opacity-60">Aspen Woods · 3 weeks ago</div></div></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ========= COMPARISON ========= -->
+<section class="py-28 bg-white">
+  <div class="max-w-[1320px] mx-auto px-5">
+    <p class="text-[12px] uppercase tracking-widest opacity-60 mb-4">§ 05 · See how we are different</p>
+    <h2 class="display text-[clamp(36px,5vw,72px)] leading-[1] mb-12 max-w-[800px]">Big-box, online-only, SunLeo.</h2>
+    <div class="overflow-x-auto rounded-2xl border border-[var(--line)]">
+      <table class="w-full text-left">
+        <thead class="bg-[var(--paper)]"><tr>
+          <th class="px-6 py-5 text-[11px] uppercase tracking-widest">Feature</th>
+          <th class="px-6 py-5 text-[11px] uppercase tracking-widest">Big-box stores</th>
+          <th class="px-6 py-5 text-[11px] uppercase tracking-widest">Online-only</th>
+          <th class="px-6 py-5 text-[11px] uppercase tracking-widest bg-[var(--coral)] text-white">SunLeo</th>
+        </tr></thead>
+        <tbody class="text-[14px]">
+          <tr class="border-t border-[var(--line)]"><td class="px-6 py-4 font-semibold">In-home measure</td><td class="px-6 py-4 opacity-70">$99</td><td class="px-6 py-4 opacity-70">DIY</td><td class="px-6 py-4 bg-[var(--coral)]/10 font-semibold">Free, 48 hrs</td></tr>
+          <tr class="border-t border-[var(--line)]"><td class="px-6 py-4 font-semibold">Live configurator</td><td class="px-6 py-4 opacity-70">No</td><td class="px-6 py-4 opacity-70">Basic</td><td class="px-6 py-4 bg-[var(--coral)]/10 font-semibold">Yes, real-time</td></tr>
+          <tr class="border-t border-[var(--line)]"><td class="px-6 py-4 font-semibold">Calgary-made</td><td class="px-6 py-4 opacity-70">No</td><td class="px-6 py-4 opacity-70">No</td><td class="px-6 py-4 bg-[var(--coral)]/10 font-semibold">Yes, 8 days</td></tr>
+          <tr class="border-t border-[var(--line)]"><td class="px-6 py-4 font-semibold">Custom widths</td><td class="px-6 py-4 opacity-70">Limited</td><td class="px-6 py-4 opacity-70">Some</td><td class="px-6 py-4 bg-[var(--coral)]/10 font-semibold">To 1/8"</td></tr>
+          <tr class="border-t border-[var(--line)]"><td class="px-6 py-4 font-semibold">Warranty</td><td class="px-6 py-4 opacity-70">2-yr limited</td><td class="px-6 py-4 opacity-70">1 yr</td><td class="px-6 py-4 bg-[var(--coral)]/10 font-semibold">Lifetime mech.</td></tr>
+          <tr class="border-t border-[var(--line)]"><td class="px-6 py-4 font-semibold">Financing</td><td class="px-6 py-4 opacity-70">Store card 24.99%</td><td class="px-6 py-4 opacity-70">Affirm</td><td class="px-6 py-4 bg-[var(--coral)]/10 font-semibold">0% · 24 mo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========= BUILT FOR CALGARY ========= -->
+<section class="py-28 bg-[var(--navy)] text-[var(--paper)] relative overflow-hidden">
+  <div class="absolute inset-0 opacity-20 pointer-events-none" style="background:radial-gradient(800px 400px at 80% 30%, rgba(255,107,91,.6), transparent 60%), radial-gradient(600px 400px at 10% 70%, rgba(245,215,126,.4), transparent 60%)"></div>
+  <div class="max-w-[1320px] mx-auto px-5 relative grid lg:grid-cols-12 gap-10 items-start">
+    <div class="lg:col-span-7">
+      <p class="text-[12px] uppercase tracking-widest opacity-60 mb-4">§ 06 · Built for Calgary</p>
+      <h2 class="display text-[clamp(40px,5.6vw,84px)] leading-[0.95] mb-6">Tuned to chinooks. Built for prairie sun.</h2>
+      <p class="text-[16px] opacity-80 max-w-[640px] mb-8 leading-relaxed">2,400 Calgary homes. We know which neighbourhoods face which way and which need 1/16" of grace on heritage frames. Every configurator quote uses a Calgary-region lead time and Calgary install crews.</p>
+      <div class="flex flex-wrap gap-2 mb-10">
+        <span class="px-3 py-1 rounded-full border border-white/20 text-[12px]">Tuscany</span>
+        <span class="px-3 py-1 rounded-full border border-white/20 text-[12px]">Mount Royal</span>
+        <span class="px-3 py-1 rounded-full border border-white/20 text-[12px]">Bridgeland</span>
+        <span class="px-3 py-1 rounded-full border border-white/20 text-[12px]">Aspen Woods</span>
+        <span class="px-3 py-1 rounded-full border border-white/20 text-[12px]">Inglewood</span>
+        <span class="px-3 py-1 rounded-full border border-white/20 text-[12px]">Hillhurst</span>
+        <span class="px-3 py-1 rounded-full border border-white/20 text-[12px]">Tuxedo Park</span>
+        <span class="px-3 py-1 rounded-full border border-white/20 text-[12px]">McKenzie Towne</span>
+        <span class="px-3 py-1 rounded-full border border-white/20 text-[12px]">Auburn Bay</span>
+        <span class="px-3 py-1 rounded-full border border-white/20 text-[12px]">Beltline</span>
+        <span class="px-3 py-1 rounded-full border border-white/20 text-[12px]">Kensington</span>
+        <span class="px-3 py-1 rounded-full border border-white/20 text-[12px]">+ 38 more</span>
+      </div>
+      <div class="grid grid-cols-3 gap-6 max-w-[600px]">
+        <div><div class="display text-[60px] leading-none mono text-[var(--coral)] counter" data-target="2412">0</div><div class="text-[11px] uppercase tracking-widest opacity-70 mt-1">Calgary homes</div></div>
+        <div><div class="display text-[60px] leading-none mono text-[var(--coral)] counter" data-target="19">0</div><div class="text-[11px] uppercase tracking-widest opacity-70 mt-1">Years on 17 Ave</div></div>
+        <div><div class="display text-[60px] leading-none mono text-[var(--coral)] counter" data-target="49">0</div><div class="text-[11px] uppercase tracking-widest opacity-70 mt-1">Communities</div></div>
+      </div>
+    </div>
+    <div class="lg:col-span-5">
+      <div class="aspect-square bg-white/5 rounded-2xl border border-white/10 relative overflow-hidden">
+        <svg viewBox="0 0 400 400" class="w-full h-full">
+          <defs><radialGradient id="cg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FF6B5B" stop-opacity=".4"/><stop offset="60%" stop-color="#FF6B5B" stop-opacity="0"/></radialGradient></defs>
+          <rect width="400" height="400" fill="url(#cg)"/>
+          <path d="M40 200 Q200 60 360 200 T 40 200" stroke="#F5D77E" stroke-width="1" fill="none" opacity=".5"/>
+          <path d="M80 280 Q200 130 320 280" stroke="#F5D77E" stroke-width="1" fill="none" opacity=".3"/>
+          <g fill="#FF6B5B"><circle cx="200" cy="200" r="6"/></g>
+          <g fill="#F5D77E"><circle cx="140" cy="160" r="3"/><circle cx="260" cy="170" r="3"/><circle cx="180" cy="270" r="3"/><circle cx="240" cy="250" r="3"/><circle cx="120" cy="240" r="3"/><circle cx="290" cy="220" r="3"/><circle cx="170" cy="130" r="3"/><circle cx="280" cy="290" r="3"/></g>
+          <text x="200" y="196" fill="white" font-family="Space Grotesk" font-size="13" text-anchor="middle">SunLeo HQ</text>
+          <text x="200" y="212" fill="white" font-size="9" text-anchor="middle" opacity=".7">2122 — 17 Ave SE</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========= SMART HOME ========= -->
+<section class="py-28 bg-[var(--paper)]">
+  <div class="max-w-[1320px] mx-auto px-5 grid lg:grid-cols-2 gap-12 items-center">
+    <div>
+      <p class="text-[12px] uppercase tracking-widest opacity-60 mb-4">§ 07 · Smart home</p>
+      <h2 class="display text-[clamp(36px,5vw,72px)] leading-[1] mb-6">It just works. Even with Apple.</h2>
+      <p class="opacity-80 leading-relaxed max-w-[540px] mb-8">Every motorized blind ships HomeKit, Matter, Alexa, Google Home ready. Lutron, Somfy, Eve. Battery or hardwired. Sunrise scenes, geofence triggers, vacation modes — programmed before we leave.</p>
+      <div class="grid grid-cols-4 gap-3">
+        <div class="bg-white border border-[var(--line)] rounded-xl p-4 text-center"><div class="display text-lg">Alexa</div></div>
+        <div class="bg-white border border-[var(--line)] rounded-xl p-4 text-center"><div class="display text-lg">Google</div></div>
+        <div class="bg-white border border-[var(--line)] rounded-xl p-4 text-center"><div class="display text-lg">HomeKit</div></div>
+        <div class="bg-white border border-[var(--line)] rounded-xl p-4 text-center"><div class="display text-lg">Matter</div></div>
+      </div>
+    </div>
+    <div class="relative">
+      <img src="https://picsum.photos/seed/confsmart/900/700" class="w-full rounded-2xl"/>
+      <div class="absolute top-4 left-4 bg-white rounded-xl px-4 py-3 shadow-xl border border-[var(--line)]">
+        <div class="text-[10px] uppercase tracking-widest opacity-60">Hey Siri</div>
+        <div class="display text-lg">"Good morning."</div>
+        <div class="text-[11px] opacity-60 mt-1">→ Master bedroom rising · Kitchen to 30%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BNPL -->
+<section class="bg-[var(--coral)] text-white py-14">
+  <div class="max-w-[1320px] mx-auto px-5 flex flex-wrap items-center justify-between gap-6">
+    <div>
+      <p class="text-[11px] uppercase tracking-widest opacity-80 mb-1">Buy now, pay later</p>
+      <h3 class="display text-3xl md:text-4xl">0% APR for 12 months — Affirm, Klarna, Pay in 4.</h3>
+    </div>
+    <a class="btn-navy">See your monthly →</a>
+  </div>
+</section>
+
+<!-- ========= BLOG ========= -->
+<section class="py-28 bg-white">
+  <div class="max-w-[1320px] mx-auto px-5">
+    <div class="flex items-end justify-between mb-12 flex-wrap gap-5">
+      <div><p class="text-[12px] uppercase tracking-widest opacity-60 mb-4">§ 08 · The journal</p><h2 class="display text-[clamp(36px,5vw,72px)] leading-[1]">From the workshop.</h2></div>
+      <a class="text-[12px] uppercase tracking-widest hover:text-[var(--coral)] transition">All posts →</a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <a href="#" class="block group">
+        <div class="aspect-[4/3] overflow-hidden rounded-2xl mb-5"><img src="https://picsum.photos/seed/confblog1/800/600" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/></div>
+        <div class="text-[11px] uppercase tracking-widest opacity-60 mb-2">Guide · 7 min</div>
+        <h3 class="display text-2xl leading-tight mb-2 group-hover:text-[var(--coral)] transition">How to pick the right opacity in 60 seconds</h3>
+        <p class="text-[14px] opacity-70">A real-world test with our fabric stylist.</p>
+      </a>
+      <a href="#" class="block group">
+        <div class="aspect-[4/3] overflow-hidden rounded-2xl mb-5"><img src="https://picsum.photos/seed/confblog2/800/600" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/></div>
+        <div class="text-[11px] uppercase tracking-widest opacity-60 mb-2">Style · 5 min</div>
+        <h3 class="display text-2xl leading-tight mb-2 group-hover:text-[var(--coral)] transition">The seven coral-and-navy rooms we built in 2026</h3>
+        <p class="text-[14px] opacity-70">Why warm-cool contrast beats neutrals for Calgary winter.</p>
+      </a>
+      <a href="#" class="block group">
+        <div class="aspect-[4/3] overflow-hidden rounded-2xl mb-5"><img src="https://picsum.photos/seed/confblog3/800/600" class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/></div>
+        <div class="text-[11px] uppercase tracking-widest opacity-60 mb-2">Smart Home · 9 min</div>
+        <h3 class="display text-2xl leading-tight mb-2 group-hover:text-[var(--coral)] transition">Programming a Matter sunrise scene from scratch</h3>
+        <p class="text-[14px] opacity-70">Step by step with screenshots, by a Calgary installer.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- As seen in -->
+<section class="py-14 bg-[var(--paper)] border-y border-[var(--line)] overflow-hidden">
+  <p class="text-center text-[11px] uppercase tracking-[0.3em] opacity-60 mb-6">As seen in</p>
+  <div class="marquee display text-2xl opacity-60 whitespace-nowrap">
+    <div class="flex gap-16 pr-16"><span>Western Living</span><span>·</span><span>Dwell</span><span>·</span><span>Avenue Calgary</span><span>·</span><span>The Globe and Mail</span><span>·</span><span>Architectural Digest</span><span>·</span><span>House &amp; Home</span></div>
+    <div class="flex gap-16 pr-16" aria-hidden="true"><span>Western Living</span><span>·</span><span>Dwell</span><span>·</span><span>Avenue Calgary</span><span>·</span><span>The Globe and Mail</span><span>·</span><span>Architectural Digest</span><span>·</span><span>House &amp; Home</span></div>
+  </div>
+</section>
+
+<!-- Instagram -->
+<section class="py-28 bg-white">
+  <div class="max-w-[1320px] mx-auto px-5">
+    <div class="flex items-end justify-between mb-10 flex-wrap gap-5">
+      <div><p class="text-[12px] uppercase tracking-widest opacity-60 mb-4">§ 09 · @sunleo.calgary</p><h2 class="display text-[clamp(36px,5vw,72px)] leading-[1]">Builds, daily.</h2></div>
+      <a class="text-[12px] uppercase tracking-widest hover:text-[var(--coral)] transition">Follow →</a>
+    </div>
+    <div class="grid grid-cols-4 grid-rows-2 gap-3">
+      <img src="https://picsum.photos/seed/cfig1/500/500" class="aspect-square object-cover rounded-xl"/>
+      <img src="https://picsum.photos/seed/cfig2/500/500" class="aspect-square object-cover rounded-xl"/>
+      <img src="https://picsum.photos/seed/cfig3/500/500" class="aspect-square object-cover rounded-xl"/>
+      <img src="https://picsum.photos/seed/cfig4/500/500" class="aspect-square object-cover rounded-xl"/>
+      <img src="https://picsum.photos/seed/cfig5/500/500" class="aspect-square object-cover rounded-xl"/>
+      <img src="https://picsum.photos/seed/cfig6/500/500" class="aspect-square object-cover rounded-xl"/>
+      <img src="https://picsum.photos/seed/cfig7/500/500" class="aspect-square object-cover rounded-xl"/>
+      <img src="https://picsum.photos/seed/cfig8/500/500" class="aspect-square object-cover rounded-xl"/>
+    </div>
+  </div>
+</section>
+
+<!-- Trade -->
+<section class="py-24 bg-[var(--paper)]">
+  <div class="max-w-[1320px] mx-auto px-5 grid lg:grid-cols-2 gap-10 items-center">
+    <div>
+      <p class="text-[12px] uppercase tracking-widest opacity-60 mb-4">§ 10 · Trade program</p>
+      <h2 class="display text-[clamp(34px,4.6vw,64px)] leading-[1] mb-5">Designers, builders, stagers — earn 20% trade pricing.</h2>
+      <p class="opacity-80 leading-relaxed mb-7 max-w-[520px]">Dedicated trade rep, priority install slots, net-30 terms. Currently partnered with 47 Calgary studios including Veranda Estate Homes and Folklore Design Co.</p>
+      <a class="btn-navy">Apply →</a>
+    </div>
+    <img src="https://picsum.photos/seed/cftrade/900/600" class="w-full rounded-2xl"/>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-28 bg-white">
+  <div class="max-w-[920px] mx-auto px-5">
+    <p class="text-[12px] uppercase tracking-widest opacity-60 mb-4">§ 11 · Frequently asked</p>
+    <h2 class="display text-[clamp(36px,5vw,72px)] leading-[1] mb-10">Before you build.</h2>
+    <div class="space-y-3">
+      <details class="border-b border-[var(--line)] py-5"><summary class="flex justify-between items-center display text-[22px]">Does the configurator price match the final quote?<span class="chev text-3xl text-[var(--coral)]">+</span></summary><p class="mt-4 opacity-80">Yes — within a 2% tolerance. The final measure verifies window dimensions; the price doesn't move unless the spec changes.</p></details>
+      <details class="border-b border-[var(--line)] py-5"><summary class="flex justify-between items-center display text-[22px]">Lead time from order to install?<span class="chev text-3xl text-[var(--coral)]">+</span></summary><p class="mt-4 opacity-80">8–10 business days for stock fabrics, 4 weeks for hardwood shutters.</p></details>
+      <details class="border-b border-[var(--line)] py-5"><summary class="flex justify-between items-center display text-[22px]">Are the blinds child-safe?<span class="chev text-3xl text-[var(--coral)]">+</span></summary><p class="mt-4 opacity-80">Cordless by default. Motorized has no exposed cords. ANSI/WCMA A100.1-2018 certified.</p></details>
+      <details class="border-b border-[var(--line)] py-5"><summary class="flex justify-between items-center display text-[22px]">Warranty?<span class="chev text-3xl text-[var(--coral)]">+</span></summary><p class="mt-4 opacity-80">Lifetime mechanism · 10 yr fabric · 5 yr motor. Calgary service techs.</p></details>
+      <details class="border-b border-[var(--line)] py-5"><summary class="flex justify-between items-center display text-[22px]">Do you carry blackout liners for nurseries?<span class="chev text-3xl text-[var(--coral)]">+</span></summary><p class="mt-4 opacity-80">Yes — 100% room-darkening with side channels available. Popular for shift workers and infants.</p></details>
+      <details class="border-b border-[var(--line)] py-5"><summary class="flex justify-between items-center display text-[22px]">Can I save my configuration?<span class="chev text-3xl text-[var(--coral)]">+</span></summary><p class="mt-4 opacity-80">Yes — email it to yourself, print as PDF, or share with a partner. Saved builds expire after 30 days.</p></details>
+      <details class="border-b border-[var(--line)] py-5"><summary class="flex justify-between items-center display text-[22px]">How quiet are the motors?<span class="chev text-3xl text-[var(--coral)]">+</span></summary><p class="mt-4 opacity-80">38 dB — quieter than a library whisper at 1 m.</p></details>
+      <details class="border-b border-[var(--line)] py-5"><summary class="flex justify-between items-center display text-[22px]">Financing?<span class="chev text-3xl text-[var(--coral)]">+</span></summary><p class="mt-4 opacity-80">Affirm, Klarna, Pay in 4. 0% APR up to 24 months on orders over $1,500.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ========= FINAL CTA ========= -->
+<section class="py-28 bg-[var(--navy)] text-[var(--paper)]" id="book">
+  <div class="max-w-[1320px] mx-auto px-5 grid lg:grid-cols-2 gap-12 items-start">
+    <div>
+      <p class="text-[12px] uppercase tracking-widest opacity-60 mb-4">§ 12 · Book the measure</p>
+      <h2 class="display text-[clamp(40px,5.6vw,84px)] leading-[0.95] mb-6">Eight days from now, the window is yours.</h2>
+      <p class="text-[17px] opacity-80 max-w-[540px] mb-8">Free measure, no deposit, no obligation. We'll bring 200+ swatches and confirm your live-configurator spec on the spot.</p>
+      <div class="flex flex-col gap-2 opacity-80 text-[14px]"><span>📞 (403) 555-0199</span><span>✉ hello@sunleo.ca</span><span>📍 2122 — 17 Ave SE</span></div>
+    </div>
+    <form class="bg-[var(--paper)] text-[var(--ink)] rounded-2xl p-8 space-y-4">
+      <div class="grid sm:grid-cols-2 gap-4">
+        <input class="w-full bg-transparent border-b border-[var(--line)] py-3 outline-none focus:border-[var(--coral)]" placeholder="First name"/>
+        <input class="w-full bg-transparent border-b border-[var(--line)] py-3 outline-none focus:border-[var(--coral)]" placeholder="Last name"/>
+      </div>
+      <input class="w-full bg-transparent border-b border-[var(--line)] py-3 outline-none focus:border-[var(--coral)]" placeholder="Email"/>
+      <input class="w-full bg-transparent border-b border-[var(--line)] py-3 outline-none focus:border-[var(--coral)]" placeholder="Mobile (we'll text 30 min before)"/>
+      <input class="w-full bg-transparent border-b border-[var(--line)] py-3 outline-none focus:border-[var(--coral)]" placeholder="Postal code"/>
+      <select class="w-full bg-transparent border-b border-[var(--line)] py-3 outline-none focus:border-[var(--coral)]"><option>Window count…</option><option>1–5</option><option>6–12</option><option>13–24</option><option>25+</option></select>
+      <textarea rows="2" class="w-full bg-transparent border-b border-[var(--line)] py-3 outline-none focus:border-[var(--coral)]" placeholder="Configured build #? Anything else?"></textarea>
+      <button class="btn-coral w-full">Book free measure →</button>
+      <p class="text-[11px] opacity-60">By submitting you agree to receive a scheduling text. Unsubscribe anytime.</p>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[var(--ink)] text-[var(--paper)] py-20">
+  <div class="max-w-[1320px] mx-auto px-5">
+    <div class="grid md:grid-cols-6 gap-10 mb-12">
+      <div class="md:col-span-2">
+        <div class="display text-3xl mb-3">SunLeo</div>
+        <p class="text-[14px] opacity-70 leading-relaxed mb-5">Custom blinds, shades, and drapery — designed and built in Calgary since 2007.</p>
+        <div class="flex gap-3">
+          <span class="w-10 h-10 rounded-full border border-white/15 grid place-items-center">f</span>
+          <span class="w-10 h-10 rounded-full border border-white/15 grid place-items-center">@</span>
+          <span class="w-10 h-10 rounded-full border border-white/15 grid place-items-center">in</span>
+          <span class="w-10 h-10 rounded-full border border-white/15 grid place-items-center">P</span>
+        </div>
+      </div>
+      <div><div class="text-[11px] uppercase tracking-widest opacity-60 mb-3">Build</div><ul class="space-y-2 text-[14px]"><li>Configurator</li><li>Roller</li><li>Cellular</li><li>Roman</li><li>Drapery</li><li>Motorized</li></ul></div>
+      <div><div class="text-[11px] uppercase tracking-widest opacity-60 mb-3">Rooms</div><ul class="space-y-2 text-[14px]"><li>Living</li><li>Bedroom</li><li>Kitchen</li><li>Bathroom</li><li>Nursery</li><li>Office</li></ul></div>
+      <div><div class="text-[11px] uppercase tracking-widest opacity-60 mb-3">Calgary</div><ul class="space-y-2 text-[14px]"><li>Tuscany</li><li>Mount Royal</li><li>Bridgeland</li><li>Aspen Woods</li><li>Inglewood</li><li>All neighbourhoods</li></ul></div>
+      <div><div class="text-[11px] uppercase tracking-widest opacity-60 mb-3">Company</div><ul class="space-y-2 text-[14px]"><li>About</li><li>Showroom</li><li>Trade</li><li>Careers</li><li>Press</li><li>Contact</li></ul></div>
+    </div>
+    <div class="border-t border-white/15 pt-8 flex flex-wrap items-center justify-between gap-6 text-[13px]">
+      <div><span class="text-[var(--coral)]">★★★★★</span><span class="opacity-70 ml-2">4.9 / 5 · Trustpilot · 1,247 reviews</span></div>
+      <div class="flex gap-3 opacity-80"><span>VISA</span><span>MC</span><span>AMEX</span><span>Affirm</span><span>Klarna</span><span>Apple Pay</span></div>
+      <div class="flex gap-3 opacity-80"><span>App Store</span><span>Google Play</span></div>
+    </div>
+    <div class="pt-8 mt-8 border-t border-white/15 flex flex-wrap items-center justify-between gap-3 text-[12px] opacity-60">
+      <span>© 2026 SunLeo Calgary Ltd · 2122 — 17 Ave SE</span>
+      <div class="flex gap-5"><span>Privacy</span><span>Accessibility</span><span>Terms</span><span>Sitemap</span></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky right -->
+<div class="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2">
+  <button class="w-12 h-12 rounded-full bg-white border border-[var(--line)] shadow-lg grid place-items-center">💬</button>
+  <button class="w-12 h-12 rounded-full bg-white border border-[var(--line)] shadow-lg grid place-items-center">♡</button>
+  <button class="w-12 h-12 rounded-full bg-white border border-[var(--line)] shadow-lg grid place-items-center">⤴</button>
+</div>
+
+<!-- Live notif -->
+<div id="liveNotif" class="fixed bottom-6 left-6 z-50 bg-white rounded-2xl shadow-2xl border border-[var(--line)] p-4 max-w-[340px] hidden notif-in">
+  <div class="flex gap-3">
+    <img src="https://picsum.photos/seed/cnotif/64/64" class="w-10 h-10 rounded-full"/>
+    <div>
+      <div class="text-[13px] leading-snug"><strong id="notifName">Sarah</strong> from <span id="notifHood">Tuscany</span> <span id="notifAction">just configured a Roller</span></div>
+      <div class="text-[11px] opacity-60 mt-1" id="notifTime">2 minutes ago</div>
+    </div>
+  </div>
+</div>
+
+<!-- Sticky bottom bar -->
+<div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 bg-[var(--ink)] text-white rounded-full px-5 py-2.5 shadow-2xl flex items-center gap-5 text-[13px]">
+  <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[var(--coral)] dot-pulse"></span> <strong id="slots">6</strong> install slots this week</span>
+  <span class="opacity-40">|</span>
+  <a href="#book" class="text-[var(--coral)] font-semibold">Claim →</a>
+</div>
+
+<!-- Countdown -->
+<div class="fixed top-[92px] right-4 z-40 bg-[var(--coral)] text-white rounded-xl px-4 py-2 text-[12px] shadow-xl">
+  Spring pricing ends in <span id="countdown" class="font-bold mono">--</span>
+</div>
+
+<!-- Exit modal -->
+<div id="exitModal" class="fixed inset-0 bg-[var(--ink)]/85 z-[80] hidden items-center justify-center p-5">
+  <div class="bg-white max-w-[560px] w-full rounded-2xl p-10 relative">
+    <button id="closeExit" class="absolute top-4 right-4 text-2xl">×</button>
+    <div class="display text-[var(--coral)] text-[56px] leading-none mb-4">Wait —</div>
+    <h3 class="display text-3xl mb-3 leading-tight">Save $75 on your build.</h3>
+    <p class="opacity-80 mb-5">Your configuration is saved. We'll text the code and a measure link.</p>
+    <div class="flex gap-2"><input class="flex-1 bg-transparent border border-[var(--line)] rounded-full px-5 py-3 outline-none" placeholder="Mobile"/><button class="btn-coral">Send</button></div>
+  </div>
+</div>
+
+
+<script>
+  AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
+  const lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+  function raf(t){ lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll', ScrollTrigger.update);
+
+  // ===== Live configurator =====
+  const state = {
+    type: 'roller',
+    typeName: 'Roller · Light Filtering',
+    typePrice: 189,
+    color: '#E8E2D2',
+    colorName: 'Stone Linen',
+    open: 30,
+    width: 48,
+    motor: false,
+    blackout: false,
+  };
+  const typePrices = { roller: 189, cellular: 329, zebra: 259, roman: 389 };
+  const typeNames = { roller: 'Roller · Light Filtering', cellular: 'Honeycomb Cellular', zebra: 'Zebra · Day/Night', roman: 'Roman Shades' };
+
+  const blind = document.getElementById('blind');
+  const openPct = document.getElementById('openPct');
+  const widthN = document.getElementById('widthN');
+  const priceTotal = document.getElementById('priceTotal');
+  const monthly = document.getElementById('monthly');
+  const colorName = document.getElementById('colorName');
+  const typeName = document.getElementById('typeName');
+  const hudColor = document.getElementById('hudColor');
+  const hudType = document.getElementById('hudType');
+  const hudW = document.getElementById('hudW');
+
+  function updatePrice(){
+    const widthFactor = state.width / 48;
+    const base = state.typePrice * widthFactor;
+    const total = Math.round(base + (state.motor ? 189 : 0) + (state.blackout ? 89 : 0));
+    priceTotal.textContent = total.toLocaleString();
+    monthly.textContent = Math.round(total / 11.5);
+  }
+  function render(){
+    blind.style.background = `repeating-linear-gradient(180deg, rgba(0,0,0,.06) 0 1px, transparent 1px 8px), ${state.color}`;
+    blind.style.height = (state.open) + '%';
+    typeName.textContent = state.typeName;
+    hudType.textContent = state.typeName;
+    colorName.textContent = state.colorName;
+    hudColor.textContent = state.colorName;
+    hudW.textContent = state.width;
+    widthN.textContent = state.width;
+    openPct.textContent = state.open;
+    updatePrice();
+  }
+
+  document.querySelectorAll('.type-btn').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.type-btn').forEach(x => { x.classList.remove('active'); x.style.background=''; x.style.color=''; });
+      b.classList.add('active'); b.style.background = 'var(--coral)'; b.style.color = '#fff';
+      state.type = b.dataset.type;
+      state.typeName = typeNames[state.type];
+      state.typePrice = typePrices[state.type];
+      render();
+    });
+  });
+  document.querySelector('.type-btn.active').style.background = 'var(--coral)';
+  document.querySelector('.type-btn.active').style.color = '#fff';
+
+  document.querySelectorAll('.swatch').forEach(s => {
+    s.addEventListener('click', () => {
+      document.querySelectorAll('.swatch').forEach(x => x.classList.remove('active'));
+      s.classList.add('active');
+      state.color = s.dataset.color;
+      state.colorName = s.dataset.name;
+      render();
+    });
+  });
+
+  document.getElementById('openSlider').addEventListener('input', e => { state.open = +e.target.value; render(); });
+  document.getElementById('widthSlider').addEventListener('input', e => { state.width = +e.target.value; render(); });
+
+  document.getElementById('motorToggle').addEventListener('click', e => {
+    e.currentTarget.classList.toggle('on'); state.motor = e.currentTarget.classList.contains('on'); render();
+  });
+  document.getElementById('blackoutToggle').addEventListener('click', e => {
+    e.currentTarget.classList.toggle('on'); state.blackout = e.currentTarget.classList.contains('on'); render();
+  });
+  render();
+
+  // Counter
+  document.querySelectorAll('.counter').forEach(el => {
+    const target = +el.dataset.target;
+    ScrollTrigger.create({ trigger: el, start: 'top 85%',
+      onEnter: () => {
+        const obj = { v: 0 };
+        gsap.to(obj, { v: target, duration: 2, ease: 'power2.out', onUpdate: () => el.textContent = Math.floor(obj.v).toLocaleString() });
+      }});
+  });
+
+  // Countdown
+  const endDate = new Date(Date.now() + 6*24*60*60*1000 + 14*60*60*1000 + 9*60*1000);
+  function tick(){
+    const d = endDate - Date.now();
+    const dd = Math.floor(d/864e5), hh=Math.floor(d%864e5/36e5), mm=Math.floor(d%36e5/6e4), ss=Math.floor(d%6e4/1e3);
+    document.getElementById('countdown').textContent = `${dd}d ${hh}h ${mm}m ${ss}s`;
+  }
+  setInterval(tick, 1000); tick();
+
+  // Notifications
+  const notif = document.getElementById('liveNotif');
+  const names = [['Sarah','Tuscany','configured a Roller'],['Marcus','Mount Royal','configured Cellular shades'],['Priya','Bridgeland','saved a build'],['Liam','Aspen Woods','added motorization'],['Aiden','Inglewood','requested swatches'],['Mira','Hillhurst','booked a free measure'],['Jordan','McKenzie Towne','installed shutters']];
+  let idx = 0;
+  function fire(){
+    const [n,h,a] = names[idx++ % names.length];
+    document.getElementById('notifName').textContent = n;
+    document.getElementById('notifHood').textContent = h;
+    document.getElementById('notifAction').textContent = a;
+    document.getElementById('notifTime').textContent = (Math.floor(Math.random()*9)+1)+' minutes ago';
+    notif.classList.remove('hidden'); notif.classList.remove('notif-in'); void notif.offsetWidth; notif.classList.add('notif-in');
+    setTimeout(()=> notif.classList.add('hidden'), 5500);
+  }
+  setTimeout(fire, 3500); setInterval(fire, 12000);
+
+  // Slots
+  let slots = 6;
+  setInterval(() => { if (slots > 2 && Math.random() > 0.75) { slots--; document.getElementById('slots').textContent = slots; } }, 32000);
+
+  // Exit intent
+  let fired = false;
+  document.addEventListener('mouseleave', e => {
+    if (!fired && e.clientY < 10) {
+      fired = true;
+      const m = document.getElementById('exitModal');
+      m.classList.remove('hidden'); m.classList.add('flex');
+    }
+  });
+  document.getElementById('closeExit').onclick = () => document.getElementById('exitModal').classList.add('hidden');
+</script>
+</body>
+</html>

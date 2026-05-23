@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SunLeo — Soft Light, Lived-In Homes, Calgary</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Homemade+Apple&family=Reenie+Beanie&family=Italianno&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --linen: #F2E6CE;
+    --linen-deep: #E6D6B4;
+    --terra: #B45A3E;
+    --terra-deep: #8A3D26;
+    --sage: #94A687;
+    --sage-deep: #6E8462;
+    --cream: #FBF4E3;
+    --ink: #2C2014;
+    --mauve: #B98775;
+  }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Manrope', sans-serif; background: var(--linen); color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .serif { font-family: 'Lora', serif; }
+  .ital { font-family: 'Lora', serif; font-style: italic; }
+  .hand { font-family: 'Homemade Apple', cursive; }
+  .scribble { font-family: 'Reenie Beanie', cursive; }
+  .swash { font-family: 'Italianno', cursive; }
+  .linen-tex {
+    background-color: var(--linen);
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 2px, rgba(180,90,62,0.04) 2px 3px),
+      repeating-linear-gradient(90deg, transparent 0 2px, rgba(44,32,20,0.04) 2px 3px);
+  }
+  .canvas-tex {
+    background-color: var(--cream);
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 4px, rgba(110,132,98,0.06) 4px 5px),
+      repeating-linear-gradient(90deg, transparent 0 4px, rgba(110,132,98,0.06) 4px 5px);
+  }
+  .blob-leaf { border-radius: 50% 0 50% 0; }
+  .blob-soft { border-radius: 70% 30% 50% 50% / 50% 50% 30% 70%; }
+  .pressed-flower {
+    width: 80px; height: 80px;
+    background:
+      radial-gradient(circle at 50% 50%, var(--terra) 8%, transparent 9%),
+      conic-gradient(from 0deg, var(--mauve) 0 60deg, transparent 60deg 120deg, var(--mauve) 120deg 180deg, transparent 180deg 240deg, var(--mauve) 240deg 300deg, transparent 300deg 360deg);
+    border-radius: 50%;
+    opacity: 0.7;
+  }
+  .leaf-shape {
+    width: 60px; height: 100px;
+    background: var(--sage-deep);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    transform: rotate(15deg);
+    opacity: 0.6;
+  }
+  .deckle {
+    -webkit-mask-image: radial-gradient(circle at 6px 6px, transparent 4px, #000 5px), radial-gradient(circle at 6px 6px, transparent 4px, #000 5px);
+    -webkit-mask-position: top left, bottom right;
+    mask-image: radial-gradient(circle at 6px 6px, transparent 4px, #000 5px);
+  }
+  .pill { border-radius: 999px; }
+  .heart-circle {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--terra);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--cream);
+  }
+  .scallop {
+    background:
+      radial-gradient(circle at 50% 100%, var(--cream) 8px, transparent 9px) repeat-x bottom;
+    background-size: 24px 12px;
+    padding-bottom: 12px;
+  }
+  .underline-curl {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12'%3E%3Cpath d='M2 6 Q 50 0 100 6 T 198 6' stroke='%238A3D26' fill='none' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 0 bottom;
+    background-size: 100% 12px;
+    padding-bottom: 14px;
+  }
+  .photo-frame {
+    background: var(--cream);
+    padding: 18px 18px 60px;
+    box-shadow: 0 8px 32px rgba(44,32,20,0.18);
+  }
+  .stamp-postal {
+    background:
+      linear-gradient(180deg, var(--terra-deep) 0 8px, transparent 8px 12px),
+      linear-gradient(180deg, transparent 0 calc(100% - 12px), transparent calc(100% - 12px) calc(100% - 8px), var(--terra-deep) calc(100% - 8px) 100%),
+      var(--cream);
+    padding: 14px 18px;
+    display: inline-block;
+    border: 1px dashed var(--terra-deep);
+  }
+  @keyframes drift { 0%,100% { transform: translateY(0) rotate(var(--r, 0deg)); } 50% { transform: translateY(-8px) rotate(var(--r, 0deg)); } }
+  .drift-1 { --r: -8deg; animation: drift 7s ease-in-out infinite; }
+  .drift-2 { --r: 5deg; animation: drift 8s ease-in-out infinite .5s; }
+  .drift-3 { --r: -12deg; animation: drift 9s ease-in-out infinite 1s; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .anim { opacity: 0; animation: fadeUp 1.2s ease forwards; }
+  .d1 { animation-delay: .1s } .d2 { animation-delay: .3s } .d3 { animation-delay: .5s }
+  .ribbon {
+    background: var(--terra);
+    color: var(--cream);
+    padding: 6px 18px;
+    display: inline-block;
+    position: relative;
+    clip-path: polygon(0 0,100% 0,calc(100% - 14px) 50%,100% 100%,0 100%,14px 50%);
+  }
+
+/* ============ MOBILE RESPONSIVE PATCH ============ */
+html, body { overflow-x: hidden; max-width: 100vw; }
+img, svg, video { max-width: 100%; height: auto; }
+
+@media (max-width: 1023px) {
+  /* Force lg:grid-cols-12 sections to stack on tablet/mobile */
+  section .grid.lg\:grid-cols-12,
+  section .grid.md\:grid-cols-12 {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  section .grid.lg\:grid-cols-12 > *,
+  section .grid.md\:grid-cols-12 > * {
+    min-width: 0;
+    width: 100%;
+  }
+  /* Tighten section padding */
+  section { padding-left: 1rem !important; padding-right: 1rem !important; }
+  section.no-padding-override { padding: revert !important; }
+  /* Marquee cards width cap */
+  .marquee article, .marquee .card { max-width: 280px !important; min-width: 240px !important; }
+}
+
+@media (max-width: 767px) {
+  /* Display text clamps */
+  h1 { font-size: clamp(2rem, 9vw, 3.5rem) !important; line-height: 1.05 !important; }
+  h2 { font-size: clamp(1.5rem, 7vw, 2.5rem) !important; line-height: 1.1 !important; }
+  /* Heavy display text */
+  .display, .didot, .serif.text-7xl, .serif.text-8xl, .serif.text-9xl,
+  [style*="font-size: 120"], [style*="font-size: 140"], [style*="font-size: 170"] {
+    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    line-height: 0.95 !important;
+  }
+  /* Touch targets 44px */
+  button, a[class*="btn"], a[role="button"] {
+    min-height: 44px;
+  }
+  /* Inputs prevent iOS zoom */
+  input, textarea, select { font-size: 16px !important; }
+  /* Disable hover transforms on touch */
+  .card:hover, *[class*="hover:translate"]:hover, *[class*="hover:scale"]:hover {
+    transform: none !important;
+  }
+  /* Big grids collapse */
+  .grid.grid-cols-6 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-5 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-4:not(.grid-rows-2) { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-3 { grid-template-columns: repeat(1, 1fr) !important; }
+  /* Comparison tables: wrap (if direct child grid-cols-4) in overflow-x scroll behavior */
+  .comparison-table, table.comparison { display: block !important; overflow-x: auto !important; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Disable cursor-follow effects on touch devices */
+  .cursor-trail, .sunbeam-cursor, .glow-dot, .mouse-trail {
+    display: none !important;
+  }
+}
+
+</style>
+</head>
+<body class="linen-tex">
+
+<!-- Trust bar -->
+<div class="bg-[var(--terra-deep)] text-[var(--cream)]">
+  <div class="max-w-[1400px] mx-auto px-4 md:px-6 py-2.5 flex items-center justify-between gap-3 text-xs md:text-sm">
+    <span class="scribble text-base md:text-xl truncate">— free in-home visit · Calgary &amp; area ✿</span>
+    <a href="tel:+14035551234" class="serif font-medium hover:text-[var(--linen)] whitespace-nowrap">(403) 555-1234</a>
+  </div>
+</div>
+
+<!-- Nav -->
+<header>
+  <div class="max-w-[1400px] mx-auto px-4 md:px-6 py-4 md:py-7 flex items-center justify-between gap-3">
+    <a href="#" class="flex items-center gap-2 md:gap-3">
+      <div class="heart-circle" style="width:48px;height:48px;">
+        <span class="serif text-xl md:text-2xl">S</span>
+      </div>
+      <span class="serif text-2xl md:text-3xl">SunLeo</span>
+      <span class="swash text-3xl md:text-4xl text-[var(--terra)] -ml-1 -mt-2">co.</span>
+    </a>
+    <nav class="hidden md:flex gap-6 lg:gap-8 serif text-base">
+      <a href="#products" class="hover:text-[var(--terra-deep)]">Our blinds</a>
+      <a href="#story" class="hover:text-[var(--terra-deep)]">Our story</a>
+      <a href="#reviews" class="hover:text-[var(--terra-deep)]">From clients</a>
+      <a href="#book" class="hover:text-[var(--terra-deep)]">Say hello</a>
+    </nav>
+    <a href="#book" class="bg-[var(--sage-deep)] text-[var(--cream)] pill px-4 md:px-7 py-2 md:py-3 serif text-xs md:text-base hover:bg-[var(--terra-deep)] transition shadow-md whitespace-nowrap">Book ✿</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="relative overflow-hidden">
+  <!-- pressed flowers floating -->
+  <div class="absolute top-16 right-1/4 drift-1 z-0 hidden md:block"><div class="pressed-flower"></div></div>
+  <div class="absolute bottom-20 left-20 drift-2 z-0 hidden md:block"><div class="leaf-shape"></div></div>
+  <div class="absolute top-1/2 right-10 drift-3 z-0 hidden md:block"><div class="pressed-flower" style="background: radial-gradient(circle at 50% 50%, var(--sage-deep) 8%, transparent 9%), conic-gradient(from 30deg, var(--terra) 0 60deg, transparent 60deg 120deg, var(--terra) 120deg 180deg, transparent 180deg 240deg, var(--terra) 240deg 300deg, transparent 300deg 360deg);"></div></div>
+
+  <div class="max-w-[1400px] mx-auto px-4 md:px-6 pt-10 md:pt-16 pb-16 md:pb-28 grid lg:grid-cols-12 gap-10 md:gap-14 items-center relative">
+    <div class="lg:col-span-6 anim d1">
+      <p class="scribble text-2xl md:text-4xl text-[var(--terra-deep)] -rotate-2 mb-4 inline-block">— a small Calgary studio</p>
+      <h1 class="serif text-4xl sm:text-5xl md:text-8xl leading-[1.05]">
+        Soft light <em class="swash text-[var(--terra)] not-italic" style="font-size: 1.6em">for</em><br/>
+        <span class="ital underline-curl">lived-in</span> homes.
+      </h1>
+      <p class="serif mt-6 md:mt-10 text-base md:text-xl leading-[1.6] text-stone-700 max-w-md">
+        Hand-finished blinds, linen romans, and soft rollers for the family room, the nursery, the kitchen where the light is best.
+      </p>
+      <div class="mt-8 md:mt-10 flex flex-wrap gap-3 md:gap-4 items-center">
+        <a href="#book" class="bg-[var(--terra)] text-[var(--cream)] pill px-6 md:px-9 py-4 md:py-5 serif text-base md:text-lg hover:bg-[var(--terra-deep)] transition shadow-xl">Book a free home visit</a>
+        <a href="tel:+14035551234" class="swash text-3xl md:text-5xl text-[var(--sage-deep)] hover:text-[var(--terra-deep)] transition">(403) 555-1234 →</a>
+      </div>
+      <div class="mt-8 md:mt-12 flex items-center gap-3 md:gap-4">
+        <div class="text-[var(--terra)] text-xl md:text-2xl">★ ★ ★ ★ ★</div>
+        <p class="serif italic text-stone-600 text-base md:text-lg">Loved by 2,400+ Calgary families.</p>
+      </div>
+    </div>
+
+    <div class="lg:col-span-6 anim d2 relative mt-8 lg:mt-0">
+      <div class="photo-frame rotate-[-2deg]" style="padding:12px 12px 40px;">
+        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1400" class="w-full h-72 md:h-[520px] object-cover" alt=""/>
+        <p class="hand text-base md:text-xl text-stone-600 mt-3 md:mt-4 text-center">— a kitchen in Bridgeland, oat linen romans, morning</p>
+      </div>
+      <!-- Floating washi tape -->
+      <div class="absolute -top-3 left-1/3 w-20 md:w-32 h-5 md:h-7 bg-[var(--sage)] opacity-70 rotate-[15deg]"></div>
+      <div class="absolute -bottom-3 right-1/4 w-16 md:w-24 h-5 md:h-7 bg-[var(--terra)] opacity-60 rotate-[-8deg]"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Story quote -->
+<section class="bg-[var(--cream)] canvas-tex relative overflow-hidden border-y border-[var(--terra)]/30">
+  <div class="absolute top-10 left-10 pressed-flower drift-1 hidden md:block"></div>
+  <div class="absolute bottom-10 right-20 leaf-shape drift-2 hidden md:block"></div>
+
+  <div class="max-w-[1100px] mx-auto px-4 md:px-6 py-16 md:py-28 text-center relative">
+    <p class="scribble text-2xl md:text-3xl text-[var(--terra-deep)] -rotate-1">— a small studio's promise —</p>
+    <p class="serif italic text-2xl sm:text-3xl md:text-5xl leading-snug mt-6 md:mt-8 text-[var(--ink)] max-w-3xl mx-auto">
+      &ldquo;We bring the swatches to your kitchen table, in the <span class="underline-curl">light you actually live in.</span>&rdquo;
+    </p>
+    <p class="hand text-lg md:text-xl text-stone-600 mt-8 md:mt-10">— Leo Aban, Founder</p>
+  </div>
+</section>
+
+<!-- Products -->
+<section id="products" class="max-w-[1400px] mx-auto px-4 md:px-6 py-16 md:py-28">
+  <p class="text-center scribble text-2xl md:text-3xl text-[var(--sage-deep)]">— our small catalogue —</p>
+  <h2 class="serif text-center text-4xl sm:text-5xl md:text-7xl mt-2">Ten kinds of <span class="ital">softness.</span></h2>
+
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-10 md:mt-16">
+    <div class="photo-frame rotate-[1deg] hover:rotate-0 hover:scale-[1.02] transition">
+      <img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=900" class="w-full h-56 object-cover" alt=""/>
+      <div class="mt-4">
+        <p class="hand text-xl text-[var(--terra)]">no. 01</p>
+        <h3 class="serif text-2xl">Roller Blinds</h3>
+        <p class="serif text-sm text-stone-600 mt-1 leading-relaxed">Clean lines. Sheer linen or warm blackout.</p>
+      </div>
+    </div>
+    <div class="photo-frame rotate-[-1deg] hover:rotate-0 hover:scale-[1.02] transition">
+      <img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?w=900" class="w-full h-56 object-cover" alt=""/>
+      <div class="mt-4">
+        <p class="hand text-xl text-[var(--terra)]">no. 02</p>
+        <h3 class="serif text-2xl">Zebra Shades</h3>
+        <p class="serif text-sm text-stone-600 mt-1 leading-relaxed">Layered sheer-and-solid bands. Soft on the eye.</p>
+      </div>
+    </div>
+    <div class="photo-frame rotate-[2deg] hover:rotate-0 hover:scale-[1.02] transition">
+      <img src="https://images.unsplash.com/photo-1617104551722-3b2d51366400?w=900" class="w-full h-56 object-cover" alt=""/>
+      <div class="mt-4">
+        <p class="hand text-xl text-[var(--terra)]">no. 03</p>
+        <h3 class="serif text-2xl">Faux Wood</h3>
+        <p class="serif text-sm text-stone-600 mt-1 leading-relaxed">Cabin warmth, kitchen-safe.</p>
+      </div>
+    </div>
+    <div class="photo-frame rotate-[-2deg] hover:rotate-0 hover:scale-[1.02] transition">
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900" class="w-full h-56 object-cover" alt=""/>
+      <div class="mt-4">
+        <p class="hand text-xl text-[var(--terra)]">no. 04</p>
+        <h3 class="serif text-2xl">Cellular</h3>
+        <p class="serif text-sm text-stone-600 mt-1 leading-relaxed">Honeycomb cells, snug in winter.</p>
+      </div>
+    </div>
+    <div class="photo-frame rotate-[1deg] hover:rotate-0 hover:scale-[1.02] transition">
+      <img src="https://images.unsplash.com/photo-1633113216288-a4d6b35066d5?w=900" class="w-full h-56 object-cover" alt=""/>
+      <div class="mt-4">
+        <p class="hand text-xl text-[var(--terra)]">no. 05</p>
+        <h3 class="serif text-2xl">Roman Shades</h3>
+        <p class="serif text-sm text-stone-600 mt-1 leading-relaxed">Folds of linen, dressed-up but cosy.</p>
+      </div>
+    </div>
+    <div class="photo-frame rotate-[-1deg] hover:rotate-0 hover:scale-[1.02] transition">
+      <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=900" class="w-full h-56 object-cover" alt=""/>
+      <div class="mt-4">
+        <p class="hand text-xl text-[var(--terra)]">no. 06</p>
+        <h3 class="serif text-2xl">Skylight</h3>
+        <p class="serif text-sm text-stone-600 mt-1 leading-relaxed">For vaulted family rooms.</p>
+      </div>
+    </div>
+    <div class="photo-frame rotate-[2deg] hover:rotate-0 hover:scale-[1.02] transition">
+      <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=900" class="w-full h-56 object-cover" alt=""/>
+      <div class="mt-4">
+        <p class="hand text-xl text-[var(--terra)]">no. 07</p>
+        <h3 class="serif text-2xl">Perfect Fit</h3>
+        <p class="serif text-sm text-stone-600 mt-1 leading-relaxed">Clipped frames, no drilling.</p>
+      </div>
+    </div>
+    <div class="photo-frame rotate-[-2deg] hover:rotate-0 hover:scale-[1.02] transition">
+      <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900" class="w-full h-56 object-cover" alt=""/>
+      <div class="mt-4">
+        <p class="hand text-xl text-[var(--terra)]">no. 08</p>
+        <h3 class="serif text-2xl">Printed Films</h3>
+        <p class="serif text-sm text-stone-600 mt-1 leading-relaxed">Floral or frosted privacy films.</p>
+      </div>
+    </div>
+    <div class="photo-frame rotate-[1deg] hover:rotate-0 hover:scale-[1.02] transition">
+      <img src="https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=900" class="w-full h-56 object-cover" alt=""/>
+      <div class="mt-4">
+        <p class="hand text-xl text-[var(--terra)]">no. 09</p>
+        <h3 class="serif text-2xl">Motorized</h3>
+        <p class="serif text-sm text-stone-600 mt-1 leading-relaxed">Whisper-quiet, app-controlled.</p>
+      </div>
+    </div>
+    <div class="bg-[var(--sage)] text-[var(--ink)] blob-soft overflow-hidden sm:col-span-2 md:col-span-3 grid md:grid-cols-2 shadow-xl">
+      <img src="https://images.unsplash.com/photo-1618219740975-d40978bb7378?w=1200" class="w-full h-72 md:h-full object-cover" alt=""/>
+      <div class="p-6 md:p-12">
+        <p class="hand text-xl md:text-2xl text-[var(--terra-deep)]">— no. 10 · special order —</p>
+        <h3 class="serif text-3xl md:text-5xl mt-2">Custom <span class="ital">Made-to-Measure</span></h3>
+        <p class="serif text-base md:text-lg mt-3 md:mt-4 leading-relaxed text-stone-800">Arched bay windows, irregular shapes, that one weird wall in the nursery. We measure, draw, and sew to fit.</p>
+        <a href="#book" class="inline-block mt-5 md:mt-6 bg-[var(--terra-deep)] text-[var(--cream)] pill px-6 md:px-7 py-3 serif text-sm md:text-base hover:bg-[var(--ink)] transition">Talk to us about it →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Story -->
+<section id="story" class="bg-[var(--linen-deep)] canvas-tex relative overflow-hidden">
+  <div class="absolute top-10 right-10 leaf-shape drift-2 hidden md:block"></div>
+  <div class="max-w-[1400px] mx-auto px-4 md:px-6 py-16 md:py-28 grid md:grid-cols-12 gap-8 md:gap-12 items-center relative">
+    <div class="md:col-span-5 relative">
+      <div class="photo-frame rotate-[-3deg]" style="padding:12px 12px 40px;">
+        <img src="https://images.unsplash.com/photo-1604014237800-1c9102c219da?w=1200" class="w-full h-72 md:h-[460px] object-cover" alt=""/>
+        <p class="hand text-base md:text-lg text-stone-600 mt-3 md:mt-4">— Leo, summer of 2017</p>
+      </div>
+      <div class="absolute -top-4 -right-2 md:-top-5 md:-right-5 stamp-postal">
+        <p class="hand text-xs md:text-sm text-[var(--terra-deep)] uppercase tracking-widest">Inglewood<br/>Calgary AB</p>
+      </div>
+    </div>
+    <div class="md:col-span-7 mt-8 md:mt-0">
+      <p class="scribble text-2xl md:text-3xl text-[var(--terra-deep)]">— the SunLeo studio —</p>
+      <h2 class="serif text-4xl sm:text-5xl md:text-6xl mt-2 leading-tight">Family-run<br/><span class="ital">from day one.</span></h2>
+      <p class="serif text-base md:text-lg leading-[1.7] mt-5 md:mt-6 text-stone-700">
+        Leo started SunLeo in 2017 from his garage in Inglewood. Eight years on, we're still small on purpose. Two installers. One studio. One curated fabric library.
+      </p>
+      <p class="serif text-base md:text-lg leading-[1.7] mt-4 text-stone-700">
+        We won't pressure-sell you. We'll bring tea, fabric samples, and an hour of patience. Then we'll go home and quote honestly.
+      </p>
+      <div class="mt-8 md:mt-10 grid grid-cols-3 gap-3 md:gap-4">
+        <div class="text-center bg-[var(--cream)] blob-soft p-3 md:p-5">
+          <p class="serif text-2xl md:text-4xl text-[var(--terra-deep)]">2,400</p>
+          <p class="hand text-sm md:text-lg mt-1">happy homes</p>
+        </div>
+        <div class="text-center bg-[var(--cream)] blob-soft p-3 md:p-5">
+          <p class="serif text-2xl md:text-4xl text-[var(--terra-deep)]">10 yrs</p>
+          <p class="hand text-sm md:text-lg mt-1">warranty</p>
+        </div>
+        <div class="text-center bg-[var(--cream)] blob-soft p-3 md:p-5">
+          <p class="serif text-2xl md:text-4xl text-[var(--terra-deep)]">4.9★</p>
+          <p class="hand text-sm md:text-lg mt-1">on google</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section id="reviews" class="max-w-[1400px] mx-auto px-4 md:px-6 py-16 md:py-28">
+  <p class="text-center scribble text-2xl md:text-3xl text-[var(--terra-deep)]">— kind words —</p>
+  <h2 class="serif text-center text-4xl sm:text-5xl md:text-6xl mt-2">From our <span class="ital">families.</span></h2>
+
+  <div class="grid md:grid-cols-3 gap-6 md:gap-8 mt-10 md:mt-14">
+    <figure class="photo-frame rotate-[-1deg] hover:rotate-0 transition">
+      <div class="text-[var(--terra)] text-xl">★★★★★</div>
+      <blockquote class="serif italic text-xl mt-4 leading-relaxed text-stone-800">&ldquo;Came in with no pressure, brought a baby gift, fitted blackouts in the nursery the next week. The nicest tradespeople I've ever invited into my home.&rdquo;</blockquote>
+      <figcaption class="hand text-xl text-[var(--sage-deep)] mt-5">— Rachel &amp; Tom, Mount Pleasant</figcaption>
+    </figure>
+    <figure class="photo-frame rotate-[1deg] hover:rotate-0 transition">
+      <div class="text-[var(--terra)] text-xl">★★★★★</div>
+      <blockquote class="serif italic text-xl mt-4 leading-relaxed text-stone-800">&ldquo;We have eleven windows of various odd shapes. SunLeo drew them, fit them, and made it feel easy.&rdquo;</blockquote>
+      <figcaption class="hand text-xl text-[var(--sage-deep)] mt-5">— Priya N., Britannia</figcaption>
+    </figure>
+    <figure class="photo-frame rotate-[-2deg] hover:rotate-0 transition">
+      <div class="text-[var(--terra)] text-xl">★★★★★</div>
+      <blockquote class="serif italic text-xl mt-4 leading-relaxed text-stone-800">&ldquo;Linen romans in the dining room are exactly what I'd hoped for. Soft, warm, well-made.&rdquo;</blockquote>
+      <figcaption class="hand text-xl text-[var(--sage-deep)] mt-5">— Maya K., Hillhurst</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="book" class="bg-[var(--terra)] text-[var(--cream)] relative overflow-hidden">
+  <div class="absolute top-20 left-20 leaf-shape drift-1 opacity-30 hidden md:block"></div>
+  <div class="absolute bottom-20 right-20 pressed-flower drift-2 opacity-50 hidden md:block"></div>
+  <div class="max-w-[1100px] mx-auto px-4 md:px-6 py-16 md:py-28 text-center relative">
+    <p class="scribble text-2xl md:text-3xl text-[var(--linen)]">— come measure your windows with us —</p>
+    <h2 class="serif text-4xl sm:text-5xl md:text-8xl mt-3 italic leading-tight">Book a soft, <br/><span class="swash text-[var(--linen)] not-italic" style="font-size: 1.5em">no-pressure</span> visit.</h2>
+    <p class="serif mt-6 md:mt-8 text-[var(--linen-deep)] max-w-xl mx-auto text-base md:text-lg">An hour at your kitchen table. Bring your tea — we'll bring the swatches.</p>
+    <form class="mt-8 md:mt-12 max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+      <input class="bg-[var(--cream)] text-stone-800 pill px-6 py-4 serif placeholder-stone-500" placeholder="Your name" />
+      <input class="bg-[var(--cream)] text-stone-800 pill px-6 py-4 serif placeholder-stone-500" placeholder="Phone or email" />
+      <button class="sm:col-span-2 bg-[var(--ink)] text-[var(--cream)] pill py-4 md:py-5 serif text-lg md:text-xl mt-2 md:mt-3 hover:bg-[var(--sage-deep)] transition">Send me a date ✿</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[var(--linen-deep)] text-stone-700 canvas-tex">
+  <div class="max-w-[1400px] mx-auto px-4 md:px-6 py-12 md:py-16 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 text-sm serif">
+    <div class="col-span-2 md:col-span-1">
+      <div class="flex items-center gap-3">
+        <div class="heart-circle" style="width:48px;height:48px;"><span class="serif">S</span></div>
+        <span class="text-xl md:text-2xl">SunLeo</span>
+        <span class="swash text-2xl md:text-3xl text-[var(--terra)] -mt-2">co.</span>
+      </div>
+      <p class="mt-4 leading-relaxed">A small Calgary studio sewing window treatments for lived-in homes.</p>
+    </div>
+    <div><p class="hand text-lg md:text-xl text-[var(--terra-deep)] mb-2">our blinds</p><ul class="space-y-1"><li>Roller</li><li>Roman</li><li>Cellular</li><li>Motorized</li></ul></div>
+    <div><p class="hand text-lg md:text-xl text-[var(--terra-deep)] mb-2">we visit</p><ul class="space-y-1"><li>Calgary</li><li>Airdrie</li><li>Cochrane</li><li>Okotoks</li></ul></div>
+    <div class="col-span-2 md:col-span-1"><p class="hand text-lg md:text-xl text-[var(--terra-deep)] mb-2">say hello</p><p>(403) 555-1234<br/>hello@sunleo.ca<br/>Inglewood, Calgary</p></div>
+  </div>
+  <div class="border-t border-stone-400/40 py-5 text-center hand text-stone-600">© MMXXVI · SunLeo — sewn with care in Alberta ✿</div>
+</footer>
+
+</body>
+</html>

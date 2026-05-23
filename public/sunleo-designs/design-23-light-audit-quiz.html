@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SunLeo — The Light Audit · A 60-second editorial diagnosis for Calgary windows</title>
+<meta name="description" content="Six questions. One light report. SunLeo's Light Audit is a quiet, editorial diagnosis for Calgary homes — built by a designer who's quietly dressed 3,400 windows since 2017."/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Public+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+<link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet"/>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<style>
+  :root{
+    --ox:      #4A1216;
+    --ox-soft: #6B1E22;
+    --cream:   #F2EBDE;
+    --cream-2: #ECE3D2;
+    --char:    #1A1612;
+    --gold:    #C8A050;
+    --gold-2:  #8C6B2F;
+    --hair:    rgba(26,22,18,.14);
+    --hair-cream: rgba(242,235,222,.18);
+  }
+  *{ -webkit-font-smoothing: antialiased; }
+  html,body{ background: var(--cream); color: var(--char); font-family: 'Public Sans', sans-serif; font-weight: 300; letter-spacing:.005em; }
+  .display{ font-family:'Old Standard TT', serif; font-weight: 400; letter-spacing:-.005em;}
+  .spectral{ font-family:'Spectral', serif; font-weight: 300; }
+  .mono{ font-family:'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing:.28em; text-transform: uppercase;}
+  .ital{ font-style: italic; }
+
+  body::before{
+    content:""; position: fixed; inset: 0; pointer-events: none; z-index: 80; opacity:.06;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence baseFrequency='.95' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.55'/></svg>");
+    mix-blend-mode: multiply;
+  }
+
+  .rule{ height:1px; background: var(--hair); }
+  .rule-thick{ height:2px; background: var(--char); }
+
+  .btn-ox{ background: var(--ox); color: var(--cream); padding: 16px 30px; font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing:.32em; text-transform: uppercase; border-radius: 0; transition: background .4s, transform .4s, letter-spacing .5s; display:inline-flex; align-items:center; gap:14px;}
+  .btn-ox:hover{ background: var(--char); letter-spacing: .42em; }
+  .btn-ghost{ border: 1px solid var(--char); color: var(--char); padding: 15px 30px; font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing:.32em; text-transform: uppercase; transition: all .4s; display:inline-flex; align-items:center; gap:12px;}
+  .btn-ghost:hover{ background: var(--char); color: var(--cream); }
+
+  .pill{ font-family:'JetBrains Mono', monospace; font-size: 10px; letter-spacing:.34em; text-transform: uppercase; }
+
+  .quiz-card{ display:none; }
+  .quiz-card.active{ display:block; animation: qFade .8s cubic-bezier(.16,1,.3,1); }
+  @keyframes qFade{ from{ opacity:0; transform: translateY(20px);} to{opacity:1; transform: translateY(0);} }
+
+  .room-tile{ position: relative; overflow:hidden; border:1px solid var(--hair); cursor: pointer; transition: transform .5s cubic-bezier(.16,1,.3,1), border-color .5s; aspect-ratio: 4/5;}
+  .room-tile:hover{ transform: translateY(-4px); border-color: var(--ox); }
+  .room-tile.selected{ border-color: var(--ox); border-width: 2px; }
+  .room-tile .label{ position: absolute; bottom: 14px; left: 14px; right: 14px; color: var(--cream); }
+
+  input[type="range"]{ -webkit-appearance:none; width:100%; background:transparent; }
+  input[type="range"]::-webkit-slider-runnable-track{ height: 2px; background: var(--char); }
+  input[type="range"]::-webkit-slider-thumb{ -webkit-appearance:none; height:32px; width: 4px; background: var(--ox); margin-top:-15px; cursor:grab; transition: transform .3s;}
+  input[type="range"]::-webkit-slider-thumb:active{ cursor: grabbing; transform: scaleY(1.4);}
+  input[type="range"]::-moz-range-track{ height:2px; background: var(--char); }
+  input[type="range"]::-moz-range-thumb{ height:32px; width:4px; background: var(--ox); border:0; cursor:grab; }
+
+  .mq{ display:flex; gap:80px; animation: mq 50s linear infinite; }
+  @keyframes mq{ from{transform: translateX(0);} to{transform: translateX(-50%);} }
+
+  .stars{ letter-spacing:.18em; color: var(--gold); }
+
+  details summary{ list-style:none; cursor: pointer; }
+  details summary::-webkit-details-marker{ display:none; }
+  details[open] .chev{ transform: rotate(45deg); }
+  .chev{ transition: transform .5s cubic-bezier(.16,1,.3,1);}
+
+  @keyframes pulse{ 0%{ box-shadow: 0 0 0 0 rgba(74,18,22,.5);} 70%{ box-shadow: 0 0 0 14px rgba(74,18,22,0);} 100%{ box-shadow: 0 0 0 0 rgba(74,18,22,0);} }
+  .pulse-dot{ display:inline-block; width:8px; height:8px; border-radius:50%; background: var(--ox); animation: pulse 2s infinite; vertical-align: middle; }
+
+  .progress-step{ height:1px; background: var(--char); opacity:.18; transition: opacity .6s, height .6s; }
+  .progress-step.done{ opacity:1; height: 2px; }
+
+  .stack-1{ transform: translateX(-2vw);}
+  .stack-2{ transform: translateX(6vw);}
+  .stack-3{ transform: translateX(-1vw);}
+
+  @keyframes notIn{ from{ transform: translateY(20px); opacity:0;} to{ transform: translateY(0); opacity:1;}}
+  .notif-in{ animation: notIn .8s cubic-bezier(.16,1,.3,1);}
+
+  .plate{ border: 1px solid var(--hair); padding: 12px 14px; }
+  .plate-cream{ border: 1px solid var(--hair-cream); padding: 12px 14px; color: var(--cream);}
+
+  .tabnum{ font-variant-numeric: tabular-nums; }
+
+  .rv{ opacity: 0; transform: translateY(20px); transition: opacity 1s, transform 1s; }
+  .rv.in{ opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){ *,*::before,*::after{ animation: none !important; transition: none !important;} }
+
+  .ul-thin{ text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; text-decoration-color: var(--gold); }
+
+  /* ========================================================== */
+  /* === MOBILE RESPONSIVE PATCH ================================ */
+  /* ========================================================== */
+  html, body { overflow-x: hidden; max-width: 100vw; }
+  img, svg, video { max-width: 100%; height: auto; }
+
+  /* Force grid lg:grid-cols-12 to behave as flex column on <lg */
+  @media (max-width: 1023px) {
+    section .grid.lg\:grid-cols-12,
+    div.grid.lg\:grid-cols-12 { display: flex !important; flex-direction: column !important; }
+    section .grid.lg\:grid-cols-12 > *,
+    div.grid.lg\:grid-cols-12 > * { min-width: 0 !important; width: 100% !important; }
+  }
+
+  @media (max-width: 767px) {
+    /* Hero word stacks were pushing horizontally — collapse on mobile */
+    .stack-1, .stack-2, .stack-3 { transform: translateX(0) !important; }
+
+    /* Header 3-col grid → stack on mobile */
+    header .grid-cols-3 { grid-template-columns: 1fr auto !important; gap: 8px !important; }
+    header .grid-cols-3 nav { display: none !important; }
+    header .grid-cols-3 a.text-center { text-align: left !important; grid-column: 1; }
+
+    /* Trust bar/scarcity content */
+    .bg-\[var\(--ox\)\] .flex.items-center.justify-center { gap: 8px !important; }
+    .bg-\[var\(--ox\)\] .flex.items-center.justify-center > * { font-size: 12px; }
+
+    /* Btn touch targets — also restore letter-spacing on tap */
+    .btn-ox, .btn-ghost { min-height: 44px; padding: 14px 24px; letter-spacing: .22em; font-size: 10.5px; }
+    .btn-ox:hover, .btn-ghost:hover { letter-spacing: .22em; }
+
+    /* iOS form zoom prevention */
+    input, textarea, select { font-size: 16px !important; }
+    input[type=range] { font-size: inherit !important; }
+
+    /* Range slider thumb a bit bigger for touch */
+    input[type="range"]::-webkit-slider-thumb { width: 6px !important; height: 42px !important; margin-top: -20px !important; }
+    input[type="range"]::-moz-range-thumb { width: 6px !important; height: 42px !important; }
+
+    /* Wrap a touch-friendly bigger hit area around the visible thumb */
+    input[type="range"] { padding: 14px 0 !important; height: 4px; }
+
+    /* Marquee tighter */
+    .mq { gap: 36px; animation-duration: 38s; }
+
+    /* Quiz: room tiles 3-col → 2-col on mobile (still grid for visual scan) */
+    .grid.grid-cols-2.md\:grid-cols-3,
+    .grid.grid-cols-1.md\:grid-cols-3 { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* Quiz: chips 4-col → 2-col */
+    .grid.grid-cols-2.md\:grid-cols-4 { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* Logos band 6-col → 3-col */
+    .grid.grid-cols-2.md\:grid-cols-6 { grid-template-columns: repeat(3, 1fr) !important; }
+
+    /* Body big 3-col grids → 1-col on phone, 4-col → 2 */
+    section > div > .grid.grid-cols-3 { grid-template-columns: 1fr !important; }
+    .grid.grid-cols-4.grid-rows-2 { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* Disable noisy hover transforms on touch */
+    .room-tile:hover { transform: none !important; }
+
+    /* Room tile labels readable */
+    .room-tile .label { font-size: 14px; }
+
+    /* Hero display text scaling (Old Standard TT can be 80-120px) */
+    h1.display { font-size: clamp(40px, 11vw, 64px) !important; line-height: 1 !important; }
+
+    /* Search/cart icons buttons */
+    button.w-9.h-9 { width: 44px !important; height: 44px !important; }
+
+    /* Quiz card padding scaled */
+    .quiz-card { padding: 0 !important; }
+
+    /* Header CTA tightening */
+    header a.btn-ox {
+      padding: 8px 10px !important;
+      font-size: 10px !important;
+      letter-spacing: .06em !important;
+      min-height: 36px !important;
+    }
+    /* Tighten header padding */
+    header .max-w-\[1440px\] { padding-left: 12px !important; padding-right: 12px !important; }
+    header .flex.items-center.gap-3 { gap: 6px !important; }
+  }
+</style>
+</head>
+
+<body class="overflow-x-hidden">
+
+<!-- 1. STICKY TOP TRUST BAR -->
+<div class="bg-[var(--char)] text-[var(--cream)] text-xs">
+  <div class="max-w-[1440px] mx-auto px-6 py-2.5 flex justify-between items-center flex-wrap gap-y-2">
+    <div class="flex items-center gap-6">
+      <span class="pill text-[var(--gold)]">— The Light Audit · Vol. I · MMXXVI</span>
+      <span class="hidden md:inline opacity-80">Free in-home measurement · No deposit</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <span class="hidden md:inline opacity-80">Mon–Sat · 9–18h</span>
+      <a href="tel:5879010240" class="ul-thin">+1 587 901 0240</a>
+      <span class="opacity-70">EN · FR</span>
+    </div>
+  </div>
+</div>
+
+<!-- 2. STICKY HEADER -->
+<header class="sticky top-0 z-40 bg-[var(--cream)]/95 backdrop-blur border-b border-[var(--hair)]">
+  <div class="max-w-[1440px] mx-auto px-6 py-5 grid grid-cols-3 items-center">
+    <nav class="hidden lg:flex items-center gap-8 text-sm">
+      <a href="#" class="hover:text-[var(--ox)] transition">The Audit</a>
+      <a href="#" class="hover:text-[var(--ox)] transition">Collections</a>
+      <a href="#" class="hover:text-[var(--ox)] transition">Ritual</a>
+      <a href="#" class="hover:text-[var(--ox)] transition">Atelier</a>
+    </nav>
+    <a href="#" class="text-center">
+      <span class="display text-3xl tracking-tight">SunLeo<span class="text-[var(--ox)]">.</span></span>
+      <span class="block pill text-[var(--gold-2)] mt-0.5">Calgary · Established 2017</span>
+    </a>
+    <div class="flex justify-end items-center gap-3 text-sm">
+      <button aria-label="Search" class="w-9 h-9 border border-[var(--hair)] flex items-center justify-center hover:bg-[var(--char)] hover:text-[var(--cream)] transition">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </button>
+      <button aria-label="Cart" class="relative w-9 h-9 border border-[var(--hair)] flex items-center justify-center hover:bg-[var(--char)] hover:text-[var(--cream)] transition">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/></svg>
+      </button>
+      <a href="#audit" class="btn-ox text-[10.5px] py-3 px-5">Begin Audit →</a>
+    </div>
+  </div>
+</header>
+
+<!-- SCARCITY BANNER -->
+<div class="bg-[var(--ox)] text-[var(--cream)] text-sm">
+  <div class="max-w-[1440px] mx-auto px-6 py-3 flex items-center justify-center gap-4 flex-wrap">
+    <span class="pulse-dot" style="background: var(--gold);"></span>
+    <span class="pill text-[var(--gold)]">— Atelier diary</span>
+    <span><b class="display ital text-lg">3 install slots</b> remaining for the week of <span class="tabnum">26 May</span>.</span>
+    <span class="opacity-80">Next available: <b>Mon 02 Jun</b>.</span>
+    <a href="#audit" class="ul-thin">Hold a slot →</a>
+  </div>
+</div>
+
+<!-- 3. HERO — THE LIGHT AUDIT -->
+<section id="audit" class="relative">
+  <div class="max-w-[1440px] mx-auto px-6 pt-20 pb-8 grid lg:grid-cols-12 gap-10 items-end">
+    <div class="lg:col-span-5">
+      <p class="mono text-[var(--ox)]">Issue Nº 01 · The Light Audit · 60 seconds</p>
+      <p class="mt-8 spectral text-xl leading-relaxed text-[var(--char)]/85 max-w-md ital">
+        A six-question diagnosis for the way light enters your home. Built by a Calgary designer who has quietly dressed three thousand four hundred windows.
+      </p>
+    </div>
+    <div class="lg:col-span-7">
+      <h1 class="display leading-[.85] text-[clamp(70px,11vw,180px)] -tracking-[.02em]">
+        <span class="block stack-1">Diagnose</span>
+        <span class="block stack-2 ital text-[var(--ox)]">your</span>
+        <span class="block stack-3">light.</span>
+      </h1>
+    </div>
+  </div>
+
+  <div class="rule max-w-[1440px] mx-auto"></div>
+
+  <div class="max-w-[1440px] mx-auto px-6 py-14 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-3">
+      <p class="mono text-[var(--gold-2)]">— Audit progress</p>
+      <div class="mt-5 space-y-3" id="progress-strip">
+        <div class="flex items-center gap-4"><span class="mono w-6 tabnum">01</span><span class="progress-step flex-1 done"></span></div>
+        <div class="flex items-center gap-4"><span class="mono w-6 tabnum">02</span><span class="progress-step flex-1"></span></div>
+        <div class="flex items-center gap-4"><span class="mono w-6 tabnum">03</span><span class="progress-step flex-1"></span></div>
+        <div class="flex items-center gap-4"><span class="mono w-6 tabnum">04</span><span class="progress-step flex-1"></span></div>
+        <div class="flex items-center gap-4"><span class="mono w-6 tabnum">05</span><span class="progress-step flex-1"></span></div>
+        <div class="flex items-center gap-4"><span class="mono w-6 tabnum">06</span><span class="progress-step flex-1"></span></div>
+        <div class="flex items-center gap-4"><span class="mono w-6 tabnum">07</span><span class="progress-step flex-1"></span></div>
+      </div>
+
+      <div class="mt-10 plate">
+        <p class="mono text-[var(--gold-2)]">— Why an audit</p>
+        <p class="spectral ital mt-3 leading-relaxed">"Most window mistakes are not aesthetic mistakes — they are light mistakes." <span class="block mt-3 mono not-italic">— Iris L., founder</span></p>
+      </div>
+
+      <div class="mt-6 text-xs opacity-70 leading-relaxed">
+        <p>The audit takes 60 seconds. Your light report is delivered the same day, by a designer. We do not sell your details.</p>
+      </div>
+    </div>
+
+    <div class="lg:col-span-6">
+      <div id="quizArea" class="border border-[var(--hair)] bg-[var(--cream-2)] p-8 md:p-12 min-h-[600px] relative">
+        <p class="mono text-[var(--ox)]" id="qIndex">Question 01 / 06</p>
+
+        <div class="quiz-card active" data-q="1">
+          <h2 class="display text-4xl md:text-5xl leading-tight mt-4">Which room are we <span class="ital text-[var(--ox)]">starting</span> with?</h2>
+          <p class="spectral mt-3 ital opacity-80">Most homes need one room solved first. The rest follow.</p>
+          <div class="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div class="room-tile" data-val="bedroom">
+              <img src="https://picsum.photos/seed/sunleoaudit01/420/520" class="absolute inset-0 w-full h-full object-cover" alt=""/>
+              <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 30%, rgba(26,22,18,.7));"></div>
+              <div class="label"><p class="mono">— Room 01</p><p class="display text-2xl mt-1">Bedroom</p></div>
+            </div>
+            <div class="room-tile" data-val="living">
+              <img src="https://picsum.photos/seed/sunleoaudit02/420/520" class="absolute inset-0 w-full h-full object-cover" alt=""/>
+              <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 30%, rgba(26,22,18,.7));"></div>
+              <div class="label"><p class="mono">— Room 02</p><p class="display text-2xl mt-1">Living</p></div>
+            </div>
+            <div class="room-tile" data-val="kitchen">
+              <img src="https://picsum.photos/seed/sunleoaudit03/420/520" class="absolute inset-0 w-full h-full object-cover" alt=""/>
+              <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 30%, rgba(26,22,18,.7));"></div>
+              <div class="label"><p class="mono">— Room 03</p><p class="display text-2xl mt-1">Kitchen</p></div>
+            </div>
+            <div class="room-tile" data-val="nursery">
+              <img src="https://picsum.photos/seed/sunleoaudit04/420/520" class="absolute inset-0 w-full h-full object-cover" alt=""/>
+              <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 30%, rgba(26,22,18,.7));"></div>
+              <div class="label"><p class="mono">— Room 04</p><p class="display text-2xl mt-1">Nursery</p></div>
+            </div>
+            <div class="room-tile" data-val="office">
+              <img src="https://picsum.photos/seed/sunleoaudit05/420/520" class="absolute inset-0 w-full h-full object-cover" alt=""/>
+              <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 30%, rgba(26,22,18,.7));"></div>
+              <div class="label"><p class="mono">— Room 05</p><p class="display text-2xl mt-1">Office</p></div>
+            </div>
+            <div class="room-tile" data-val="whole">
+              <img src="https://picsum.photos/seed/sunleoaudit06/420/520" class="absolute inset-0 w-full h-full object-cover" alt=""/>
+              <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 30%, rgba(26,22,18,.7));"></div>
+              <div class="label"><p class="mono">— Room 06</p><p class="display text-2xl mt-1">Whole home</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-card" data-q="2">
+          <h2 class="display text-4xl md:text-5xl leading-tight mt-4">How much <span class="ital text-[var(--ox)]">morning</span> sun does it get?</h2>
+          <p class="spectral mt-3 ital opacity-80">Use the slider. 0% is north-facing winter shadow, 100% is summer east-glare.</p>
+          <div class="mt-10">
+            <div class="flex items-end justify-between">
+              <div>
+                <p class="mono text-[var(--gold-2)]">— Reading</p>
+                <p class="display text-7xl mt-2 tabnum"><span id="sunReading">42</span><span class="text-2xl ital text-[var(--gold-2)]">%</span></p>
+              </div>
+              <div class="text-right">
+                <p class="mono text-[var(--gold-2)]">— Designation</p>
+                <p class="spectral text-2xl ital mt-2" id="sunLabel">Soft east light</p>
+              </div>
+            </div>
+            <div class="mt-8 pt-2">
+              <input type="range" min="0" max="100" value="42" id="sunRange"/>
+            </div>
+            <div class="flex justify-between text-xs opacity-70 mt-3">
+              <span>Shadow</span><span>Diffused</span><span>Direct</span><span>Glare</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-card" data-q="3">
+          <h2 class="display text-4xl md:text-5xl leading-tight mt-4">What feeling <span class="ital text-[var(--ox)]">do you want?</span></h2>
+          <p class="spectral mt-3 ital opacity-80">Choose one. We design around the answer.</p>
+          <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="room-tile" data-val="open">
+              <img src="https://picsum.photos/seed/sunleoaudit07/420/520" class="absolute inset-0 w-full h-full object-cover" alt=""/>
+              <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 30%, rgba(26,22,18,.75));"></div>
+              <div class="label"><p class="mono">— Mood 01</p><p class="display text-2xl mt-1">Open</p><p class="text-xs opacity-80 mt-1">Bright, sheer, lifted</p></div>
+            </div>
+            <div class="room-tile" data-val="soft">
+              <img src="https://picsum.photos/seed/sunleoaudit08/420/520" class="absolute inset-0 w-full h-full object-cover" alt=""/>
+              <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 30%, rgba(26,22,18,.75));"></div>
+              <div class="label"><p class="mono">— Mood 02</p><p class="display text-2xl mt-1">Soft</p><p class="text-xs opacity-80 mt-1">Filtered, linen, hush</p></div>
+            </div>
+            <div class="room-tile" data-val="dark">
+              <img src="https://picsum.photos/seed/sunleoaudit09/420/520" class="absolute inset-0 w-full h-full object-cover" alt=""/>
+              <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 30%, rgba(26,22,18,.75));"></div>
+              <div class="label"><p class="mono">— Mood 03</p><p class="display text-2xl mt-1">Dark</p><p class="text-xs opacity-80 mt-1">Cinema, blackout, calm</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-card" data-q="4">
+          <h2 class="display text-4xl md:text-5xl leading-tight mt-4">Anyone we should be <span class="ital text-[var(--ox)]">protecting?</span></h2>
+          <p class="spectral mt-3 ital opacity-80">Tick all that apply. Sleepers, kids, pets — we design around them.</p>
+          <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3" id="protectGrid">
+            <button data-val="sleepers" class="protect-tile border border-[var(--hair)] p-5 text-left hover:border-[var(--ox)] transition">
+              <span class="display text-3xl">☾</span>
+              <p class="display text-xl mt-2">Sleepers</p>
+              <p class="mono mt-2 opacity-70">— Light sensitive</p>
+            </button>
+            <button data-val="kids" class="protect-tile border border-[var(--hair)] p-5 text-left hover:border-[var(--ox)] transition">
+              <span class="display text-3xl">✦</span>
+              <p class="display text-xl mt-2">Children</p>
+              <p class="mono mt-2 opacity-70">— Cordless required</p>
+            </button>
+            <button data-val="pets" class="protect-tile border border-[var(--hair)] p-5 text-left hover:border-[var(--ox)] transition">
+              <span class="display text-3xl">♡</span>
+              <p class="display text-xl mt-2">Pets</p>
+              <p class="mono mt-2 opacity-70">— Chew + paw proof</p>
+            </button>
+            <button data-val="art" class="protect-tile border border-[var(--hair)] p-5 text-left hover:border-[var(--ox)] transition">
+              <span class="display text-3xl">▢</span>
+              <p class="display text-xl mt-2">Art / wood</p>
+              <p class="mono mt-2 opacity-70">— UV blocking</p>
+            </button>
+          </div>
+        </div>
+
+        <div class="quiz-card" data-q="5">
+          <h2 class="display text-4xl md:text-5xl leading-tight mt-4">Open to <span class="ital text-[var(--ox)]">motorisation?</span></h2>
+          <p class="spectral mt-3 ital opacity-80">Motors fit any product. They add $180–$280 per window.</p>
+          <div class="mt-8 grid grid-cols-3 gap-4">
+            <button data-val="yes" class="motor-tile border border-[var(--hair)] p-8 text-center hover:border-[var(--ox)] transition">
+              <p class="display text-2xl">Yes</p>
+              <p class="mono mt-3 opacity-70">— Open to it</p>
+            </button>
+            <button data-val="maybe" class="motor-tile border border-[var(--hair)] p-8 text-center hover:border-[var(--ox)] transition">
+              <p class="display text-2xl">Maybe</p>
+              <p class="mono mt-3 opacity-70">— Show me prices</p>
+            </button>
+            <button data-val="no" class="motor-tile border border-[var(--hair)] p-8 text-center hover:border-[var(--ox)] transition">
+              <p class="display text-2xl">No</p>
+              <p class="mono mt-3 opacity-70">— Cord-pull only</p>
+            </button>
+          </div>
+        </div>
+
+        <div class="quiz-card" data-q="6">
+          <h2 class="display text-4xl md:text-5xl leading-tight mt-4">A comfortable <span class="ital text-[var(--ox)]">budget?</span></h2>
+          <p class="spectral mt-3 ital opacity-80">Per window, installed. We never push beyond the slider.</p>
+          <div class="mt-10">
+            <div class="flex items-end justify-between">
+              <div>
+                <p class="mono text-[var(--gold-2)]">— Comfortable budget</p>
+                <p class="display text-7xl mt-2 tabnum">$<span id="budgetReading">540</span></p>
+              </div>
+              <div class="text-right">
+                <p class="mono text-[var(--gold-2)]">— Likely product</p>
+                <p class="spectral text-2xl ital mt-2" id="budgetLabel">Linen roller, motorised</p>
+              </div>
+            </div>
+            <div class="mt-8 pt-2">
+              <input type="range" min="100" max="2000" step="20" value="540" id="budgetRange"/>
+            </div>
+            <div class="flex justify-between text-xs opacity-70 mt-3">
+              <span>$100</span><span>$500</span><span>$1,000</span><span>$2,000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-card" data-q="7">
+          <p class="mono text-[var(--ox)]">— Final step</p>
+          <h2 class="display text-4xl md:text-5xl leading-tight mt-4">Where shall we <span class="ital text-[var(--ox)]">send the report?</span></h2>
+          <p class="spectral mt-4 ital opacity-80 max-w-lg">Your light audit is delivered the same day by Iris, by email. We do not sell your details, and we will not call unless you ask.</p>
+
+          <div class="mt-8 space-y-3 max-w-md">
+            <div>
+              <label class="mono opacity-70">— Name</label>
+              <input type="text" placeholder="First name" class="w-full mt-2 bg-transparent border-b border-[var(--char)] py-3 outline-none spectral text-xl placeholder:opacity-40"/>
+            </div>
+            <div>
+              <label class="mono opacity-70">— Email</label>
+              <input type="email" placeholder="you@home.com" class="w-full mt-2 bg-transparent border-b border-[var(--char)] py-3 outline-none spectral text-xl placeholder:opacity-40"/>
+            </div>
+            <div>
+              <label class="mono opacity-70">— Calgary district</label>
+              <input type="text" placeholder="e.g. Tuscany NW, Inglewood SE" class="w-full mt-2 bg-transparent border-b border-[var(--char)] py-3 outline-none spectral text-xl placeholder:opacity-40"/>
+            </div>
+          </div>
+
+          <button id="quizSubmit" class="btn-ox mt-10">Deliver my light report →</button>
+          <p class="mono mt-5 opacity-60">— Same-day delivery · No deposit · No call</p>
+        </div>
+
+        <div class="quiz-card" data-q="8">
+          <p class="mono text-[var(--ox)]">— Delivered</p>
+          <h2 class="display text-5xl md:text-7xl leading-[.95] mt-5">Thank you, <span class="ital">your light report is on its way.</span></h2>
+          <p class="spectral text-xl ital mt-6 max-w-xl">Iris will personally send your diagnosis within four hours, with three product recommendations and one Calgary install reference for context. Below, your starting points.</p>
+
+          <div class="rule mt-10"></div>
+          <p class="mono mt-8 text-[var(--gold-2)]">— Personalised recommendations · based on your answers</p>
+        </div>
+
+        <div class="mt-10 flex justify-between items-center pt-6 border-t border-[var(--hair)]">
+          <button id="qPrev" class="mono opacity-50 hover:opacity-100 transition flex items-center gap-2" disabled>← Previous</button>
+          <span class="mono opacity-50"><span id="qCount">1</span> of 6</span>
+          <button id="qNext" class="mono hover:text-[var(--ox)] transition flex items-center gap-2">Next question →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lg:col-span-3">
+      <div class="aspect-[3/4] relative overflow-hidden">
+        <img src="https://picsum.photos/seed/sunleoaudithero/480/640" class="absolute inset-0 w-full h-full object-cover" alt=""/>
+        <div class="absolute bottom-3 left-3 right-3 plate-cream bg-[var(--char)]/55 backdrop-blur">
+          <p class="mono text-[var(--gold)]">— Plate I</p>
+          <p class="spectral ital text-sm mt-2 text-[var(--cream)]">A Tuscany NW kitchen, audited 11.IV.2026. Linen roller, oat milk, motorised. 6 windows, $3,240.</p>
+        </div>
+      </div>
+      <div class="mt-6 plate">
+        <p class="mono text-[var(--gold-2)]">— Atelier diary</p>
+        <p class="spectral mt-3 ital leading-relaxed">"Iris quietly fixed three years of squinting in our breakfast nook." <span class="block mt-3 mono not-italic">— H. F., Mount Royal, MMXXVI</span></p>
+        <div class="stars mt-3">★★★★★</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. TRUST STRIP -->
+<section class="border-y border-[var(--hair)] bg-[var(--cream-2)]">
+  <div class="max-w-[1440px] mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-6 gap-6 items-center text-center text-sm">
+    <div><p class="mono text-[var(--gold-2)]">— BBB</p><p class="display text-2xl mt-1">A+</p></div>
+    <div><p class="mono text-[var(--gold-2)]">— Top Choice</p><p class="display text-2xl mt-1 ital">2025 / 26</p></div>
+    <div><p class="mono text-[var(--gold-2)]">— Affirm</p><p class="display text-2xl mt-1">0% APR</p></div>
+    <div><p class="mono text-[var(--gold-2)]">— Klarna</p><p class="display text-2xl mt-1">Pay 4×</p></div>
+    <div><p class="mono text-[var(--gold-2)]">— Google</p><p class="display text-2xl mt-1">4.9 ✦</p></div>
+    <div><p class="mono text-[var(--gold-2)]">— Reviews</p><p class="display text-2xl mt-1 tabnum">2,418</p></div>
+  </div>
+</section>
+
+<!-- 5. PRODUCT GRID -->
+<section class="max-w-[1440px] mx-auto px-6 py-24" id="shop">
+  <div class="grid lg:grid-cols-12 gap-10 items-end mb-14">
+    <div class="lg:col-span-7">
+      <p class="mono text-[var(--ox)]">— The collection · Vol. I</p>
+      <h2 class="display text-6xl md:text-8xl leading-[.92] mt-4 -tracking-[.01em]">
+        Ten <span class="ital text-[var(--ox)]">honest</span><br/>ways to dress a window.
+      </h2>
+    </div>
+    <div class="lg:col-span-5 spectral text-lg ital leading-relaxed opacity-90">
+      Every product is custom-cut, hung by Iris's two-person crew, and guaranteed by the atelier for ten years. The numbers below are starting prices — your audit will refine them.
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-1 border border-[var(--hair)]">
+    <a href="#" class="group block bg-[var(--cream-2)] p-1">
+      <div class="relative overflow-hidden bg-white">
+        <img src="https://picsum.photos/seed/sunleoaudp01/600/750" class="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700" alt=""/>
+        <span class="absolute top-3 left-3 bg-[var(--char)] text-[var(--cream)] px-2 py-1 mono">— 01</span>
+      </div>
+      <div class="p-5 flex items-baseline justify-between">
+        <div>
+          <p class="display text-xl">Linen Roller</p>
+          <p class="mono mt-1 opacity-60">— Belgian linen · 14 colourways</p>
+        </div>
+        <div class="text-right"><p class="display text-xl ital text-[var(--ox)]">from $180</p><p class="mono opacity-60 mt-1">or 4 × $45</p></div>
+      </div>
+      <div class="px-5 pb-5 flex items-center gap-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 612</span></div>
+    </a>
+    <a href="#" class="group block bg-[var(--cream-2)] p-1">
+      <div class="relative overflow-hidden bg-white">
+        <img src="https://picsum.photos/seed/sunleoaudp02/600/750" class="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700" alt=""/>
+        <span class="absolute top-3 left-3 bg-[var(--char)] text-[var(--cream)] px-2 py-1 mono">— 02</span>
+      </div>
+      <div class="p-5 flex items-baseline justify-between">
+        <div><p class="display text-xl">Honeycomb Cellular</p><p class="mono mt-1 opacity-60">— R-5 · sub-zero rated</p></div>
+        <div class="text-right"><p class="display text-xl ital text-[var(--ox)]">from $290</p><p class="mono opacity-60 mt-1">or 4 × $72</p></div>
+      </div>
+      <div class="px-5 pb-5 flex items-center gap-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 1,204</span></div>
+    </a>
+    <a href="#" class="group block bg-[var(--cream-2)] p-1">
+      <div class="relative overflow-hidden bg-white">
+        <img src="https://picsum.photos/seed/sunleoaudp03/600/750" class="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700" alt=""/>
+        <span class="absolute top-3 left-3 bg-[var(--char)] text-[var(--cream)] px-2 py-1 mono">— 03</span>
+      </div>
+      <div class="p-5 flex items-baseline justify-between">
+        <div><p class="display text-xl">Roman Shade</p><p class="mono mt-1 opacity-60">— Hand-folded · 22 fabrics</p></div>
+        <div class="text-right"><p class="display text-xl ital text-[var(--ox)]">from $340</p><p class="mono opacity-60 mt-1">or 4 × $85</p></div>
+      </div>
+      <div class="px-5 pb-5 flex items-center gap-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 388</span></div>
+    </a>
+    <a href="#" class="group block bg-[var(--cream-2)] p-1">
+      <div class="relative overflow-hidden bg-white">
+        <img src="https://picsum.photos/seed/sunleoaudp04/600/750" class="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700" alt=""/>
+        <span class="absolute top-3 left-3 bg-[var(--char)] text-[var(--cream)] px-2 py-1 mono">— 04</span>
+      </div>
+      <div class="p-5 flex items-baseline justify-between">
+        <div><p class="display text-xl">Motorised Roller</p><p class="mono mt-1 opacity-60">— Matter 1.4 · 7-yr battery</p></div>
+        <div class="text-right"><p class="display text-xl ital text-[var(--ox)]">from $480</p><p class="mono opacity-60 mt-1">or 4 × $120</p></div>
+      </div>
+      <div class="px-5 pb-5 flex items-center gap-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 522</span></div>
+    </a>
+    <a href="#" class="group block bg-[var(--cream-2)] p-1">
+      <div class="relative overflow-hidden bg-white">
+        <img src="https://picsum.photos/seed/sunleoaudp05/600/750" class="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700" alt=""/>
+        <span class="absolute top-3 left-3 bg-[var(--char)] text-[var(--cream)] px-2 py-1 mono">— 05</span>
+      </div>
+      <div class="p-5 flex items-baseline justify-between">
+        <div><p class="display text-xl">Zebra Sheer</p><p class="mono mt-1 opacity-60">— Dual-band · UV blocking</p></div>
+        <div class="text-right"><p class="display text-xl ital text-[var(--ox)]">from $220</p><p class="mono opacity-60 mt-1">or 4 × $55</p></div>
+      </div>
+      <div class="px-5 pb-5 flex items-center gap-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 270</span></div>
+    </a>
+    <a href="#" class="group block bg-[var(--cream-2)] p-1">
+      <div class="relative overflow-hidden bg-white">
+        <img src="https://picsum.photos/seed/sunleoaudp06/600/750" class="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700" alt=""/>
+        <span class="absolute top-3 left-3 bg-[var(--char)] text-[var(--cream)] px-2 py-1 mono">— 06</span>
+      </div>
+      <div class="p-5 flex items-baseline justify-between">
+        <div><p class="display text-xl">Wood Shutter</p><p class="mono mt-1 opacity-60">— Basswood · 12 stains</p></div>
+        <div class="text-right"><p class="display text-xl ital text-[var(--ox)]">from $620</p><p class="mono opacity-60 mt-1">or 4 × $155</p></div>
+      </div>
+      <div class="px-5 pb-5 flex items-center gap-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 162</span></div>
+    </a>
+    <a href="#" class="group block bg-[var(--cream-2)] p-1">
+      <div class="relative overflow-hidden bg-white">
+        <img src="https://picsum.photos/seed/sunleoaudp07/600/750" class="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700" alt=""/>
+        <span class="absolute top-3 left-3 bg-[var(--char)] text-[var(--cream)] px-2 py-1 mono">— 07</span>
+      </div>
+      <div class="p-5 flex items-baseline justify-between">
+        <div><p class="display text-xl">Faux Wood Blind</p><p class="mono mt-1 opacity-60">— Humidity-stable</p></div>
+        <div class="text-right"><p class="display text-xl ital text-[var(--ox)]">from $148</p><p class="mono opacity-60 mt-1">or 4 × $37</p></div>
+      </div>
+      <div class="px-5 pb-5 flex items-center gap-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.8 · 905</span></div>
+    </a>
+    <a href="#" class="group block bg-[var(--cream-2)] p-1">
+      <div class="relative overflow-hidden bg-white">
+        <img src="https://picsum.photos/seed/sunleoaudp08/600/750" class="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700" alt=""/>
+        <span class="absolute top-3 left-3 bg-[var(--char)] text-[var(--cream)] px-2 py-1 mono">— 08</span>
+      </div>
+      <div class="p-5 flex items-baseline justify-between">
+        <div><p class="display text-xl">Skylight Cellular</p><p class="mono mt-1 opacity-60">— Made-to-shape</p></div>
+        <div class="text-right"><p class="display text-xl ital text-[var(--ox)]">from $410</p><p class="mono opacity-60 mt-1">or 4 × $102</p></div>
+      </div>
+      <div class="px-5 pb-5 flex items-center gap-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 84</span></div>
+    </a>
+    <a href="#" class="group block bg-[var(--cream-2)] p-1">
+      <div class="relative overflow-hidden bg-white">
+        <img src="https://picsum.photos/seed/sunleoaudp09/600/750" class="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700" alt=""/>
+        <span class="absolute top-3 left-3 bg-[var(--char)] text-[var(--cream)] px-2 py-1 mono">— 09</span>
+      </div>
+      <div class="p-5 flex items-baseline justify-between">
+        <div><p class="display text-xl">Drapery Panel</p><p class="mono mt-1 opacity-60">— Custom lined · 60 fabrics</p></div>
+        <div class="text-right"><p class="display text-xl ital text-[var(--ox)]">from $390</p><p class="mono opacity-60 mt-1">or 4 × $97</p></div>
+      </div>
+      <div class="px-5 pb-5 flex items-center gap-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 311</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- 6. RITUAL -->
+<section class="bg-[var(--char)] text-[var(--cream)] py-24">
+  <div class="max-w-[1440px] mx-auto px-6">
+    <p class="mono text-[var(--gold)]">— The ritual</p>
+    <h2 class="display text-6xl md:text-8xl mt-4 leading-[.95] -tracking-[.01em]">
+      Three steps. <span class="ital text-[var(--gold)]">Ten</span><br/>quiet days.
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-1 mt-16 border border-[var(--hair-cream)]">
+      <div class="p-10 border-r border-[var(--hair-cream)]">
+        <p class="display text-7xl text-[var(--gold)] ital">I.</p>
+        <h3 class="display text-3xl mt-6">The audit.</h3>
+        <p class="spectral ital mt-3 opacity-80 leading-relaxed">Sixty seconds in this browser. Six honest questions. A personalised diagnosis sent the same day by Iris.</p>
+        <p class="mono text-[var(--gold)] mt-6">— Day 01 · Free</p>
+      </div>
+      <div class="p-10 border-r border-[var(--hair-cream)]">
+        <p class="display text-7xl text-[var(--gold)] ital">II.</p>
+        <h3 class="display text-3xl mt-6">The visit.</h3>
+        <p class="spectral ital mt-3 opacity-80 leading-relaxed">Iris arrives at your home with eight fabric samples. She measures every window with a laser. You drink the coffee.</p>
+        <p class="mono text-[var(--gold)] mt-6">— Day 02–04 · No deposit</p>
+      </div>
+      <div class="p-10">
+        <p class="display text-7xl text-[var(--gold)] ital">III.</p>
+        <h3 class="display text-3xl mt-6">The install.</h3>
+        <p class="spectral ital mt-3 opacity-80 leading-relaxed">Two installers, one morning, no mess. Ten-year atelier guarantee on the craft, lifetime on the hardware.</p>
+        <p class="mono text-[var(--gold)] mt-6">— Day 08–10 · One morning</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. REVIEWS -->
+<section class="max-w-[1440px] mx-auto px-6 py-24">
+  <div class="grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-3">
+      <p class="mono text-[var(--ox)]">— Atelier voices</p>
+      <h2 class="display text-5xl md:text-6xl mt-4 leading-[.95]">2,418 <span class="ital text-[var(--ox)]">Calgary</span> reviews.</h2>
+      <div class="stars text-2xl mt-5">★★★★★</div>
+      <p class="mono mt-3 opacity-70">— 4.9 weighted average · Google + Trustpilot</p>
+    </div>
+    <div class="lg:col-span-9 grid md:grid-cols-2 gap-1 border border-[var(--hair)]">
+      <article class="p-8 bg-[var(--cream-2)]">
+        <div class="stars">★★★★★</div>
+        <p class="display text-2xl ital mt-4 leading-snug">"The audit was strangely accurate. Iris guessed our living room had a hot east window before she ever saw it."</p>
+        <div class="mt-6 flex items-center gap-4">
+          <img src="https://picsum.photos/seed/sunleoaudr01/80/80" class="w-12 h-12 object-cover rounded-full" alt=""/>
+          <div><p class="display text-lg">Hattie F.</p><p class="mono opacity-60">— Mount Royal · MMXXVI</p></div>
+        </div>
+      </article>
+      <article class="p-8 bg-[var(--cream-2)]">
+        <div class="stars">★★★★★</div>
+        <p class="display text-2xl ital mt-4 leading-snug">"We had been quoted four times. SunLeo was 18% cheaper and the only one who came back the same week."</p>
+        <div class="mt-6 flex items-center gap-4">
+          <img src="https://picsum.photos/seed/sunleoaudr02/80/80" class="w-12 h-12 object-cover rounded-full" alt=""/>
+          <div><p class="display text-lg">Tomislav P.</p><p class="mono opacity-60">— Bridgeland · MMXXVI</p></div>
+        </div>
+      </article>
+      <article class="p-8 bg-[var(--cream-2)]">
+        <div class="stars">★★★★★</div>
+        <p class="display text-2xl ital mt-4 leading-snug">"Our baby finally naps. The blackout cellular was the recommendation, and it took exactly six minutes per window."</p>
+        <div class="mt-6 flex items-center gap-4">
+          <img src="https://picsum.photos/seed/sunleoaudr03/80/80" class="w-12 h-12 object-cover rounded-full" alt=""/>
+          <div><p class="display text-lg">Esmé R.</p><p class="mono opacity-60">— Britannia · MMXXVI</p></div>
+        </div>
+      </article>
+      <article class="p-8 bg-[var(--cream-2)]">
+        <div class="stars">★★★★★</div>
+        <p class="display text-2xl ital mt-4 leading-snug">"They quoted in the home, not on the phone. The audit is a fair test of whether you trust the designer. We did."</p>
+        <div class="mt-6 flex items-center gap-4">
+          <img src="https://picsum.photos/seed/sunleoaudr04/80/80" class="w-12 h-12 object-cover rounded-full" alt=""/>
+          <div><p class="display text-lg">Wren D.</p><p class="mono opacity-60">— Aspen Estates · MMXXVI</p></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 8. COMPARISON TABLE -->
+<section class="bg-[var(--cream-2)] py-24">
+  <div class="max-w-[1440px] mx-auto px-6">
+    <p class="mono text-[var(--ox)]">— On the differences</p>
+    <h2 class="display text-6xl md:text-7xl mt-4 leading-[.95]">A quiet <span class="ital text-[var(--ox)]">comparison.</span></h2>
+
+    <div class="mt-14 border border-[var(--hair)] bg-[var(--cream)]">
+      <div class="grid grid-cols-4 mono text-xs">
+        <div class="p-5 border-b border-[var(--hair)]">— Criterion</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] text-[var(--ox)]">— SunLeo Atelier</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] opacity-70">— Hunter Douglas dealer</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] opacity-70">— Big-box store</div>
+
+        <div class="p-5 border-b border-[var(--hair)] spectral ital">In-home audit</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl">Same day</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">7–10 days</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">DIY only</div>
+
+        <div class="p-5 border-b border-[var(--hair)] spectral ital">Deposit required</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl">$0</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">50%</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">100% upfront</div>
+
+        <div class="p-5 border-b border-[var(--hair)] spectral ital">Designer on call</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl">One — Iris</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">Rotating</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">None</div>
+
+        <div class="p-5 border-b border-[var(--hair)] spectral ital">Install time</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl">One morning</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">2–3 days</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">DIY</div>
+
+        <div class="p-5 spectral ital">Atelier guarantee</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl">10 years</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl opacity-70">Limited</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl opacity-70">90 days</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. BUILT FOR CALGARY -->
+<section class="max-w-[1440px] mx-auto px-6 py-24">
+  <div class="grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-5">
+      <p class="mono text-[var(--ox)]">— Built for Calgary</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.95]">A practice <span class="ital text-[var(--ox)]">of place.</span></h2>
+      <p class="spectral ital mt-6 text-lg leading-relaxed opacity-90 max-w-md">
+        Chinook winds, dry winters, brutal east light, west-mountain glare. We design for Calgary's specific weather — not a generic catalogue.
+      </p>
+
+      <div class="mt-10 grid grid-cols-3 gap-6">
+        <div><p class="display text-5xl tabnum"><span data-counter="3400">3,400</span></p><p class="mono mt-2 opacity-70">— Windows since 2017</p></div>
+        <div><p class="display text-5xl tabnum"><span data-counter="42">0</span></p><p class="mono mt-2 opacity-70">— Calgary districts served</p></div>
+        <div><p class="display text-5xl tabnum"><span data-counter="11">0</span></p><p class="mono mt-2 opacity-70">— Atelier crew</p></div>
+      </div>
+
+      <div class="mt-10 flex flex-wrap gap-2">
+        <span class="pill border border-[var(--char)] px-3 py-1.5">Tuscany NW</span>
+        <span class="pill border border-[var(--char)] px-3 py-1.5">Mount Royal</span>
+        <span class="pill border border-[var(--char)] px-3 py-1.5">Inglewood SE</span>
+        <span class="pill border border-[var(--char)] px-3 py-1.5">Britannia</span>
+        <span class="pill border border-[var(--char)] px-3 py-1.5">Bridgeland</span>
+        <span class="pill border border-[var(--char)] px-3 py-1.5">Mahogany SE</span>
+        <span class="pill border border-[var(--char)] px-3 py-1.5">Aspen Estates</span>
+        <span class="pill border border-[var(--char)] px-3 py-1.5">Bowness</span>
+      </div>
+    </div>
+    <div class="lg:col-span-7">
+      <div class="aspect-[5/4] relative overflow-hidden bg-[var(--cream-2)] border border-[var(--hair)]">
+        <img src="https://picsum.photos/seed/sunleoaudmap/900/700" class="absolute inset-0 w-full h-full object-cover opacity-90" alt=""/>
+        <div class="absolute inset-0" style="background: radial-gradient(circle at 50% 50%, transparent 30%, rgba(242,235,222,.55));"></div>
+        <div class="absolute bottom-4 left-4 plate bg-[var(--cream)]/95">
+          <p class="mono text-[var(--gold-2)]">— Calgary city limits</p>
+          <p class="spectral ital text-sm mt-2">42 districts · 17 quadrants · 1 atelier</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. SMART HOME -->
+<section class="bg-[var(--char)] text-[var(--cream)] py-24">
+  <div class="max-w-[1440px] mx-auto px-6 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-7">
+      <p class="mono text-[var(--gold)]">— Quiet automation</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.95]">
+        For homes that <span class="ital text-[var(--gold)]">already</span><br/>have a voice.
+      </h2>
+      <p class="spectral ital mt-6 text-lg leading-relaxed opacity-90 max-w-xl">
+        Every motorised SunLeo is Matter 1.4 native. Alexa, Google Home, Apple HomeKit, SmartThings. No bridge, no hub, no monthly cloud bill. Whisper to your blinds.
+      </p>
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-1 border border-[var(--hair-cream)]">
+        <div class="p-5 border-r border-[var(--hair-cream)]"><p class="display text-2xl ital">Matter</p><p class="mono mt-1 opacity-70">— v1.4</p></div>
+        <div class="p-5 border-r border-[var(--hair-cream)]"><p class="display text-2xl ital">Alexa</p><p class="mono mt-1 opacity-70">— Native</p></div>
+        <div class="p-5 border-r border-[var(--hair-cream)]"><p class="display text-2xl ital">Google</p><p class="mono mt-1 opacity-70">— Home</p></div>
+        <div class="p-5"><p class="display text-2xl ital">Apple</p><p class="mono mt-1 opacity-70">— HomeKit</p></div>
+      </div>
+    </div>
+    <div class="lg:col-span-5">
+      <div class="aspect-square relative overflow-hidden">
+        <img src="https://picsum.photos/seed/sunleoaudsmart/600/600" class="absolute inset-0 w-full h-full object-cover" alt=""/>
+        <div class="absolute bottom-4 left-4 plate-cream border border-[var(--hair-cream)] bg-[var(--char)]/70 backdrop-blur">
+          <p class="mono text-[var(--gold)]">— Voice latency</p>
+          <p class="display text-3xl mt-2">320 <span class="ital opacity-70">ms</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. BNPL -->
+<section class="max-w-[1440px] mx-auto px-6 py-20">
+  <div class="border border-[var(--char)] p-12 grid md:grid-cols-2 gap-8 items-center bg-[var(--cream-2)]">
+    <div>
+      <p class="mono text-[var(--ox)]">— Patient money</p>
+      <h2 class="display text-5xl md:text-6xl mt-4 leading-[.95]">Pay in <span class="ital text-[var(--ox)]">four</span>, with no interest.</h2>
+      <p class="spectral ital mt-5 text-lg opacity-90 max-w-md leading-relaxed">Affirm, Klarna, Afterpay. 0% APR · 24 months · pre-qualified at checkout. We never push beyond your audit budget.</p>
+    </div>
+    <div class="flex flex-wrap gap-4 items-center justify-end">
+      <div class="display text-3xl ital">Affirm</div>
+      <div class="display text-3xl">Klarna</div>
+      <div class="display text-3xl ital">afterpay</div>
+      <div class="display text-3xl">Sezzle</div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. JOURNAL -->
+<section class="max-w-[1440px] mx-auto px-6 py-24">
+  <div class="flex justify-between items-end mb-12 flex-wrap gap-4">
+    <div>
+      <p class="mono text-[var(--ox)]">— From the journal</p>
+      <h2 class="display text-5xl md:text-6xl mt-4 leading-[.95]">Field <span class="ital text-[var(--ox)]">notes</span> on light.</h2>
+    </div>
+    <a href="#" class="mono ul-thin">All entries — 47 →</a>
+  </div>
+  <div class="grid md:grid-cols-3 gap-1 border border-[var(--hair)]">
+    <article class="bg-[var(--cream-2)] p-1">
+      <img src="https://picsum.photos/seed/sunleoaudbl1/600/420" class="w-full h-[280px] object-cover" alt=""/>
+      <div class="p-6">
+        <p class="mono text-[var(--gold-2)]">— Entry 011 · Light</p>
+        <h3 class="display text-2xl mt-3 leading-snug">Why Calgary east light is sharper than Vancouver east light.</h3>
+        <p class="spectral ital mt-3 opacity-80">A short defence of dry-mountain glare and why your fabrics need to know about it.</p>
+      </div>
+    </article>
+    <article class="bg-[var(--cream-2)] p-1">
+      <img src="https://picsum.photos/seed/sunleoaudbl2/600/420" class="w-full h-[280px] object-cover" alt=""/>
+      <div class="p-6">
+        <p class="mono text-[var(--gold-2)]">— Entry 010 · Sleep</p>
+        <h3 class="display text-2xl mt-3 leading-snug">Eight measurable improvements in sleep after one blackout install.</h3>
+        <p class="spectral ital mt-3 opacity-80">From a 2026 study we ran across forty Mahogany homes. The numbers are surprising.</p>
+      </div>
+    </article>
+    <article class="bg-[var(--cream-2)] p-1">
+      <img src="https://picsum.photos/seed/sunleoaudbl3/600/420" class="w-full h-[280px] object-cover" alt=""/>
+      <div class="p-6">
+        <p class="mono text-[var(--gold-2)]">— Entry 009 · Craft</p>
+        <h3 class="display text-2xl mt-3 leading-snug">The case for hand-folded Roman shades in a Chinook climate.</h3>
+        <p class="spectral ital mt-3 opacity-80">Machine-folded shades crack. Hand-folded shades drape. A Calgary-specific opinion.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 13. AS SEEN IN -->
+<section class="border-y border-[var(--hair)] py-10 bg-[var(--cream-2)] overflow-hidden">
+  <p class="mono text-center text-[var(--gold-2)] mb-6">— As quietly seen in</p>
+  <div class="mq">
+    <div class="flex items-center gap-20 shrink-0">
+      <span class="display text-4xl ital">Avenue Calgary</span>
+      <span class="display text-4xl">Western Living</span>
+      <span class="display text-4xl ital">Calgary Herald</span>
+      <span class="display text-4xl">House &amp; Home</span>
+      <span class="display text-4xl ital">Style at Home</span>
+      <span class="display text-4xl">Globe &amp; Mail</span>
+    </div>
+    <div class="flex items-center gap-20 shrink-0" aria-hidden="true">
+      <span class="display text-4xl ital">Avenue Calgary</span>
+      <span class="display text-4xl">Western Living</span>
+      <span class="display text-4xl ital">Calgary Herald</span>
+      <span class="display text-4xl">House &amp; Home</span>
+      <span class="display text-4xl ital">Style at Home</span>
+      <span class="display text-4xl">Globe &amp; Mail</span>
+    </div>
+  </div>
+</section>
+
+<!-- 14. INSTAGRAM -->
+<section class="max-w-[1440px] mx-auto px-6 py-24">
+  <div class="flex justify-between items-end mb-10 flex-wrap gap-4">
+    <div>
+      <p class="mono text-[var(--ox)]">— Instagram</p>
+      <h2 class="display text-5xl md:text-6xl mt-4">@sunleo<span class="ital text-[var(--ox)]">.atelier</span></h2>
+    </div>
+    <a href="#" class="mono ul-thin">14.2k followers · follow →</a>
+  </div>
+  <div class="grid grid-cols-4 grid-rows-2 gap-1">
+    <img src="https://picsum.photos/seed/sunleoaudig01/360/360" class="w-full aspect-square object-cover" alt=""/>
+    <img src="https://picsum.photos/seed/sunleoaudig02/360/360" class="w-full aspect-square object-cover" alt=""/>
+    <img src="https://picsum.photos/seed/sunleoaudig03/360/360" class="w-full aspect-square object-cover" alt=""/>
+    <img src="https://picsum.photos/seed/sunleoaudig04/360/360" class="w-full aspect-square object-cover" alt=""/>
+    <img src="https://picsum.photos/seed/sunleoaudig05/360/360" class="w-full aspect-square object-cover" alt=""/>
+    <img src="https://picsum.photos/seed/sunleoaudig06/360/360" class="w-full aspect-square object-cover" alt=""/>
+    <img src="https://picsum.photos/seed/sunleoaudig07/360/360" class="w-full aspect-square object-cover" alt=""/>
+    <img src="https://picsum.photos/seed/sunleoaudig08/360/360" class="w-full aspect-square object-cover" alt=""/>
+  </div>
+</section>
+
+<!-- 15. TRADE -->
+<section class="bg-[var(--ox)] text-[var(--cream)] py-24">
+  <div class="max-w-[1440px] mx-auto px-6 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-7">
+      <p class="mono text-[var(--gold)]">— For the trade</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.95]">
+        A <span class="ital text-[var(--gold)]">discreet</span> partnership<br/>for designers + builders.
+      </h2>
+      <p class="spectral ital mt-6 text-lg leading-relaxed opacity-90 max-w-xl">
+        20% trade discount, dedicated installer, lead-time guarantee, white-label invoices. We currently work with 38 Calgary interior designers and 11 custom builders.
+      </p>
+      <a href="#" class="mt-8 inline-flex items-center gap-3 mono border border-[var(--gold)] px-5 py-3 hover:bg-[var(--gold)] hover:text-[var(--char)] transition">Apply to the trade programme →</a>
+    </div>
+    <div class="lg:col-span-5 spectral ital text-xl leading-relaxed">
+      "I refer SunLeo for every kitchen project where the homeowner cares about light. Iris finishes my drawings."
+      <span class="block mt-6 mono not-italic text-[var(--gold)]">— Eloise Whitcombe · principal · Whitcombe + Co Interiors</span>
+    </div>
+  </div>
+</section>
+
+<!-- 16. FAQ -->
+<section class="max-w-[1440px] mx-auto px-6 py-24" id="faq">
+  <div class="grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-4">
+      <p class="mono text-[var(--ox)]">— Quiet answers</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.95]">Eight <span class="ital text-[var(--ox)]">honest</span> questions.</h2>
+    </div>
+    <div class="lg:col-span-8 border-t border-[var(--hair)]">
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">Is the audit really free?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="spectral mt-4 opacity-80 leading-relaxed max-w-2xl">Entirely. There is no follow-up sales call unless you ask for one. You will receive a single, designer-written report by email. That is the whole offer.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">What happens after I submit?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="spectral mt-4 opacity-80 leading-relaxed max-w-2xl">Iris reads every audit personally. Within four hours she emails three product recommendations, one Calgary install reference, and an installed-cost estimate. You decide what to do next.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">Do you actually publish prices?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="spectral mt-4 opacity-80 leading-relaxed max-w-2xl">Starting prices, yes — they are on every product card and on the comparison page. Final pricing comes after measurement, because every window is custom. Your audit budget caps the recommendations.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">Where do you deliver?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="spectral mt-4 opacity-80 leading-relaxed max-w-2xl">Greater Calgary, Airdrie, Cochrane, Okotoks, Chestermere. Outside that radius, we partner with the closest atelier in our trade network.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">What if I hate the product after install?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="spectral mt-4 opacity-80 leading-relaxed max-w-2xl">We re-make it. The 10-year atelier guarantee covers craft, fit, and your peace of mind. You will not be the first to ask for a remake — eight clients did last year.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">Will you call me?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="spectral mt-4 opacity-80 leading-relaxed max-w-2xl">Only if you ask. Email is the default. We are a small atelier and we respect quiet inboxes.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">Do you do commercial?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="spectral mt-4 opacity-80 leading-relaxed max-w-2xl">Boutique hotels, restaurants, dental offices, executive boardrooms. Anything under 80 windows. For larger projects we refer to our trade partners.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl ital">Who is Iris?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="spectral mt-4 opacity-80 leading-relaxed max-w-2xl">Iris Laframboise is the atelier's founder and only designer. NCIDQ-certified. Eleven years in Calgary. Has dressed 3,400 windows since 2017. She also reads every audit, personally.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 17. FINAL CTA -->
+<section class="bg-[var(--char)] text-[var(--cream)] py-24" id="book">
+  <div class="max-w-[1440px] mx-auto px-6 grid lg:grid-cols-12 gap-10 items-center">
+    <div class="lg:col-span-6">
+      <p class="mono text-[var(--gold)]">— Closing note</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.92]">
+        Begin the <span class="ital text-[var(--gold)]">audit.</span><br/>Sixty seconds.
+      </h2>
+      <p class="spectral ital text-xl mt-6 opacity-90 max-w-lg leading-relaxed">
+        Or — if you would prefer to skip the questionnaire — book a designer visit directly. Iris will arrive within the week.
+      </p>
+    </div>
+    <div class="lg:col-span-6 border border-[var(--hair-cream)] p-8 bg-[var(--char)]">
+      <p class="mono text-[var(--gold)]">— Direct booking · no audit required</p>
+      <div class="mt-6 space-y-4">
+        <div>
+          <label class="mono opacity-70">— Name</label>
+          <input type="text" placeholder="First name" class="w-full mt-2 bg-transparent border-b border-[var(--gold)] py-3 outline-none spectral text-xl text-[var(--cream)] placeholder:opacity-40"/>
+        </div>
+        <div>
+          <label class="mono opacity-70">— Email</label>
+          <input type="email" placeholder="you@home.com" class="w-full mt-2 bg-transparent border-b border-[var(--gold)] py-3 outline-none spectral text-xl text-[var(--cream)] placeholder:opacity-40"/>
+        </div>
+        <div>
+          <label class="mono opacity-70">— Phone (optional)</label>
+          <input type="tel" placeholder="+1 587 ___ ____" class="w-full mt-2 bg-transparent border-b border-[var(--gold)] py-3 outline-none spectral text-xl text-[var(--cream)] placeholder:opacity-40"/>
+        </div>
+        <div>
+          <label class="mono opacity-70">— Window count</label>
+          <input type="number" placeholder="e.g. 6" class="w-full mt-2 bg-transparent border-b border-[var(--gold)] py-3 outline-none spectral text-xl text-[var(--cream)] placeholder:opacity-40"/>
+        </div>
+        <button class="btn-ox mt-6" style="background: var(--gold); color: var(--char);">Reserve a designer visit →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 18. MEGA FOOTER -->
+<footer class="bg-[var(--cream)] text-[var(--char)] border-t border-[var(--hair)] py-20">
+  <div class="max-w-[1440px] mx-auto px-6">
+    <div class="grid lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-4">
+        <span class="display text-4xl">SunLeo<span class="text-[var(--ox)]">.</span></span>
+        <p class="spectral ital mt-5 text-lg leading-relaxed max-w-md opacity-90">A Calgary atelier dressing windows since 2017. Three thousand four hundred installs. One designer. No deposit, no pressure.</p>
+        <div class="mt-8 flex items-center gap-5">
+          <div class="stars text-xl">★★★★★</div>
+          <span class="mono opacity-70">— 4.9 · 2,418 reviews · Trustpilot</span>
+        </div>
+        <div class="mt-6 flex gap-3">
+          <span class="display text-xl">Affirm</span>
+          <span class="display text-xl ital">Klarna</span>
+          <span class="display text-xl">afterpay</span>
+          <span class="display text-xl ital">Visa</span>
+        </div>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--gold-2)]">— Shop</p>
+        <ul class="mt-5 space-y-2 spectral text-lg">
+          <li><a class="hover:text-[var(--ox)] transition" href="#">Roller</a></li>
+          <li><a class="hover:text-[var(--ox)] transition" href="#">Cellular</a></li>
+          <li><a class="hover:text-[var(--ox)] transition" href="#">Roman</a></li>
+          <li><a class="hover:text-[var(--ox)] transition" href="#">Motorised</a></li>
+          <li><a class="hover:text-[var(--ox)] transition" href="#">Shutter</a></li>
+          <li><a class="hover:text-[var(--ox)] transition" href="#">Drapery</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--gold-2)]">— Atelier</p>
+        <ul class="mt-5 space-y-2 spectral text-lg">
+          <li><a class="hover:text-[var(--ox)] transition" href="#">The Audit</a></li>
+          <li><a class="hover:text-[var(--ox)] transition" href="#">Ritual</a></li>
+          <li><a class="hover:text-[var(--ox)] transition" href="#">Journal</a></li>
+          <li><a class="hover:text-[var(--ox)] transition" href="#">Press</a></li>
+          <li><a class="hover:text-[var(--ox)] transition" href="#">Trade</a></li>
+          <li><a class="hover:text-[var(--ox)] transition" href="#">Iris</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--gold-2)]">— Help</p>
+        <ul class="mt-5 space-y-2 spectral text-lg">
+          <li><a class="hover:text-[var(--ox)] transition" href="#">FAQ</a></li>
+          <li><a class="hover:text-[var(--ox)] transition" href="#">Returns</a></li>
+          <li><a class="hover:text-[var(--ox)] transition" href="#">Guarantee</a></li>
+          <li><a class="hover:text-[var(--ox)] transition" href="#">Care</a></li>
+          <li><a class="hover:text-[var(--ox)] transition" href="#">Track</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--gold-2)]">— Contact</p>
+        <ul class="mt-5 space-y-2 spectral text-lg">
+          <li>+1 587 901 0240</li>
+          <li class="ul-thin">iris@sunleo.ca</li>
+          <li class="opacity-80 text-base">Mon–Sat · 9–18h</li>
+          <li class="opacity-80 text-base">Calgary, AB</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule mt-16"></div>
+    <div class="mt-8 flex flex-wrap justify-between gap-4 text-xs mono opacity-60">
+      <p>© MMXXVI SunLeo Atelier · Calgary, Alberta · Treaty 7 land</p>
+      <p>— Privacy · Terms · Accessibility · Cookies</p>
+    </div>
+  </div>
+</footer>
+
+<!-- 19. STICKY SIDE PANEL -->
+<div class="fixed right-3 top-1/2 -translate-y-1/2 z-30 hidden md:flex flex-col gap-2">
+  <button class="w-11 h-11 bg-[var(--char)] text-[var(--cream)] flex items-center justify-center hover:bg-[var(--ox)] transition" aria-label="Chat">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </button>
+  <button class="w-11 h-11 bg-[var(--cream)] text-[var(--char)] border border-[var(--char)] flex items-center justify-center hover:bg-[var(--char)] hover:text-[var(--cream)] transition" aria-label="Save">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+  </button>
+  <button class="w-11 h-11 bg-[var(--cream)] text-[var(--char)] border border-[var(--char)] flex items-center justify-center hover:bg-[var(--char)] hover:text-[var(--cream)] transition" aria-label="Share">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+  </button>
+</div>
+
+<!-- LIVE TICKER (notif popup) -->
+<div id="liveNotif" class="hidden md:flex fixed left-5 bottom-24 z-40 max-w-xs bg-[var(--cream)] border border-[var(--char)] p-4 gap-3 items-start notif-in">
+  <span class="pulse-dot mt-1.5"></span>
+  <div>
+    <p class="mono text-[var(--gold-2)]">— Atelier live · 2 min ago</p>
+    <p class="spectral mt-1 text-sm ital"><span id="liveName">Marisol H.</span> from <b><span id="liveCity">Mahogany SE</span></b> <span id="liveAct">reserved a free audit visit.</span></p>
+  </div>
+</div>
+
+<!-- COUNTDOWN BAR -->
+<div class="fixed top-4 right-4 z-40 bg-[var(--ox)] text-[var(--cream)] px-4 py-2 mono text-xs flex items-center gap-3">
+  <span class="pulse-dot" style="background: var(--gold);"></span>
+  <span class="text-[var(--gold)]">— Spring atelier ends</span>
+  <span class="tabnum" id="cd">--d --h --m --s</span>
+</div>
+
+<!-- STICKY BOTTOM BAR -->
+<div class="fixed bottom-0 inset-x-0 z-30 bg-[var(--char)] text-[var(--cream)] py-3 px-6 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--gold)]">
+  <div class="flex items-center gap-3 text-sm">
+    <span class="pulse-dot" style="background: var(--gold);"></span>
+    <span class="mono text-[var(--gold)]">— 3 install slots</span>
+    <span class="spectral ital">remaining for week of 26 May</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <a href="#audit" class="mono ul-thin">Begin audit (60s)</a>
+    <a href="#book" class="btn-ox text-[10.5px] py-2.5 px-4" style="background: var(--gold); color: var(--char);">Book a visit →</a>
+  </div>
+</div>
+
+<!-- EXIT INTENT MODAL -->
+<div id="exitModal" class="hidden fixed inset-0 z-50 bg-[var(--char)]/85 backdrop-blur-sm items-center justify-center p-6">
+  <div class="max-w-xl bg-[var(--cream)] p-10 border border-[var(--char)] relative">
+    <button id="exitClose" class="absolute top-4 right-4 mono opacity-60 hover:opacity-100">— Close (esc)</button>
+    <p class="mono text-[var(--ox)]">— Before you leave</p>
+    <h3 class="display text-4xl mt-4 leading-tight">Eight free <span class="ital text-[var(--ox)]">fabric swatches.</span></h3>
+    <p class="spectral ital mt-4 opacity-90 leading-relaxed">A boxed set of Belgian linen and honeycomb samples, posted in 48 hours. No call, no follow-up. Yours to keep.</p>
+    <div class="mt-6 flex items-end gap-3">
+      <input type="email" placeholder="your address" class="flex-1 bg-transparent border-b border-[var(--char)] py-3 outline-none spectral text-lg"/>
+      <button class="btn-ox">Send swatches</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const lenis = new Lenis({ lerp: 0.08 });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+  }
+  AOS.init({ once: true, duration: 800, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
+
+  // Quiz controller
+  const cards = document.querySelectorAll('.quiz-card');
+  const progressSteps = document.querySelectorAll('#progress-strip .progress-step');
+  const qIndex = document.getElementById('qIndex');
+  const qCount = document.getElementById('qCount');
+  const qNext = document.getElementById('qNext');
+  const qPrev = document.getElementById('qPrev');
+  let current = 1;
+  const total = 6;
+  const answers = {};
+
+  function show(n){
+    cards.forEach(c => c.classList.remove('active'));
+    const target = document.querySelector(`.quiz-card[data-q="${n}"]`);
+    if(target) target.classList.add('active');
+    if(n <= total){
+      qIndex.textContent = `Question ${String(n).padStart(2,'0')} / 06`;
+      qCount.textContent = n;
+    } else if (n === 7){
+      qIndex.textContent = `Final · Delivery`;
+      qCount.textContent = '6';
+    } else {
+      qIndex.textContent = 'Delivered';
+    }
+    progressSteps.forEach((s,i) => {
+      if(i < n) s.classList.add('done'); else s.classList.remove('done');
+    });
+    qPrev.disabled = n <= 1;
+    qPrev.style.opacity = n <= 1 ? .35 : 1;
+    if(n === 7){ qNext.style.display = 'none'; } else { qNext.style.display = 'inline-flex'; }
+    if(n === 8){ qNext.style.display='none'; qPrev.style.display='none'; }
+    current = n;
+  }
+
+  qNext.addEventListener('click', () => { if(current < 7) show(current + 1); });
+  qPrev.addEventListener('click', () => { if(current > 1) show(current - 1); });
+
+  document.querySelectorAll('.room-tile').forEach(tile => {
+    tile.addEventListener('click', () => {
+      tile.parentElement.querySelectorAll('.room-tile').forEach(t => t.classList.remove('selected'));
+      tile.classList.add('selected');
+      answers[`q${current}`] = tile.dataset.val;
+      setTimeout(() => { if(current < 7) show(current + 1); }, 380);
+    });
+  });
+
+  document.querySelectorAll('.protect-tile').forEach(tile => {
+    tile.addEventListener('click', () => {
+      tile.classList.toggle('selected');
+      tile.style.borderColor = tile.classList.contains('selected') ? 'var(--ox)' : 'var(--hair)';
+    });
+  });
+  document.querySelectorAll('.motor-tile').forEach(tile => {
+    tile.addEventListener('click', () => {
+      tile.parentElement.querySelectorAll('.motor-tile').forEach(t => { t.style.borderColor='var(--hair)'; });
+      tile.style.borderColor = 'var(--ox)';
+      answers['q5'] = tile.dataset.val;
+      setTimeout(() => show(6), 380);
+    });
+  });
+
+  const sunRange = document.getElementById('sunRange');
+  const sunReading = document.getElementById('sunReading');
+  const sunLabel = document.getElementById('sunLabel');
+  function sunLabelFor(v){
+    if(v < 25) return 'North shadow';
+    if(v < 55) return 'Soft east light';
+    if(v < 80) return 'Bright direct';
+    return 'Mountain glare';
+  }
+  sunRange?.addEventListener('input', () => {
+    sunReading.textContent = sunRange.value;
+    sunLabel.textContent = sunLabelFor(+sunRange.value);
+    answers.q2 = +sunRange.value;
+  });
+
+  const budgetRange = document.getElementById('budgetRange');
+  const budgetReading = document.getElementById('budgetReading');
+  const budgetLabel = document.getElementById('budgetLabel');
+  function budgetLabelFor(v){
+    if(v < 220) return 'Faux wood blind';
+    if(v < 360) return 'Linen roller, cord';
+    if(v < 580) return 'Linen roller, motorised';
+    if(v < 900) return 'Roman, hand-folded';
+    return 'Wood shutter, basswood';
+  }
+  budgetRange?.addEventListener('input', () => {
+    budgetReading.textContent = Number(budgetRange.value).toLocaleString();
+    budgetLabel.textContent = budgetLabelFor(+budgetRange.value);
+    answers.q6 = +budgetRange.value;
+  });
+
+  document.getElementById('quizSubmit')?.addEventListener('click', () => { show(8); window.scrollTo({ top: document.getElementById('audit').offsetTop, behavior:'smooth'}); });
+
+  const cdEl = document.getElementById('cd');
+  const endDate = new Date(Date.now() + 1000*60*60*24*5 + 1000*60*60*8);
+  function tickCd(){
+    const diff = endDate - new Date();
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    cdEl.textContent = `${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+  }
+  setInterval(tickCd, 1000); tickCd();
+
+  const notif = document.getElementById('liveNotif');
+  const liveName = document.getElementById('liveName');
+  const liveCity = document.getElementById('liveCity');
+  const liveAct = document.getElementById('liveAct');
+  const liveEvents = [
+    {name:'Marisol H.', city:'Mahogany SE', act:'reserved a free audit visit.'},
+    {name:'Devin K.', city:'Tuscany NW', act:'ordered Linen Roller in Oat Milk.'},
+    {name:'Wren D.', city:'Mount Royal', act:'reserved an install slot.'},
+    {name:'Tomislav P.', city:'Bridgeland', act:'downloaded a swatch set.'},
+    {name:'Hattie F.', city:'Aspen Estates', act:'upgraded to motorised.'},
+    {name:'Esmé R.', city:'Britannia', act:'booked Iris for Tuesday.'},
+  ];
+  let ev = 0;
+  function showNotif(){
+    if(!notif) return;
+    const e = liveEvents[ev % liveEvents.length];
+    liveName.textContent = e.name;
+    liveCity.textContent = e.city;
+    liveAct.textContent = e.act;
+    notif.classList.remove('hidden','notif-in');
+    notif.offsetWidth;
+    notif.classList.add('flex','notif-in');
+    ev++;
+    setTimeout(()=> notif.classList.add('hidden'), 6000);
+  }
+  setTimeout(showNotif, 4000);
+  setInterval(showNotif, 14000);
+
+  document.querySelectorAll('[data-counter]').forEach(el => {
+    const target = parseInt(el.getAttribute('data-counter'),10);
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          let n = 0;
+          const step = Math.max(1, Math.floor(target/60));
+          const t = setInterval(() => {
+            n += step; if(n >= target){ n = target; clearInterval(t); }
+            el.textContent = n.toLocaleString();
+          }, 20);
+          obs.disconnect();
+        }
+      });
+    });
+    obs.observe(el);
+  });
+
+  const exitModal = document.getElementById('exitModal');
+  let exitFired = false;
+  document.addEventListener('mouseout', (e) => {
+    if(!exitFired && e.clientY < 10 && e.relatedTarget == null){
+      exitFired = true;
+      exitModal.classList.remove('hidden');
+      exitModal.classList.add('flex');
+    }
+  });
+  document.getElementById('exitClose')?.addEventListener('click', () => {
+    exitModal.classList.add('hidden');
+    exitModal.classList.remove('flex');
+  });
+  document.addEventListener('keyup', (e) => {
+    if(e.key === 'Escape' && exitModal.classList.contains('flex')){
+      exitModal.classList.add('hidden'); exitModal.classList.remove('flex');
+    }
+  });
+</script>
+</body>
+</html>

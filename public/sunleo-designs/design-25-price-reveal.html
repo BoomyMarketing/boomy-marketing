@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SunLeo — Price Reveal · The only Calgary blinds brand that publishes prices</title>
+<meta name="description" content="No quotes. No salesman. No surprise. SunLeo publishes the exact starting price of every window treatment on the front page — and tells you what other Calgary brands quietly charge."/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Tobias:wght@400;500;700&family=Editorial+New:wght@400;500;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<!-- Tobias/Editorial fallback via Tinos -->
+<link href="https://fonts.googleapis.com/css2?family=Migra:wght@400;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"/>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+<link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet"/>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<style>
+  :root{
+    --bg:     #FFFFFF;
+    --ink:    #0A0A0A;
+    --ink-2:  #1F1F1F;
+    --blue:   #0030FF;
+    --blue-2: #0026CC;
+    --yellow: #F5E000;
+    --gray:   #9C9C9C;
+    --gray-2: #E5E5E5;
+    --gray-3: #F4F4F4;
+    --hair:   rgba(10,10,10,.10);
+    --hair-strong: rgba(10,10,10,.22);
+  }
+  *{ -webkit-font-smoothing: antialiased; }
+  html, body{ background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', sans-serif; font-weight: 400; letter-spacing: -.005em;}
+  .display{ font-family: 'Fraunces', 'Tinos', serif; font-weight: 700; letter-spacing: -.025em;}
+  .mono{ font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase;}
+  .tabnum{ font-variant-numeric: tabular-nums;}
+  .ital{ font-style: italic;}
+
+  /* Subtle banking grid */
+  body{
+    background-image:
+      linear-gradient(rgba(10,10,10,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(10,10,10,.025) 1px, transparent 1px);
+    background-size: 80px 80px;
+    background-position: 0 0;
+  }
+
+  /* Buttons */
+  .btn-blue{ background: var(--blue); color: #fff; padding: 16px 28px; font-family:'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; transition: background .3s, transform .3s; display: inline-flex; align-items: center; gap: 14px; font-weight: 600; }
+  .btn-blue:hover{ background: var(--blue-2); transform: translateY(-2px); }
+  .btn-yellow{ background: var(--yellow); color: var(--ink); padding: 16px 28px; font-family:'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; transition: background .3s; display: inline-flex; align-items: center; gap: 14px; font-weight: 700; }
+  .btn-yellow:hover{ background: #E8D300; }
+  .btn-ink{ background: var(--ink); color: #fff; padding: 16px 28px; font-family:'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; transition: background .3s; display: inline-flex; align-items: center; gap: 14px; font-weight: 600; }
+  .btn-ink:hover{ background: var(--blue); }
+  .btn-ghost{ border: 1px solid var(--ink); color: var(--ink); padding: 15px 28px; font-family:'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; transition: all .3s; display: inline-flex; align-items: center; gap: 14px; font-weight: 600; }
+  .btn-ghost:hover{ background: var(--ink); color: #fff; }
+
+  /* Banking-grade table */
+  .price-cell{ font-family: 'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; font-weight: 500;}
+
+  /* Stripe-style giant numeric */
+  .giga-num{ font-family: 'Fraunces', 'Tinos', serif; font-weight: 700; letter-spacing: -.045em; line-height: .85; }
+  .giga-num sup{ font-size: .4em; vertical-align: top; font-weight: 500;}
+
+  /* Hover lift */
+  .lift{ transition: transform .3s ease, box-shadow .3s ease;}
+  .lift:hover{ transform: translateY(-2px); box-shadow: 0 16px 32px -16px rgba(10,10,10,.18);}
+
+  /* Banner highlight */
+  .hl-yellow{ background: var(--yellow); padding: 0 6px;}
+  .hl-blue{ background: var(--blue); color: #fff; padding: 0 6px;}
+
+  /* Rule */
+  .rule{ height:1px; background: var(--hair);}
+  .rule-thick{ height:2px; background: var(--ink);}
+
+  /* Marquee */
+  .mq{ display:flex; gap:80px; animation: mq 50s linear infinite;}
+  @keyframes mq{ from{ transform: translateX(0);} to{ transform: translateX(-50%);}}
+
+  /* Pulse */
+  @keyframes pulse{ 0%{ box-shadow: 0 0 0 0 rgba(0,48,255,.5);} 70%{ box-shadow: 0 0 0 12px rgba(0,48,255,0);} 100%{ box-shadow: 0 0 0 0 rgba(0,48,255,0);}}
+  .pulse-dot{ display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--blue); animation: pulse 2s infinite; vertical-align: middle; }
+
+  /* Notif */
+  @keyframes notIn{ from{ transform: translateY(20px); opacity:0;} to{ transform: translateY(0); opacity:1;}}
+  .notif-in{ animation: notIn .6s cubic-bezier(.16,1,.3,1);}
+
+  /* Stars */
+  .stars{ letter-spacing:.16em; color: var(--blue);}
+
+  /* Manifesto Big Number */
+  .manifesto-num{ font-family: 'Fraunces', serif; font-weight: 700; font-size: 240px; line-height: .8; letter-spacing: -.04em;}
+
+  /* Accordion */
+  details summary{ list-style:none; cursor: pointer; }
+  details summary::-webkit-details-marker{ display:none; }
+  details[open] .chev{ transform: rotate(45deg); }
+  .chev{ transition: transform .4s cubic-bezier(.16,1,.3,1);}
+
+  /* Calc input */
+  .calc-input{ background: #fff; border: 1px solid var(--hair-strong); padding: 12px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-variant-numeric: tabular-nums; outline: none; transition: border-color .3s; width: 100%;}
+  .calc-input:focus{ border-color: var(--blue);}
+
+  /* Stripe-style under-receipt */
+  .receipt{ background: #fff; border: 1px solid var(--ink); padding: 28px; position: relative;}
+  .receipt::before{ content:""; position: absolute; top:0; left:0; right:0; height: 2px; background: var(--blue);}
+
+  /* Strike-through */
+  .strike{ text-decoration: line-through; text-decoration-color: var(--gray); text-decoration-thickness: 1.5px;}
+
+  @media (prefers-reduced-motion: reduce){ *,*::before,*::after{ animation: none !important; transition: none !important;}}
+
+  /* ========================================================== */
+  /* === MOBILE RESPONSIVE PATCH ================================ */
+  /* ========================================================== */
+  html, body { overflow-x: hidden; max-width: 100vw; }
+  img, svg, video { max-width: 100%; height: auto; }
+
+  /* Force grid lg:grid-cols-12 to stack on <lg */
+  @media (max-width: 1023px) {
+    section .grid.lg\:grid-cols-12,
+    div.grid.lg\:grid-cols-12 { display: flex !important; flex-direction: column !important; }
+    section .grid.lg\:grid-cols-12 > *,
+    div.grid.lg\:grid-cols-12 > * { min-width: 0 !important; width: 100% !important; }
+  }
+
+  @media (max-width: 767px) {
+    /* Manifesto big numbers (240px in CSS, 120px inline in 3-step) — scale down */
+    .manifesto-num { font-size: 72px !important; }
+    /* Override inline style="font-size:120px" by class specificity */
+    p.manifesto-num[style*="120"] { font-size: 64px !important; }
+
+    /* Receipt padding tighter on small screens */
+    .receipt { padding: 18px; }
+
+    /* iOS form zoom prevention; calc input is already 16px but ensure others */
+    input, textarea, select { font-size: 16px !important; }
+    .calc-input { padding: 12px 12px; }
+
+    /* Touch target min for all CTAs */
+    a[class*="btn-"], button { min-height: 44px; }
+    a[class*="btn-"] { padding-top: 12px !important; padding-bottom: 12px !important; }
+
+    /* Marquee tighter */
+    .mq { gap: 36px; animation-duration: 40s; }
+
+    /* Scarcity bar wraps cleanly */
+    .bg-\[var\(--blue\)\] .flex.items-center.justify-center { gap: 8px !important; font-size: 12px; }
+    .bg-\[var\(--blue\)\] .flex.items-center.justify-center b { font-size: 16px !important; }
+
+    /* === PRICE COMPARISON TABLE: 5-col grid → 2-col card layout (criterion + sunleo, with 3 competitors flowing below) === */
+    #vs .border-2.border-\[var\(--ink\)\] .grid.grid-cols-5 {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 0;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--hair-strong) !important;
+    }
+    /* Header row (criterion / sunleo / hd / hd / shop) — hide on mobile, card flow makes it clear */
+    #vs .border-2.border-\[var\(--ink\)\] .grid.grid-cols-5.mono { display: none !important; }
+    /* First cell: criterion label spans both columns */
+    #vs .border-2.border-\[var\(--ink\)\] .grid.grid-cols-5 > div:first-child {
+      grid-column: 1 / -1 !important;
+      border-right: 0 !important;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      opacity: .65;
+      padding: 12px 14px 4px !important;
+    }
+    /* Cells 2-5 (sunleo + 3 competitors) — show as 2x2 grid inside row */
+    #vs .border-2.border-\[var\(--ink\)\] .grid.grid-cols-5 > div:nth-child(n+2) {
+      border-right: 0 !important;
+      padding: 10px 14px !important;
+      font-size: 16px !important;
+    }
+    #vs .border-2.border-\[var\(--ink\)\] .grid.grid-cols-5 > div:nth-child(2)::before { content: 'SUNLEO · '; opacity: .55; font-size: 9px; letter-spacing: .2em; display: block; }
+    #vs .border-2.border-\[var\(--ink\)\] .grid.grid-cols-5 > div:nth-child(3)::before { content: 'HUNTER DOUGLAS · '; opacity: .55; font-size: 9px; letter-spacing: .2em; display: block; }
+    #vs .border-2.border-\[var\(--ink\)\] .grid.grid-cols-5 > div:nth-child(4)::before { content: 'HOME DEPOT · '; opacity: .55; font-size: 9px; letter-spacing: .2em; display: block; }
+    #vs .border-2.border-\[var\(--ink\)\] .grid.grid-cols-5 > div:nth-child(5)::before { content: 'LOCAL SHOP · '; opacity: .55; font-size: 9px; letter-spacing: .2em; display: block; }
+
+    /* If table isn't in #vs section, fall back: any 5-col grid gets wrapped in scroll */
+    section .grid.grid-cols-5:not(#vs *) {
+      min-width: 700px;
+    }
+
+    /* Calculator stacks: inputs were already w-full */
+    section#manifesto .grid.lg\:grid-cols-12 > div { gap: 12px; }
+
+    /* Big hero typo */
+    h2.display.text-7xl { font-size: 44px !important; line-height: .9; }
+    h2.display.md\:text-9xl { font-size: 56px !important; line-height: .9; }
+    h1.display { font-size: clamp(40px, 11vw, 64px) !important; line-height: .9 !important; }
+
+    /* Mono header bar (col-1 md:5 grid in hero) → 2-col */
+    .grid.grid-cols-1.md\:grid-cols-5 { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* Logos band 6-col → 3-col */
+    .grid.grid-cols-2.md\:grid-cols-6 { grid-template-columns: repeat(3, 1fr) !important; }
+
+    /* 4-col stats blocks → 2-col on phone */
+    .grid.grid-cols-2.md\:grid-cols-4 { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* 3-col grids → 1-col on phone */
+    section .grid.grid-cols-3:not(.grid-rows-2) { grid-template-columns: 1fr !important; }
+    section .grid.grid-cols-4.grid-rows-2 { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* md:grid-cols-3 testimonial style → 1-col */
+    .grid.md\:grid-cols-3:not(.grid-cols-2):not(.grid-cols-1) { grid-template-columns: 1fr !important; }
+
+    /* Header CTA might clip — tighten padding/font on phone */
+    header a.btn-yellow, header a.btn-blue, header a.btn-red, header a.btn-ink {
+      padding: 8px 10px !important;
+      font-size: 10px !important;
+      letter-spacing: .06em !important;
+      min-height: 36px !important;
+    }
+    /* Hide logo tagline */
+    header .mono.text-\[var\(--blue\)\] { display: none !important; }
+    /* Tighten header padding */
+    header .max-w-\[1480px\] { padding-left: 12px !important; padding-right: 12px !important; }
+    header .flex.items-center.gap-3 { gap: 6px !important; }
+  }
+
+  /* Tablet adjustment */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .manifesto-num { font-size: 140px !important; }
+  }
+</style>
+</head>
+
+<body class="overflow-x-hidden">
+
+<!-- 1. STICKY TOP TRUST BAR -->
+<div class="bg-[var(--ink)] text-white text-xs">
+  <div class="max-w-[1480px] mx-auto px-6 py-2.5 flex justify-between items-center flex-wrap gap-y-2">
+    <div class="flex items-center gap-6">
+      <span class="mono text-[var(--yellow)]">PUBLIC PRICING · 0% SURPRISE</span>
+      <span class="hidden md:inline opacity-80">Free measurement · No deposit · Same-week quote</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <span class="hidden md:inline opacity-80">Mon–Sat 9–18</span>
+      <a href="tel:5879010240" class="underline decoration-[var(--yellow)] underline-offset-4">+1 587 901 0240</a>
+      <span class="opacity-70">EN · FR</span>
+    </div>
+  </div>
+</div>
+
+<!-- 2. STICKY HEADER -->
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b-2 border-[var(--ink)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#" class="flex items-baseline gap-2">
+      <span class="display text-3xl">SunLeo</span>
+      <span class="mono text-[var(--blue)]">·PRICE/REVEAL</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-7 mono">
+      <a href="#prices" class="hover:text-[var(--blue)] transition">PRICES</a>
+      <a href="#calc" class="hover:text-[var(--blue)] transition">CALCULATOR</a>
+      <a href="#vs" class="hover:text-[var(--blue)] transition">VS. CALGARY</a>
+      <a href="#manifesto" class="hover:text-[var(--blue)] transition">MANIFESTO</a>
+      <a href="#book" class="hover:text-[var(--blue)] transition">BOOK</a>
+    </nav>
+    <div class="flex items-center gap-3 mono">
+      <button aria-label="Search" class="w-9 h-9 border border-[var(--ink)] flex items-center justify-center hover:bg-[var(--ink)] hover:text-white transition">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </button>
+      <button aria-label="Cart" class="relative w-9 h-9 border border-[var(--ink)] flex items-center justify-center hover:bg-[var(--ink)] hover:text-white transition">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/></svg>
+      </button>
+      <a href="#book" class="btn-yellow text-[11px] py-3 px-5">BOOK MEASUREMENT →</a>
+    </div>
+  </div>
+</header>
+
+<!-- SCARCITY -->
+<div class="bg-[var(--blue)] text-white">
+  <div class="max-w-[1480px] mx-auto px-6 py-3 flex items-center justify-center gap-4 flex-wrap text-sm">
+    <span class="pulse-dot" style="background: var(--yellow);"></span>
+    <span class="mono text-[var(--yellow)]">FACT:</span>
+    <span>Other Calgary brands hide their prices because they're 28–47% higher. <b class="display text-xl">Why bury a number?</b></span>
+    <a href="#vs" class="underline decoration-[var(--yellow)] underline-offset-4">Read the data →</a>
+  </div>
+</div>
+
+<!-- 3. HERO — PRICE MANIFESTO + INLINE CALCULATOR -->
+<section class="border-b-2 border-[var(--ink)] relative" id="manifesto">
+  <div class="max-w-[1480px] mx-auto px-6 py-20 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-7">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="bg-[var(--ink)] text-white mono px-3 py-1.5">№ 01</span>
+        <span class="mono opacity-70">A MANIFESTO · MAY MMXXVI</span>
+      </div>
+      <h1 class="display leading-[.85] text-[clamp(60px,8.4vw,140px)]">
+        We are the <span class="hl-yellow">only</span><br/>
+        Calgary blinds<br/>
+        brand that <span class="hl-blue">publishes</span><br/>
+        the price.
+      </h1>
+      <p class="mt-8 text-xl leading-relaxed max-w-2xl">
+        On this page, in plain sight, you will find the exact starting price of every product we sell — and the average Calgary market price next to it. <b>No quote, no salesman, no surprise.</b>
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="#prices" class="btn-blue">SEE EVERY PRICE →</a>
+        <a href="#calc" class="btn-ghost">USE THE CALCULATOR</a>
+      </div>
+
+      <!-- 5 reasons strip -->
+      <div class="mt-14 border-2 border-[var(--ink)]">
+        <div class="grid grid-cols-1 md:grid-cols-5 mono text-[10.5px]">
+          <div class="p-4 border-b md:border-b-0 md:border-r border-[var(--ink)] bg-[var(--gray-3)]">
+            <p class="text-[var(--blue)] font-bold">REASON 01</p>
+            <p class="mt-2 leading-snug">Calgary deserves better than 6 days of phone tag.</p>
+          </div>
+          <div class="p-4 border-b md:border-b-0 md:border-r border-[var(--ink)]">
+            <p class="text-[var(--blue)] font-bold">REASON 02</p>
+            <p class="mt-2 leading-snug">A hidden price is an apology for a high one.</p>
+          </div>
+          <div class="p-4 border-b md:border-b-0 md:border-r border-[var(--ink)] bg-[var(--gray-3)]">
+            <p class="text-[var(--blue)] font-bold">REASON 03</p>
+            <p class="mt-2 leading-snug">No-quote shopping saves the customer 4.2 hours.</p>
+          </div>
+          <div class="p-4 border-b md:border-b-0 md:border-r border-[var(--ink)]">
+            <p class="text-[var(--blue)] font-bold">REASON 04</p>
+            <p class="mt-2 leading-snug">Sleep is more important than a haggle.</p>
+          </div>
+          <div class="p-4 bg-[var(--gray-3)]">
+            <p class="text-[var(--blue)] font-bold">REASON 05</p>
+            <p class="mt-2 leading-snug">If we can publish, anyone can.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inline Calculator -->
+    <div class="lg:col-span-5" id="calc">
+      <div class="receipt">
+        <div class="flex items-center justify-between border-b border-[var(--hair)] pb-4">
+          <p class="mono"><span class="text-[var(--blue)]">▮</span> LIVE COST CALCULATOR</p>
+          <p class="mono text-[var(--gray)]">v3.2 · MAY/MMXXVI</p>
+        </div>
+
+        <div class="mt-6 space-y-5">
+          <div>
+            <label class="mono text-[var(--gray)]">01 / WINDOW WIDTH (IN)</label>
+            <input id="calcW" type="number" min="12" max="120" value="36" class="calc-input mt-2"/>
+          </div>
+          <div>
+            <label class="mono text-[var(--gray)]">02 / WINDOW HEIGHT (IN)</label>
+            <input id="calcH" type="number" min="12" max="120" value="60" class="calc-input mt-2"/>
+          </div>
+          <div>
+            <label class="mono text-[var(--gray)]">03 / PRODUCT</label>
+            <select id="calcProd" class="calc-input mt-2 bg-white">
+              <option value="180">Linen Roller — $180/window base</option>
+              <option value="290">Honeycomb Cellular — $290 base</option>
+              <option value="340">Roman Shade — $340 base</option>
+              <option value="480">Motorised Roller — $480 base</option>
+              <option value="620">Wood Shutter — $620 base</option>
+            </select>
+          </div>
+          <div>
+            <label class="mono text-[var(--gray)]">04 / MOTORISATION</label>
+            <div class="flex gap-2 mt-2">
+              <button class="calc-motor flex-1 border border-[var(--ink)] py-3 mono text-xs bg-[var(--blue)] text-white" data-motor="0">NO · $0</button>
+              <button class="calc-motor flex-1 border border-[var(--ink)] py-3 mono text-xs hover:bg-[var(--ink)] hover:text-white transition" data-motor="240">YES · +$240</button>
+            </div>
+          </div>
+          <div>
+            <label class="mono text-[var(--gray)]">05 / QUANTITY</label>
+            <input id="calcQty" type="number" min="1" max="40" value="6" class="calc-input mt-2"/>
+          </div>
+        </div>
+
+        <div class="border-t border-[var(--ink)] mt-7 pt-7">
+          <div class="flex items-baseline justify-between">
+            <p class="mono">YOUR PRICE, INSTALLED</p>
+            <p class="mono text-[var(--blue)] tabnum"><span id="calcPerWindow">$180</span> / WINDOW</p>
+          </div>
+          <p class="giga-num text-7xl mt-3 tabnum"><sup>$</sup><span id="calcTotal">1,080</span></p>
+          <div class="mt-3 grid grid-cols-2 gap-3 mono">
+            <div class="border border-[var(--hair)] p-3">
+              <p class="text-[var(--gray)]">AFFIRM · 24 MO</p>
+              <p class="tabnum mt-1 text-lg font-medium"><span id="calcAffirm">$45</span>/mo</p>
+            </div>
+            <div class="border border-[var(--hair)] p-3">
+              <p class="text-[var(--gray)]">KLARNA · 4×</p>
+              <p class="tabnum mt-1 text-lg font-medium"><span id="calcKlarna">$270</span></p>
+            </div>
+          </div>
+        </div>
+
+        <a href="#book" class="btn-blue w-full justify-center mt-6">LOCK THIS PRICE →</a>
+        <p class="mono text-center mt-3 text-[var(--gray)]">No deposit · Price valid for 14 days · Free measurement</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. TRUST STRIP -->
+<section class="border-b-2 border-[var(--ink)] bg-white">
+  <div class="max-w-[1480px] mx-auto px-6 py-7 grid grid-cols-2 md:grid-cols-6 gap-6 items-center text-center mono">
+    <div><p class="text-[var(--gray)]">BBB</p><p class="display text-2xl mt-1 text-[var(--ink)]">A+</p></div>
+    <div><p class="text-[var(--gray)]">TOP CHOICE</p><p class="display text-2xl mt-1">2025–26</p></div>
+    <div><p class="text-[var(--gray)]">AFFIRM</p><p class="display text-2xl mt-1 text-[var(--blue)]">0% APR</p></div>
+    <div><p class="text-[var(--gray)]">KLARNA</p><p class="display text-2xl mt-1">PAY 4×</p></div>
+    <div><p class="text-[var(--gray)]">GOOGLE</p><p class="display text-2xl mt-1">4.9 ★</p></div>
+    <div><p class="text-[var(--gray)]">REVIEWS</p><p class="display text-2xl mt-1 tabnum">2,418</p></div>
+  </div>
+</section>
+
+<!-- 5. PUBLIC PRICE TABLE — THE MANIFESTO -->
+<section class="border-b-2 border-[var(--ink)]" id="prices">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <div class="grid lg:grid-cols-12 gap-10 items-end mb-14">
+      <div class="lg:col-span-8">
+        <p class="mono text-[var(--blue)]">EXHIBIT A · THE PRICE TABLE</p>
+        <h2 class="display text-7xl md:text-9xl leading-[.85] mt-4">
+          Every <span class="hl-yellow">price.</span><br/>
+          On this <span class="hl-blue">page.</span>
+        </h2>
+      </div>
+      <div class="lg:col-span-4 text-lg leading-relaxed">
+        These are <b>installed</b> prices, per window, for the most common Calgary size (36 × 60 inches). Larger windows scale linearly. Quantity discounts of 5–18% apply above 8 windows.
+      </div>
+    </div>
+
+    <!-- Big price table -->
+    <div class="border-2 border-[var(--ink)] bg-white">
+      <div class="grid grid-cols-12 mono text-[11px] border-b-2 border-[var(--ink)]">
+        <div class="col-span-5 p-4 border-r border-[var(--ink)]">PRODUCT</div>
+        <div class="col-span-2 p-4 border-r border-[var(--ink)] text-[var(--blue)]">SUNLEO PRICE</div>
+        <div class="col-span-2 p-4 border-r border-[var(--ink)] text-[var(--gray)]">CALGARY AVG</div>
+        <div class="col-span-2 p-4 border-r border-[var(--ink)] text-[var(--gray)]">DIFFERENCE</div>
+        <div class="col-span-1 p-4">SHOP</div>
+      </div>
+
+      <!-- Rows -->
+      <div class="grid grid-cols-12 border-b border-[var(--hair)] hover:bg-[var(--gray-3)] transition">
+        <div class="col-span-5 p-5 border-r border-[var(--hair)]">
+          <p class="display text-2xl">Linen Roller</p>
+          <p class="mono text-[var(--gray)] mt-1">BELGIAN LINEN · 14 COLOURWAYS · CORD OR CHAIN</p>
+        </div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--blue)]" data-label="SunLeo">$180</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--gray)] strike" data-label="Calgary avg">$245</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl" data-label="Difference">−27%</div>
+        <div class="col-span-1 p-5"><a href="#" class="mono underline">→</a></div>
+      </div>
+
+      <div class="grid grid-cols-12 border-b border-[var(--hair)] hover:bg-[var(--gray-3)] transition">
+        <div class="col-span-5 p-5 border-r border-[var(--hair)]">
+          <p class="display text-2xl">Honeycomb Cellular</p>
+          <p class="mono text-[var(--gray)] mt-1">R-5 · DOUBLE CELL · SUB-ZERO RATED</p>
+        </div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--blue)]" data-label="SunLeo">$290</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--gray)] strike" data-label="Calgary avg">$420</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl" data-label="Difference">−31%</div>
+        <div class="col-span-1 p-5"><a href="#" class="mono underline">→</a></div>
+      </div>
+
+      <div class="grid grid-cols-12 border-b border-[var(--hair)] hover:bg-[var(--gray-3)] transition">
+        <div class="col-span-5 p-5 border-r border-[var(--hair)]">
+          <p class="display text-2xl">Roman Shade</p>
+          <p class="mono text-[var(--gray)] mt-1">HAND-FOLDED · 22 FABRICS · LINED</p>
+        </div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--blue)]" data-label="SunLeo">$340</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--gray)] strike" data-label="Calgary avg">$520</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl" data-label="Difference">−35%</div>
+        <div class="col-span-1 p-5"><a href="#" class="mono underline">→</a></div>
+      </div>
+
+      <div class="grid grid-cols-12 border-b border-[var(--hair)] hover:bg-[var(--gray-3)] transition">
+        <div class="col-span-5 p-5 border-r border-[var(--hair)]">
+          <p class="display text-2xl">Motorised Roller</p>
+          <p class="mono text-[var(--gray)] mt-1">MATTER 1.4 · 7-YR BATTERY · 28 dB · 320 ms</p>
+        </div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--blue)]" data-label="SunLeo">$480</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--gray)] strike" data-label="Calgary avg">$710</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl" data-label="Difference">−32%</div>
+        <div class="col-span-1 p-5"><a href="#" class="mono underline">→</a></div>
+      </div>
+
+      <div class="grid grid-cols-12 border-b border-[var(--hair)] hover:bg-[var(--gray-3)] transition">
+        <div class="col-span-5 p-5 border-r border-[var(--hair)]">
+          <p class="display text-2xl">Zebra Sheer</p>
+          <p class="mono text-[var(--gray)] mt-1">DUAL-BAND · UV BLOCKING · 24 FABRICS</p>
+        </div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--blue)]" data-label="SunLeo">$220</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--gray)] strike" data-label="Calgary avg">$320</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl" data-label="Difference">−31%</div>
+        <div class="col-span-1 p-5"><a href="#" class="mono underline">→</a></div>
+      </div>
+
+      <div class="grid grid-cols-12 border-b border-[var(--hair)] hover:bg-[var(--gray-3)] transition">
+        <div class="col-span-5 p-5 border-r border-[var(--hair)]">
+          <p class="display text-2xl">Basswood Shutter</p>
+          <p class="mono text-[var(--gray)] mt-1">12 STAINS · CUSTOM · LIFETIME HARDWARE</p>
+        </div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--blue)]" data-label="SunLeo">$620</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--gray)] strike" data-label="Calgary avg">$890</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl" data-label="Difference">−30%</div>
+        <div class="col-span-1 p-5"><a href="#" class="mono underline">→</a></div>
+      </div>
+
+      <div class="grid grid-cols-12 border-b border-[var(--hair)] hover:bg-[var(--gray-3)] transition">
+        <div class="col-span-5 p-5 border-r border-[var(--hair)]">
+          <p class="display text-2xl">Faux Wood Blind</p>
+          <p class="mono text-[var(--gray)] mt-1">HUMIDITY-STABLE · 8 FINISHES</p>
+        </div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--blue)]" data-label="SunLeo">$148</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--gray)] strike" data-label="Calgary avg">$210</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl" data-label="Difference">−29%</div>
+        <div class="col-span-1 p-5"><a href="#" class="mono underline">→</a></div>
+      </div>
+
+      <div class="grid grid-cols-12 border-b border-[var(--hair)] hover:bg-[var(--gray-3)] transition">
+        <div class="col-span-5 p-5 border-r border-[var(--hair)]">
+          <p class="display text-2xl">Skylight Cellular</p>
+          <p class="mono text-[var(--gray)] mt-1">MADE-TO-SHAPE · TRIANGLE · OCTAGON</p>
+        </div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--blue)]" data-label="SunLeo">$410</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--gray)] strike" data-label="Calgary avg">$640</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl" data-label="Difference">−35%</div>
+        <div class="col-span-1 p-5"><a href="#" class="mono underline">→</a></div>
+      </div>
+
+      <div class="grid grid-cols-12 hover:bg-[var(--gray-3)] transition">
+        <div class="col-span-5 p-5 border-r border-[var(--hair)]">
+          <p class="display text-2xl">Drapery Panel</p>
+          <p class="mono text-[var(--gray)] mt-1">CUSTOM LINED · 60 FABRICS · PLEATED</p>
+        </div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--blue)]" data-label="SunLeo">$390</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl text-[var(--gray)] strike" data-label="Calgary avg">$560</div>
+        <div class="col-span-2 p-5 border-r border-[var(--hair)] price-cell text-2xl" data-label="Difference">−30%</div>
+        <div class="col-span-1 p-5"><a href="#" class="mono underline">→</a></div>
+      </div>
+    </div>
+
+    <p class="mt-6 mono text-[var(--gray)]">Source: average of 4 anonymised Calgary blinds-and-shades quotes obtained by SunLeo between Sep 2024 and Apr 2026, normalised to 36 × 60 in. Full methodology on request.</p>
+  </div>
+</section>
+
+<!-- 6. THE RITUAL -->
+<section class="bg-[var(--ink)] text-white border-b-2 border-[var(--ink)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <p class="mono text-[var(--yellow)]">THE RITUAL</p>
+    <h2 class="display text-7xl md:text-8xl mt-4 leading-[.9]">
+      Three steps.<br/><span class="text-[var(--yellow)]">Zero</span> quote calls.
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-1 mt-14 border border-white/20">
+      <div class="p-10 border-r border-white/20">
+        <p class="manifesto-num text-[var(--yellow)]" style="font-size:120px">01</p>
+        <h3 class="display text-3xl mt-6">Lock the price online.</h3>
+        <p class="mt-3 opacity-80 leading-relaxed">Use the calculator. The number you see is the number you'll pay. We email a 14-day price lock instantly.</p>
+        <p class="mono text-[var(--yellow)] mt-6">DAY 01 · INSTANT</p>
+      </div>
+      <div class="p-10 border-r border-white/20">
+        <p class="manifesto-num text-[var(--yellow)]" style="font-size:120px">02</p>
+        <h3 class="display text-3xl mt-6">We measure for free.</h3>
+        <p class="mt-3 opacity-80 leading-relaxed">A senior installer arrives within 48 hours with a laser, an iPad, and 12 fabric samples. No deposit, no commitment.</p>
+        <p class="mono text-[var(--yellow)] mt-6">DAY 02–03 · FREE</p>
+      </div>
+      <div class="p-10">
+        <p class="manifesto-num text-[var(--yellow)]" style="font-size:120px">03</p>
+        <h3 class="display text-3xl mt-6">Install in one morning.</h3>
+        <p class="mt-3 opacity-80 leading-relaxed">Two-person crew. 9 AM to noon. 10-year atelier guarantee, lifetime hardware. No phone tag.</p>
+        <p class="mono text-[var(--yellow)] mt-6">DAY 08–10 · ONE MORNING</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. REVIEWS -->
+<section class="border-b-2 border-[var(--ink)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <div class="grid lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-3">
+        <p class="mono text-[var(--blue)]">CUSTOMER VOICES</p>
+        <h2 class="display text-5xl md:text-6xl mt-4 leading-[.95]">2,418 receipts.</h2>
+        <div class="stars text-2xl mt-5">★★★★★</div>
+        <p class="mono mt-3 text-[var(--gray)]">4.9 WEIGHTED · GOOGLE + TRUSTPILOT</p>
+        <p class="mt-6 display text-3xl ital">"Finally — a number."</p>
+      </div>
+      <div class="lg:col-span-9 grid md:grid-cols-2 gap-1 border-2 border-[var(--ink)]">
+        <article class="p-7 border-r border-[var(--hair)] hover:bg-[var(--gray-3)] transition">
+          <div class="stars">★★★★★</div>
+          <p class="display text-2xl mt-4 leading-snug">"Got the price in 14 seconds. The other four shops still had not called me back."</p>
+          <div class="mt-5 flex items-center gap-4">
+            <img src="https://picsum.photos/seed/sunleoprr01/80/80" class="w-12 h-12 object-cover" alt=""/>
+            <div><p class="display text-lg">Hattie F.</p><p class="mono text-[var(--gray)]">MOUNT ROYAL · MMXXVI</p></div>
+          </div>
+        </article>
+        <article class="p-7 border-b md:border-b-0 hover:bg-[var(--gray-3)] transition">
+          <div class="stars">★★★★★</div>
+          <p class="display text-2xl mt-4 leading-snug">"I asked Hunter Douglas for the price three times. They said 'a designer will call.' SunLeo just told me."</p>
+          <div class="mt-5 flex items-center gap-4">
+            <img src="https://picsum.photos/seed/sunleoprr02/80/80" class="w-12 h-12 object-cover" alt=""/>
+            <div><p class="display text-lg">Tomislav P.</p><p class="mono text-[var(--gray)]">BRIDGELAND · MMXXVI</p></div>
+          </div>
+        </article>
+        <article class="p-7 border-r border-t border-[var(--hair)] hover:bg-[var(--gray-3)] transition">
+          <div class="stars">★★★★★</div>
+          <p class="display text-2xl mt-4 leading-snug">"The locked-in quote was within $11 of the final invoice. That has never happened to me before."</p>
+          <div class="mt-5 flex items-center gap-4">
+            <img src="https://picsum.photos/seed/sunleoprr03/80/80" class="w-12 h-12 object-cover" alt=""/>
+            <div><p class="display text-lg">Esmé R.</p><p class="mono text-[var(--gray)]">BRITANNIA · MMXXVI</p></div>
+          </div>
+        </article>
+        <article class="p-7 border-t border-[var(--hair)] hover:bg-[var(--gray-3)] transition">
+          <div class="stars">★★★★★</div>
+          <p class="display text-2xl mt-4 leading-snug">"I price-checked them against five Calgary shops. They were 28% cheaper and the only ones who told me upfront."</p>
+          <div class="mt-5 flex items-center gap-4">
+            <img src="https://picsum.photos/seed/sunleoprr04/80/80" class="w-12 h-12 object-cover" alt=""/>
+            <div><p class="display text-lg">Wren D.</p><p class="mono text-[var(--gray)]">ASPEN ESTATES · MMXXVI</p></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. VS. CALGARY — COMPARISON -->
+<section class="bg-[var(--gray-3)] border-b-2 border-[var(--ink)]" id="vs">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <p class="mono text-[var(--blue)]">EXHIBIT B · WHAT OTHERS QUIETLY CHARGE</p>
+    <h2 class="display text-7xl md:text-8xl mt-4 leading-[.9]">
+      The <span class="hl-yellow">numbers</span><br/>
+      they won't <span class="hl-blue">publish.</span>
+    </h2>
+
+    <div class="mt-14 border-2 border-[var(--ink)] bg-white">
+      <div class="grid grid-cols-5 mono text-[11px] border-b-2 border-[var(--ink)]">
+        <div class="p-4 border-r border-[var(--ink)]">CRITERION</div>
+        <div class="p-4 border-r border-[var(--ink)] text-[var(--blue)]">SUNLEO</div>
+        <div class="p-4 border-r border-[var(--ink)] text-[var(--gray)]">HUNTER DOUGLAS</div>
+        <div class="p-4 border-r border-[var(--ink)] text-[var(--gray)]">HOME DEPOT</div>
+        <div class="p-4 text-[var(--gray)]">LOCAL CALGARY SHOP</div>
+      </div>
+
+      <div class="grid grid-cols-5 border-b border-[var(--hair)]">
+        <div class="p-5 border-r border-[var(--hair)] display text-xl">Published prices?</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--blue)]">YES · ON HOMEPAGE</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--gray)]">No</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--gray)]">Partial</div>
+        <div class="p-5 display text-xl text-[var(--gray)]">No</div>
+      </div>
+      <div class="grid grid-cols-5 border-b border-[var(--hair)] bg-[var(--gray-3)]">
+        <div class="p-5 border-r border-[var(--hair)] display text-xl">Quote turn-around</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--blue)]">14 SECONDS</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--gray)]">5–10 days</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--gray)]">DIY only</div>
+        <div class="p-5 display text-xl text-[var(--gray)]">2–4 days</div>
+      </div>
+      <div class="grid grid-cols-5 border-b border-[var(--hair)]">
+        <div class="p-5 border-r border-[var(--hair)] display text-xl">Roller installed</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--blue)]">$180</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--gray)] strike">$245</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--gray)] strike">$219 + DIY</div>
+        <div class="p-5 display text-xl text-[var(--gray)] strike">$268</div>
+      </div>
+      <div class="grid grid-cols-5 border-b border-[var(--hair)] bg-[var(--gray-3)]">
+        <div class="p-5 border-r border-[var(--hair)] display text-xl">Cellular installed</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--blue)]">$290</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--gray)] strike">$420</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--gray)] strike">$340 + DIY</div>
+        <div class="p-5 display text-xl text-[var(--gray)] strike">$465</div>
+      </div>
+      <div class="grid grid-cols-5 border-b border-[var(--hair)]">
+        <div class="p-5 border-r border-[var(--hair)] display text-xl">Motorised installed</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--blue)]">$480</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--gray)] strike">$710</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--gray)]">N/A</div>
+        <div class="p-5 display text-xl text-[var(--gray)] strike">$795</div>
+      </div>
+      <div class="grid grid-cols-5 border-b border-[var(--hair)] bg-[var(--gray-3)]">
+        <div class="p-5 border-r border-[var(--hair)] display text-xl">Deposit required</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--blue)]">$0</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--gray)]">50%</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--gray)]">100%</div>
+        <div class="p-5 display text-xl text-[var(--gray)]">25–50%</div>
+      </div>
+      <div class="grid grid-cols-5">
+        <div class="p-5 border-r border-[var(--hair)] display text-xl">Atelier guarantee</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--blue)]">10 YEARS</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--gray)]">7 years</div>
+        <div class="p-5 border-r border-[var(--hair)] display text-xl text-[var(--gray)]">90 days</div>
+        <div class="p-5 display text-xl text-[var(--gray)]">1–2 years</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. BUILT FOR CALGARY -->
+<section class="border-b-2 border-[var(--ink)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-5">
+      <p class="mono text-[var(--blue)]">EXHIBIT C · BUILT FOR CALGARY</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.92]">
+        <span class="hl-yellow">3,400</span><br/>installs.<br/>One city.
+      </h2>
+      <p class="mt-7 text-lg leading-relaxed max-w-md opacity-90">
+        We deliver in every Calgary district, Airdrie, Cochrane, Okotoks, Chestermere. Our two-person crew has worked together since 2019.
+      </p>
+
+      <div class="mt-10 grid grid-cols-3 gap-6">
+        <div><p class="display text-5xl tabnum"><span data-counter="3400">3,400</span></p><p class="mono mt-2 opacity-70">INSTALLS · SINCE '17</p></div>
+        <div><p class="display text-5xl tabnum"><span data-counter="42">0</span></p><p class="mono mt-2 opacity-70">DISTRICTS COVERED</p></div>
+        <div><p class="display text-5xl tabnum"><span data-counter="98">0</span></p><p class="mono mt-2 opacity-70">% PRICE ACCURACY</p></div>
+      </div>
+
+      <div class="mt-10 flex flex-wrap gap-2 mono">
+        <span class="border border-[var(--ink)] px-3 py-1.5">TUSCANY NW</span>
+        <span class="border border-[var(--ink)] px-3 py-1.5">MOUNT ROYAL</span>
+        <span class="border border-[var(--ink)] px-3 py-1.5">INGLEWOOD SE</span>
+        <span class="border border-[var(--ink)] px-3 py-1.5">BRITANNIA</span>
+        <span class="border border-[var(--ink)] px-3 py-1.5">BRIDGELAND</span>
+        <span class="border border-[var(--ink)] px-3 py-1.5">MAHOGANY SE</span>
+        <span class="border border-[var(--ink)] px-3 py-1.5">ASPEN ESTATES</span>
+        <span class="border border-[var(--ink)] px-3 py-1.5">BOWNESS</span>
+      </div>
+    </div>
+    <div class="lg:col-span-7">
+      <div class="aspect-[5/4] relative overflow-hidden border-2 border-[var(--ink)]">
+        <img src="https://picsum.photos/seed/sunleoprmap/900/700" class="absolute inset-0 w-full h-full object-cover" alt=""/>
+        <div class="absolute inset-0 bg-[var(--blue)]/30"></div>
+        <div class="absolute inset-0" style="background: radial-gradient(circle at 50% 50%, transparent 30%, rgba(255,255,255,.55));"></div>
+        <div class="absolute bottom-4 left-4 bg-white border border-[var(--ink)] px-4 py-3">
+          <p class="mono text-[var(--gray)]">CALGARY · ALL DISTRICTS</p>
+          <p class="display text-2xl mt-1">42 / 42</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. SMART HOME -->
+<section class="bg-[var(--ink)] text-white border-b-2 border-[var(--ink)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-7">
+      <p class="mono text-[var(--yellow)]">SPECIFICATION · MOTOR</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.92]">
+        Whisper-quiet.<br/><span class="text-[var(--yellow)]">Public</span> spec.
+      </h2>
+      <p class="mt-6 text-lg leading-relaxed max-w-xl opacity-90">
+        Matter 1.4 native. 28 dB at one metre. 7-year battery. 320 ms voice latency. Native to Alexa, Google Home, Apple HomeKit, SmartThings. No bridge, no hub, no cloud bill.
+      </p>
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-1 border border-white/20">
+        <div class="p-5 border-r border-white/20"><p class="display text-2xl">MATTER</p><p class="mono mt-1 text-[var(--yellow)]">v1.4</p></div>
+        <div class="p-5 border-r border-white/20"><p class="display text-2xl">ALEXA</p><p class="mono mt-1 text-[var(--yellow)]">NATIVE</p></div>
+        <div class="p-5 border-r border-white/20"><p class="display text-2xl">GOOGLE</p><p class="mono mt-1 text-[var(--yellow)]">HOME</p></div>
+        <div class="p-5"><p class="display text-2xl">APPLE</p><p class="mono mt-1 text-[var(--yellow)]">HOMEKIT</p></div>
+      </div>
+
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-5">
+        <div><p class="manifesto-num text-[var(--yellow)]" style="font-size:64px">28<sup style="font-size:.32em">dB</sup></p><p class="mono mt-2 opacity-70">NOISE @ 1m</p></div>
+        <div><p class="manifesto-num text-[var(--yellow)]" style="font-size:64px">7<sup style="font-size:.32em">yr</sup></p><p class="mono mt-2 opacity-70">BATTERY</p></div>
+        <div><p class="manifesto-num text-[var(--yellow)]" style="font-size:64px">320<sup style="font-size:.32em">ms</sup></p><p class="mono mt-2 opacity-70">VOICE LATENCY</p></div>
+        <div><p class="manifesto-num text-[var(--yellow)]" style="font-size:64px">$0<sup style="font-size:.32em">/mo</sup></p><p class="mono mt-2 opacity-70">CLOUD BILL</p></div>
+      </div>
+    </div>
+    <div class="lg:col-span-5">
+      <div class="aspect-square relative overflow-hidden border border-white/30">
+        <img src="https://picsum.photos/seed/sunleoprsmart/600/600" class="absolute inset-0 w-full h-full object-cover" alt=""/>
+        <div class="absolute bottom-4 left-4 bg-white text-[var(--ink)] border border-[var(--ink)] px-4 py-3">
+          <p class="mono text-[var(--gray)]">CALGARY HOME · MATTER 1.4</p>
+          <p class="display text-2xl mt-1">"Hey Google, raise the kitchen."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. BNPL -->
+<section class="border-b-2 border-[var(--ink)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-16">
+    <div class="border-2 border-[var(--ink)] grid md:grid-cols-2">
+      <div class="p-12 border-r-2 border-[var(--ink)]">
+        <p class="mono text-[var(--blue)]">PAY-LATER MATH</p>
+        <h2 class="display text-5xl md:text-6xl mt-4 leading-[.95]">
+          A whole-home order. <span class="text-[var(--blue)]">$0</span> today.
+        </h2>
+        <p class="mt-5 text-lg opacity-90 max-w-md leading-relaxed">Affirm, Klarna, Afterpay, Sezzle. 0% APR · 24 months · pre-qualified at checkout. Your calculator number, paid over time.</p>
+      </div>
+      <div class="p-12 grid grid-cols-2 gap-6 items-center bg-[var(--gray-3)]">
+        <div><p class="mono opacity-70">A $3,240 ORDER · 24 MO</p><p class="display text-5xl mt-2 text-[var(--blue)] tabnum">$135<span class="text-2xl opacity-70">/mo</span></p></div>
+        <div><p class="mono opacity-70">A $3,240 ORDER · PAY 4×</p><p class="display text-5xl mt-2 tabnum">$810<span class="text-2xl opacity-70">/qtr</span></p></div>
+        <div class="col-span-2 flex flex-wrap gap-4 mt-4 items-center">
+          <div class="display text-2xl ital">Affirm</div>
+          <div class="display text-2xl">Klarna</div>
+          <div class="display text-2xl ital">afterpay</div>
+          <div class="display text-2xl">Sezzle</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. JOURNAL -->
+<section class="border-b-2 border-[var(--ink)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <div class="flex justify-between items-end mb-12 flex-wrap gap-4">
+      <div>
+        <p class="mono text-[var(--blue)]">FIELD NOTES</p>
+        <h2 class="display text-5xl md:text-6xl mt-4 leading-[.95]">Price <span class="ital">economics.</span></h2>
+      </div>
+      <a href="#" class="mono underline decoration-[var(--blue)] underline-offset-4">ALL 47 ENTRIES →</a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-1 border-2 border-[var(--ink)]">
+      <article class="p-1 bg-white border-r border-[var(--hair)] hover:bg-[var(--gray-3)] transition">
+        <img src="https://picsum.photos/seed/sunleoprbl1/600/420" class="w-full h-[260px] object-cover" alt=""/>
+        <div class="p-6">
+          <p class="mono text-[var(--blue)]">№ 011 · MAY/MMXXVI</p>
+          <h3 class="display text-2xl mt-3 leading-snug">Why we publish prices when Hunter Douglas doesn't.</h3>
+          <p class="mt-3 opacity-80">A defence of transparency, including the four objections we used to have.</p>
+        </div>
+      </article>
+      <article class="p-1 bg-white border-r border-[var(--hair)] hover:bg-[var(--gray-3)] transition">
+        <img src="https://picsum.photos/seed/sunleoprbl2/600/420" class="w-full h-[260px] object-cover" alt=""/>
+        <div class="p-6">
+          <p class="mono text-[var(--blue)]">№ 010 · APR/MMXXVI</p>
+          <h3 class="display text-2xl mt-3 leading-snug">The hidden 28% margin most Calgary brands rely on.</h3>
+          <p class="mt-3 opacity-80">A line-by-line breakdown of why "ask for a quote" usually means +28%.</p>
+        </div>
+      </article>
+      <article class="p-1 bg-white hover:bg-[var(--gray-3)] transition">
+        <img src="https://picsum.photos/seed/sunleoprbl3/600/420" class="w-full h-[260px] object-cover" alt=""/>
+        <div class="p-6">
+          <p class="mono text-[var(--blue)]">№ 009 · MAR/MMXXVI</p>
+          <h3 class="display text-2xl mt-3 leading-snug">Eight Calgary buyers price-shopped us. Here's what we lost.</h3>
+          <p class="mt-3 opacity-80">A study of where we sit cheapest, where we are not, and why.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 13. AS SEEN IN -->
+<section class="border-b-2 border-[var(--ink)] py-10 bg-[var(--gray-3)] overflow-hidden">
+  <p class="mono text-center text-[var(--blue)] mb-6">AS PUBLICLY SEEN IN</p>
+  <div class="mq">
+    <div class="flex items-center gap-20 shrink-0">
+      <span class="display text-4xl">CALGARY HERALD</span>
+      <span class="display text-4xl">AVENUE</span>
+      <span class="display text-4xl">WESTERN LIVING</span>
+      <span class="display text-4xl">HOUSE &amp; HOME</span>
+      <span class="display text-4xl">STYLE AT HOME</span>
+      <span class="display text-4xl">GLOBE &amp; MAIL</span>
+    </div>
+    <div class="flex items-center gap-20 shrink-0" aria-hidden="true">
+      <span class="display text-4xl">CALGARY HERALD</span>
+      <span class="display text-4xl">AVENUE</span>
+      <span class="display text-4xl">WESTERN LIVING</span>
+      <span class="display text-4xl">HOUSE &amp; HOME</span>
+      <span class="display text-4xl">STYLE AT HOME</span>
+      <span class="display text-4xl">GLOBE &amp; MAIL</span>
+    </div>
+  </div>
+</section>
+
+<!-- 14. INSTAGRAM -->
+<section class="border-b-2 border-[var(--ink)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-24">
+    <div class="flex justify-between items-end mb-10 flex-wrap gap-4">
+      <div>
+        <p class="mono text-[var(--blue)]">INSTAGRAM</p>
+        <h2 class="display text-5xl md:text-6xl mt-4">@SUNLEO<span class="text-[var(--blue)]">.PRICE</span></h2>
+      </div>
+      <a href="#" class="mono underline decoration-[var(--blue)] underline-offset-4">14.2k FOLLOWERS →</a>
+    </div>
+    <div class="grid grid-cols-4 grid-rows-2 gap-1 border-2 border-[var(--ink)]">
+      <img src="https://picsum.photos/seed/sunleoprig01/360/360" class="w-full aspect-square object-cover" alt=""/>
+      <img src="https://picsum.photos/seed/sunleoprig02/360/360" class="w-full aspect-square object-cover" alt=""/>
+      <img src="https://picsum.photos/seed/sunleoprig03/360/360" class="w-full aspect-square object-cover" alt=""/>
+      <img src="https://picsum.photos/seed/sunleoprig04/360/360" class="w-full aspect-square object-cover" alt=""/>
+      <img src="https://picsum.photos/seed/sunleoprig05/360/360" class="w-full aspect-square object-cover" alt=""/>
+      <img src="https://picsum.photos/seed/sunleoprig06/360/360" class="w-full aspect-square object-cover" alt=""/>
+      <img src="https://picsum.photos/seed/sunleoprig07/360/360" class="w-full aspect-square object-cover" alt=""/>
+      <img src="https://picsum.photos/seed/sunleoprig08/360/360" class="w-full aspect-square object-cover" alt=""/>
+    </div>
+  </div>
+</section>
+
+<!-- 15. TRADE -->
+<section class="bg-[var(--blue)] text-white border-b-2 border-[var(--ink)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-7">
+      <p class="mono text-[var(--yellow)]">TRADE PARTNERS</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.95]">
+        Designers, the price is <span class="text-[var(--yellow)]">also</span> 20% off.
+      </h2>
+      <p class="mt-6 text-lg leading-relaxed max-w-xl opacity-90">
+        We do not run quote-and-margin trade programs. The published price minus 20%, dedicated installer, lead-time guarantee, white-label invoices. 38 Calgary designers and 11 builders work with us.
+      </p>
+      <a href="#" class="mt-8 inline-flex items-center gap-3 mono border-2 border-white px-6 py-3 hover:bg-white hover:text-[var(--blue)] transition font-bold">APPLY →</a>
+    </div>
+    <div class="lg:col-span-5">
+      <p class="display text-3xl ital leading-snug">
+        "It's the only blinds vendor I can quote to my clients without a phone call. Saves four days per project."
+      </p>
+      <p class="mono mt-6 text-[var(--yellow)]">— ELOISE WHITCOMBE · PRINCIPAL · WHITCOMBE + CO INTERIORS</p>
+    </div>
+  </div>
+</section>
+
+<!-- 16. FAQ -->
+<section class="border-b-2 border-[var(--ink)]" id="faq">
+  <div class="max-w-[1480px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-4">
+      <p class="mono text-[var(--blue)]">PUBLIC ANSWERS</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.95]">Eight questions, eight prices.</h2>
+    </div>
+    <div class="lg:col-span-8 border-t border-[var(--hair)]">
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">Is the published price really the final price?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">For the standard Calgary window (36 × 60 in), yes. Larger or non-rectangular windows scale linearly — the calculator handles it. Final invoices have been within $11 of the locked-in price across 2,418 jobs.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">How can you be 28–47% cheaper?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">We don't run a showroom, we don't pay sales commissions, and we run a single 11-person team — not a dealer network. The savings go to the customer instead of into rent and commission.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">Why does Hunter Douglas not publish?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">Because they sell through dealers. Dealers set local prices. Publishing nationally would undercut their channel. We are the dealer + the manufacturer + the installer, so there is no margin to hide.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">What about the comparison data?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">We obtained four anonymised Calgary quotes between Sep 2024 and Apr 2026 on the same 36 × 60 window with the same product spec. The average sits in the "Calgary AVG" column. Full methodology available on request.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">How long is a price valid?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">14 days from the calculator submission. Fabric prices fluctuate; we hold the number for two weeks at our risk.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">Do you do commercial?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">Yes — under 80 windows. Same published prices, dedicated installer, commercial invoicing. Boutique hotels, restaurants, dental, executive.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">Custom shapes?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">Yes. Triangular, octagonal, arched. We quote within 24 hours after measurement. Add 18% on the calculator base.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="display text-2xl">Do you sell brands other than your own?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">No. Every SunLeo product is manufactured to our spec by partners in Quebec and Belgium. We never resell. We never markup.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 17. FINAL CTA + FORM -->
+<section class="bg-[var(--yellow)] text-[var(--ink)] border-b-2 border-[var(--ink)]" id="book">
+  <div class="max-w-[1480px] mx-auto px-6 py-24 grid lg:grid-cols-12 gap-10 items-center">
+    <div class="lg:col-span-6">
+      <p class="mono text-[var(--blue)]">FREE MEASUREMENT</p>
+      <h2 class="display text-7xl md:text-8xl mt-4 leading-[.88]">
+        Lock the<br/>price. <span class="text-[var(--blue)]">No</span><br/>deposit.
+      </h2>
+      <p class="mt-7 text-xl max-w-xl leading-relaxed">
+        Pick a 30-minute window. A senior installer arrives with samples and a laser. We measure, you choose, we confirm the calculator number. 14-day price lock applies.
+      </p>
+    </div>
+    <div class="lg:col-span-6 bg-white border-2 border-[var(--ink)] p-8">
+      <p class="mono text-[var(--blue)]">CONFIRM YOUR PRICE LOCK</p>
+      <div class="mt-6 space-y-4">
+        <div>
+          <label class="mono text-[var(--gray)]">FIRST NAME</label>
+          <input type="text" placeholder="Name" class="calc-input mt-2"/>
+        </div>
+        <div>
+          <label class="mono text-[var(--gray)]">EMAIL</label>
+          <input type="email" placeholder="you@home.com" class="calc-input mt-2"/>
+        </div>
+        <div>
+          <label class="mono text-[var(--gray)]">CALGARY DISTRICT</label>
+          <input type="text" placeholder="e.g. Tuscany NW" class="calc-input mt-2"/>
+        </div>
+        <div>
+          <label class="mono text-[var(--gray)]">WINDOW COUNT</label>
+          <input type="number" placeholder="6" class="calc-input mt-2"/>
+        </div>
+        <button class="btn-blue w-full justify-center mt-3">RESERVE FREE MEASUREMENT →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 18. MEGA FOOTER -->
+<footer class="bg-[var(--ink)] text-white py-20">
+  <div class="max-w-[1480px] mx-auto px-6">
+    <div class="grid lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-4">
+        <span class="display text-4xl">SunLeo<span class="text-[var(--blue)]">.</span></span>
+        <p class="mt-5 text-lg leading-relaxed max-w-md opacity-90">Calgary's only public-pricing window-treatment brand since 2017. 3,400 installs, 4.9 stars, 0 surprises.</p>
+        <div class="mt-8 flex items-center gap-5">
+          <div class="stars text-xl">★★★★★</div>
+          <span class="mono opacity-70">4.9 · 2,418 REVIEWS · TRUSTPILOT</span>
+        </div>
+        <div class="mt-6 flex gap-3 flex-wrap">
+          <span class="display text-xl">Affirm</span>
+          <span class="display text-xl ital">Klarna</span>
+          <span class="display text-xl">afterpay</span>
+          <span class="display text-xl ital">Sezzle</span>
+          <span class="display text-xl">Visa</span>
+        </div>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--gray)]">SHOP</p>
+        <ul class="mt-5 space-y-2 text-lg">
+          <li><a class="hover:text-[var(--blue)] transition" href="#">Roller — $180</a></li>
+          <li><a class="hover:text-[var(--blue)] transition" href="#">Cellular — $290</a></li>
+          <li><a class="hover:text-[var(--blue)] transition" href="#">Roman — $340</a></li>
+          <li><a class="hover:text-[var(--blue)] transition" href="#">Motorised — $480</a></li>
+          <li><a class="hover:text-[var(--blue)] transition" href="#">Shutter — $620</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--gray)]">DATA</p>
+        <ul class="mt-5 space-y-2 text-lg">
+          <li><a class="hover:text-[var(--blue)] transition" href="#">Price Table</a></li>
+          <li><a class="hover:text-[var(--blue)] transition" href="#">Calculator</a></li>
+          <li><a class="hover:text-[var(--blue)] transition" href="#">VS. Calgary</a></li>
+          <li><a class="hover:text-[var(--blue)] transition" href="#">Methodology</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--gray)]">HELP</p>
+        <ul class="mt-5 space-y-2 text-lg">
+          <li><a class="hover:text-[var(--blue)] transition" href="#">FAQ</a></li>
+          <li><a class="hover:text-[var(--blue)] transition" href="#">Returns</a></li>
+          <li><a class="hover:text-[var(--blue)] transition" href="#">Guarantee</a></li>
+          <li><a class="hover:text-[var(--blue)] transition" href="#">Track</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono text-[var(--gray)]">CONTACT</p>
+        <ul class="mt-5 space-y-2 text-lg">
+          <li>+1 587 901 0240</li>
+          <li class="underline decoration-[var(--blue)] underline-offset-4">price@sunleo.ca</li>
+          <li class="opacity-80 text-base">MON–SAT 9–18</li>
+          <li class="opacity-80 text-base">CALGARY, AB</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule mt-16" style="background: rgba(255,255,255,.15);"></div>
+    <div class="mt-8 flex flex-wrap justify-between gap-4 mono opacity-60">
+      <p>© MMXXVI SUNLEO · CALGARY · TREATY 7</p>
+      <p>PRIVACY · TERMS · ACCESSIBILITY · COOKIES</p>
+    </div>
+  </div>
+</footer>
+
+<!-- 19. STICKY SIDE PANEL -->
+<div class="fixed right-3 top-1/2 -translate-y-1/2 z-30 hidden md:flex flex-col gap-2">
+  <button class="w-11 h-11 bg-[var(--ink)] text-white flex items-center justify-center hover:bg-[var(--blue)] transition" aria-label="Chat">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </button>
+  <button class="w-11 h-11 bg-white text-[var(--ink)] border-2 border-[var(--ink)] flex items-center justify-center hover:bg-[var(--ink)] hover:text-white transition" aria-label="Save">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+  </button>
+  <button class="w-11 h-11 bg-white text-[var(--ink)] border-2 border-[var(--ink)] flex items-center justify-center hover:bg-[var(--ink)] hover:text-white transition" aria-label="Share">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+  </button>
+</div>
+
+<!-- LIVE TICKER -->
+<div id="liveNotif" class="hidden md:flex fixed left-5 bottom-24 z-40 max-w-xs bg-white border-2 border-[var(--ink)] p-4 gap-3 items-start notif-in">
+  <span class="pulse-dot mt-1.5"></span>
+  <div>
+    <p class="mono text-[var(--blue)]">LOCKED · 2 MIN AGO</p>
+    <p class="mt-1 text-sm leading-snug"><span id="liveName">Marisol H.</span> · <span id="liveCity">Mahogany SE</span> locked <span class="display text-[var(--blue)]">$<span id="liveAmt">2,940</span></span>.</p>
+  </div>
+</div>
+
+<!-- STICKY BOTTOM BAR -->
+<div class="fixed bottom-0 inset-x-0 z-30 bg-[var(--ink)] text-white py-3 px-6 flex flex-wrap items-center justify-between gap-3 border-t-2 border-[var(--blue)]">
+  <div class="flex items-center gap-3 text-sm">
+    <span class="pulse-dot" style="background: var(--yellow);"></span>
+    <span class="mono text-[var(--yellow)]">3 SLOTS LEFT · 26 MAY WEEK</span>
+    <span class="opacity-80">Next available: <b>Mon 02 Jun</b>.</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <a href="#calc" class="mono underline decoration-[var(--yellow)] underline-offset-4">RUN CALCULATOR</a>
+    <a href="#book" class="btn-yellow text-[11px] py-2.5 px-4">LOCK PRICE →</a>
+  </div>
+</div>
+
+<!-- EXIT MODAL -->
+<div id="exitModal" class="hidden fixed inset-0 z-50 bg-[var(--ink)]/85 backdrop-blur-sm items-center justify-center p-6">
+  <div class="max-w-xl bg-white p-10 border-2 border-[var(--ink)] relative">
+    <div class="absolute top-0 left-0 right-0 h-2 bg-[var(--blue)]"></div>
+    <button id="exitClose" class="absolute top-4 right-4 mono opacity-60 hover:opacity-100">CLOSE · ESC</button>
+    <p class="mono text-[var(--blue)]">BEFORE YOU LEAVE</p>
+    <h3 class="display text-4xl mt-4 leading-tight">An extra <span class="text-[var(--blue)]">$50</span> off any order.</h3>
+    <p class="mt-4 leading-relaxed">Already 28–35% cheaper. We'll knock another $50 off your next calculator result, valid 7 days. We're allergic to surprise pricing — this stacks on top of the public discount.</p>
+    <div class="mt-6 flex items-end gap-3">
+      <input type="email" placeholder="your email" class="calc-input"/>
+      <button class="btn-blue">LOCK IT</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const lenis = new Lenis({ lerp: 0.08 });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+  }
+  AOS.init({ once: true, duration: 700, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
+
+  // Calculator
+  const calcW = document.getElementById('calcW');
+  const calcH = document.getElementById('calcH');
+  const calcProd = document.getElementById('calcProd');
+  const calcQty = document.getElementById('calcQty');
+  const calcPerWindow = document.getElementById('calcPerWindow');
+  const calcTotal = document.getElementById('calcTotal');
+  const calcAffirm = document.getElementById('calcAffirm');
+  const calcKlarna = document.getElementById('calcKlarna');
+  let calcMotor = 0;
+  document.querySelectorAll('.calc-motor').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.calc-motor').forEach(x => {
+        x.classList.remove('bg-[var(--blue)]','text-white');
+      });
+      b.classList.add('bg-[var(--blue)]','text-white');
+      calcMotor = +b.dataset.motor;
+      recalc();
+    });
+  });
+  function recalc(){
+    const base = +calcProd.value;
+    const w = Math.max(12, +calcW.value || 36);
+    const h = Math.max(12, +calcH.value || 60);
+    const sizeMul = (w * h) / (36 * 60);
+    const perWindow = Math.round(base * sizeMul) + calcMotor;
+    const qty = Math.max(1, +calcQty.value || 1);
+    let total = perWindow * qty;
+    let discount = 1;
+    if(qty >= 8) discount = 0.92;
+    if(qty >= 16) discount = 0.86;
+    total = Math.round(total * discount);
+    calcPerWindow.textContent = `$${perWindow.toLocaleString()}`;
+    calcTotal.textContent = total.toLocaleString();
+    calcAffirm.textContent = `$${Math.round(total/24).toLocaleString()}`;
+    calcKlarna.textContent = `$${Math.round(total/4).toLocaleString()}`;
+  }
+  [calcW, calcH, calcProd, calcQty].forEach(el => el.addEventListener('input', recalc));
+  recalc();
+
+  // Countdown
+  const cdEl = document.getElementById('cd');
+  const endDate = new Date(Date.now() + 1000*60*60*24*5 + 1000*60*60*8);
+  function tickCd(){
+    const diff = endDate - new Date();
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    cdEl.textContent = `${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+  }
+  setInterval(tickCd, 1000); tickCd();
+
+  // Live ticker
+  const notif = document.getElementById('liveNotif');
+  const liveName = document.getElementById('liveName');
+  const liveCity = document.getElementById('liveCity');
+  const liveAmt = document.getElementById('liveAmt');
+  const events = [
+    {name:'Marisol H.', city:'Mahogany SE', amt:'2,940'},
+    {name:'Devin K.', city:'Tuscany NW', amt:'1,820'},
+    {name:'Wren D.', city:'Mount Royal', amt:'4,160'},
+    {name:'Tomislav P.', city:'Bridgeland', amt:'2,180'},
+    {name:'Hattie F.', city:'Aspen Estates', amt:'5,720'},
+    {name:'Esmé R.', city:'Britannia', amt:'1,640'},
+  ];
+  let ev = 0;
+  function showNotif(){
+    if(!notif) return;
+    const e = events[ev % events.length];
+    liveName.textContent = e.name;
+    liveCity.textContent = e.city;
+    liveAmt.textContent = e.amt;
+    notif.classList.remove('hidden','notif-in');
+    notif.offsetWidth;
+    notif.classList.add('flex','notif-in');
+    ev++;
+    setTimeout(() => notif.classList.add('hidden'), 6000);
+  }
+  setTimeout(showNotif, 4500);
+  setInterval(showNotif, 13000);
+
+  // Counters
+  document.querySelectorAll('[data-counter]').forEach(el => {
+    const target = parseInt(el.getAttribute('data-counter'),10);
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          let n = 0;
+          const step = Math.max(1, Math.floor(target/60));
+          const t = setInterval(() => {
+            n += step; if(n >= target){ n = target; clearInterval(t); }
+            el.textContent = n.toLocaleString();
+          }, 20);
+          obs.disconnect();
+        }
+      });
+    });
+    obs.observe(el);
+  });
+
+  // Exit intent
+  const exitModal = document.getElementById('exitModal');
+  let exitFired = false;
+  document.addEventListener('mouseout', (e) => {
+    if(!exitFired && e.clientY < 10 && e.relatedTarget == null){
+      exitFired = true;
+      exitModal.classList.remove('hidden');
+      exitModal.classList.add('flex');
+    }
+  });
+  document.getElementById('exitClose')?.addEventListener('click', () => {
+    exitModal.classList.add('hidden');
+    exitModal.classList.remove('flex');
+  });
+  document.addEventListener('keyup', (e) => {
+    if(e.key === 'Escape' && exitModal.classList.contains('flex')){
+      exitModal.classList.add('hidden'); exitModal.classList.remove('flex');
+    }
+  });
+</script>
+</body>
+</html>

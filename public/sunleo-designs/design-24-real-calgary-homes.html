@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SunLeo — Real Calgary Homes · A wall of 3,400 installs since 2017</title>
+<meta name="description" content="No stock photos, no models, no fiction. SunLeo only shows real Calgary homes — Tuscany, Mount Royal, Inglewood — installed by Iris and her crew since 2017."/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Reckless+Neue:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Public+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet"/>
+<!-- Fallback for Reckless if not available via Google: serve via custom -->
+<style>
+  @font-face{
+    font-family:'Reckless Neue';
+    font-style:normal;
+    font-weight:400;
+    src: local('GT Sectra'), local('Cormorant Garamond');
+  }
+</style>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+<link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet"/>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<style>
+  :root{
+    --bone:    #EFEAE0;
+    --bone-2:  #E5DECE;
+    --olive:   #42402C;
+    --olive-2: #585832;
+    --terr:    #A5523B;
+    --terr-2:  #C56B4C;
+    --sky:     #7AA2C2;
+    --ink:     #0E0C0A;
+    --hair:    rgba(14,12,10,.15);
+    --hair-bone: rgba(239,234,224,.20);
+  }
+  *{ -webkit-font-smoothing: antialiased; }
+  html,body{ background: var(--bone); color: var(--ink); font-family: 'Public Sans', sans-serif; font-weight: 300; }
+  /* fallback fonts via Cormorant Garamond if reckless not loaded — load it explicitly */
+  .display{ font-family: 'GT Sectra', 'Cormorant Garamond', 'Reckless Neue', serif; font-weight: 400; letter-spacing:-.01em;}
+  .mono{ font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing:.28em; text-transform: uppercase; }
+  .hand{ font-family: 'Caveat', cursive; }
+  .ital{ font-style: italic; }
+
+  /* Apartamento-style warm paper grain */
+  body::before{
+    content:""; position: fixed; inset: 0; pointer-events: none; z-index: 80; opacity: .09;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence baseFrequency='.88' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.6'/></svg>");
+    mix-blend-mode: multiply;
+  }
+
+  /* Tape decoration */
+  .tape{
+    position: absolute; top: -10px; left: 14px; width: 80px; height: 22px;
+    background: rgba(122,162,194,.55); transform: rotate(-4deg);
+    box-shadow: 0 4px 8px -3px rgba(14,12,10,.2);
+  }
+  .tape-right{ left:auto; right: 18px; transform: rotate(3deg); background: rgba(165,82,59,.45);}
+  .tape-center{ left: 50%; transform: translateX(-50%) rotate(-2deg);}
+
+  /* Polaroid */
+  .polaroid{ background:#fff; padding: 14px 14px 60px; box-shadow: 0 18px 32px -16px rgba(14,12,10,.25); border:1px solid rgba(14,12,10,.06); position: relative; }
+  .polaroid img{ width:100%; display:block; }
+  .polaroid .caption{ position: absolute; bottom: 14px; left: 14px; right: 14px; }
+
+  /* Map pin */
+  .pin{ display:inline-block; width:6px; height:6px; border-radius:50%; background: var(--terr); box-shadow: 0 0 0 4px rgba(165,82,59,.18); }
+
+  /* Buttons */
+  .btn-olive{ background: var(--olive); color: var(--bone); padding: 14px 24px; font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing:.28em; text-transform: uppercase; border-radius: 999px; transition: background .4s, transform .4s, letter-spacing .5s; display:inline-flex; align-items:center; gap:12px;}
+  .btn-olive:hover{ background: var(--ink); letter-spacing:.36em; }
+  .btn-terr{ background: var(--terr); color: var(--bone); padding: 14px 24px; font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing:.28em; text-transform: uppercase; border-radius: 999px; transition: background .4s; display:inline-flex; align-items:center; gap:12px;}
+  .btn-terr:hover{ background: var(--olive); }
+  .btn-ghost{ border: 1px solid var(--ink); color: var(--ink); padding: 13px 24px; font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing:.28em; text-transform: uppercase; border-radius: 999px; transition: all .4s; display:inline-flex; align-items:center; gap:12px;}
+  .btn-ghost:hover{ background: var(--ink); color: var(--bone); }
+
+  .pill{ font-family:'JetBrains Mono', monospace; font-size: 10px; letter-spacing:.3em; text-transform: uppercase;}
+
+  /* Stars */
+  .stars{ letter-spacing:.16em; color: var(--terr); }
+
+  /* Marquee */
+  .mq{ display:flex; gap: 70px; animation: mq 50s linear infinite;}
+  @keyframes mq{ from{transform: translateX(0);} to{transform: translateX(-50%);}}
+
+  /* District tag overlay on install photos */
+  .district{ position: absolute; top:12px; left:12px; background: var(--bone); color: var(--ink); padding: 4px 10px; font-family:'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing:.25em; text-transform: uppercase; }
+
+  /* Tabular */
+  .tabnum{ font-variant-numeric: tabular-nums; }
+
+  /* Accordion */
+  details summary{ list-style:none; cursor: pointer; }
+  details summary::-webkit-details-marker{ display:none; }
+  details[open] .chev{ transform: rotate(45deg); }
+  .chev{ transition: transform .5s cubic-bezier(.16,1,.3,1); }
+
+  /* Pulse */
+  @keyframes pulse{ 0%{ box-shadow: 0 0 0 0 rgba(165,82,59,.5);} 70%{ box-shadow: 0 0 0 12px rgba(165,82,59,0);} 100%{ box-shadow: 0 0 0 0 rgba(165,82,59,0);} }
+  .pulse-dot{ display:inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--terr); animation: pulse 2.2s infinite; vertical-align: middle; }
+
+  /* Notif */
+  @keyframes notIn{ from{ transform: translateY(20px); opacity: 0;} to{transform: translateY(0); opacity:1;}}
+  .notif-in{ animation: notIn .8s cubic-bezier(.16,1,.3,1); }
+
+  /* Handwritten quote underline */
+  .hand-underline{ text-decoration: underline wavy; text-decoration-thickness: 1px; text-decoration-color: var(--terr); text-underline-offset: 5px; }
+
+  /* Tilted polaroids */
+  .tilt-l{ transform: rotate(-2deg); }
+  .tilt-r{ transform: rotate(2deg); }
+  .tilt-l2{ transform: rotate(-3.5deg); }
+  .tilt-r2{ transform: rotate(3.5deg); }
+
+  /* Hover lift */
+  .lift{ transition: transform .8s cubic-bezier(.16,1,.3,1), box-shadow .8s; }
+  .lift:hover{ transform: translateY(-6px) rotate(-1deg); box-shadow: 0 28px 50px -20px rgba(14,12,10,.3); }
+
+  /* Reveal */
+  .rv{ opacity: 0; transform: translateY(20px); transition: opacity 1s, transform 1s;}
+  .rv.in{ opacity: 1; transform: translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){ *,*::before,*::after{ animation: none !important; transition: none !important;} }
+
+  /* ========================================================== */
+  /* === MOBILE RESPONSIVE PATCH ================================ */
+  /* ========================================================== */
+  html, body { overflow-x: hidden; max-width: 100vw; }
+  img, svg, video { max-width: 100%; height: auto; }
+
+  /* Force grid lg:grid-cols-12 to stack on <lg */
+  @media (max-width: 1023px) {
+    section .grid.lg\:grid-cols-12,
+    div.grid.lg\:grid-cols-12 { display: flex !important; flex-direction: column !important; }
+    section .grid.lg\:grid-cols-12 > *,
+    div.grid.lg\:grid-cols-12 > * { min-width: 0 !important; width: 100% !important; }
+  }
+
+  @media (max-width: 767px) {
+    /* Polaroid bottom padding tightened so caption fits on phone */
+    .polaroid { padding: 10px 10px 44px; }
+
+    /* iOS form zoom prevention */
+    input, textarea, select { font-size: 16px !important; }
+
+    /* Touch target min */
+    .btn-olive, .btn-terr, .btn-ghost { min-height: 44px; padding: 13px 22px; letter-spacing: .2em; font-size: 10.5px; }
+    .btn-olive:hover, .btn-terr:hover, .btn-ghost:hover { letter-spacing: .2em; }
+
+    /* Disable hover transforms on touch */
+    .lift:hover { transform: none !important; box-shadow: none !important; }
+
+    /* Marquee tighter */
+    .mq { gap: 36px; animation-duration: 40s; }
+
+    /* Tilts straighten slightly on mobile to avoid overflow */
+    .tilt-l, .tilt-r { transform: rotate(0); }
+    .tilt-l2 { transform: rotate(-1.5deg); }
+    .tilt-r2 { transform: rotate(1.5deg); }
+
+    /* Tape decoration scaled down */
+    .tape { width: 56px; height: 18px; top: -8px; }
+
+    /* District badge — keep readable, just tighter letter-spacing */
+    .district { font-size: 10px; padding: 4px 9px; letter-spacing: .18em; }
+
+    /* 24-photo Instagram wall: 4-col → 2-col on phone */
+    section .grid.grid-cols-4.grid-rows-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; grid-template-rows: repeat(4, minmax(0, 1fr)) !important; }
+
+    /* Other 3, 4, 5, 6-col grids → 2-col on phone */
+    .grid.grid-cols-3 { grid-template-columns: repeat(2, 1fr) !important; }
+    .grid.grid-cols-2.md\:grid-cols-3.lg\:grid-cols-4,
+    .grid.grid-cols-2.md\:grid-cols-4 { grid-template-columns: repeat(2, 1fr) !important; }
+    .grid.grid-cols-2.md\:grid-cols-5,
+    .grid.grid-cols-2.md\:grid-cols-6 { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* Cards within md:grid-cols-3 → 1-col mobile (testimonial cards) */
+    .grid.md\:grid-cols-3:not(.grid-cols-2):not(.grid-cols-1) { grid-template-columns: 1fr !important; }
+
+    /* Founder polaroid + handwritten note: ensure they stack vertically on mobile via flex/grid defaults */
+    .polaroid + .polaroid, .polaroid + div, div + .polaroid { margin-top: 24px; }
+
+    /* Big display text scaling */
+    h1.display, h2.display { font-size: clamp(36px, 10vw, 60px) !important; line-height: 1 !important; }
+    .display.text-\[clamp\(72px\,12vw\,180px\)\],
+    .display.text-\[clamp\(60px\,10vw\,150px\)\],
+    .display.text-\[clamp\(50px\,8vw\,120px\)\] { font-size: clamp(36px, 10vw, 60px) !important; }
+
+    /* Range slider thumb */
+    input[type="range"]::-webkit-slider-thumb { width: 6px !important; height: 42px !important; margin-top: -20px !important; }
+
+    /* Search/cart icon buttons */
+    button.w-9.h-9 { width: 44px !important; height: 44px !important; }
+
+    /* Header CTA tightening */
+    header a.btn-terr, header a.btn-olive {
+      padding: 8px 10px !important;
+      font-size: 10px !important;
+      letter-spacing: .06em !important;
+      min-height: 36px !important;
+    }
+    /* Hide logo handwritten tagline */
+    header .hand.text-2xl { display: none !important; }
+    /* Tighten header padding */
+    header .max-w-\[1480px\] { padding-left: 12px !important; padding-right: 12px !important; }
+    header .flex.items-center.gap-3 { gap: 6px !important; }
+  }
+</style>
+</head>
+
+<body class="overflow-x-hidden">
+
+<!-- 1. STICKY TOP TRUST BAR -->
+<div class="bg-[var(--olive)] text-[var(--bone)] text-xs">
+  <div class="max-w-[1480px] mx-auto px-6 py-2.5 flex justify-between items-center flex-wrap gap-y-2">
+    <div class="flex items-center gap-5">
+      <span class="pill text-[var(--bone-2)]">— Real Calgary Homes · No models, no fiction</span>
+      <span class="hidden md:inline opacity-80">3,400 installs since '17</span>
+    </div>
+    <div class="flex items-center gap-5">
+      <span class="hidden md:inline opacity-80">Mon–Sat · 9–18h</span>
+      <a href="tel:5879010240" class="underline decoration-[var(--terr)] underline-offset-4">+1 587 901 0240</a>
+      <span class="opacity-70">EN · FR</span>
+    </div>
+  </div>
+</div>
+
+<!-- 2. STICKY HEADER -->
+<header class="sticky top-0 z-40 bg-[var(--bone)]/95 backdrop-blur border-b border-[var(--hair)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-5 flex items-center justify-between">
+    <a href="#" class="flex items-baseline gap-3">
+      <span class="display text-3xl">SunLeo<span class="text-[var(--terr)]">.</span></span>
+      <span class="hand text-2xl text-[var(--olive)]">— from Calgary</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-7 text-sm">
+      <a href="#" class="hover:text-[var(--terr)] transition">The wall</a>
+      <a href="#" class="hover:text-[var(--terr)] transition">Iris</a>
+      <a href="#" class="hover:text-[var(--terr)] transition">Shop</a>
+      <a href="#" class="hover:text-[var(--terr)] transition">Districts</a>
+      <a href="#" class="hover:text-[var(--terr)] transition">Diary</a>
+    </nav>
+    <div class="flex items-center gap-3 text-sm">
+      <button aria-label="Search" class="w-9 h-9 rounded-full border border-[var(--hair)] flex items-center justify-center hover:bg-[var(--ink)] hover:text-[var(--bone)] transition">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </button>
+      <button aria-label="Cart" class="relative w-9 h-9 rounded-full border border-[var(--hair)] flex items-center justify-center hover:bg-[var(--ink)] hover:text-[var(--bone)] transition">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/></svg>
+      </button>
+      <a href="#book" class="btn-terr text-[10.5px] py-3 px-5">Book Iris →</a>
+    </div>
+  </div>
+</header>
+
+<!-- SCARCITY -->
+<div class="bg-[var(--terr)] text-[var(--bone)] text-sm">
+  <div class="max-w-[1480px] mx-auto px-6 py-3 flex items-center justify-center gap-4 flex-wrap">
+    <span class="pulse-dot" style="background: var(--bone);"></span>
+    <span class="pill">— Iris's diary</span>
+    <span>Iris is in <b class="hand text-xl">Tuscany NW</b> this Friday. <b class="display ital text-lg">3 install slots</b> remaining for the week.</span>
+    <a href="#book" class="underline decoration-[var(--bone)] underline-offset-4">Catch her →</a>
+  </div>
+</div>
+
+<!-- 3. HERO — FOUNDER + REAL INSTALLS -->
+<section class="relative max-w-[1480px] mx-auto px-6 pt-16 pb-20">
+  <div class="grid lg:grid-cols-12 gap-8 items-start">
+    <!-- Left: founder portrait -->
+    <div class="lg:col-span-5 relative">
+      <p class="mono text-[var(--olive)]">— Plate Nº 01 · Iris Laframboise · founder · Calgary</p>
+      <div class="relative mt-5">
+        <span class="tape tape-center"></span>
+        <div class="polaroid tilt-l">
+          <img src="https://picsum.photos/seed/sunleorealiris/700/900" alt="Iris, founder"/>
+          <div class="caption">
+            <p class="hand text-2xl text-[var(--ink)]">Iris, on a Wednesday in March.</p>
+            <p class="mono mt-1 opacity-70">— Inglewood SE · MMXXVI</p>
+          </div>
+        </div>
+      </div>
+      <p class="mt-8 hand text-3xl text-[var(--olive)] leading-snug max-w-md">
+        <span class="hand-underline">"I do not sell windows. I sell quieter mornings — and I'd like to come measure yours."</span>
+      </p>
+      <p class="mono mt-4 text-[var(--olive)]">— Iris L., founder · NCIDQ · Calgary</p>
+    </div>
+
+    <!-- Right: headline + install pile -->
+    <div class="lg:col-span-7 relative">
+      <p class="mono text-[var(--terr)]">— Issue Nº 12 · Spring · MMXXVI</p>
+      <h1 class="display leading-[.86] text-[clamp(64px,9vw,148px)] mt-5 -tracking-[.015em]">
+        Real <span class="ital text-[var(--terr)]">Calgary</span><br/>homes.<br/>
+        Not <span class="ital">stock</span> photos.
+      </h1>
+      <p class="mt-7 text-lg leading-relaxed max-w-xl opacity-90">
+        Since 2017, Iris and her two-person crew have installed window treatments in <b>3,400</b> Calgary homes. Below, a small wall of them — real addresses, real first names, real install dates. The same homes you walk past on your morning loop.
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a href="#wall" class="btn-olive">See the Calgary wall →</a>
+        <a href="#book" class="btn-ghost">Book a visit with Iris</a>
+      </div>
+
+      <!-- 3 install thumbnails -->
+      <div class="mt-12 grid grid-cols-3 gap-4">
+        <div class="polaroid tilt-l lift">
+          <img src="https://picsum.photos/seed/sunleorealh1/400/440" alt=""/>
+          <span class="district">Tuscany NW</span>
+          <div class="caption">
+            <p class="hand text-xl">Hattie's kitchen</p>
+            <p class="mono opacity-70 mt-1">— III.MMXXVI · 6 windows</p>
+          </div>
+        </div>
+        <div class="polaroid lift">
+          <img src="https://picsum.photos/seed/sunleorealh2/400/440" alt=""/>
+          <span class="district">Mount Royal SW</span>
+          <div class="caption">
+            <p class="hand text-xl">Esmé's bedroom</p>
+            <p class="mono opacity-70 mt-1">— II.MMXXVI · 4 windows</p>
+          </div>
+        </div>
+        <div class="polaroid tilt-r lift">
+          <img src="https://picsum.photos/seed/sunleorealh3/400/440" alt=""/>
+          <span class="district">Inglewood SE</span>
+          <div class="caption">
+            <p class="hand text-xl">Tomislav's loft</p>
+            <p class="mono opacity-70 mt-1">— I.MMXXVI · 9 windows</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calgary line -->
+  <div class="mt-20 border-y border-[var(--ink)] py-5 grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+    <div><p class="display text-4xl tabnum"><span data-counter="3400">3,400</span></p><p class="mono mt-1 opacity-70">— Homes since 2017</p></div>
+    <div><p class="display text-4xl tabnum"><span data-counter="42">0</span></p><p class="mono mt-1 opacity-70">— Calgary districts</p></div>
+    <div><p class="display text-4xl tabnum"><span data-counter="11">0</span></p><p class="mono mt-1 opacity-70">— Years atelier</p></div>
+    <div><p class="display text-4xl tabnum">4.9 ★</p><p class="mono mt-1 opacity-70">— 2,418 reviews</p></div>
+    <div><p class="display text-4xl tabnum">0</p><p class="mono mt-1 opacity-70">— Complaints in '26</p></div>
+  </div>
+</section>
+
+<!-- 4. TRUST STRIP -->
+<section class="border-y border-[var(--hair)] bg-[var(--bone-2)]">
+  <div class="max-w-[1480px] mx-auto px-6 py-7 grid grid-cols-2 md:grid-cols-6 gap-6 items-center text-center text-sm">
+    <div><p class="mono opacity-70">— BBB</p><p class="display text-2xl mt-1">A+</p></div>
+    <div><p class="mono opacity-70">— Top Choice</p><p class="display text-2xl mt-1 ital">2025–26</p></div>
+    <div><p class="mono opacity-70">— Affirm</p><p class="display text-2xl mt-1">0% APR</p></div>
+    <div><p class="mono opacity-70">— Klarna</p><p class="display text-2xl mt-1">Pay 4×</p></div>
+    <div><p class="mono opacity-70">— Google</p><p class="display text-2xl mt-1">4.9 ★</p></div>
+    <div><p class="mono opacity-70">— Reviews</p><p class="display text-2xl mt-1 tabnum">2,418</p></div>
+  </div>
+</section>
+
+<!-- 5. PRODUCT GRID -->
+<section class="max-w-[1480px] mx-auto px-6 py-24" id="shop">
+  <div class="grid lg:grid-cols-12 gap-10 items-end mb-14">
+    <div class="lg:col-span-7">
+      <p class="mono text-[var(--terr)]">— The honest shop</p>
+      <h2 class="display text-6xl md:text-8xl leading-[.92] mt-4 -tracking-[.01em]">
+        Ten products. <span class="ital text-[var(--terr)]">No</span><br/>upsell ladder.
+      </h2>
+    </div>
+    <div class="lg:col-span-5 text-lg leading-relaxed opacity-90">
+      We sell the ten window treatments we'd put in our own homes. No "good / better / best" psychology — just one fair price per fabric, and our installer comes with every order.
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <a href="#" class="block lift polaroid">
+      <span class="tape"></span>
+      <img src="https://picsum.photos/seed/sunleorealp01/600/720" alt=""/>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-2xl">Linen Roller — Oat</p>
+        <p class="mono mt-1 opacity-70">— Belgian linen · 14 colourways</p>
+        <div class="flex items-baseline justify-between mt-3">
+          <p class="display text-xl text-[var(--terr)] ital">from $180</p>
+          <p class="mono opacity-70">or 4 × $45</p>
+        </div>
+        <div class="flex items-center gap-2 mt-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 612</span></div>
+      </div>
+    </a>
+    <a href="#" class="block lift polaroid">
+      <img src="https://picsum.photos/seed/sunleorealp02/600/720" alt=""/>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-2xl">Honeycomb Cellular</p>
+        <p class="mono mt-1 opacity-70">— R-5 · sub-zero rated</p>
+        <div class="flex items-baseline justify-between mt-3">
+          <p class="display text-xl text-[var(--terr)] ital">from $290</p>
+          <p class="mono opacity-70">or 4 × $72</p>
+        </div>
+        <div class="flex items-center gap-2 mt-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 1,204</span></div>
+      </div>
+    </a>
+    <a href="#" class="block lift polaroid">
+      <span class="tape tape-right"></span>
+      <img src="https://picsum.photos/seed/sunleorealp03/600/720" alt=""/>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-2xl">Roman Shade — Hand-folded</p>
+        <p class="mono mt-1 opacity-70">— 22 fabrics · made in shop</p>
+        <div class="flex items-baseline justify-between mt-3">
+          <p class="display text-xl text-[var(--terr)] ital">from $340</p>
+          <p class="mono opacity-70">or 4 × $85</p>
+        </div>
+        <div class="flex items-center gap-2 mt-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 388</span></div>
+      </div>
+    </a>
+    <a href="#" class="block lift polaroid">
+      <img src="https://picsum.photos/seed/sunleorealp04/600/720" alt=""/>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-2xl">Motorised Roller — Matter 1.4</p>
+        <p class="mono mt-1 opacity-70">— 7-year battery · 320 ms</p>
+        <div class="flex items-baseline justify-between mt-3">
+          <p class="display text-xl text-[var(--terr)] ital">from $480</p>
+          <p class="mono opacity-70">or 4 × $120</p>
+        </div>
+        <div class="flex items-center gap-2 mt-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 522</span></div>
+      </div>
+    </a>
+    <a href="#" class="block lift polaroid">
+      <span class="tape"></span>
+      <img src="https://picsum.photos/seed/sunleorealp05/600/720" alt=""/>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-2xl">Zebra Sheer</p>
+        <p class="mono mt-1 opacity-70">— Dual-band · UV blocking</p>
+        <div class="flex items-baseline justify-between mt-3">
+          <p class="display text-xl text-[var(--terr)] ital">from $220</p>
+          <p class="mono opacity-70">or 4 × $55</p>
+        </div>
+        <div class="flex items-center gap-2 mt-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 270</span></div>
+      </div>
+    </a>
+    <a href="#" class="block lift polaroid">
+      <img src="https://picsum.photos/seed/sunleorealp06/600/720" alt=""/>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-2xl">Basswood Shutter</p>
+        <p class="mono mt-1 opacity-70">— 12 stains · custom</p>
+        <div class="flex items-baseline justify-between mt-3">
+          <p class="display text-xl text-[var(--terr)] ital">from $620</p>
+          <p class="mono opacity-70">or 4 × $155</p>
+        </div>
+        <div class="flex items-center gap-2 mt-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 162</span></div>
+      </div>
+    </a>
+    <a href="#" class="block lift polaroid">
+      <span class="tape tape-right"></span>
+      <img src="https://picsum.photos/seed/sunleorealp07/600/720" alt=""/>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-2xl">Faux Wood Blind</p>
+        <p class="mono mt-1 opacity-70">— Humidity-stable</p>
+        <div class="flex items-baseline justify-between mt-3">
+          <p class="display text-xl text-[var(--terr)] ital">from $148</p>
+          <p class="mono opacity-70">or 4 × $37</p>
+        </div>
+        <div class="flex items-center gap-2 mt-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.8 · 905</span></div>
+      </div>
+    </a>
+    <a href="#" class="block lift polaroid">
+      <img src="https://picsum.photos/seed/sunleorealp08/600/720" alt=""/>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-2xl">Skylight Cellular</p>
+        <p class="mono mt-1 opacity-70">— Made-to-shape</p>
+        <div class="flex items-baseline justify-between mt-3">
+          <p class="display text-xl text-[var(--terr)] ital">from $410</p>
+          <p class="mono opacity-70">or 4 × $102</p>
+        </div>
+        <div class="flex items-center gap-2 mt-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 84</span></div>
+      </div>
+    </a>
+    <a href="#" class="block lift polaroid">
+      <span class="tape"></span>
+      <img src="https://picsum.photos/seed/sunleorealp09/600/720" alt=""/>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-2xl">Drapery Panel — Custom</p>
+        <p class="mono mt-1 opacity-70">— 60 fabrics · lined · pleated</p>
+        <div class="flex items-baseline justify-between mt-3">
+          <p class="display text-xl text-[var(--terr)] ital">from $390</p>
+          <p class="mono opacity-70">or 4 × $97</p>
+        </div>
+        <div class="flex items-center gap-2 mt-2 text-xs"><span class="stars">★★★★★</span><span class="opacity-60">4.9 · 311</span></div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- 6. HOW IT WORKS — THE RITUAL -->
+<section class="bg-[var(--olive)] text-[var(--bone)] py-24">
+  <div class="max-w-[1480px] mx-auto px-6">
+    <p class="mono text-[var(--bone-2)]">— The ritual</p>
+    <h2 class="display text-6xl md:text-7xl mt-4 leading-[.95]">
+      Three steps. <span class="hand text-[var(--terr-2)]" style="font-weight:600;">Ten quiet days.</span>
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-1 mt-16 border border-[var(--hair-bone)]">
+      <div class="p-10 border-r border-[var(--hair-bone)]">
+        <p class="display text-7xl text-[var(--terr-2)] ital">01.</p>
+        <h3 class="display text-3xl mt-6">Iris answers the email.</h3>
+        <p class="mt-3 opacity-80 leading-relaxed">She replies personally, within four hours, with three recommendations and a starting price. No call centre, no template.</p>
+        <p class="mono text-[var(--bone-2)] mt-6">— Day 01 · By Iris</p>
+      </div>
+      <div class="p-10 border-r border-[var(--hair-bone)]">
+        <p class="display text-7xl text-[var(--terr-2)] ital">02.</p>
+        <h3 class="display text-3xl mt-6">She drives over with linen samples.</h3>
+        <p class="mt-3 opacity-80 leading-relaxed">In her Subaru. She'll spend an hour measuring with a laser, showing fabrics in your light, and answering questions. You drink the coffee.</p>
+        <p class="mono text-[var(--bone-2)] mt-6">— Day 02–04 · Free, no deposit</p>
+      </div>
+      <div class="p-10">
+        <p class="display text-7xl text-[var(--terr-2)] ital">03.</p>
+        <h3 class="display text-3xl mt-6">Two installers, one morning.</h3>
+        <p class="mt-3 opacity-80 leading-relaxed">They arrive at 9 AM with the order. They leave at noon. No mess, no second visit, no chasing. Ten-year atelier guarantee.</p>
+        <p class="mono text-[var(--bone-2)] mt-6">— Day 08–10 · One morning</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. REVIEWS — REAL CALGARY VOICES -->
+<section class="max-w-[1480px] mx-auto px-6 py-24">
+  <div class="grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-3">
+      <p class="mono text-[var(--terr)]">— Calgary voices</p>
+      <h2 class="display text-5xl md:text-6xl mt-4 leading-[.95]">2,418 <span class="ital text-[var(--terr)]">first</span> names.</h2>
+      <div class="stars text-2xl mt-5">★★★★★</div>
+      <p class="mono mt-3 opacity-70">— 4.9 weighted · Google + Trustpilot</p>
+      <p class="mt-6 hand text-2xl text-[var(--olive)]">"We answer every review by name."</p>
+      <p class="mono mt-2 opacity-70">— Iris L.</p>
+    </div>
+    <div class="lg:col-span-9 grid md:grid-cols-2 gap-6">
+      <article class="polaroid tilt-l lift">
+        <span class="tape"></span>
+        <img src="https://picsum.photos/seed/sunleorealr01/700/420" alt=""/>
+        <div class="caption" style="position:static; margin-top: 14px;">
+          <div class="stars">★★★★★</div>
+          <p class="hand text-2xl mt-2">"Iris fixed three years of squinting in our breakfast nook."</p>
+          <p class="mono mt-3 opacity-70">— Hattie F. · Mount Royal SW · MMXXVI</p>
+        </div>
+      </article>
+      <article class="polaroid tilt-r lift">
+        <img src="https://picsum.photos/seed/sunleorealr02/700/420" alt=""/>
+        <div class="caption" style="position:static; margin-top: 14px;">
+          <div class="stars">★★★★★</div>
+          <p class="hand text-2xl mt-2">"Quoted four times. Iris was 18% cheaper and the only one who came back the same week."</p>
+          <p class="mono mt-3 opacity-70">— Tomislav P. · Bridgeland · MMXXVI</p>
+        </div>
+      </article>
+      <article class="polaroid tilt-l2 lift">
+        <span class="tape tape-right"></span>
+        <img src="https://picsum.photos/seed/sunleorealr03/700/420" alt=""/>
+        <div class="caption" style="position:static; margin-top: 14px;">
+          <div class="stars">★★★★★</div>
+          <p class="hand text-2xl mt-2">"Our baby finally naps through east light. Six minutes per window."</p>
+          <p class="mono mt-3 opacity-70">— Esmé R. · Britannia · MMXXVI</p>
+        </div>
+      </article>
+      <article class="polaroid tilt-r2 lift">
+        <img src="https://picsum.photos/seed/sunleorealr04/700/420" alt=""/>
+        <div class="caption" style="position:static; margin-top: 14px;">
+          <div class="stars">★★★★★</div>
+          <p class="hand text-2xl mt-2">"She quotes in the home, not on the phone. We trusted that."</p>
+          <p class="mono mt-3 opacity-70">— Wren D. · Aspen Estates · MMXXVI</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 8. COMPARISON -->
+<section class="bg-[var(--bone-2)] py-24">
+  <div class="max-w-[1480px] mx-auto px-6">
+    <p class="mono text-[var(--terr)]">— On the differences</p>
+    <h2 class="display text-6xl md:text-7xl mt-4 leading-[.95]">
+      The <span class="ital text-[var(--terr)]">honest</span> table.
+    </h2>
+    <p class="mt-5 hand text-2xl text-[var(--olive)] max-w-2xl">— I asked four shops the same questions in 2024. Here is what I learned. <span class="block mono mt-2 not-italic opacity-70">— Iris L., founder.</span></p>
+
+    <div class="mt-14 border-2 border-[var(--ink)] bg-[var(--bone)]">
+      <div class="grid grid-cols-4 mono text-xs">
+        <div class="p-5 border-b border-[var(--hair)]">— Criterion</div>
+        <div class="p-5 border-b border-l-2 border-[var(--ink)] text-[var(--terr)]">— SunLeo (Iris)</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] opacity-70">— Hunter Douglas dealer</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] opacity-70">— Home Depot online</div>
+
+        <div class="p-5 border-b border-[var(--hair)] hand text-xl">In-home visit</div>
+        <div class="p-5 border-b border-l-2 border-[var(--ink)] display text-xl">Same week</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">7–10 days</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">No visit</div>
+
+        <div class="p-5 border-b border-[var(--hair)] hand text-xl">Who answers</div>
+        <div class="p-5 border-b border-l-2 border-[var(--ink)] display text-xl">Iris herself</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">Sales rep</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">Chatbot</div>
+
+        <div class="p-5 border-b border-[var(--hair)] hand text-xl">Deposit required</div>
+        <div class="p-5 border-b border-l-2 border-[var(--ink)] display text-xl">$0</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">50%</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">100% upfront</div>
+
+        <div class="p-5 border-b border-[var(--hair)] hand text-xl">Install crew</div>
+        <div class="p-5 border-b border-l-2 border-[var(--ink)] display text-xl">Same 2 humans</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">Subcontracted</div>
+        <div class="p-5 border-b border-l border-[var(--hair)] display text-xl opacity-70">DIY</div>
+
+        <div class="p-5 hand text-xl">Atelier guarantee</div>
+        <div class="p-5 border-l-2 border-[var(--ink)] display text-xl">10 years</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl opacity-70">Limited</div>
+        <div class="p-5 border-l border-[var(--hair)] display text-xl opacity-70">90 days</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. THE CALGARY WALL — 24 polaroids -->
+<section class="max-w-[1480px] mx-auto px-6 py-24" id="wall">
+  <div class="grid lg:grid-cols-12 gap-10 items-end mb-14">
+    <div class="lg:col-span-7">
+      <p class="mono text-[var(--terr)]">— The Calgary wall · 24 of 3,400</p>
+      <h2 class="display text-6xl md:text-8xl leading-[.92] mt-4 -tracking-[.01em]">
+        Twenty-four <span class="ital text-[var(--terr)]">real</span> homes.<br/>One Iris.
+      </h2>
+    </div>
+    <div class="lg:col-span-5 leading-relaxed opacity-90">
+      Tap any photo to read the install story — neighbourhood, year, fabric, customer first name, and the one detail that made the project memorable. The other 3,376 live in our archive.
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <!-- 24 install polaroids -->
+    <a href="#" class="polaroid tilt-l lift">
+      <span class="tape"></span>
+      <img src="https://picsum.photos/seed/sunleorealwa01/440/520" alt=""/>
+      <span class="district">Tuscany NW</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Hattie's kitchen</p>
+        <p class="mono opacity-70 mt-1">— III.MMXXVI · Linen roller</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid lift">
+      <img src="https://picsum.photos/seed/sunleorealwa02/440/520" alt=""/>
+      <span class="district">Mount Royal SW</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Esmé's bedroom</p>
+        <p class="mono opacity-70 mt-1">— II.MMXXVI · Blackout cellular</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid tilt-r lift">
+      <span class="tape tape-right"></span>
+      <img src="https://picsum.photos/seed/sunleorealwa03/440/520" alt=""/>
+      <span class="district">Inglewood SE</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Tomislav's loft</p>
+        <p class="mono opacity-70 mt-1">— I.MMXXVI · Roman</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid tilt-l2 lift">
+      <img src="https://picsum.photos/seed/sunleorealwa04/440/520" alt=""/>
+      <span class="district">Bridgeland NE</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Wren's office</p>
+        <p class="mono opacity-70 mt-1">— XII.MMXXV · Motorised</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid lift">
+      <span class="tape"></span>
+      <img src="https://picsum.photos/seed/sunleorealwa05/440/520" alt=""/>
+      <span class="district">Mahogany SE</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Marisol's nursery</p>
+        <p class="mono opacity-70 mt-1">— XI.MMXXV · Blackout</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid tilt-r2 lift">
+      <img src="https://picsum.photos/seed/sunleorealwa06/440/520" alt=""/>
+      <span class="district">Britannia SW</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Devin's loft</p>
+        <p class="mono opacity-70 mt-1">— X.MMXXV · Zebra sheer</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid tilt-l lift">
+      <img src="https://picsum.photos/seed/sunleorealwa07/440/520" alt=""/>
+      <span class="district">Aspen Estates</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Robin's library</p>
+        <p class="mono opacity-70 mt-1">— X.MMXXV · Drapery</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid lift">
+      <span class="tape tape-right"></span>
+      <img src="https://picsum.photos/seed/sunleorealwa08/440/520" alt=""/>
+      <span class="district">Bowness NW</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Lior's kitchen</p>
+        <p class="mono opacity-70 mt-1">— IX.MMXXV · Roller</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid tilt-r lift">
+      <img src="https://picsum.photos/seed/sunleorealwa09/440/520" alt=""/>
+      <span class="district">Kensington NW</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Astrid's lounge</p>
+        <p class="mono opacity-70 mt-1">— IX.MMXXV · Honeycomb</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid tilt-l2 lift">
+      <span class="tape"></span>
+      <img src="https://picsum.photos/seed/sunleorealwa10/440/520" alt=""/>
+      <span class="district">Bankview SW</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Felipe's studio</p>
+        <p class="mono opacity-70 mt-1">— VIII.MMXXV · Drapery</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid lift">
+      <img src="https://picsum.photos/seed/sunleorealwa11/440/520" alt=""/>
+      <span class="district">Mission SW</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Saskia's flat</p>
+        <p class="mono opacity-70 mt-1">— VIII.MMXXV · Roller</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid tilt-r2 lift">
+      <img src="https://picsum.photos/seed/sunleorealwa12/440/520" alt=""/>
+      <span class="district">Sunnyside NW</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Rune's terrace</p>
+        <p class="mono opacity-70 mt-1">— VII.MMXXV · Shutters</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid tilt-l lift">
+      <span class="tape tape-right"></span>
+      <img src="https://picsum.photos/seed/sunleorealwa13/440/520" alt=""/>
+      <span class="district">Hillhurst NW</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Linnea's nursery</p>
+        <p class="mono opacity-70 mt-1">— VII.MMXXV · Blackout</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid lift">
+      <img src="https://picsum.photos/seed/sunleorealwa14/440/520" alt=""/>
+      <span class="district">Altadore SW</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Cyrus's reading room</p>
+        <p class="mono opacity-70 mt-1">— VI.MMXXV · Linen</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid tilt-r lift">
+      <img src="https://picsum.photos/seed/sunleorealwa15/440/520" alt=""/>
+      <span class="district">Acadia SE</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Petra's atelier</p>
+        <p class="mono opacity-70 mt-1">— VI.MMXXV · Roman</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid tilt-l2 lift">
+      <span class="tape"></span>
+      <img src="https://picsum.photos/seed/sunleorealwa16/440/520" alt=""/>
+      <span class="district">Sundance SE</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Mira's kitchen</p>
+        <p class="mono opacity-70 mt-1">— V.MMXXV · Cellular</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid lift">
+      <img src="https://picsum.photos/seed/sunleorealwa17/440/520" alt=""/>
+      <span class="district">Renfrew NE</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Otis's bedroom</p>
+        <p class="mono opacity-70 mt-1">— V.MMXXV · Motorised</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid tilt-r2 lift">
+      <span class="tape tape-right"></span>
+      <img src="https://picsum.photos/seed/sunleorealwa18/440/520" alt=""/>
+      <span class="district">Killarney SW</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Anouk's lounge</p>
+        <p class="mono opacity-70 mt-1">— IV.MMXXV · Roller</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid tilt-l lift">
+      <img src="https://picsum.photos/seed/sunleorealwa19/440/520" alt=""/>
+      <span class="district">Lake Bonavista</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Ezra's master</p>
+        <p class="mono opacity-70 mt-1">— IV.MMXXV · Shutter</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid lift">
+      <img src="https://picsum.photos/seed/sunleorealwa20/440/520" alt=""/>
+      <span class="district">Cliff Bungalow</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Indigo's library</p>
+        <p class="mono opacity-70 mt-1">— III.MMXXV · Drapery</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid tilt-r lift">
+      <span class="tape"></span>
+      <img src="https://picsum.photos/seed/sunleorealwa21/440/520" alt=""/>
+      <span class="district">Beltline SW</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Quincy's condo</p>
+        <p class="mono opacity-70 mt-1">— III.MMXXV · Motorised</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid tilt-l2 lift">
+      <img src="https://picsum.photos/seed/sunleorealwa22/440/520" alt=""/>
+      <span class="district">Cranston SE</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Mathilda's loft</p>
+        <p class="mono opacity-70 mt-1">— II.MMXXV · Honeycomb</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid lift">
+      <span class="tape tape-right"></span>
+      <img src="https://picsum.photos/seed/sunleorealwa23/440/520" alt=""/>
+      <span class="district">Auburn Bay SE</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Knox's playroom</p>
+        <p class="mono opacity-70 mt-1">— II.MMXXV · Blackout</p>
+      </div>
+    </a>
+    <a href="#" class="polaroid tilt-r2 lift">
+      <img src="https://picsum.photos/seed/sunleorealwa24/440/520" alt=""/>
+      <span class="district">Kingsland SW</span>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="hand text-xl">Soren's atelier</p>
+        <p class="mono opacity-70 mt-1">— I.MMXXV · Linen</p>
+      </div>
+    </a>
+  </div>
+
+  <div class="mt-12 text-center">
+    <a href="#" class="btn-ghost">See all 3,400 installs in the archive →</a>
+  </div>
+</section>
+
+<!-- 10. CALGARY MAP -->
+<section class="bg-[var(--olive)] text-[var(--bone)] py-24">
+  <div class="max-w-[1480px] mx-auto px-6 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-5">
+      <p class="mono text-[var(--bone-2)]">— A practice of place</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.95]">
+        Iris drives a <span class="ital text-[var(--terr-2)]">Subaru</span>.<br/>It knows Calgary.
+      </h2>
+      <p class="mt-6 text-lg leading-relaxed max-w-md opacity-90">
+        We do not subcontract anyone. Every install is by the same two-person crew, in their own van, who have worked together since 2019.
+      </p>
+
+      <div class="mt-10 flex flex-wrap gap-2">
+        <span class="pill border border-[var(--bone)] px-3 py-1.5">Tuscany NW</span>
+        <span class="pill border border-[var(--bone)] px-3 py-1.5">Mount Royal</span>
+        <span class="pill border border-[var(--bone)] px-3 py-1.5">Inglewood SE</span>
+        <span class="pill border border-[var(--bone)] px-3 py-1.5">Britannia</span>
+        <span class="pill border border-[var(--bone)] px-3 py-1.5">Bridgeland</span>
+        <span class="pill border border-[var(--bone)] px-3 py-1.5">Mahogany SE</span>
+        <span class="pill border border-[var(--bone)] px-3 py-1.5">Aspen Estates</span>
+        <span class="pill border border-[var(--bone)] px-3 py-1.5">Bowness</span>
+        <span class="pill border border-[var(--bone)] px-3 py-1.5">+ 34 more</span>
+      </div>
+    </div>
+    <div class="lg:col-span-7">
+      <div class="aspect-[5/4] relative overflow-hidden bg-[var(--olive-2)] border border-[var(--hair-bone)]">
+        <img src="https://picsum.photos/seed/sunleorealmap/900/720" class="absolute inset-0 w-full h-full object-cover opacity-50" alt=""/>
+        <div class="absolute inset-0" style="background: radial-gradient(circle at 50% 50%, transparent 30%, rgba(66,64,44,.7));"></div>
+        <!-- floating pins -->
+        <span class="absolute top-[24%] left-[18%] pin"></span>
+        <span class="absolute top-[28%] left-[34%] pin"></span>
+        <span class="absolute top-[42%] left-[28%] pin"></span>
+        <span class="absolute top-[48%] left-[52%] pin"></span>
+        <span class="absolute top-[36%] left-[58%] pin"></span>
+        <span class="absolute top-[60%] left-[40%] pin"></span>
+        <span class="absolute top-[68%] left-[64%] pin"></span>
+        <span class="absolute top-[52%] left-[76%] pin"></span>
+        <span class="absolute top-[34%] left-[72%] pin"></span>
+        <span class="absolute top-[58%] left-[22%] pin"></span>
+        <div class="absolute bottom-4 left-4 bg-[var(--bone)] text-[var(--ink)] px-4 py-3">
+          <p class="mono opacity-70">— Calgary install pins</p>
+          <p class="hand text-2xl mt-1">All 42 districts, since '17.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. SMART HOME -->
+<section class="max-w-[1480px] mx-auto px-6 py-24">
+  <div class="grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-7">
+      <p class="mono text-[var(--terr)]">— Quiet automation</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.95]">
+        Motors that <span class="ital text-[var(--terr)]">whisper</span>.
+      </h2>
+      <p class="mt-6 text-lg leading-relaxed max-w-xl opacity-90">
+        Matter 1.4 native. Alexa, Google Home, Apple HomeKit, SmartThings. 28 dB at one metre, 7-year battery, 320 ms voice latency. No bridge. No monthly cloud bill.
+      </p>
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-1 border border-[var(--hair)]">
+        <div class="p-5 border-r border-[var(--hair)] bg-[var(--bone-2)]"><p class="display text-2xl ital">Matter</p><p class="mono mt-1 opacity-70">— v1.4</p></div>
+        <div class="p-5 border-r border-[var(--hair)] bg-[var(--bone-2)]"><p class="display text-2xl ital">Alexa</p><p class="mono mt-1 opacity-70">— Native</p></div>
+        <div class="p-5 border-r border-[var(--hair)] bg-[var(--bone-2)]"><p class="display text-2xl ital">Google</p><p class="mono mt-1 opacity-70">— Home</p></div>
+        <div class="p-5 bg-[var(--bone-2)]"><p class="display text-2xl ital">Apple</p><p class="mono mt-1 opacity-70">— HomeKit</p></div>
+      </div>
+    </div>
+    <div class="lg:col-span-5">
+      <div class="polaroid lift">
+        <span class="tape tape-center"></span>
+        <img src="https://picsum.photos/seed/sunleorealsmart/600/600" alt=""/>
+        <div class="caption" style="position:static; margin-top:14px;">
+          <p class="hand text-2xl">"Hey Google, raise the kitchen."</p>
+          <p class="mono mt-1 opacity-70">— Devin K.'s morning routine · Britannia SW</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. BNPL -->
+<section class="max-w-[1480px] mx-auto px-6 py-12">
+  <div class="border-2 border-[var(--ink)] p-12 grid md:grid-cols-2 gap-8 items-center bg-[var(--bone-2)]">
+    <div>
+      <p class="mono text-[var(--terr)]">— Patient money</p>
+      <h2 class="display text-5xl md:text-6xl mt-4 leading-[.95]">Pay in <span class="ital text-[var(--terr)]">four</span>, no interest.</h2>
+      <p class="mt-5 text-lg opacity-90 max-w-md leading-relaxed">Affirm, Klarna, Afterpay, Sezzle. 0% APR · 24 months · pre-qualified at checkout.</p>
+    </div>
+    <div class="flex flex-wrap gap-4 items-center justify-end">
+      <div class="display text-3xl ital">Affirm</div>
+      <div class="display text-3xl">Klarna</div>
+      <div class="display text-3xl ital">afterpay</div>
+      <div class="display text-3xl">Sezzle</div>
+    </div>
+  </div>
+</section>
+
+<!-- 13. JOURNAL / DIARY -->
+<section class="max-w-[1480px] mx-auto px-6 py-24">
+  <div class="flex justify-between items-end mb-12 flex-wrap gap-4">
+    <div>
+      <p class="mono text-[var(--terr)]">— Iris's diary</p>
+      <h2 class="display text-5xl md:text-6xl mt-4 leading-[.95]">Field <span class="ital text-[var(--terr)]">notes</span>.</h2>
+    </div>
+    <a href="#" class="mono underline decoration-[var(--terr)] underline-offset-4">All 47 entries →</a>
+  </div>
+  <div class="grid md:grid-cols-3 gap-6">
+    <article class="polaroid tilt-l lift">
+      <span class="tape"></span>
+      <img src="https://picsum.photos/seed/sunleorealbl1/600/420" class="w-full h-[260px] object-cover" alt=""/>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="mono opacity-70">— Entry 011 · Light</p>
+        <p class="hand text-2xl mt-2">Why east Calgary light is sharper than west.</p>
+      </div>
+    </article>
+    <article class="polaroid lift">
+      <img src="https://picsum.photos/seed/sunleorealbl2/600/420" class="w-full h-[260px] object-cover" alt=""/>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="mono opacity-70">— Entry 010 · Sleep</p>
+        <p class="hand text-2xl mt-2">Eight measurable sleep improvements after one blackout.</p>
+      </div>
+    </article>
+    <article class="polaroid tilt-r lift">
+      <span class="tape tape-right"></span>
+      <img src="https://picsum.photos/seed/sunleorealbl3/600/420" class="w-full h-[260px] object-cover" alt=""/>
+      <div class="caption" style="position:static; margin-top:14px;">
+        <p class="mono opacity-70">— Entry 009 · Craft</p>
+        <p class="hand text-2xl mt-2">The case for hand-folded Roman shades in Chinook.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 14. AS SEEN IN -->
+<section class="border-y border-[var(--hair)] py-10 bg-[var(--bone-2)] overflow-hidden">
+  <p class="mono text-center text-[var(--olive)] mb-6">— As real-ly seen in</p>
+  <div class="mq">
+    <div class="flex items-center gap-20 shrink-0">
+      <span class="display text-4xl ital">Avenue Calgary</span>
+      <span class="display text-4xl">Western Living</span>
+      <span class="display text-4xl ital">Calgary Herald</span>
+      <span class="display text-4xl">House &amp; Home</span>
+      <span class="display text-4xl ital">Style at Home</span>
+      <span class="display text-4xl">Globe &amp; Mail</span>
+    </div>
+    <div class="flex items-center gap-20 shrink-0" aria-hidden="true">
+      <span class="display text-4xl ital">Avenue Calgary</span>
+      <span class="display text-4xl">Western Living</span>
+      <span class="display text-4xl ital">Calgary Herald</span>
+      <span class="display text-4xl">House &amp; Home</span>
+      <span class="display text-4xl ital">Style at Home</span>
+      <span class="display text-4xl">Globe &amp; Mail</span>
+    </div>
+  </div>
+</section>
+
+<!-- 15. INSTAGRAM -->
+<section class="max-w-[1480px] mx-auto px-6 py-24">
+  <div class="flex justify-between items-end mb-10 flex-wrap gap-4">
+    <div>
+      <p class="mono text-[var(--terr)]">— Instagram</p>
+      <h2 class="display text-5xl md:text-6xl mt-4">@sunleo<span class="ital text-[var(--terr)]">.real</span></h2>
+    </div>
+    <a href="#" class="mono underline decoration-[var(--terr)] underline-offset-4">14.2k followers · follow Iris →</a>
+  </div>
+  <div class="grid grid-cols-4 grid-rows-2 gap-3">
+    <img src="https://picsum.photos/seed/sunleorealig01/360/360" class="w-full aspect-square object-cover lift" alt=""/>
+    <img src="https://picsum.photos/seed/sunleorealig02/360/360" class="w-full aspect-square object-cover lift" alt=""/>
+    <img src="https://picsum.photos/seed/sunleorealig03/360/360" class="w-full aspect-square object-cover lift" alt=""/>
+    <img src="https://picsum.photos/seed/sunleorealig04/360/360" class="w-full aspect-square object-cover lift" alt=""/>
+    <img src="https://picsum.photos/seed/sunleorealig05/360/360" class="w-full aspect-square object-cover lift" alt=""/>
+    <img src="https://picsum.photos/seed/sunleorealig06/360/360" class="w-full aspect-square object-cover lift" alt=""/>
+    <img src="https://picsum.photos/seed/sunleorealig07/360/360" class="w-full aspect-square object-cover lift" alt=""/>
+    <img src="https://picsum.photos/seed/sunleorealig08/360/360" class="w-full aspect-square object-cover lift" alt=""/>
+  </div>
+</section>
+
+<!-- 16. TRADE -->
+<section class="bg-[var(--terr)] text-[var(--bone)] py-24">
+  <div class="max-w-[1480px] mx-auto px-6 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-7">
+      <p class="mono text-[var(--bone-2)]">— For the trade</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.95]">
+        Calgary designers, <span class="hand text-[var(--bone-2)]" style="font-weight:600;">welcome.</span>
+      </h2>
+      <p class="mt-6 text-lg leading-relaxed max-w-xl opacity-90">
+        20% trade discount, dedicated installer, lead-time guarantee, white-label invoices. 38 Calgary interior designers + 11 custom builders work with us today.
+      </p>
+      <a href="#" class="mt-8 inline-flex items-center gap-3 mono border border-[var(--bone)] px-5 py-3 hover:bg-[var(--bone)] hover:text-[var(--terr)] transition rounded-full">Apply →</a>
+    </div>
+    <div class="lg:col-span-5 hand text-3xl leading-snug">
+      "I refer Iris for every kitchen where the homeowner cares about light. She finishes my drawings."
+      <span class="block mt-6 mono not-italic text-[var(--bone-2)]" style="font-family:'JetBrains Mono', monospace;">— Eloise Whitcombe · principal · Whitcombe + Co</span>
+    </div>
+  </div>
+</section>
+
+<!-- 17. FAQ -->
+<section class="max-w-[1480px] mx-auto px-6 py-24" id="faq">
+  <div class="grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-4">
+      <p class="mono text-[var(--terr)]">— Honest answers</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.95]">Eight <span class="ital text-[var(--terr)]">questions</span> Iris hears most.</h2>
+    </div>
+    <div class="lg:col-span-8 border-t border-[var(--hair)]">
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="hand text-3xl">Is the in-home visit really free?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">Entirely. No deposit, no obligation, no sales follow-up. Iris drives over, measures, shows fabrics, leaves a written estimate, and waits for you to decide.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="hand text-3xl">Are these really real photos?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">Yes — every photo on the Calgary wall is a SunLeo install. We do not use stock imagery. You can usually identify the neighbourhood from the window framing.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="hand text-3xl">Why do you only work in Calgary?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">Because we install ourselves. Iris's crew drives. We cover Greater Calgary, Airdrie, Cochrane, Okotoks, Chestermere — anywhere we can be back by dinner.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="hand text-3xl">Who is Iris, really?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">Iris Laframboise. Born in Trois-Rivières, moved to Calgary in 2014. NCIDQ-certified. Started SunLeo in 2017 with one ladder and a Subaru. Now: 3,400 installs, two installers, one designer, one ladder.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="hand text-3xl">How long is a typical install?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">One morning, for a typical 8-window home. Bigger projects spread across one to two days. The crew arrives at 9 AM and leaves by noon.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="hand text-3xl">Do you do commercial?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">Boutique hotels, restaurants, dental offices, executive boardrooms. Anything under 80 windows. Larger projects we refer to our trade network.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="hand text-3xl">What if I hate it after install?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">We re-make it. Ten-year atelier guarantee covers craft, fit, and peace of mind. Eight clients asked for a remake last year — we did them all.</p>
+      </details>
+      <details class="border-b border-[var(--hair)] py-6">
+        <summary class="flex items-center justify-between gap-8"><span class="hand text-3xl">Can I just buy without the visit?</span><span class="display text-2xl chev">+</span></summary>
+        <p class="mt-4 opacity-80 leading-relaxed max-w-2xl">Yes — online checkout works for stock sizes. Custom orders need a measurement. We'd rather come over once than ship the wrong size twice.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 18. FINAL CTA -->
+<section class="bg-[var(--olive)] text-[var(--bone)] py-24" id="book">
+  <div class="max-w-[1480px] mx-auto px-6 grid lg:grid-cols-12 gap-10 items-center">
+    <div class="lg:col-span-6">
+      <p class="mono text-[var(--bone-2)]">— Iris's calendar</p>
+      <h2 class="display text-6xl md:text-7xl mt-4 leading-[.92]">
+        Have her <span class="hand text-[var(--terr-2)]" style="font-weight:600;">over.</span>
+      </h2>
+      <p class="mt-6 text-xl opacity-90 max-w-lg leading-relaxed">
+        Pick a morning. She brings fabric, a laser, and an honest opinion. You make coffee. The visit is free.
+      </p>
+      <p class="mt-8 hand text-3xl">— I'd love to see your windows.</p>
+      <p class="mono mt-2 opacity-70">— Iris L., founder · 11 years in Calgary</p>
+    </div>
+    <div class="lg:col-span-6 border border-[var(--hair-bone)] p-8 bg-[var(--olive-2)]">
+      <p class="mono text-[var(--bone-2)]">— Send Iris a note</p>
+      <div class="mt-6 space-y-4">
+        <div>
+          <label class="mono opacity-70">— Name</label>
+          <input type="text" placeholder="First name" class="w-full mt-2 bg-transparent border-b border-[var(--bone)] py-3 outline-none text-xl text-[var(--bone)] placeholder:opacity-40"/>
+        </div>
+        <div>
+          <label class="mono opacity-70">— Email</label>
+          <input type="email" placeholder="you@home.com" class="w-full mt-2 bg-transparent border-b border-[var(--bone)] py-3 outline-none text-xl text-[var(--bone)] placeholder:opacity-40"/>
+        </div>
+        <div>
+          <label class="mono opacity-70">— Calgary district</label>
+          <input type="text" placeholder="e.g. Tuscany NW" class="w-full mt-2 bg-transparent border-b border-[var(--bone)] py-3 outline-none text-xl text-[var(--bone)] placeholder:opacity-40"/>
+        </div>
+        <div>
+          <label class="mono opacity-70">— A line about your windows</label>
+          <textarea rows="3" placeholder="The east light is brutal in the kitchen..." class="w-full mt-2 bg-transparent border-b border-[var(--bone)] py-3 outline-none text-xl text-[var(--bone)] placeholder:opacity-40 resize-none"></textarea>
+        </div>
+        <button class="btn-terr mt-6">Send Iris a note →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 19. MEGA FOOTER -->
+<footer class="bg-[var(--bone)] text-[var(--ink)] border-t border-[var(--hair)] py-20">
+  <div class="max-w-[1480px] mx-auto px-6">
+    <div class="grid lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-4">
+        <span class="display text-4xl">SunLeo<span class="text-[var(--terr)]">.</span></span>
+        <p class="mt-5 text-lg leading-relaxed max-w-md opacity-90">Calgary windows since 2017. 3,400 installs. One designer in a Subaru. No deposit, no models, no fiction.</p>
+        <div class="mt-8 flex items-center gap-5">
+          <div class="stars text-xl">★★★★★</div>
+          <span class="mono opacity-70">— 4.9 · 2,418 real Calgary names</span>
+        </div>
+        <div class="mt-6 flex gap-3 flex-wrap">
+          <span class="display text-xl">Affirm</span>
+          <span class="display text-xl ital">Klarna</span>
+          <span class="display text-xl">afterpay</span>
+          <span class="display text-xl ital">Sezzle</span>
+        </div>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono opacity-70">— Shop</p>
+        <ul class="mt-5 space-y-2 text-lg">
+          <li><a class="hover:text-[var(--terr)] transition" href="#">Roller</a></li>
+          <li><a class="hover:text-[var(--terr)] transition" href="#">Cellular</a></li>
+          <li><a class="hover:text-[var(--terr)] transition" href="#">Roman</a></li>
+          <li><a class="hover:text-[var(--terr)] transition" href="#">Motorised</a></li>
+          <li><a class="hover:text-[var(--terr)] transition" href="#">Shutter</a></li>
+          <li><a class="hover:text-[var(--terr)] transition" href="#">Drapery</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono opacity-70">— Atelier</p>
+        <ul class="mt-5 space-y-2 text-lg">
+          <li><a class="hover:text-[var(--terr)] transition" href="#">The Wall</a></li>
+          <li><a class="hover:text-[var(--terr)] transition" href="#">Iris</a></li>
+          <li><a class="hover:text-[var(--terr)] transition" href="#">Diary</a></li>
+          <li><a class="hover:text-[var(--terr)] transition" href="#">Trade</a></li>
+          <li><a class="hover:text-[var(--terr)] transition" href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono opacity-70">— Help</p>
+        <ul class="mt-5 space-y-2 text-lg">
+          <li><a class="hover:text-[var(--terr)] transition" href="#">FAQ</a></li>
+          <li><a class="hover:text-[var(--terr)] transition" href="#">Returns</a></li>
+          <li><a class="hover:text-[var(--terr)] transition" href="#">Guarantee</a></li>
+          <li><a class="hover:text-[var(--terr)] transition" href="#">Care</a></li>
+        </ul>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="mono opacity-70">— Contact</p>
+        <ul class="mt-5 space-y-2 text-lg">
+          <li>+1 587 901 0240</li>
+          <li class="underline decoration-[var(--terr)] underline-offset-4">iris@sunleo.ca</li>
+          <li class="opacity-80 text-base">Mon–Sat · 9–18h</li>
+          <li class="opacity-80 text-base">Calgary, AB</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-[var(--hair)] mt-16"></div>
+    <div class="mt-8 flex flex-wrap justify-between gap-4 text-xs mono opacity-60">
+      <p>© MMXXVI SunLeo · Calgary, Alberta · Treaty 7 land</p>
+      <p>— Privacy · Terms · Accessibility · Cookies</p>
+    </div>
+  </div>
+</footer>
+
+<!-- 20. STICKY SIDE -->
+<div class="fixed right-3 top-1/2 -translate-y-1/2 z-30 hidden md:flex flex-col gap-2">
+  <button class="w-11 h-11 rounded-full bg-[var(--olive)] text-[var(--bone)] flex items-center justify-center hover:bg-[var(--terr)] transition" aria-label="Chat">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </button>
+  <button class="w-11 h-11 rounded-full bg-[var(--bone)] text-[var(--olive)] border border-[var(--olive)] flex items-center justify-center hover:bg-[var(--olive)] hover:text-[var(--bone)] transition" aria-label="Save">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+  </button>
+  <button class="w-11 h-11 rounded-full bg-[var(--bone)] text-[var(--olive)] border border-[var(--olive)] flex items-center justify-center hover:bg-[var(--olive)] hover:text-[var(--bone)] transition" aria-label="Share">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+  </button>
+</div>
+
+<!-- LIVE TICKER -->
+<div id="liveNotif" class="hidden md:flex fixed left-5 bottom-24 z-40 max-w-xs bg-[var(--bone)] border border-[var(--olive)] p-4 gap-3 items-start notif-in">
+  <span class="pulse-dot mt-1.5"></span>
+  <div>
+    <p class="mono opacity-70">— Iris just · 2 min ago</p>
+    <p class="hand text-xl mt-1"><span id="liveAct">Replied to Marisol from Mahogany SE.</span></p>
+  </div>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="fixed top-4 right-4 z-40 bg-[var(--terr)] text-[var(--bone)] px-4 py-2 mono text-xs flex items-center gap-3 rounded-full">
+  <span class="pulse-dot" style="background: var(--bone);"></span>
+  <span>— Spring window closes</span>
+  <span class="tabnum" id="cd">--d --h --m --s</span>
+</div>
+
+<!-- STICKY BOTTOM BAR -->
+<div class="fixed bottom-0 inset-x-0 z-30 bg-[var(--olive)] text-[var(--bone)] py-3 px-6 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--terr)]">
+  <div class="flex items-center gap-3 text-sm">
+    <span class="pulse-dot" style="background: var(--bone);"></span>
+    <span class="mono">— 3 install slots</span>
+    <span class="hand text-xl">remaining for week of 26 May</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <a href="#wall" class="mono underline decoration-[var(--terr)] underline-offset-4">See the wall</a>
+    <a href="#book" class="btn-terr text-[10.5px] py-2.5 px-4">Book Iris →</a>
+  </div>
+</div>
+
+<!-- EXIT MODAL -->
+<div id="exitModal" class="hidden fixed inset-0 z-50 bg-[var(--olive)]/85 backdrop-blur-sm items-center justify-center p-6">
+  <div class="max-w-xl bg-[var(--bone)] p-10 relative">
+    <span class="tape tape-center"></span>
+    <button id="exitClose" class="absolute top-4 right-4 mono opacity-60 hover:opacity-100">— Close (esc)</button>
+    <p class="mono text-[var(--terr)]">— Before you leave</p>
+    <h3 class="display text-4xl mt-4 leading-tight">Eight free <span class="ital text-[var(--terr)]">linen swatches.</span></h3>
+    <p class="hand text-2xl mt-4 leading-snug">— Belgian linen, posted in 48 hours. No call.</p>
+    <div class="mt-6 flex items-end gap-3">
+      <input type="email" placeholder="your address" class="flex-1 bg-transparent border-b border-[var(--ink)] py-3 outline-none text-lg"/>
+      <button class="btn-terr">Send swatches</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const lenis = new Lenis({ lerp: 0.08 });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+  }
+  AOS.init({ once: true, duration: 800, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
+
+  const cdEl = document.getElementById('cd');
+  const endDate = new Date(Date.now() + 1000*60*60*24*5 + 1000*60*60*8);
+  function tickCd(){
+    const diff = endDate - new Date();
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    cdEl.textContent = `${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+  }
+  setInterval(tickCd, 1000); tickCd();
+
+  const notif = document.getElementById('liveNotif');
+  const liveAct = document.getElementById('liveAct');
+  const events = [
+    "Replied to Marisol from Mahogany SE.",
+    "Measured Devin's living room in Tuscany NW.",
+    "Posted swatches to Wren in Mount Royal.",
+    "Booked Tomislav in Bridgeland for Wednesday.",
+    "Iris installed 6 cellular in Aspen Estates.",
+    "Replied to Esmé in Britannia.",
+  ];
+  let ev = 0;
+  function showNotif(){
+    if(!notif) return;
+    liveAct.textContent = events[ev % events.length];
+    notif.classList.remove('hidden','notif-in');
+    notif.offsetWidth;
+    notif.classList.add('flex','notif-in');
+    ev++;
+    setTimeout(() => notif.classList.add('hidden'), 6000);
+  }
+  setTimeout(showNotif, 4500);
+  setInterval(showNotif, 14000);
+
+  document.querySelectorAll('[data-counter]').forEach(el => {
+    const target = parseInt(el.getAttribute('data-counter'),10);
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          let n = 0;
+          const step = Math.max(1, Math.floor(target/60));
+          const t = setInterval(() => {
+            n += step; if(n >= target){ n = target; clearInterval(t); }
+            el.textContent = n.toLocaleString();
+          }, 20);
+          obs.disconnect();
+        }
+      });
+    });
+    obs.observe(el);
+  });
+
+  const exitModal = document.getElementById('exitModal');
+  let exitFired = false;
+  document.addEventListener('mouseout', (e) => {
+    if(!exitFired && e.clientY < 10 && e.relatedTarget == null){
+      exitFired = true;
+      exitModal.classList.remove('hidden');
+      exitModal.classList.add('flex');
+    }
+  });
+  document.getElementById('exitClose')?.addEventListener('click', () => {
+    exitModal.classList.add('hidden');
+    exitModal.classList.remove('flex');
+  });
+  document.addEventListener('keyup', (e) => {
+    if(e.key === 'Escape' && exitModal.classList.contains('flex')){
+      exitModal.classList.add('hidden'); exitModal.classList.remove('flex');
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SunLeo ✿ Blinds that actually don't suck</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Caveat+Brush&family=Shrikhand&family=Bricolage+Grotesque:wght@400;700;800&family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #FFF1C9;
+    --pink: #FF3DCB;
+    --pink-deep: #C9168F;
+    --lime: #C4FF1F;
+    --cobalt: #1F2AFF;
+    --lemon: #FFE800;
+    --orange: #FF6E00;
+    --purple: #9C00FF;
+    --ink: #0F0021;
+  }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Bricolage Grotesque', sans-serif; background: var(--cream); color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .display { font-family: 'Bagel Fat One', sans-serif; letter-spacing: -0.02em; line-height: 0.9; }
+  .shrik { font-family: 'Shrikhand', serif; }
+  .hand { font-family: 'Caveat', cursive; font-weight: 700; }
+  .brush { font-family: 'Caveat Brush', cursive; }
+
+  .checker {
+    background-color: var(--cream);
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 30px, rgba(255,61,203,0.10) 30px 31px),
+      repeating-linear-gradient(90deg, transparent 0 30px, rgba(31,42,255,0.10) 30px 31px);
+  }
+  .dotty {
+    background-image: radial-gradient(var(--ink) 1.5px, transparent 1.5px);
+    background-size: 18px 18px;
+  }
+  .ticker {
+    animation: ticker 18s linear infinite;
+  }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .star {
+    clip-path: polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+  }
+  .squish { border-radius: 60% 40% 70% 30% / 40% 60% 30% 70%; }
+  .squish-2 { border-radius: 70% 30% 50% 50% / 50% 50% 30% 70%; }
+  .squish-3 { border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%; }
+  .sticker { box-shadow: 5px 5px 0 var(--ink); border: 3px solid var(--ink); }
+  .sticker-pink { box-shadow: 5px 5px 0 var(--pink-deep); border: 3px solid var(--ink); }
+  .rot-1 { transform: rotate(-3deg); }
+  .rot-2 { transform: rotate(2deg); }
+  .rot-3 { transform: rotate(-5deg); }
+  .rot-4 { transform: rotate(4deg); }
+  .rot-5 { transform: rotate(-1.5deg); }
+  @keyframes wob { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+  .wob { animation: wob 4s ease-in-out infinite; }
+  @keyframes bounce-cute { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .bounce-cute { animation: bounce-cute 2.4s ease-in-out infinite; }
+  @keyframes spin-slow { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+  .spin-slow { animation: spin-slow 20s linear infinite; }
+  .stripe-rainbow {
+    background:
+      linear-gradient(135deg, var(--pink) 0 16.66%, var(--orange) 16.66% 33.33%, var(--lemon) 33.33% 50%, var(--lime) 50% 66.66%, var(--cobalt) 66.66% 83.33%, var(--purple) 83.33% 100%);
+  }
+  .wobble:hover { transform: rotate(-3deg) scale(1.04); }
+  .wobble { transition: transform .25s ease; }
+  .marker {
+    background: linear-gradient(180deg, transparent 60%, var(--lemon) 60%);
+    padding: 0 6px;
+  }
+  .underline-wavy { text-decoration: underline wavy var(--pink); text-decoration-thickness: 3px; text-underline-offset: 8px; }
+  @keyframes glow-pulse { 0%,100% { box-shadow: 0 0 0 0 var(--lemon); } 50% { box-shadow: 0 0 0 16px transparent; } }
+  .glow-pulse { animation: glow-pulse 1.8s ease-out infinite; }
+  .button-3d {
+    box-shadow: 6px 6px 0 var(--ink);
+    border: 3px solid var(--ink);
+    transition: all .15s ease;
+  }
+  .button-3d:hover { transform: translate(3px, 3px); box-shadow: 3px 3px 0 var(--ink); }
+  .button-3d:active { transform: translate(6px, 6px); box-shadow: 0 0 0 var(--ink); }
+  .heart::after {
+    content: "";
+    display: inline-block;
+    width: 1em; height: 1em;
+    background:
+      radial-gradient(circle at 30% 60%, var(--pink) 30%, transparent 31%),
+      radial-gradient(circle at 70% 60%, var(--pink) 30%, transparent 31%),
+      linear-gradient(to bottom right, transparent 50%, var(--pink) 50%) bottom right / 50% 50% no-repeat,
+      linear-gradient(to bottom left, transparent 50%, var(--pink) 50%) bottom left / 50% 50% no-repeat;
+  }
+  .pixel-corner {
+    background:
+      linear-gradient(45deg, transparent 6px, currentColor 6px),
+      linear-gradient(-45deg, transparent 6px, currentColor 6px),
+      linear-gradient(135deg, transparent 6px, currentColor 6px),
+      linear-gradient(-135deg, transparent 6px, currentColor 6px);
+    background-position: top left, top right, bottom right, bottom left;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+  }
+
+/* ============ MOBILE RESPONSIVE PATCH ============ */
+html, body { overflow-x: hidden; max-width: 100vw; }
+img, svg, video { max-width: 100%; height: auto; }
+
+@media (max-width: 1023px) {
+  /* Force lg:grid-cols-12 sections to stack on tablet/mobile */
+  section .grid.lg\:grid-cols-12,
+  section .grid.md\:grid-cols-12 {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  section .grid.lg\:grid-cols-12 > *,
+  section .grid.md\:grid-cols-12 > * {
+    min-width: 0;
+    width: 100%;
+  }
+  /* Tighten section padding */
+  section { padding-left: 1rem !important; padding-right: 1rem !important; }
+  section.no-padding-override { padding: revert !important; }
+  /* Marquee cards width cap */
+  .marquee article, .marquee .card { max-width: 280px !important; min-width: 240px !important; }
+}
+
+@media (max-width: 767px) {
+  /* Display text clamps */
+  h1 { font-size: clamp(2rem, 9vw, 3.5rem) !important; line-height: 1.05 !important; }
+  h2 { font-size: clamp(1.5rem, 7vw, 2.5rem) !important; line-height: 1.1 !important; }
+  /* Heavy display text */
+  .display, .didot, .serif.text-7xl, .serif.text-8xl, .serif.text-9xl,
+  [style*="font-size: 120"], [style*="font-size: 140"], [style*="font-size: 170"] {
+    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    line-height: 0.95 !important;
+  }
+  /* Touch targets 44px */
+  button, a[class*="btn"], a[role="button"] {
+    min-height: 44px;
+  }
+  /* Inputs prevent iOS zoom */
+  input, textarea, select { font-size: 16px !important; }
+  /* Disable hover transforms on touch */
+  .card:hover, *[class*="hover:translate"]:hover, *[class*="hover:scale"]:hover {
+    transform: none !important;
+  }
+  /* Big grids collapse */
+  .grid.grid-cols-6 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-5 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-4:not(.grid-rows-2) { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-3 { grid-template-columns: repeat(1, 1fr) !important; }
+  /* Comparison tables: wrap (if direct child grid-cols-4) in overflow-x scroll behavior */
+  .comparison-table, table.comparison { display: block !important; overflow-x: auto !important; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Disable cursor-follow effects on touch devices */
+  .cursor-trail, .sunbeam-cursor, .glow-dot, .mouse-trail {
+    display: none !important;
+  }
+}
+
+</style>
+</head>
+<body class="checker">
+
+<!-- Top marquee -->
+<div class="bg-[var(--cobalt)] text-[var(--lemon)] py-3 overflow-hidden whitespace-nowrap border-b-[3px] border-[var(--ink)]">
+  <div class="inline-flex ticker gap-12 display text-xl pl-4">
+    <span>★ FREE in-home measure</span><span class="text-[var(--lime)]">✿</span><span>blinds that bang</span><span class="text-[var(--pink)]">♡</span><span>4.9 from 1,247 humans</span><span class="text-[var(--lemon)]">✿</span><span>0% financing yeppp</span><span class="text-[var(--lime)]">★</span>
+    <span>★ FREE in-home measure</span><span class="text-[var(--lime)]">✿</span><span>blinds that bang</span><span class="text-[var(--pink)]">♡</span><span>4.9 from 1,247 humans</span><span class="text-[var(--lemon)]">✿</span><span>0% financing yeppp</span><span class="text-[var(--lime)]">★</span>
+  </div>
+</div>
+
+<!-- Nav -->
+<header class="border-b-[3px] border-[var(--ink)] bg-[var(--cream)] sticky top-0 z-40">
+  <div class="max-w-[1400px] mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between gap-3">
+    <a href="#" class="flex items-center gap-2">
+      <span class="display text-2xl md:text-4xl">SunLeo</span>
+      <span class="text-[var(--pink)] text-2xl md:text-3xl wob inline-block">✿</span>
+    </a>
+    <nav class="hidden md:flex gap-5 lg:gap-7 font-bold text-sm md:text-base">
+      <a class="hover:text-[var(--pink)]" href="#products">stuff we sell</a>
+      <a class="hover:text-[var(--cobalt)]" href="#vibes">why bother</a>
+      <a class="hover:text-[var(--orange)]" href="#reviews">receipts</a>
+      <a class="hover:text-[var(--purple)]" href="#book">talk 2 us</a>
+    </nav>
+    <a href="#book" class="bg-[var(--lime)] text-[var(--ink)] display text-sm md:text-lg px-4 md:px-6 py-2 md:py-3 button-3d whitespace-nowrap">free quote ✦</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="relative overflow-hidden">
+  <!-- floating shapes -->
+  <div class="absolute top-20 right-2 md:right-10 w-20 md:w-36 h-20 md:h-36 star bg-[var(--lemon)] sticker bounce-cute"></div>
+  <div class="absolute top-1/3 left-2 md:left-10 w-16 md:w-28 h-16 md:h-28 squish bg-[var(--pink)] sticker-pink wob"></div>
+  <div class="absolute bottom-20 right-1/3 w-12 md:w-20 h-12 md:h-20 squish-2 bg-[var(--lime)] sticker spin-slow"></div>
+  <div class="absolute bottom-32 left-1/4 w-10 md:w-16 h-10 md:h-16 rounded-full bg-[var(--cobalt)] sticker bounce-cute" style="animation-delay: .8s"></div>
+
+  <div class="max-w-[1400px] mx-auto px-4 md:px-6 pt-10 md:pt-12 pb-16 md:pb-24 relative z-10">
+    <div class="text-center">
+      <span class="inline-block bg-[var(--pink)] text-[var(--cream)] font-bold px-4 md:px-5 py-2 rounded-full sticker-pink rot-2 hand text-lg md:text-2xl">— calgary's #1 unboring blinds co. ✿</span>
+
+      <h1 class="display text-5xl sm:text-6xl md:text-[180px] mt-6 md:mt-8 leading-[0.85]">
+        <span class="inline-block">blinds</span>
+        <span class="hand text-[var(--cobalt)] inline-block rot-1 text-[0.7em] mx-2">that</span>
+        <br/>
+        <span class="bg-[var(--lime)] inline-block px-3 sticker rot-3">don't</span>
+        <span class="text-[var(--pink)] inline-block">suck.</span>
+      </h1>
+      <p class="hand text-2xl md:text-4xl text-[var(--cobalt)] mt-6 md:mt-8 rot-2">no really, your mom will love these →</p>
+
+      <div class="mt-8 md:mt-10 flex flex-wrap gap-3 md:gap-4 justify-center items-center">
+        <a href="#book" class="bg-[var(--cobalt)] text-[var(--lemon)] display text-xl md:text-3xl px-6 md:px-10 py-4 md:py-5 button-3d glow-pulse">📞 Book free measure</a>
+        <a href="#products" class="display text-lg md:text-3xl underline-wavy hover:text-[var(--pink)] transition">or just browse →</a>
+      </div>
+
+      <!-- chip rail -->
+      <div class="mt-10 md:mt-14 flex flex-wrap justify-center gap-2 md:gap-3">
+        <div class="bg-[var(--cream)] px-3 md:px-4 py-2 rounded-full sticker rot-3 font-bold text-xs md:text-sm">⭐ 4.9 ★★★★★</div>
+        <div class="bg-[var(--lemon)] px-3 md:px-4 py-2 rounded-full sticker rot-2 font-bold text-xs md:text-sm">💸 0% APR yepp</div>
+        <div class="bg-[var(--pink)] text-[var(--cream)] px-3 md:px-4 py-2 rounded-full sticker-pink rot-1 font-bold text-xs md:text-sm">🔥 free install</div>
+        <div class="bg-[var(--lime)] px-3 md:px-4 py-2 rounded-full sticker rot-4 font-bold text-xs md:text-sm">🚀 1,247 happy fams</div>
+        <div class="bg-[var(--cobalt)] text-[var(--lemon)] px-3 md:px-4 py-2 rounded-full sticker rot-5 font-bold text-xs md:text-sm">⚡ 7-day install</div>
+      </div>
+    </div>
+
+    <!-- Hero collage -->
+    <div class="mt-12 md:mt-16 grid grid-cols-12 gap-3 md:gap-4 max-w-6xl mx-auto relative">
+      <div class="col-span-12 sm:col-span-7 wobble relative">
+        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200" class="w-full h-64 md:h-96 object-cover squish sticker"/>
+        <div class="absolute -bottom-5 -left-2 md:-left-5 bg-[var(--lemon)] sticker px-3 py-1 rotate-[-6deg] hand text-base md:text-xl">↑ this kitchen ✿</div>
+      </div>
+      <div class="col-span-12 sm:col-span-5 grid grid-cols-2 sm:grid-cols-1 gap-3 md:gap-4">
+        <div class="wobble"><img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=900" class="w-full h-32 md:h-44 object-cover squish-2 sticker rot-2"/></div>
+        <div class="wobble relative"><img src="https://images.unsplash.com/photo-1633113216288-a4d6b35066d5?w=900" class="w-full h-32 md:h-48 object-cover squish-3 sticker rot-3"/><div class="absolute -top-4 -right-4 w-12 md:w-16 h-12 md:h-16 star bg-[var(--pink)] sticker-pink flex items-center justify-center text-[var(--cream)] text-xs font-bold spin-slow">NEW!</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section id="products" class="py-12 md:py-20 relative overflow-hidden border-y-[3px] border-[var(--ink)] bg-[var(--cream)]">
+  <div class="absolute top-10 left-4 md:left-10 w-16 md:w-24 h-16 md:h-24 star bg-[var(--lime)] sticker rot-3 spin-slow"></div>
+  <div class="absolute bottom-10 right-4 md:right-10 w-20 md:w-32 h-20 md:h-32 squish bg-[var(--purple)] sticker wob"></div>
+
+  <div class="max-w-[1400px] mx-auto px-4 md:px-6 relative z-10">
+    <p class="hand text-[var(--cobalt)] text-2xl md:text-4xl text-center wob inline-block w-full">— the menu —</p>
+    <h2 class="shrik text-5xl sm:text-6xl md:text-[140px] text-center mt-2 text-[var(--pink)] -rotate-1">pick yer flavor!</h2>
+    <p class="text-center mt-4 font-bold text-stone-700 text-base md:text-lg">10 types of blinds. all custom. all bangers.</p>
+
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mt-10 md:mt-16">
+      <div class="bg-[var(--pink)] text-[var(--cream)] p-6 sticker-pink wobble">
+        <img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800" class="w-full h-44 object-cover squish"/>
+        <h3 class="shrik text-4xl mt-4">Roller blinds</h3>
+        <p class="mt-2 font-medium">the classic. clean, modern, never extra.</p>
+        <p class="hand text-3xl text-[var(--lemon)] mt-2">from $89 ✿</p>
+      </div>
+      <div class="bg-[var(--cobalt)] text-[var(--lemon)] p-6 sticker wobble">
+        <img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?w=800" class="w-full h-44 object-cover squish-2"/>
+        <h3 class="shrik text-4xl mt-4">Zebra shades</h3>
+        <p class="mt-2 font-medium text-[var(--cream)]">two layers, infinite vibes.</p>
+        <p class="hand text-3xl text-[var(--lime)] mt-2">$129 ↓</p>
+      </div>
+      <div class="bg-[var(--lemon)] text-[var(--ink)] p-6 sticker wobble">
+        <img src="https://images.unsplash.com/photo-1617104551722-3b2d51366400?w=800" class="w-full h-44 object-cover squish-3"/>
+        <h3 class="shrik text-4xl mt-4">Faux wood</h3>
+        <p class="mt-2 font-medium">cabin-core for your kitchen.</p>
+        <p class="hand text-3xl text-[var(--pink)] mt-2">$119 ↓</p>
+      </div>
+      <div class="bg-[var(--lime)] text-[var(--ink)] p-6 sticker wobble">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800" class="w-full h-44 object-cover squish"/>
+        <h3 class="shrik text-4xl mt-4">Cellular</h3>
+        <p class="mt-2 font-medium">honeycomb energy bills go brrr ↓.</p>
+        <p class="hand text-3xl text-[var(--cobalt)] mt-2">$149 ↓</p>
+      </div>
+      <div class="bg-[var(--orange)] text-[var(--cream)] p-6 sticker wobble">
+        <img src="https://images.unsplash.com/photo-1633113216288-a4d6b35066d5?w=800" class="w-full h-44 object-cover squish-2"/>
+        <h3 class="shrik text-4xl mt-4">Roman</h3>
+        <p class="mt-2 font-medium">soft &amp; fancy. main character.</p>
+        <p class="hand text-3xl text-[var(--lemon)] mt-2">$199 ↓</p>
+      </div>
+      <div class="bg-[var(--cream)] text-[var(--ink)] p-6 sticker wobble border-[var(--pink)]" style="border-color: var(--pink);">
+        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800" class="w-full h-44 object-cover squish-3"/>
+        <h3 class="shrik text-4xl mt-4">Skylight</h3>
+        <p class="mt-2 font-medium">skylights deserve outfits 2.</p>
+        <p class="hand text-3xl text-[var(--cobalt)] mt-2">$229 ↓</p>
+      </div>
+      <div class="bg-[var(--pink)] text-[var(--cream)] p-6 sticker-pink wobble">
+        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800" class="w-full h-44 object-cover squish"/>
+        <h3 class="shrik text-4xl mt-4">Perfect fit</h3>
+        <p class="mt-2 font-medium">no drilling. landlord-safe.</p>
+        <p class="hand text-3xl text-[var(--lemon)] mt-2">$99 ↓</p>
+      </div>
+      <div class="bg-[var(--purple)] text-[var(--lemon)] p-6 sticker wobble">
+        <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800" class="w-full h-44 object-cover squish-2"/>
+        <h3 class="shrik text-4xl mt-4">Printed films</h3>
+        <p class="mt-2 font-medium text-[var(--cream)]">vibes, but for glass.</p>
+        <p class="hand text-3xl text-[var(--lime)] mt-2">$59 ↓</p>
+      </div>
+      <div class="bg-[var(--lemon)] text-[var(--ink)] p-6 sticker wobble">
+        <img src="https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=800" class="w-full h-44 object-cover squish-3"/>
+        <h3 class="shrik text-4xl mt-4">Motorized</h3>
+        <p class="mt-2 font-medium">"alexa close the blinds" — you, soon.</p>
+        <p class="hand text-3xl text-[var(--pink)] mt-2">$249 ↓</p>
+      </div>
+      <div class="bg-[var(--ink)] text-[var(--lemon)] p-5 md:p-6 sticker wobble sm:col-span-2 md:col-span-3 flex flex-col md:flex-row gap-4 md:gap-6 items-center">
+        <img src="https://images.unsplash.com/photo-1618219740975-d40978bb7378?w=900" class="md:w-1/3 w-full h-48 md:h-56 object-cover squish"/>
+        <div>
+          <h3 class="shrik text-3xl sm:text-4xl md:text-7xl">Custom Made-to-Measure ✦</h3>
+          <p class="mt-3 text-[var(--cream)] font-medium text-base md:text-lg">weird window? arches? bay? skylight that points at the moon? we love that for you.</p>
+          <a class="inline-block mt-4 bg-[var(--pink)] text-[var(--cream)] px-5 md:px-6 py-3 hand text-xl md:text-2xl button-3d" style="box-shadow: 6px 6px 0 var(--lime);" href="#book">→ let's chat fr</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why -->
+<section id="vibes" class="py-12 md:py-20 bg-[var(--cobalt)] text-[var(--lemon)] relative overflow-hidden border-b-[3px] border-[var(--ink)]">
+  <div class="absolute -top-10 -right-10 w-36 md:w-56 h-36 md:h-56 star bg-[var(--pink)] spin-slow"></div>
+  <div class="absolute bottom-10 left-4 md:left-10 w-20 md:w-32 h-20 md:h-32 squish bg-[var(--lime)] wob"></div>
+
+  <div class="max-w-[1400px] mx-auto px-4 md:px-6 relative">
+    <p class="hand text-2xl md:text-4xl text-[var(--lime)]">— why bother w/ us —</p>
+    <h2 class="shrik text-5xl sm:text-6xl md:text-[160px] mt-2 text-[var(--cream)] leading-[0.9]">the energy is<br/><span class="text-[var(--lime)]">different.</span></h2>
+
+    <div class="grid md:grid-cols-3 gap-5 md:gap-6 mt-10 md:mt-16">
+      <div class="bg-[var(--lemon)] text-[var(--ink)] p-5 md:p-7 sticker rot-2">
+        <p class="display text-5xl md:text-7xl">✦01</p>
+        <h3 class="shrik text-2xl md:text-3xl mt-3">No showroom, no salespeople</h3>
+        <p class="mt-2 font-medium">we come 2 u. you wear sweats. we bring 400 samples.</p>
+      </div>
+      <div class="bg-[var(--pink)] text-[var(--cream)] p-5 md:p-7 sticker-pink rot-1">
+        <p class="display text-5xl md:text-7xl">✦02</p>
+        <h3 class="shrik text-2xl md:text-3xl mt-3">Same-week install</h3>
+        <p class="mt-2 font-medium">most jobs done in 7 days. no ghosting.</p>
+      </div>
+      <div class="bg-[var(--lime)] text-[var(--ink)] p-5 md:p-7 sticker rot-3">
+        <p class="display text-5xl md:text-7xl">✦03</p>
+        <h3 class="shrik text-2xl md:text-3xl mt-3">10-year warranty</h3>
+        <p class="mt-2 font-medium">it breaks → we fix. that's it. that's the policy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section id="reviews" class="py-12 md:py-20 relative overflow-hidden border-b-[3px] border-[var(--ink)] bg-[var(--cream)]">
+  <div class="max-w-[1400px] mx-auto px-4 md:px-6">
+    <p class="hand text-2xl md:text-4xl text-[var(--cobalt)] text-center">— receipts ✿ —</p>
+    <h2 class="shrik text-4xl sm:text-5xl md:text-[120px] text-center text-[var(--pink)] -rotate-1">what the ppl say.</h2>
+
+    <div class="grid md:grid-cols-3 gap-6 md:gap-8 mt-10 md:mt-14">
+      <div class="bg-[var(--cream)] p-7 sticker rot-3" style="border-color: var(--pink);">
+        <div class="text-[var(--orange)] text-2xl">★★★★★</div>
+        <p class="mt-3 font-medium text-lg">"genuinely so funny on the phone and then SHOWED UP ON TIME. 10/10 will gossip with the installers again."</p>
+        <p class="mt-5 hand text-3xl text-[var(--cobalt)]">— maddie · marda loop</p>
+      </div>
+      <div class="bg-[var(--lemon)] p-7 sticker rot-2">
+        <div class="text-[var(--cobalt)] text-2xl">★★★★★</div>
+        <p class="mt-3 font-medium text-lg">"I was bored by every blind site until I landed here. and the blinds bang. and the price was fair. 10/10."</p>
+        <p class="mt-5 hand text-3xl text-[var(--pink)]">— j · sunnyside</p>
+      </div>
+      <div class="bg-[var(--lime)] p-7 sticker rot-4">
+        <div class="text-[var(--pink)] text-2xl">★★★★★</div>
+        <p class="mt-3 font-medium text-lg">"motorized roller in the loft. say 'hey google goodnight' = bliss. why didn't I do this sooner."</p>
+        <p class="mt-5 hand text-3xl text-[var(--cobalt)]">— sam &amp; dee · east village</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="book" class="py-12 md:py-20 stripe-rainbow border-b-[3px] border-[var(--ink)] relative overflow-hidden">
+  <div class="absolute top-10 left-4 md:left-10 w-20 md:w-32 h-20 md:h-32 star bg-[var(--lemon)] sticker rot-2"></div>
+  <div class="absolute bottom-10 right-4 md:right-10 w-20 md:w-32 h-20 md:h-32 squish bg-[var(--cobalt)] sticker rot-3"></div>
+
+  <div class="max-w-[1100px] mx-auto px-4 md:px-6 text-center relative">
+    <div class="inline-block bg-[var(--cream)] sticker px-4 md:px-6 py-2 md:py-3 rotate-[-2deg] mb-6 hand text-xl md:text-3xl text-[var(--pink)]">↓ this is the part where u book ↓</div>
+    <h2 class="display text-5xl sm:text-6xl md:text-[150px] leading-[0.85] text-[var(--cream)]">tell us about<br/><span class="text-[var(--lemon)] marker text-[var(--lemon)]">your windows</span> ✿</h2>
+    <p class="hand text-2xl md:text-4xl text-[var(--cream)] mt-4 md:mt-6 rot-2">we text back within the hour fr</p>
+    <form class="mt-8 md:mt-10 max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <input class="bg-[var(--cream)] text-[var(--ink)] px-5 py-4 md:py-5 rounded-full font-bold sticker placeholder:text-[var(--pink-deep)]" placeholder="your name"/>
+      <input class="bg-[var(--cream)] text-[var(--ink)] px-5 py-4 md:py-5 rounded-full font-bold sticker placeholder:text-[var(--pink-deep)]" placeholder="postal"/>
+      <input class="bg-[var(--cream)] text-[var(--ink)] px-5 py-4 md:py-5 rounded-full font-bold sticker placeholder:text-[var(--pink-deep)]" placeholder="phone or email"/>
+      <button class="sm:col-span-3 bg-[var(--cobalt)] text-[var(--lemon)] display text-xl md:text-3xl py-5 md:py-6 rounded-full sticker button-3d mt-2">BOOK ME IN ✦</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[var(--ink)] text-[var(--lemon)] py-12 md:py-16 relative overflow-hidden">
+  <div class="absolute top-10 right-8 md:right-20 w-16 md:w-20 h-16 md:h-20 star bg-[var(--pink)] spin-slow"></div>
+  <div class="max-w-[1400px] mx-auto px-4 md:px-6 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 relative">
+    <div>
+      <p class="display text-4xl text-[var(--cream)]">SunLeo <span class="text-[var(--pink)]">✿</span></p>
+      <p class="mt-3 font-medium text-[var(--cream)]">unboring blinds, made in calgary fr fr.</p>
+    </div>
+    <div><p class="hand text-3xl text-[var(--pink)]">products</p><ul class="mt-2 text-[var(--cream)] space-y-1 font-medium"><li>Roller</li><li>Zebra</li><li>Roman</li><li>Motorized</li></ul></div>
+    <div><p class="hand text-3xl text-[var(--lime)]">areas</p><ul class="mt-2 text-[var(--cream)] space-y-1 font-medium"><li>Calgary</li><li>Airdrie</li><li>Cochrane</li><li>Okotoks</li></ul></div>
+    <div><p class="hand text-3xl text-[var(--cobalt)]" style="color: var(--lemon);">say hi</p><p class="mt-2 text-[var(--cream)] font-medium">(403) 555-1234<br/>hi@sunleo.ca</p></div>
+  </div>
+  <p class="text-center text-stone-500 text-xs mt-10 font-medium">© MMXXVI SunLeo · blinds, but make it fun ✿</p>
+</footer>
+
+</body>
+</html>

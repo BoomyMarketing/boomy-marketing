@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SunLeo — Soft Light Sanctuary | Calgary Blinds for Quiet Homes</title>
+<meta name="description" content="Quiet light, tactile fabric, gentle hours. SunLeo creates restful window treatments for Calgary homes that breathe."/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@200;300;400;500;600&family=Tenor+Sans&display=swap" rel="stylesheet"/>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+<link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet"/>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<style>
+  :root{
+    --beige: #E8DDC8;
+    --rose:  #D9A48F;
+    --sage:  #A4B494;
+    --cream: #F6EFE3;
+    --warm-cream: #FAF5EC;
+    --soft-black: #1A1A1A;
+    --ink: #2A2522;
+    --hairline: rgba(26,26,26,.10);
+    --hairline-strong: rgba(26,26,26,.22);
+  }
+  *{ -webkit-font-smoothing: antialiased; }
+  html, body{ background: var(--warm-cream); color: var(--ink); font-family: 'Manrope', sans-serif; font-weight: 300; letter-spacing: 0; }
+  .serif{ font-family: 'DM Serif Display', serif; font-weight: 400; letter-spacing: -0.01em; }
+  .tenor{ font-family: 'Tenor Sans', sans-serif; letter-spacing: 0.04em; }
+  .tabular{ font-variant-numeric: tabular-nums; }
+
+  /* ===== Breath animation ===== */
+  @keyframes breath{ 0%,100%{ transform: scale(1);} 50%{ transform: scale(1.022);}}
+  .breathe{ animation: breath 6s ease-in-out infinite; transform-origin: center;}
+  @keyframes breath-soft{ 0%,100%{ opacity:.85;} 50%{ opacity:1;}}
+  .breath-soft{ animation: breath-soft 6s ease-in-out infinite;}
+
+  /* ===== Soft glow particles cursor trail ===== */
+  .glow-dot{
+    position: fixed; width: 14px; height: 14px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(217,164,143,.6), rgba(217,164,143,0) 70%);
+    pointer-events: none; mix-blend-mode: multiply; z-index: 70;
+    transform: translate(-50%,-50%);
+  }
+
+  /* ===== Hairlines ===== */
+  .rule{ height:1px; background: var(--hairline); width: 100%; }
+
+  /* ===== Buttons (soft) ===== */
+  .btn-soft{ background: var(--ink); color: var(--cream); padding: 14px 30px; border-radius: 999px; font-family:'Tenor Sans'; font-size: 13px; letter-spacing:.18em; text-transform: uppercase; transition: transform .5s cubic-bezier(.16,1,.3,1), background .5s, box-shadow .5s; box-shadow: 0 14px 30px -16px rgba(26,26,26,.5);}
+  .btn-soft:hover{ transform: translateY(-1px); background:#000; box-shadow: 0 20px 36px -14px rgba(26,26,26,.55);}
+  .btn-ghost-soft{ border: 1px solid var(--hairline-strong); color: var(--ink); padding: 13px 30px; border-radius: 999px; font-family:'Tenor Sans'; font-size: 13px; letter-spacing:.18em; text-transform: uppercase; transition: all .5s cubic-bezier(.16,1,.3,1);}
+  .btn-ghost-soft:hover{ border-color: var(--ink); background: var(--ink); color: var(--cream);}
+
+  /* ===== Pills ===== */
+  .pill{ font-family:'Tenor Sans'; font-size: 11px; letter-spacing:.35em; text-transform: uppercase; opacity:.7;}
+
+  /* ===== Hero halo ===== */
+  .halo{
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(700px 500px at 70% 30%, rgba(217,164,143,.35), transparent 60%),
+      radial-gradient(600px 400px at 20% 70%, rgba(164,180,148,.28), transparent 60%),
+      radial-gradient(900px 600px at 50% 100%, rgba(232,221,200,.4), transparent 60%);
+    pointer-events:none;
+  }
+
+  /* ===== Hand-drawn circles ===== */
+  .scribble{ stroke: currentColor; fill:none; stroke-width:1.4; stroke-linecap:round;}
+
+  /* ===== Card with rounded soft borders ===== */
+  .soft-card{ background: var(--warm-cream); border-radius: 20px; border: 1px solid var(--hairline); transition: transform .8s cubic-bezier(.16,1,.3,1), box-shadow .8s;}
+  .soft-card:hover{ transform: translateY(-4px); box-shadow: 0 30px 50px -30px rgba(26,26,26,.18);}
+
+  /* ===== Auto carousel ===== */
+  .marquee{ display:flex; gap: 70px; animation: marquee 60s linear infinite; }
+  @keyframes marquee{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .marquee-slow{ animation-duration: 80s; }
+
+  /* ===== FAQ ===== */
+  details summary{ list-style:none; cursor:pointer; }
+  details summary::-webkit-details-marker{ display:none; }
+  details[open] .chev{ transform: rotate(45deg); }
+  .chev{ transition: transform .5s cubic-bezier(.16,1,.3,1);}
+
+  /* ===== Notif ===== */
+  @keyframes notifIn{ from{ transform: translateY(20px); opacity:0;} to{ transform: translateY(0); opacity:1;}}
+  .notif-in{ animation: notifIn .9s cubic-bezier(.16,1,.3,1);}
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+
+  /* Subtle parallax */
+  .lift{ transform: translateY(var(--lift,0)); transition: transform .2s linear;}
+  ::-webkit-scrollbar{ width:8px;} ::-webkit-scrollbar-thumb{ background: var(--hairline-strong); border-radius:8px;}
+
+  /* Underline grow */
+  .ulink{ background-image: linear-gradient(currentColor,currentColor); background-size: 0 1px; background-repeat:no-repeat; background-position: 0 100%; transition: background-size .6s cubic-bezier(.16,1,.3,1);}
+  .ulink:hover{ background-size: 100% 1px;}
+
+  /* Number flourish */
+  .figure-num{ font-family: 'DM Serif Display'; font-style: italic; letter-spacing: -0.04em;}
+
+  /* ========================================================== */
+  /* === MOBILE RESPONSIVE PATCH ================================ */
+  /* ========================================================== */
+  html, body { overflow-x: hidden; max-width: 100vw; }
+  img, svg, video { max-width: 100%; height: auto; }
+
+  /* Hide cursor trail on touch devices — expensive + meaningless */
+  @media (hover: none), (max-width: 1023px) {
+    .glow-dot { display: none !important; }
+  }
+
+  /* At <lg, force the lg:grid-cols-12 containers to stack as flex columns */
+  @media (max-width: 1023px) {
+    section .grid.lg\:grid-cols-12 { display: flex !important; flex-direction: column !important; }
+    section .grid.lg\:grid-cols-12 > * { min-width: 0 !important; width: 100% !important; }
+  }
+
+  @media (max-width: 767px) {
+    /* Pill labels wrap nicely on small screens */
+    .pill { letter-spacing: .24em; }
+
+    /* iOS form zoom prevention */
+    input, textarea, select { font-size: 16px !important; }
+
+    /* Touch targets */
+    .btn-soft, .btn-ghost-soft { min-height: 44px; padding: 12px 26px; }
+
+    /* Disable hover transform on touch (no hover, only triggers stuck state) */
+    .soft-card:hover { transform: none !important; box-shadow: none !important; }
+
+    /* Marquee tighter gap on phone, narrower review cards */
+    .marquee { gap: 24px !important; animation-duration: 50s; }
+    .marquee article.min-w-\[440px\] { min-width: 280px !important; padding: 20px !important; }
+    .marquee article .serif { font-size: 18px !important; }
+
+    /* Float pill cards under the hero image — avoid them overflowing */
+    .absolute.-bottom-8.-left-8 { left: 8px !important; bottom: -12px !important; max-width: calc(100vw - 24px); }
+
+    /* Reduce the breath scale slightly on phone (subtler) */
+    .breathe { animation-duration: 8s; }
+
+    /* 3-column stats grid → 1 column for clearer reading */
+    section .grid.grid-cols-3 { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* 4-col swatch / room grids → 2 cols on mobile */
+    section .grid.grid-cols-4 { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* 6-col footer */
+    footer .grid.md\:grid-cols-6 { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* Round 10x10 buttons (carousel arrows) → 44 */
+    .w-10.h-10.rounded-full { width: 44px !important; height: 44px !important; }
+
+    /* Serif italics on mobile word-wrap */
+    .serif.italic { word-wrap: break-word; overflow-wrap: anywhere; }
+  }
+</style>
+</head>
+<body class="relative overflow-x-hidden">
+
+<!-- Trust bar -->
+<div class="bg-[var(--soft-black)] text-[var(--cream)]">
+  <div class="max-w-[1280px] mx-auto px-5 py-2.5 flex items-center justify-between gap-4 text-[11px] tenor uppercase tracking-[.25em]">
+    <span class="hidden sm:flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-[var(--rose)]"></span> A quiet, Calgary atelier since 2007</span>
+    <span class="sm:hidden">Calgary atelier · 2007</span>
+    <div class="hidden md:flex items-center gap-6">
+      <a href="tel:4035550199" class="ulink">(403) 555-0199</a>
+      <span class="opacity-60">Tue–Sat 10–6 · Sun by appointment</span>
+      <span class="text-[var(--rose)]">Free in-home visit</span>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-[var(--warm-cream)]/85 backdrop-blur-md border-b border-[var(--hairline)]">
+  <div class="max-w-[1280px] mx-auto px-5 py-4 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3">
+      <svg width="42" height="42" viewBox="0 0 60 60"><circle cx="30" cy="30" r="14" fill="none" stroke="#1A1A1A" stroke-width="1.2"/><circle cx="30" cy="30" r="6" fill="#D9A48F"/></svg>
+      <span class="serif text-3xl">SunLeo</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-9 tenor text-[12px] uppercase tracking-[.22em]">
+      <a class="ulink" href="#">Window treatments</a>
+      <a class="ulink" href="#">Drapery</a>
+      <a class="ulink" href="#">Wellness rooms</a>
+      <a class="ulink" href="#">Atelier</a>
+      <a class="ulink" href="#">Calgary</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <span class="hidden md:inline tenor text-[12px] uppercase tracking-[.22em]">⌕</span>
+      <span class="hidden md:inline tenor text-[12px] uppercase tracking-[.22em]">Saved · 0</span>
+      <a href="#book" class="btn-soft">Book a quiet visit</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========= HERO ========= -->
+<section class="relative pt-20 pb-32 overflow-hidden">
+  <div class="halo"></div>
+  <div class="max-w-[1280px] mx-auto px-5 relative">
+    <div class="grid lg:grid-cols-12 gap-10 items-end">
+      <div class="lg:col-span-7">
+        <p class="pill mb-7" data-aos="fade-up">Volume III · Soft Light Sanctuary · 2026</p>
+        <h1 class="serif text-[clamp(56px,8.5vw,140px)] leading-[0.92] mb-7" data-aos="fade-up" data-aos-delay="100">
+          A window<br/>
+          <em class="italic text-[var(--rose)]">should</em><br/>
+          breathe with<br/>
+          <span class="font-normal">the room.</span>
+        </h1>
+        <p class="text-[17px] leading-[1.85] max-w-[520px] opacity-80 mb-10 font-light" data-aos="fade-up" data-aos-delay="200">
+          SunLeo crafts window treatments for Calgary homes that prefer quiet — soft linens, mohair drapery, hand-pleated shades that rise on a hush. Slow living, made in our 17 Avenue atelier.
+        </p>
+        <div class="flex flex-wrap items-center gap-4 mb-12" data-aos="fade-up" data-aos-delay="300">
+          <a href="#book" class="btn-soft">Book a quiet visit</a>
+          <a href="#shop" class="btn-ghost-soft">View the collection</a>
+        </div>
+        <div class="flex items-center gap-8 pill" data-aos="fade-up" data-aos-delay="400">
+          <span>★ 4.9 · Google</span>
+          <span>·</span>
+          <span>Lifetime mechanism</span>
+          <span class="hidden sm:inline">·</span>
+          <span class="hidden sm:inline">Made in Calgary</span>
+        </div>
+      </div>
+      <div class="lg:col-span-5 relative" data-aos="fade-left" data-aos-duration="1400">
+        <div class="aspect-[3/4] rounded-[2px] overflow-hidden relative breathe">
+          <img src="https://picsum.photos/seed/sunleo21hero/700/930" class="w-full h-full object-cover" alt=""/>
+        </div>
+        <div class="absolute -bottom-8 -left-8 bg-[var(--cream)] border border-[var(--hairline)] rounded-[2px] px-5 py-4 max-w-[220px] shadow-xl breath-soft">
+          <p class="pill mb-1">Now in studio</p>
+          <p class="serif text-xl italic leading-tight">Linen, mohair, dawn</p>
+          <p class="text-[12px] opacity-60 mt-1">Spring '26 fabric lookbook.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust strip -->
+<section class="border-y border-[var(--hairline)] bg-[var(--cream)]">
+  <div class="max-w-[1280px] mx-auto px-5 py-5 flex flex-wrap items-center justify-between gap-5 pill">
+    <span>★ BBB A+ Accredited</span>
+    <span>● Top Choice Calgary 2024</span>
+    <span>♦ Houzz Best of 2024</span>
+    <span>◐ Affirm · Klarna · Pay in 4</span>
+    <span>★ Google 4.9 · 1,247</span>
+    <span>○ Bonded · Licensed · WCB</span>
+  </div>
+</section>
+
+<!-- ========= INTRO QUOTE ========= -->
+<section class="py-28">
+  <div class="max-w-[920px] mx-auto px-5 text-center">
+    <p class="pill mb-8">§ 02 · The philosophy</p>
+    <p class="serif text-[clamp(30px,3.6vw,56px)] leading-[1.25] italic">"A room is dressed when you stop noticing its windows. When the light feels like it has always lived there."</p>
+    <p class="pill mt-8 not-italic">— Elena Park, founding designer</p>
+  </div>
+</section>
+
+<!-- ========= COLLECTION (PRODUCT GRID 3x3 + 1) ========= -->
+<section class="py-24 bg-[var(--beige)]" id="shop">
+  <div class="max-w-[1280px] mx-auto px-5">
+    <div class="flex items-end justify-between mb-14 flex-wrap gap-6">
+      <div>
+        <p class="pill mb-4">§ 03 · The collection</p>
+        <h2 class="serif text-[clamp(40px,5.8vw,84px)] leading-[1]">Slow fabrics. <em class="italic">Quiet mechanisms.</em></h2>
+      </div>
+      <div class="flex gap-2 pill">
+        <span class="px-3 py-1.5 border border-[var(--hairline-strong)] rounded-full">Sort · curated</span>
+        <span class="px-3 py-1.5 border border-[var(--hairline-strong)] rounded-full">Filter · all</span>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a href="#" class="soft-card overflow-hidden block">
+        <div class="aspect-[4/5] overflow-hidden relative">
+          <img src="https://picsum.photos/seed/spa01/700/870" class="w-full h-full object-cover" alt=""/>
+          <span class="absolute top-3 left-3 bg-[var(--cream)]/90 backdrop-blur px-3 py-1 rounded-full pill">Hand-stitched</span>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-2"><h3 class="serif text-2xl">Linen Roller</h3><span class="tabular text-[13px]">★ 4.9</span></div>
+          <p class="text-[14px] opacity-70 font-light mb-3">Sheer Belgian flax. 14 tones of stone, oat, and dawn.</p>
+          <div class="flex items-center justify-between text-[13px]"><span class="opacity-50 line-through tabular">$329</span><span class="font-medium tabular">from $239</span></div>
+        </div>
+      </a>
+      <a href="#" class="soft-card overflow-hidden block"><div class="aspect-[4/5] overflow-hidden"><img src="https://picsum.photos/seed/spa02/700/870" class="w-full h-full object-cover"/></div><div class="p-6"><div class="flex items-center justify-between mb-2"><h3 class="serif text-2xl">Mohair Drapery</h3><span class="tabular text-[13px]">★ 4.9</span></div><p class="text-[14px] opacity-70 font-light mb-3">Hand-pleated. Whisper-quiet rails. Hotel-grade weave.</p><div class="flex items-center justify-between text-[13px]"><span class="opacity-50 line-through tabular">$1,490</span><span class="font-medium tabular">from $1,189</span></div></div></a>
+      <a href="#" class="soft-card overflow-hidden block"><div class="aspect-[4/5] overflow-hidden"><img src="https://picsum.photos/seed/spa03/700/870" class="w-full h-full object-cover"/></div><div class="p-6"><div class="flex items-center justify-between mb-2"><h3 class="serif text-2xl">Honeycomb Cellular</h3><span class="tabular text-[13px]">★ 5.0</span></div><p class="text-[14px] opacity-70 font-light mb-3">R-5.0. Top-down, bottom-up. Insulates against winter.</p><div class="flex items-center justify-between text-[13px]"><span class="opacity-50 line-through tabular">$429</span><span class="font-medium tabular">from $329</span></div></div></a>
+      <a href="#" class="soft-card overflow-hidden block"><div class="aspect-[4/5] overflow-hidden relative"><img src="https://picsum.photos/seed/spa04/700/870" class="w-full h-full object-cover"/><span class="absolute top-3 left-3 bg-[var(--rose)]/90 text-[var(--cream)] px-3 py-1 rounded-full pill">New</span></div><div class="p-6"><div class="flex items-center justify-between mb-2"><h3 class="serif text-2xl">Roman Shades</h3><span class="tabular text-[13px]">★ 4.9</span></div><p class="text-[14px] opacity-70 font-light mb-3">Sculptural, hobbled folds. Forty-eight designer weaves.</p><div class="flex items-center justify-between text-[13px]"><span class="opacity-50 line-through tabular">$489</span><span class="font-medium tabular">from $389</span></div></div></a>
+      <a href="#" class="soft-card overflow-hidden block"><div class="aspect-[4/5] overflow-hidden"><img src="https://picsum.photos/seed/spa05/700/870" class="w-full h-full object-cover"/></div><div class="p-6"><div class="flex items-center justify-between mb-2"><h3 class="serif text-2xl">Woven Wood</h3><span class="tabular text-[13px]">★ 4.8</span></div><p class="text-[14px] opacity-70 font-light mb-3">Bamboo, jute, grass-cloth. Earth-grade textures.</p><div class="flex items-center justify-between text-[13px]"><span class="opacity-50 line-through tabular">$389</span><span class="font-medium tabular">from $299</span></div></div></a>
+      <a href="#" class="soft-card overflow-hidden block"><div class="aspect-[4/5] overflow-hidden"><img src="https://picsum.photos/seed/spa06/700/870" class="w-full h-full object-cover"/></div><div class="p-6"><div class="flex items-center justify-between mb-2"><h3 class="serif text-2xl">Shutters</h3><span class="tabular text-[13px]">★ 5.0</span></div><p class="text-[14px] opacity-70 font-light mb-3">Furniture-grade basswood, hand-finished.</p><div class="flex items-center justify-between text-[13px]"><span class="opacity-50 line-through tabular">$1,290</span><span class="font-medium tabular">from $989</span></div></div></a>
+      <a href="#" class="soft-card overflow-hidden block"><div class="aspect-[4/5] overflow-hidden"><img src="https://picsum.photos/seed/spa07/700/870" class="w-full h-full object-cover"/></div><div class="p-6"><div class="flex items-center justify-between mb-2"><h3 class="serif text-2xl">Zebra · Day &amp; Night</h3><span class="tabular text-[13px]">★ 4.8</span></div><p class="text-[14px] opacity-70 font-light mb-3">Alternating sheer-and-solid bands. Tilt to any hour.</p><div class="flex items-center justify-between text-[13px]"><span class="opacity-50 line-through tabular">$349</span><span class="font-medium tabular">from $259</span></div></div></a>
+      <a href="#" class="soft-card overflow-hidden block"><div class="aspect-[4/5] overflow-hidden relative"><img src="https://picsum.photos/seed/spa08/700/870" class="w-full h-full object-cover"/><span class="absolute top-3 left-3 bg-[var(--sage)]/90 text-[var(--cream)] px-3 py-1 rounded-full pill">Quiet motor</span></div><div class="p-6"><div class="flex items-center justify-between mb-2"><h3 class="serif text-2xl">Motorized Drapery</h3><span class="tabular text-[13px]">★ 4.9</span></div><p class="text-[14px] opacity-70 font-light mb-3">38 dB whisper. Lutron, Somfy, HomeKit, Matter.</p><div class="flex items-center justify-between text-[13px]"><span class="opacity-50 line-through tabular">$1,490</span><span class="font-medium tabular">from $1,189</span></div></div></a>
+      <a href="#" class="soft-card overflow-hidden block"><div class="aspect-[4/5] overflow-hidden"><img src="https://picsum.photos/seed/spa09/700/870" class="w-full h-full object-cover"/></div><div class="p-6"><div class="flex items-center justify-between mb-2"><h3 class="serif text-2xl">Faux Wood</h3><span class="tabular text-[13px]">★ 4.7</span></div><p class="text-[14px] opacity-70 font-light mb-3">For wet rooms. Humidity-proof. UV stable.</p><div class="flex items-center justify-between text-[13px]"><span class="opacity-50 line-through tabular">$229</span><span class="font-medium tabular">from $169</span></div></div></a>
+      <a href="#" class="soft-card overflow-hidden block"><div class="aspect-[4/5] overflow-hidden"><img src="https://picsum.photos/seed/spa10/700/870" class="w-full h-full object-cover"/></div><div class="p-6"><div class="flex items-center justify-between mb-2"><h3 class="serif text-2xl">Outdoor Solar</h3><span class="tabular text-[13px]">★ 4.8</span></div><p class="text-[14px] opacity-70 font-light mb-3">Pergolas &amp; sunrooms. Wind-rated, UV 99%.</p><div class="flex items-center justify-between text-[13px]"><span class="opacity-50 line-through tabular">$789</span><span class="font-medium tabular">from $629</span></div></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ========= HOW IT WORKS ========= -->
+<section class="py-28 bg-[var(--warm-cream)]">
+  <div class="max-w-[1280px] mx-auto px-5">
+    <p class="pill mb-4">§ 04 · The unhurried process</p>
+    <h2 class="serif text-[clamp(40px,5.4vw,80px)] leading-[1] mb-16 max-w-[820px]">Three quiet steps to a softer room.</h2>
+
+    <div class="grid md:grid-cols-3 gap-10">
+      <div>
+        <svg width="64" height="64" viewBox="0 0 64 64" class="mb-6"><circle class="scribble text-[var(--rose)]" cx="32" cy="32" r="22"/><text x="32" y="40" text-anchor="middle" font-family="DM Serif Display" font-size="22" fill="#1A1A1A" font-style="italic">I</text></svg>
+        <h3 class="serif text-3xl mb-3">The visit</h3>
+        <p class="text-[15px] opacity-80 leading-[1.8] font-light">A specialist arrives with 200 swatches, a printed lookbook, and a cup of tea. We sit on your sofa, watch the light, and sketch by hand. The visit lasts an hour. The quote is printed before we leave.</p>
+      </div>
+      <div>
+        <svg width="64" height="64" viewBox="0 0 64 64" class="mb-6"><circle class="scribble text-[var(--sage)]" cx="32" cy="32" r="22"/><text x="32" y="40" text-anchor="middle" font-family="DM Serif Display" font-size="22" fill="#1A1A1A" font-style="italic">II</text></svg>
+        <h3 class="serif text-3xl mb-3">The atelier</h3>
+        <p class="text-[15px] opacity-80 leading-[1.8] font-light">Twelve makers on 17 Avenue cut, stitch, and quality-check your treatments. Eight business days, no rush. You'll receive a photograph of your shades on the bench before they ship.</p>
+      </div>
+      <div>
+        <svg width="64" height="64" viewBox="0 0 64 64" class="mb-6"><circle class="scribble text-[var(--rose)]" cx="32" cy="32" r="22"/><text x="32" y="40" text-anchor="middle" font-family="DM Serif Display" font-size="22" fill="#1A1A1A" font-style="italic">III</text></svg>
+        <h3 class="serif text-3xl mb-3">The install</h3>
+        <p class="text-[15px] opacity-80 leading-[1.8] font-light">A two-person crew arrives in clean shoes, drop cloths, and a small vacuum. We test every cord, motor, and pairing. A one-year tune-up visit is included, no charge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========= REVIEWS — slow auto carousel ========= -->
+<section class="py-28 bg-[var(--cream)] overflow-hidden">
+  <div class="max-w-[1280px] mx-auto px-5">
+    <div class="text-center mb-14">
+      <p class="pill mb-4">§ 05 · Soft testimonies</p>
+      <h2 class="serif text-[clamp(40px,5.4vw,80px)] leading-[1]">A standing ovation, <em class="italic">whispered</em>.</h2>
+      <div class="mt-6 inline-flex items-center gap-4 pill">
+        <span>★★★★★</span><span>4.9 / 5 · Google</span><span>·</span><span>1,247 reviews</span>
+      </div>
+    </div>
+  </div>
+  <div class="marquee marquee-slow">
+    <div class="flex gap-7 pr-7">
+      <article class="min-w-[440px] bg-[var(--warm-cream)] rounded-[20px] p-8 border border-[var(--hairline)]">
+        <p class="serif text-[24px] italic leading-snug mb-5">"The mohair drapery weighs the room like a held breath. It's the softest thing in our home — and we have three cats."</p>
+        <div class="flex items-center gap-3"><img src="https://picsum.photos/seed/spar1/64/64" class="w-12 h-12 rounded-full"/><div><div class="serif text-xl">Eleanor M.</div><div class="pill !text-[10px] !tracking-[.22em] !opacity-70">Mount Royal · April '26</div></div></div>
+      </article>
+      <article class="min-w-[440px] bg-[var(--warm-cream)] rounded-[20px] p-8 border border-[var(--hairline)]">
+        <p class="serif text-[24px] italic leading-snug mb-5">"They asked us how the room is used in the morning, then how it's used at night. No one had ever done that."</p>
+        <div class="flex items-center gap-3"><img src="https://picsum.photos/seed/spar2/64/64" class="w-12 h-12 rounded-full"/><div><div class="serif text-xl">Devi &amp; Marcus D.</div><div class="pill !text-[10px] !tracking-[.22em] !opacity-70">Tuscany · March '26</div></div></div>
+      </article>
+      <article class="min-w-[440px] bg-[var(--warm-cream)] rounded-[20px] p-8 border border-[var(--hairline)]">
+        <p class="serif text-[24px] italic leading-snug mb-5">"My nursery shades open with a HomeKit sunrise scene. The baby thinks she's a Disney princess."</p>
+        <div class="flex items-center gap-3"><img src="https://picsum.photos/seed/spar3/64/64" class="w-12 h-12 rounded-full"/><div><div class="serif text-xl">Priya K.</div><div class="pill !text-[10px] !tracking-[.22em] !opacity-70">Bridgeland · February '26</div></div></div>
+      </article>
+      <article class="min-w-[440px] bg-[var(--warm-cream)] rounded-[20px] p-8 border border-[var(--hairline)]">
+        <p class="serif text-[24px] italic leading-snug mb-5">"The installer fixed our crooked 1912 window frame and didn't charge a cent extra. That's a Calgary value."</p>
+        <div class="flex items-center gap-3"><img src="https://picsum.photos/seed/spar4/64/64" class="w-12 h-12 rounded-full"/><div><div class="serif text-xl">Liam O.</div><div class="pill !text-[10px] !tracking-[.22em] !opacity-70">Inglewood · April '26</div></div></div>
+      </article>
+    </div>
+    <div class="flex gap-7 pr-7" aria-hidden="true">
+      <article class="min-w-[440px] bg-[var(--warm-cream)] rounded-[20px] p-8 border border-[var(--hairline)]"><p class="serif text-[24px] italic leading-snug mb-5">"The mohair drapery weighs the room like a held breath. It's the softest thing in our home — and we have three cats."</p><div class="flex items-center gap-3"><img src="https://picsum.photos/seed/spar1/64/64" class="w-12 h-12 rounded-full"/><div><div class="serif text-xl">Eleanor M.</div><div class="pill !text-[10px] !tracking-[.22em] !opacity-70">Mount Royal · April '26</div></div></div></article>
+      <article class="min-w-[440px] bg-[var(--warm-cream)] rounded-[20px] p-8 border border-[var(--hairline)]"><p class="serif text-[24px] italic leading-snug mb-5">"They asked us how the room is used in the morning, then how it's used at night."</p><div class="flex items-center gap-3"><img src="https://picsum.photos/seed/spar2/64/64" class="w-12 h-12 rounded-full"/><div><div class="serif text-xl">Devi &amp; Marcus D.</div><div class="pill !text-[10px] !tracking-[.22em] !opacity-70">Tuscany · March '26</div></div></div></article>
+      <article class="min-w-[440px] bg-[var(--warm-cream)] rounded-[20px] p-8 border border-[var(--hairline)]"><p class="serif text-[24px] italic leading-snug mb-5">"My nursery shades open with a HomeKit sunrise scene. The baby thinks she's a Disney princess."</p><div class="flex items-center gap-3"><img src="https://picsum.photos/seed/spar3/64/64" class="w-12 h-12 rounded-full"/><div><div class="serif text-xl">Priya K.</div><div class="pill !text-[10px] !tracking-[.22em] !opacity-70">Bridgeland · February '26</div></div></div></article>
+      <article class="min-w-[440px] bg-[var(--warm-cream)] rounded-[20px] p-8 border border-[var(--hairline)]"><p class="serif text-[24px] italic leading-snug mb-5">"The installer fixed our crooked 1912 window frame and didn't charge a cent extra."</p><div class="flex items-center gap-3"><img src="https://picsum.photos/seed/spar4/64/64" class="w-12 h-12 rounded-full"/><div><div class="serif text-xl">Liam O.</div><div class="pill !text-[10px] !tracking-[.22em] !opacity-70">Inglewood · April '26</div></div></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ========= COMPARISON ========= -->
+<section class="py-28 bg-[var(--warm-cream)]">
+  <div class="max-w-[1280px] mx-auto px-5">
+    <p class="pill mb-4">§ 06 · See how we are different</p>
+    <h2 class="serif text-[clamp(40px,5.4vw,80px)] leading-[1] mb-12 max-w-[820px]">Big-box. Online-only. <em class="italic">SunLeo.</em></h2>
+    <div class="overflow-x-auto rounded-[24px] border border-[var(--hairline)]">
+      <table class="w-full text-left">
+        <thead class="bg-[var(--beige)]"><tr>
+          <th class="px-6 py-5 pill">Feature</th>
+          <th class="px-6 py-5 pill">Big-box</th>
+          <th class="px-6 py-5 pill">Online-only</th>
+          <th class="px-6 py-5 pill bg-[var(--rose)] text-[var(--cream)]">SunLeo</th>
+        </tr></thead>
+        <tbody class="text-[14px] font-light">
+          <tr class="border-t border-[var(--hairline)]"><td class="px-6 py-4 serif text-lg">In-home visit</td><td class="px-6 py-4 opacity-60">$99</td><td class="px-6 py-4 opacity-60">DIY</td><td class="px-6 py-4 bg-[var(--rose)]/10 font-medium">Free, 48 hrs</td></tr>
+          <tr class="border-t border-[var(--hairline)]"><td class="px-6 py-4 serif text-lg">Custom widths</td><td class="px-6 py-4 opacity-60">Limited</td><td class="px-6 py-4 opacity-60">Maybe</td><td class="px-6 py-4 bg-[var(--rose)]/10 font-medium">To 1/8"</td></tr>
+          <tr class="border-t border-[var(--hairline)]"><td class="px-6 py-4 serif text-lg">Made locally</td><td class="px-6 py-4 opacity-60">No</td><td class="px-6 py-4 opacity-60">No</td><td class="px-6 py-4 bg-[var(--rose)]/10 font-medium">Yes, 8 days</td></tr>
+          <tr class="border-t border-[var(--hairline)]"><td class="px-6 py-4 serif text-lg">Warranty</td><td class="px-6 py-4 opacity-60">2 yr</td><td class="px-6 py-4 opacity-60">1 yr</td><td class="px-6 py-4 bg-[var(--rose)]/10 font-medium">Lifetime mech.</td></tr>
+          <tr class="border-t border-[var(--hairline)]"><td class="px-6 py-4 serif text-lg">Install crew</td><td class="px-6 py-4 opacity-60">Subcontract</td><td class="px-6 py-4 opacity-60">DIY</td><td class="px-6 py-4 bg-[var(--rose)]/10 font-medium">Employees</td></tr>
+          <tr class="border-t border-[var(--hairline)]"><td class="px-6 py-4 serif text-lg">Financing</td><td class="px-6 py-4 opacity-60">Store card</td><td class="px-6 py-4 opacity-60">Affirm</td><td class="px-6 py-4 bg-[var(--rose)]/10 font-medium">0% · 24 mo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========= BUILT FOR CALGARY ========= -->
+<section class="py-28 bg-[var(--beige)] relative overflow-hidden">
+  <div class="max-w-[1280px] mx-auto px-5 grid lg:grid-cols-12 gap-12 items-center relative">
+    <div class="lg:col-span-6">
+      <p class="pill mb-4">§ 07 · Calgary at heart</p>
+      <h2 class="serif text-[clamp(40px,5.4vw,80px)] leading-[1] mb-6">From the foothills <em class="italic">to your front room.</em></h2>
+      <p class="text-[16px] leading-[1.85] opacity-80 font-light max-w-[560px] mb-9">We measure four to eight Calgary homes a day. We know which neighbourhoods see prairie wind on west glass, which heritage windows need a 1/16" of grace, which kitchens get afternoon shimmer.</p>
+      <div class="flex flex-wrap gap-2 mb-12">
+        <span class="px-3 py-1 rounded-full border border-[var(--hairline-strong)] pill">Tuscany</span>
+        <span class="px-3 py-1 rounded-full border border-[var(--hairline-strong)] pill">Mount Royal</span>
+        <span class="px-3 py-1 rounded-full border border-[var(--hairline-strong)] pill">Bridgeland</span>
+        <span class="px-3 py-1 rounded-full border border-[var(--hairline-strong)] pill">Aspen Woods</span>
+        <span class="px-3 py-1 rounded-full border border-[var(--hairline-strong)] pill">Inglewood</span>
+        <span class="px-3 py-1 rounded-full border border-[var(--hairline-strong)] pill">Hillhurst</span>
+        <span class="px-3 py-1 rounded-full border border-[var(--hairline-strong)] pill">Beltline</span>
+        <span class="px-3 py-1 rounded-full border border-[var(--hairline-strong)] pill">Tuxedo Park</span>
+        <span class="px-3 py-1 rounded-full border border-[var(--hairline-strong)] pill">Kensington</span>
+        <span class="px-3 py-1 rounded-full border border-[var(--hairline-strong)] pill">McKenzie Towne</span>
+        <span class="px-3 py-1 rounded-full border border-[var(--hairline-strong)] pill">Auburn Bay</span>
+        <span class="px-3 py-1 rounded-full border border-[var(--hairline-strong)] pill">+ 38 more</span>
+      </div>
+      <div class="grid grid-cols-3 gap-6 max-w-[600px]">
+        <div><div class="figure-num text-[64px] leading-none tabular counter" data-target="2412">0</div><div class="pill mt-2">Calgary homes</div></div>
+        <div><div class="figure-num text-[64px] leading-none tabular counter" data-target="19">0</div><div class="pill mt-2">Years on 17 Ave</div></div>
+        <div><div class="figure-num text-[64px] leading-none tabular counter" data-target="49">0</div><div class="pill mt-2">Communities</div></div>
+      </div>
+    </div>
+    <div class="lg:col-span-6 relative">
+      <div class="aspect-[4/5] rounded-[20px] overflow-hidden border border-[var(--hairline)] bg-[var(--warm-cream)] relative">
+        <svg viewBox="0 0 400 500" class="w-full h-full">
+          <defs><radialGradient id="g1" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#D9A48F" stop-opacity=".4"/><stop offset="60%" stop-color="#D9A48F" stop-opacity="0"/></radialGradient></defs>
+          <rect width="400" height="500" fill="url(#g1)"/>
+          <path d="M40 250 Q200 100 360 250 T 40 250" stroke="#A4B494" stroke-width=".7" fill="none" opacity=".5"/>
+          <path d="M60 360 Q200 220 340 360" stroke="#D9A48F" stroke-width=".7" fill="none" opacity=".5"/>
+          <g fill="#1A1A1A"><circle cx="200" cy="250" r="5"/><circle cx="140" cy="200" r="2.5"/><circle cx="260" cy="210" r="2.5"/><circle cx="180" cy="320" r="2.5"/><circle cx="240" cy="300" r="2.5"/><circle cx="120" cy="290" r="2.5"/><circle cx="290" cy="270" r="2.5"/></g>
+          <text x="200" y="246" font-family="DM Serif Display" font-style="italic" font-size="15" text-anchor="middle" fill="#1A1A1A">SunLeo Atelier</text>
+          <text x="200" y="266" font-size="9" text-anchor="middle" fill="#1A1A1A" opacity=".6" font-family="Tenor Sans" letter-spacing=".25em">2122 — 17 AVE SE</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========= SMART HOME ========= -->
+<section class="py-28 bg-[var(--warm-cream)]">
+  <div class="max-w-[1280px] mx-auto px-5 grid lg:grid-cols-2 gap-14 items-center">
+    <div class="relative">
+      <div class="aspect-square rounded-[20px] overflow-hidden bg-[var(--cream)]">
+        <img src="https://picsum.photos/seed/spasmart/900/900" class="w-full h-full object-cover breath-soft"/>
+      </div>
+      <div class="absolute top-6 left-6 bg-[var(--warm-cream)] border border-[var(--hairline)] rounded-[14px] p-4 shadow-xl">
+        <p class="pill mb-1">Hey Siri</p>
+        <p class="serif text-xl italic">"Quiet evening."</p>
+        <p class="text-[12px] opacity-60 mt-1 font-light">→ Drapery 80% · Sheers 30% · Lights warm</p>
+      </div>
+    </div>
+    <div>
+      <p class="pill mb-4">§ 08 · Smart, gently</p>
+      <h2 class="serif text-[clamp(36px,5vw,72px)] leading-[1] mb-6">Schedules, scenes, <em class="italic">silences.</em></h2>
+      <p class="opacity-80 leading-[1.85] font-light max-w-[540px] mb-9">Every motorized treatment ships Lutron, Somfy, and Eve. Speaks HomeKit, Matter, Alexa, and Google. We program your scenes — sunrise, dinner, away, sleep — and leave a printed remote card.</p>
+      <div class="grid grid-cols-4 gap-3">
+        <div class="bg-[var(--cream)] border border-[var(--hairline)] rounded-[14px] p-5 text-center"><div class="serif text-lg">Alexa</div></div>
+        <div class="bg-[var(--cream)] border border-[var(--hairline)] rounded-[14px] p-5 text-center"><div class="serif text-lg">Google</div></div>
+        <div class="bg-[var(--cream)] border border-[var(--hairline)] rounded-[14px] p-5 text-center"><div class="serif text-lg">HomeKit</div></div>
+        <div class="bg-[var(--cream)] border border-[var(--hairline)] rounded-[14px] p-5 text-center"><div class="serif text-lg">Matter</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BNPL banner — soft -->
+<section class="py-12 bg-[var(--sage)] text-[var(--soft-black)]">
+  <div class="max-w-[1280px] mx-auto px-5 flex flex-wrap items-center justify-between gap-6">
+    <div>
+      <p class="pill mb-2">Buy now, pay later</p>
+      <h3 class="serif text-3xl md:text-4xl">0% APR for twelve months. <em class="italic">Affirm, Klarna, Pay in 4.</em></h3>
+    </div>
+    <a href="#book" class="btn-soft">See your monthly</a>
+  </div>
+</section>
+
+<!-- ========= BLOG ========= -->
+<section class="py-28 bg-[var(--warm-cream)]">
+  <div class="max-w-[1280px] mx-auto px-5">
+    <div class="flex items-end justify-between mb-12 flex-wrap gap-5">
+      <div><p class="pill mb-4">§ 09 · The journal</p><h2 class="serif text-[clamp(40px,5.2vw,76px)] leading-[1]">From the studio.</h2></div>
+      <a class="pill ulink">All posts →</a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-10">
+      <a href="#" class="group block">
+        <div class="aspect-[4/3] overflow-hidden rounded-[14px] mb-5"><img src="https://picsum.photos/seed/spab1/800/600" class="w-full h-full object-cover group-hover:scale-105 transition duration-1000"/></div>
+        <p class="pill mb-2">Guide · 8 min</p>
+        <h3 class="serif text-2xl leading-tight mb-2 group-hover:italic transition">The seven fabrics that age quietly in Calgary sun</h3>
+        <p class="opacity-70 text-[14px] font-light">A weave study photographed under southern light.</p>
+      </a>
+      <a href="#" class="group block">
+        <div class="aspect-[4/3] overflow-hidden rounded-[14px] mb-5"><img src="https://picsum.photos/seed/spab2/800/600" class="w-full h-full object-cover group-hover:scale-105 transition duration-1000"/></div>
+        <p class="pill mb-2">Profile · 5 min</p>
+        <h3 class="serif text-2xl leading-tight mb-2 group-hover:italic transition">Inside a Mount Royal restoration, window by window</h3>
+        <p class="opacity-70 text-[14px] font-light">The architect's notebook alongside our installer's notes.</p>
+      </a>
+      <a href="#" class="group block">
+        <div class="aspect-[4/3] overflow-hidden rounded-[14px] mb-5"><img src="https://picsum.photos/seed/spab3/800/600" class="w-full h-full object-cover group-hover:scale-105 transition duration-1000"/></div>
+        <p class="pill mb-2">How-to · 9 min</p>
+        <h3 class="serif text-2xl leading-tight mb-2 group-hover:italic transition">Programming a HomeKit sunrise scene, slowly</h3>
+        <p class="opacity-70 text-[14px] font-light">Includes the three mistakes everyone makes with motor schedules.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- As seen in marquee -->
+<section class="py-14 bg-[var(--cream)] border-y border-[var(--hairline)] overflow-hidden">
+  <p class="text-center pill mb-6">As seen in</p>
+  <div class="marquee serif text-2xl opacity-60 whitespace-nowrap">
+    <div class="flex gap-16 pr-16 italic"><span>Western Living</span><span>·</span><span>House &amp; Home</span><span>·</span><span>Avenue Calgary</span><span>·</span><span>Dwell</span><span>·</span><span>Architectural Digest</span><span>·</span><span>Style at Home</span><span>·</span><span>The Globe and Mail</span></div>
+    <div class="flex gap-16 pr-16 italic" aria-hidden="true"><span>Western Living</span><span>·</span><span>House &amp; Home</span><span>·</span><span>Avenue Calgary</span><span>·</span><span>Dwell</span><span>·</span><span>Architectural Digest</span><span>·</span><span>Style at Home</span><span>·</span><span>The Globe and Mail</span></div>
+  </div>
+</section>
+
+<!-- Instagram -->
+<section class="py-28 bg-[var(--warm-cream)]">
+  <div class="max-w-[1280px] mx-auto px-5">
+    <div class="flex items-end justify-between mb-10 flex-wrap gap-5">
+      <div><p class="pill mb-4">§ 10 · @sunleo.calgary</p><h2 class="serif text-[clamp(40px,5.2vw,76px)] leading-[1]">Daily light, daily fabric.</h2></div>
+      <a class="pill ulink">Follow →</a>
+    </div>
+    <div class="grid grid-cols-4 grid-rows-2 gap-3">
+      <img src="https://picsum.photos/seed/spaig1/500/500" class="aspect-square object-cover rounded-[14px]"/>
+      <img src="https://picsum.photos/seed/spaig2/500/500" class="aspect-square object-cover rounded-[14px]"/>
+      <img src="https://picsum.photos/seed/spaig3/500/500" class="aspect-square object-cover rounded-[14px]"/>
+      <img src="https://picsum.photos/seed/spaig4/500/500" class="aspect-square object-cover rounded-[14px]"/>
+      <img src="https://picsum.photos/seed/spaig5/500/500" class="aspect-square object-cover rounded-[14px]"/>
+      <img src="https://picsum.photos/seed/spaig6/500/500" class="aspect-square object-cover rounded-[14px]"/>
+      <img src="https://picsum.photos/seed/spaig7/500/500" class="aspect-square object-cover rounded-[14px]"/>
+      <img src="https://picsum.photos/seed/spaig8/500/500" class="aspect-square object-cover rounded-[14px]"/>
+    </div>
+  </div>
+</section>
+
+<!-- Trade -->
+<section class="py-24 bg-[var(--beige)]">
+  <div class="max-w-[1280px] mx-auto px-5 grid lg:grid-cols-12 gap-12 items-center">
+    <div class="lg:col-span-6">
+      <p class="pill mb-4">§ 11 · Trade program</p>
+      <h2 class="serif text-[clamp(36px,5vw,72px)] leading-[1] mb-5">Designers, builders, stagers — earn twenty percent.</h2>
+      <p class="opacity-80 leading-[1.85] font-light mb-8 max-w-[520px]">A dedicated trade rep, priority install slots, net-30 terms. We currently work with 47 Calgary design studios, including Veranda Estate Homes and Folklore Design Co.</p>
+      <a class="btn-soft">Apply to the program</a>
+    </div>
+    <div class="lg:col-span-6"><img src="https://picsum.photos/seed/spatrade/900/700" class="w-full rounded-[20px]"/></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-28 bg-[var(--warm-cream)]">
+  <div class="max-w-[920px] mx-auto px-5">
+    <p class="pill mb-4">§ 12 · Frequently asked</p>
+    <h2 class="serif text-[clamp(40px,5.2vw,76px)] leading-[1] mb-12">Before your quiet visit.</h2>
+    <div>
+      <details class="border-b border-[var(--hairline)] py-6"><summary class="flex items-baseline justify-between serif text-[26px]"><span>How long from visit to install?</span><span class="chev text-4xl text-[var(--rose)]">+</span></summary><p class="mt-4 opacity-80 font-light leading-[1.85]">Eight to ten business days for in-stock fabrics; four weeks for hardwood shutters. We never quote a date we cannot beat.</p></details>
+      <details class="border-b border-[var(--hairline)] py-6"><summary class="flex items-baseline justify-between serif text-[26px]"><span>Is the visit truly free?</span><span class="chev text-4xl text-[var(--rose)]">+</span></summary><p class="mt-4 opacity-80 font-light leading-[1.85]">Yes — within 50 km of downtown Calgary. We bring 200 swatches and a printed quote.</p></details>
+      <details class="border-b border-[var(--hairline)] py-6"><summary class="flex items-baseline justify-between serif text-[26px]"><span>Are the treatments child-safe?</span><span class="chev text-4xl text-[var(--rose)]">+</span></summary><p class="mt-4 opacity-80 font-light leading-[1.85]">Cordless by default. Motorized has no exposed cords. ANSI/WCMA A100.1-2018 certified.</p></details>
+      <details class="border-b border-[var(--hairline)] py-6"><summary class="flex items-baseline justify-between serif text-[26px]"><span>What's the warranty?</span><span class="chev text-4xl text-[var(--rose)]">+</span></summary><p class="mt-4 opacity-80 font-light leading-[1.85]">Lifetime mechanism · ten years on fabrics · five years on motors. Calgary-based techs, no shipping returns.</p></details>
+      <details class="border-b border-[var(--hairline)] py-6"><summary class="flex items-baseline justify-between serif text-[26px]"><span>Can I see fabrics first?</span><span class="chev text-4xl text-[var(--rose)]">+</span></summary><p class="mt-4 opacity-80 font-light leading-[1.85]">A free swatch kit of twelve samples arrives in three business days, or visit our 17 Avenue atelier Tue–Sat.</p></details>
+      <details class="border-b border-[var(--hairline)] py-6"><summary class="flex items-baseline justify-between serif text-[26px]"><span>How quiet are the motors?</span><span class="chev text-4xl text-[var(--rose)]">+</span></summary><p class="mt-4 opacity-80 font-light leading-[1.85]">38 dB — quieter than a library whisper, measured at one metre from a bedroom shade.</p></details>
+      <details class="border-b border-[var(--hairline)] py-6"><summary class="flex items-baseline justify-between serif text-[26px]"><span>Do you do nurseries and bedrooms?</span><span class="chev text-4xl text-[var(--rose)]">+</span></summary><p class="mt-4 opacity-80 font-light leading-[1.85]">Yes — blackout liners, side channels, and motorized schedules for shift workers and new parents.</p></details>
+      <details class="border-b border-[var(--hairline)] py-6"><summary class="flex items-baseline justify-between serif text-[26px]"><span>Financing?</span><span class="chev text-4xl text-[var(--rose)]">+</span></summary><p class="mt-4 opacity-80 font-light leading-[1.85]">Affirm, Klarna, Pay in 4, and 0% APR up to 24 months on orders over $1,500.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ========= FINAL CTA + FORM ========= -->
+<section class="py-32 bg-[var(--soft-black)] text-[var(--cream)]" id="book">
+  <div class="max-w-[1280px] mx-auto px-5 grid lg:grid-cols-12 gap-14 items-start">
+    <div class="lg:col-span-6">
+      <p class="pill mb-4 !text-[var(--cream)] !opacity-60">§ 13 · Book the quiet visit</p>
+      <h2 class="serif text-[clamp(44px,6vw,96px)] leading-[0.95] mb-7">Your peaceful <em class="italic">space</em> awaits.</h2>
+      <p class="text-[17px] opacity-80 max-w-[520px] mb-7 font-light leading-[1.85]">Pick a window — morning, midday, or twilight. We arrive with swatches, tea, and a printed quote. No deposit, no obligation, no rush.</p>
+      <div class="flex flex-col gap-2 opacity-80 text-[14px] font-light">
+        <span>📞 (403) 555-0199</span>
+        <span>✉ hello@sunleo.ca</span>
+        <span>📍 2122 — 17 Ave SE, Calgary</span>
+      </div>
+    </div>
+    <form class="lg:col-span-6 bg-[var(--warm-cream)] text-[var(--ink)] p-10 rounded-[24px] space-y-5">
+      <div class="grid sm:grid-cols-2 gap-4">
+        <input class="w-full bg-transparent border-b border-[var(--hairline-strong)] py-3 outline-none focus:border-[var(--rose)] font-light" placeholder="First name"/>
+        <input class="w-full bg-transparent border-b border-[var(--hairline-strong)] py-3 outline-none focus:border-[var(--rose)] font-light" placeholder="Last name"/>
+      </div>
+      <input class="w-full bg-transparent border-b border-[var(--hairline-strong)] py-3 outline-none focus:border-[var(--rose)] font-light" placeholder="Email"/>
+      <input class="w-full bg-transparent border-b border-[var(--hairline-strong)] py-3 outline-none focus:border-[var(--rose)] font-light" placeholder="Mobile (we'll text 30 min before)"/>
+      <input class="w-full bg-transparent border-b border-[var(--hairline-strong)] py-3 outline-none focus:border-[var(--rose)] font-light" placeholder="Postal code"/>
+      <select class="w-full bg-transparent border-b border-[var(--hairline-strong)] py-3 outline-none focus:border-[var(--rose)] font-light"><option>Window count…</option><option>1–5</option><option>6–12</option><option>13–24</option><option>25+</option></select>
+      <textarea rows="2" class="w-full bg-transparent border-b border-[var(--hairline-strong)] py-3 outline-none focus:border-[var(--rose)] font-light" placeholder="Anything we should know about the room?"></textarea>
+      <button class="btn-soft w-full">Book my quiet visit</button>
+      <p class="text-[11px] opacity-60 font-light">By submitting you agree to receive a scheduling text. Unsubscribe anytime.</p>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[var(--warm-cream)] py-20 border-t border-[var(--hairline)]">
+  <div class="max-w-[1280px] mx-auto px-5">
+    <div class="grid md:grid-cols-6 gap-10 mb-12">
+      <div class="md:col-span-2">
+        <div class="serif text-4xl mb-3">SunLeo.</div>
+        <p class="text-[14px] opacity-70 leading-[1.8] font-light mb-5">Custom shades, drapery, and shutters — designed and built quietly in Calgary since 2007.</p>
+        <div class="flex gap-3 text-[12px]">
+          <span class="w-10 h-10 border border-[var(--hairline-strong)] grid place-items-center rounded-full">f</span>
+          <span class="w-10 h-10 border border-[var(--hairline-strong)] grid place-items-center rounded-full">@</span>
+          <span class="w-10 h-10 border border-[var(--hairline-strong)] grid place-items-center rounded-full">in</span>
+          <span class="w-10 h-10 border border-[var(--hairline-strong)] grid place-items-center rounded-full">P</span>
+        </div>
+      </div>
+      <div><div class="pill mb-3">Shop</div><ul class="space-y-2 text-[14px] font-light"><li>Roller Blinds</li><li>Cellular Shades</li><li>Roman Shades</li><li>Drapery</li><li>Shutters</li><li>Motorized</li></ul></div>
+      <div><div class="pill mb-3">Rooms</div><ul class="space-y-2 text-[14px] font-light"><li>Living</li><li>Bedroom</li><li>Kitchen</li><li>Bathroom</li><li>Nursery</li><li>Office</li></ul></div>
+      <div><div class="pill mb-3">Calgary</div><ul class="space-y-2 text-[14px] font-light"><li>Tuscany</li><li>Mount Royal</li><li>Bridgeland</li><li>Aspen Woods</li><li>Inglewood</li><li>All neighbourhoods</li></ul></div>
+      <div><div class="pill mb-3">Company</div><ul class="space-y-2 text-[14px] font-light"><li>About</li><li>Atelier</li><li>Trade</li><li>Careers</li><li>Press</li><li>Contact</li></ul></div>
+    </div>
+    <div class="border-t border-[var(--hairline)] pt-8 flex flex-wrap items-center justify-between gap-6 text-[13px] font-light">
+      <div><span class="text-[var(--rose)]">★★★★★</span><span class="opacity-70 ml-2">4.9 / 5 · Trustpilot · 1,247</span></div>
+      <div class="flex gap-3 opacity-80 pill"><span>VISA</span><span>MC</span><span>AMEX</span><span>Affirm</span><span>Klarna</span><span>Apple Pay</span></div>
+      <div class="flex gap-3 opacity-80 pill"><span>App Store</span><span>Google Play</span></div>
+    </div>
+    <div class="pt-8 mt-8 border-t border-[var(--hairline)] flex flex-wrap items-center justify-between gap-3 text-[12px] opacity-60 font-light">
+      <span>© 2026 SunLeo Calgary Ltd · 2122 — 17 Ave SE</span>
+      <div class="flex gap-5 pill"><span>Privacy</span><span>Accessibility</span><span>Terms</span><span>Sitemap</span></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky right -->
+<div class="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2">
+  <button class="w-12 h-12 rounded-full bg-[var(--warm-cream)] border border-[var(--hairline)] shadow-lg grid place-items-center text-[14px]">💬</button>
+  <button class="w-12 h-12 rounded-full bg-[var(--warm-cream)] border border-[var(--hairline)] shadow-lg grid place-items-center">♡</button>
+  <button class="w-12 h-12 rounded-full bg-[var(--warm-cream)] border border-[var(--hairline)] shadow-lg grid place-items-center">⤴</button>
+</div>
+
+<!-- Live notification (soft) -->
+<div id="liveNotif" class="fixed bottom-6 left-6 z-50 bg-[var(--warm-cream)] border border-[var(--hairline)] rounded-[18px] shadow-xl p-4 max-w-[320px] hidden notif-in">
+  <div class="flex gap-3">
+    <img src="https://picsum.photos/seed/spanotif/64/64" class="w-10 h-10 rounded-full"/>
+    <div>
+      <div class="text-[13px] leading-snug font-light"><span class="serif italic" id="notifName">Sarah</span> from <span id="notifHood">Tuscany</span> <span id="notifAction">booked a quiet visit</span></div>
+      <div class="pill !text-[10px] !tracking-[.2em] !opacity-60 mt-1" id="notifTime">a few minutes ago</div>
+    </div>
+  </div>
+</div>
+
+<!-- Sticky bottom bar (soft) -->
+<div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 bg-[var(--warm-cream)] border border-[var(--hairline)] text-[var(--ink)] rounded-full px-5 py-2.5 shadow-2xl flex items-center gap-5 text-[12px]">
+  <span class="flex items-center gap-2 pill"><span class="w-1.5 h-1.5 rounded-full bg-[var(--rose)] breath-soft"></span><span><strong id="slots">4</strong> quiet visits left this week</span></span>
+  <span class="opacity-40">|</span>
+  <a href="#book" class="text-[var(--rose)] tenor uppercase tracking-[.18em]">Reserve →</a>
+</div>
+
+<!-- Countdown -->
+<div class="fixed top-[88px] right-4 z-40 bg-[var(--rose)] text-[var(--cream)] rounded-full px-4 py-2 pill !opacity-100 !text-[var(--cream)]">
+  New collection arrives in <span id="countdown" class="font-bold tabular ml-1">--</span>
+</div>
+
+<!-- Exit modal -->
+<div id="exitModal" class="fixed inset-0 bg-[var(--soft-black)]/85 z-[80] hidden items-center justify-center p-5">
+  <div class="bg-[var(--warm-cream)] max-w-[560px] w-full rounded-[24px] p-12 relative">
+    <button id="closeExit" class="absolute top-4 right-4 text-2xl">×</button>
+    <p class="pill mb-4">Take your time</p>
+    <h3 class="serif text-5xl italic leading-tight mb-3">A handwritten note,<br/>before you go.</h3>
+    <p class="opacity-80 mb-6 font-light leading-[1.85]">A $75 credit toward your first set of treatments. We'll text it gently — no spam, ever.</p>
+    <div class="flex gap-2"><input class="flex-1 bg-transparent border border-[var(--hairline-strong)] rounded-full px-5 py-3 outline-none font-light" placeholder="Mobile"/><button class="btn-soft">Send</button></div>
+  </div>
+</div>
+
+
+<script>
+  AOS.init({ duration: 1100, once: true, easing: 'ease-out-cubic' });
+  const lenis = new Lenis({ lerp: 0.07, smoothWheel: true });
+  function raf(t){ lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll', ScrollTrigger.update);
+
+  // Mouse-trail soft glow dots
+  const dots = [];
+  const N = 8;
+  for (let i = 0; i < N; i++){
+    const d = document.createElement('div');
+    d.className = 'glow-dot';
+    d.style.opacity = (1 - i/N) * 0.6;
+    d.style.width = (16 - i) + 'px';
+    d.style.height = (16 - i) + 'px';
+    document.body.appendChild(d);
+    dots.push({ el: d, x: window.innerWidth/2, y: window.innerHeight/2 });
+  }
+  let mx = window.innerWidth/2, my = window.innerHeight/2;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function tick(){
+    let x = mx, y = my;
+    dots.forEach((d) => {
+      d.x += (x - d.x) * 0.22;
+      d.y += (y - d.y) * 0.22;
+      d.el.style.left = d.x + 'px';
+      d.el.style.top  = d.y + 'px';
+      x = d.x; y = d.y;
+    });
+    requestAnimationFrame(tick);
+  }
+  tick();
+
+  // Counter
+  document.querySelectorAll('.counter').forEach(el => {
+    const target = +el.dataset.target;
+    ScrollTrigger.create({ trigger: el, start: 'top 85%',
+      onEnter: () => {
+        const obj = { v: 0 };
+        gsap.to(obj, { v: target, duration: 2.6, ease: 'power2.out', onUpdate: () => el.textContent = Math.floor(obj.v).toLocaleString() });
+      }});
+  });
+
+  // Countdown
+  const endDate = new Date(Date.now() + 4*24*60*60*1000 + 7*60*60*1000 + 18*60*1000);
+  function tickCD(){
+    const d = endDate - Date.now();
+    const dd = Math.floor(d/864e5), hh=Math.floor(d%864e5/36e5), mm=Math.floor(d%36e5/6e4), ss=Math.floor(d%6e4/1e3);
+    document.getElementById('countdown').textContent = `${dd}d ${hh}h ${mm}m ${ss}s`;
+  }
+  setInterval(tickCD, 1000); tickCD();
+
+  // Notifications
+  const notif = document.getElementById('liveNotif');
+  const names = [['Sarah','Tuscany','booked a quiet visit'],['Marcus','Mount Royal','requested swatches'],['Priya','Bridgeland','reserved a measure'],['Liam','Aspen Woods','ordered cellular shades'],['Aiden','Inglewood','saved four products'],['Mira','Hillhurst','reserved a visit'],['Jordan','McKenzie Towne','installed shutters']];
+  let idx = 0;
+  function fire(){
+    const [n,h,a] = names[idx++ % names.length];
+    document.getElementById('notifName').textContent = n;
+    document.getElementById('notifHood').textContent = h;
+    document.getElementById('notifAction').textContent = a;
+    document.getElementById('notifTime').textContent = (Math.floor(Math.random()*9)+1)+' minutes ago';
+    notif.classList.remove('hidden'); notif.classList.remove('notif-in'); void notif.offsetWidth; notif.classList.add('notif-in');
+    setTimeout(()=> notif.classList.add('hidden'), 6500);
+  }
+  setTimeout(fire, 4500); setInterval(fire, 15000);
+
+  // Slots
+  let slots = 4;
+  setInterval(() => { if (slots > 1 && Math.random() > 0.85) { slots--; document.getElementById('slots').textContent = slots; } }, 40000);
+
+  // Exit intent
+  let fired = false;
+  document.addEventListener('mouseleave', e => {
+    if (!fired && e.clientY < 10) {
+      fired = true;
+      const m = document.getElementById('exitModal');
+      m.classList.remove('hidden'); m.classList.add('flex');
+    }
+  });
+  document.getElementById('closeExit').onclick = () => document.getElementById('exitModal').classList.add('hidden');
+</script>
+</body>
+</html>

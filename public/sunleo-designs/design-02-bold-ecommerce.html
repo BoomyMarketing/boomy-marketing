@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SunLeo Mart — Loud Blinds, Honest Prices</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Archivo+Black&family=Familjen+Grotesk:wght@400;500;700&family=Redaction+50:wght@700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --black: #0A0A08;
+    --paper: #FBF7EE;
+    --tomato: #FF3B1F;
+    --tomato-deep: #C9230B;
+    --acid: #DBFF1F;
+    --cobalt: #1A2BFF;
+    --magenta: #FF24A8;
+  }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Familjen Grotesk', sans-serif; background: var(--paper); color: var(--black); -webkit-font-smoothing: antialiased; }
+  .ablk { font-family: 'Archivo Black', sans-serif; letter-spacing: -0.03em; }
+  .arch { font-family: 'Archivo', sans-serif; }
+  .display { font-family: 'Archivo Black', sans-serif; letter-spacing: -0.05em; line-height: 0.82; }
+  .ticker { background-image: repeating-linear-gradient(90deg, transparent 0 16px, var(--black) 16px 17px); }
+  .stripe-tomato { background-image: repeating-linear-gradient(135deg, var(--tomato) 0 18px, var(--tomato-deep) 18px 36px); }
+  .stripe-black { background-image: repeating-linear-gradient(135deg, var(--black) 0 18px, #1c1916 18px 36px); }
+  .halftone {
+    background-image: radial-gradient(rgba(10,10,8,1) 1.5px, transparent 1.5px);
+    background-size: 8px 8px;
+    background-position: 0 0;
+  }
+  .halftone-light { background-image: radial-gradient(rgba(255,255,255,0.4) 1px, transparent 1px); background-size: 6px 6px; }
+  .shadow-brutal { box-shadow: 6px 6px 0 0 var(--black); }
+  .shadow-brutal-lg { box-shadow: 10px 10px 0 0 var(--black); }
+  .shadow-tomato { box-shadow: 6px 6px 0 0 var(--tomato); }
+  .shadow-acid { box-shadow: 6px 6px 0 0 var(--acid); }
+  .border-brutal { border: 3px solid var(--black); }
+  .scroll-marq { animation: marquee 26s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .scroll-fast { animation: marquee 14s linear infinite; }
+  .price-strike { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: var(--tomato); }
+  .badge-flop { transform: rotate(-6deg); display: inline-block; }
+  .flag {
+    background:
+      linear-gradient(0deg, transparent 50%, var(--acid) 50%),
+      linear-gradient(0deg, var(--tomato), var(--tomato));
+    background-size: 100% 100%, 100% 100%;
+  }
+  .underline-zig { text-decoration: underline wavy var(--tomato); text-underline-offset: 8px; text-decoration-thickness: 3px; }
+  .grit { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"); }
+  @keyframes throb { 0%,100% { transform: scale(1) rotate(-3deg); } 50% { transform: scale(1.06) rotate(-3deg); } }
+  .throb { animation: throb 1.8s ease-in-out infinite; }
+  .star-burst { clip-path: polygon(50% 0%,60% 20%,82% 18%,73% 38%,98% 50%,73% 62%,82% 82%,60% 80%,50% 100%,40% 80%,18% 82%,27% 62%,2% 50%,27% 38%,18% 18%,40% 20%); }
+
+/* ============ MOBILE RESPONSIVE PATCH ============ */
+html, body { overflow-x: hidden; max-width: 100vw; }
+img, svg, video { max-width: 100%; height: auto; }
+
+@media (max-width: 1023px) {
+  /* Force lg:grid-cols-12 sections to stack on tablet/mobile */
+  section .grid.lg\:grid-cols-12,
+  section .grid.md\:grid-cols-12 {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  section .grid.lg\:grid-cols-12 > *,
+  section .grid.md\:grid-cols-12 > * {
+    min-width: 0;
+    width: 100%;
+  }
+  /* Tighten section padding */
+  section { padding-left: 1rem !important; padding-right: 1rem !important; }
+  section.no-padding-override { padding: revert !important; }
+  /* Marquee cards width cap */
+  .marquee article, .marquee .card { max-width: 280px !important; min-width: 240px !important; }
+}
+
+@media (max-width: 767px) {
+  /* Display text clamps */
+  h1 { font-size: clamp(2rem, 9vw, 3.5rem) !important; line-height: 1.05 !important; }
+  h2 { font-size: clamp(1.5rem, 7vw, 2.5rem) !important; line-height: 1.1 !important; }
+  /* Heavy display text */
+  .display, .didot, .serif.text-7xl, .serif.text-8xl, .serif.text-9xl,
+  [style*="font-size: 120"], [style*="font-size: 140"], [style*="font-size: 170"] {
+    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    line-height: 0.95 !important;
+  }
+  /* Touch targets 44px */
+  button, a[class*="btn"], a[role="button"] {
+    min-height: 44px;
+  }
+  /* Inputs prevent iOS zoom */
+  input, textarea, select { font-size: 16px !important; }
+  /* Disable hover transforms on touch */
+  .card:hover, *[class*="hover:translate"]:hover, *[class*="hover:scale"]:hover {
+    transform: none !important;
+  }
+  /* Big grids collapse */
+  .grid.grid-cols-6 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-5 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-4:not(.grid-rows-2) { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-3 { grid-template-columns: repeat(1, 1fr) !important; }
+  /* Comparison tables: wrap (if direct child grid-cols-4) in overflow-x scroll behavior */
+  .comparison-table, table.comparison { display: block !important; overflow-x: auto !important; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Disable cursor-follow effects on touch devices */
+  .cursor-trail, .sunbeam-cursor, .glow-dot, .mouse-trail {
+    display: none !important;
+  }
+}
+
+</style>
+</head>
+<body class="grit">
+
+<!-- Top ticker -->
+<div class="bg-[var(--tomato)] text-[var(--paper)] overflow-hidden whitespace-nowrap py-2.5 border-y-[3px] border-[var(--black)]">
+  <div class="inline-flex scroll-fast gap-8 ablk text-base">
+    <span>★ HALF-PRICE WEEK ★</span><span>FREE MEASURE</span><span>FREE INSTALL</span><span>10-YR WARRANTY</span><span>★ HALF-PRICE WEEK ★</span><span>FREE MEASURE</span><span>FREE INSTALL</span><span>10-YR WARRANTY</span><span>★ HALF-PRICE WEEK ★</span><span>FREE MEASURE</span><span>FREE INSTALL</span><span>10-YR WARRANTY</span>
+  </div>
+</div>
+
+<!-- Trust strip -->
+<div class="bg-[var(--black)] text-[var(--paper)] text-xs">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+    <div class="flex gap-3 sm:gap-6 ablk uppercase tracking-wide text-[10px] sm:text-xs"><span class="text-[var(--acid)]">★★★★★</span> 4.9 / 1,247 reviews <span class="hidden sm:inline">· BBB A+ · since 2017</span></div>
+    <a href="tel:+14035551234" class="ablk text-[var(--acid)] underline-zig text-[11px] sm:text-xs whitespace-nowrap">☎ 403 · 555 · 1234</a>
+  </div>
+</div>
+
+<!-- Nav -->
+<header class="border-b-[3px] border-[var(--black)] sticky top-0 bg-[var(--paper)] z-40">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between gap-3">
+    <a href="#" class="ablk text-xl sm:text-2xl md:text-3xl tracking-tighter">SUN<span class="text-[var(--tomato)]">LEO</span><span class="text-[var(--cobalt)]">.</span>MART</a>
+    <nav class="hidden lg:flex gap-7 ablk uppercase text-sm">
+      <a href="#products" class="hover:text-[var(--tomato)]">Shop</a>
+      <a href="#why" class="hover:text-[var(--tomato)]">Why us</a>
+      <a href="#reviews" class="hover:text-[var(--tomato)]">Reviews</a>
+      <a href="#install" class="hover:text-[var(--tomato)]">How it works</a>
+    </nav>
+    <a href="#quote" class="ablk uppercase text-[10px] sm:text-xs md:text-sm bg-[var(--black)] text-[var(--acid)] px-3 sm:px-5 py-2 sm:py-3 border-brutal shadow-tomato hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition whitespace-nowrap">Free Quote →</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="border-b-[3px] border-[var(--black)] relative overflow-hidden">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-6 pt-8 md:pt-12 pb-12 md:pb-16 grid grid-cols-12 gap-6 relative">
+    <!-- Big text -->
+    <div class="col-span-12 lg:col-span-8 relative">
+      <div class="ablk uppercase text-[var(--tomato)] text-xs sm:text-sm mb-3 inline-block bg-[var(--black)] px-3 py-1.5 rotate-[-2deg]">★ SPRING BLOWOUT ★</div>
+      <h1 class="display text-[16vw] sm:text-[14vw] lg:text-[200px]">
+        <span class="block">BLINDS</span>
+        <span class="block text-[var(--tomato)] -mt-2 sm:-mt-3">FOR</span>
+        <span class="block -mt-2 sm:-mt-3">PEOPLE.</span>
+      </h1>
+      <p class="arch font-bold uppercase text-lg sm:text-xl md:text-2xl mt-4 md:mt-6 max-w-xl tracking-tight">Custom blinds, measured at your kitchen table, installed by Friday. 50% off this week — no fine print. We're <span class="bg-[var(--acid)] px-2">very loud</span> about it.</p>
+
+      <div class="mt-6 md:mt-8 flex flex-wrap gap-3 sm:gap-4 items-center">
+        <a href="#quote" class="ablk uppercase text-base sm:text-xl bg-[var(--tomato)] text-[var(--paper)] px-6 sm:px-9 py-4 sm:py-5 border-brutal shadow-brutal hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition">Yes please &nbsp;→</a>
+        <a href="tel:+14035551234" class="ablk uppercase text-base sm:text-xl bg-[var(--paper)] text-[var(--black)] px-6 sm:px-9 py-4 sm:py-5 border-brutal shadow-brutal-lg hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition">☎ Call now</a>
+      </div>
+
+      <div class="mt-6 md:mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl">
+        <div class="border-brutal bg-[var(--acid)] p-3"><p class="ablk text-xl sm:text-2xl">7-day</p><p class="text-[10px] sm:text-xs uppercase font-bold">install or it's free</p></div>
+        <div class="border-brutal bg-[var(--paper)] p-3"><p class="ablk text-xl sm:text-2xl">$0</p><p class="text-[10px] sm:text-xs uppercase font-bold">down · 0% APR</p></div>
+        <div class="border-brutal bg-[var(--cobalt)] text-[var(--paper)] p-3"><p class="ablk text-xl sm:text-2xl">10-yr</p><p class="text-[10px] sm:text-xs uppercase font-bold">warranty</p></div>
+        <div class="border-brutal bg-[var(--magenta)] text-[var(--paper)] p-3"><p class="ablk text-xl sm:text-2xl">2,400</p><p class="text-[10px] sm:text-xs uppercase font-bold">YYC homes</p></div>
+      </div>
+    </div>
+
+    <!-- Hero card stack -->
+    <div class="col-span-12 lg:col-span-4 relative mt-6 lg:mt-0">
+      <div class="absolute -top-2 -right-2 w-24 h-24 sm:w-32 sm:h-32 star-burst bg-[var(--tomato)] flex items-center justify-center throb z-10 text-center">
+        <div class="text-[var(--paper)] ablk leading-none">
+          <p class="text-2xl sm:text-3xl">-50%</p>
+          <p class="text-[9px] sm:text-[10px] uppercase mt-1">this week<br/>only</p>
+        </div>
+      </div>
+      <div class="border-brutal bg-[var(--paper)] shadow-brutal-lg">
+        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200" class="w-full h-72 sm:h-96 lg:h-[420px] object-cover border-b-[3px] border-[var(--black)]" />
+        <div class="p-4 sm:p-5">
+          <p class="ablk uppercase text-xs text-[var(--tomato)]">★ Bestseller</p>
+          <h3 class="ablk text-2xl sm:text-3xl mt-1">Whole-Home Roller Pack</h3>
+          <div class="mt-3 flex items-end gap-3">
+            <span class="ablk text-3xl sm:text-4xl">$1,489</span>
+            <span class="price-strike font-bold text-stone-500 pb-1">$2,978</span>
+          </div>
+          <p class="text-[11px] sm:text-xs uppercase font-bold mt-2 text-stone-700">12 windows · pro install · 10-yr warranty</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stripe bar -->
+<div class="stripe-tomato text-[var(--paper)] py-4 border-b-[3px] border-[var(--black)] overflow-hidden">
+  <div class="ablk uppercase text-xl flex gap-8 whitespace-nowrap scroll-marq">
+    <span>★ FREE MEASURE</span><span>★ FREE INSTALL</span><span>★ LOWEST PRICE GUARANTEE</span><span>★ 7-DAY INSTALL OR IT'S FREE</span><span>★ FREE MEASURE</span><span>★ FREE INSTALL</span><span>★ LOWEST PRICE GUARANTEE</span><span>★ 7-DAY INSTALL OR IT'S FREE</span>
+  </div>
+</div>
+
+<!-- Products -->
+<section id="products" class="border-b-[3px] border-[var(--black)]">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-6 py-12 md:py-16">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-6 md:mb-8">
+      <div>
+        <p class="ablk uppercase text-[var(--tomato)]">★ Shop the lot</p>
+        <h2 class="display text-5xl sm:text-6xl md:text-9xl mt-2">PICK YOUR<br/>WINDOW.</h2>
+      </div>
+      <p class="ablk uppercase text-xs sm:text-sm bg-[var(--acid)] border-brutal px-4 py-3 max-w-xs">All 10 product lines · every single one on sale this week. No fine print. We checked.</p>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4">
+      <!-- Card 01 -->
+      <div class="border-brutal bg-[var(--paper)] shadow-brutal-lg hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition">
+        <div class="relative overflow-hidden border-b-[3px] border-[var(--black)]">
+          <img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=600" class="w-full h-44 object-cover" />
+          <span class="absolute top-2 left-2 bg-[var(--tomato)] text-[var(--paper)] ablk text-xs px-2 py-1 border-2 border-[var(--black)]">-50%</span>
+          <span class="absolute top-2 right-2 bg-[var(--acid)] ablk text-[10px] uppercase px-2 py-1 border-2 border-[var(--black)] badge-flop">Bestseller</span>
+        </div>
+        <div class="p-4">
+          <p class="ablk text-xs uppercase text-stone-500">#01</p>
+          <h3 class="ablk text-xl">Roller</h3>
+          <div class="flex gap-1 text-sm mt-1">★★★★★ <span class="text-stone-500 text-xs ml-1">412</span></div>
+          <p class="ablk text-2xl mt-1 text-[var(--tomato-deep)]">$89<span class="price-strike text-xs ml-1 text-stone-500">$179</span></p>
+        </div>
+      </div>
+      <!-- 02 -->
+      <div class="border-brutal bg-[var(--cobalt)] text-[var(--paper)] shadow-brutal-lg hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition">
+        <div class="relative overflow-hidden border-b-[3px] border-[var(--black)]">
+          <img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?w=600" class="w-full h-44 object-cover" />
+          <span class="absolute top-2 left-2 bg-[var(--acid)] text-[var(--black)] ablk text-xs px-2 py-1 border-2 border-[var(--black)]">NEW</span>
+        </div>
+        <div class="p-4">
+          <p class="ablk text-xs uppercase opacity-70">#02</p>
+          <h3 class="ablk text-xl">Zebra</h3>
+          <div class="flex gap-1 text-sm mt-1 text-[var(--acid)]">★★★★★ <span class="opacity-70 text-xs ml-1">298</span></div>
+          <p class="ablk text-2xl mt-1 text-[var(--acid)]">$129<span class="price-strike text-xs ml-1 opacity-70">$259</span></p>
+        </div>
+      </div>
+      <!-- 03 -->
+      <div class="border-brutal bg-[var(--paper)] shadow-brutal-lg hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition">
+        <div class="relative overflow-hidden border-b-[3px] border-[var(--black)]">
+          <img src="https://images.unsplash.com/photo-1617104551722-3b2d51366400?w=600" class="w-full h-44 object-cover" />
+          <span class="absolute top-2 left-2 bg-[var(--tomato)] text-[var(--paper)] ablk text-xs px-2 py-1 border-2 border-[var(--black)]">-40%</span>
+        </div>
+        <div class="p-4">
+          <p class="ablk text-xs uppercase text-stone-500">#03</p>
+          <h3 class="ablk text-xl">Faux Wood</h3>
+          <div class="flex gap-1 text-sm mt-1">★★★★★ <span class="text-stone-500 text-xs ml-1">367</span></div>
+          <p class="ablk text-2xl mt-1 text-[var(--tomato-deep)]">$119<span class="price-strike text-xs ml-1 text-stone-500">$199</span></p>
+        </div>
+      </div>
+      <!-- 04 -->
+      <div class="border-brutal bg-[var(--magenta)] text-[var(--paper)] shadow-brutal-lg hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition">
+        <div class="relative overflow-hidden border-b-[3px] border-[var(--black)]">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600" class="w-full h-44 object-cover" />
+          <span class="absolute top-2 left-2 bg-[var(--acid)] text-[var(--black)] ablk text-xs px-2 py-1 border-2 border-[var(--black)]">★ Hot</span>
+        </div>
+        <div class="p-4">
+          <p class="ablk text-xs uppercase opacity-80">#04</p>
+          <h3 class="ablk text-xl">Cellular</h3>
+          <div class="flex gap-1 text-sm mt-1 text-[var(--acid)]">★★★★★ <span class="opacity-80 text-xs ml-1">241</span></div>
+          <p class="ablk text-2xl mt-1 text-[var(--acid)]">$149<span class="price-strike text-xs ml-1 opacity-80">$299</span></p>
+        </div>
+      </div>
+      <!-- 05 -->
+      <div class="border-brutal bg-[var(--paper)] shadow-brutal-lg hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition">
+        <div class="relative overflow-hidden border-b-[3px] border-[var(--black)]">
+          <img src="https://images.unsplash.com/photo-1633113216288-a4d6b35066d5?w=600" class="w-full h-44 object-cover" />
+          <span class="absolute top-2 left-2 bg-[var(--cobalt)] text-[var(--paper)] ablk text-xs px-2 py-1 border-2 border-[var(--black)]">Luxe</span>
+        </div>
+        <div class="p-4">
+          <p class="ablk text-xs uppercase text-stone-500">#05</p>
+          <h3 class="ablk text-xl">Roman</h3>
+          <div class="flex gap-1 text-sm mt-1">★★★★★ <span class="text-stone-500 text-xs ml-1">189</span></div>
+          <p class="ablk text-2xl mt-1 text-[var(--tomato-deep)]">$199<span class="price-strike text-xs ml-1 text-stone-500">$399</span></p>
+        </div>
+      </div>
+      <!-- 06 -->
+      <div class="border-brutal bg-[var(--acid)] shadow-brutal-lg hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition">
+        <div class="relative overflow-hidden border-b-[3px] border-[var(--black)]">
+          <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600" class="w-full h-44 object-cover" />
+          <span class="absolute top-2 left-2 bg-[var(--black)] text-[var(--acid)] ablk text-xs px-2 py-1 border-2 border-[var(--black)]">Up</span>
+        </div>
+        <div class="p-4">
+          <p class="ablk text-xs uppercase">#06</p>
+          <h3 class="ablk text-xl">Skylight</h3>
+          <div class="flex gap-1 text-sm mt-1">★★★★★ <span class="text-xs ml-1 opacity-70">98</span></div>
+          <p class="ablk text-2xl mt-1 text-[var(--tomato-deep)]">$229<span class="price-strike text-xs ml-1 opacity-70">$459</span></p>
+        </div>
+      </div>
+      <!-- 07 -->
+      <div class="border-brutal bg-[var(--paper)] shadow-brutal-lg hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition">
+        <div class="relative overflow-hidden border-b-[3px] border-[var(--black)]">
+          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600" class="w-full h-44 object-cover" />
+          <span class="absolute top-2 left-2 bg-[var(--magenta)] text-[var(--paper)] ablk text-xs px-2 py-1 border-2 border-[var(--black)]">No-drill</span>
+        </div>
+        <div class="p-4">
+          <p class="ablk text-xs uppercase text-stone-500">#07</p>
+          <h3 class="ablk text-xl">Perfect Fit</h3>
+          <div class="flex gap-1 text-sm mt-1">★★★★★ <span class="text-stone-500 text-xs ml-1">143</span></div>
+          <p class="ablk text-2xl mt-1 text-[var(--tomato-deep)]">$99<span class="price-strike text-xs ml-1 text-stone-500">$199</span></p>
+        </div>
+      </div>
+      <!-- 08 -->
+      <div class="border-brutal bg-[var(--paper)] shadow-brutal-lg hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition">
+        <div class="relative overflow-hidden border-b-[3px] border-[var(--black)]">
+          <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=600" class="w-full h-44 object-cover" />
+        </div>
+        <div class="p-4">
+          <p class="ablk text-xs uppercase text-stone-500">#08</p>
+          <h3 class="ablk text-xl">Printed Film</h3>
+          <div class="flex gap-1 text-sm mt-1">★★★★★ <span class="text-stone-500 text-xs ml-1">76</span></div>
+          <p class="ablk text-2xl mt-1 text-[var(--tomato-deep)]">$59<span class="price-strike text-xs ml-1 text-stone-500">$119</span></p>
+        </div>
+      </div>
+      <!-- 09 -->
+      <div class="border-brutal bg-[var(--black)] text-[var(--acid)] shadow-brutal-lg hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition">
+        <div class="relative overflow-hidden border-b-[3px] border-[var(--acid)]">
+          <img src="https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=600" class="w-full h-44 object-cover" />
+          <span class="absolute top-2 left-2 bg-[var(--acid)] text-[var(--black)] ablk text-xs px-2 py-1 border-2 border-[var(--black)]">★ Smart</span>
+        </div>
+        <div class="p-4">
+          <p class="ablk text-xs uppercase opacity-80">#09</p>
+          <h3 class="ablk text-xl">Motorized</h3>
+          <div class="flex gap-1 text-sm mt-1">★★★★★ <span class="opacity-80 text-xs ml-1">312</span></div>
+          <p class="ablk text-2xl mt-1">$249<span class="price-strike text-xs ml-1 opacity-80">$499</span></p>
+        </div>
+      </div>
+      <!-- 10 -->
+      <div class="border-brutal bg-[var(--tomato)] text-[var(--paper)] shadow-brutal-lg hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition">
+        <div class="relative overflow-hidden border-b-[3px] border-[var(--black)]">
+          <img src="https://images.unsplash.com/photo-1618219740975-d40978bb7378?w=600" class="w-full h-44 object-cover" />
+          <span class="absolute top-2 left-2 bg-[var(--paper)] text-[var(--black)] ablk text-xs px-2 py-1 border-2 border-[var(--black)]">Custom</span>
+        </div>
+        <div class="p-4">
+          <p class="ablk text-xs uppercase opacity-80">#10</p>
+          <h3 class="ablk text-xl">Made-to-Measure</h3>
+          <div class="flex gap-1 text-sm mt-1 text-[var(--acid)]">★★★★★ <span class="opacity-80 text-xs ml-1">58</span></div>
+          <p class="ablk text-2xl mt-1 text-[var(--acid)]">From $179</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why -->
+<section id="why" class="bg-[var(--black)] text-[var(--paper)] border-b-[3px] border-[var(--black)] relative overflow-hidden">
+  <div class="absolute inset-0 halftone-light opacity-10"></div>
+  <div class="max-w-[1500px] mx-auto px-4 md:px-6 py-12 md:py-20 relative">
+    <p class="ablk uppercase text-[var(--acid)] mb-3">★ Why us</p>
+    <h2 class="display text-5xl sm:text-6xl md:text-[160px] text-[var(--paper)]">WE BEAT<br/><span class="text-[var(--tomato)]">EVERY</span><br/>QUOTE.</h2>
+
+    <div class="grid md:grid-cols-3 gap-4 md:gap-5 mt-10 md:mt-14">
+      <div class="border-brutal border-[var(--acid)] bg-[var(--paper)] text-[var(--black)] p-5 md:p-7 shadow-brutal" style="box-shadow: 10px 10px 0 0 var(--acid);">
+        <p class="ablk text-5xl md:text-7xl text-[var(--tomato)]">01</p>
+        <h3 class="ablk text-xl md:text-2xl mt-3 uppercase">Lowest-price guarantee</h3>
+        <p class="font-bold mt-3">Show us a written quote — we beat it by 10%. Locked in writing.</p>
+      </div>
+      <div class="border-brutal border-[var(--acid)] bg-[var(--tomato)] text-[var(--paper)] p-5 md:p-7 shadow-brutal" style="box-shadow: 10px 10px 0 0 var(--acid);">
+        <p class="ablk text-5xl md:text-7xl text-[var(--acid)]">02</p>
+        <h3 class="ablk text-xl md:text-2xl mt-3 uppercase">7-day install or free</h3>
+        <p class="font-bold mt-3">Late beyond 7 business days? Blinds are on us. Yes really.</p>
+      </div>
+      <div class="border-brutal border-[var(--acid)] bg-[var(--acid)] text-[var(--black)] p-5 md:p-7 shadow-brutal" style="box-shadow: 10px 10px 0 0 var(--tomato);">
+        <p class="ablk text-5xl md:text-7xl text-[var(--tomato)]">03</p>
+        <h3 class="ablk text-xl md:text-2xl mt-3 uppercase">10-year warranty</h3>
+        <p class="font-bold mt-3">Mechanism, fabric, motor — fully covered. We come back, no charge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Install steps -->
+<section id="install" class="border-b-[3px] border-[var(--black)]">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-6 py-12 md:py-16">
+    <h2 class="display text-4xl sm:text-5xl md:text-8xl">QUOTE → MEASURE → DONE.</h2>
+    <p class="font-bold uppercase mt-3 text-stone-700">Three steps. Seven days. No salesperson.</p>
+
+    <div class="mt-8 md:mt-10 grid md:grid-cols-3 gap-4 md:gap-6">
+      <div class="bg-[var(--paper)] border-brutal p-6 relative">
+        <span class="absolute -top-4 -left-4 bg-[var(--tomato)] text-[var(--paper)] ablk text-3xl w-14 h-14 flex items-center justify-center border-brutal">1</span>
+        <h3 class="ablk text-2xl uppercase mt-3">Get a number</h3>
+        <p class="mt-2 font-medium">60-second form. We text a ballpark in 5 minutes.</p>
+      </div>
+      <div class="bg-[var(--acid)] border-brutal p-6 relative">
+        <span class="absolute -top-4 -left-4 bg-[var(--tomato)] text-[var(--paper)] ablk text-3xl w-14 h-14 flex items-center justify-center border-brutal">2</span>
+        <h3 class="ablk text-2xl uppercase mt-3">We come to you</h3>
+        <p class="mt-2 font-medium">Free home measure. 400+ swatches. Exact pricing on the spot.</p>
+      </div>
+      <div class="bg-[var(--cobalt)] text-[var(--paper)] border-brutal p-6 relative">
+        <span class="absolute -top-4 -left-4 bg-[var(--acid)] text-[var(--black)] ablk text-3xl w-14 h-14 flex items-center justify-center border-brutal">3</span>
+        <h3 class="ablk text-2xl uppercase mt-3">Installed Friday</h3>
+        <p class="mt-2 font-medium">Made locally. Up by end of week. Or it's free.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section id="reviews" class="border-b-[3px] border-[var(--black)] bg-[var(--paper)]">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-6 py-12 md:py-16">
+    <div class="flex items-end justify-between flex-wrap">
+      <h2 class="display text-4xl sm:text-5xl md:text-9xl">PEOPLE.<br/><span class="text-[var(--tomato)]">LIKE.</span> US.</h2>
+      <div class="border-brutal bg-[var(--acid)] p-4 shadow-brutal mt-6">
+        <p class="ablk text-2xl md:text-3xl">4.9 / 5</p>
+        <p class="ablk text-xs uppercase">1,247 google reviews</p>
+      </div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4 md:gap-6 mt-8 md:mt-12">
+      <figure class="border-brutal bg-[var(--paper)] p-6 shadow-brutal">
+        <div class="text-2xl text-[var(--tomato)]">★★★★★</div>
+        <blockquote class="ablk text-xl mt-3 uppercase leading-tight">&ldquo;Saved $1,800 vs Hunter Douglas. Done in 5 days.&rdquo;</blockquote>
+        <figcaption class="ablk text-xs uppercase mt-4 text-stone-600">— Mike P. · Auburn Bay</figcaption>
+      </figure>
+      <figure class="border-brutal bg-[var(--tomato)] text-[var(--paper)] p-6 shadow-brutal">
+        <div class="text-2xl text-[var(--acid)]">★★★★★</div>
+        <blockquote class="ablk text-xl mt-3 uppercase leading-tight">&ldquo;Best contractor experience in Calgary. Period.&rdquo;</blockquote>
+        <figcaption class="ablk text-xs uppercase mt-4 text-[var(--acid)]">— Sarah L. · Beltline</figcaption>
+      </figure>
+      <figure class="border-brutal bg-[var(--paper)] p-6 shadow-brutal">
+        <div class="text-2xl text-[var(--tomato)]">★★★★★</div>
+        <blockquote class="ablk text-xl mt-3 uppercase leading-tight">&ldquo;Motorized blackouts. Alexa. Sleep restored.&rdquo;</blockquote>
+        <figcaption class="ablk text-xs uppercase mt-4 text-stone-600">— Jen K. · Evanston</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Big CTA -->
+<section id="quote" class="bg-[var(--tomato)] text-[var(--paper)] border-b-[3px] border-[var(--black)] relative overflow-hidden">
+  <div class="absolute inset-0 halftone opacity-10"></div>
+  <div class="max-w-[1500px] mx-auto px-4 md:px-6 py-12 md:py-20 relative">
+    <h2 class="display text-5xl sm:text-6xl md:text-[180px] text-[var(--paper)]">DON'T MISS<br/><span class="text-[var(--acid)]">50% OFF.</span></h2>
+    <p class="ablk uppercase text-lg md:text-2xl mt-4 md:mt-6">Offer ends Sunday. Free measure. Free install.</p>
+    <form class="mt-8 md:mt-10 max-w-2xl bg-[var(--paper)] text-[var(--black)] border-brutal p-4 md:p-6 shadow-brutal-lg grid sm:grid-cols-3 gap-3">
+      <input class="border-brutal px-4 py-4 ablk uppercase" placeholder="Your name"/>
+      <input class="border-brutal px-4 py-4 ablk uppercase" placeholder="Phone"/>
+      <input class="border-brutal px-4 py-4 ablk uppercase" placeholder="Postal"/>
+      <button class="sm:col-span-3 bg-[var(--black)] text-[var(--acid)] ablk text-xl md:text-3xl py-4 md:py-5 border-brutal hover:bg-[var(--cobalt)] hover:text-[var(--acid)] transition">CLAIM MY 50% OFF →</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[var(--black)] text-[var(--paper)]">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-6 py-10 md:py-14 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+    <div>
+      <p class="ablk text-3xl">SUN<span class="text-[var(--tomato)]">LEO</span><span class="text-[var(--acid)]">.</span>MART</p>
+      <p class="ablk uppercase text-xs mt-4 leading-relaxed">Calgary's loudest custom blinds. Free measure, pro install, lowest price.</p>
+      <p class="ablk text-[var(--acid)] mt-4 text-xl">☎ 403 555 1234</p>
+    </div>
+    <div><p class="ablk uppercase mb-3 text-[var(--tomato)]">★ Shop</p><ul class="ablk uppercase text-sm space-y-1"><li>Roller</li><li>Zebra</li><li>Cellular</li><li>Motorized</li><li>All</li></ul></div>
+    <div><p class="ablk uppercase mb-3 text-[var(--tomato)]">★ Areas</p><ul class="ablk uppercase text-sm space-y-1"><li>Calgary</li><li>Airdrie</li><li>Cochrane</li><li>Okotoks</li></ul></div>
+    <div><p class="ablk uppercase mb-3 text-[var(--tomato)]">★ Promises</p><ul class="ablk uppercase text-sm space-y-1"><li>Lowest price</li><li>7-day install</li><li>10-yr warranty</li><li>BBB A+</li></ul></div>
+  </div>
+  <div class="stripe-tomato py-3 ablk uppercase text-[var(--paper)] text-xs text-center">© MMXXVI · SunLeo Mart · Loud and proud since 2017</div>
+</footer>
+
+</body>
+</html>

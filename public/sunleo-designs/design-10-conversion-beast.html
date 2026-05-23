@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SunLeo — Free Quote in 60 Seconds · Calgary's #1 Custom Blinds</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #FAFBFD;
+    --ink: #0A0F1F;
+    --ink-2: #1A2238;
+    --cobalt: #3447FF;
+    --cobalt-deep: #1A2BC9;
+    --orange: #FF5C1A;
+    --orange-deep: #D43F00;
+    --acid-green: #00E676;
+    --warn: #FFB400;
+    --rule: rgba(10,15,31,0.08);
+  }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Manrope', sans-serif; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .display { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -0.035em; line-height: 0.92; font-variation-settings: "opsz" 96; }
+  .display-md { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; letter-spacing: -0.02em; font-variation-settings: "opsz" 48; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .grad-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%); }
+  .grad-cobalt { background: linear-gradient(135deg, var(--cobalt) 0%, var(--cobalt-deep) 100%); }
+  .grad-text-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--warn) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hair { border-color: var(--rule); }
+  .pulse-dot::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--acid-green); display: inline-block; margin-right: 6px; animation: pulse-dot 1.6s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%,100% { box-shadow: 0 0 0 0 rgba(0,230,118,0.7); } 50% { box-shadow: 0 0 0 8px rgba(0,230,118,0); } }
+  .pulse-ring { box-shadow: 0 0 0 0 rgba(255,92,26,0.5); animation: pulse-ring 1.8s ease-out infinite; }
+  @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(255,92,26,0.5); } 70% { box-shadow: 0 0 0 14px rgba(255,92,26,0); } 100% { box-shadow: 0 0 0 0 rgba(255,92,26,0); } }
+  .ticker-scroll { animation: ticker 36s linear infinite; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .check::before { content: "✓"; display: inline-block; width: 18px; height: 18px; background: var(--acid-green); color: white; border-radius: 999px; text-align: center; line-height: 18px; font-size: 10px; font-weight: 800; margin-right: 8px; }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(52,71,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(52,71,255,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .ring-strong { box-shadow: 0 0 0 4px rgba(255,92,26,0.18), 0 30px 60px -25px rgba(10,15,31,0.18); }
+  .card-shadow { box-shadow: 0 1px 0 var(--rule), 0 16px 36px -16px rgba(10,15,31,0.10); }
+  .glow-cobalt { box-shadow: 0 30px 60px -25px rgba(52,71,255,0.45); }
+  .progress-bar { background: linear-gradient(90deg, var(--cobalt) 0%, var(--orange) 100%); height: 4px; border-radius: 999px; }
+  @keyframes count { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  .live-pop { animation: count .8s cubic-bezier(.2,.7,.2,1); }
+  .countdown-digit {
+    background: var(--ink);
+    color: white;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-variant-numeric: tabular-nums;
+    display: inline-block;
+    min-width: 42px;
+    text-align: center;
+  }
+  .badge-soft { background: rgba(52,71,255,0.10); color: var(--cobalt-deep); padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+  .badge-orange { background: rgba(255,92,26,0.12); color: var(--orange-deep); padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+  .badge-green { background: rgba(0,230,118,0.14); color: #007A3D; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+  .star-yellow { color: #FFB400; }
+
+/* ============ MOBILE RESPONSIVE PATCH ============ */
+html, body { overflow-x: hidden; max-width: 100vw; }
+img, svg, video { max-width: 100%; height: auto; }
+
+@media (max-width: 1023px) {
+  /* Force lg:grid-cols-12 sections to stack on tablet/mobile */
+  section .grid.lg\:grid-cols-12,
+  section .grid.md\:grid-cols-12 {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  section .grid.lg\:grid-cols-12 > *,
+  section .grid.md\:grid-cols-12 > * {
+    min-width: 0;
+    width: 100%;
+  }
+  /* Tighten section padding */
+  section { padding-left: 1rem !important; padding-right: 1rem !important; }
+  section.no-padding-override { padding: revert !important; }
+  /* Marquee cards width cap */
+  .marquee article, .marquee .card { max-width: 280px !important; min-width: 240px !important; }
+}
+
+@media (max-width: 767px) {
+  /* Display text clamps */
+  h1 { font-size: clamp(2rem, 9vw, 3.5rem) !important; line-height: 1.05 !important; }
+  h2 { font-size: clamp(1.5rem, 7vw, 2.5rem) !important; line-height: 1.1 !important; }
+  /* Heavy display text */
+  .display, .didot, .serif.text-7xl, .serif.text-8xl, .serif.text-9xl,
+  [style*="font-size: 120"], [style*="font-size: 140"], [style*="font-size: 170"] {
+    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    line-height: 0.95 !important;
+  }
+  /* Touch targets 44px */
+  button, a[class*="btn"], a[role="button"] {
+    min-height: 44px;
+  }
+  /* Inputs prevent iOS zoom */
+  input, textarea, select { font-size: 16px !important; }
+  /* Disable hover transforms on touch */
+  .card:hover, *[class*="hover:translate"]:hover, *[class*="hover:scale"]:hover {
+    transform: none !important;
+  }
+  /* Big grids collapse */
+  .grid.grid-cols-6 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-5 { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-4:not(.grid-rows-2) { grid-template-columns: repeat(2, 1fr) !important; }
+  .grid.grid-cols-3 { grid-template-columns: repeat(1, 1fr) !important; }
+  /* Comparison tables: wrap (if direct child grid-cols-4) in overflow-x scroll behavior */
+  .comparison-table, table.comparison { display: block !important; overflow-x: auto !important; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Disable cursor-follow effects on touch devices */
+  .cursor-trail, .sunbeam-cursor, .glow-dot, .mouse-trail {
+    display: none !important;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Urgency bar -->
+<div class="grad-orange text-white text-center text-xs sm:text-sm font-bold py-2 px-3 sm:px-4 relative overflow-hidden">
+  <span class="inline-flex flex-wrap items-center justify-center gap-1 sm:gap-3">
+    ⚡ <strong>50% OFF</strong> · ends in
+    <span class="countdown-digit text-xs sm:text-sm" style="padding:6px 8px;min-width:32px;">02</span><span>:</span>
+    <span class="countdown-digit text-xs sm:text-sm" style="padding:6px 8px;min-width:32px;">14</span><span>:</span>
+    <span class="countdown-digit text-xs sm:text-sm" style="padding:6px 8px;min-width:32px;">47</span><span>:</span>
+    <span class="countdown-digit text-xs sm:text-sm" style="padding:6px 8px;min-width:32px;">23</span>
+    · <strong class="hidden sm:inline">7 install slots left</strong> 🔥
+  </span>
+</div>
+
+<!-- Trust ribbon -->
+<div class="bg-[var(--ink)] text-white text-xs">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-6 py-2 flex flex-wrap items-center justify-between gap-2 md:gap-3">
+    <div class="flex flex-wrap gap-2 md:gap-5 items-center font-medium">
+      <span class="star-yellow">★★★★★</span> <span>4.9 · 1,247 reviews</span>
+      <span class="hidden md:inline">🏆 #1 in YYC 2024 &amp; 2025</span>
+      <span class="hidden lg:inline">🚚 Free measure &amp; install</span>
+    </div>
+    <a href="tel:+14035551234" class="font-bold text-[var(--warn)] hover:text-orange-200 whitespace-nowrap">📞 (403) 555-1234</a>
+  </div>
+</div>
+
+<!-- Live activity ticker -->
+<div class="bg-emerald-50 border-y border-emerald-200 text-emerald-900 text-xs overflow-hidden whitespace-nowrap py-2.5">
+  <div class="ticker-scroll inline-flex gap-10 px-4 font-semibold">
+    <span><span class="pulse-dot"></span>Sarah K. in Aspen Woods booked a free measurement · 3 min ago</span>
+    <span><span class="pulse-dot"></span>Mike P. in Auburn Bay claimed 50% off · 7 min ago</span>
+    <span><span class="pulse-dot"></span>Jen R. in Tuscany booked install · 11 min ago</span>
+    <span><span class="pulse-dot"></span>David L. in Cochrane requested a quote · 14 min ago</span>
+    <span><span class="pulse-dot"></span>Priya N. in Britannia booked install · 18 min ago</span>
+    <span><span class="pulse-dot"></span>Sarah K. in Aspen Woods booked a free measurement · 3 min ago</span>
+    <span><span class="pulse-dot"></span>Mike P. in Auburn Bay claimed 50% off · 7 min ago</span>
+    <span><span class="pulse-dot"></span>Jen R. in Tuscany booked install · 11 min ago</span>
+    <span><span class="pulse-dot"></span>David L. in Cochrane requested a quote · 14 min ago</span>
+    <span><span class="pulse-dot"></span>Priya N. in Britannia booked install · 18 min ago</span>
+  </div>
+</div>
+
+<!-- Nav -->
+<header class="bg-white border-b hair sticky top-0 z-40 backdrop-blur-md">
+  <div class="max-w-[1500px] mx-auto px-6 py-3 flex items-center justify-between">
+    <a href="#" class="display-md text-2xl">Sun<span class="grad-text-orange">Leo</span></a>
+    <nav class="hidden lg:flex gap-7 font-semibold text-sm">
+      <a href="#products" class="hover:text-[var(--cobalt)]">Products</a>
+      <a href="#calculator" class="hover:text-[var(--cobalt)]">Calculator</a>
+      <a href="#reviews" class="hover:text-[var(--cobalt)]">Reviews</a>
+      <a href="#how" class="hover:text-[var(--cobalt)]">How it works</a>
+    </nav>
+    <a href="#calculator" class="grad-orange text-white font-bold text-sm px-5 py-3 rounded-xl pulse-ring">Free Quote →</a>
+  </div>
+</header>
+
+<!-- Hero with calculator -->
+<section class="grid-bg relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white pointer-events-none"></div>
+  <div class="max-w-[1500px] mx-auto px-6 py-10 md:py-14 grid lg:grid-cols-12 gap-10 items-start relative">
+
+    <!-- Left -->
+    <div class="lg:col-span-7 relative">
+      <div class="inline-flex items-center gap-2 badge-orange mb-5">
+        🔥 50% OFF · 7 SLOTS LEFT THIS WEEK
+      </div>
+      <h1 class="display text-[10vw] lg:text-[88px]">
+        Calgary's <span class="grad-text-orange">#1</span><br/>
+        custom blinds.<br/>
+        Free measure. <span class="bg-yellow-300 px-2 rounded-lg">7-day install.</span>
+      </h1>
+      <p class="mt-6 text-lg text-stone-700 max-w-2xl leading-relaxed">
+        Get an instant ballpark quote in <strong>60 seconds.</strong> Free in-home measurement. Lowest price guaranteed in writing.
+      </p>
+
+      <ul class="mt-7 grid grid-cols-2 gap-x-6 gap-y-2 max-w-lg font-semibold text-sm">
+        <li class="check">Free in-home measurement</li>
+        <li class="check">Free professional install</li>
+        <li class="check">7-day install or it's free</li>
+        <li class="check">10-year warranty</li>
+        <li class="check">Lowest price guarantee</li>
+        <li class="check">0% APR · pay in 12 months</li>
+      </ul>
+
+      <!-- Trust card row -->
+      <div class="mt-8 flex flex-wrap gap-3 items-center">
+        <div class="flex items-center gap-3 bg-white border hair rounded-xl px-4 py-3 card-shadow">
+          <div class="star-yellow text-xl">★★★★★</div>
+          <div>
+            <p class="display-md text-base leading-none">4.9 / 5</p>
+            <p class="text-[11px] text-stone-500 mt-0.5">1,247 Google reviews</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 bg-white border hair rounded-xl px-4 py-3 card-shadow">
+          <div class="text-2xl">🏆</div>
+          <div>
+            <p class="display-md text-base leading-none">#1 Rated</p>
+            <p class="text-[11px] text-stone-500 mt-0.5">Calgary 2024–25</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 bg-white border hair rounded-xl px-4 py-3 card-shadow">
+          <div class="text-2xl">✅</div>
+          <div>
+            <p class="display-md text-base leading-none">A+ BBB</p>
+            <p class="text-[11px] text-stone-500 mt-0.5">Accredited 8 yrs</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social proof bar -->
+      <div class="mt-8 bg-white border-l-4 border-[var(--acid-green)] rounded-r-xl px-5 py-4 flex items-center gap-3 card-shadow">
+        <div class="text-3xl">👨‍👩‍👧</div>
+        <div>
+          <p class="font-bold text-emerald-900"><span class="display-md text-2xl">47</span> Calgary families booked SunLeo this week.</p>
+          <p class="text-xs text-stone-500 mt-0.5">Last booking: 3 minutes ago, Aspen Woods.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calculator card -->
+    <div id="calculator" class="lg:col-span-5 bg-white rounded-2xl ring-strong p-6 lg:p-8 sticky top-28">
+      <div class="flex items-center justify-between mb-4">
+        <span class="badge-green pulse-dot">FREE · NO SPAM</span>
+        <span class="badge-soft">60 sec</span>
+      </div>
+      <h2 class="display-md text-3xl leading-tight">Get your instant ballpark in <span class="grad-text-orange">60 seconds.</span></h2>
+      <p class="text-sm text-stone-600 mt-2">No card. No commitment. Just the number we'd quote a neighbour.</p>
+
+      <!-- Progress -->
+      <div class="mt-5 flex items-center gap-2 text-xs font-bold text-stone-500">
+        <span>Step 1 of 3</span>
+        <div class="flex-1 h-1.5 bg-stone-100 rounded-full overflow-hidden"><div class="progress-bar" style="width: 33%; height: 100%;"></div></div>
+      </div>
+
+      <form class="mt-5 grid gap-4">
+        <div>
+          <label class="text-xs font-bold uppercase text-stone-500">1. How many windows?</label>
+          <div class="grid grid-cols-4 gap-2 mt-2">
+            <button type="button" class="border hair rounded-lg py-2.5 font-bold hover:bg-blue-50 transition">1-3</button>
+            <button type="button" class="border-2 border-[var(--cobalt)] text-[var(--cobalt)] rounded-lg py-2.5 font-bold bg-blue-50">4-7</button>
+            <button type="button" class="border hair rounded-lg py-2.5 font-bold hover:bg-blue-50 transition">8-12</button>
+            <button type="button" class="border hair rounded-lg py-2.5 font-bold hover:bg-blue-50 transition">13+</button>
+          </div>
+        </div>
+        <div>
+          <label class="text-xs font-bold uppercase text-stone-500">2. Product type?</label>
+          <select class="w-full border hair rounded-lg py-3 px-3 mt-2 font-semibold focus:outline-none focus:border-[var(--cobalt)]">
+            <option>Roller Blinds — most popular</option>
+            <option>Zebra Shades</option>
+            <option>Faux Wood Blinds</option>
+            <option>Cellular / Honeycomb</option>
+            <option>Motorized — smart home</option>
+            <option>Not sure — recommend me</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-xs font-bold uppercase text-stone-500">3. Phone</label>
+            <input class="w-full border hair rounded-lg py-3 px-3 mt-2 font-semibold focus:outline-none focus:border-[var(--cobalt)]" placeholder="(403) ..." />
+          </div>
+          <div>
+            <label class="text-xs font-bold uppercase text-stone-500">Postal</label>
+            <input class="w-full border hair rounded-lg py-3 px-3 mt-2 font-semibold focus:outline-none focus:border-[var(--cobalt)]" placeholder="T2P 1A1" />
+          </div>
+        </div>
+        <button class="grad-orange text-white display-md text-xl py-5 rounded-xl mt-2 hover:opacity-95 pulse-ring transition">Get My Free Quote →</button>
+        <p class="text-[11px] text-center text-stone-500 flex items-center justify-center gap-1">🔒 100% private. Never spam. <span class="font-bold">2,400+ Calgary homes</span> trust us.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- As seen in -->
+<section class="bg-white border-y hair">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-6 py-5 md:py-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-6 items-center text-center text-stone-400">
+    <p class="text-xs uppercase tracking-widest font-bold">As seen in</p>
+    <p class="display-md text-base md:text-lg text-stone-500">Calgary Herald</p>
+    <p class="display-md text-base md:text-lg text-stone-500">CTV Calgary</p>
+    <p class="display-md text-base md:text-lg text-stone-500">Avenue Magazine</p>
+    <p class="display-md text-base md:text-lg text-stone-500">YYC Living</p>
+  </div>
+</section>
+
+<!-- Products -->
+<section id="products" class="max-w-[1500px] mx-auto px-4 md:px-6 py-12 md:py-16">
+  <div class="text-center mb-8 md:mb-10">
+    <p class="badge-orange inline-block mb-3">★ All products 40-50% off this week ★</p>
+    <h2 class="display text-3xl sm:text-4xl md:text-6xl">Pick your blind. Pay in 12 months.</h2>
+    <p class="text-stone-600 mt-3 text-sm md:text-base">All 10 products · made locally · 7-day install · 0% APR</p>
+  </div>
+
+  <div class="grid grid-cols-2 lg:grid-cols-5 gap-3">
+    <div class="bg-white border hair rounded-xl overflow-hidden card-shadow hover:ring-strong transition relative">
+      <span class="absolute top-2 left-2 badge-orange text-xs">-50%</span>
+      <img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=600" class="w-full h-36 object-cover" />
+      <div class="p-3">
+        <h3 class="font-bold">Roller Blinds</h3>
+        <div class="star-yellow text-xs mt-1">★★★★★ <span class="text-stone-500">412</span></div>
+        <p class="display-md text-xl text-[var(--orange-deep)] mt-1">$89<span class="text-xs text-stone-400 font-normal line-through ml-1">$179</span></p>
+      </div>
+    </div>
+    <div class="bg-white border hair rounded-xl overflow-hidden card-shadow hover:ring-strong transition relative">
+      <span class="absolute top-2 left-2 badge-soft text-xs">HOT</span>
+      <img src="https://images.unsplash.com/photo-1616137466211-f939a420be84?w=600" class="w-full h-36 object-cover" />
+      <div class="p-3">
+        <h3 class="font-bold">Zebra Shades</h3>
+        <div class="star-yellow text-xs mt-1">★★★★★ <span class="text-stone-500">298</span></div>
+        <p class="display-md text-xl text-[var(--orange-deep)] mt-1">$129<span class="text-xs text-stone-400 font-normal line-through ml-1">$259</span></p>
+      </div>
+    </div>
+    <div class="bg-white border hair rounded-xl overflow-hidden card-shadow hover:ring-strong transition relative">
+      <img src="https://images.unsplash.com/photo-1617104551722-3b2d51366400?w=600" class="w-full h-36 object-cover" />
+      <div class="p-3">
+        <h3 class="font-bold">Faux Wood</h3>
+        <div class="star-yellow text-xs mt-1">★★★★★ <span class="text-stone-500">367</span></div>
+        <p class="display-md text-xl text-[var(--orange-deep)] mt-1">$119<span class="text-xs text-stone-400 font-normal line-through ml-1">$199</span></p>
+      </div>
+    </div>
+    <div class="bg-white border hair rounded-xl overflow-hidden card-shadow hover:ring-strong transition relative">
+      <span class="absolute top-2 left-2 badge-green text-xs">SAVES $$</span>
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600" class="w-full h-36 object-cover" />
+      <div class="p-3">
+        <h3 class="font-bold">Cellular</h3>
+        <div class="star-yellow text-xs mt-1">★★★★★ <span class="text-stone-500">241</span></div>
+        <p class="display-md text-xl text-[var(--orange-deep)] mt-1">$149<span class="text-xs text-stone-400 font-normal line-through ml-1">$299</span></p>
+      </div>
+    </div>
+    <div class="bg-white border hair rounded-xl overflow-hidden card-shadow hover:ring-strong transition relative">
+      <span class="absolute top-2 left-2 badge-soft text-xs">LUXE</span>
+      <img src="https://images.unsplash.com/photo-1633113216288-a4d6b35066d5?w=600" class="w-full h-36 object-cover" />
+      <div class="p-3">
+        <h3 class="font-bold">Roman</h3>
+        <div class="star-yellow text-xs mt-1">★★★★★ <span class="text-stone-500">189</span></div>
+        <p class="display-md text-xl text-[var(--orange-deep)] mt-1">$199<span class="text-xs text-stone-400 font-normal line-through ml-1">$399</span></p>
+      </div>
+    </div>
+    <div class="bg-white border hair rounded-xl overflow-hidden card-shadow hover:ring-strong transition relative">
+      <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600" class="w-full h-36 object-cover" />
+      <div class="p-3">
+        <h3 class="font-bold">Skylight</h3>
+        <div class="star-yellow text-xs mt-1">★★★★★ <span class="text-stone-500">98</span></div>
+        <p class="display-md text-xl text-[var(--orange-deep)] mt-1">$229<span class="text-xs text-stone-400 font-normal line-through ml-1">$459</span></p>
+      </div>
+    </div>
+    <div class="bg-white border hair rounded-xl overflow-hidden card-shadow hover:ring-strong transition relative">
+      <span class="absolute top-2 left-2 badge-soft text-xs">NO-DRILL</span>
+      <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600" class="w-full h-36 object-cover" />
+      <div class="p-3">
+        <h3 class="font-bold">Perfect Fit</h3>
+        <div class="star-yellow text-xs mt-1">★★★★★ <span class="text-stone-500">143</span></div>
+        <p class="display-md text-xl text-[var(--orange-deep)] mt-1">$99<span class="text-xs text-stone-400 font-normal line-through ml-1">$199</span></p>
+      </div>
+    </div>
+    <div class="bg-white border hair rounded-xl overflow-hidden card-shadow hover:ring-strong transition relative">
+      <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=600" class="w-full h-36 object-cover" />
+      <div class="p-3">
+        <h3 class="font-bold">Printed Films</h3>
+        <div class="star-yellow text-xs mt-1">★★★★★ <span class="text-stone-500">76</span></div>
+        <p class="display-md text-xl text-[var(--orange-deep)] mt-1">$59<span class="text-xs text-stone-400 font-normal line-through ml-1">$119</span></p>
+      </div>
+    </div>
+    <div class="bg-white border hair rounded-xl overflow-hidden card-shadow hover:ring-strong transition relative">
+      <span class="absolute top-2 left-2 badge-orange text-xs">SMART</span>
+      <img src="https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=600" class="w-full h-36 object-cover" />
+      <div class="p-3">
+        <h3 class="font-bold">Motorized</h3>
+        <div class="star-yellow text-xs mt-1">★★★★★ <span class="text-stone-500">312</span></div>
+        <p class="display-md text-xl text-[var(--orange-deep)] mt-1">$249<span class="text-xs text-stone-400 font-normal line-through ml-1">$499</span></p>
+      </div>
+    </div>
+    <div class="bg-white border hair rounded-xl overflow-hidden card-shadow hover:ring-strong transition relative">
+      <img src="https://images.unsplash.com/photo-1618219740975-d40978bb7378?w=600" class="w-full h-36 object-cover" />
+      <div class="p-3">
+        <h3 class="font-bold">Made-to-Measure</h3>
+        <div class="star-yellow text-xs mt-1">★★★★★ <span class="text-stone-500">58</span></div>
+        <p class="display-md text-xl text-[var(--orange-deep)] mt-1">From $179</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section id="how" class="bg-[var(--ink)] text-white relative overflow-hidden">
+  <div class="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
+  <div class="max-w-[1500px] mx-auto px-4 md:px-6 py-12 md:py-16 relative">
+    <div class="text-center mb-8 md:mb-12">
+      <p class="badge-orange inline-block">3-STEP PROCESS</p>
+      <h2 class="display text-3xl sm:text-4xl md:text-6xl mt-3">From quote to install in 7 days.</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+      <div class="bg-white/5 border border-white/15 p-5 md:p-7 rounded-2xl backdrop-blur">
+        <p class="display text-5xl md:text-7xl grad-text-orange">01</p>
+        <h3 class="display-md text-xl md:text-2xl mt-3">Get instant quote</h3>
+        <p class="text-stone-300 mt-2 text-sm md:text-base">60-second form. Ballpark in your inbox in 5 minutes.</p>
+      </div>
+      <div class="bg-white/5 border border-white/15 p-5 md:p-7 rounded-2xl backdrop-blur">
+        <p class="display text-5xl md:text-7xl grad-text-orange">02</p>
+        <h3 class="display-md text-xl md:text-2xl mt-3">Free measurement</h3>
+        <p class="text-stone-300 mt-2 text-sm md:text-base">Pro comes to you. Brings 400+ samples. Exact pricing on the spot.</p>
+      </div>
+      <div class="bg-white/5 border border-white/15 p-5 md:p-7 rounded-2xl backdrop-blur">
+        <p class="display text-5xl md:text-7xl grad-text-orange">03</p>
+        <h3 class="display-md text-xl md:text-2xl mt-3">Install in 7 days</h3>
+        <p class="text-stone-300 mt-2 text-sm md:text-base">Made locally. Installed by our team. Or your blinds are free.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section id="reviews" class="max-w-[1500px] mx-auto px-4 md:px-6 py-12 md:py-16">
+  <div class="text-center mb-8 md:mb-10">
+    <div class="star-yellow text-2xl md:text-3xl">★★★★★</div>
+    <h2 class="display text-3xl sm:text-4xl md:text-6xl mt-2">4.9 / 5 — 1,247 Calgary reviews.</h2>
+    <p class="text-stone-600 mt-2 text-sm md:text-base">All verified Google reviews. No filters.</p>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+    <figure class="bg-white border hair rounded-xl p-5 card-shadow">
+      <div class="star-yellow">★★★★★</div>
+      <p class="mt-2 font-semibold text-sm leading-snug">"Saved $1,800 vs Hunter Douglas. Installed in 5 days."</p>
+      <p class="text-xs text-stone-500 mt-3 font-medium">— Mike P., Auburn Bay · 2 weeks ago</p>
+    </figure>
+    <figure class="bg-white border hair rounded-xl p-5 card-shadow">
+      <div class="star-yellow">★★★★★</div>
+      <p class="mt-2 font-semibold text-sm leading-snug">"Best contractor experience in Calgary. Period."</p>
+      <p class="text-xs text-stone-500 mt-3 font-medium">— Sarah L., Beltline · 3 weeks ago</p>
+    </figure>
+    <figure class="bg-white border hair rounded-xl p-5 card-shadow">
+      <div class="star-yellow">★★★★★</div>
+      <p class="mt-2 font-semibold text-sm leading-snug">"Motorized blackouts that work with Alexa. Game changer."</p>
+      <p class="text-xs text-stone-500 mt-3 font-medium">— Jen K., Evanston · 1 month ago</p>
+    </figure>
+    <figure class="bg-white border hair rounded-xl p-5 card-shadow">
+      <div class="star-yellow">★★★★★</div>
+      <p class="mt-2 font-semibold text-sm leading-snug">"Quoted on a Monday. Installed by Friday. Spotless."</p>
+      <p class="text-xs text-stone-500 mt-3 font-medium">— Dan T., Aspen · 1 month ago</p>
+    </figure>
+    <figure class="bg-white border hair rounded-xl p-5 card-shadow">
+      <div class="star-yellow">★★★★★</div>
+      <p class="mt-2 font-semibold text-sm leading-snug">"Beat the cheapest quote by 10%. Honored to the dollar."</p>
+      <p class="text-xs text-stone-500 mt-3 font-medium">— Carla M., Bridgeland</p>
+    </figure>
+    <figure class="bg-white border hair rounded-xl p-5 card-shadow">
+      <div class="star-yellow">★★★★★</div>
+      <p class="mt-2 font-semibold text-sm leading-snug">"Cellular shades dropped winter heating bill 18%."</p>
+      <p class="text-xs text-stone-500 mt-3 font-medium">— Trent W., Tuscany</p>
+    </figure>
+    <figure class="bg-white border hair rounded-xl p-5 card-shadow">
+      <div class="star-yellow">★★★★★</div>
+      <p class="mt-2 font-semibold text-sm leading-snug">"Nursery blackouts saved our sleep. Worth every cent."</p>
+      <p class="text-xs text-stone-500 mt-3 font-medium">— Rachel D., Mount Pleasant</p>
+    </figure>
+    <figure class="bg-white border hair rounded-xl p-5 card-shadow">
+      <div class="star-yellow">★★★★★</div>
+      <p class="mt-2 font-semibold text-sm leading-snug">"Clean install, friendly crew, fair price. 10/10."</p>
+      <p class="text-xs text-stone-500 mt-3 font-medium">— Aaron H., Cochrane</p>
+    </figure>
+  </div>
+</section>
+
+<!-- Guarantees -->
+<section class="bg-gradient-to-b from-blue-50 to-white border-y hair">
+  <div class="max-w-[1100px] mx-auto px-4 md:px-6 py-12 md:py-16">
+    <h2 class="display text-2xl sm:text-3xl md:text-5xl text-center mb-8 md:mb-10">No-risk guarantees, in writing.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+      <div class="bg-white border-2 border-[var(--cobalt)] rounded-2xl p-4 md:p-5 flex gap-3 md:gap-4 items-start card-shadow">
+        <div class="text-2xl md:text-3xl">💯</div>
+        <div><p class="display-md text-base md:text-lg">Lowest-price guarantee</p><p class="text-sm text-stone-600 mt-1">Show us a written quote — we beat it by 10%.</p></div>
+      </div>
+      <div class="bg-white border-2 border-[var(--cobalt)] rounded-2xl p-4 md:p-5 flex gap-3 md:gap-4 items-start card-shadow">
+        <div class="text-2xl md:text-3xl">⏱️</div>
+        <div><p class="display-md text-base md:text-lg">7-day install or it's free</p><p class="text-sm text-stone-600 mt-1">Late beyond 7 business days? Your blinds are on us.</p></div>
+      </div>
+      <div class="bg-white border-2 border-[var(--cobalt)] rounded-2xl p-4 md:p-5 flex gap-3 md:gap-4 items-start card-shadow">
+        <div class="text-2xl md:text-3xl">🛡️</div>
+        <div><p class="display-md text-base md:text-lg">10-year warranty</p><p class="text-sm text-stone-600 mt-1">Mechanism, fabric, and motor — fully covered.</p></div>
+      </div>
+      <div class="bg-white border-2 border-[var(--cobalt)] rounded-2xl p-4 md:p-5 flex gap-3 md:gap-4 items-start card-shadow">
+        <div class="text-2xl md:text-3xl">💳</div>
+        <div><p class="display-md text-base md:text-lg">Pay in 12 months, 0% APR</p><p class="text-sm text-stone-600 mt-1">Approved in 30 seconds. No down payment.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Big closing CTA -->
+<section class="grad-orange text-white relative overflow-hidden">
+  <div class="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
+  <div class="max-w-[1100px] mx-auto px-4 md:px-6 py-12 md:py-16 text-center relative">
+    <p class="font-bold uppercase text-yellow-200 tracking-widest text-xs md:text-sm">⚡ DON'T MISS — 7 SLOTS LEFT</p>
+    <h2 class="display text-3xl sm:text-5xl md:text-7xl mt-3">Get 50% off — before Sunday.</h2>
+    <p class="mt-3 md:mt-4 text-base md:text-lg">It takes 60 seconds. We'll text you a quote within the hour.</p>
+    <a href="#calculator" class="inline-block mt-6 md:mt-8 bg-white text-[var(--orange-deep)] display-md text-lg md:text-2xl px-6 md:px-10 py-4 md:py-5 rounded-xl hover:bg-yellow-200 transition glow-cobalt">CLAIM MY 50% OFF →</a>
+    <p class="text-xs text-orange-100 mt-4">🔒 Free, no card, never spam.</p>
+  </div>
+</section>
+
+<!-- Sticky bottom bar -->
+<div class="fixed bottom-0 left-0 right-0 bg-[var(--ink)] text-white p-3 flex items-center justify-between gap-3 z-40 shadow-2xl border-t-2 border-[var(--orange)]">
+  <div class="hidden sm:block">
+    <p class="font-bold text-sm">🔥 50% off ends Sunday</p>
+    <p class="text-xs text-stone-300">Only 7 install slots left</p>
+  </div>
+  <div class="flex gap-2 flex-1 sm:flex-initial">
+    <a href="tel:+14035551234" class="flex-1 sm:flex-initial bg-white text-[var(--ink)] font-bold px-5 py-3 rounded-xl text-center text-sm">📞 Call Now</a>
+    <a href="#calculator" class="flex-1 sm:flex-initial grad-orange text-white font-bold px-5 py-3 rounded-xl text-center text-sm pulse-ring">Get Free Quote →</a>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-[var(--ink)] text-stone-400 pb-24">
+  <div class="max-w-[1500px] mx-auto px-4 md:px-6 py-10 md:py-12 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-sm">
+    <div class="col-span-2 md:col-span-1">
+      <p class="display-md text-xl md:text-2xl text-white">Sun<span class="grad-text-orange">Leo</span></p>
+      <p class="mt-3">Calgary's #1 rated custom blinds. Free measure, pro install, lowest price.</p>
+      <p class="mt-3 grad-text-orange font-bold text-lg md:text-xl">(403) 555-1234</p>
+    </div>
+    <div><p class="text-white font-bold mb-3">Shop</p><ul class="space-y-1"><li>Roller</li><li>Zebra</li><li>Cellular</li><li>Motorized</li><li>All Products</li></ul></div>
+    <div><p class="text-white font-bold mb-3">Areas Served</p><ul class="space-y-1"><li>Calgary</li><li>Airdrie</li><li>Cochrane</li><li>Okotoks</li><li>Chestermere</li></ul></div>
+    <div class="col-span-2 md:col-span-1"><p class="text-white font-bold mb-3">Guarantees</p><ul class="space-y-1"><li>Lowest Price</li><li>7-Day Install</li><li>10-Yr Warranty</li><li>BBB A+</li></ul></div>
+  </div>
+  <div class="border-t border-stone-800 py-4 text-center text-xs">© 2026 SunLeo Blinds Inc. · All offers in writing.</div>
+</footer>
+
+</body>
+</html>
