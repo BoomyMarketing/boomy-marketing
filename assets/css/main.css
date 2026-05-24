@@ -649,90 +649,6 @@
 /* ================================================================
    FOOTER — Container Queries on isolated component
 ================================================================ */
-@layer components {
-  /* COSMIC OUTRO — pre-footer */
-  .cosmic-outro {
-    position: relative;
-    overflow: hidden;
-    padding: 100px 5% 240px;
-    text-align: center;
-    background: transparent;
-    isolation: isolate;
-  }
-  .cosmic-outro-glow {
-    position: absolute;
-    bottom: -60px; left: 50%;
-    transform: translateX(-50%);
-    width: min(1100px, 130vw);
-    height: 520px;
-    background: radial-gradient(ellipse at center bottom, rgba(255,107,53,.22) 0%, rgba(124,58,237,.14) 35%, transparent 65%);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .cosmic-outro-inner {
-    position: relative;
-    z-index: 2;
-    max-width: 760px;
-    margin: 0 auto;
-  }
-  .cosmic-outro-heading {
-    font-size: clamp(3.2rem, 9vw, 7.5rem);
-    font-weight: 900;
-    line-height: 0.92;
-    letter-spacing: -0.04em;
-    margin: 18px 0 28px;
-    text-transform: uppercase;
-  }
-  .cosmic-outro-heading span {
-    background: linear-gradient(90deg, var(--accent-orange) 0%, var(--accent-yellow) 40%, var(--accent-orange) 80%);
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: cop-gradient 3s linear infinite;
-  }
-  @keyframes cop-gradient { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
-  .cosmic-outro-sub {
-    font-size: 1.08rem;
-    color: var(--text-sec);
-    line-height: 1.75;
-    margin-bottom: 40px;
-  }
-  /* Planet */
-  .cosmic-outro-planet {
-    position: absolute;
-    bottom: -200px; left: 50%;
-    transform: translateX(-50%);
-    width: 480px; height: 480px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-  }
-  .cop-planet {
-    width: 260px; height: 260px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #b06aff 0%, var(--bg-darkest) 28%, var(--accent-orange) 62%, var(--accent-yellow) 100%);
-    box-shadow: 0 0 80px rgba(255,107,53,.65), 0 0 180px rgba(255,107,53,.3), 0 0 320px rgba(255,107,53,.12), inset 0 0 50px rgba(124,58,237,.45);
-    animation: cop-pulse 5s ease-in-out infinite;
-    position: relative; z-index: 3;
-  }
-  @keyframes cop-pulse {
-    0%,100% { box-shadow: 0 0 80px rgba(255,107,53,.65), 0 0 180px rgba(255,107,53,.3), 0 0 320px rgba(255,107,53,.12), inset 0 0 50px rgba(124,58,237,.45); }
-    50% { box-shadow: 0 0 110px rgba(255,107,53,.85), 0 0 240px rgba(255,107,53,.45), 0 0 420px rgba(255,107,53,.18), inset 0 0 70px rgba(124,58,237,.6); }
-  }
-  .cop-orbit { position: absolute; border-radius: 50%; }
-  .cop-o1 { width: 330px; height: 330px; border: 1.5px solid rgba(255,107,53,.2); }
-  .cop-o2 { width: 420px; height: 420px; border: 1.5px solid rgba(255,210,63,.12); }
-  .cop-o3 { width: 480px; height: 480px; border: 1px solid rgba(124,58,237,.08); }
-  .cop-wrap { position: absolute; border-radius: 50%; }
-  .cop-w1 { width: 330px; height: 330px; animation: cop-orbit-spin 10s linear infinite; }
-  .cop-w2 { width: 420px; height: 420px; animation: cop-orbit-spin 18s linear infinite reverse; }
-  .cop-dot { position: absolute; border-radius: 50%; top: 50%; left: 50%; }
-  .cop-w1 .cop-dot { width: 16px; height: 16px; background: radial-gradient(circle at 35% 35%, #FFD23F, #FF6B35); box-shadow: 0 0 12px rgba(255,210,63,.9); transform: translate(-50%, -165px); }
-  .cop-w2 .cop-dot { width: 10px; height: 10px; background: radial-gradient(circle at 35% 35%, #a78bfa, #7C3AED); box-shadow: 0 0 8px rgba(124,58,237,.9); transform: translate(-50%, -210px); }
-  @keyframes cop-orbit-spin { to { transform: rotate(360deg); } }
-
   .footer {
     background: transparent;
     border-top: 1px solid rgba(255,255,255,0.06);
@@ -945,4 +861,117 @@
       &:active::after { background: rgba(255,255,255,0.12); }
     }
   }
+}
+
+/* ================================================================
+   COSMIC OUTRO — unlayered so it always wins the cascade
+================================================================ */
+.cosmic-outro {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 5% 260px;
+  text-align: center;
+  background: transparent;
+  isolation: isolate;
+}
+.cosmic-outro-glow {
+  position: absolute;
+  bottom: -60px; left: 50%;
+  transform: translateX(-50%);
+  width: min(1100px, 130vw);
+  height: 520px;
+  background: radial-gradient(ellipse at center bottom, rgba(255,107,53,.22) 0%, rgba(124,58,237,.14) 35%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+.cosmic-outro-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+.cosmic-outro-heading {
+  font-size: clamp(3.2rem, 9vw, 7.5rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  margin: 18px 0 28px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.cosmic-outro-heading span {
+  background: linear-gradient(90deg, var(--accent-orange) 0%, var(--accent-yellow) 40%, var(--accent-orange) 80%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: cop-gradient 3s linear infinite;
+}
+@keyframes cop-gradient { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+.cosmic-outro-sub {
+  font-size: 1.08rem;
+  color: var(--text-sec);
+  line-height: 1.75;
+  margin-bottom: 40px;
+  text-align: center;
+}
+/* Planet */
+.cosmic-outro-planet {
+  position: absolute;
+  bottom: -200px; left: 50%;
+  transform: translateX(-50%);
+  width: 480px; height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.cop-planet {
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #b06aff 0%, var(--bg-darkest) 28%, var(--accent-orange) 62%, var(--accent-yellow) 100%);
+  box-shadow: 0 0 80px rgba(255,107,53,.65), 0 0 180px rgba(255,107,53,.3), 0 0 320px rgba(255,107,53,.12), inset 0 0 50px rgba(124,58,237,.45);
+  animation: cop-pulse 5s ease-in-out infinite;
+  position: relative; z-index: 3;
+}
+@keyframes cop-pulse {
+  0%,100% { box-shadow: 0 0 80px rgba(255,107,53,.65), 0 0 180px rgba(255,107,53,.3), 0 0 320px rgba(255,107,53,.12), inset 0 0 50px rgba(124,58,237,.45); }
+  50% { box-shadow: 0 0 110px rgba(255,107,53,.85), 0 0 240px rgba(255,107,53,.45), 0 0 420px rgba(255,107,53,.18), inset 0 0 70px rgba(124,58,237,.6); }
+}
+.cop-orbit { position: absolute; border-radius: 50%; }
+.cop-o1 { width: 330px; height: 330px; border: 1.5px solid rgba(255,107,53,.2); }
+.cop-o2 { width: 420px; height: 420px; border: 1.5px solid rgba(255,210,63,.12); }
+.cop-o3 { width: 480px; height: 480px; border: 1px solid rgba(124,58,237,.08); }
+.cop-wrap { position: absolute; border-radius: 50%; }
+.cop-w1 { width: 330px; height: 330px; animation: cop-orbit-spin 10s linear infinite; }
+.cop-w2 { width: 420px; height: 420px; animation: cop-orbit-spin 18s linear infinite reverse; }
+.cop-dot { position: absolute; border-radius: 50%; top: 50%; left: 50%; }
+.cop-w1 .cop-dot { width: 16px; height: 16px; background: radial-gradient(circle at 35% 35%, #FFD23F, #FF6B35); box-shadow: 0 0 12px rgba(255,210,63,.9); transform: translate(-50%, -165px); }
+.cop-w2 .cop-dot { width: 10px; height: 10px; background: radial-gradient(circle at 35% 35%, #a78bfa, #7C3AED); box-shadow: 0 0 8px rgba(124,58,237,.9); transform: translate(-50%, -210px); }
+@keyframes cop-orbit-spin { to { transform: rotate(360deg); } }
+/* Mobile */
+@media (max-width: 768px) {
+  .cosmic-outro { padding: 72px 6% 200px; }
+  .cosmic-outro-planet { width: 320px; height: 320px; bottom: -140px; }
+  .cop-planet { width: 170px; height: 170px; }
+  .cop-o1 { width: 220px; height: 220px; }
+  .cop-o2 { width: 280px; height: 280px; }
+  .cop-o3 { width: 320px; height: 320px; }
+  .cop-w1 { width: 220px; height: 220px; }
+  .cop-w2 { width: 280px; height: 280px; }
+  .cop-w1 .cop-dot { transform: translate(-50%, -110px); }
+  .cop-w2 .cop-dot { transform: translate(-50%, -140px); }
+}
+@media (max-width: 480px) {
+  .cosmic-outro { padding: 60px 6% 170px; }
+  .cosmic-outro-planet { width: 260px; height: 260px; bottom: -110px; }
+  .cop-planet { width: 140px; height: 140px; }
+  .cop-o1 { width: 180px; height: 180px; }
+  .cop-o2 { width: 230px; height: 230px; }
+  .cop-o3 { width: 260px; height: 260px; }
+  .cop-w1 { width: 180px; height: 180px; }
+  .cop-w2 { width: 230px; height: 230px; }
+  .cop-w1 .cop-dot { transform: translate(-50%, -90px); }
+  .cop-w2 .cop-dot { transform: translate(-50%, -115px); }
 }
