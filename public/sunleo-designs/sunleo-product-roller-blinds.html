@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roller Blinds Calgary — Custom Made & Installed | SunLeo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --soji: #EDE8DC;
+  --soji-light: #F5F1E8;
+  --soji-dark: #E3DDD0;
+  --navy: #1B2844;
+  --navy-deep: #111B30;
+  --gold: #B09060;
+  --text: #1A1A1A;
+  --muted: #7A746C;
+  --line: rgba(27,40,68,0.1);
+}
+
+body { background: var(--soji-light); color: var(--text); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+.serif { font-family: 'Cormorant Garamond', serif; }
+
+/* NAV */
+nav {
+  background: var(--navy-deep);
+  padding: 0 40px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: #fff; }
+.nav-cta { background: #fff; color: var(--navy); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 11px 22px; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
+.nav-cta:hover { background: var(--soji); }
+
+/* BREADCRUMB */
+.breadcrumb {
+  background: var(--soji-dark);
+  padding: 14px 40px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 400;
+}
+.breadcrumb a { color: var(--muted); text-decoration: none; }
+.breadcrumb a:hover { color: var(--navy); }
+.breadcrumb .sep { opacity: 0.4; }
+.breadcrumb .current { color: var(--navy); font-weight: 500; }
+
+/* PRODUCT HERO */
+.product-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 620px;
+  background: #fff;
+}
+
+/* GALLERY */
+.gallery {
+  position: relative;
+  background: var(--soji);
+}
+.gallery-main {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  display: block;
+}
+.gallery-thumbs {
+  display: flex;
+  gap: 6px;
+  padding: 12px 16px;
+  background: var(--soji-dark);
+}
+.gallery-thumb {
+  width: 72px;
+  height: 52px;
+  object-fit: cover;
+  cursor: pointer;
+  opacity: 0.6;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.gallery-thumb.active, .gallery-thumb:hover { opacity: 1; border-color: var(--navy); }
+.gallery-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+}
+
+/* PRODUCT INFO */
+.product-info {
+  padding: 48px 48px 40px;
+  display: flex;
+  flex-direction: column;
+}
+.product-category {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.product-name {
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--navy);
+  line-height: 1.05;
+  margin-bottom: 8px;
+}
+.product-tagline {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+.product-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin-bottom: 28px;
+}
+.product-desc {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+/* STYLE OPTIONS */
+.options-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 12px;
+  display: block;
+}
+.style-options {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.style-chip {
+  padding: 8px 18px;
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #fff;
+}
+.style-chip.active, .style-chip:hover {
+  border-color: var(--navy);
+  color: var(--navy);
+  background: var(--soji-light);
+}
+
+/* FEATURES LIST */
+.features-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+.feature-mini-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text);
+}
+.feature-mini-item::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 600;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+/* CTA BLOCK */
+.cta-block {
+  background: var(--soji);
+  padding: 24px;
+  border-left: 3px solid var(--navy);
+  margin-bottom: 20px;
+}
+.cta-block-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.cta-block-sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--muted);
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+.btn-cta-main {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: var(--navy);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 15px 20px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.btn-cta-main:hover { background: #253660; }
+.btn-cta-secondary {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: transparent;
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 13px 20px;
+  text-decoration: none;
+  border: 1px solid rgba(27,40,68,0.25);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+  font-family: 'Inter', sans-serif;
+}
+.btn-cta-secondary:hover { border-color: var(--navy); background: var(--soji); }
+
+.trust-mini {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.trust-mini span {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.trust-mini span::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 600;
+  font-size: 11px;
+}
+
+/* PRODUCT DETAILS */
+.details-section {
+  background: #fff;
+  padding: 80px 40px;
+}
+.details-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.detail-section-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 16px; }
+.detail-h2 { font-size: 36px; font-weight: 300; color: var(--navy); line-height: 1.1; margin-bottom: 20px; }
+.detail-p { font-size: 14px; font-weight: 300; line-height: 1.8; color: var(--muted); margin-bottom: 24px; }
+
+.specs-table { width: 100%; border-collapse: collapse; }
+.specs-table tr { border-bottom: 1px solid var(--line); }
+.specs-table tr:first-child { border-top: 1px solid var(--line); }
+.specs-table td { padding: 14px 0; font-size: 13px; vertical-align: top; }
+.specs-table td:first-child { font-weight: 500; color: var(--navy); width: 45%; }
+.specs-table td:last-child { color: var(--muted); font-weight: 300; }
+
+/* ROOM GALLERY */
+.rooms-section {
+  background: var(--soji);
+  padding: 80px 40px;
+}
+.rooms-inner { max-width: 1100px; margin: 0 auto; }
+.rooms-header { text-align: center; margin-bottom: 48px; }
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.room-tile {
+  position: relative;
+  overflow: hidden;
+}
+.room-tile img {
+  width: 100%;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.room-tile:hover img { transform: scale(1.04); }
+.room-tile-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 20px 16px 14px;
+  background: linear-gradient(to top, rgba(17,27,48,0.85) 0%, transparent 100%);
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* PROCESS SECTION */
+.process-section {
+  background: var(--navy);
+  padding: 80px 40px;
+}
+.process-inner { max-width: 960px; margin: 0 auto; }
+.process-header { text-align: center; margin-bottom: 56px; }
+.process-header .detail-section-tag { color: var(--gold); }
+.process-header .detail-h2 { color: #fff; }
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+.process-step {
+  background: rgba(255,255,255,0.05);
+  padding: 32px 24px;
+  border: 1px solid rgba(255,255,255,0.07);
+  text-align: center;
+}
+.process-step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 16px;
+  display: block;
+}
+.process-step-title { font-size: 12px; font-weight: 600; color: #fff; margin-bottom: 8px; letter-spacing: 0.06em; }
+.process-step-desc { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+/* BOTTOM CTA */
+.bottom-cta {
+  background: var(--soji-dark);
+  padding: 80px 40px;
+  text-align: center;
+}
+.bottom-cta-h2 { font-size: 44px; font-weight: 300; color: var(--navy); margin-bottom: 16px; }
+.bottom-cta-p { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.7; max-width: 520px; margin: 0 auto 36px; }
+.btn-bottom-main {
+  display: inline-block;
+  background: var(--navy);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  text-decoration: none;
+  transition: background 0.2s;
+  margin: 0 8px;
+}
+.btn-bottom-main:hover { background: #253660; }
+
+/* RELATED */
+.related-section {
+  background: #fff;
+  padding: 80px 40px;
+}
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.related-card {
+  display: block;
+  text-decoration: none;
+  background: var(--soji-light);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+.related-card:hover { transform: translateY(-4px); }
+.related-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.related-card-info { padding: 16px; }
+.related-card-num { font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; display: block; }
+.related-card-name { font-size: 14px; font-weight: 500; color: var(--navy); }
+.related-card-desc { font-size: 12px; font-weight: 300; color: var(--muted); margin-top: 3px; }
+.related-card-arrow { font-size: 11px; color: var(--gold); margin-top: 8px; display: block; font-weight: 600; letter-spacing: 0.1em; }
+
+/* FOOTER */
+footer { background: var(--navy-deep); padding: 48px 40px 28px; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; max-width: 1200px; margin: 0 auto 32px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 32px; }
+.footer-logo img { height: 40px; object-fit: contain; margin-bottom: 12px; }
+.footer-logo p { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.7; font-weight: 300; }
+.footer-col-title { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 14px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.footer-links a { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: #fff; }
+.footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.footer-bottom p { font-size: 11px; color: rgba(255,255,255,0.25); font-weight: 300; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="design-28-soji-professional.html">
+    <img src="sunleo-logo.png" alt="SunLeo Window Coverings" style="height:44px; object-fit:contain;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="design-28-soji-professional.html#collections">Collections</a></li>
+    <li><a href="#">Gallery</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+  <a href="#book" class="nav-cta">Book Free Measurement</a>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="design-28-soji-professional.html">Home</a>
+  <span class="sep">›</span>
+  <a href="design-28-soji-professional.html#collections">Collections</a>
+  <span class="sep">›</span>
+  <span class="current">Roller Blinds</span>
+</div>
+
+<!-- PRODUCT HERO -->
+<div class="product-hero">
+
+  <!-- Gallery -->
+  <div class="gallery">
+    <div class="gallery-badge">Custom Made</div>
+    <img class="gallery-main" id="mainImg"
+      src="https://images.unsplash.com/photo-1615876063860-d971f6dca5dc?w=900&q=85"
+      alt="Roller Blinds Calgary">
+    <div class="gallery-thumbs">
+      <img class="gallery-thumb active"
+        src="https://images.unsplash.com/photo-1615876063860-d971f6dca5dc?w=200&q=70"
+        onclick="switchImg(this, 'https://images.unsplash.com/photo-1615876063860-d971f6dca5dc?w=900&q=85')" alt="">
+      <img class="gallery-thumb"
+        src="https://images.unsplash.com/photo-1598928636135-d146006ff4be?w=200&q=70"
+        onclick="switchImg(this, 'https://images.unsplash.com/photo-1598928636135-d146006ff4be?w=900&q=85')" alt="">
+      <img class="gallery-thumb"
+        src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=200&q=70"
+        onclick="switchImg(this, 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=900&q=85')" alt="">
+      <img class="gallery-thumb"
+        src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=200&q=70"
+        onclick="switchImg(this, 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=85')" alt="">
+    </div>
+  </div>
+
+  <!-- Product Info -->
+  <div class="product-info">
+    <p class="product-category">Collection 01</p>
+    <h1 class="product-name serif">Roller Blinds</h1>
+    <p class="product-tagline">Sleek, minimal &amp; endlessly versatile</p>
+    <div class="product-divider"></div>
+    <p class="product-desc">
+      Our custom roller blinds are precision-cut to fit your windows perfectly — no gaps, no guesswork. Available in blackout, light-filtering, and solar fabrics. Clean lines that suit any interior from contemporary to traditional.
+    </p>
+
+    <span class="options-label">Fabric Type</span>
+    <div class="style-options">
+      <div class="style-chip active">Blackout</div>
+      <div class="style-chip">Light Filtering</div>
+      <div class="style-chip">Solar / Screen</div>
+      <div class="style-chip">Sheer</div>
+    </div>
+
+    <div class="features-mini">
+      <div class="feature-mini-item">100% custom-made to your exact window measurements</div>
+      <div class="feature-mini-item">Available in 100+ fabric colours and textures</div>
+      <div class="feature-mini-item">Blackout, light-filtering &amp; solar options</div>
+      <div class="feature-mini-item">Manual chain or motorized operation available</div>
+      <div class="feature-mini-item">Professional installation included</div>
+    </div>
+
+    <div class="cta-block" id="book">
+      <p class="cta-block-title">Get a Free In-Home Measurement</p>
+      <p class="cta-block-sub">Our expert visits your home, measures your windows, and brings fabric samples — at no charge.</p>
+      <a href="#booking-form" class="btn-cta-main">Book Free In-Home Measurement</a>
+      <a href="design-28-soji-professional.html#collections" class="btn-cta-secondary">Browse All Collections</a>
+    </div>
+
+    <div class="trust-mini">
+      <span>Free consultation</span>
+      <span>No obligation</span>
+      <span>Professional install</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- PRODUCT DETAILS -->
+<section class="details-section">
+  <div class="details-inner">
+    <div>
+      <span class="detail-section-tag">Product Details</span>
+      <h2 class="detail-h2 serif">Why Choose Custom Roller Blinds?</h2>
+      <p class="detail-p">
+        Unlike off-the-shelf blinds that require trimming and leave gaps, SunLeo roller blinds are made-to-measure for a perfect fit in every window. Our expert measures each opening to the millimetre — because every home is different.
+      </p>
+      <p class="detail-p">
+        Whether you need complete blackout for a bedroom, a solar screen to reduce glare in your home office, or a sheer fabric to maintain your view — we carry the right solution. All fabrics are sourced from premium suppliers and are available in Calgary within 2–3 weeks.
+      </p>
+      <p class="detail-p" style="margin-bottom:0;">
+        Every installation is handled by our certified team. We mount, level, and test every blind before we leave — so you get it right the first time.
+      </p>
+    </div>
+    <div>
+      <span class="detail-section-tag">Specifications</span>
+      <table class="specs-table">
+        <tr><td>Construction</td><td>Custom made-to-measure</td></tr>
+        <tr><td>Width range</td><td>Up to 240 cm single panel</td></tr>
+        <tr><td>Fabric options</td><td>Blackout, light-filtering, solar, sheer</td></tr>
+        <tr><td>Colours available</td><td>100+ fabrics in stock</td></tr>
+        <tr><td>Operation</td><td>Manual chain or motorized</td></tr>
+        <tr><td>Motor compatibility</td><td>Somfy, Rollease, battery &amp; hardwired</td></tr>
+        <tr><td>Lead time</td><td>2–3 weeks after measurement</td></tr>
+        <tr><td>Installation</td><td>Professional — included</td></tr>
+        <tr><td>Warranty</td><td>3-year product warranty</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ROOM GALLERY -->
+<section class="rooms-section">
+  <div class="rooms-inner">
+    <div class="rooms-header">
+      <span class="detail-section-tag">Roller Blinds in the Home</span>
+      <h2 class="detail-h2 serif">See Them in Every Room</h2>
+    </div>
+    <div class="rooms-grid">
+      <div class="room-tile">
+        <img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=700&q=80" alt="Living Room">
+        <div class="room-tile-label">Living Room</div>
+      </div>
+      <div class="room-tile">
+        <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=700&q=80" alt="Bedroom">
+        <div class="room-tile-label">Bedroom</div>
+      </div>
+      <div class="room-tile">
+        <img src="https://images.unsplash.com/photo-1600607687644-c7f34b5063c7?w=700&q=80" alt="Home Office">
+        <div class="room-tile-label">Home Office</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="process-inner">
+    <div class="process-header">
+      <span class="detail-section-tag" style="color:var(--gold);">What Happens Next</span>
+      <h2 class="detail-h2 serif" style="color:#fff;">From Booking to Beautiful</h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <span class="process-step-num">01</span>
+        <p class="process-step-title">You Book</p>
+        <p class="process-step-desc">Fill in the form. We confirm your appointment within 24 hours.</p>
+      </div>
+      <div class="process-step">
+        <span class="process-step-num">02</span>
+        <p class="process-step-title">We Visit</p>
+        <p class="process-step-desc">Our expert comes to your home with fabric samples and a measuring kit.</p>
+      </div>
+      <div class="process-step">
+        <span class="process-step-num">03</span>
+        <p class="process-step-title">Custom Made</p>
+        <p class="process-step-desc">Your blinds are manufactured to your exact measurements — ready in 2–3 weeks.</p>
+      </div>
+      <div class="process-step">
+        <span class="process-step-num">04</span>
+        <p class="process-step-title">Installed</p>
+        <p class="process-step-desc">We return to mount, level, and test every blind. Done right the first time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section class="bottom-cta" id="booking-form">
+  <span style="font-size:10px; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:16px;">Ready to Start?</span>
+  <h2 class="bottom-cta-h2 serif">Book Your Free<br>In-Home Measurement</h2>
+  <p class="bottom-cta-p">Our expert visits your home, measures every window, and brings roller blind samples — completely free, no commitment required.</p>
+
+  <div style="max-width: 640px; margin: 0 auto; background: #fff; padding: 40px; text-align: left; box-shadow: 0 2px 40px rgba(27,40,68,0.06);">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+      <div>
+        <label style="display:block; font-size:10px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--navy); margin-bottom:7px;">First Name</label>
+        <input type="text" placeholder="Jane" style="width:100%; padding:11px 14px; border:1px solid #DDD8CC; background:var(--soji-light); font-size:14px; font-family:'Inter',sans-serif; outline:none;">
+      </div>
+      <div>
+        <label style="display:block; font-size:10px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--navy); margin-bottom:7px;">Last Name</label>
+        <input type="text" placeholder="Smith" style="width:100%; padding:11px 14px; border:1px solid #DDD8CC; background:var(--soji-light); font-size:14px; font-family:'Inter',sans-serif; outline:none;">
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+      <div>
+        <label style="display:block; font-size:10px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--navy); margin-bottom:7px;">Phone</label>
+        <input type="tel" placeholder="(403) 555-0100" style="width:100%; padding:11px 14px; border:1px solid #DDD8CC; background:var(--soji-light); font-size:14px; font-family:'Inter',sans-serif; outline:none;">
+      </div>
+      <div>
+        <label style="display:block; font-size:10px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--navy); margin-bottom:7px;">Email</label>
+        <input type="email" placeholder="jane@email.com" style="width:100%; padding:11px 14px; border:1px solid #DDD8CC; background:var(--soji-light); font-size:14px; font-family:'Inter',sans-serif; outline:none;">
+      </div>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="display:block; font-size:10px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--navy); margin-bottom:7px;">Which room(s)?</label>
+      <input type="text" placeholder="e.g. Bedroom + living room, or whole house…" style="width:100%; padding:11px 14px; border:1px solid #DDD8CC; background:var(--soji-light); font-size:14px; font-family:'Inter',sans-serif; outline:none;">
+    </div>
+    <button style="width:100%; padding:15px; background:var(--navy); color:#fff; font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; border:none; cursor:pointer; font-family:'Inter',sans-serif;">
+      Request Free Measurement for Roller Blinds
+    </button>
+    <p style="text-align:center; font-size:11px; color:var(--muted); margin-top:12px; font-weight:300;">We'll call or text within 24 hours to confirm your appointment.</p>
+  </div>
+</section>
+
+<!-- RELATED COLLECTIONS -->
+<section class="related-section">
+  <div style="text-align:center; margin-bottom:40px;">
+    <span style="font-size:10px; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:14px;">More Collections</span>
+    <h2 class="serif" style="font-size:36px; font-weight:300; color:var(--navy);">You Might Also Like</h2>
+  </div>
+  <div class="related-grid">
+    <a href="#" class="related-card">
+      <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=500&q=75" alt="Honeycomb Shades">
+      <div class="related-card-info">
+        <span class="related-card-num">Collection 02</span>
+        <p class="related-card-name">Honeycomb Shades</p>
+        <p class="related-card-desc">Energy-saving · Insulating cells</p>
+        <span class="related-card-arrow">View Collection →</span>
+      </div>
+    </a>
+    <a href="#" class="related-card">
+      <img src="https://images.unsplash.com/photo-1598928636135-d146006ff4be?w=500&q=75" alt="Zebra Shades">
+      <div class="related-card-info">
+        <span class="related-card-num">Collection 03</span>
+        <p class="related-card-name">Zebra Shades</p>
+        <p class="related-card-desc">Alternating sheer &amp; solid bands</p>
+        <span class="related-card-arrow">View Collection →</span>
+      </div>
+    </a>
+    <a href="#" class="related-card">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=75" alt="Motorized Blinds">
+      <div class="related-card-info">
+        <span class="related-card-num">Collection 05</span>
+        <p class="related-card-name">Motorized Blinds</p>
+        <p class="related-card-desc">Smart home · Voice &amp; app control</p>
+        <span class="related-card-arrow">View Collection →</span>
+      </div>
+    </a>
+    <a href="#" class="related-card">
+      <img src="https://images.unsplash.com/photo-1586105251261-72a756497a11?w=500&q=75" alt="Drapery">
+      <div class="related-card-info">
+        <span class="related-card-num">Collection 06</span>
+        <p class="related-card-name">Drapery &amp; Curtains</p>
+        <p class="related-card-desc">Luxurious fabrics · Custom sizing</p>
+        <span class="related-card-arrow">View Collection →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-logo">
+      <img src="sunleo-logo.png" alt="SunLeo">
+      <p>Calgary-based custom window covering specialists. Expert craftsmanship. Solutions that elevate every space.</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Navigate</p>
+      <ul class="footer-links">
+        <li><a href="design-28-soji-professional.html">Home</a></li>
+        <li><a href="design-28-soji-professional.html#collections">Collections</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Collections</p>
+      <ul class="footer-links">
+        <li><a href="#">Roller Blinds</a></li>
+        <li><a href="#">Honeycomb Shades</a></li>
+        <li><a href="#">Zebra Shades</a></li>
+        <li><a href="#">Wood Blinds</a></li>
+        <li><a href="#">Motorized Blinds</a></li>
+        <li><a href="#">Drapery &amp; Curtains</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Contact</p>
+      <ul class="footer-links">
+        <li><a href="#">(403) 555-0100</a></li>
+        <li><a href="#">info@sunleowindows.ca</a></li>
+        <li><a href="#">Calgary, Alberta</a></li>
+        <li><a href="#booking-form">Book Free Measurement</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 SunLeo Window Coverings. All rights reserved.</p>
+    <p>Roller Blinds Calgary — Custom Made &amp; Installed</p>
+  </div>
+</footer>
+
+<script>
+function switchImg(thumb, src) {
+  document.getElementById('mainImg').src = src;
+  document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+  thumb.classList.add('active');
+}
+document.querySelectorAll('.style-chip').forEach(chip => {
+  chip.addEventListener('click', function() {
+    document.querySelectorAll('.style-chip').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>

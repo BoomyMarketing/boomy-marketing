@@ -4,411 +4,915 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SunLeo Window Coverings — Custom Blinds & Shades Calgary</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --soji: #EDE8DC;
-    --soji-dark: #E3DDD0;
-    --navy: #1B2844;
-    --navy-light: #253660;
-    --gold: #B8A070;
-    --text: #1A1A1A;
-    --text-muted: #6B6560;
-  }
-  * { font-family: 'Georgia', 'Times New Roman', serif; }
-  .sans { font-family: 'Helvetica Neue', Arial, sans-serif; }
-  body { background: var(--soji); color: var(--text); }
-  .btn-primary {
-    background: var(--navy);
-    color: #fff;
-    padding: 14px 32px;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    border: none;
-    cursor: pointer;
-    display: inline-block;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-  .btn-primary:hover { background: #253660; }
-  .btn-outline {
-    background: transparent;
-    color: var(--navy);
-    padding: 13px 32px;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    border: 1.5px solid var(--navy);
-    cursor: pointer;
-    display: inline-block;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-  .btn-outline:hover { background: var(--navy); color: #fff; }
-  .section-label {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .divider {
-    width: 48px;
-    height: 2px;
-    background: var(--gold);
-    display: block;
-    margin: 0 auto;
-  }
-  .divider-left {
-    width: 48px;
-    height: 2px;
-    background: var(--gold);
-    display: block;
-  }
-  .category-card {
-    position: relative;
-    overflow: hidden;
-    background: #fff;
-    cursor: pointer;
-    display: block;
-    text-decoration: none;
-  }
-  .category-card img {
-    width: 100%;
-    aspect-ratio: 4/3;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.5s ease;
-  }
-  .category-card:hover img { transform: scale(1.04); }
-  .category-card .overlay {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: linear-gradient(to top, rgba(27,40,68,0.88) 0%, rgba(27,40,68,0.1) 100%);
-    padding: 28px 24px 20px;
-  }
-  .process-step {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-  }
-  .step-num {
-    font-size: 42px;
-    font-weight: 300;
-    color: var(--gold);
-    line-height: 1;
-    min-width: 52px;
-  }
-  nav a { text-decoration: none; }
-  .trust-bar {
-    background: var(--navy);
-    color: #fff;
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --soji: #EDE8DC;
+  --soji-light: #F5F1E8;
+  --soji-dark: #E3DDD0;
+  --navy: #1B2844;
+  --navy-deep: #111B30;
+  --gold: #B09060;
+  --gold-light: #C8A87A;
+  --text: #1A1A1A;
+  --muted: #7A746C;
+  --line: rgba(27,40,68,0.12);
+}
+
+body {
+  background: var(--soji);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.serif { font-family: 'Cormorant Garamond', serif; }
+
+/* TRUST BAR */
+.trust-bar {
+  background: var(--navy-deep);
+  color: rgba(255,255,255,0.72);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  padding: 9px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.trust-bar a { color: rgba(255,255,255,0.72); text-decoration: none; }
+
+/* NAV */
+nav {
+  background: var(--soji);
+  border-bottom: 1px solid var(--line);
+  padding: 0 40px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.nav-links a:hover { opacity: 1; }
+.nav-cta {
+  background: var(--navy);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  text-decoration: none;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: #253660; }
+
+/* HERO */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 108px);
+}
+.hero-text {
+  background: var(--soji);
+  padding: 80px 64px 80px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+.hero-tag::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+}
+.hero-h1 {
+  font-size: 58px;
+  font-weight: 300;
+  line-height: 1.08;
+  color: var(--navy);
+  margin-bottom: 28px;
+}
+.hero-sub {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 420px;
+  margin-bottom: 44px;
+}
+.hero-btns {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--navy);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 15px 30px;
+  text-decoration: none;
+  transition: background 0.2s;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover { background: #253660; }
+.btn-ghost {
+  background: transparent;
+  color: var(--navy);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 14px 30px;
+  text-decoration: none;
+  border: 1px solid rgba(27,40,68,0.35);
+  transition: all 0.2s;
+  display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--navy); background: rgba(27,40,68,0.04); }
+
+.hero-img {
+  position: relative;
+  overflow: hidden;
+}
+.hero-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-badge {
+  position: absolute;
+  bottom: 40px;
+  left: -24px;
+  background: var(--soji-light);
+  padding: 24px 32px;
+  box-shadow: 0 16px 60px rgba(27,40,68,0.18);
+  border-left: 3px solid var(--gold);
+}
+.hero-badge-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.hero-badge-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--navy);
+}
+.hero-badge-sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+/* SECTION HEADER */
+.section-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.section-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 16px;
+}
+.section-h2 {
+  font-size: 42px;
+  font-weight: 300;
+  color: var(--navy);
+  line-height: 1.1;
+}
+.section-line {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  display: block;
+  margin: 20px auto 0;
+}
+
+/* HOW IT WORKS */
+.how-section {
+  background: #fff;
+  padding: 96px 40px;
+}
+.steps {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr 40px 1fr;
+  gap: 0;
+  max-width: 860px;
+  margin: 0 auto;
+  align-items: start;
+}
+.step {
+  text-align: center;
+  padding: 0 16px;
+}
+.step-icon {
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  background: var(--soji-light);
+}
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--navy);
+}
+.step-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 32px;
+}
+.step-connector::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.4;
+}
+.step-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+.step-desc {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--muted);
+  font-weight: 300;
+}
+
+/* COLLECTIONS */
+.collections-section {
+  background: var(--soji);
+  padding: 96px 40px;
+}
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.collection-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+  background: var(--navy-deep);
+}
+.collection-card img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease, opacity 0.3s ease;
+  opacity: 0.9;
+}
+.collection-card:hover img {
+  transform: scale(1.05);
+  opacity: 0.75;
+}
+.collection-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 40px 24px 24px;
+  background: linear-gradient(to top, rgba(17,27,48,0.95) 0%, transparent 100%);
+}
+.collection-num {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 6px;
+  display: block;
+}
+.collection-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.collection-desc {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.04em;
+}
+.collection-arrow {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  transition: all 0.2s;
+}
+.collection-card:hover .collection-arrow {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+/* WHY SECTION */
+.why-section {
+  background: var(--navy);
+  padding: 96px 40px;
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: center;
+}
+.why-text .section-tag { text-align: left; }
+.why-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+.why-intro {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 40px;
+}
+.why-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.why-feature {
+  padding: 20px 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.why-feature:last-child { border-bottom: 1px solid rgba(255,255,255,0.08); }
+.why-feature-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+.why-feature-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 3px;
+  letter-spacing: 0.04em;
+}
+.why-feature-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.6;
+  font-weight: 300;
+}
+.why-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.why-stat {
+  background: rgba(255,255,255,0.05);
+  padding: 32px 28px;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.why-stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--gold-light);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.why-stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+/* FORM SECTION */
+.form-section {
+  background: var(--soji-dark);
+  padding: 96px 40px;
+}
+.form-wrap {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.form-card {
+  background: #fff;
+  padding: 56px 56px 48px;
+  box-shadow: 0 2px 40px rgba(27,40,68,0.06);
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.form-field { margin-bottom: 16px; }
+.form-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #DDD8CC;
+  background: var(--soji-light);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-input:focus { border-color: var(--navy); }
+.form-submit {
+  width: 100%;
+  padding: 16px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+.form-submit:hover { background: #253660; }
+.form-note {
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 14px;
+  font-weight: 300;
+}
+
+/* FOOTER */
+footer {
+  background: var(--navy-deep);
+  padding: 56px 40px 32px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr;
+  gap: 48px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+.footer-brand img { height: 44px; object-fit: contain; margin-bottom: 16px; }
+.footer-brand p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+  font-weight: 300;
+}
+.footer-heading {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 16px;
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-links a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-weight: 300;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: #fff; }
+.footer-contact p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  font-weight: 300;
+}
+.footer-contact strong {
+  display: block;
+  color: rgba(255,255,255,0.8);
+  font-weight: 500;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-bottom p {
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  font-weight: 300;
+}
 </style>
 </head>
 <body>
 
 <!-- TRUST BAR -->
-<div class="trust-bar py-2 px-6 text-center sans" style="font-size:12px; letter-spacing:0.05em;">
-  <span>✓ Free In-Home Measurement</span>
-  <span class="mx-4 opacity-40">|</span>
-  <span>✓ Factory-Direct Pricing</span>
-  <span class="mx-4 opacity-40">|</span>
-  <span>✓ Professional Installation</span>
-  <span class="mx-4 opacity-40">|</span>
-  <span>✓ Calgary-Owned &amp; Operated</span>
+<div class="trust-bar">
+  <span>📞 <a href="tel:+14035550100">(403) 555-0100</a></span>
+  <span style="letter-spacing:0.1em; font-weight:500; color:rgba(255,255,255,0.9);">FREE IN-HOME MEASUREMENT &amp; CONSULTATION</span>
+  <span>Serving Calgary &amp; Area</span>
 </div>
 
 <!-- NAV -->
-<nav style="background: var(--soji); border-bottom: 1px solid rgba(27,40,68,0.12);" class="px-8 py-5 flex items-center justify-between">
-  <div class="flex items-center gap-3">
-    <img src="sunleo-logo.png" alt="SunLeo Window Coverings" style="height:52px; object-fit:contain;">
-  </div>
-  <div class="flex items-center gap-10 sans" style="font-size:13px; font-weight:500; letter-spacing:0.06em; color: var(--navy);">
-    <a href="#" class="hover:opacity-60 transition-opacity">COLLECTIONS</a>
-    <a href="#" class="hover:opacity-60 transition-opacity">GALLERY</a>
-    <a href="#" class="hover:opacity-60 transition-opacity">BLOG</a>
-  </div>
-  <a href="#measurement" class="btn-primary" style="padding:11px 22px; font-size:12px;">Book Free Measurement</a>
+<nav>
+  <img src="sunleo-logo.png" alt="SunLeo Window Coverings" style="height:50px; object-fit:contain;">
+  <ul class="nav-links">
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#">Gallery</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+  <a href="#quote" class="nav-cta">Book Free Measurement</a>
 </nav>
 
-<!-- HERO — SPLIT LAYOUT -->
-<section style="min-height:86vh; display:grid; grid-template-columns: 1fr 1fr;">
-  <!-- Left: text -->
-  <div style="background: var(--soji); padding: 80px 64px; display:flex; flex-direction:column; justify-content:center;">
-    <span class="section-label mb-4">Calgary's Custom Window Specialists</span>
-    <div class="divider-left mb-8"></div>
-    <h1 style="font-size:52px; line-height:1.1; font-weight:400; color: var(--navy); margin-bottom:24px;">
-      Window Coverings<br>Crafted for<br><em>Your Home</em>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-tag">Calgary's Custom Window Specialists</div>
+    <h1 class="hero-h1 serif">
+      We Design &amp;<br>Install Custom<br><em>Window Coverings</em>
     </h1>
-    <p class="sans" style="font-size:16px; line-height:1.75; color: var(--text-muted); max-width:400px; margin-bottom:40px;">
-      From custom roller shades to motorized drapery — SunLeo brings expert consultation, precise measuring, and flawless installation directly to your Calgary home.
+    <p class="hero-sub">
+      Premium blinds, shades &amp; drapery — tailored to your space. Our experts come to you, measure every window, and handle everything from selection to installation.
     </p>
-    <div class="flex gap-4 flex-wrap">
-      <a href="#measurement" class="btn-primary">Book Free In-Home Measurement</a>
-      <a href="#collections" class="btn-outline">View Collections</a>
-    </div>
-    <!-- Social proof line -->
-    <div class="flex items-center gap-3 mt-10">
-      <div class="flex" style="gap:-4px;">
-        <div style="width:32px;height:32px;border-radius:50%;background:var(--navy);border:2px solid var(--soji);"></div>
-        <div style="width:32px;height:32px;border-radius:50%;background:var(--navy-light);border:2px solid var(--soji);margin-left:-8px;"></div>
-        <div style="width:32px;height:32px;border-radius:50%;background:#4A6FA5;border:2px solid var(--soji);margin-left:-8px;"></div>
-      </div>
-      <p class="sans" style="font-size:13px; color: var(--text-muted);">
-        Trusted by <strong style="color:var(--navy);">1,200+ Calgary homes</strong>
-      </p>
+    <div class="hero-btns">
+      <a href="#quote" class="btn-primary">Book Free In-Home Measurement</a>
+      <a href="#collections" class="btn-ghost">Browse Collections</a>
     </div>
   </div>
-  <!-- Right: image -->
-  <div style="position:relative; overflow:hidden;">
-    <img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=900&q=80" alt="Luxury window coverings" style="width:100%; height:100%; object-fit:cover; display:block;">
-    <!-- Floating badge -->
-    <div style="position:absolute; bottom:40px; left:-20px; background:#fff; padding:20px 28px; box-shadow:0 12px 40px rgba(27,40,68,0.18);">
-      <p class="sans" style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:4px;">Complimentary</p>
-      <p style="font-size:18px; font-weight:400; color:var(--navy);">In-Home Consultation</p>
-      <p class="sans" style="font-size:12px; color:var(--text-muted);">Measure · Design · Install</p>
-    </div>
-  </div>
-</section>
-
-<!-- COLLECTIONS / CATEGORIES -->
-<section id="collections" style="background: #fff; padding: 96px 64px;">
-  <div style="max-width:1280px; margin:0 auto;">
-    <div class="text-center mb-16">
-      <span class="section-label">Our Collections</span>
-      <div class="divider mt-3 mb-6"></div>
-      <h2 style="font-size:38px; font-weight:400; color:var(--navy);">Find Your Perfect Window Treatment</h2>
-      <p class="sans" style="font-size:16px; color:var(--text-muted); max-width:520px; margin:12px auto 0;">
-        Every window is different. Browse our collections and let our experts help you find the ideal fit.
-      </p>
-    </div>
-
-    <!-- 2×3 Grid -->
-    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:2px;">
-
-      <!-- Roller Shades -->
-      <a href="#" class="category-card">
-        <img src="https://images.unsplash.com/photo-1615876063860-d971f6dca5dc?w=700&q=80" alt="Roller Shades">
-        <div class="overlay">
-          <p class="sans" style="font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.65); margin-bottom:4px;">Collection</p>
-          <h3 style="font-size:20px; font-weight:400; color:#fff;">Roller Shades</h3>
-          <p class="sans" style="font-size:12px; color:rgba(255,255,255,0.7); margin-top:4px;">Clean lines · Blackout &amp; Solar options</p>
-        </div>
-      </a>
-
-      <!-- Cellular / Honeycomb -->
-      <a href="#" class="category-card">
-        <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=700&q=80" alt="Cellular Honeycomb Shades">
-        <div class="overlay">
-          <p class="sans" style="font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.65); margin-bottom:4px;">Collection</p>
-          <h3 style="font-size:20px; font-weight:400; color:#fff;">Cellular / Honeycomb</h3>
-          <p class="sans" style="font-size:12px; color:rgba(255,255,255,0.7); margin-top:4px;">Energy-saving · Insulating cells</p>
-        </div>
-      </a>
-
-      <!-- Zebra Shades -->
-      <a href="#" class="category-card">
-        <img src="https://images.unsplash.com/photo-1598928636135-d146006ff4be?w=700&q=80" alt="Zebra Shades">
-        <div class="overlay">
-          <p class="sans" style="font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.65); margin-bottom:4px;">Collection</p>
-          <h3 style="font-size:20px; font-weight:400; color:#fff;">Zebra Shades</h3>
-          <p class="sans" style="font-size:12px; color:rgba(255,255,255,0.7); margin-top:4px;">Alternating sheer &amp; solid bands</p>
-        </div>
-      </a>
-
-      <!-- Wood Blinds -->
-      <a href="#" class="category-card">
-        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=700&q=80" alt="Wood Blinds">
-        <div class="overlay">
-          <p class="sans" style="font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.65); margin-bottom:4px;">Collection</p>
-          <h3 style="font-size:20px; font-weight:400; color:#fff;">Wood Blinds</h3>
-          <p class="sans" style="font-size:12px; color:rgba(255,255,255,0.7); margin-top:4px;">Real wood · Faux wood options</p>
-        </div>
-      </a>
-
-      <!-- Motorized -->
-      <a href="#" class="category-card">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Motorized Blinds">
-        <div class="overlay">
-          <p class="sans" style="font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.65); margin-bottom:4px;">Collection</p>
-          <h3 style="font-size:20px; font-weight:400; color:#fff;">Motorized</h3>
-          <p class="sans" style="font-size:12px; color:rgba(255,255,255,0.7); margin-top:4px;">Smart home · Voice &amp; app control</p>
-        </div>
-      </a>
-
-      <!-- Drapery & Curtains -->
-      <a href="#" class="category-card">
-        <img src="https://images.unsplash.com/photo-1586105251261-72a756497a11?w=700&q=80" alt="Drapery and Curtains">
-        <div class="overlay">
-          <p class="sans" style="font-size:10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.65); margin-bottom:4px;">Collection</p>
-          <h3 style="font-size:20px; font-weight:400; color:#fff;">Drapery &amp; Curtains</h3>
-          <p class="sans" style="font-size:12px; color:rgba(255,255,255,0.7); margin-top:4px;">Luxurious fabrics · Custom sizing</p>
-        </div>
-      </a>
-
-    </div>
-
-    <div class="text-center mt-12">
-      <a href="#measurement" class="btn-primary">Book a Free Consultation to Explore All Options</a>
+  <div class="hero-img">
+    <img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1000&q=85" alt="Custom window coverings in Calgary home">
+    <div class="hero-badge">
+      <p class="hero-badge-label">Complimentary</p>
+      <p class="hero-badge-title">In-Home Consultation</p>
+      <p class="hero-badge-sub">Measure · Design · Install</p>
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section style="background: var(--soji); padding: 96px 64px;">
-  <div style="max-width:1080px; margin:0 auto;">
-    <div class="text-center mb-16">
-      <span class="section-label">The Process</span>
-      <div class="divider mt-3 mb-6"></div>
-      <h2 style="font-size:38px; font-weight:400; color:var(--navy);">Simple from Start to Finish</h2>
+<section class="how-section">
+  <div class="section-header">
+    <span class="section-tag">The Process</span>
+    <h2 class="section-h2 serif">How It Works</h2>
+    <span class="section-line"></span>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-icon">
+        <span class="step-num">01</span>
+      </div>
+      <p class="step-title">Browse Collections</p>
+      <p class="step-desc">Explore our window covering styles and find your perfect match from our curated catalogue.</p>
     </div>
-
-    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:64px; align-items:start;">
-
-      <div class="process-step flex-col text-center">
-        <div class="step-num" style="text-align:center; width:100%;">01</div>
-        <div style="width:1px; height:40px; background:var(--gold); margin: 8px auto;"></div>
-        <h3 style="font-size:20px; font-weight:400; color:var(--navy); margin-bottom:12px;">We Come to You</h3>
-        <p class="sans" style="font-size:14px; line-height:1.7; color:var(--text-muted);">Our expert visits your home for a complimentary measurement and design consultation — at a time that suits you.</p>
+    <div class="step-connector"></div>
+    <div class="step">
+      <div class="step-icon">
+        <span class="step-num">02</span>
       </div>
-
-      <div class="process-step flex-col text-center">
-        <div class="step-num" style="text-align:center; width:100%;">02</div>
-        <div style="width:1px; height:40px; background:var(--gold); margin: 8px auto;"></div>
-        <h3 style="font-size:20px; font-weight:400; color:var(--navy); margin-bottom:12px;">Choose Your Style</h3>
-        <p class="sans" style="font-size:14px; line-height:1.7; color:var(--text-muted);">Browse fabric samples and colour swatches in your own light. We help you select the perfect covering for each room.</p>
+      <p class="step-title">Book Free Visit</p>
+      <p class="step-desc">Our expert comes to your home — we measure every window and bring samples to help you choose.</p>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step">
+      <div class="step-icon">
+        <span class="step-num">03</span>
       </div>
-
-      <div class="process-step flex-col text-center">
-        <div class="step-num" style="text-align:center; width:100%;">03</div>
-        <div style="width:1px; height:40px; background:var(--gold); margin: 8px auto;"></div>
-        <h3 style="font-size:20px; font-weight:400; color:var(--navy); margin-bottom:12px;">Professional Install</h3>
-        <p class="sans" style="font-size:14px; line-height:1.7; color:var(--text-muted);">Your custom blinds are crafted and installed by our certified team — perfectly fitted, guaranteed.</p>
-      </div>
-
+      <p class="step-title">We Measure &amp; Install</p>
+      <p class="step-desc">Custom-made to your exact specifications, then professionally installed with a perfect fit guarantee.</p>
     </div>
   </div>
 </section>
 
-<!-- WHY SUNLEO -->
-<section style="background: var(--navy); padding: 96px 64px;">
-  <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
+<!-- COLLECTIONS -->
+<section class="collections-section" id="collections">
+  <div class="section-header">
+    <span class="section-tag">Our Collections</span>
+    <h2 class="section-h2 serif">Explore Our Collections</h2>
+    <span class="section-line"></span>
+  </div>
+  <div class="collections-grid">
 
-    <div>
-      <span style="font-family:'Helvetica Neue',Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold);">Why SunLeo</span>
-      <div style="width:48px;height:2px;background:var(--gold);margin:12px 0 28px;"></div>
-      <h2 style="font-size:38px; font-weight:400; color:#fff; line-height:1.2; margin-bottom:24px;">
-        Calgary's Window Covering Specialists
-      </h2>
-      <p class="sans" style="font-size:15px; line-height:1.75; color:rgba(255,255,255,0.72); margin-bottom:40px;">
-        We're not a big-box store. Every measurement, recommendation, and installation is handled by our local team of specialists who know Calgary homes and climates inside-out.
-      </p>
-      <a href="#measurement" class="btn-primary" style="background:#fff; color:var(--navy);">Book Free In-Home Measurement</a>
-    </div>
+    <a href="sunleo-product-roller-blinds.html" class="collection-card">
+      <img src="https://images.unsplash.com/photo-1615876063860-d971f6dca5dc?w=700&q=80" alt="Roller Blinds">
+      <div class="collection-info">
+        <span class="collection-num">Collection 01</span>
+        <p class="collection-name">Roller Blinds</p>
+        <p class="collection-desc">Sleek, minimal &amp; versatile</p>
+      </div>
+      <div class="collection-arrow">→</div>
+    </a>
 
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
-      <div style="background:rgba(255,255,255,0.07); padding:28px 24px; border:1px solid rgba(255,255,255,0.1);">
-        <div style="font-size:32px; font-weight:300; color:var(--gold); margin-bottom:8px;">15+</div>
-        <p class="sans" style="font-size:13px; color:rgba(255,255,255,0.7);">Years serving Calgary homeowners</p>
+    <a href="sunleo-product-honeycomb.html" class="collection-card">
+      <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=700&q=80" alt="Honeycomb Shades">
+      <div class="collection-info">
+        <span class="collection-num">Collection 02</span>
+        <p class="collection-name">Honeycomb Shades</p>
+        <p class="collection-desc">Energy-saving · Superior insulation</p>
       </div>
-      <div style="background:rgba(255,255,255,0.07); padding:28px 24px; border:1px solid rgba(255,255,255,0.1);">
-        <div style="font-size:32px; font-weight:300; color:var(--gold); margin-bottom:8px;">1,200+</div>
-        <p class="sans" style="font-size:13px; color:rgba(255,255,255,0.7);">Homes transformed across Calgary</p>
-      </div>
-      <div style="background:rgba(255,255,255,0.07); padding:28px 24px; border:1px solid rgba(255,255,255,0.1);">
-        <div style="font-size:32px; font-weight:300; color:var(--gold); margin-bottom:8px;">100%</div>
-        <p class="sans" style="font-size:13px; color:rgba(255,255,255,0.7);">Custom — nothing off the shelf</p>
-      </div>
-      <div style="background:rgba(255,255,255,0.07); padding:28px 24px; border:1px solid rgba(255,255,255,0.1);">
-        <div style="font-size:32px; font-weight:300; color:var(--gold); margin-bottom:8px;">Free</div>
-        <p class="sans" style="font-size:13px; color:rgba(255,255,255,0.7);">In-home measurement &amp; design consult</p>
-      </div>
-    </div>
+      <div class="collection-arrow">→</div>
+    </a>
 
+    <a href="#" class="collection-card">
+      <img src="https://images.unsplash.com/photo-1598928636135-d146006ff4be?w=700&q=80" alt="Zebra Shades">
+      <div class="collection-info">
+        <span class="collection-num">Collection 03</span>
+        <p class="collection-name">Zebra Shades</p>
+        <p class="collection-desc">Modern alternating sheer &amp; solid bands</p>
+      </div>
+      <div class="collection-arrow">→</div>
+    </a>
+
+    <a href="#" class="collection-card">
+      <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=700&q=80" alt="Wood Blinds">
+      <div class="collection-info">
+        <span class="collection-num">Collection 04</span>
+        <p class="collection-name">Wood Blinds</p>
+        <p class="collection-desc">Real wood &amp; faux wood options</p>
+      </div>
+      <div class="collection-arrow">→</div>
+    </a>
+
+    <a href="#" class="collection-card">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Motorized Blinds">
+      <div class="collection-info">
+        <span class="collection-num">Collection 05</span>
+        <p class="collection-name">Motorized Blinds</p>
+        <p class="collection-desc">Smart home · App &amp; voice control</p>
+      </div>
+      <div class="collection-arrow">→</div>
+    </a>
+
+    <a href="#" class="collection-card">
+      <img src="https://images.unsplash.com/photo-1586105251261-72a756497a11?w=700&q=80" alt="Drapery & Curtains">
+      <div class="collection-info">
+        <span class="collection-num">Collection 06</span>
+        <p class="collection-name">Drapery &amp; Curtains</p>
+        <p class="collection-desc">Luxurious fabrics · Custom sizing</p>
+      </div>
+      <div class="collection-arrow">→</div>
+    </a>
+
+  </div>
+  <div style="text-align:center; margin-top: 48px;">
+    <a href="#quote" class="btn-primary">Not Sure? Book a Free Consultation</a>
   </div>
 </section>
 
-<!-- LEAD GEN FORM -->
-<section id="measurement" style="background: var(--soji-dark); padding: 96px 64px;">
-  <div style="max-width:760px; margin:0 auto;">
-    <div class="text-center mb-12">
-      <span class="section-label">Get Started</span>
-      <div class="divider mt-3 mb-6"></div>
-      <h2 style="font-size:38px; font-weight:400; color:var(--navy);">Book Your Free In-Home Measurement</h2>
-      <p class="sans" style="font-size:16px; color:var(--text-muted); margin-top:12px;">
-        No commitment, no pressure. Just an expert visit to measure your windows and explore the perfect options for your home.
-      </p>
+<!-- WHY CHOOSE SUNLEO -->
+<section class="why-section">
+  <div class="why-grid">
+    <div class="why-text">
+      <span class="section-tag">Why Choose SunLeo</span>
+      <h2 class="why-h2">Calgary's Window Covering Specialists</h2>
+      <p class="why-intro">We're not a big-box store. SunLeo is a Calgary-based team of dedicated window covering specialists who come to your home, understand your space, and deliver a flawless result — every time.</p>
+      <div class="why-features">
+        <div class="why-feature">
+          <div class="why-feature-dot"></div>
+          <div>
+            <p class="why-feature-title">Free In-Home Consultation</p>
+            <p class="why-feature-desc">Our expert comes to you — measuring, advising, and bringing samples directly to your home.</p>
+          </div>
+        </div>
+        <div class="why-feature">
+          <div class="why-feature-dot"></div>
+          <div>
+            <p class="why-feature-title">Custom-Made Solutions</p>
+            <p class="why-feature-desc">Every covering is precision-made to your exact window measurements. Nothing off-the-shelf.</p>
+          </div>
+        </div>
+        <div class="why-feature">
+          <div class="why-feature-dot"></div>
+          <div>
+            <p class="why-feature-title">Professional Installation</p>
+            <p class="why-feature-desc">Our certified installers ensure a perfect fit and flawless finish — guaranteed.</p>
+          </div>
+        </div>
+        <div class="why-feature">
+          <div class="why-feature-dot"></div>
+          <div>
+            <p class="why-feature-title">Factory-Direct Quality</p>
+            <p class="why-feature-desc">Premium materials sourced direct — exceptional quality at honest pricing.</p>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:40px;">
+        <a href="#quote" class="btn-primary" style="background:#fff; color:var(--navy);">Book Free In-Home Measurement</a>
+      </div>
     </div>
 
-    <div style="background:#fff; padding:48px 56px; box-shadow:0 4px 40px rgba(27,40,68,0.08);">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
+    <div class="why-stats">
+      <div class="why-stat">
+        <p class="why-stat-num">15+</p>
+        <p class="why-stat-label">Years serving Calgary homeowners</p>
+      </div>
+      <div class="why-stat">
+        <p class="why-stat-num">1,200+</p>
+        <p class="why-stat-label">Homes transformed across Calgary</p>
+      </div>
+      <div class="why-stat">
+        <p class="why-stat-num">100%</p>
+        <p class="why-stat-label">Custom — nothing off the shelf</p>
+      </div>
+      <div class="why-stat">
+        <p class="why-stat-num">Free</p>
+        <p class="why-stat-label">In-home measurement &amp; consultation</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="form-section" id="quote">
+  <div class="form-wrap">
+    <div class="section-header">
+      <span class="section-tag">Get Started</span>
+      <h2 class="section-h2 serif">Book a Free In-Home Measurement</h2>
+      <span class="section-line"></span>
+      <p style="font-size:15px; color:var(--muted); margin-top:16px; font-weight:300; line-height:1.7;">
+        No obligation. No pressure. An expert visits your home, measures your windows, and guides you through every option.
+      </p>
+    </div>
+    <div class="form-card">
+      <div class="form-row">
         <div>
-          <label class="sans" style="display:block; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--navy); margin-bottom:8px;">First Name</label>
-          <input type="text" placeholder="Jane" style="width:100%; padding:12px 16px; border:1px solid #D4CFC4; background:var(--soji); font-family:Georgia,serif; font-size:15px; outline:none; box-sizing:border-box;">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-input" placeholder="Jane">
         </div>
         <div>
-          <label class="sans" style="display:block; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--navy); margin-bottom:8px;">Last Name</label>
-          <input type="text" placeholder="Smith" style="width:100%; padding:12px 16px; border:1px solid #D4CFC4; background:var(--soji); font-family:Georgia,serif; font-size:15px; outline:none; box-sizing:border-box;">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-input" placeholder="Smith">
         </div>
       </div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
+      <div class="form-row">
         <div>
-          <label class="sans" style="display:block; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--navy); margin-bottom:8px;">Phone</label>
-          <input type="tel" placeholder="(403) 555-0100" style="width:100%; padding:12px 16px; border:1px solid #D4CFC4; background:var(--soji); font-family:Georgia,serif; font-size:15px; outline:none; box-sizing:border-box;">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-input" placeholder="(403) 555-0100">
         </div>
         <div>
-          <label class="sans" style="display:block; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--navy); margin-bottom:8px;">Email</label>
-          <input type="email" placeholder="jane@email.com" style="width:100%; padding:12px 16px; border:1px solid #D4CFC4; background:var(--soji); font-family:Georgia,serif; font-size:15px; outline:none; box-sizing:border-box;">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" placeholder="jane@email.com">
         </div>
       </div>
-      <div style="margin-bottom:20px;">
-        <label class="sans" style="display:block; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--navy); margin-bottom:8px;">Neighbourhood / Area</label>
-        <input type="text" placeholder="e.g. Springbank Hill, Tuscany, Beltline…" style="width:100%; padding:12px 16px; border:1px solid #D4CFC4; background:var(--soji); font-family:Georgia,serif; font-size:15px; outline:none; box-sizing:border-box;">
-      </div>
-      <div style="margin-bottom:32px;">
-        <label class="sans" style="display:block; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--navy); margin-bottom:8px;">What are you looking for? (optional)</label>
-        <select style="width:100%; padding:12px 16px; border:1px solid #D4CFC4; background:var(--soji); font-family:Georgia,serif; font-size:15px; outline:none; appearance:none; box-sizing:border-box; color:var(--text);">
-          <option value="">— Select a collection —</option>
-          <option>Roller Shades</option>
-          <option>Cellular / Honeycomb</option>
+      <div class="form-field">
+        <label class="form-label">What are you looking for?</label>
+        <select class="form-input" style="appearance:none; cursor:pointer;">
+          <option value="">— Select a collection (optional) —</option>
+          <option>Roller Blinds</option>
+          <option>Honeycomb Shades</option>
           <option>Zebra Shades</option>
           <option>Wood Blinds</option>
           <option>Motorized Blinds</option>
           <option>Drapery &amp; Curtains</option>
-          <option>Not sure yet</option>
+          <option>Not sure yet — need advice</option>
         </select>
       </div>
-      <button type="submit" class="btn-primary" style="width:100%; text-align:center; padding:16px; font-size:13px;">
-        Request My Free Measurement
-      </button>
-      <p class="sans text-center" style="font-size:12px; color:var(--text-muted); margin-top:16px;">
-        We'll call or text within 24 hours to confirm your appointment.
-      </p>
+      <div class="form-field">
+        <label class="form-label">Message / Notes (optional)</label>
+        <textarea class="form-input" rows="3" placeholder="e.g. Looking for blackout options for bedroom, or motorized for living room…" style="resize:vertical;"></textarea>
+      </div>
+      <button class="form-submit">Request Free In-Home Measurement</button>
+      <p class="form-note">Our team will contact you within 24 hours to confirm your appointment.</p>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer style="background: var(--navy); color:rgba(255,255,255,0.6); padding: 48px 64px;">
-  <div style="max-width:1280px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;">
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="sunleo-logo.png" alt="SunLeo Window Coverings">
+      <p>Calgary-based custom window covering specialists. Expert craftsmanship. Solutions that elevate every space.</p>
+    </div>
     <div>
-      <img src="sunleo-logo.png" alt="SunLeo" style="height:40px; object-fit:contain; margin-bottom:8px;">
-      <p class="sans" style="font-size:12px; margin-top:4px;">Calgary's Custom Window Covering Specialists</p>
+      <p class="footer-heading">Navigation</p>
+      <ul class="footer-links">
+        <li><a href="#">Collections</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#quote">Book Measurement</a></li>
+      </ul>
     </div>
-    <div class="sans" style="font-size:12px; letter-spacing:0.04em; display:flex; gap:40px;">
-      <a href="#" style="color:rgba(255,255,255,0.6); text-decoration:none; hover:color:#fff;">Collections</a>
-      <a href="#" style="color:rgba(255,255,255,0.6); text-decoration:none;">Gallery</a>
-      <a href="#" style="color:rgba(255,255,255,0.6); text-decoration:none;">Blog</a>
-      <a href="#measurement" style="color:rgba(255,255,255,0.6); text-decoration:none;">Book Measurement</a>
+    <div>
+      <p class="footer-heading">Collections</p>
+      <ul class="footer-links">
+        <li><a href="#">Roller Blinds</a></li>
+        <li><a href="#">Honeycomb Shades</a></li>
+        <li><a href="#">Zebra Shades</a></li>
+        <li><a href="#">Wood Blinds</a></li>
+        <li><a href="#">Motorized Blinds</a></li>
+        <li><a href="#">Drapery &amp; Curtains</a></li>
+      </ul>
     </div>
-    <p class="sans" style="font-size:12px;">© 2025 SunLeo Window Coverings · Calgary, AB</p>
+    <div class="footer-contact">
+      <p class="footer-heading">Contact</p>
+      <p>
+        <strong>(403) 555-0100</strong>
+        <strong style="margin-top:12px;">info@sunleowindows.ca</strong>
+        Calgary, Alberta, Canada
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 SunLeo Window Coverings. All rights reserved.</p>
+    <p>Calgary, AB · Custom Window Coverings</p>
   </div>
 </footer>
 
