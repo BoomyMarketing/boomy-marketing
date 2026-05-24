@@ -60,6 +60,8 @@ const pageStyle = `
   .float-tag-2 { bottom: 15%; right: 0%; animation: floatTag 4s ease-in-out 1.5s infinite; }
   .float-tag-3 { bottom: 28%; left: 0%; animation: floatTag 4s ease-in-out .8s infinite; }
   @keyframes floatTag { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  /* FOUC prevention: hero elements hidden until GSAP animates them in */
+  #heroBadge, #hero-heading, .hero-sub, .hero-buttons, .hero-visual, .float-tag { opacity: 0; }
   /* SERVICES */
   .services { background: transparent; }
   .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
@@ -515,20 +517,24 @@ const pageStyle = `
 <script>
 // GSAP animations
 window.addEventListener('load', () => {
-  if (typeof (window as any).gsap === 'undefined') return;
+  const heroEls = '#heroBadge, #hero-heading, .hero-sub, .hero-buttons, .hero-visual, .float-tag';
+  if (typeof (window as any).gsap === 'undefined') {
+    document.querySelectorAll(heroEls).forEach(el => ((el as HTMLElement).style.opacity = '1'));
+    return;
+  }
   const gsap = (window as any).gsap;
   const ScrollTrigger = (window as any).ScrollTrigger;
   gsap.registerPlugin(ScrollTrigger);
 
   const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   heroTl
-    .from('#heroBadge',    { opacity: 0, y: 30, duration: 0.6 })
-    .from('#hero-heading', { opacity: 0, y: 45, duration: 0.7 }, '-=0.3')
-    .from('.booming-word', { opacity: 0, scale: 0.82, duration: 0.65 }, '-=0.4')
-    .from('.hero-sub',     { opacity: 0, y: 24, duration: 0.55 }, '-=0.35')
-    .from('.hero-buttons', { opacity: 0, y: 20, duration: 0.5  }, '-=0.3')
-    .from('.hero-visual',  { opacity: 0, scale: 0.86, duration: 0.9, ease: 'back.out(1.4)' }, '-=0.7')
-    .from('.float-tag',    { opacity: 0, y: 18, stagger: 0.14, duration: 0.5 }, '-=0.55');
+    .fromTo('#heroBadge',    { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 })
+    .fromTo('#hero-heading', { opacity: 0, y: 45 }, { opacity: 1, y: 0, duration: 0.7 }, '-=0.3')
+    .fromTo('.booming-word', { opacity: 0, scale: 0.82 }, { opacity: 1, scale: 1, duration: 0.65 }, '-=0.4')
+    .fromTo('.hero-sub',     { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.55 }, '-=0.35')
+    .fromTo('.hero-buttons', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5  }, '-=0.3')
+    .fromTo('.hero-visual',  { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 0.9, ease: 'back.out(1.4)' }, '-=0.7')
+    .fromTo('.float-tag',    { opacity: 0, y: 18 }, { opacity: 1, y: 0, stagger: 0.14, duration: 0.5 }, '-=0.55');
 
   gsap.utils.toArray('.reveal').forEach((el: Element) => {
     gsap.fromTo(el, { opacity: 0, y: 38 }, { opacity: 1, y: 0, duration: 0.72, ease: 'power2.out',
