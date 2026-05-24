@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUNLEO — Custom Window Coverings & Motorization | Calgary, AB</title>
+    <!-- Tailwind CSS Integration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sunleo: {
+                            blue: '#0a2540',      // Deep navy for buttons and accents
+                            gold: '#b89047',      // Soft premium gold
+                            soji: '#efebe4',      // Soji White (Sherwin Williams SW 9083) - main background
+                            dark: '#121212',      // Charcoal black for footer/top bar
+                            cardBg: '#fbf9f6'     // Subtle light tint for cards
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Fade-in transition for smooth single-page navigation */
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-sunleo-soji min-h-screen flex flex-col justify-between">
+
+    <!-- TOP ANNOUNCEMENT BAR (Matches exact text/layout structure from image_64ffa2.png) -->
+    <div class="bg-sunleo-dark text-white text-[10px] sm:text-xs py-2 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-sunleo-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                <span>(403) 555-0190</span>
+            </div>
+            <div class="font-semibold text-center tracking-widest uppercase text-white">
+                FREE IN-HOME CONSULTATION
+            </div>
+            <div class="text-gray-400">
+                Serving Calgary & Surrounding Areas
+            </div>
+        </div>
+    </div>
+
+    <!-- STICKY HEADER (Matches exact navigation elements from image_64ffa2.png) -->
+    <header class="sticky top-0 bg-sunleo-soji/95 backdrop-blur shadow-sm z-40 transition-all duration-300 border-b border-gray-200/30">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Crowned Lion Crest Logo -->
+            <a href="#" onclick="navigateTo('home'); return false;" class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-sunleo-blue rounded-lg flex items-center justify-center text-sunleo-gold border border-sunleo-gold">
+                    <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 2L3 7v10l9 5 9-5V7l-9-5z" stroke-linejoin="round" />
+                        <path d="M12 6c-1.5 0-3 1.2-3 3 0 1.8 1.2 3 3 3s3-1.2 3-3c0-1.8-1.5-3-3-3z" />
+                        <path d="M9 13c-2 0-3.5 1.5-3.5 3.5v1.5h11v-1.5c0-2-1.5-3.5-3.5-3.5" />
+                        <path d="M12 11v3" />
+                    </svg>
+                </div>
+                <div>
+                    <span class="block text-xl font-extrabold tracking-widest text-sunleo-blue leading-none">SUNLEO</span>
+                    <span class="block text-[9px] font-bold tracking-widest uppercase text-sunleo-gold mt-1">WINDOW COVERINGS</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links (HOME, PRODUCTS, ABOUT, GALLERY, CONTACT) -->
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold tracking-wider text-sunleo-blue uppercase">
+                <a href="#" id="nav-home" onclick="navigateTo('home'); return false;" class="nav-link border-b-2 border-sunleo-blue pb-1 transition-all">HOME</a>
+                <a href="#view-home" onclick="navigateTo('home'); document.getElementById('collections-anchor').scrollIntoView({behavior: 'smooth'}); return false;" class="nav-link border-b-2 border-transparent hover:border-sunleo-gold pb-1 transition-all">PRODUCTS</a>
+                <a href="#about" onclick="openNavModal('about'); return false;" class="nav-link border-b-2 border-transparent hover:border-sunleo-gold pb-1 transition-all">ABOUT</a>
+                <a href="#gallery" onclick="openNavModal('gallery'); return false;" class="nav-link border-b-2 border-transparent hover:border-sunleo-gold pb-1 transition-all">GALLERY</a>
+                <a href="#quote-section" onclick="document.getElementById('quote-section').scrollIntoView({behavior: 'smooth'}); return false;" class="nav-link border-b-2 border-transparent hover:border-sunleo-gold pb-1 transition-all">CONTACT</a>
+            </nav>
+
+            <!-- Action Button (GET A QUOTE) -->
+            <div class="hidden sm:block">
+                <a href="#quote-section" onclick="document.getElementById('quote-section').scrollIntoView({behavior: 'smooth'}); return false;" class="bg-sunleo-blue hover:bg-sunleo-gold text-white font-bold text-xs uppercase tracking-widest px-6 py-3.5 rounded transition-all duration-300">
+                    GET A QUOTE
+                </a>
+            </div>
+
+            <!-- Hamburger Button (Mobile) -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-sunleo-blue focus:outline-none" aria-label="Open Navigation">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-sunleo-blue text-white transition-all duration-300 border-t border-sunleo-gold/20">
+            <nav class="flex flex-col p-6 gap-4 text-sm font-medium tracking-wider uppercase">
+                <a href="#" onclick="toggleMobileMenu(); navigateTo('home'); return false;" class="hover:text-sunleo-gold py-2 border-b border-white/5">HOME</a>
+                <a href="#view-home" onclick="toggleMobileMenu(); navigateTo('home'); document.getElementById('collections-anchor').scrollIntoView({behavior: 'smooth'}); return false;" class="hover:text-sunleo-gold py-2 border-b border-white/5">PRODUCTS</a>
+                <a href="#about" onclick="toggleMobileMenu(); openNavModal('about'); return false;" class="hover:text-sunleo-gold py-2 border-b border-white/5">ABOUT</a>
+                <a href="#gallery" onclick="toggleMobileMenu(); openNavModal('gallery'); return false;" class="hover:text-sunleo-gold py-2 border-b border-white/5">GALLERY</a>
+                <a href="#quote-section" onclick="toggleMobileMenu(); document.getElementById('quote-section').scrollIntoView({behavior: 'smooth'}); return false;" class="hover:text-sunleo-gold py-2">CONTACT</a>
+                <a href="#quote-section" onclick="toggleMobileMenu(); document.getElementById('quote-section').scrollIntoView({behavior: 'smooth'}); return false;" class="bg-sunleo-gold text-center py-3 rounded font-bold text-xs tracking-widest mt-2">GET A QUOTE</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN INTERACTIVE WRAPPER -->
+    <main class="flex-grow">
+
+        <!-- ================= PAGE 1: HOME PAGE (HERO, PROCESS, COLLECTIONS & WHY CHOOSE US) ================= -->
+        <div id="view-home" class="fade-in max-w-7xl mx-auto px-4 py-6">
+            
+            <!-- HERO SECTION -->
+            <section class="relative min-h-[500px] sm:min-h-[550px] flex items-center overflow-hidden mb-16 rounded-2xl shadow-lg border border-gray-200/10">
+                <!-- Background Image & Gradient overlay -->
+                <div class="absolute inset-0 z-0">
+                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1920&q=80" 
+                         alt="Luxury living room with modern elegant window shades" 
+                         class="w-full h-full object-cover object-center" />
+                    <!-- Left-to-right gradient to ensure text readability -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-sunleo-blue/95 via-sunleo-blue/70 to-transparent"></div>
+                </div>
+
+                <!-- Hero Content -->
+                <div class="relative z-10 px-8 sm:px-12 py-16 w-full">
+                    <div class="max-w-xl text-white">
+                        <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+                            We Design, Manufacture & Install Custom Window Coverings
+                        </h1>
+                        <p class="text-sm sm:text-base text-gray-200 mb-8 font-light leading-relaxed">
+                            Premium blinds, shades, and drapery tailored precisely to your unique space. Elevate your interiors with beautiful, custom-built designs. No-obligation quote.
+                        </p>
+
+                        <!-- Hero Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4 mb-10">
+                            <a href="#quote-section" onclick="document.getElementById('quote-section').scrollIntoView({behavior: 'smooth'}); return false;" class="bg-sunleo-blue border border-sunleo-blue hover:bg-sunleo-gold hover:border-sunleo-gold text-white font-bold text-xs uppercase tracking-widest px-8 py-4 rounded text-center transition-all duration-300 shadow-md">
+                                GET A FREE QUOTE
+                            </a>
+                            <a href="#collections-anchor" onclick="document.getElementById('collections-anchor').scrollIntoView({behavior: 'smooth'}); return false;" class="border-2 border-white hover:bg-white hover:text-sunleo-blue text-white font-bold text-xs uppercase tracking-widest px-8 py-4 rounded text-center transition-all duration-300">
+                                BROWSE COLLECTIONS
+                            </a>
+                        </div>
+
+                        <!-- Core Trust Stats (NO STAR REVIEWS / NO RATING MENTIONS) -->
+                        <div class="grid grid-cols-2 gap-6 pt-6 border-t border-white/20">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-sunleo-gold border border-white/5">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold text-white">500+</div>
+                                    <div class="text-[10px] sm:text-xs text-gray-300">Happy Customers</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-sunleo-gold border border-white/5">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold text-white">Licensed</div>
+                                    <div class="text-[10px] sm:text-xs text-gray-300">&amp; Fully Insured</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HOW IT WORKS SECTION (Matches layout and custom SVGs exactly) -->
+            <section id="how-it-works" class="py-12 bg-transparent mb-16">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="font-serif text-3xl font-bold text-center text-sunleo-blue tracking-wide uppercase mb-1">
+                        How It Works
+                    </h2>
+                    <div class="w-12 h-0.5 bg-sunleo-blue mx-auto mb-16"></div>
+
+                    <div class="relative grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+                        
+                        <!-- Connecting Arrow 1 (Desktop) -->
+                        <div class="hidden md:flex absolute top-12 left-[24%] w-[16%] items-center justify-center">
+                            <svg class="w-full text-sunleo-blue/30" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 100 20">
+                                <path d="M0,10 H90 M82,4 L90,10 L82,16" stroke-dasharray="6 4" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+
+                        <!-- Connecting Arrow 2 (Desktop) -->
+                        <div class="hidden md:flex absolute top-12 right-[24%] w-[16%] items-center justify-center">
+                            <svg class="w-full text-sunleo-blue/30" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 100 20">
+                                <path d="M0,10 H90 M82,4 L90,10 L82,16" stroke-dasharray="6 4" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+
+                        <!-- Step 1 -->
+                        <div class="relative z-10 flex flex-col items-center text-center">
+                            <div class="w-8 h-8 rounded-full bg-sunleo-blue text-white text-sm font-bold flex items-center justify-center mb-4">
+                                1
+                            </div>
+                            <!-- Custom Window Blinds SVG -->
+                            <div class="w-20 h-20 flex items-center justify-center text-sunleo-blue mb-6">
+                                <svg class="w-16 h-16" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8">
+                                    <rect x="12" y="16" width="40" height="34" rx="2" />
+                                    <line x1="12" y1="24" x2="52" y2="24" />
+                                    <line x1="12" y1="32" x2="52" y2="32" />
+                                    <line x1="12" y1="40" x2="52" y2="40" />
+                                    <line x1="32" y1="16" x2="32" y2="50" stroke-dasharray="2 2" />
+                                </svg>
+                            </div>
+                            <h3 class="text-sm font-bold uppercase tracking-wider text-sunleo-blue mb-3">
+                                Browse Collections
+                            </h3>
+                            <p class="text-xs text-gray-500 max-w-xs leading-relaxed font-light">
+                                Explore our window covering styles and find your perfect match.
+                            </p>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="relative z-10 flex flex-col items-center text-center">
+                            <div class="w-8 h-8 rounded-full bg-sunleo-blue text-white text-sm font-bold flex items-center justify-center mb-4">
+                                2
+                            </div>
+                            <!-- Custom Clipboard & Dollar SVG -->
+                            <div class="w-20 h-20 flex items-center justify-center text-sunleo-blue mb-6">
+                                <svg class="w-16 h-16" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8">
+                                    <rect x="18" y="14" width="28" height="38" rx="3" />
+                                    <path d="M26 14V11a2 2 0 012-2h8a2 2 0 012 2v3" fill="currentColor" fill-opacity="0.1" />
+                                    <line x1="24" y1="23" x2="38" y2="23" />
+                                    <line x1="24" y1="30" x2="38" y2="30" />
+                                    <line x1="24" y1="37" x2="32" y2="37" />
+                                    <circle cx="42" cy="42" r="9" fill="white" />
+                                    <circle cx="42" cy="42" r="9" />
+                                    <text x="42" y="45.5" font-family="'Montserrat', sans-serif" font-weight="bold" font-size="10" text-anchor="middle" fill="currentColor" stroke="none">$</text>
+                                </svg>
+                            </div>
+                            <h3 class="text-sm font-bold uppercase tracking-wider text-sunleo-blue mb-3">
+                                Request A Free Quote
+                            </h3>
+                            <p class="text-xs text-gray-500 max-w-xs leading-relaxed font-light">
+                                Tell us about your project and get a no-obligation estimate.
+                            </p>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="relative z-10 flex flex-col items-center text-center">
+                            <div class="w-8 h-8 rounded-full bg-sunleo-blue text-white text-sm font-bold flex items-center justify-center mb-4">
+                                3
+                            </div>
+                            <!-- Custom Power Drill SVG -->
+                            <div class="w-20 h-20 flex items-center justify-center text-sunleo-blue mb-6">
+                                <svg class="w-16 h-16" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8">
+                                    <path d="M16 22h18v9H16v-9z" fill="currentColor" fill-opacity="0.1" />
+                                    <path d="M34 23.5h5v6h-5v-6z" />
+                                    <path d="M39 25.5h3v2h-3v-2z" fill="currentColor" />
+                                    <line x1="42" y1="26.5" x2="48" y2="26.5" stroke-width="2.5" />
+                                    <path d="M24 31l4.5 13.5h5.5l-2.5-13.5" />
+                                    <rect x="25" y="44.5" width="11" height="5" rx="1" fill="currentColor" fill-opacity="0.2" />
+                                    <path d="M16 22c-2.5 0-3.5 2-3.5 4.5s1 4.5 3.5 4.5" />
+                                    <path d="M21.5 33h2" />
+                                    <line x1="52" y1="26.5" x2="58" y2="26.5" stroke-dasharray="2 3" />
+                                </svg>
+                            </div>
+                            <h3 class="text-sm font-bold uppercase tracking-wider text-sunleo-blue mb-3">
+                                We Measure & Install
+                            </h3>
+                            <p class="text-xs text-gray-500 max-w-xs leading-relaxed font-light">
+                                Our experts handle everything from measurement to installation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ANCHOR POINT FOR COLLECTION NAVIGATION -->
+            <div id="collections-anchor" class="pt-6"></div>
+
+            <!-- EXPLORE OUR COLLECTIONS INTRO -->
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="font-serif text-3xl font-bold text-sunleo-blue leading-tight mb-4 uppercase">
+                    Explore Our Collections
+                </h2>
+                <p class="text-sm text-gray-600 font-light leading-relaxed">
+                    Designed to inspire. Handcrafted for your space. Select a category below to explore custom solutions, premium features, and detailed installation showcases.
+                </p>
+                <div class="w-12 h-0.5 bg-sunleo-blue mx-auto mt-6"></div>
+            </div>
+
+            <!-- SHADES & BLINDS CATEGORIES GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                
+                <!-- Card 1: Roller Blinds -->
+                <div class="bg-sunleo-cardBg rounded-xl overflow-hidden shadow-sm border border-gray-200/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80" alt="Roller Blinds" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow text-center">
+                        <h3 class="font-serif text-lg font-bold text-sunleo-blue uppercase mb-2">Roller Blinds</h3>
+                        <p class="text-xs text-gray-500 flex-grow mb-6">Sleek, minimal, and highly versatile design for modern glare protection.</p>
+                        <button onclick="navigateTo('roller')" class="w-full py-3 bg-sunleo-blue hover:bg-sunleo-gold text-white font-bold text-xs uppercase tracking-widest rounded transition-colors duration-300">
+                            Explore Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2: Honeycomb / Cellular Shades -->
+                <div class="bg-sunleo-cardBg rounded-xl overflow-hidden shadow-sm border border-gray-200/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80" alt="Cellular Shades" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow text-center">
+                        <h3 class="font-serif text-lg font-bold text-sunleo-blue uppercase mb-2">Honeycomb Shades</h3>
+                        <p class="text-xs text-gray-500 flex-grow mb-6">Superior cell insulation engineered for extreme winter and summer comfort.</p>
+                        <button onclick="navigateTo('cellular')" class="w-full py-3 bg-sunleo-blue hover:bg-sunleo-gold text-white font-bold text-xs uppercase tracking-widest rounded transition-colors duration-300">
+                            Explore Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Zebra Blinds -->
+                <div class="bg-sunleo-cardBg rounded-xl overflow-hidden shadow-sm border border-gray-200/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=600&q=80" alt="Zebra Blinds" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow text-center">
+                        <h3 class="font-serif text-lg font-bold text-sunleo-blue uppercase mb-2">Zebra Blinds</h3>
+                        <p class="text-xs text-gray-500 flex-grow mb-6">Alternating sheer and solid panels for beautifully tailored natural light control.</p>
+                        <button onclick="navigateTo('zebra')" class="w-full py-3 bg-sunleo-blue hover:bg-sunleo-gold text-white font-bold text-xs uppercase tracking-widest rounded transition-colors duration-300">
+                            Explore Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 4: Classic Custom Drapes -->
+                <div class="bg-sunleo-cardBg rounded-xl overflow-hidden shadow-sm border border-gray-200/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=600&q=80" alt="Custom Drapery" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow text-center">
+                        <h3 class="font-serif text-lg font-bold text-sunleo-blue uppercase mb-2">Custom Drapery</h3>
+                        <p class="text-xs text-gray-500 flex-grow mb-6">Luxurious draperies tailored to frame your Calgary windows with rich texture.</p>
+                        <button onclick="navigateTo('sheer')" class="w-full py-3 bg-sunleo-blue hover:bg-sunleo-gold text-white font-bold text-xs uppercase tracking-widest rounded transition-colors duration-300">
+                            Explore Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 5: Smart Automation -->
+                <div class="bg-sunleo-cardBg rounded-xl overflow-hidden shadow-sm border border-gray-200/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=600&q=80" alt="Motorized Systems" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow text-center">
+                        <h3 class="font-serif text-lg font-bold text-sunleo-blue uppercase mb-2">Smart Motorization</h3>
+                        <p class="text-xs text-gray-500 flex-grow mb-6">Effortless control with motorized limits integrated with smart home ecosystems.</p>
+                        <button onclick="navigateTo('motorized')" class="w-full py-3 bg-sunleo-blue hover:bg-sunleo-gold text-white font-bold text-xs uppercase tracking-widest rounded transition-colors duration-300">
+                            Explore Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 6: Outdoor ZIP Shades -->
+                <div class="bg-sunleo-cardBg rounded-xl overflow-hidden shadow-sm border border-gray-200/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=600&q=80" alt="Outdoor Shades" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow text-center">
+                        <h3 class="font-serif text-lg font-bold text-sunleo-blue uppercase mb-2">Outdoor ZIP Shades</h3>
+                        <p class="text-xs text-gray-500 flex-grow mb-6">Weatherproof screen protection built to defend porches and pergolas.</p>
+                        <button onclick="navigateTo('outdoor')" class="w-full py-3 bg-sunleo-blue hover:bg-sunleo-gold text-white font-bold text-xs uppercase tracking-widest rounded transition-colors duration-300">
+                            Explore Details
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ================= WHY CHOOSE US SECTION ================= -->
+            <section id="why-choose-us" class="py-12 bg-transparent mb-16 border-t border-gray-300/30 pt-16">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="font-serif text-3xl font-bold text-center text-sunleo-blue tracking-wide uppercase mb-1">
+                        Why Choose Sunleo
+                    </h2>
+                    <div class="w-12 h-0.5 bg-sunleo-blue mx-auto mb-16"></div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Benefit 1: Calgary Climate Ready -->
+                        <div class="bg-sunleo-cardBg rounded-xl p-6 border border-gray-200/50 shadow-sm flex flex-col items-center text-center">
+                            <div class="w-12 h-12 bg-sunleo-blue text-sunleo-gold rounded-full flex items-center justify-center mb-4 shadow-sm">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                                </svg>
+                            </div>
+                            <h4 class="font-serif text-sm font-bold uppercase tracking-wider text-sunleo-blue mb-2">Calgary Climate Insulation</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed font-light">
+                                Engineered specifically with thermal dual-cell air traps to withstand frozen winter periods and reduce summer cooling costs.
+                            </p>
+                        </div>
+
+                        <!-- Benefit 2: Mobile Showroom Consultation -->
+                        <div class="bg-sunleo-cardBg rounded-xl p-6 border border-gray-200/50 shadow-sm flex flex-col items-center text-center">
+                            <div class="w-12 h-12 bg-sunleo-blue text-sunleo-gold rounded-full flex items-center justify-center mb-4 shadow-sm">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1M21 12l-11.25-3.75" />
+                                </svg>
+                            </div>
+                            <h4 class="font-serif text-sm font-bold uppercase tracking-wider text-sunleo-blue mb-2">In-Home Studio Service</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed font-light">
+                                We bring thousands of curated textures to you. Evaluate color balances directly against your Soji White walls under native lighting.
+                            </p>
+                        </div>
+
+                        <!-- Benefit 3: Child and Pet Safe -->
+                        <div class="bg-sunleo-cardBg rounded-xl p-6 border border-gray-200/50 shadow-sm flex flex-col items-center text-center">
+                            <div class="w-12 h-12 bg-sunleo-blue text-sunleo-gold rounded-full flex items-center justify-center mb-4 shadow-sm">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                                </svg>
+                            </div>
+                            <h4 class="font-serif text-sm font-bold uppercase tracking-wider text-sunleo-blue mb-2">Worry-Free Child Safety</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed font-light">
+                                All installations fully comply with modern Canadian cordless safety regulations. Pet-safe, sleek, and entirely loop-free designs.
+                            </p>
+                        </div>
+
+                        <!-- Benefit 4: Lifetime Expert Craftmanship -->
+                        <div class="bg-sunleo-cardBg rounded-xl p-6 border border-gray-200/50 shadow-sm flex flex-col items-center text-center">
+                            <div class="w-12 h-12 bg-sunleo-blue text-sunleo-gold rounded-full flex items-center justify-center mb-4 shadow-sm">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A1.79 1.79 0 0114 21l-5.83-5.83m0 .002l-3.24-3.24A1.79 1.79 0 014 12c0-.5.19-.98.53-1.32l5.83-5.83m.002 0l3.24 3.24A1.79 1.79 0 0115 12c0 .5-.19.98-.53 1.32L8.64 19.17" />
+                                </svg>
+                            </div>
+                            <h4 class="font-serif text-sm font-bold uppercase tracking-wider text-sunleo-blue mb-2">Local Calgary Fitters</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed font-light">
+                                Handcrafted precisely to measure and cleanly installed by certified, local fitting experts with premium aluminum hardware.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+
+        <!-- ================= PAGE 2: PRODUCT DETAILS PAGE (DYNAMIC SPA INTERFACE) ================= -->
+        <div id="view-details" class="fade-in max-w-7xl mx-auto px-4 py-12 hidden">
+            
+            <!-- Breadcrumbs and Navigation Back -->
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-10 pb-6 border-b border-gray-200">
+                <div class="flex items-center gap-2 text-xs uppercase tracking-wider text-gray-500">
+                    <a href="#" onclick="navigateTo('home')" class="hover:text-sunleo-gold transition-colors font-semibold font-bold">Home</a>
+                    <span>/</span>
+                    <span id="breadcrumb-category" class="text-sunleo-blue">Category</span>
+                </div>
+                <button onclick="navigateTo('home')" class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-sunleo-blue hover:text-sunleo-gold transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    Back to All Categories
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Left Column: Image and Video Player -->
+                <div class="lg:col-span-7 space-y-8">
+                    <div class="rounded-xl overflow-hidden shadow-md">
+                        <img id="detail-image" src="" alt="Detailed Product View" class="w-full h-[450px] object-cover">
+                    </div>
+                    
+                    <!-- Interactive Video Presentation -->
+                    <div class="bg-sunleo-cardBg rounded-xl p-6 border border-gray-200/50">
+                        <h4 class="font-serif text-lg font-bold text-sunleo-blue mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-sunleo-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            Video Demonstration
+                        </h4>
+                        <!-- Video Placeholder -->
+                        <div class="relative rounded-lg overflow-hidden h-60 bg-black group cursor-pointer" onclick="playMockVideo()">
+                            <img id="detail-video-placeholder" src="" alt="Video Cover" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-sunleo-blue text-white rounded-full flex items-center justify-center shadow-lg group-hover:bg-sunleo-gold transition-colors duration-300">
+                                    <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                                </div>
+                            </div>
+                            <span class="absolute bottom-4 left-4 bg-sunleo-dark/80 text-white text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 rounded">
+                                Duration: 1:45 min
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Product Specs & Information -->
+                <div class="lg:col-span-5 flex flex-col justify-between">
+                    <div>
+                        <span id="detail-subtitle" class="block text-xs uppercase tracking-widest text-sunleo-gold font-bold mb-3">System Subtitle</span>
+                        <h2 id="detail-title" class="font-serif text-3xl font-bold text-sunleo-blue leading-tight mb-6">Product Name</h2>
+                        <p id="detail-desc" class="text-sm text-gray-600 leading-relaxed font-light mb-8">Description...</p>
+
+                        <!-- Highlights list -->
+                        <div class="space-y-4 mb-8">
+                            <h5 class="text-xs font-bold uppercase tracking-wider text-sunleo-blue">Why This Product Stands Out:</h5>
+                            <ul id="detail-benefits" class="space-y-2 text-xs text-gray-600">
+                                <!-- Populated Dynamically -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Call to Action (NO PRICES) -->
+                    <div class="bg-sunleo-cardBg p-6 rounded-xl border border-gray-200/50 mt-6">
+                        <span class="block text-xs text-gray-500 mb-2 font-medium">Custom Dimensions & Free Fabric Sampling</span>
+                        <h4 class="font-serif text-md font-bold text-sunleo-blue mb-4">Would you like a custom measurements proposal?</h4>
+                        <a href="#quote-section" class="block text-center w-full py-4 bg-sunleo-blue hover:bg-sunleo-gold text-white font-bold text-xs uppercase tracking-widest rounded transition-colors duration-300 shadow-md">
+                            Schedule A Complimentary Consultation
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- IN-HOME CONSULTATION BOOKING FORM -->
+    <section id="quote-section" class="py-16 border-t border-gray-200/50 bg-sunleo-soji">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-12 rounded-2xl overflow-hidden border border-gray-200 shadow-lg">
+                
+                <!-- Left Form Column -->
+                <div class="lg:col-span-7 bg-white p-8 sm:p-12">
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-sunleo-blue uppercase tracking-wide mb-2">
+                        Request In-Home Consultation
+                    </h2>
+                    <p class="text-xs text-gray-500 mb-8 uppercase tracking-wider">Fill in the fields below and we'll bring the showroom sample kits directly to your doorstep.</p>
+
+                    <form onsubmit="handleFormSubmit(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-600 mb-2">Your Name</label>
+                                <input type="text" required class="w-full bg-gray-50 border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-sunleo-gold transition-colors" placeholder="Alex Smith">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-600 mb-2">Email Address</label>
+                                <input type="email" required class="w-full bg-gray-50 border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-sunleo-gold transition-colors" placeholder="alex@domain.ca">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-600 mb-2">Phone Number</label>
+                                <input type="tel" required class="w-full bg-gray-50 border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-sunleo-gold transition-colors" placeholder="+1 (403) 555-0190">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-600 mb-2">Which style interested you?</label>
+                                <select id="form-product-select" class="w-full bg-gray-50 border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-sunleo-gold transition-colors">
+                                    <option value="">Still deciding / General consultation</option>
+                                    <option value="roller">Roller Blinds</option>
+                                    <option value="cellular">Honeycomb Cellular Shades</option>
+                                    <option value="zebra">Zebra Blinds</option>
+                                    <option value="sheer">Custom Drapery</option>
+                                    <option value="motorized">Smart Motorization</option>
+                                    <option value="outdoor">Outdoor ZIP Shades</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-600 mb-2">Tell us about your project (optional)</label>
+                            <textarea rows="3" class="w-full bg-gray-50 border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:border-sunleo-gold transition-colors" placeholder="E.g., 4 windows in South-West Calgary home, looking for motorization..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 bg-sunleo-blue hover:bg-sunleo-gold text-white font-bold text-xs uppercase tracking-widest rounded transition-colors duration-300 shadow-md">
+                            Submit Request
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Branding Column -->
+                <div class="lg:col-span-5 bg-sunleo-cardBg p-8 sm:p-12 flex flex-col justify-center items-center text-center border-t lg:border-t-0 lg:border-l border-gray-200">
+                    <div class="w-32 h-32 bg-sunleo-blue text-sunleo-gold rounded-full flex items-center justify-center mb-8 border-2 border-sunleo-gold shadow-md">
+                        <svg class="w-16 h-16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2L3 7v10l9 5 9-5V7l-9-5z" stroke-linejoin="round" />
+                            <path d="M12 6c-1.5 0-3 1.2-3 3 0 1.8 1.2 3 3 3s3-1.2 3-3c0-1.8-1.5-3-3-3z" />
+                            <path d="M9 13c-2 0-3.5 1.5-3.5 3.5v1.5h11v-1.5c0-2-1.5-3.5-3.5-3.5" />
+                            <path d="M12 11v3" />
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-extrabold tracking-widest text-sunleo-blue mb-2">SUNLEO</span>
+                    <span class="text-xs uppercase tracking-widest text-sunleo-gold font-bold mb-6">WINDOW COVERINGS</span>
+                    
+                    <p class="text-sm text-gray-600 max-w-sm leading-relaxed font-light">
+                        We design more than just shade. We deliver precise architectural alignment, climate insulation, and ultimate modern luxury directly to your home.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-sunleo-dark text-white pt-16 pb-8 border-t border-sunleo-gold/20">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            
+            <!-- About -->
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 bg-sunleo-blue rounded-lg flex items-center justify-center text-sunleo-gold border border-sunleo-gold/50">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2L3 7v10l9 5 9-5V7l-9-5z" stroke-linejoin="round" />
+                            <path d="M12 6c-1.5 0-3 1.2-3 3 0 1.8 1.2 3 3 3s3-1.2 3-3c0-1.8-1.5-3-3-3z" />
+                        </svg>
+                    </div>
+                    <span class="text-lg font-bold tracking-widest">SUNLEO</span>
+                </div>
+                <p class="text-xs text-gray-400 leading-relaxed max-w-xs mb-6 font-light">
+                    Your premier partner for custom window treatments, helping you regulate light and climate inside premium residential and commercial spaces.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="font-bold text-xs uppercase tracking-wider text-sunleo-gold mb-6 pb-2 border-b border-white/10">Navigation</h4>
+                <ul class="space-y-3 text-xs text-gray-400 font-light">
+                    <li><a href="#" onclick="navigateTo('home'); return false;" class="hover:text-white transition-colors">Home Page</a></li>
+                    <li><a href="#process" onclick="openNavModal('process')" class="hover:text-white transition-colors">Our Process</a></li>
+                    <li><a href="#gallery" onclick="openNavModal('gallery')" class="hover:text-white transition-colors">Inspirational Gallery</a></li>
+                    <li><a href="#blog" onclick="openNavModal('blog')" class="hover:text-white transition-colors">Insight Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Solutions -->
+            <div>
+                <h4 class="font-bold text-xs uppercase tracking-wider text-sunleo-gold mb-6 pb-2 border-b border-white/10">Collections</h4>
+                <ul class="space-y-3 text-xs text-gray-400 font-light">
+                    <li><a href="#" onclick="navigateTo('roller')" class="hover:text-white transition-colors">Roller Blinds</a></li>
+                    <li><a href="#" onclick="navigateTo('cellular')" class="hover:text-white transition-colors">Honeycomb Shades</a></li>
+                    <li><a href="#" onclick="navigateTo('zebra')" class="hover:text-white transition-colors">Zebra Blinds</a></li>
+                    <li><a href="#" onclick="navigateTo('motorized')" class="hover:text-white transition-colors">Automated Systems</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Information -->
+            <div>
+                <h4 class="font-bold text-xs uppercase tracking-wider text-sunleo-gold mb-6 pb-2 border-b border-white/10">Contact Us</h4>
+                <ul class="space-y-4 text-xs text-gray-400 font-light">
+                    <li class="flex items-start gap-2.5">
+                        <svg class="w-4 h-4 text-sunleo-gold shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span>820 10 Ave SW, Calgary, AB T2R 0B4</span>
+                    </li>
+                    <li class="flex items-center gap-2.5">
+                        <svg class="w-4 h-4 text-sunleo-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <span>+1 (403) 555-0190</span>
+                    </li>
+                    <li class="flex items-center gap-2.5">
+                        <svg class="w-4 h-4 text-sunleo-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <span>design@sunleocoverings.ca</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="max-w-7xl mx-auto px-4 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+            <div>
+                © 2026 Sunleo Window Coverings. All rights reserved.
+            </div>
+            <div class="flex gap-4">
+                <a href="#" class="w-8 h-8 rounded-full border border-gray-700 hover:border-sunleo-gold hover:text-sunleo-gold flex items-center justify-center transition-all">f</a>
+                <a href="#" class="w-8 h-8 rounded-full border border-gray-700 hover:border-sunleo-gold hover:text-sunleo-gold flex items-center justify-center transition-all">t</a>
+                <a href="#" class="w-8 h-8 rounded-full border border-gray-700 hover:border-sunleo-gold hover:text-sunleo-gold flex items-center justify-center transition-all">p</a>
+                <a href="#" class="w-8 h-8 rounded-full border border-gray-700 hover:border-sunleo-gold hover:text-sunleo-gold flex items-center justify-center transition-all">in</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- NAVIGATION INFORMATION MODALS -->
+    <div id="nav-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden px-4">
+        <div class="bg-white max-w-2xl w-full rounded-xl overflow-hidden shadow-2xl border border-gray-200">
+            <div class="p-6 border-b border-gray-200 flex justify-between items-center bg-sunleo-soji">
+                <h3 id="nav-modal-title" class="font-serif text-xl font-bold text-sunleo-blue uppercase">Title</h3>
+                <button onclick="closeNavModal()" class="text-gray-500 hover:text-gray-800 text-2xl font-bold focus:outline-none">&times;</button>
+            </div>
+            <div class="p-6 max-h-[70vh] overflow-y-auto" id="nav-modal-body">
+                <!-- Content Populated Dynamically -->
+            </div>
+            <div class="p-4 bg-gray-50 border-t border-gray-200 flex justify-end">
+                <button onclick="closeNavModal()" class="px-6 py-2 bg-sunleo-blue hover:bg-sunleo-gold text-white text-xs font-bold uppercase tracking-widest rounded transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOCK VIDEO PLAYER MODAL -->
+    <div id="video-modal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center hidden px-4">
+        <div class="max-w-4xl w-full relative">
+            <button onclick="closeVideoModal()" class="absolute -top-12 right-0 text-white hover:text-sunleo-gold text-3xl font-bold focus:outline-none">&times; Close</button>
+            <div class="bg-sunleo-dark aspect-video rounded-xl overflow-hidden flex flex-col items-center justify-center text-white p-8 border border-white/20">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-sunleo-gold mb-4"></div>
+                <p class="font-serif text-lg mb-2">Initializing Video Presentation...</p>
+                <p class="text-xs text-gray-400">On your active server, this container loads fully interactive HTML5/Vimeo/YouTube system tutorials.</p>
+                <button onclick="closeVideoModal()" class="mt-8 px-6 py-2 bg-sunleo-gold hover:bg-white hover:text-sunleo-blue text-xs font-bold uppercase tracking-widest rounded transition-colors">
+                    Stop Playback
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORM SUBMISSION SUCCESS MODAL -->
+    <div id="success-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden px-4">
+        <div class="bg-white max-w-md w-full rounded-xl overflow-hidden shadow-2xl p-8 text-center border border-gray-200">
+            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-sunleo-blue uppercase tracking-wide mb-3">Booking Confirmed!</h3>
+            <p class="text-sm text-gray-600 leading-relaxed mb-8">
+                Thank you for choosing SUNLEO. One of our Calgary-based design specialists will call you shortly to confirm your in-home appointment.
+            </p>
+            <button onclick="closeSuccessModal()" class="w-full py-3 bg-sunleo-blue hover:bg-sunleo-gold text-white font-bold text-xs uppercase tracking-widest rounded transition-colors shadow-md">
+                Excellent
+            </button>
+        </div>
+    </div>
+
+    <!-- SCRIPTING FOR DYNAMIC EXPERIENCE -->
+    <script>
+        // Database of detailed product specifications
+        const productData = {
+            roller: {
+                title: "Premium Roller Blinds",
+                subtitle: "Sleek Aesthetics & Flawless Light Management",
+                description: "Our engineered roller blinds fit seamlessly inside or outside window casings to match Calgary’s modern urban interior layouts. Crafted with moisture-resistant, non-fading structural fabric, they are low-maintenance and effortlessly repel household dust. Choose from our vast range of light-filtering textiles to create custom ambiances, or block 100% of incoming light with our Blackout fabrics.",
+                image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80",
+                videoPlaceholder: "https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&w=800&q=80",
+                benefits: [
+                    "Over 250 European designer fabrics & textures",
+                    "Rustproof heavy-duty aluminum hardware components",
+                    "Hypoallergenic & eco-certified materials (Oeko-Tex Standard 100)",
+                    "Customized to your exact window dimensions within 5 business days"
+                ]
+            },
+            cellular: {
+                title: "Honeycomb Cellular Shades",
+                subtitle: "Climate Insulation Perfect for Extreme Alberta Weather",
+                description: "Specially constructed with dual-cell air traps, our cellular honeycomb shades create a thermal barrier at your window pane. Highly recommended for Calgary homes experiencing freezing chinook winds and scorching summer days, they keep indoor spaces insulated while reducing your monthly heating and cooling bills.",
+                image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80",
+                videoPlaceholder: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80",
+                benefits: [
+                    "Saves up to 15% on winter heating and summer cooling utility costs",
+                    "Top-down/Bottom-up functionality for absolute street privacy",
+                    "Ideal for complex architectural layouts, high-slanted skylights, and arches",
+                    "Compact profile when fully raised ensures clean outdoor views"
+                ]
+            },
+            zebra: {
+                title: "Dual Zebra Blinds",
+                subtitle: "Alternating Contrast & Infinite Light Variety",
+                description: "Also widely known as Banded or Day-and-Night shades, Zebra blinds utilize two overlapping fabric bands—alternating between sheer mesh stripes and thick solid fabric blocks. Seamlessly adjust the alignment with a modern cord loop or push of a button to quickly dial in privacy, outside views, or soft lighting.",
+                image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80",
+                videoPlaceholder: "https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&w=800&q=80",
+                benefits: [
+                    "Precise, continuous dial control of privacy and brightness",
+                    "Adds a chic graphic design focal point to living spaces",
+                    "Dust-repellent static protection means virtually no maintenance",
+                    "Available in warm organic tones, textured weaves, and classic solids"
+                ]
+            },
+            sheer: {
+                title: "Custom Custom Drapery",
+                subtitle: "Luxurious Fabric Layering",
+                description: "For timeless luxury, our custom drapery options are sewn using premium-selected Turkish and Italian drapery fabrics. Whether you choose lightweight sheer linens that diffuse harsh glare or heavy velvet drapes that lock in evening heat, each curtain is custom-measured, lined, and draped with beautiful deep folds.",
+                image: "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=1200&q=80",
+                videoPlaceholder: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80",
+                benefits: [
+                    "Hundreds of heavy texture and sheer organic fabric selections",
+                    "Professional tailoring with heavy weighted corner hems for a beautiful hang",
+                    "Thermal, light-filtering, and blackout lining options",
+                    "Compatible with custom ceiling tracks and decorative drapery rods"
+                ]
+            },
+            motorized: {
+                title: "Smart Home Motorization",
+                subtitle: "Whisper-Quiet Remote & Automated Power Integration",
+                description: "Step into modern luxury. Raise or lower your window shades via smart remotes, voice controls, or smartphone apps. Program your shades to align with sunrise, close automatically in peak midday sun to protect furniture, or raise automatically at wake-up time.",
+                image: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=1200&q=80",
+                videoPlaceholder: "https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&w=800&q=80",
+                benefits: [
+                    "Long-lasting, USB-rechargeable lithium battery motors",
+                    "Siri, Google Home, and Alexa smart voice command compatible",
+                    "Protects carpets and paintings from UV-fading automatically",
+                    "Zero cords means a 100% pet-friendly, child-safe environment"
+                ]
+            },
+            outdoor: {
+                title: "Weatherproof Patio ZIP Shades",
+                subtitle: "Durable Shielding to Expand Outdoor Spaces",
+                description: "Engineered specifically to expand your outdoor dining and lounging, our external ZIP shades are secured tightly inside vertical side guides. This allows them to withstand gusting winds while acting as a robust barrier against direct sun glare, evening bugs, and dust.",
+                image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1200&q=80",
+                videoPlaceholder: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80",
+                benefits: [
+                    "Heavy-duty ZIP guide channel ensures shades stay firm in heavy winds",
+                    "Screen fabric blocks up to 95% of heat while maintaining outside visibility",
+                    "Perfect mosquito barrier for summer evenings on the patio",
+                    "Heavy aluminum framing protects against direct Canadian snow and rain"
+                ]
+            }
+        };
+
+        // Navigation between Home and Product Detail Pages (With header link styling synchronization)
+        function navigateTo(target) {
+            const homeView = document.getElementById('view-home');
+            const detailsView = document.getElementById('view-details');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (target === 'home') {
+                detailsView.classList.add('hidden');
+                homeView.classList.remove('hidden');
+                document.getElementById('form-product-select').value = "";
+                updateActiveLink('HOME');
+            } else {
+                const data = productData[target];
+                if (data) {
+                    document.getElementById('breadcrumb-category').innerText = data.title;
+                    document.getElementById('detail-title').innerText = data.title;
+                    document.getElementById('detail-subtitle').innerText = data.subtitle;
+                    document.getElementById('detail-desc').innerText = data.description;
+                    document.getElementById('detail-image').src = data.image;
+                    document.getElementById('detail-video-placeholder').src = data.videoPlaceholder;
+
+                    const benefitsList = document.getElementById('detail-benefits');
+                    benefitsList.innerHTML = '';
+                    data.benefits.forEach(benefit => {
+                        const li = document.createElement('li');
+                        li.className = "flex items-start gap-2.5";
+                        li.innerHTML = `
+                            <svg class="w-4 h-4 text-sunleo-gold shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            <span>${benefit}</span>
+                        `;
+                        benefitsList.appendChild(li);
+                    });
+
+                    document.getElementById('form-product-select').value = target;
+
+                    homeView.classList.add('hidden');
+                    detailsView.classList.remove('hidden');
+                    updateActiveLink('PRODUCTS');
+                }
+            }
+        }
+
+        // Highlights the active navbar element matching the image design
+        function updateActiveLink(activeText) {
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(link => {
+                if (link.textContent.trim() === activeText) {
+                    link.classList.add('border-sunleo-blue');
+                    link.classList.remove('border-transparent');
+                } else {
+                    link.classList.remove('border-sunleo-blue');
+                    link.classList.add('border-transparent');
+                }
+            });
+        }
+
+        // Toggle Mobile Navigation Drawer
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Navigation Modal Contents (Process, Gallery, Blog, Contacts)
+        const modalContents = {
+            about: {
+                title: "About SUNLEO Window Coverings",
+                body: `
+                    <div class="space-y-6 text-sm text-gray-600 font-light">
+                        <p class="font-medium text-sunleo-blue">Premium Handcrafted Aesthetics & Superior Engineering</p>
+                        <p>At SUNLEO, we specialize in premium custom window coverings designed to bring harmony, precise light management, and high thermal insulation directly to your home. Based in Calgary, Alberta, we curate our materials specifically to withstand local temperature fluctuations.</p>
+                        <p>With our modern approach, we eliminate fake ratings and focus strictly on delivering outstanding durability, pet-safe motorization limits, and clean-hanging drapery.</p>
+                        <div class="border-l-2 border-sunleo-gold pl-4 space-y-4">
+                            <div>
+                                <h5 class="font-bold text-sunleo-blue text-xs uppercase tracking-wider">Our Standards</h5>
+                                <p class="text-xs">We provide a comprehensive mobile showroom experience, allowing you to test textures against your specific indoor paint configurations before making a final selection.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            process: {
+                title: "How We Bring Harmony to Your Home",
+                body: `
+                    <div class="space-y-6 text-sm text-gray-600 font-light">
+                        <p class="font-medium text-sunleo-blue">We take care of every single step under our worry-free guarantee:</p>
+                        <div class="border-l-2 border-sunleo-gold pl-4 space-y-4">
+                            <div>
+                                <h5 class="font-bold text-sunleo-blue text-xs uppercase tracking-wider">1. Showroom on Wheels</h5>
+                                <p class="text-xs">Our consultant visits your home with actual fabric books. Compare textures directly against your walls under your specific room lighting (Soji White walls, evening LEDs, or bright afternoon chinooks).</p>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-sunleo-blue text-xs uppercase tracking-wider">2. Precision Laser Measurements</h5>
+                                <p class="text-xs">Our certified specialists handle precise structural measurements using Swiss optical laser technology down to the last millimeter.</p>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-sunleo-blue text-xs uppercase tracking-wider">3. Premium In-House Manufacturing</h5>
+                                <p class="text-xs">We assemble your shades in our production facility utilizing modern components and thick dust-resistant materials.</p>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-sunleo-blue text-xs uppercase tracking-wider">4. Expert Dust-Free Installation</h5>
+                                <p class="text-xs">Our factory-trained technicians securely install your systems with commercial vacuums, leaving your home immaculate.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            gallery: {
+                title: "Inspirational Gallery",
+                body: `
+                    <p class="text-xs text-gray-500 mb-6 font-light">Explore recent, real-life custom installations across premium custom-built Calgary properties.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="rounded overflow-hidden h-40"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover"></div>
+                        <div class="rounded overflow-hidden h-40"><img src="https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover"></div>
+                        <div class="rounded overflow-hidden h-40"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover"></div>
+                        <div class="rounded overflow-hidden h-40"><img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover"></div>
+                    </div>
+                `
+            },
+            blog: {
+                title: "SUNLEO Window Coverings Blog",
+                body: `
+                    <div class="space-y-6 text-sm text-gray-600 font-light">
+                        <div class="p-4 bg-sunleo-soji rounded-lg">
+                            <h4 class="font-serif font-bold text-sunleo-blue mb-1">How to Insulate Calgary Homes Against Extreme Weather Using Cellular Shades</h4>
+                            <p class="text-xs text-gray-500 mb-2">Published: May 12, 2026</p>
+                            <p class="text-xs">With outdoor temperatures fluctuating from freezing winter lows to high summer sunshine, cellular honeycomb shades create critical pockets of air that insulate your home and cut energy costs...</p>
+                        </div>
+                        <div class="p-4 bg-sunleo-soji rounded-lg">
+                            <h4 class="font-serif font-bold text-sunleo-blue mb-1">Why Modern Interior Designers Avoid Plastic and Opt for Soji White Blinds</h4>
+                            <p class="text-xs text-gray-500 mb-2">Published: April 28, 2026</p>
+                            <p class="text-xs">Soji White offers a warm, neutral white balance. When paired with linen textures, it creates a clean, sophisticated backdrop that enhances modern decor.</p>
+                        </div>
+                    </div>
+                `
+            },
+            contacts: {
+                title: "Our Calgary Office & Consultation Inquiries",
+                body: `
+                    <div class="space-y-4 text-xs text-gray-600 font-light">
+                        <p class="text-sm font-medium text-sunleo-blue mb-2">We look forward to serving your window needs!</p>
+                        <p><strong>Calgary Showroom:</strong> 820 10 Ave SW, Calgary, AB T2R 0B4</p>
+                        <p><strong>Primary Line:</strong> +1 (403) 555-0190</p>
+                        <p><strong>Operating Hours:</strong> Mon - Sat: 9:00 AM - 6:00 PM (Sunday by Appointment only)</p>
+                        <div class="h-48 rounded bg-gray-200 mt-4 flex items-center justify-center text-gray-400">
+                            [Interactive Map Area Placeholder]
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        function openNavModal(type) {
+            const data = modalContents[type];
+            if (data) {
+                document.getElementById('nav-modal-title').innerText = data.title;
+                document.getElementById('nav-modal-body').innerHTML = data.body;
+                document.getElementById('nav-modal').classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                updateActiveLink(type.toUpperCase());
+            }
+        }
+
+        function closeNavModal() {
+            document.getElementById('nav-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Mock Video Player controls
+        function playMockVideo() {
+            document.getElementById('video-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            document.getElementById('video-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Form Submit handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const successModal = document.getElementById('success-modal');
+            successModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            event.target.reset();
+        }
+
+        function closeSuccessModal() {
+            const successModal = document.getElementById('success-modal');
+            successModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Click boundaries outside modal
+        window.onclick = function(event) {
+            const navModal = document.getElementById('nav-modal');
+            const videoModal = document.getElementById('video-modal');
+            const successModal = document.getElementById('success-modal');
+            if (event.target === navModal) {
+                closeNavModal();
+            }
+            if (event.target === videoModal) {
+                closeVideoModal();
+            }
+            if (event.target === successModal) {
+                closeSuccessModal();
+            }
+        }
+    </script>
+</body>
+</html>
