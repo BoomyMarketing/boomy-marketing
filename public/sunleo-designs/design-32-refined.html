@@ -463,29 +463,12 @@ img { display: block; max-width: 100%; }
 .coll-card__img-wrap { position: relative; overflow: hidden; }
 .coll-card__img {
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 4/3;
   object-fit: cover;
   display: block;
   transition: transform .55s ease;
 }
 .coll-card:hover .coll-card__img { transform: scale(1.06); }
-/* Slide-up reveal on hover */
-.coll-card__hover-label {
-  position: absolute;
-  bottom: -40px;
-  left: 0; right: 0;
-  background: rgba(27,58,107,.9);
-  color: #fff;
-  font-family: var(--ui);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 10px;
-  transition: bottom .25s ease;
-}
-.coll-card:hover .coll-card__hover-label { bottom: 0; }
 .coll-card__body {
   padding: 20px 22px 24px;
   flex: 1;
@@ -529,53 +512,46 @@ img { display: block; max-width: 100%; }
 /* ══════════════════════════════════════════════
    WHY CHOOSE
 ══════════════════════════════════════════════ */
-.why-sec { background: var(--white); padding: 96px 0; }
+.why-sec { background: var(--white); padding: 80px 0; }
 .why-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-  max-width: 960px;
-  margin: 0 auto;
-}
-.why-card {
-  padding: 36px 28px;
+  grid-template-columns: repeat(4, 1fr);
   border: 1px solid var(--border);
   border-radius: 10px;
-  background: var(--bg-gray);
-  transition: border-color .2s, box-shadow .2s, transform .2s;
+  overflow: hidden;
+}
+.why-card {
+  padding: 40px 28px 36px;
+  border-right: 1px solid var(--border);
   text-align: center;
+  transition: background .2s;
 }
-.why-card:hover {
-  border-color: var(--navy-mid);
-  box-shadow: 0 6px 24px rgba(27,58,107,.12);
-  transform: translateY(-3px);
-}
+.why-card:last-child { border-right: none; }
+.why-card:hover { background: var(--bg-blue); }
 .why-card__icon {
-  width: 66px; height: 66px;
-  border: 2px solid var(--border);
+  width: 68px; height: 68px;
+  border: 1.5px solid var(--navy-mid);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 20px;
-  font-size: 28px;
-  background: var(--white);
-  transition: border-color .2s, background .2s;
+  color: var(--navy-mid);
+  transition: background .2s;
 }
-.why-card:hover .why-card__icon {
-  border-color: var(--navy-mid);
-  background: var(--bg-blue);
-}
+.why-card:hover .why-card__icon { background: rgba(27,58,107,.08); }
 .why-card__title {
   font-family: var(--ui);
-  font-size: 15px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .07em;
   color: var(--text);
   margin-bottom: 10px;
 }
 .why-card__desc {
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--muted);
   line-height: 1.65;
 }
@@ -600,7 +576,7 @@ img { display: block; max-width: 100%; }
 }
 .stat:last-child { border-right: none; }
 .stat:hover { background: #dce8f4; }
-.stat__icon { font-size: 26px; display: block; margin-bottom: 10px; opacity: .6; }
+.stat__icon { display: flex; justify-content: center; margin-bottom: 12px; color: var(--navy-mid); opacity: .75; }
 .stat__num {
   font-family: var(--display);
   font-size: 44px;
@@ -642,7 +618,7 @@ img { display: block; max-width: 100%; }
 .form-left__h2 {
   font-family: var(--display);
   font-size: 36px;
-  font-weight: 400;
+  font-weight: 800;
   color: var(--text);
   margin-bottom: 6px;
   line-height: 1.15;
@@ -1020,7 +996,7 @@ img { display: block; max-width: 100%; }
       <div class="coll-card">
         <div class="coll-card__img-wrap">
           <img class="coll-card__img" src="https://images.unsplash.com/photo-1615876063860-d971f6dca5dc?w=700&q=80" alt="Roller Blinds">
-          <div class="coll-card__hover-label">View Collection →</div>
+          
         </div>
         <div class="coll-card__body">
           <p class="coll-card__title">Roller Blinds</p>
@@ -1032,7 +1008,7 @@ img { display: block; max-width: 100%; }
       <div class="coll-card">
         <div class="coll-card__img-wrap">
           <img class="coll-card__img" src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=700&q=80" alt="Honeycomb Shades">
-          <div class="coll-card__hover-label">View Collection →</div>
+          
         </div>
         <div class="coll-card__body">
           <p class="coll-card__title">Honeycomb Shades</p>
@@ -1044,7 +1020,7 @@ img { display: block; max-width: 100%; }
       <div class="coll-card">
         <div class="coll-card__img-wrap">
           <img class="coll-card__img" src="https://images.unsplash.com/photo-1598928636135-d146006ff4be?w=700&q=80" alt="Zebra Shades">
-          <div class="coll-card__hover-label">View Collection →</div>
+          
         </div>
         <div class="coll-card__body">
           <p class="coll-card__title">Zebra Shades</p>
@@ -1056,7 +1032,7 @@ img { display: block; max-width: 100%; }
       <div class="coll-card">
         <div class="coll-card__img-wrap">
           <img class="coll-card__img" src="https://images.unsplash.com/photo-1586105251261-72a756497a11?w=700&q=80" alt="Drapery & Curtains">
-          <div class="coll-card__hover-label">View Collection →</div>
+          
         </div>
         <div class="coll-card__body">
           <p class="coll-card__title">Drapery &amp; Curtains</p>
@@ -1068,7 +1044,7 @@ img { display: block; max-width: 100%; }
       <div class="coll-card">
         <div class="coll-card__img-wrap">
           <img class="coll-card__img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Motorized Blinds">
-          <div class="coll-card__hover-label">View Collection →</div>
+          
         </div>
         <div class="coll-card__body">
           <p class="coll-card__title">Motorized Blinds</p>
@@ -1080,7 +1056,7 @@ img { display: block; max-width: 100%; }
       <div class="coll-card">
         <div class="coll-card__img-wrap">
           <img class="coll-card__img" src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=700&q=80" alt="Wood Blinds">
-          <div class="coll-card__hover-label">View Collection →</div>
+          
         </div>
         <div class="coll-card__body">
           <p class="coll-card__title">Wood Blinds</p>
@@ -1101,21 +1077,55 @@ img { display: block; max-width: 100%; }
       <h2 class="sec-h2">Why Choose SunLeo</h2>
     </div>
     <div class="why-grid">
+
       <div class="why-card">
-        <div class="why-card__icon">🏠</div>
+        <div class="why-card__icon">
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="17" cy="10" r="6"/>
+            <path d="M5 30 a12 12 0 0 1 24 0"/>
+            <path d="M25 18 q4-1 6 2"/>
+            <path d="M25 24 q3 0 5 2"/>
+          </svg>
+        </div>
         <p class="why-card__title">Free Consultation</p>
-        <p class="why-card__desc">Expert advice tailored to your needs and space — we come to you with samples at no charge.</p>
+        <p class="why-card__desc">We come to your home with samples — expert advice at no charge.</p>
       </div>
+
       <div class="why-card">
-        <div class="why-card__icon">✂️</div>
+        <div class="why-card__icon">
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="12" height="12" rx="2"/>
+            <rect x="19" y="3" width="12" height="12" rx="2"/>
+            <rect x="3" y="19" width="12" height="12" rx="2"/>
+            <rect x="19" y="19" width="12" height="12" rx="2"/>
+          </svg>
+        </div>
         <p class="why-card__title">Custom-Made Solutions</p>
-        <p class="why-card__desc">Precision-crafted window coverings designed just for your windows and your home.</p>
+        <p class="why-card__desc">Precision-crafted window coverings built to fit your exact windows.</p>
       </div>
+
       <div class="why-card">
-        <div class="why-card__icon">🔧</div>
+        <div class="why-card__icon">
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M28 4 a8 8 0 0 0-9 9L6 26 a3 3 0 0 0 4.2 4.2L23 17 a8 8 0 0 0 9-9 l-5 5-3-3z"/>
+            <circle cx="8" cy="28" r="1.5" fill="currentColor"/>
+          </svg>
+        </div>
         <p class="why-card__title">Professional Installation</p>
-        <p class="why-card__desc">Skilled installers ensure a perfect fit and flawless finish, guaranteed.</p>
+        <p class="why-card__desc">Our skilled team ensures a perfect fit and flawless finish every time.</p>
       </div>
+
+      <div class="why-card">
+        <div class="why-card__icon">
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 2 L30 8 L30 18 C30 25 24 30 17 32 C10 30 4 25 4 18 L4 8z"/>
+            <polyline points="11,17 15,21 23,13"/>
+          </svg>
+        </div>
+        <p class="why-card__title">Licensed &amp; Insured</p>
+        <p class="why-card__desc">Fully licensed, bonded, and insured for your complete peace of mind.</p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1124,13 +1134,26 @@ img { display: block; max-width: 100%; }
 <div class="stats-bar">
   <div class="container">
     <div class="stats-inner">
+
       <div class="stat">
-        <span class="stat__icon">👥</span>
-        <p class="stat__num">1,200+</p>
+        <span class="stat__icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="10" r="5"/>
+            <path d="M2 28 a10 10 0 0 1 20 0"/>
+            <circle cx="24" cy="12" r="4"/>
+            <path d="M24 16 a8 8 0 0 1 6 12"/>
+          </svg>
+        </span>
+        <p class="stat__num">500+</p>
         <p class="stat__label">Projects Completed</p>
       </div>
+
       <div class="stat">
-        <span class="stat__icon">⭐</span>
+        <span class="stat__icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="16,3 20,12 30,13 22,20 24,30 16,25 8,30 10,20 2,13 12,12"/>
+          </svg>
+        </span>
         <div class="stat__stars">
           <span class="stat__star">★</span><span class="stat__star">★</span>
           <span class="stat__star">★</span><span class="stat__star">★</span>
@@ -1139,16 +1162,34 @@ img { display: block; max-width: 100%; }
         <p class="stat__num" style="font-size:30px; margin-top:4px;">5.0</p>
         <p class="stat__label">Star Google Rating</p>
       </div>
+
       <div class="stat">
-        <span class="stat__icon">📅</span>
-        <p class="stat__num">15+</p>
+        <span class="stat__icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="26" height="24" rx="3"/>
+            <line x1="3" y1="12" x2="29" y2="12"/>
+            <line x1="10" y1="2" x2="10" y2="8"/>
+            <line x1="22" y1="2" x2="22" y2="8"/>
+            <line x1="9" y1="18" x2="14" y2="18"/>
+            <line x1="9" y1="23" x2="14" y2="23"/>
+            <line x1="18" y1="18" x2="23" y2="18"/>
+          </svg>
+        </span>
+        <p class="stat__num">10+</p>
         <p class="stat__label">Years Experience</p>
       </div>
+
       <div class="stat">
-        <span class="stat__icon">🛡️</span>
+        <span class="stat__icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 2 L28 8 L28 18 C28 24 22 29 16 31 C10 29 4 24 4 18 L4 8z"/>
+            <polyline points="10,16 14,20 22,12"/>
+          </svg>
+        </span>
         <p class="stat__num">100%</p>
         <p class="stat__label">Satisfaction Guaranteed</p>
       </div>
+
     </div>
   </div>
 </div>
@@ -1172,26 +1213,15 @@ img { display: block; max-width: 100%; }
             <input type="email" class="f-input" placeholder="jane@email.com">
           </div>
         </div>
-        <div class="f-field">
-          <label class="f-label">Phone Number</label>
-          <input type="tel" class="f-input" placeholder="(403) 555-0100">
-        </div>
-        <div class="f-field">
-          <label class="f-label">What are you looking for?</label>
-          <select class="f-input" style="cursor:pointer; appearance:none;">
-            <option value="">— Select a collection —</option>
-            <option>Roller Blinds</option>
-            <option>Honeycomb Shades</option>
-            <option>Zebra Shades</option>
-            <option>Wood Blinds</option>
-            <option>Motorized Blinds</option>
-            <option>Drapery &amp; Curtains</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <div class="f-field">
-          <label class="f-label">Message / Notes</label>
-          <textarea class="f-input" rows="3" style="resize:vertical;" placeholder="Tell us about your windows…"></textarea>
+        <div class="f-field form-row">
+          <div>
+            <label class="f-label">Phone Number</label>
+            <input type="tel" class="f-input" placeholder="(403) 555-0100">
+          </div>
+          <div>
+            <label class="f-label">Message / Notes</label>
+            <textarea class="f-input" rows="1" style="resize:none; height:44px;" placeholder="Tell us about your windows…"></textarea>
+          </div>
         </div>
         <button class="f-submit">Submit Request</button>
         <p class="f-note">🔒 Our team will contact you within 24 hours.</p>
