@@ -79,12 +79,12 @@ img { display: block; max-width: 100%; }
    NAV
 ══════════════════════════════════════════════ */
 .site-nav {
-  background: var(--white);
+  background: var(--bg-gray);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 200;
-  box-shadow: 0 1px 6px rgba(13,24,41,.07);
+  box-shadow: 0 1px 8px rgba(13,24,41,.09);
 }
 .site-nav .container {
   height: 74px;
@@ -142,7 +142,8 @@ img { display: block; max-width: 100%; }
 ══════════════════════════════════════════════ */
 .hero {
   position: relative;
-  min-height: 580px;
+  min-height: 76vh;
+  min-height: clamp(560px, 76vh, 780px);
   display: flex;
   align-items: stretch;
   background: var(--navy);
@@ -155,38 +156,24 @@ img { display: block; max-width: 100%; }
   height: 100%;
   object-fit: cover;
   object-position: 70% center;
-  opacity: .4;
-  animation: slow-zoom 20s ease-in-out infinite alternate;
+  opacity: .82;
+  animation: slow-zoom 22s ease-in-out infinite alternate;
 }
 @keyframes slow-zoom {
   from { transform: scale(1); }
   to   { transform: scale(1.06); }
 }
-/* subtle diagonal light sweep */
-.hero__glare {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    125deg,
-    rgba(255,255,255,0) 30%,
-    rgba(255,255,255,.03) 50%,
-    rgba(255,255,255,0) 70%
-  );
-  animation: glare 8s ease-in-out infinite;
-  pointer-events: none;
-}
-@keyframes glare {
-  0%,100% { opacity:0; }
-  50%      { opacity:1; }
-}
+/* Left-side dark gradient — right half stays bright */
 .hero__overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    100deg,
-    rgba(13,24,41,.86) 0%,
-    rgba(13,24,41,.68) 42%,
-    rgba(13,24,41,.15) 100%
+    to right,
+    rgba(13,24,41,.91) 0%,
+    rgba(13,24,41,.82) 28%,
+    rgba(13,24,41,.55) 50%,
+    rgba(13,24,41,.18) 68%,
+    rgba(13,24,41,.0)  85%
   );
 }
 .hero .container {
@@ -196,16 +183,12 @@ img { display: block; max-width: 100%; }
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  padding-top: 64px;
+  padding-bottom: 0;
 }
-.hero__glass {
-  /* frosted-glass text panel */
-  max-width: 600px;
-  padding: 52px 52px 48px;
-  background: rgba(13,24,41,.45);
-  backdrop-filter: blur(2px);
-  border: 1px solid rgba(255,255,255,.08);
-  border-left: 3px solid rgba(255,255,255,.25);
-  margin: 60px 0 0;
+/* No frosted glass — content sits on gradient directly */
+.hero__content {
+  max-width: 580px;
   animation: fadeUp .7s ease both .1s;
 }
 @keyframes fadeUp {
@@ -234,12 +217,12 @@ img { display: block; max-width: 100%; }
 }
 .hero__h1 {
   font-family: var(--display);
-  font-size: clamp(34px, 4.2vw, 56px);
+  font-size: clamp(36px, 4.4vw, 58px);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.08;
   letter-spacing: -.015em;
   color: #fff;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   animation: fadeUp .6s ease both .3s;
 }
 .hero__h1 em {
@@ -248,11 +231,11 @@ img { display: block; max-width: 100%; }
 }
 .hero__sub {
   font-family: var(--ui);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 300;
   line-height: 1.7;
-  color: rgba(255,255,255,.75);
-  margin-bottom: 32px;
+  color: rgba(255,255,255,.78);
+  margin-bottom: 34px;
   animation: fadeUp .6s ease both .4s;
 }
 .hero__btns {
@@ -296,19 +279,32 @@ img { display: block; max-width: 100%; }
   border-color: rgba(255,255,255,.85);
   background: rgba(255,255,255,.07);
 }
-.hero__proof {
-  display: flex;
-  gap: 28px;
-  padding: 24px 0 56px;
-  flex-wrap: wrap;
+/* Proof strip — full-width band at bottom of hero */
+.hero__proof-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(13,24,41,.72);
+  border-top: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(4px);
   animation: fadeUp .6s ease both .65s;
+}
+.hero__proof-bar .container {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .proof-item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   color: #fff;
+  padding: 18px 0;
+  flex: 1;
+  border-right: 1px solid rgba(255,255,255,.08);
 }
+.proof-item:last-child { border-right: none; }
 .proof-item__icon {
   width: 38px; height: 38px;
   background: rgba(255,255,255,.1);
@@ -863,10 +859,9 @@ img { display: block; max-width: 100%; }
   <img class="hero__photo"
     src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1600&q=85"
     alt="Luxury window coverings Calgary home">
-  <div class="hero__glare"></div>
   <div class="hero__overlay"></div>
   <div class="container">
-    <div class="hero__glass">
+    <div class="hero__content">
       <div class="hero__eyebrow">Calgary's Custom Window Specialists</div>
       <h1 class="hero__h1">
         We Design, Manufacture<br>&amp; Install <em>Custom</em><br>Window Coverings
@@ -879,26 +874,36 @@ img { display: block; max-width: 100%; }
         <a href="#collections" class="btn-ghost-w">Browse Collections</a>
       </div>
     </div>
-    <div class="hero__proof">
+  </div>
+  <!-- Proof strip at bottom -->
+  <div class="hero__proof-bar">
+    <div class="container">
       <div class="proof-item">
         <div class="proof-item__icon">⭐</div>
         <div>
-          <p class="proof-item__strong">1,200+</p>
-          <p class="proof-item__light">Calgary Homes</p>
+          <p class="proof-item__strong">1,200+ Homes</p>
+          <p class="proof-item__light">Served in Calgary</p>
         </div>
       </div>
       <div class="proof-item">
-        <div class="proof-item__icon" style="background:rgba(66,133,244,.25);">G</div>
+        <div class="proof-item__icon">🏆</div>
         <div>
-          <p class="proof-item__strong">5.0 ★★★★★</p>
-          <p class="proof-item__light">Google Reviews</p>
+          <p class="proof-item__strong">10+ Years</p>
+          <p class="proof-item__light">Serving Calgary &amp; Area</p>
+        </div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-item__icon">📐</div>
+        <div>
+          <p class="proof-item__strong">FREE In-Home</p>
+          <p class="proof-item__light">Measurement Included</p>
         </div>
       </div>
       <div class="proof-item">
         <div class="proof-item__icon">🛡</div>
         <div>
           <p class="proof-item__strong">Licensed</p>
-          <p class="proof-item__light">&amp; Insured</p>
+          <p class="proof-item__light">&amp; Fully Insured</p>
         </div>
       </div>
     </div>
