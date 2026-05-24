@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SunLeo Window Coverings — Custom Blinds & Shades Calgary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy:       #0E1F40;
+  --navy-mid:   #1A3161;
+  --blue:       #1D4ED8;
+  --blue-hover: #1E40AF;
+  --white:      #FFFFFF;
+  --off-white:  #F7F8FA;
+  --gray-light: #EEF0F4;
+  --gray-mid:   #D1D5DB;
+  --gray-text:  #6B7280;
+  --body-text:  #374151;
+  --heading:    #0E1F40;
+
+  --shadow-sm:  0 1px 3px rgba(14,31,64,.08), 0 1px 2px rgba(14,31,64,.06);
+  --shadow-md:  0 4px 16px rgba(14,31,64,.10), 0 2px 6px rgba(14,31,64,.06);
+  --shadow-lg:  0 12px 40px rgba(14,31,64,.14), 0 4px 12px rgba(14,31,64,.08);
+
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+
+  --font-display: 'Outfit', sans-serif;
+  --font-body:    'Source Sans 3', sans-serif;
+
+  --section-pad: 88px 0;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--body-text);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+img { display: block; max-width: 100%; }
+a { text-decoration: none; }
+button { cursor: pointer; border: none; font-family: var(--font-display); }
+
+/* ─── LAYOUT ─────────────────────────────────── */
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ─── TRUST BAR ──────────────────────────────── */
+.trust-bar {
+  background: var(--navy);
+  padding: 9px 0;
+}
+.trust-bar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.trust-bar__phone {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.02em;
+}
+.trust-bar__phone svg { vertical-align: -2px; margin-right: 5px; }
+.trust-bar__center {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.trust-bar__center::before,
+.trust-bar__center::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: rgba(255,255,255,0.35);
+}
+.trust-bar__location {
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+/* ─── NAV ─────────────────────────────────────── */
+.site-nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-light);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: var(--shadow-sm);
+}
+.site-nav .container {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo { height: 48px; object-fit: contain; }
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--heading);
+  transition: color 0.15s;
+  letter-spacing: 0.01em;
+  position: relative;
+  padding-bottom: 2px;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0; right: 100%;
+  height: 2px;
+  background: var(--blue);
+  transition: right 0.25s ease;
+}
+.nav-links a:hover { color: var(--blue); }
+.nav-links a:hover::after { right: 0; }
+.nav-cta {
+  background: var(--navy);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 11px 22px;
+  border-radius: var(--r-sm);
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--navy-mid); transform: translateY(-1px); }
+
+/* ─── HERO ─────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--navy);
+}
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.38;
+  transform: scale(1.02);
+  animation: heroZoom 12s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform: scale(1.02); }
+  to   { transform: scale(1.07); }
+}
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    rgba(14,31,64,0.75) 0%,
+    rgba(14,31,64,0.55) 50%,
+    rgba(14,31,64,0.30) 100%
+  );
+}
+.hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  padding: 80px 0;
+}
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 20px;
+}
+.hero__eyebrow::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1.5px;
+  background: rgba(255,255,255,0.5);
+}
+.hero__h1 {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4.5vw, 52px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+.hero__h1 em {
+  font-style: normal;
+  color: #93C5FD;
+}
+.hero__sub {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.78);
+  margin-bottom: 36px;
+  max-width: 500px;
+}
+.hero__actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.btn-hero-primary {
+  display: inline-block;
+  background: var(--blue);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 14px 28px;
+  border-radius: var(--r-sm);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(29,78,216,.35);
+}
+.btn-hero-primary:hover {
+  background: var(--blue-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(29,78,216,.45);
+}
+.btn-hero-ghost {
+  display: inline-block;
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 13px 28px;
+  border-radius: var(--r-sm);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  transition: all 0.2s;
+}
+.btn-hero-ghost:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.75);
+}
+.hero__proof {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px 0 40px;
+}
+.proof-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.proof-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.proof-main {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+.proof-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.3;
+  font-weight: 300;
+}
+
+/* ─── SECTION HEADER ─────────────────────────── */
+.section-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.section-kicker {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  display: block;
+  margin-bottom: 12px;
+}
+.section-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 800;
+  color: var(--heading);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.section-sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--gray-text);
+  max-width: 540px;
+  margin: 12px auto 0;
+  line-height: 1.65;
+}
+
+/* ─── HOW IT WORKS ───────────────────────────── */
+.how-section {
+  padding: var(--section-pad);
+  background: var(--white);
+}
+.how-steps {
+  display: grid;
+  grid-template-columns: 1fr 56px 1fr 56px 1fr;
+  align-items: start;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.how-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 34px;
+}
+.how-connector svg { color: var(--gray-mid); }
+.how-step { text-align: center; padding: 0 8px; }
+.how-step__circle {
+  width: 72px;
+  height: 72px;
+  background: var(--navy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 4px 20px rgba(14,31,64,.20);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.how-step:hover .how-step__circle {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(14,31,64,.25);
+}
+.how-step__num {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+.how-step__icon {
+  font-size: 28px;
+}
+.how-step__title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--heading);
+  margin-bottom: 8px;
+  letter-spacing: 0.01em;
+}
+.how-step__desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--gray-text);
+  line-height: 1.65;
+}
+
+/* ─── COLLECTIONS ───────────────────────────── */
+.collections-section {
+  padding: var(--section-pad);
+  background: var(--off-white);
+}
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.collection-card {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.28s cubic-bezier(.2,.7,.2,1), box-shadow 0.28s;
+  display: flex;
+  flex-direction: column;
+}
+.collection-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+.collection-card__img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.collection-card__img {
+  width: 100%;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+  transition: transform 0.55s ease;
+}
+.collection-card:hover .collection-card__img {
+  transform: scale(1.06);
+}
+.collection-card__body {
+  padding: 22px 24px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.collection-card__title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--heading);
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.collection-card__desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--gray-text);
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 20px;
+}
+.btn-collection {
+  display: inline-block;
+  background: var(--blue);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 10px 22px;
+  border-radius: var(--r-sm);
+  align-self: flex-start;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-collection:hover {
+  background: var(--blue-hover);
+  transform: translateY(-1px);
+}
+
+/* ─── WHY CHOOSE ──────────────────────────────── */
+.why-section {
+  padding: var(--section-pad);
+  background: var(--white);
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.why-card {
+  padding: 36px 32px;
+  background: var(--off-white);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--gray-light);
+  text-align: center;
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.why-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.why-card__icon {
+  width: 64px;
+  height: 64px;
+  background: var(--navy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 26px;
+}
+.why-card__title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--heading);
+  margin-bottom: 10px;
+}
+.why-card__desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--gray-text);
+  line-height: 1.65;
+}
+
+/* ─── STATS BAR ──────────────────────────────── */
+.stats-section {
+  background: var(--off-white);
+  border-top: 1px solid var(--gray-light);
+  border-bottom: 1px solid var(--gray-light);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  divide: var(--gray-light);
+}
+.stat-item {
+  padding: 44px 32px;
+  text-align: center;
+  border-right: 1px solid var(--gray-light);
+  transition: background 0.2s;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: var(--gray-light); }
+.stat-item__num {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+.stat-item__stars {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  margin-bottom: 4px;
+}
+.stat-item__star { color: #FBBF24; font-size: 18px; line-height: 1; }
+.stat-item__label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray-text);
+  letter-spacing: 0.02em;
+}
+
+/* ─── FORM SECTION ───────────────────────────── */
+.form-section {
+  padding: var(--section-pad);
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+}
+.form-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 80% 50%, rgba(29,78,216,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 10% 20%, rgba(255,255,255,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.form-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.form-left__kicker {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #93C5FD;
+  display: block;
+  margin-bottom: 14px;
+}
+.form-left__h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+.form-left__p {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.75;
+  margin-bottom: 36px;
+}
+.form-logo {
+  height: 80px;
+  object-fit: contain;
+  opacity: 0.9;
+  margin-bottom: 24px;
+}
+.form-assurance {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.form-assurance__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.4;
+}
+.form-assurance__check {
+  width: 20px;
+  height: 20px;
+  background: rgba(29,78,216,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #93C5FD;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.form-card {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-lg);
+}
+.form-card__title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--heading);
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--gray-light);
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.form-field { margin-bottom: 16px; }
+.form-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--heading);
+  margin-bottom: 6px;
+  letter-spacing: 0.03em;
+}
+.form-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--gray-mid);
+  border-radius: var(--r-sm);
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--body-text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(29,78,216,0.12);
+}
+.form-input::placeholder { color: var(--gray-mid); }
+.form-submit {
+  width: 100%;
+  padding: 14px;
+  background: var(--navy);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: var(--r-sm);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(14,31,64,.25);
+  margin-top: 4px;
+}
+.form-submit:hover {
+  background: var(--navy-mid);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(14,31,64,.30);
+}
+.form-note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--gray-text);
+  margin-top: 12px;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* ─── FOOTER ─────────────────────────────────── */
+.site-footer {
+  background: #080F1F;
+  padding: 64px 0 28px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.2fr 1.5fr;
+  gap: 48px;
+  margin-bottom: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.footer-brand__logo {
+  height: 44px;
+  object-fit: contain;
+  margin-bottom: 16px;
+}
+.footer-brand__desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+  max-width: 240px;
+}
+.footer-col__title {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 16px;
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-links a {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  transition: color 0.15s;
+}
+.footer-links a:hover { color: #fff; }
+.footer-contact__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.footer-contact__item:last-child { margin-bottom: 0; }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-bottom p {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.25);
+}
+
+/* ─── ANIMATIONS ─────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero__eyebrow { animation: fadeUp 0.6s ease both 0.1s; }
+.hero__h1      { animation: fadeUp 0.6s ease both 0.25s; }
+.hero__sub     { animation: fadeUp 0.6s ease both 0.4s; }
+.hero__actions { animation: fadeUp 0.6s ease both 0.55s; }
+.hero__proof   { animation: fadeUp 0.6s ease both 0.7s; }
+</style>
+</head>
+<body>
+
+<!-- ══════ TRUST BAR ══════ -->
+<div class="trust-bar">
+  <div class="container">
+    <span class="trust-bar__phone">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.64 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.55 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      (403) 555-0100
+    </span>
+    <span class="trust-bar__center">Free In-Home Measurement &amp; Consultation</span>
+    <span class="trust-bar__location">Serving Calgary &amp; Area</span>
+  </div>
+</div>
+
+<!-- ══════ NAV ══════ -->
+<nav class="site-nav">
+  <div class="container">
+    <img src="sunleo-logo.png" alt="SunLeo Window Coverings" class="nav-logo">
+    <ul class="nav-links">
+      <li><a href="#collections">Collections</a></li>
+      <li><a href="#">Gallery</a></li>
+      <li><a href="#">Blog</a></li>
+    </ul>
+    <a href="#quote" class="nav-cta">Book Free Measurement</a>
+  </div>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<section class="hero">
+  <img
+    class="hero__bg"
+    src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1600&q=85"
+    alt="Custom window coverings in a Calgary home"
+  >
+  <div class="hero__overlay"></div>
+  <div class="container" style="width:100%;">
+    <div class="hero__content">
+      <div class="hero__eyebrow">Calgary's Custom Window Specialists</div>
+      <h1 class="hero__h1">
+        We Design, Manufacture<br>&amp; Install <em>Custom</em><br>Window Coverings
+      </h1>
+      <p class="hero__sub">
+        Premium blinds, shades &amp; curtains — tailored to your space.<br>
+        No obligation quote.
+      </p>
+      <div class="hero__actions">
+        <a href="#quote" class="btn-hero-primary">Book Free In-Home Measurement</a>
+        <a href="#collections" class="btn-hero-ghost">Browse Collections</a>
+      </div>
+    </div>
+    <div class="hero__proof">
+      <div class="proof-item">
+        <div class="proof-icon">🏠</div>
+        <div>
+          <p class="proof-main">1,200+</p>
+          <p class="proof-sub">Calgary Homes</p>
+        </div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon">🛡️</div>
+        <div>
+          <p class="proof-main">Licensed</p>
+          <p class="proof-sub">&amp; Insured</p>
+        </div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon">📐</div>
+        <div>
+          <p class="proof-main">Free Visit</p>
+          <p class="proof-sub">No obligation</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ HOW IT WORKS ══════ -->
+<section class="how-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-kicker">The Process</span>
+      <h2 class="section-h2">How It Works</h2>
+    </div>
+    <div class="how-steps">
+
+      <div class="how-step">
+        <div class="how-step__circle">
+          <span class="how-step__icon">🪟</span>
+        </div>
+        <p class="how-step__title">Browse Collections</p>
+        <p class="how-step__desc">Explore our window covering styles and find your perfect match from our curated catalogue.</p>
+      </div>
+
+      <div class="how-connector">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+
+      <div class="how-step">
+        <div class="how-step__circle">
+          <span class="how-step__icon">📋</span>
+        </div>
+        <p class="how-step__title">Request a Free Visit</p>
+        <p class="how-step__desc">Tell us about your project and our expert visits your home — measuring every window and bringing samples.</p>
+      </div>
+
+      <div class="how-connector">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+
+      <div class="how-step">
+        <div class="how-step__circle">
+          <span class="how-step__icon">🔧</span>
+        </div>
+        <p class="how-step__title">We Measure &amp; Install</p>
+        <p class="how-step__desc">Our certified installers handle everything — custom-made to fit, installed perfectly, guaranteed.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════ COLLECTIONS ══════ -->
+<section class="collections-section" id="collections">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-kicker">What We Offer</span>
+      <h2 class="section-h2">Explore Our Collections</h2>
+      <p class="section-sub">Every window is unique. Browse our collections and let our Calgary specialists guide you to the perfect solution for your home.</p>
+    </div>
+    <div class="collections-grid">
+
+      <div class="collection-card">
+        <div class="collection-card__img-wrap">
+          <img class="collection-card__img" src="https://images.unsplash.com/photo-1615876063860-d971f6dca5dc?w=700&q=80" alt="Roller Blinds">
+        </div>
+        <div class="collection-card__body">
+          <h3 class="collection-card__title">Roller Blinds</h3>
+          <p class="collection-card__desc">Sleek, minimal, and versatile. Available in blackout, light-filtering, and solar fabrics — perfect for any room.</p>
+          <a href="sunleo-product-roller-blinds.html" class="btn-collection">View Collection</a>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="collection-card__img-wrap">
+          <img class="collection-card__img" src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=700&q=80" alt="Honeycomb Shades">
+        </div>
+        <div class="collection-card__body">
+          <h3 class="collection-card__title">Honeycomb Shades</h3>
+          <p class="collection-card__desc">Energy-efficient comfort with superior insulation. Cellular design traps air to keep your home comfortable year-round.</p>
+          <a href="#" class="btn-collection">View Collection</a>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="collection-card__img-wrap">
+          <img class="collection-card__img" src="https://images.unsplash.com/photo-1598928636135-d146006ff4be?w=700&q=80" alt="Zebra Shades">
+        </div>
+        <div class="collection-card__body">
+          <h3 class="collection-card__title">Zebra Shades</h3>
+          <p class="collection-card__desc">Modern light control with alternating sheer and solid bands — adjust from privacy to open view with a single pull.</p>
+          <a href="#" class="btn-collection">View Collection</a>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="collection-card__img-wrap">
+          <img class="collection-card__img" src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=700&q=80" alt="Wood Blinds">
+        </div>
+        <div class="collection-card__body">
+          <h3 class="collection-card__title">Wood Blinds</h3>
+          <p class="collection-card__desc">Timeless warmth with real and faux wood options. Custom stains and finishes to match your interior perfectly.</p>
+          <a href="#" class="btn-collection">View Collection</a>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="collection-card__img-wrap">
+          <img class="collection-card__img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Motorized Blinds">
+        </div>
+        <div class="collection-card__body">
+          <h3 class="collection-card__title">Motorized Blinds</h3>
+          <p class="collection-card__desc">Smart automation for effortless control. Works with Alexa, Google Home, and your smartphone — raise or lower with one tap.</p>
+          <a href="#" class="btn-collection">View Collection</a>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="collection-card__img-wrap">
+          <img class="collection-card__img" src="https://images.unsplash.com/photo-1586105251261-72a756497a11?w=700&q=80" alt="Drapery & Curtains">
+        </div>
+        <div class="collection-card__body">
+          <h3 class="collection-card__title">Drapery &amp; Curtains</h3>
+          <p class="collection-card__desc">Soft elegance that filters light beautifully. Custom-made from premium fabrics — floor to ceiling, exactly as you envision.</p>
+          <a href="#" class="btn-collection">View Collection</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════ WHY CHOOSE SUNLEO ══════ -->
+<section class="why-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-kicker">Our Promise</span>
+      <h2 class="section-h2">Why Choose SunLeo</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-card__icon">🏠</div>
+        <h3 class="why-card__title">Free In-Home Consultation</h3>
+        <p class="why-card__desc">Our expert advice is tailored to your needs and space — we come to you with samples and solutions, completely free.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card__icon">✂️</div>
+        <h3 class="why-card__title">Custom-Made Solutions</h3>
+        <p class="why-card__desc">Precision-crafted window coverings designed just for your windows. No off-the-shelf fitting, every order is made-to-measure.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card__icon">⭐</div>
+        <h3 class="why-card__title">Professional Installation</h3>
+        <p class="why-card__desc">Skilled installers ensure a perfect fit and flawless finish — your blinds will look and operate exactly as intended.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ STATS ══════ -->
+<div class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <p class="stat-item__num">1,200+</p>
+        <p class="stat-item__label">Projects Completed</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-item__stars">
+          <span class="stat-item__star">★</span>
+          <span class="stat-item__star">★</span>
+          <span class="stat-item__star">★</span>
+          <span class="stat-item__star">★</span>
+          <span class="stat-item__star">★</span>
+        </div>
+        <p class="stat-item__num" style="font-size:28px; margin-top:2px;">5.0</p>
+        <p class="stat-item__label">Google Rating</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-item__num">15+</p>
+        <p class="stat-item__label">Years Experience</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-item__num">100%</p>
+        <p class="stat-item__label">Satisfaction Guaranteed</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ FORM ══════ -->
+<section class="form-section" id="quote">
+  <div class="container">
+    <div class="form-inner">
+      <div class="form-left">
+        <img src="sunleo-logo.png" alt="SunLeo" class="form-logo">
+        <span class="form-left__kicker">Get Started Today</span>
+        <h2 class="form-left__h2">Book a Free<br>In-Home Measurement</h2>
+        <p class="form-left__p">
+          Custom window coverings designed for beauty, comfort, and lasting quality. Our expert comes to your home — at no cost, with no obligation.
+        </p>
+        <div class="form-assurance">
+          <div class="form-assurance__item">
+            <div class="form-assurance__check">✓</div>
+            We come to you — no showroom visit needed
+          </div>
+          <div class="form-assurance__item">
+            <div class="form-assurance__check">✓</div>
+            Free fabric samples &amp; expert advice in your home
+          </div>
+          <div class="form-assurance__item">
+            <div class="form-assurance__check">✓</div>
+            Our team will contact you within 24 hours
+          </div>
+          <div class="form-assurance__item">
+            <div class="form-assurance__check">✓</div>
+            Serving all Calgary neighbourhoods
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <p class="form-card__title">Request Your Free Measurement</p>
+        <div class="form-row form-field">
+          <div>
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-input" placeholder="Jane">
+          </div>
+          <div>
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-input" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" placeholder="jane@email.com">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-input" placeholder="(403) 555-0100">
+        </div>
+        <div class="form-field">
+          <label class="form-label">What are you looking for?</label>
+          <select class="form-input" style="cursor:pointer;">
+            <option value="">— Select a collection (optional) —</option>
+            <option>Roller Blinds</option>
+            <option>Honeycomb Shades</option>
+            <option>Zebra Shades</option>
+            <option>Wood Blinds</option>
+            <option>Motorized Blinds</option>
+            <option>Drapery &amp; Curtains</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Message / Notes (optional)</label>
+          <textarea class="form-input" rows="3" style="resize:vertical;" placeholder="e.g. Need blackout for bedroom, or motorized for the living room…"></textarea>
+        </div>
+        <button class="form-submit">Book Free In-Home Measurement</button>
+        <p class="form-note">
+          <span>🔒</span>
+          Our team will contact you within 24 hours to confirm.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="sunleo-logo.png" alt="SunLeo Window Coverings" class="footer-brand__logo">
+        <p class="footer-brand__desc">Calgary-based custom window covering specialists. Expert craftsmanship. Solutions that elevate every space.</p>
+      </div>
+      <div>
+        <p class="footer-col__title">Navigate</p>
+        <ul class="footer-links">
+          <li><a href="#">Collections</a></li>
+          <li><a href="#">Gallery</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#quote">Book Measurement</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col__title">Collections</p>
+        <ul class="footer-links">
+          <li><a href="#">Roller Blinds</a></li>
+          <li><a href="#">Honeycomb Shades</a></li>
+          <li><a href="#">Zebra Shades</a></li>
+          <li><a href="#">Wood Blinds</a></li>
+          <li><a href="#">Motorized Blinds</a></li>
+          <li><a href="#">Drapery &amp; Curtains</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col__title">Contact</p>
+        <div class="footer-contact__item">📞 (403) 555-0100</div>
+        <div class="footer-contact__item">✉️ info@sunleowindows.ca</div>
+        <div class="footer-contact__item">📍 Calgary, Alberta, Canada</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 SunLeo Window Coverings. All rights reserved.</p>
+      <p>Calgary, AB · Custom Blinds &amp; Shades</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
