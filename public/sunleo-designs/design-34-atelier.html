@@ -485,7 +485,8 @@
   <section class="py-24 lg:py-32 border-t border-gold/15 px-6 lg:px-14 bg-soji-dark">
     <div class="max-w-screen-xl mx-auto">
 
-      <div class="text-center mb-20">
+      <!-- Header -->
+      <div class="text-center mb-16 lg:mb-20">
         <div class="flex items-center justify-center gap-5 mb-5">
           <div style="width:28px; height:1px; background:#b89047;"></div>
           <span class="text-[9.5px] tracking-[0.4em] uppercase text-gold font-body font-medium">The Process</span>
@@ -496,44 +497,70 @@
         </h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gold/20">
+      <!-- Steps with connector arrows -->
+      <div class="relative grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
 
-        <div class="relative px-4 pb-12 md:pb-0 md:pr-14 md:pl-6 pt-4">
-          <span class="step-ghost">01</span>
-          <div class="relative pt-8 pl-3">
-            <div style="width:28px; height:1px; background:#b89047; margin-bottom:20px;"></div>
-            <h3 class="font-display text-[1.7rem] font-medium text-navy mb-3 leading-tight">We Come<br/>To You</h3>
-            <p class="text-[13px] text-navy/50 font-light leading-relaxed">
-              Our specialist visits your Calgary home with a full fabric library. We measure every window precisely — no guesswork, no store trips.
-            </p>
-          </div>
+        <!-- Connector arrows (desktop only) -->
+        <div class="hidden md:flex absolute top-[52px] left-0 right-0 items-center justify-around px-[22%] pointer-events-none z-10">
+          <!-- Arrow 1 -->
+          <svg class="w-16 h-5 text-gold/40" fill="none" viewBox="0 0 64 20">
+            <path stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 3" stroke-linecap="round" d="M2 10 H56"/>
+            <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M50 4 L62 10 L50 16"/>
+          </svg>
+          <!-- Arrow 2 -->
+          <svg class="w-16 h-5 text-gold/40" fill="none" viewBox="0 0 64 20">
+            <path stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 3" stroke-linecap="round" d="M2 10 H56"/>
+            <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M50 4 L62 10 L50 16"/>
+          </svg>
         </div>
 
-        <div class="relative px-4 py-12 md:py-0 md:px-14 pt-4 md:pt-4">
-          <span class="step-ghost">02</span>
-          <div class="relative pt-8 pl-3">
-            <div style="width:28px; height:1px; background:#b89047; margin-bottom:20px;"></div>
-            <h3 class="font-display text-[1.7rem] font-medium text-navy mb-3 leading-tight">Choose<br/>Your Style</h3>
-            <p class="text-[13px] text-navy/50 font-light leading-relaxed">
-              Browse hundreds of fabrics and systems in your own light. We guide you to the perfect match for your interior and lifestyle.
-            </p>
+        <!-- Step 1: Free In-Home Visit -->
+        <div class="bg-white rounded-xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center">
+          <!-- Icon -->
+          <div class="w-[60px] h-[60px] rounded-full flex items-center justify-center mb-5 flex-shrink-0" style="background:#1B2844;">
+            <svg class="w-7 h-7" fill="none" stroke="#b89047" stroke-width="1.6" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
           </div>
+          <!-- Step badge -->
+          <span class="text-[8.5px] tracking-[0.35em] uppercase font-body font-semibold text-gold mb-3">Step 01</span>
+          <h3 class="font-display text-[1.45rem] font-semibold text-navy mb-3 leading-tight">Free In-Home<br/>Consultation</h3>
+          <p class="text-[12.5px] text-navy/50 font-light leading-relaxed">
+            Our specialist comes to you with a full fabric library — precise measurements, zero guesswork, zero pressure.
+          </p>
         </div>
 
-        <div class="relative px-4 pt-12 md:pt-4 md:pl-14 md:pr-6">
-          <span class="step-ghost">03</span>
-          <div class="relative pt-8 pl-3">
-            <div style="width:28px; height:1px; background:#b89047; margin-bottom:20px;"></div>
-            <h3 class="font-display text-[1.7rem] font-medium text-navy mb-3 leading-tight">Installed<br/>Perfectly</h3>
-            <p class="text-[13px] text-navy/50 font-light leading-relaxed">
-              Custom-built to your exact measurements and installed by our certified team. Every window, flawlessly finished.
-            </p>
+        <!-- Step 2: Choose Your Style -->
+        <div class="bg-white rounded-xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center">
+          <div class="w-[60px] h-[60px] rounded-full flex items-center justify-center mb-5 flex-shrink-0" style="background:#1B2844;">
+            <svg class="w-7 h-7" fill="none" stroke="#b89047" stroke-width="1.6" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+            </svg>
           </div>
+          <span class="text-[8.5px] tracking-[0.35em] uppercase font-body font-semibold text-gold mb-3">Step 02</span>
+          <h3 class="font-display text-[1.45rem] font-semibold text-navy mb-3 leading-tight">Choose Your<br/>Perfect Style</h3>
+          <p class="text-[12.5px] text-navy/50 font-light leading-relaxed">
+            Browse hundreds of fabrics, textures, and operating systems in your own home — we guide you to the perfect match.
+          </p>
+        </div>
+
+        <!-- Step 3: Expert Installation -->
+        <div class="bg-white rounded-xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center">
+          <div class="w-[60px] h-[60px] rounded-full flex items-center justify-center mb-5 flex-shrink-0" style="background:#1B2844;">
+            <svg class="w-7 h-7" fill="none" stroke="#b89047" stroke-width="1.6" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+            </svg>
+          </div>
+          <span class="text-[8.5px] tracking-[0.35em] uppercase font-body font-semibold text-gold mb-3">Step 03</span>
+          <h3 class="font-display text-[1.45rem] font-semibold text-navy mb-3 leading-tight">Expert<br/>Installation</h3>
+          <p class="text-[12.5px] text-navy/50 font-light leading-relaxed">
+            Custom-built to your exact measurements and installed by our certified Calgary team. Every window, flawlessly finished.
+          </p>
         </div>
 
       </div>
 
-      <div class="text-center mt-20">
+      <div class="text-center mt-14">
         <a href="#book" class="btn-navy">
           Start With a Free Measurement
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
