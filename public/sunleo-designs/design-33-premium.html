@@ -118,6 +118,72 @@
         @media (max-width: 640px) {
             .card-img-mobile { height: 200px !important; }
         }
+
+        /* ── Floating Call Button (desktop/laptop only) ──────────── */
+        @keyframes phone-bounce {
+            0%,  70%, 100% { transform: translateY(0) rotate(0deg); }
+            20%             { transform: translateY(-9px) rotate(-12deg); }
+            40%             { transform: translateY(0)   rotate(10deg); }
+            55%             { transform: translateY(-4px) rotate(-5deg); }
+        }
+
+        .float-call-wrap {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            position: fixed;
+            right: 24px;
+            bottom: 48px;
+            z-index: 45;
+            background: #1B2844;
+            border: 2px solid #b89047;
+            border-radius: 50px;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 22px rgba(27,40,68,0.38);
+            transition: box-shadow 0.3s ease;
+        }
+        .float-call-wrap:hover {
+            box-shadow: 0 10px 38px rgba(27,40,68,0.55);
+        }
+
+        /* Phone icon circle */
+        .float-call-icon {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            animation: phone-bounce 5s ease-in-out 3s infinite;
+        }
+        .float-call-wrap:hover .float-call-icon {
+            animation-play-state: paused;
+        }
+
+        /* Phone number label — collapsed by default, slides in on hover */
+        .float-call-label {
+            max-width: 0;
+            overflow: hidden;
+            opacity: 0;
+            white-space: nowrap;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.05em;
+            color: #EDE8DC;
+            padding: 0;
+            transition:
+                max-width 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity   0.28s ease 0.06s,
+                padding   0.42s ease;
+        }
+        .float-call-wrap:hover .float-call-label {
+            max-width: 190px;
+            opacity: 1;
+            padding: 0 4px 0 16px;
+        }
     </style>
 </head>
 <body class="font-sans text-gray-800 bg-sunleo-soji min-h-screen flex flex-col justify-between" style="background-color:#efebe4;">
@@ -1258,6 +1324,16 @@
             }
         }
     </script>
+
+    <!-- FLOATING CALL BUTTON — Desktop/Laptop only -->
+    <a href="tel:4035550190" class="float-call-wrap hidden sm:flex" aria-label="Call SunLeo (403) 555-0190">
+        <span class="float-call-label">(403) 555-0190</span>
+        <div class="float-call-icon">
+            <svg class="w-6 h-6" fill="none" stroke="#b89047" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+        </div>
+    </a>
 
     <!-- MOBILE FLOATING CTA BAR -->
     <div class="mobile-safe-bottom fixed bottom-0 left-0 right-0 z-50 sm:hidden flex gap-3 px-4 pt-3"
