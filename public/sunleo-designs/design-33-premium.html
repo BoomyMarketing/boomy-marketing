@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#1B2844">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>SUNLEO — Custom Window Coverings & Motorization | Calgary, AB</title>
     <!-- Tailwind CSS Integration -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -77,6 +81,43 @@
         }
         .mobile-cta-bounce         { animation: cta-float 3s ease-in-out infinite; }
         .mobile-cta-bounce-delayed { animation: cta-float 3s ease-in-out 1.5s infinite; }
+
+        /* ── Mobile / cross-browser safety ─────────────────────────────── */
+        body { overflow-x: hidden; }
+        * { -webkit-box-sizing: border-box; box-sizing: border-box; }
+        /* Prevent iOS auto-zoom on form focus (16px threshold) */
+        input, select, textarea { font-size: 16px !important; touch-action: manipulation; }
+        /* Smooth tap UX — no flash on touch */
+        a, button, [role="button"] { -webkit-tap-highlight-color: transparent; }
+        /* FB Messenger / WKWebView: backdrop-filter not supported — solid fallback */
+        @supports not (backdrop-filter: blur(1px)) {
+            header { background-color: rgba(239,235,228,0.99) !important; }
+        }
+        /* Safe area for notched phones (iPhone X+, Android notch) */
+        .mobile-safe-bottom {
+            padding-bottom: max(12px, env(safe-area-inset-bottom, 12px));
+        }
+        /* Responsive images */
+        img { max-width: 100%; height: auto; }
+        /* Prevent Tailwind tracking-widest from overflowing tiny screens */
+        @media (max-width: 360px) {
+            .tracking-widest { letter-spacing: 0.08em; }
+            .tracking-wider  { letter-spacing: 0.06em; }
+        }
+        /* Force font rendering on Android */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        /* Hero gradient more opaque on mobile for text legibility */
+        @media (max-width: 640px) {
+            .hero-overlay { background: linear-gradient(to right, rgba(10,37,64,0.97) 0%, rgba(10,37,64,0.85) 60%, rgba(10,37,64,0.4) 100%) !important; }
+        }
+        /* Fix card image height on small screens */
+        @media (max-width: 640px) {
+            .card-img-mobile { height: 200px !important; }
+        }
     </style>
 </head>
 <body class="font-sans text-gray-800 bg-sunleo-soji min-h-screen flex flex-col justify-between" style="background-color:#efebe4;">
@@ -107,11 +148,11 @@
     <header class="sticky top-0 bg-sunleo-soji/95 backdrop-blur shadow-sm z-40 transition-all duration-300 border-b border-gray-200/30">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
             <!-- Crowned Lion Crest Logo -->
-            <a href="#" onclick="navigateTo('home'); return false;" class="flex items-center gap-2">
-                <img src="sunleo-logo.png" alt="SunLeo Window Coverings Calgary" class="w-auto" style="height:52px; filter:drop-shadow(0 2px 6px rgba(27,40,68,0.18));">
-                <div>
-                    <span class="block text-xl font-extrabold tracking-widest text-sunleo-blue leading-none">SUNLEO</span>
-                    <span class="block text-[10px] font-bold tracking-widest uppercase text-sunleo-gold mt-1">WINDOW COVERINGS</span>
+            <a href="#" onclick="navigateTo('home'); return false;" class="flex items-center gap-2 min-w-0">
+                <img src="sunleo-logo.png" alt="SunLeo Window Coverings Calgary" class="w-auto h-10 sm:h-[52px] flex-shrink-0" style="filter:drop-shadow(0 2px 6px rgba(27,40,68,0.18));">
+                <div class="min-w-0">
+                    <span class="block text-lg sm:text-xl font-extrabold tracking-wider sm:tracking-widest text-sunleo-blue leading-none truncate">SUNLEO</span>
+                    <span class="block text-[9px] sm:text-[10px] font-bold tracking-wider sm:tracking-widest uppercase text-sunleo-gold mt-1">WINDOW COVERINGS</span>
                 </div>
             </a>
 
@@ -169,13 +210,13 @@
                          alt="Luxury living room with modern elegant window shades" 
                          class="w-full h-full object-cover object-center" />
                     <!-- Left-to-right gradient to ensure text readability -->
-                    <div class="absolute inset-0 bg-gradient-to-r from-sunleo-blue/95 via-sunleo-blue/70 to-transparent"></div>
+                    <div class="hero-overlay absolute inset-0 bg-gradient-to-r from-sunleo-blue/95 via-sunleo-blue/70 to-transparent"></div>
                 </div>
 
                 <!-- Hero Content -->
-                <div class="relative z-10 px-6 sm:px-10 md:px-12 py-12 sm:py-16 w-full">
+                <div class="relative z-10 px-4 sm:px-10 md:px-12 py-10 sm:py-16 w-full">
                     <div class="max-w-xl text-white">
-                        <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+                        <h1 class="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 sm:mb-6">
                             We Design, Manufacture & Install Custom Window Coverings
                         </h1>
                         <p class="text-base sm:text-lg text-gray-200 mb-8 font-light leading-relaxed">
@@ -193,14 +234,14 @@
                         </div>
 
                         <!-- Core Trust Stats -->
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-4 pt-6 border-t border-white/20">
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-x-3 gap-y-3 sm:gap-x-6 sm:gap-y-4 pt-5 sm:pt-6 border-t border-white/20">
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0" style="border:1px solid rgba(184,144,71,0.4);">
                                     <svg class="w-5 h-5" fill="none" stroke="#b89047" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                                 </div>
                                 <div>
-                                    <div class="text-base font-bold text-white">500+</div>
-                                    <div class="text-sm text-gray-300">Calgary Homes</div>
+                                    <div class="text-sm sm:text-base font-bold text-white">500+</div>
+                                    <div class="text-xs sm:text-sm text-gray-300">Calgary Homes</div>
                                 </div>
                             </div>
                             <div class="flex items-center gap-3">
@@ -208,8 +249,8 @@
                                     <svg class="w-5 h-5" fill="none" stroke="#b89047" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                                 </div>
                                 <div>
-                                    <div class="text-base font-bold text-white">Licensed</div>
-                                    <div class="text-sm text-gray-300">&amp; Fully Insured</div>
+                                    <div class="text-sm sm:text-base font-bold text-white">Licensed</div>
+                                    <div class="text-xs sm:text-sm text-gray-300">&amp; Fully Insured</div>
                                 </div>
                             </div>
                             <div class="flex items-center gap-3">
@@ -217,8 +258,8 @@
                                     <svg class="w-5 h-5" fill="none" stroke="#b89047" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                 </div>
                                 <div>
-                                    <div class="text-base font-bold text-white">Same-Week</div>
-                                    <div class="text-sm text-gray-300">Installation</div>
+                                    <div class="text-sm sm:text-base font-bold text-white">Same-Week</div>
+                                    <div class="text-xs sm:text-sm text-gray-300">Installation</div>
                                 </div>
                             </div>
                             <div class="flex items-center gap-3">
@@ -226,8 +267,8 @@
                                     <svg class="w-5 h-5" fill="none" stroke="#b89047" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
                                 </div>
                                 <div>
-                                    <div class="text-base font-bold text-white">10+ Years</div>
-                                    <div class="text-sm text-gray-300">Serving Calgary</div>
+                                    <div class="text-sm sm:text-base font-bold text-white">10+ Years</div>
+                                    <div class="text-xs sm:text-sm text-gray-300">Serving Calgary</div>
                                 </div>
                             </div>
                         </div>
@@ -236,7 +277,7 @@
             </section>
 
             <!-- constrained content wrapper -->
-            <div class="max-w-7xl mx-auto px-4 pt-16 pb-6">
+            <div class="max-w-7xl mx-auto px-4 pt-10 sm:pt-16 pb-6">
 
             <!-- HOW IT WORKS SECTION (Matches layout and custom SVGs exactly) -->
             <section id="how-it-works" class="py-10 md:py-12 bg-transparent mb-10 md:mb-16">
@@ -321,7 +362,7 @@
                 
                 <!-- Card 1: Roller Blinds -->
                 <div class="bg-sunleo-cardBg rounded-xl overflow-hidden shadow-sm border border-gray-200/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
-                    <div class="h-64 overflow-hidden relative">
+                    <div class="h-48 sm:h-64 overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80" alt="Roller Blinds" class="w-full h-full object-cover">
                     </div>
                     <div class="p-5 sm:p-6 flex flex-col flex-grow text-center">
@@ -335,7 +376,7 @@
 
                 <!-- Card 2: Honeycomb / Cellular Shades -->
                 <div class="bg-sunleo-cardBg rounded-xl overflow-hidden shadow-sm border border-gray-200/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
-                    <div class="h-64 overflow-hidden relative">
+                    <div class="h-48 sm:h-64 overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80" alt="Cellular Shades" class="w-full h-full object-cover">
                     </div>
                     <div class="p-5 sm:p-6 flex flex-col flex-grow text-center">
@@ -349,7 +390,7 @@
 
                 <!-- Card 3: Zebra Blinds -->
                 <div class="bg-sunleo-cardBg rounded-xl overflow-hidden shadow-sm border border-gray-200/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
-                    <div class="h-64 overflow-hidden relative">
+                    <div class="h-48 sm:h-64 overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=600&q=80" alt="Zebra Blinds" class="w-full h-full object-cover">
                     </div>
                     <div class="p-5 sm:p-6 flex flex-col flex-grow text-center">
@@ -363,7 +404,7 @@
 
                 <!-- Card 4: Classic Custom Drapes -->
                 <div class="bg-sunleo-cardBg rounded-xl overflow-hidden shadow-sm border border-gray-200/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
-                    <div class="h-64 overflow-hidden relative">
+                    <div class="h-48 sm:h-64 overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=600&q=80" alt="Custom Drapery" class="w-full h-full object-cover">
                     </div>
                     <div class="p-5 sm:p-6 flex flex-col flex-grow text-center">
@@ -377,7 +418,7 @@
 
                 <!-- Card 5: Smart Automation -->
                 <div class="bg-sunleo-cardBg rounded-xl overflow-hidden shadow-sm border border-gray-200/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
-                    <div class="h-64 overflow-hidden relative">
+                    <div class="h-48 sm:h-64 overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=600&q=80" alt="Motorized Systems" class="w-full h-full object-cover">
                     </div>
                     <div class="p-5 sm:p-6 flex flex-col flex-grow text-center">
@@ -391,7 +432,7 @@
 
                 <!-- Card 6: Outdoor ZIP Shades -->
                 <div class="bg-sunleo-cardBg rounded-xl overflow-hidden shadow-sm border border-gray-200/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
-                    <div class="h-64 overflow-hidden relative">
+                    <div class="h-48 sm:h-64 overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=600&q=80" alt="Outdoor Shades" class="w-full h-full object-cover">
                     </div>
                     <div class="p-5 sm:p-6 flex flex-col flex-grow text-center">
@@ -406,7 +447,7 @@
             </div>
 
             <!-- ================= MID-PAGE CTA STRIP ================= -->
-            <div class="rounded-2xl px-8 py-12 mb-16 flex flex-col md:flex-row items-center justify-between gap-8" style="background:#1B2844;">
+            <div class="rounded-2xl px-5 sm:px-8 py-8 sm:py-12 mb-12 sm:mb-16 flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8" style="background:#1B2844;">
                 <div class="text-white max-w-xl">
                     <p class="text-xs tracking-[0.3em] uppercase font-semibold mb-3" style="color:#b89047;">Free — No Obligation</p>
                     <h3 class="font-serif text-2xl md:text-3xl font-bold leading-snug mb-3">Ready to See How Your Home<br class="hidden md:block"/> Could Look?</h3>
@@ -418,7 +459,7 @@
                     </div>
                 </div>
                 <div class="flex-shrink-0">
-                    <a href="#quote-section" onclick="document.getElementById('quote-section').scrollIntoView({behavior:'smooth'}); return false;" class="inline-flex items-center gap-3 px-8 py-4 rounded font-bold text-sm uppercase tracking-widest transition-all duration-300 bg-sunleo-gold hover:bg-white text-white hover:text-sunleo-blue shadow-lg whitespace-nowrap min-h-[52px]">
+                    <a href="#quote-section" onclick="document.getElementById('quote-section').scrollIntoView({behavior:'smooth'}); return false;" class="inline-flex items-center justify-center gap-2 sm:gap-3 w-full md:w-auto px-6 sm:px-8 py-4 rounded font-bold text-sm uppercase tracking-wide sm:tracking-widest transition-all duration-300 bg-sunleo-gold hover:bg-white text-white hover:text-sunleo-blue shadow-lg min-h-[52px] text-center">
                         Book Free In-Home Measurement
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
                     </a>
@@ -426,14 +467,14 @@
             </div>
 
             <!-- ================= WHY CHOOSE US SECTION ================= -->
-            <section id="why-choose-us" class="py-16 md:py-24 border-t border-gray-200/60">
+            <section id="why-choose-us" class="py-10 md:py-24 border-t border-gray-200/60">
 
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                     <!-- Header -->
-                    <div class="text-center mb-14">
+                    <div class="text-center mb-8 sm:mb-14">
                         <p class="text-xs tracking-[0.44em] uppercase font-sans font-semibold mb-4" style="color:#b89047;">Why Choose Us</p>
-                        <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4" style="color:#1B2844;">Why Calgary Homeowners<br/>Choose SunLeo</h2>
+                        <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4" style="color:#1B2844;">Why Calgary Homeowners<br class="hidden sm:block"/>Choose SunLeo</h2>
                         <div class="w-12 h-0.5 mx-auto" style="background:#b89047;"></div>
                     </div>
 
@@ -441,7 +482,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 
                         <!-- Card 1 -->
-                        <div class="rounded-2xl p-8 flex flex-col hover:-translate-y-1 transition-all duration-300" style="background:#fff; border:1px solid rgba(27,40,68,0.08); box-shadow:0 2px 16px rgba(27,40,68,0.07);">
+                        <div class="rounded-2xl p-5 sm:p-8 flex flex-col hover:-translate-y-1 transition-all duration-300" style="background:#fff; border:1px solid rgba(27,40,68,0.08); box-shadow:0 2px 16px rgba(27,40,68,0.07);">
                             <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 flex-shrink-0" style="background:#1B2844;">
                                 <svg class="w-7 h-7" fill="none" stroke="#b89047" stroke-width="1.75" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
@@ -452,7 +493,7 @@
                         </div>
 
                         <!-- Card 2 -->
-                        <div class="rounded-2xl p-8 flex flex-col hover:-translate-y-1 transition-all duration-300" style="background:#fff; border:1px solid rgba(27,40,68,0.08); box-shadow:0 2px 16px rgba(27,40,68,0.07);">
+                        <div class="rounded-2xl p-5 sm:p-8 flex flex-col hover:-translate-y-1 transition-all duration-300" style="background:#fff; border:1px solid rgba(27,40,68,0.08); box-shadow:0 2px 16px rgba(27,40,68,0.07);">
                             <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 flex-shrink-0" style="background:#1B2844;">
                                 <svg class="w-7 h-7" fill="none" stroke="#b89047" stroke-width="1.75" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/>
@@ -463,7 +504,7 @@
                         </div>
 
                         <!-- Card 3 -->
-                        <div class="rounded-2xl p-8 flex flex-col hover:-translate-y-1 transition-all duration-300" style="background:#fff; border:1px solid rgba(27,40,68,0.08); box-shadow:0 2px 16px rgba(27,40,68,0.07);">
+                        <div class="rounded-2xl p-5 sm:p-8 flex flex-col hover:-translate-y-1 transition-all duration-300" style="background:#fff; border:1px solid rgba(27,40,68,0.08); box-shadow:0 2px 16px rgba(27,40,68,0.07);">
                             <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 flex-shrink-0" style="background:#1B2844;">
                                 <svg class="w-7 h-7" fill="none" stroke="#b89047" stroke-width="1.75" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
@@ -474,7 +515,7 @@
                         </div>
 
                         <!-- Card 4 -->
-                        <div class="rounded-2xl p-8 flex flex-col hover:-translate-y-1 transition-all duration-300" style="background:#fff; border:1px solid rgba(27,40,68,0.08); box-shadow:0 2px 16px rgba(27,40,68,0.07);">
+                        <div class="rounded-2xl p-5 sm:p-8 flex flex-col hover:-translate-y-1 transition-all duration-300" style="background:#fff; border:1px solid rgba(27,40,68,0.08); box-shadow:0 2px 16px rgba(27,40,68,0.07);">
                             <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 flex-shrink-0" style="background:#1B2844;">
                                 <svg class="w-7 h-7" fill="none" stroke="#b89047" stroke-width="1.75" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"/>
@@ -485,7 +526,7 @@
                         </div>
 
                         <!-- Card 5 -->
-                        <div class="rounded-2xl p-8 flex flex-col hover:-translate-y-1 transition-all duration-300" style="background:#fff; border:1px solid rgba(27,40,68,0.08); box-shadow:0 2px 16px rgba(27,40,68,0.07);">
+                        <div class="rounded-2xl p-5 sm:p-8 flex flex-col hover:-translate-y-1 transition-all duration-300" style="background:#fff; border:1px solid rgba(27,40,68,0.08); box-shadow:0 2px 16px rgba(27,40,68,0.07);">
                             <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 flex-shrink-0" style="background:#1B2844;">
                                 <svg class="w-7 h-7" fill="none" stroke="#b89047" stroke-width="1.75" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
@@ -496,7 +537,7 @@
                         </div>
 
                         <!-- Card 6 -->
-                        <div class="rounded-2xl p-8 flex flex-col hover:-translate-y-1 transition-all duration-300" style="background:#fff; border:1px solid rgba(27,40,68,0.08); box-shadow:0 2px 16px rgba(27,40,68,0.07);">
+                        <div class="rounded-2xl p-5 sm:p-8 flex flex-col hover:-translate-y-1 transition-all duration-300" style="background:#fff; border:1px solid rgba(27,40,68,0.08); box-shadow:0 2px 16px rgba(27,40,68,0.07);">
                             <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 flex-shrink-0" style="background:#1B2844;">
                                 <svg class="w-7 h-7" fill="none" stroke="#b89047" stroke-width="1.75" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
@@ -514,7 +555,7 @@
         </div>
 
         <!-- ================= TESTIMONIALS SECTION ================= -->
-        <section class="py-16 md:py-20 border-t border-gray-200/60" style="background:#fff;">
+        <section class="py-10 md:py-20 border-t border-gray-200/60" style="background:#fff;">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 <div class="text-center mb-12">
@@ -526,7 +567,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
 
                     <!-- Testimonial 1 -->
-                    <div class="rounded-2xl p-8 flex flex-col" style="background:#efebe4; border-left:4px solid #b89047;">
+                    <div class="rounded-2xl p-5 sm:p-8 flex flex-col" style="background:#efebe4; border-left:4px solid #b89047;">
                         <div class="flex gap-1 mb-5">
                             <svg class="w-4 h-4" fill="#b89047" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                             <svg class="w-4 h-4" fill="#b89047" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -545,7 +586,7 @@
                     </div>
 
                     <!-- Testimonial 2 -->
-                    <div class="rounded-2xl p-8 flex flex-col" style="background:#efebe4; border-left:4px solid #b89047;">
+                    <div class="rounded-2xl p-5 sm:p-8 flex flex-col" style="background:#efebe4; border-left:4px solid #b89047;">
                         <div class="flex gap-1 mb-5">
                             <svg class="w-4 h-4" fill="#b89047" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                             <svg class="w-4 h-4" fill="#b89047" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -564,7 +605,7 @@
                     </div>
 
                     <!-- Testimonial 3 -->
-                    <div class="rounded-2xl p-8 flex flex-col" style="background:#efebe4; border-left:4px solid #b89047;">
+                    <div class="rounded-2xl p-5 sm:p-8 flex flex-col" style="background:#efebe4; border-left:4px solid #b89047;">
                         <div class="flex gap-1 mb-5">
                             <svg class="w-4 h-4" fill="#b89047" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                             <svg class="w-4 h-4" fill="#b89047" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -607,7 +648,7 @@
                 <!-- Left Column: Image and Video Player -->
                 <div class="lg:col-span-7 space-y-8">
                     <div class="rounded-xl overflow-hidden shadow-md">
-                        <img id="detail-image" src="" alt="Detailed Product View" class="w-full h-[450px] object-cover">
+                        <img id="detail-image" src="" alt="Detailed Product View" class="w-full h-[260px] sm:h-[450px] object-cover">
                     </div>
                     
                     <!-- Interactive Video Presentation -->
@@ -668,8 +709,8 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 rounded-2xl overflow-hidden border border-gray-200 shadow-lg">
                 
                 <!-- Left Form Column -->
-                <div class="lg:col-span-7 bg-white p-8 sm:p-12">
-                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-sunleo-blue uppercase tracking-wide mb-2">
+                <div class="lg:col-span-7 bg-white p-5 sm:p-12">
+                    <h2 class="font-serif text-xl sm:text-3xl font-bold text-sunleo-blue uppercase tracking-wide mb-2">
                         Request In-Home Consultation
                     </h2>
                     <p class="text-xs text-gray-500 mb-8 uppercase tracking-wider">Fill in the fields below and we'll bring the showroom sample kits directly to your doorstep.</p>
@@ -720,7 +761,7 @@
                 </div>
 
                 <!-- Right Trust Column -->
-                <div class="lg:col-span-5 p-8 sm:p-12 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-gray-200" style="background:#1B2844;">
+                <div class="lg:col-span-5 p-5 sm:p-12 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-gray-200" style="background:#1B2844;">
 
                     <!-- What you get -->
                     <div class="mb-8">
@@ -781,10 +822,10 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="pt-16 pb-8" style="background:#1B2844; border-top:4px solid #b89047;">
+    <footer class="pt-10 sm:pt-16 pb-8" style="background:#1B2844; border-top:4px solid #b89047;">
         <div class="max-w-7xl mx-auto px-4">
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-14">
 
                 <!-- About -->
                 <div class="lg:col-span-1">
@@ -1219,7 +1260,7 @@
     </script>
 
     <!-- MOBILE FLOATING CTA BAR -->
-    <div class="fixed bottom-0 left-0 right-0 z-50 sm:hidden flex gap-3 px-4 py-3"
+    <div class="mobile-safe-bottom fixed bottom-0 left-0 right-0 z-50 sm:hidden flex gap-3 px-4 pt-3"
          style="background:rgba(10,37,64,0.97); border-top:2px solid #b89047; box-shadow:0 -6px 28px rgba(0,0,0,0.3);">
         <a href="#quote-section"
            onclick="document.getElementById('quote-section').scrollIntoView({behavior:'smooth'}); return false;"
