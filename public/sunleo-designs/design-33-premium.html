@@ -158,26 +158,14 @@
             animation-play-state: paused;
         }
 
-        /* Phone number label — collapsed by default, slides in on hover */
+        /* Phone number label — always visible */
         .float-call-label {
-            max-width: 0;
-            overflow: hidden;
-            opacity: 0;
             white-space: nowrap;
             font-family: 'Raleway', sans-serif;
             font-weight: 700;
             font-size: 14px;
             letter-spacing: 0.05em;
             color: #EDE8DC;
-            padding: 0;
-            transition:
-                max-width 0.42s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity   0.28s ease 0.06s,
-                padding   0.42s ease;
-        }
-        .float-call-wrap:hover .float-call-label {
-            max-width: 190px;
-            opacity: 1;
             padding: 0 4px 0 16px;
         }
     </style>
