@@ -1,0 +1,170 @@
+_comment: |
+  Copy this file to {page-slug}.yml in your project's docs/page-briefs/ folder,
+  fill out every field, then write content from the brief.
+  After writing run: python lazy-method/lazy-check.py --config {site}/lazy-config.json --report report.json
+  Target score: ≥ 75.
+
+  Every {placeholder} below must be replaced. Do not ship a brief with placeholders intact.
+
+# ── Identity ────────────────────────────────────────────────────────────
+page: /{slug}/
+page_type: city-landing  # one of: home / city-landing / install-city / service-hub / blog-howto / blog-buying-guide / blog-cost / blog-troubleshooting / blog-general / pricing / calculator / contact / quote / locations-index / services-index / product / comparison / about
+priority: P1  # P1 (write this sprint) / P2 (next sprint) / P3 (backlog) / P4 (long-tail)
+
+# ── Keywords (4-tier model) ─────────────────────────────────────────────
+primary_keyword: {primary_keyword}
+secondary_keywords:
+  - {secondary_kw_1}
+  - {secondary_kw_2}
+  - {secondary_kw_3}
+supporting_keywords:
+  - {supporting_kw_1}
+  - {supporting_kw_2}
+  - {supporting_kw_3}
+  - {supporting_kw_4}
+  - {supporting_kw_5}
+  - {supporting_kw_6}
+
+# ── Personas (pick 2-3 from the 5 archetypes) ───────────────────────────
+personas:
+  - {persona_1}
+  - {persona_2}
+# Universal archetypes (see STRATEGY-2026-2027.md §4):
+#   stressed-user-emergency
+#   stressed-user-broken-thing
+#   planner-replacement-or-new-purchase
+#   cost-checker
+#   decision-maker-b2b-commercial-volume
+
+persona_modifiers:
+  - {modifier_1}  # how this persona phrases the query
+  - {modifier_2}
+
+# ── Targets ─────────────────────────────────────────────────────────────
+word_target: {target}    # see niche-profile + STRATEGY-2026-2027.md §1 row 1
+word_min: {min}
+word_max: {max}
+
+# ── SEO metadata ────────────────────────────────────────────────────────
+title: "{page_title}"  # 40-70 chars, includes primary KW + brand + phone (if local) + USP
+meta_description: |
+  {meta_desc_140_to_165_chars_includes_primary_kw_call_to_action_trust_signal}
+
+# ── On-page structure ───────────────────────────────────────────────────
+h1: {h1_includes_primary_kw}
+
+# First-100-words direct answer (LLM extraction target)
+direct_answer: |
+  {2-3 sentences. Declarative. Answers the primary query verbatim.
+  Includes primary KW in the first sentence.
+  Includes specific number (price, time, count, year).
+  Includes credential or USP.}
+
+# 5-8 H2 sections (each phrased as a question or user-search phrasing where possible)
+sections:
+  - h2: {h2_section_1}
+    intent: {one_line_what_this_section_delivers}
+    h3_optional:
+      - {h3_1}
+      - {h3_2}
+      - {h3_3}
+  - h2: {h2_section_2}
+    intent: {intent}
+  - h2: {h2_section_3}
+    intent: {intent}
+  - h2: {h2_section_4}
+    intent: {intent}
+  - h2: {h2_section_5}
+    intent: {intent}
+  - h2: Frequently Asked Questions
+    intent: 3-6 FAQs (FAQPage schema)
+
+# FAQ (3-6 questions — these get FAQPage schema)
+faq:
+  - q: {question_1_phrased_as_users_type_it}
+    a: |
+      {answer_60_to_120_words. Standalone — no "see above" / "see below".
+      Includes specific number where possible. Conversational but precise.}
+  - q: {question_2}
+    a: |
+      {answer}
+  - q: {question_3}
+    a: |
+      {answer}
+  - q: {question_4}
+    a: |
+      {answer}
+
+# ── Internal linking (min 5) ────────────────────────────────────────────
+internal_links:
+  - /{related_page_1}/
+  - /{related_page_2}/
+  - /{parent_hub}/
+  - /{sibling_1}/
+  - /{sibling_2}/
+  - /{blog_or_resource}/
+
+# ── External citations (E-E-A-T) ────────────────────────────────────────
+external_citations:
+  - url: {authority_url_1}
+    anchor: {anchor_text_describing_source}
+  - url: {authority_url_2}
+    anchor: {anchor_text}
+# Examples of authority types: industry association, standards body, .gov agency,
+# .edu reference, peer-reviewed publication, major industry publication.
+
+# ── Schema markup required ──────────────────────────────────────────────
+schema_types:
+  - {schema_1}  # e.g. LocalBusiness, Service, Article, Product
+  - {schema_2}  # e.g. FAQPage
+  - {schema_3}  # e.g. BreadcrumbList
+  - Speakable   # always — target direct-answer + FAQ blocks
+# See STRATEGY-2026-2027.md §7 for full schema-per-page-type matrix.
+
+# ── Trust signals (E-E-A-T) — at least 5 ────────────────────────────────
+trust_signals:
+  - "{credential_or_certification}"
+  - "{warranty_or_guarantee}"
+  - "{review_count_and_score}"
+  - "{license_or_insurance}"
+  - "{free_offer_or_no_surprise_pledge}"
+  - "Author bio block ({expert_name})"
+
+# ── GEO / AI Overviews checklist (must all be true before publish) ──────
+geo_ai_checklist:
+  direct_answer_first_100: true
+  standalone_paragraphs: true
+  question_phrased_h2_h3: true
+  tldr_block: true
+  faq_with_schema: true
+  comparison_tables: false  # set true if comparison page or has comparable data
+  specific_numbers: true
+  expert_quote: true
+  speakable_schema: true
+  dateModified_visible: true
+
+# ── E-E-A-T checklist (must all be true before publish) ─────────────────
+eeat_checklist:
+  author_bio_with_credentials: true
+  real_photos_used: true
+  customer_quotes_with_attribution: true
+  year_founded_mentioned: true
+  warranty_or_guarantee_mentioned: true
+  reviews_count_score: true
+  niche_or_geo_specificity: true
+  outbound_citations_to_authority: true
+  editorial_standards_linked: true
+  license_or_credential_visible: true
+
+# ── Quality gates ───────────────────────────────────────────────────────
+lazy_method_target_score: 75
+publish_after:
+  - brief_filled: true
+  - draft_written: false
+  - edited: false
+  - schema_verified: false       # via Google Rich Results Test
+  - lazy_check_passed: false     # ≥ 75 from lazy-check.py
+  - internal_links_min_5: false
+  - alt_text_complete: false
+  - author_bio_rendered: false
+  - dateModified_visible: false
