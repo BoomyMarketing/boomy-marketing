@@ -55,25 +55,53 @@
         .text-gray-700 {
             color: #374151;  /* 7:1 contrast on white — WCAG AAA */
         }
+
+        /* ── Scrolling Ticker ───────────────────────────────────── */
+        @keyframes ticker-scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .ticker-track {
+            display: flex;
+            align-items: center;
+            animation: ticker-scroll 55s linear infinite;
+            white-space: nowrap;
+            width: max-content;
+        }
+        .ticker-wrap:hover .ticker-track { animation-play-state: paused; }
+
+        /* ── Mobile CTA float animation ─────────────────────────── */
+        @keyframes cta-float {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-3px); }
+        }
+        .mobile-cta-bounce         { animation: cta-float 3s ease-in-out infinite; }
+        .mobile-cta-bounce-delayed { animation: cta-float 3s ease-in-out 1.5s infinite; }
     </style>
 </head>
 <body class="font-sans text-gray-800 bg-sunleo-soji min-h-screen flex flex-col justify-between" style="background-color:#efebe4;">
 
-    <!-- TOP ANNOUNCEMENT BAR (Matches exact text/layout structure from image_64ffa2.png) -->
-    <div class="bg-sunleo-dark text-white text-xs sm:text-sm py-2 px-4">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-            <div class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-sunleo-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                <span>(403) 555-0190</span>
-            </div>
-            <div class="font-semibold text-center tracking-widest uppercase text-white">
-                FREE IN-HOME CONSULTATION
-            </div>
-            <div class="text-gray-400">
-                Serving Calgary & Surrounding Areas
-            </div>
+    <!-- SCROLLING TICKER BAR -->
+    <a href="#quote-section" onclick="document.getElementById('quote-section').scrollIntoView({behavior:'smooth'}); return false;"
+       class="ticker-wrap block overflow-hidden cursor-pointer"
+       style="background:#1B2844; border-bottom:2px solid #b89047; padding:9px 0;" title="Book your free in-home measurement">
+        <div class="ticker-track text-xs sm:text-sm font-semibold tracking-widest uppercase" style="color:#EDE8DC;">
+            <span style="padding:0 20px; color:#b89047; font-size:14px;">✦</span><span>Book Free In-Home Measurement — No Obligation</span>
+            <span style="padding:0 20px; color:#b89047; font-size:14px;">✦</span><span>500+ Happy Calgary Homeowners</span>
+            <span style="padding:0 20px; color:#b89047; font-size:14px;">✦</span><span>Same-Week Installation Available</span>
+            <span style="padding:0 20px; color:#b89047; font-size:14px;">✦</span><span>Licensed &amp; Insured · Calgary Since 2015</span>
+            <span style="padding:0 20px; color:#b89047; font-size:14px;">✦</span><span>Roller Shades · Zebra Blinds · Motorized Solutions</span>
+            <span style="padding:0 20px; color:#b89047; font-size:14px;">✦</span><span>Call Today: (403) 555-0190</span>
+            <span style="padding:0 20px; color:#b89047; font-size:14px;">✦</span><span>Calgary's Premium Window Covering Specialists</span>
+            <span style="padding:0 20px; color:#b89047; font-size:14px;">✦</span><span>Book Free In-Home Measurement — No Obligation</span>
+            <span style="padding:0 20px; color:#b89047; font-size:14px;">✦</span><span>500+ Happy Calgary Homeowners</span>
+            <span style="padding:0 20px; color:#b89047; font-size:14px;">✦</span><span>Same-Week Installation Available</span>
+            <span style="padding:0 20px; color:#b89047; font-size:14px;">✦</span><span>Licensed &amp; Insured · Calgary Since 2015</span>
+            <span style="padding:0 20px; color:#b89047; font-size:14px;">✦</span><span>Roller Shades · Zebra Blinds · Motorized Solutions</span>
+            <span style="padding:0 20px; color:#b89047; font-size:14px;">✦</span><span>Call Today: (403) 555-0190</span>
+            <span style="padding:0 20px; color:#b89047; font-size:14px;">✦</span><span>Calgary's Premium Window Covering Specialists</span>
         </div>
-    </div>
+    </a>
 
     <!-- STICKY HEADER (Matches exact navigation elements from image_64ffa2.png) -->
     <header class="sticky top-0 bg-sunleo-soji/95 backdrop-blur shadow-sm z-40 transition-all duration-300 border-b border-gray-200/30">
@@ -96,8 +124,13 @@
                 <a href="#quote-section" onclick="document.getElementById('quote-section').scrollIntoView({behavior: 'smooth'}); return false;" class="nav-link border-b-2 border-transparent hover:border-sunleo-gold pb-1 transition-all">CONTACT</a>
             </nav>
 
-            <!-- Action Button (GET A QUOTE) -->
-            <div class="hidden sm:block">
+            <!-- Action Buttons (Desktop) -->
+            <div class="hidden sm:flex items-center gap-3">
+                <a href="tel:4035550190"
+                   class="flex items-center gap-2 border-2 border-sunleo-blue text-sunleo-blue hover:bg-sunleo-blue hover:text-white font-bold text-sm uppercase tracking-widest px-4 py-3 rounded transition-all duration-300 min-h-[44px]">
+                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                    <span class="hidden md:inline">Call Us</span>
+                </a>
                 <a href="#quote-section" onclick="document.getElementById('quote-section').scrollIntoView({behavior: 'smooth'}); return false;" class="bg-sunleo-gold hover:bg-sunleo-blue text-white font-bold text-base uppercase tracking-widest px-6 py-3 rounded transition-all duration-300 min-h-[44px] inline-flex items-center">
                     GET A QUOTE
                 </a>
@@ -123,7 +156,7 @@
     </header>
 
     <!-- MAIN INTERACTIVE WRAPPER -->
-    <main class="flex-grow">
+    <main class="flex-grow pb-[76px] sm:pb-0">
 
         <!-- ================= PAGE 1: HOME PAGE (HERO, PROCESS, COLLECTIONS & WHY CHOOSE US) ================= -->
         <div id="view-home" class="fade-in">
@@ -1184,5 +1217,23 @@
             }
         }
     </script>
+
+    <!-- MOBILE FLOATING CTA BAR -->
+    <div class="fixed bottom-0 left-0 right-0 z-50 sm:hidden flex gap-3 px-4 py-3"
+         style="background:rgba(10,37,64,0.97); border-top:2px solid #b89047; box-shadow:0 -6px 28px rgba(0,0,0,0.3);">
+        <a href="#quote-section"
+           onclick="document.getElementById('quote-section').scrollIntoView({behavior:'smooth'}); return false;"
+           class="mobile-cta-bounce flex-1 flex items-center justify-center gap-2 text-white font-bold text-sm uppercase tracking-widest py-3 rounded-lg min-h-[48px]"
+           style="background:#b89047;">
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            Get Quote
+        </a>
+        <a href="tel:4035550190"
+           class="mobile-cta-bounce-delayed flex-1 flex items-center justify-center gap-2 font-bold text-sm uppercase tracking-widest py-3 rounded-lg min-h-[48px]"
+           style="background:#0a2540; border:2px solid rgba(184,144,71,0.55); color:#EDE8DC;">
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            Call Now
+        </a>
+    </div>
 </body>
 </html>
