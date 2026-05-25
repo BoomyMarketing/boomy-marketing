@@ -131,10 +131,6 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            position: fixed;
-            right: 24px;
-            bottom: 48px;
-            z-index: 45;
             background: #1B2844;
             border: 2px solid #b89047;
             border-radius: 50px;
@@ -1318,17 +1314,47 @@
                 closeSuccessModal();
             }
         }
+
+        function copyPhone(e) {
+            e.preventDefault();
+            const number = '(403) 555-0190';
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(number);
+            } else {
+                // fallback for older browsers
+                const el = document.createElement('textarea');
+                el.value = number;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+            }
+            const tip = document.getElementById('float-call-tip');
+            tip.style.opacity = '1';
+            tip.style.transform = 'translateY(0)';
+            setTimeout(() => {
+                tip.style.opacity = '0';
+                tip.style.transform = 'translateY(6px)';
+            }, 1800);
+        }
     </script>
 
-    <!-- FLOATING CALL BUTTON — Desktop/Laptop only -->
-    <a href="tel:4035550190" class="float-call-wrap hidden sm:flex" aria-label="Call SunLeo (403) 555-0190">
-        <span class="float-call-label">(403) 555-0190</span>
-        <div class="float-call-icon">
-            <svg class="w-6 h-6" fill="none" stroke="#b89047" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-            </svg>
+    <!-- FLOATING CALL BUTTON — Desktop only (hover shows number, click copies to clipboard) -->
+    <div class="hidden sm:block" style="position:fixed; right:24px; bottom:48px; z-index:45;">
+        <!-- "Copied!" tooltip -->
+        <div id="float-call-tip"
+             style="position:absolute; bottom:calc(100% + 10px); right:0; background:#1B2844; color:#b89047; font-family:'Raleway',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:6px 14px; border-radius:50px; border:1px solid #b89047; white-space:nowrap; opacity:0; transform:translateY(6px); transition:opacity 0.3s ease, transform 0.3s ease; pointer-events:none;">
+            ✓ Copied!
         </div>
-    </a>
+        <div class="float-call-wrap" onclick="copyPhone(event)" role="button" tabindex="0" aria-label="Copy phone number (403) 555-0190">
+            <span class="float-call-label">(403) 555-0190</span>
+            <div class="float-call-icon">
+                <svg class="w-6 h-6" fill="none" stroke="#b89047" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
 
     <!-- MOBILE FLOATING CTA BAR -->
     <div class="mobile-safe-bottom fixed bottom-0 left-0 right-0 z-50 sm:hidden flex gap-3 px-4 pt-3"
