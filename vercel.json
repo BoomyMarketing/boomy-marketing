@@ -3,5 +3,29 @@
   "outputDirectory": "dist",
   "framework": "astro",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/seo-toronto", "destination": "/local/toronto/seo-agency", "permanent": true },
+    { "source": "/seo-toronto/", "destination": "/local/toronto/seo-agency", "permanent": true },
+    { "source": "/seo-vancouver", "destination": "/local/vancouver/seo-agency", "permanent": true },
+    { "source": "/seo-vancouver/", "destination": "/local/vancouver/seo-agency", "permanent": true },
+    { "source": "/seo-bc-kelowna", "destination": "/local/kelowna/ecommerce-seo-agency", "permanent": true },
+    { "source": "/seo-bc-kelowna/", "destination": "/local/kelowna/ecommerce-seo-agency", "permanent": true },
+    { "source": "/seo-calgary-seo-services-calgary", "destination": "/local/calgary/seo-agency", "permanent": true },
+    { "source": "/seo-calgary-seo-services-calgary/", "destination": "/local/calgary/seo-agency", "permanent": true },
+    { "source": "/seo-canada-consultants", "destination": "/services/seo", "permanent": true },
+    { "source": "/seo-canada-consultants/", "destination": "/services/seo", "permanent": true },
+    { "source": "/richmond-hill-seo-company", "destination": "/local/richmond-hill/seo-company", "permanent": true },
+    { "source": "/richmond-hill-seo-company/", "destination": "/local/richmond-hill/seo-company", "permanent": true },
+    { "source": "/vaughan-seo-company", "destination": "/local/toronto/seo-agency", "permanent": true },
+    { "source": "/vaughan-seo-company/", "destination": "/local/toronto/seo-agency", "permanent": true },
+    { "source": "/web-design-calgary", "destination": "/local/calgary/web-design-company", "permanent": true },
+    { "source": "/web-design-calgary/", "destination": "/local/calgary/web-design-company", "permanent": true },
+    { "source": "/marketing-services", "destination": "/services", "permanent": true },
+    { "source": "/marketing-services/", "destination": "/services", "permanent": true },
+    { "source": "/seo-pricing", "destination": "/pricing", "permanent": true },
+    { "source": "/seo-pricing/", "destination": "/pricing", "permanent": true },
+    { "source": "/about-us", "destination": "/about", "permanent": true },
+    { "source": "/about-us/", "destination": "/about", "permanent": true }
+  ]
 }

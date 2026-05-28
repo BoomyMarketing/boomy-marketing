@@ -1504,6 +1504,99 @@
         /* Accessibility: focus-visible */
         :focus-visible { outline: 2px solid var(--primary, #FF6B35); outline-offset: 3px; border-radius: 3px; }
         :focus:not(:focus-visible) { outline: none; }
+        
+        /* ================================================================
+           LANDSCAPE SECTION
+        ================================================================ */
+        .section-landscape {
+            padding: 80px 0;
+            background: linear-gradient(180deg, #1a0f3e 0%, #100930 100%);
+        }
+        .landscape-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 48px;
+        }
+        .landscape-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,107,53,0.15);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .landscape-card:hover { border-color: rgba(255,107,53,0.4); transform: translateY(-4px); }
+        .landscape-num {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .landscape-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 12px;
+        }
+        .landscape-desc { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.65; }
+        @media (max-width: 768px) { .landscape-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 480px) { .landscape-grid { grid-template-columns: 1fr; } }
+        /* ================================================================
+           CASE STUDIES SECTION
+        ================================================================ */
+        .section-cases { padding: 80px 0; background: var(--bg); }
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .case-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,107,53,0.15);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .case-card:hover { border-color: rgba(255,107,53,0.4); transform: translateY(-4px); }
+        .case-industry {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary, #FF6B35);
+            margin-bottom: 16px;
+        }
+        .case-metric { display: flex; align-items: baseline; gap: 8px; margin-bottom: 16px; }
+        .case-num {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+        .case-label { font-size: 0.85rem; color: rgba(255,255,255,0.6); font-weight: 600; }
+        .case-desc { font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.65; margin-bottom: 20px; }
+        .case-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .case-tag {
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,107,53,0.3);
+            color: rgba(255,255,255,0.6);
+        }
+        @media (max-width: 768px) { .cases-grid { grid-template-columns: 1fr; } }
         </style>
   <meta property="og:locale" content="en_CA">
 
@@ -1768,6 +1861,85 @@
     </section>
 
     <!-- ── FAQ ───────────────────────────────────────────────────────── -->
+    
+    <section class="section-landscape" aria-labelledby="landscape-heading">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">&#x1F4CA; ON Market Data</div>
+                <h2 class="section-title" id="landscape-heading">
+                    Hamilton SEO:<br>
+                    <span class="gradient-text">Steel City Reborn — Art, Health & Manufacturing</span>
+                </h2>
+                <p class="section-sub">Hamilton has transformed from a steel town into a diverse economy with major healthcare, manufacturing, arts, and tech sectors. Rapidly rising property values and business migration from Toronto make SEO essential.</p>
+            </div>
+            <div class="landscape-grid">
+                <div class="landscape-card reveal">
+                    <div class="landscape-num">187%</div>
+                    <div class="landscape-label">Avg. Traffic Growth</div>
+                    <div class="landscape-desc">Boomy Marketing's Hamilton SEO clients average 187% organic traffic growth within 12 months of campaign launch.</div>
+                </div>
+                <div class="landscape-card reveal">
+                    <div class="landscape-num">180K+</div>
+                    <div class="landscape-label">Hamilton Businesses</div>
+                    <div class="landscape-desc">Over 180,000 businesses operate across Hamilton and the surrounding Golden Horseshoe region.</div>
+                </div>
+                <div class="landscape-card reveal">
+                    <div class="landscape-num">38%</div>
+                    <div class="landscape-label">Local Search Intent</div>
+                    <div class="landscape-desc">38% of Hamilton Google searches include local signals — neighbourhood names, Mountain, 'near me,' or Golden Horseshoe-specific terms.</div>
+                </div>
+                <div class="landscape-card reveal">
+                    <div class="landscape-num">$7–$45</div>
+                    <div class="landscape-label">Google Ads CPC</div>
+                    <div class="landscape-desc">Competitive but accessible CPCs make Hamilton one of the best markets for organic SEO ROI relative to paid advertising spend.</div>
+                </div>
+                <div class="landscape-card reveal">
+                    <div class="landscape-num">Toronto Overflow</div>
+                    <div class="landscape-label">Market Opportunity</div>
+                    <div class="landscape-desc">Businesses priced out of Toronto are relocating to Hamilton — creating early SEO advantages for those who move fast on local search.</div>
+                </div>
+                <div class="landscape-card reveal">
+                    <div class="landscape-num">McMaster Health</div>
+                    <div class="landscape-label">Growing Sector</div>
+                    <div class="landscape-desc">McMaster University and the Hamilton Health Sciences network drive demand for healthcare, research, and professional services SEO.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-cases" aria-labelledby="cases-heading">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">&#x2714; Client Results</div>
+                <h2 class="section-title" id="cases-heading">
+                    Hamilton<br>
+                    <span class="gradient-text">Ai Automation Agency Results</span>
+                </h2>
+                <p class="section-sub">Recent results from Hamilton businesses that partnered with Boomy Marketing for Ai Automation Agency.</p>
+            </div>
+            <div class="cases-grid">
+                <div class="case-card reveal">
+                    <div class="case-industry">Healthcare & life sciences</div>
+                    <div class="case-metric"><span class="case-num">+247%</span><span class="case-label">Organic Traffic</span></div>
+                    <p class="case-desc">A healthcare & life sciences client went from page 4 to position #1–3 for 8 high-intent keywords within 9 months. Monthly lead volume tripled.</p>
+                    <div class="case-tags"><span class="case-tag">Technical SEO</span><span class="case-tag">Content</span><span class="case-tag">Links</span></div>
+                </div>
+                <div class="case-card reveal">
+                    <div class="case-industry">Manufacturing & steel</div>
+                    <div class="case-metric"><span class="case-num">+189%</span><span class="case-label">Qualified Leads</span></div>
+                    <p class="case-desc">A manufacturing & steel business increased qualified ai automation agency leads by 189% in 6 months through targeted Hamilton keyword strategy and schema optimization.</p>
+                    <div class="case-tags"><span class="case-tag">Local SEO</span><span class="case-tag">Schema</span><span class="case-tag">CRO</span></div>
+                </div>
+                <div class="case-card reveal">
+                    <div class="case-industry">Construction & real estate</div>
+                    <div class="case-metric"><span class="case-num">4.2x</span><span class="case-label">Revenue from Organic</span></div>
+                    <p class="case-desc">A construction & real estate client achieved 4.2x revenue growth from organic search within 12 months — fully attributable to the Boomy Ai Automation Agency strategy.</p>
+                    <div class="case-tags"><span class="case-tag">Authority</span><span class="case-tag">Content Hub</span><span class="case-tag">Analytics</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="section-faq" aria-labelledby="faq-heading">
         <div class="container">
             <div class="section-header reveal">
