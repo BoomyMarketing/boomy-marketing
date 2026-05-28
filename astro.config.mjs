@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
 import fs from 'node:fs';
 import fsp from 'node:fs/promises';
 import path from 'node:path';
@@ -131,37 +130,12 @@ function legacyStaticPages() {
   };
 }
 
-// Runs AFTER @astrojs/sitemap. Renames sitemap-index.xml → sitemap.xml so
-// the URL already submitted to Google Search Console keeps working.
-function renameSitemapIndex() {
-  return {
-    name: 'rename-sitemap-index',
-    hooks: {
-      'astro:build:done': async ({ dir }) => {
-        const distRoot = fileURLToPath(dir);
-        const sitemapIndex = path.join(distRoot, 'sitemap-index.xml');
-        const sitemapTarget = path.join(distRoot, 'sitemap.xml');
-        if (fs.existsSync(sitemapIndex)) {
-          if (fs.existsSync(sitemapTarget)) await fsp.rm(sitemapTarget);
-          await fsp.rename(sitemapIndex, sitemapTarget);
-        }
-      },
-    },
-  };
-}
-
 export default defineConfig({
   site: 'https://boomymarketing.com',
   output: 'static',
   integrations: [
     legacyStaticPages(),
-    sitemap({
-      changefreq: 'weekly',
-      priority: 0.7,
-      lastmod: new Date(),
-      filter: (page) => !page.includes('/404') && !page.includes('/error'),
-    }),
-    renameSitemapIndex(),
+    // Manual sitemap.xml in root takes priority — copied by legacyStaticPages hook
   ],
   build: {
     format: 'directory',

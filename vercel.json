@@ -7,22 +7,22 @@
   "redirects": [
     {
       "source": "/seo-toronto",
-      "destination": "/local/toronto/seo-agency",
+      "destination": "/seo-agency/toronto",
       "permanent": true
     },
     {
       "source": "/seo-vancouver",
-      "destination": "/local/vancouver/seo-agency",
+      "destination": "/seo-agency/vancouver",
       "permanent": true
     },
     {
       "source": "/seo-bc-kelowna",
-      "destination": "/local/kelowna/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/kelowna",
       "permanent": true
     },
     {
       "source": "/seo-calgary-seo-services-calgary",
-      "destination": "/local/calgary/seo-agency",
+      "destination": "/seo-agency/calgary",
       "permanent": true
     },
     {
@@ -32,17 +32,17 @@
     },
     {
       "source": "/richmond-hill-seo-company",
-      "destination": "/local/richmond-hill/seo-company",
+      "destination": "/seo-company/richmond-hill",
       "permanent": true
     },
     {
       "source": "/vaughan-seo-company",
-      "destination": "/local/toronto/seo-agency",
+      "destination": "/seo-agency/toronto",
       "permanent": true
     },
     {
       "source": "/web-design-calgary",
-      "destination": "/local/calgary/web-design-company",
+      "destination": "/web-design-company/calgary",
       "permanent": true
     },
     {
