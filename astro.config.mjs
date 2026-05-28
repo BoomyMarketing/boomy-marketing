@@ -38,20 +38,43 @@ function serveFile(res, filePath) {
   res.end(fs.readFileSync(filePath));
 }
 
+// Directories excluded from service-slug auto-detection
+const SKIP_DIRS = new Set([
+  'local', 'assets', 'services', 'sitemap', 'locations', 'node_modules',
+  'dist', 'src', 'docs', 'scripts', 'generators', 'public', 'lazy-method',
+  'api', 'projects', 'booking', 'thank-you', 'about-us', 'web-design',
+  'seo', 'boomy-digital-marketing-blog',
+]);
+
+function isServiceDir(dirPath) {
+  try {
+    return fs.readdirSync(dirPath).some(sub => {
+      const idx = path.join(dirPath, sub, 'index.html');
+      return fs.existsSync(idx) && fs.statSync(idx).isFile();
+    });
+  } catch { return false; }
+}
+
 function resolveLocalPath(url) {
-  // Strip query string and trailing slash
   const clean = url.split('?')[0].replace(/\/$/, '');
 
+  // Legacy roots (local/, assets/, services/)
   const legacyRoots = ['local', 'assets', 'services'];
   const matched = legacyRoots.find(r => clean === `/${r}` || clean.startsWith(`/${r}/`));
-  if (!matched) return null;
+  if (matched) {
+    let filePath = path.join(root, clean);
+    if (!path.extname(filePath)) filePath = path.join(filePath, 'index.html');
+    return fs.existsSync(filePath) && fs.statSync(filePath).isFile() ? filePath : null;
+  }
 
-  let filePath = path.join(root, clean);
-  // If no extension → append index.html (clean URLs)
-  // If ends with /index.html → also fine as-is
-  if (!path.extname(filePath)) filePath = path.join(filePath, 'index.html');
+  // New /{service}/{city} pattern — 2-level deep service pages
+  const parts = clean.split('/').filter(Boolean);
+  if (parts.length === 2 && !SKIP_DIRS.has(parts[0])) {
+    const filePath = path.join(root, parts[0], parts[1], 'index.html');
+    return fs.existsSync(filePath) && fs.statSync(filePath).isFile() ? filePath : null;
+  }
 
-  return fs.existsSync(filePath) && fs.statSync(filePath).isFile() ? filePath : null;
+  return null;
 }
 
 /**
@@ -74,16 +97,30 @@ function legacyStaticPages() {
         server.middlewares.stack.unshift({ route: '', handle: handler });
       },
 
-      // Production build: copy legacy dirs + SEO root files into dist/
+      // Production build: copy legacy dirs + auto-detected service dirs + SEO root files
       'astro:build:done': async ({ dir }) => {
         const distRoot = fileURLToPath(dir);
+
+        // Known static dirs
         for (const dirName of ['local', 'assets', 'services', 'sitemap', 'locations']) {
           const src = path.join(root, dirName);
           if (fs.existsSync(src)) {
             await copyDir(src, path.join(distRoot, dirName));
           }
         }
-        for (const fileName of ['robots.txt', 'llms.txt', 'manifest.json']) {
+
+        // Auto-detect /{service}/{city} directories
+        const entries = fs.readdirSync(root);
+        for (const entry of entries) {
+          if (SKIP_DIRS.has(entry) || entry.startsWith('.') || entry.startsWith('_')) continue;
+          const src = path.join(root, entry);
+          if (!fs.statSync(src).isDirectory()) continue;
+          if (isServiceDir(src)) {
+            await copyDir(src, path.join(distRoot, entry));
+          }
+        }
+
+        for (const fileName of ['robots.txt', 'llms.txt', 'manifest.json', 'sitemap.xml']) {
           const src = path.join(root, fileName);
           if (fs.existsSync(src)) {
             await fsp.copyFile(src, path.join(distRoot, fileName));

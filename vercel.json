@@ -5,27 +5,1630 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/seo-toronto", "destination": "/local/toronto/seo-agency", "permanent": true },
-    { "source": "/seo-toronto/", "destination": "/local/toronto/seo-agency", "permanent": true },
-    { "source": "/seo-vancouver", "destination": "/local/vancouver/seo-agency", "permanent": true },
-    { "source": "/seo-vancouver/", "destination": "/local/vancouver/seo-agency", "permanent": true },
-    { "source": "/seo-bc-kelowna", "destination": "/local/kelowna/ecommerce-seo-agency", "permanent": true },
-    { "source": "/seo-bc-kelowna/", "destination": "/local/kelowna/ecommerce-seo-agency", "permanent": true },
-    { "source": "/seo-calgary-seo-services-calgary", "destination": "/local/calgary/seo-agency", "permanent": true },
-    { "source": "/seo-calgary-seo-services-calgary/", "destination": "/local/calgary/seo-agency", "permanent": true },
-    { "source": "/seo-canada-consultants", "destination": "/services/seo", "permanent": true },
-    { "source": "/seo-canada-consultants/", "destination": "/services/seo", "permanent": true },
-    { "source": "/richmond-hill-seo-company", "destination": "/local/richmond-hill/seo-company", "permanent": true },
-    { "source": "/richmond-hill-seo-company/", "destination": "/local/richmond-hill/seo-company", "permanent": true },
-    { "source": "/vaughan-seo-company", "destination": "/local/toronto/seo-agency", "permanent": true },
-    { "source": "/vaughan-seo-company/", "destination": "/local/toronto/seo-agency", "permanent": true },
-    { "source": "/web-design-calgary", "destination": "/local/calgary/web-design-company", "permanent": true },
-    { "source": "/web-design-calgary/", "destination": "/local/calgary/web-design-company", "permanent": true },
-    { "source": "/marketing-services", "destination": "/services", "permanent": true },
-    { "source": "/marketing-services/", "destination": "/services", "permanent": true },
-    { "source": "/seo-pricing", "destination": "/pricing", "permanent": true },
-    { "source": "/seo-pricing/", "destination": "/pricing", "permanent": true },
-    { "source": "/about-us", "destination": "/about", "permanent": true },
-    { "source": "/about-us/", "destination": "/about", "permanent": true }
+    {
+      "source": "/seo-toronto",
+      "destination": "/local/toronto/seo-agency",
+      "permanent": true
+    },
+    {
+      "source": "/seo-vancouver",
+      "destination": "/local/vancouver/seo-agency",
+      "permanent": true
+    },
+    {
+      "source": "/seo-bc-kelowna",
+      "destination": "/local/kelowna/ecommerce-seo-agency",
+      "permanent": true
+    },
+    {
+      "source": "/seo-calgary-seo-services-calgary",
+      "destination": "/local/calgary/seo-agency",
+      "permanent": true
+    },
+    {
+      "source": "/seo-canada-consultants",
+      "destination": "/services/seo",
+      "permanent": true
+    },
+    {
+      "source": "/richmond-hill-seo-company",
+      "destination": "/local/richmond-hill/seo-company",
+      "permanent": true
+    },
+    {
+      "source": "/vaughan-seo-company",
+      "destination": "/local/toronto/seo-agency",
+      "permanent": true
+    },
+    {
+      "source": "/web-design-calgary",
+      "destination": "/local/calgary/web-design-company",
+      "permanent": true
+    },
+    {
+      "source": "/marketing-services",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/seo-pricing",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/local/abbotsford/ai-automation-agency",
+      "destination": "/ai-automation-agency/abbotsford",
+      "permanent": true
+    },
+    {
+      "source": "/local/abbotsford/ai-development-company",
+      "destination": "/ai-development-company/abbotsford",
+      "permanent": true
+    },
+    {
+      "source": "/local/abbotsford/content-marketing-agency",
+      "destination": "/content-marketing-agency/abbotsford",
+      "permanent": true
+    },
+    {
+      "source": "/local/abbotsford/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/abbotsford",
+      "permanent": true
+    },
+    {
+      "source": "/local/abbotsford/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/abbotsford",
+      "permanent": true
+    },
+    {
+      "source": "/local/abbotsford/email-marketing-agency",
+      "destination": "/email-marketing-agency/abbotsford",
+      "permanent": true
+    },
+    {
+      "source": "/local/abbotsford/google-ads-agency",
+      "destination": "/google-ads-agency/abbotsford",
+      "permanent": true
+    },
+    {
+      "source": "/local/abbotsford/seo-agency",
+      "destination": "/seo-agency/abbotsford",
+      "permanent": true
+    },
+    {
+      "source": "/local/abbotsford/seo-company",
+      "destination": "/seo-company/abbotsford",
+      "permanent": true
+    },
+    {
+      "source": "/local/abbotsford/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/abbotsford",
+      "permanent": true
+    },
+    {
+      "source": "/local/abbotsford/web-design-company",
+      "destination": "/web-design-company/abbotsford",
+      "permanent": true
+    },
+    {
+      "source": "/local/barrie/ai-automation-agency",
+      "destination": "/ai-automation-agency/barrie",
+      "permanent": true
+    },
+    {
+      "source": "/local/barrie/ai-development-company",
+      "destination": "/ai-development-company/barrie",
+      "permanent": true
+    },
+    {
+      "source": "/local/barrie/content-marketing-agency",
+      "destination": "/content-marketing-agency/barrie",
+      "permanent": true
+    },
+    {
+      "source": "/local/barrie/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/barrie",
+      "permanent": true
+    },
+    {
+      "source": "/local/barrie/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/barrie",
+      "permanent": true
+    },
+    {
+      "source": "/local/barrie/email-marketing-agency",
+      "destination": "/email-marketing-agency/barrie",
+      "permanent": true
+    },
+    {
+      "source": "/local/barrie/google-ads-agency",
+      "destination": "/google-ads-agency/barrie",
+      "permanent": true
+    },
+    {
+      "source": "/local/barrie/seo-agency",
+      "destination": "/seo-agency/barrie",
+      "permanent": true
+    },
+    {
+      "source": "/local/barrie/seo-company",
+      "destination": "/seo-company/barrie",
+      "permanent": true
+    },
+    {
+      "source": "/local/barrie/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/barrie",
+      "permanent": true
+    },
+    {
+      "source": "/local/barrie/web-design-company",
+      "destination": "/web-design-company/barrie",
+      "permanent": true
+    },
+    {
+      "source": "/local/brampton/ai-automation-agency",
+      "destination": "/ai-automation-agency/brampton",
+      "permanent": true
+    },
+    {
+      "source": "/local/brampton/ai-development-company",
+      "destination": "/ai-development-company/brampton",
+      "permanent": true
+    },
+    {
+      "source": "/local/brampton/content-marketing-agency",
+      "destination": "/content-marketing-agency/brampton",
+      "permanent": true
+    },
+    {
+      "source": "/local/brampton/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/brampton",
+      "permanent": true
+    },
+    {
+      "source": "/local/brampton/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/brampton",
+      "permanent": true
+    },
+    {
+      "source": "/local/brampton/email-marketing-agency",
+      "destination": "/email-marketing-agency/brampton",
+      "permanent": true
+    },
+    {
+      "source": "/local/brampton/google-ads-agency",
+      "destination": "/google-ads-agency/brampton",
+      "permanent": true
+    },
+    {
+      "source": "/local/brampton/seo-agency",
+      "destination": "/seo-agency/brampton",
+      "permanent": true
+    },
+    {
+      "source": "/local/brampton/seo-company",
+      "destination": "/seo-company/brampton",
+      "permanent": true
+    },
+    {
+      "source": "/local/brampton/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/brampton",
+      "permanent": true
+    },
+    {
+      "source": "/local/brampton/web-design-company",
+      "destination": "/web-design-company/brampton",
+      "permanent": true
+    },
+    {
+      "source": "/local/burlington/ai-automation-agency",
+      "destination": "/ai-automation-agency/burlington",
+      "permanent": true
+    },
+    {
+      "source": "/local/burlington/ai-development-company",
+      "destination": "/ai-development-company/burlington",
+      "permanent": true
+    },
+    {
+      "source": "/local/burlington/content-marketing-agency",
+      "destination": "/content-marketing-agency/burlington",
+      "permanent": true
+    },
+    {
+      "source": "/local/burlington/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/burlington",
+      "permanent": true
+    },
+    {
+      "source": "/local/burlington/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/burlington",
+      "permanent": true
+    },
+    {
+      "source": "/local/burlington/email-marketing-agency",
+      "destination": "/email-marketing-agency/burlington",
+      "permanent": true
+    },
+    {
+      "source": "/local/burlington/google-ads-agency",
+      "destination": "/google-ads-agency/burlington",
+      "permanent": true
+    },
+    {
+      "source": "/local/burlington/seo-agency",
+      "destination": "/seo-agency/burlington",
+      "permanent": true
+    },
+    {
+      "source": "/local/burlington/seo-company",
+      "destination": "/seo-company/burlington",
+      "permanent": true
+    },
+    {
+      "source": "/local/burlington/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/burlington",
+      "permanent": true
+    },
+    {
+      "source": "/local/burlington/web-design-company",
+      "destination": "/web-design-company/burlington",
+      "permanent": true
+    },
+    {
+      "source": "/local/burnaby/ai-automation-agency",
+      "destination": "/ai-automation-agency/burnaby",
+      "permanent": true
+    },
+    {
+      "source": "/local/burnaby/ai-development-company",
+      "destination": "/ai-development-company/burnaby",
+      "permanent": true
+    },
+    {
+      "source": "/local/burnaby/content-marketing-agency",
+      "destination": "/content-marketing-agency/burnaby",
+      "permanent": true
+    },
+    {
+      "source": "/local/burnaby/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/burnaby",
+      "permanent": true
+    },
+    {
+      "source": "/local/burnaby/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/burnaby",
+      "permanent": true
+    },
+    {
+      "source": "/local/burnaby/email-marketing-agency",
+      "destination": "/email-marketing-agency/burnaby",
+      "permanent": true
+    },
+    {
+      "source": "/local/burnaby/google-ads-agency",
+      "destination": "/google-ads-agency/burnaby",
+      "permanent": true
+    },
+    {
+      "source": "/local/burnaby/seo-agency",
+      "destination": "/seo-agency/burnaby",
+      "permanent": true
+    },
+    {
+      "source": "/local/burnaby/seo-company",
+      "destination": "/seo-company/burnaby",
+      "permanent": true
+    },
+    {
+      "source": "/local/burnaby/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/burnaby",
+      "permanent": true
+    },
+    {
+      "source": "/local/burnaby/web-design-company",
+      "destination": "/web-design-company/burnaby",
+      "permanent": true
+    },
+    {
+      "source": "/local/calgary/ai-automation-agency",
+      "destination": "/ai-automation-agency/calgary",
+      "permanent": true
+    },
+    {
+      "source": "/local/calgary/ai-development-company",
+      "destination": "/ai-development-company/calgary",
+      "permanent": true
+    },
+    {
+      "source": "/local/calgary/content-marketing-agency",
+      "destination": "/content-marketing-agency/calgary",
+      "permanent": true
+    },
+    {
+      "source": "/local/calgary/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/calgary",
+      "permanent": true
+    },
+    {
+      "source": "/local/calgary/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/calgary",
+      "permanent": true
+    },
+    {
+      "source": "/local/calgary/email-marketing-agency",
+      "destination": "/email-marketing-agency/calgary",
+      "permanent": true
+    },
+    {
+      "source": "/local/calgary/google-ads-agency",
+      "destination": "/google-ads-agency/calgary",
+      "permanent": true
+    },
+    {
+      "source": "/local/calgary/seo-agency",
+      "destination": "/seo-agency/calgary",
+      "permanent": true
+    },
+    {
+      "source": "/local/calgary/seo-company",
+      "destination": "/seo-company/calgary",
+      "permanent": true
+    },
+    {
+      "source": "/local/calgary/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/calgary",
+      "permanent": true
+    },
+    {
+      "source": "/local/calgary/web-design-company",
+      "destination": "/web-design-company/calgary",
+      "permanent": true
+    },
+    {
+      "source": "/local/calgary/web-development-company",
+      "destination": "/web-development-company/calgary",
+      "permanent": true
+    },
+    {
+      "source": "/local/charlottetown/ai-automation-agency",
+      "destination": "/ai-automation-agency/charlottetown",
+      "permanent": true
+    },
+    {
+      "source": "/local/charlottetown/ai-development-company",
+      "destination": "/ai-development-company/charlottetown",
+      "permanent": true
+    },
+    {
+      "source": "/local/charlottetown/content-marketing-agency",
+      "destination": "/content-marketing-agency/charlottetown",
+      "permanent": true
+    },
+    {
+      "source": "/local/charlottetown/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/charlottetown",
+      "permanent": true
+    },
+    {
+      "source": "/local/charlottetown/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/charlottetown",
+      "permanent": true
+    },
+    {
+      "source": "/local/charlottetown/email-marketing-agency",
+      "destination": "/email-marketing-agency/charlottetown",
+      "permanent": true
+    },
+    {
+      "source": "/local/charlottetown/google-ads-agency",
+      "destination": "/google-ads-agency/charlottetown",
+      "permanent": true
+    },
+    {
+      "source": "/local/charlottetown/seo-agency",
+      "destination": "/seo-agency/charlottetown",
+      "permanent": true
+    },
+    {
+      "source": "/local/charlottetown/seo-company",
+      "destination": "/seo-company/charlottetown",
+      "permanent": true
+    },
+    {
+      "source": "/local/charlottetown/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/charlottetown",
+      "permanent": true
+    },
+    {
+      "source": "/local/charlottetown/web-design-company",
+      "destination": "/web-design-company/charlottetown",
+      "permanent": true
+    },
+    {
+      "source": "/local/coquitlam/ai-automation-agency",
+      "destination": "/ai-automation-agency/coquitlam",
+      "permanent": true
+    },
+    {
+      "source": "/local/coquitlam/ai-development-company",
+      "destination": "/ai-development-company/coquitlam",
+      "permanent": true
+    },
+    {
+      "source": "/local/coquitlam/content-marketing-agency",
+      "destination": "/content-marketing-agency/coquitlam",
+      "permanent": true
+    },
+    {
+      "source": "/local/coquitlam/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/coquitlam",
+      "permanent": true
+    },
+    {
+      "source": "/local/coquitlam/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/coquitlam",
+      "permanent": true
+    },
+    {
+      "source": "/local/coquitlam/email-marketing-agency",
+      "destination": "/email-marketing-agency/coquitlam",
+      "permanent": true
+    },
+    {
+      "source": "/local/coquitlam/google-ads-agency",
+      "destination": "/google-ads-agency/coquitlam",
+      "permanent": true
+    },
+    {
+      "source": "/local/coquitlam/seo-agency",
+      "destination": "/seo-agency/coquitlam",
+      "permanent": true
+    },
+    {
+      "source": "/local/coquitlam/seo-company",
+      "destination": "/seo-company/coquitlam",
+      "permanent": true
+    },
+    {
+      "source": "/local/coquitlam/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/coquitlam",
+      "permanent": true
+    },
+    {
+      "source": "/local/coquitlam/web-design-company",
+      "destination": "/web-design-company/coquitlam",
+      "permanent": true
+    },
+    {
+      "source": "/local/edmonton/ai-automation-agency",
+      "destination": "/ai-automation-agency/edmonton",
+      "permanent": true
+    },
+    {
+      "source": "/local/edmonton/ai-development-company",
+      "destination": "/ai-development-company/edmonton",
+      "permanent": true
+    },
+    {
+      "source": "/local/edmonton/content-marketing-agency",
+      "destination": "/content-marketing-agency/edmonton",
+      "permanent": true
+    },
+    {
+      "source": "/local/edmonton/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/edmonton",
+      "permanent": true
+    },
+    {
+      "source": "/local/edmonton/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/edmonton",
+      "permanent": true
+    },
+    {
+      "source": "/local/edmonton/email-marketing-agency",
+      "destination": "/email-marketing-agency/edmonton",
+      "permanent": true
+    },
+    {
+      "source": "/local/edmonton/google-ads-agency",
+      "destination": "/google-ads-agency/edmonton",
+      "permanent": true
+    },
+    {
+      "source": "/local/edmonton/seo-agency",
+      "destination": "/seo-agency/edmonton",
+      "permanent": true
+    },
+    {
+      "source": "/local/edmonton/seo-company",
+      "destination": "/seo-company/edmonton",
+      "permanent": true
+    },
+    {
+      "source": "/local/edmonton/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/edmonton",
+      "permanent": true
+    },
+    {
+      "source": "/local/edmonton/web-design-company",
+      "destination": "/web-design-company/edmonton",
+      "permanent": true
+    },
+    {
+      "source": "/local/fort-mcmurray/ai-automation-agency",
+      "destination": "/ai-automation-agency/fort-mcmurray",
+      "permanent": true
+    },
+    {
+      "source": "/local/fort-mcmurray/ai-development-company",
+      "destination": "/ai-development-company/fort-mcmurray",
+      "permanent": true
+    },
+    {
+      "source": "/local/fort-mcmurray/content-marketing-agency",
+      "destination": "/content-marketing-agency/fort-mcmurray",
+      "permanent": true
+    },
+    {
+      "source": "/local/fort-mcmurray/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/fort-mcmurray",
+      "permanent": true
+    },
+    {
+      "source": "/local/fort-mcmurray/email-marketing-agency",
+      "destination": "/email-marketing-agency/fort-mcmurray",
+      "permanent": true
+    },
+    {
+      "source": "/local/fort-mcmurray/google-ads-agency",
+      "destination": "/google-ads-agency/fort-mcmurray",
+      "permanent": true
+    },
+    {
+      "source": "/local/fort-mcmurray/seo-agency",
+      "destination": "/seo-agency/fort-mcmurray",
+      "permanent": true
+    },
+    {
+      "source": "/local/fort-mcmurray/seo-company",
+      "destination": "/seo-company/fort-mcmurray",
+      "permanent": true
+    },
+    {
+      "source": "/local/fort-mcmurray/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/fort-mcmurray",
+      "permanent": true
+    },
+    {
+      "source": "/local/fort-mcmurray/web-design-company",
+      "destination": "/web-design-company/fort-mcmurray",
+      "permanent": true
+    },
+    {
+      "source": "/local/fredericton/ai-automation-agency",
+      "destination": "/ai-automation-agency/fredericton",
+      "permanent": true
+    },
+    {
+      "source": "/local/fredericton/ai-development-company",
+      "destination": "/ai-development-company/fredericton",
+      "permanent": true
+    },
+    {
+      "source": "/local/fredericton/content-marketing-agency",
+      "destination": "/content-marketing-agency/fredericton",
+      "permanent": true
+    },
+    {
+      "source": "/local/fredericton/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/fredericton",
+      "permanent": true
+    },
+    {
+      "source": "/local/fredericton/email-marketing-agency",
+      "destination": "/email-marketing-agency/fredericton",
+      "permanent": true
+    },
+    {
+      "source": "/local/fredericton/google-ads-agency",
+      "destination": "/google-ads-agency/fredericton",
+      "permanent": true
+    },
+    {
+      "source": "/local/fredericton/seo-agency",
+      "destination": "/seo-agency/fredericton",
+      "permanent": true
+    },
+    {
+      "source": "/local/fredericton/seo-company",
+      "destination": "/seo-company/fredericton",
+      "permanent": true
+    },
+    {
+      "source": "/local/fredericton/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/fredericton",
+      "permanent": true
+    },
+    {
+      "source": "/local/fredericton/web-design-company",
+      "destination": "/web-design-company/fredericton",
+      "permanent": true
+    },
+    {
+      "source": "/local/guelph/ai-automation-agency",
+      "destination": "/ai-automation-agency/guelph",
+      "permanent": true
+    },
+    {
+      "source": "/local/guelph/ai-development-company",
+      "destination": "/ai-development-company/guelph",
+      "permanent": true
+    },
+    {
+      "source": "/local/guelph/content-marketing-agency",
+      "destination": "/content-marketing-agency/guelph",
+      "permanent": true
+    },
+    {
+      "source": "/local/guelph/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/guelph",
+      "permanent": true
+    },
+    {
+      "source": "/local/guelph/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/guelph",
+      "permanent": true
+    },
+    {
+      "source": "/local/halifax/ai-automation-agency",
+      "destination": "/ai-automation-agency/halifax",
+      "permanent": true
+    },
+    {
+      "source": "/local/halifax/ai-development-company",
+      "destination": "/ai-development-company/halifax",
+      "permanent": true
+    },
+    {
+      "source": "/local/halifax/content-marketing-agency",
+      "destination": "/content-marketing-agency/halifax",
+      "permanent": true
+    },
+    {
+      "source": "/local/halifax/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/halifax",
+      "permanent": true
+    },
+    {
+      "source": "/local/halifax/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/halifax",
+      "permanent": true
+    },
+    {
+      "source": "/local/halifax/email-marketing-agency",
+      "destination": "/email-marketing-agency/halifax",
+      "permanent": true
+    },
+    {
+      "source": "/local/halifax/google-ads-agency",
+      "destination": "/google-ads-agency/halifax",
+      "permanent": true
+    },
+    {
+      "source": "/local/halifax/seo-agency",
+      "destination": "/seo-agency/halifax",
+      "permanent": true
+    },
+    {
+      "source": "/local/halifax/seo-company",
+      "destination": "/seo-company/halifax",
+      "permanent": true
+    },
+    {
+      "source": "/local/halifax/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/halifax",
+      "permanent": true
+    },
+    {
+      "source": "/local/halifax/web-design-company",
+      "destination": "/web-design-company/halifax",
+      "permanent": true
+    },
+    {
+      "source": "/local/hamilton/ai-automation-agency",
+      "destination": "/ai-automation-agency/hamilton",
+      "permanent": true
+    },
+    {
+      "source": "/local/hamilton/ai-development-company",
+      "destination": "/ai-development-company/hamilton",
+      "permanent": true
+    },
+    {
+      "source": "/local/hamilton/content-marketing-agency",
+      "destination": "/content-marketing-agency/hamilton",
+      "permanent": true
+    },
+    {
+      "source": "/local/hamilton/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/hamilton",
+      "permanent": true
+    },
+    {
+      "source": "/local/hamilton/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/hamilton",
+      "permanent": true
+    },
+    {
+      "source": "/local/hamilton/email-marketing-agency",
+      "destination": "/email-marketing-agency/hamilton",
+      "permanent": true
+    },
+    {
+      "source": "/local/hamilton/google-ads-agency",
+      "destination": "/google-ads-agency/hamilton",
+      "permanent": true
+    },
+    {
+      "source": "/local/hamilton/seo-agency",
+      "destination": "/seo-agency/hamilton",
+      "permanent": true
+    },
+    {
+      "source": "/local/hamilton/seo-company",
+      "destination": "/seo-company/hamilton",
+      "permanent": true
+    },
+    {
+      "source": "/local/hamilton/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/hamilton",
+      "permanent": true
+    },
+    {
+      "source": "/local/hamilton/web-design-company",
+      "destination": "/web-design-company/hamilton",
+      "permanent": true
+    },
+    {
+      "source": "/local/kelowna/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/kelowna",
+      "permanent": true
+    },
+    {
+      "source": "/local/kingston/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/kingston",
+      "permanent": true
+    },
+    {
+      "source": "/local/kitchener/ai-automation-agency",
+      "destination": "/ai-automation-agency/kitchener",
+      "permanent": true
+    },
+    {
+      "source": "/local/kitchener/ai-development-company",
+      "destination": "/ai-development-company/kitchener",
+      "permanent": true
+    },
+    {
+      "source": "/local/kitchener/content-marketing-agency",
+      "destination": "/content-marketing-agency/kitchener",
+      "permanent": true
+    },
+    {
+      "source": "/local/kitchener/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/kitchener",
+      "permanent": true
+    },
+    {
+      "source": "/local/kitchener/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/kitchener",
+      "permanent": true
+    },
+    {
+      "source": "/local/kitchener/email-marketing-agency",
+      "destination": "/email-marketing-agency/kitchener",
+      "permanent": true
+    },
+    {
+      "source": "/local/kitchener/google-ads-agency",
+      "destination": "/google-ads-agency/kitchener",
+      "permanent": true
+    },
+    {
+      "source": "/local/kitchener/seo-agency",
+      "destination": "/seo-agency/kitchener",
+      "permanent": true
+    },
+    {
+      "source": "/local/kitchener/seo-company",
+      "destination": "/seo-company/kitchener",
+      "permanent": true
+    },
+    {
+      "source": "/local/kitchener/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/kitchener",
+      "permanent": true
+    },
+    {
+      "source": "/local/kitchener/web-design-company",
+      "destination": "/web-design-company/kitchener",
+      "permanent": true
+    },
+    {
+      "source": "/local/london-ontario/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/london-ontario",
+      "permanent": true
+    },
+    {
+      "source": "/local/markham/ai-automation-agency",
+      "destination": "/ai-automation-agency/markham",
+      "permanent": true
+    },
+    {
+      "source": "/local/markham/ai-development-company",
+      "destination": "/ai-development-company/markham",
+      "permanent": true
+    },
+    {
+      "source": "/local/markham/content-marketing-agency",
+      "destination": "/content-marketing-agency/markham",
+      "permanent": true
+    },
+    {
+      "source": "/local/markham/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/markham",
+      "permanent": true
+    },
+    {
+      "source": "/local/markham/email-marketing-agency",
+      "destination": "/email-marketing-agency/markham",
+      "permanent": true
+    },
+    {
+      "source": "/local/markham/google-ads-agency",
+      "destination": "/google-ads-agency/markham",
+      "permanent": true
+    },
+    {
+      "source": "/local/markham/seo-agency",
+      "destination": "/seo-agency/markham",
+      "permanent": true
+    },
+    {
+      "source": "/local/markham/seo-company",
+      "destination": "/seo-company/markham",
+      "permanent": true
+    },
+    {
+      "source": "/local/markham/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/markham",
+      "permanent": true
+    },
+    {
+      "source": "/local/markham/web-design-company",
+      "destination": "/web-design-company/markham",
+      "permanent": true
+    },
+    {
+      "source": "/local/mississauga/ai-automation-agency",
+      "destination": "/ai-automation-agency/mississauga",
+      "permanent": true
+    },
+    {
+      "source": "/local/mississauga/ai-development-company",
+      "destination": "/ai-development-company/mississauga",
+      "permanent": true
+    },
+    {
+      "source": "/local/mississauga/content-marketing-agency",
+      "destination": "/content-marketing-agency/mississauga",
+      "permanent": true
+    },
+    {
+      "source": "/local/mississauga/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/mississauga",
+      "permanent": true
+    },
+    {
+      "source": "/local/mississauga/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/mississauga",
+      "permanent": true
+    },
+    {
+      "source": "/local/mississauga/email-marketing-agency",
+      "destination": "/email-marketing-agency/mississauga",
+      "permanent": true
+    },
+    {
+      "source": "/local/mississauga/google-ads-agency",
+      "destination": "/google-ads-agency/mississauga",
+      "permanent": true
+    },
+    {
+      "source": "/local/mississauga/seo-agency",
+      "destination": "/seo-agency/mississauga",
+      "permanent": true
+    },
+    {
+      "source": "/local/mississauga/seo-company",
+      "destination": "/seo-company/mississauga",
+      "permanent": true
+    },
+    {
+      "source": "/local/mississauga/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/mississauga",
+      "permanent": true
+    },
+    {
+      "source": "/local/mississauga/web-design-company",
+      "destination": "/web-design-company/mississauga",
+      "permanent": true
+    },
+    {
+      "source": "/local/north-vancouver/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/north-vancouver",
+      "permanent": true
+    },
+    {
+      "source": "/local/oakville/ai-automation-agency",
+      "destination": "/ai-automation-agency/oakville",
+      "permanent": true
+    },
+    {
+      "source": "/local/oakville/ai-development-company",
+      "destination": "/ai-development-company/oakville",
+      "permanent": true
+    },
+    {
+      "source": "/local/oakville/content-marketing-agency",
+      "destination": "/content-marketing-agency/oakville",
+      "permanent": true
+    },
+    {
+      "source": "/local/oakville/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/oakville",
+      "permanent": true
+    },
+    {
+      "source": "/local/oakville/email-marketing-agency",
+      "destination": "/email-marketing-agency/oakville",
+      "permanent": true
+    },
+    {
+      "source": "/local/oakville/google-ads-agency",
+      "destination": "/google-ads-agency/oakville",
+      "permanent": true
+    },
+    {
+      "source": "/local/oakville/seo-agency",
+      "destination": "/seo-agency/oakville",
+      "permanent": true
+    },
+    {
+      "source": "/local/oakville/seo-company",
+      "destination": "/seo-company/oakville",
+      "permanent": true
+    },
+    {
+      "source": "/local/oakville/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/oakville",
+      "permanent": true
+    },
+    {
+      "source": "/local/oakville/web-design-company",
+      "destination": "/web-design-company/oakville",
+      "permanent": true
+    },
+    {
+      "source": "/local/oshawa/ai-automation-agency",
+      "destination": "/ai-automation-agency/oshawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/oshawa/ai-development-company",
+      "destination": "/ai-development-company/oshawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/oshawa/content-marketing-agency",
+      "destination": "/content-marketing-agency/oshawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/oshawa/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/oshawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/oshawa/email-marketing-agency",
+      "destination": "/email-marketing-agency/oshawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/oshawa/google-ads-agency",
+      "destination": "/google-ads-agency/oshawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/oshawa/seo-agency",
+      "destination": "/seo-agency/oshawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/oshawa/seo-company",
+      "destination": "/seo-company/oshawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/oshawa/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/oshawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/oshawa/web-design-company",
+      "destination": "/web-design-company/oshawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/ottawa/ai-automation-agency",
+      "destination": "/ai-automation-agency/ottawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/ottawa/ai-development-company",
+      "destination": "/ai-development-company/ottawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/ottawa/content-marketing-agency",
+      "destination": "/content-marketing-agency/ottawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/ottawa/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/ottawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/ottawa/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/ottawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/ottawa/email-marketing-agency",
+      "destination": "/email-marketing-agency/ottawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/ottawa/google-ads-agency",
+      "destination": "/google-ads-agency/ottawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/ottawa/seo-agency",
+      "destination": "/seo-agency/ottawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/ottawa/seo-company",
+      "destination": "/seo-company/ottawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/ottawa/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/ottawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/ottawa/web-design-company",
+      "destination": "/web-design-company/ottawa",
+      "permanent": true
+    },
+    {
+      "source": "/local/regina/ai-automation-agency",
+      "destination": "/ai-automation-agency/regina",
+      "permanent": true
+    },
+    {
+      "source": "/local/regina/ai-development-company",
+      "destination": "/ai-development-company/regina",
+      "permanent": true
+    },
+    {
+      "source": "/local/regina/content-marketing-agency",
+      "destination": "/content-marketing-agency/regina",
+      "permanent": true
+    },
+    {
+      "source": "/local/regina/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/regina",
+      "permanent": true
+    },
+    {
+      "source": "/local/regina/email-marketing-agency",
+      "destination": "/email-marketing-agency/regina",
+      "permanent": true
+    },
+    {
+      "source": "/local/regina/google-ads-agency",
+      "destination": "/google-ads-agency/regina",
+      "permanent": true
+    },
+    {
+      "source": "/local/regina/seo-agency",
+      "destination": "/seo-agency/regina",
+      "permanent": true
+    },
+    {
+      "source": "/local/regina/seo-company",
+      "destination": "/seo-company/regina",
+      "permanent": true
+    },
+    {
+      "source": "/local/regina/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/regina",
+      "permanent": true
+    },
+    {
+      "source": "/local/regina/web-design-company",
+      "destination": "/web-design-company/regina",
+      "permanent": true
+    },
+    {
+      "source": "/local/richmond-hill/ai-automation-agency",
+      "destination": "/ai-automation-agency/richmond-hill",
+      "permanent": true
+    },
+    {
+      "source": "/local/richmond-hill/ai-development-company",
+      "destination": "/ai-development-company/richmond-hill",
+      "permanent": true
+    },
+    {
+      "source": "/local/richmond-hill/content-marketing-agency",
+      "destination": "/content-marketing-agency/richmond-hill",
+      "permanent": true
+    },
+    {
+      "source": "/local/richmond-hill/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/richmond-hill",
+      "permanent": true
+    },
+    {
+      "source": "/local/richmond-hill/email-marketing-agency",
+      "destination": "/email-marketing-agency/richmond-hill",
+      "permanent": true
+    },
+    {
+      "source": "/local/richmond-hill/google-ads-agency",
+      "destination": "/google-ads-agency/richmond-hill",
+      "permanent": true
+    },
+    {
+      "source": "/local/richmond-hill/seo-agency",
+      "destination": "/seo-agency/richmond-hill",
+      "permanent": true
+    },
+    {
+      "source": "/local/richmond-hill/seo-company",
+      "destination": "/seo-company/richmond-hill",
+      "permanent": true
+    },
+    {
+      "source": "/local/richmond-hill/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/richmond-hill",
+      "permanent": true
+    },
+    {
+      "source": "/local/richmond-hill/web-design-company",
+      "destination": "/web-design-company/richmond-hill",
+      "permanent": true
+    },
+    {
+      "source": "/local/richmond/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/richmond",
+      "permanent": true
+    },
+    {
+      "source": "/local/saskatoon/ai-automation-agency",
+      "destination": "/ai-automation-agency/saskatoon",
+      "permanent": true
+    },
+    {
+      "source": "/local/saskatoon/ai-development-company",
+      "destination": "/ai-development-company/saskatoon",
+      "permanent": true
+    },
+    {
+      "source": "/local/saskatoon/content-marketing-agency",
+      "destination": "/content-marketing-agency/saskatoon",
+      "permanent": true
+    },
+    {
+      "source": "/local/saskatoon/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/saskatoon",
+      "permanent": true
+    },
+    {
+      "source": "/local/saskatoon/email-marketing-agency",
+      "destination": "/email-marketing-agency/saskatoon",
+      "permanent": true
+    },
+    {
+      "source": "/local/saskatoon/google-ads-agency",
+      "destination": "/google-ads-agency/saskatoon",
+      "permanent": true
+    },
+    {
+      "source": "/local/saskatoon/seo-agency",
+      "destination": "/seo-agency/saskatoon",
+      "permanent": true
+    },
+    {
+      "source": "/local/saskatoon/seo-company",
+      "destination": "/seo-company/saskatoon",
+      "permanent": true
+    },
+    {
+      "source": "/local/saskatoon/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/saskatoon",
+      "permanent": true
+    },
+    {
+      "source": "/local/saskatoon/web-design-company",
+      "destination": "/web-design-company/saskatoon",
+      "permanent": true
+    },
+    {
+      "source": "/local/surrey/ai-automation-agency",
+      "destination": "/ai-automation-agency/surrey",
+      "permanent": true
+    },
+    {
+      "source": "/local/surrey/ai-development-company",
+      "destination": "/ai-development-company/surrey",
+      "permanent": true
+    },
+    {
+      "source": "/local/surrey/content-marketing-agency",
+      "destination": "/content-marketing-agency/surrey",
+      "permanent": true
+    },
+    {
+      "source": "/local/surrey/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/surrey",
+      "permanent": true
+    },
+    {
+      "source": "/local/surrey/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/surrey",
+      "permanent": true
+    },
+    {
+      "source": "/local/surrey/email-marketing-agency",
+      "destination": "/email-marketing-agency/surrey",
+      "permanent": true
+    },
+    {
+      "source": "/local/surrey/google-ads-agency",
+      "destination": "/google-ads-agency/surrey",
+      "permanent": true
+    },
+    {
+      "source": "/local/surrey/seo-agency",
+      "destination": "/seo-agency/surrey",
+      "permanent": true
+    },
+    {
+      "source": "/local/surrey/seo-company",
+      "destination": "/seo-company/surrey",
+      "permanent": true
+    },
+    {
+      "source": "/local/surrey/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/surrey",
+      "permanent": true
+    },
+    {
+      "source": "/local/surrey/web-design-company",
+      "destination": "/web-design-company/surrey",
+      "permanent": true
+    },
+    {
+      "source": "/local/surrey/web-development-company",
+      "destination": "/web-development-company/surrey",
+      "permanent": true
+    },
+    {
+      "source": "/local/toronto/ai-automation-agency",
+      "destination": "/ai-automation-agency/toronto",
+      "permanent": true
+    },
+    {
+      "source": "/local/toronto/ai-development-company",
+      "destination": "/ai-development-company/toronto",
+      "permanent": true
+    },
+    {
+      "source": "/local/toronto/content-marketing-agency",
+      "destination": "/content-marketing-agency/toronto",
+      "permanent": true
+    },
+    {
+      "source": "/local/toronto/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/toronto",
+      "permanent": true
+    },
+    {
+      "source": "/local/toronto/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/toronto",
+      "permanent": true
+    },
+    {
+      "source": "/local/toronto/email-marketing-agency",
+      "destination": "/email-marketing-agency/toronto",
+      "permanent": true
+    },
+    {
+      "source": "/local/toronto/google-ads-agency",
+      "destination": "/google-ads-agency/toronto",
+      "permanent": true
+    },
+    {
+      "source": "/local/toronto/ppc-agency",
+      "destination": "/ppc-agency/toronto",
+      "permanent": true
+    },
+    {
+      "source": "/local/toronto/seo-agency",
+      "destination": "/seo-agency/toronto",
+      "permanent": true
+    },
+    {
+      "source": "/local/toronto/seo-company",
+      "destination": "/seo-company/toronto",
+      "permanent": true
+    },
+    {
+      "source": "/local/toronto/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/toronto",
+      "permanent": true
+    },
+    {
+      "source": "/local/toronto/web-design-company",
+      "destination": "/web-design-company/toronto",
+      "permanent": true
+    },
+    {
+      "source": "/local/toronto/web-development-company",
+      "destination": "/web-development-company/toronto",
+      "permanent": true
+    },
+    {
+      "source": "/local/vancouver/ai-automation-agency",
+      "destination": "/ai-automation-agency/vancouver",
+      "permanent": true
+    },
+    {
+      "source": "/local/vancouver/ai-development-company",
+      "destination": "/ai-development-company/vancouver",
+      "permanent": true
+    },
+    {
+      "source": "/local/vancouver/content-marketing-agency",
+      "destination": "/content-marketing-agency/vancouver",
+      "permanent": true
+    },
+    {
+      "source": "/local/vancouver/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/vancouver",
+      "permanent": true
+    },
+    {
+      "source": "/local/vancouver/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/vancouver",
+      "permanent": true
+    },
+    {
+      "source": "/local/vancouver/email-marketing-agency",
+      "destination": "/email-marketing-agency/vancouver",
+      "permanent": true
+    },
+    {
+      "source": "/local/vancouver/google-ads-agency",
+      "destination": "/google-ads-agency/vancouver",
+      "permanent": true
+    },
+    {
+      "source": "/local/vancouver/seo-agency",
+      "destination": "/seo-agency/vancouver",
+      "permanent": true
+    },
+    {
+      "source": "/local/vancouver/seo-company",
+      "destination": "/seo-company/vancouver",
+      "permanent": true
+    },
+    {
+      "source": "/local/vancouver/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/vancouver",
+      "permanent": true
+    },
+    {
+      "source": "/local/vancouver/web-design-company",
+      "destination": "/web-design-company/vancouver",
+      "permanent": true
+    },
+    {
+      "source": "/local/victoria/ai-automation-agency",
+      "destination": "/ai-automation-agency/victoria",
+      "permanent": true
+    },
+    {
+      "source": "/local/victoria/ai-development-company",
+      "destination": "/ai-development-company/victoria",
+      "permanent": true
+    },
+    {
+      "source": "/local/victoria/content-marketing-agency",
+      "destination": "/content-marketing-agency/victoria",
+      "permanent": true
+    },
+    {
+      "source": "/local/victoria/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/victoria",
+      "permanent": true
+    },
+    {
+      "source": "/local/victoria/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/victoria",
+      "permanent": true
+    },
+    {
+      "source": "/local/victoria/email-marketing-agency",
+      "destination": "/email-marketing-agency/victoria",
+      "permanent": true
+    },
+    {
+      "source": "/local/victoria/google-ads-agency",
+      "destination": "/google-ads-agency/victoria",
+      "permanent": true
+    },
+    {
+      "source": "/local/victoria/seo-agency",
+      "destination": "/seo-agency/victoria",
+      "permanent": true
+    },
+    {
+      "source": "/local/victoria/seo-company",
+      "destination": "/seo-company/victoria",
+      "permanent": true
+    },
+    {
+      "source": "/local/victoria/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/victoria",
+      "permanent": true
+    },
+    {
+      "source": "/local/victoria/web-design-company",
+      "destination": "/web-design-company/victoria",
+      "permanent": true
+    },
+    {
+      "source": "/local/waterloo/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/waterloo",
+      "permanent": true
+    },
+    {
+      "source": "/local/windsor/ai-automation-agency",
+      "destination": "/ai-automation-agency/windsor",
+      "permanent": true
+    },
+    {
+      "source": "/local/windsor/ai-development-company",
+      "destination": "/ai-development-company/windsor",
+      "permanent": true
+    },
+    {
+      "source": "/local/windsor/content-marketing-agency",
+      "destination": "/content-marketing-agency/windsor",
+      "permanent": true
+    },
+    {
+      "source": "/local/windsor/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/windsor",
+      "permanent": true
+    },
+    {
+      "source": "/local/windsor/ecommerce-seo-agency",
+      "destination": "/ecommerce-seo-agency/windsor",
+      "permanent": true
+    },
+    {
+      "source": "/local/windsor/email-marketing-agency",
+      "destination": "/email-marketing-agency/windsor",
+      "permanent": true
+    },
+    {
+      "source": "/local/windsor/google-ads-agency",
+      "destination": "/google-ads-agency/windsor",
+      "permanent": true
+    },
+    {
+      "source": "/local/windsor/seo-agency",
+      "destination": "/seo-agency/windsor",
+      "permanent": true
+    },
+    {
+      "source": "/local/windsor/seo-company",
+      "destination": "/seo-company/windsor",
+      "permanent": true
+    },
+    {
+      "source": "/local/windsor/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/windsor",
+      "permanent": true
+    },
+    {
+      "source": "/local/windsor/web-design-company",
+      "destination": "/web-design-company/windsor",
+      "permanent": true
+    },
+    {
+      "source": "/local/winnipeg/ai-automation-agency",
+      "destination": "/ai-automation-agency/winnipeg",
+      "permanent": true
+    },
+    {
+      "source": "/local/winnipeg/ai-development-company",
+      "destination": "/ai-development-company/winnipeg",
+      "permanent": true
+    },
+    {
+      "source": "/local/winnipeg/content-marketing-agency",
+      "destination": "/content-marketing-agency/winnipeg",
+      "permanent": true
+    },
+    {
+      "source": "/local/winnipeg/digital-marketing-agency",
+      "destination": "/digital-marketing-agency/winnipeg",
+      "permanent": true
+    },
+    {
+      "source": "/local/winnipeg/email-marketing-agency",
+      "destination": "/email-marketing-agency/winnipeg",
+      "permanent": true
+    },
+    {
+      "source": "/local/winnipeg/google-ads-agency",
+      "destination": "/google-ads-agency/winnipeg",
+      "permanent": true
+    },
+    {
+      "source": "/local/winnipeg/seo-agency",
+      "destination": "/seo-agency/winnipeg",
+      "permanent": true
+    },
+    {
+      "source": "/local/winnipeg/seo-company",
+      "destination": "/seo-company/winnipeg",
+      "permanent": true
+    },
+    {
+      "source": "/local/winnipeg/social-media-marketing-agency",
+      "destination": "/social-media-marketing-agency/winnipeg",
+      "permanent": true
+    },
+    {
+      "source": "/local/winnipeg/web-design-company",
+      "destination": "/web-design-company/winnipeg",
+      "permanent": true
+    }
   ]
 }
