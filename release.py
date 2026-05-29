@@ -1,13 +1,14 @@
 """
-release.py — Daily publish schedule for boomy (https://boomymarketing.com)
+release.py — Sitemap + robots maintenance for boomy (https://boomymarketing.com)
 Runs via GitHub Actions (.github/workflows/daily-release.yml)
 
-Logic:
-  - Schedule start: 14 days before TODAY (gives initial batch published)
-  - 5 pages/day after that
-  - Updates robots.txt (Allow published pages, Disallow /local/ for rest)
-  - Updates sitemap.xml (only published pages listed)
-  - HTML files are NOT modified
+POST-MIGRATION behavior (URL structure is now /{service}/{city}/, not /local/):
+  - All pages are already published (datePublished set in each page's schema).
+  - This script is IDEMPOTENT: it preserves the existing sitemap.xml URL set,
+    drops any stray /local/ URLs, refreshes <lastmod> from each page's
+    datePublished, and rewrites a clean robots.txt (Allow: /).
+  - It NEVER adds /local/ URLs back. HTML files are not modified.
+  - Pings IndexNow + GSC for pages whose datePublished == today (usually none).
 """
 
 import json
@@ -19,164 +20,123 @@ from datetime import date, timedelta
 from pathlib import Path
 
 TODAY = date.today()
-PAGES_PER_DAY = 5
-LAUNCH_DATE  = date(2026, 2, 26)  # fixed — DO NOT change after first run
 DOMAIN = "https://boomymarketing.com"
 SITE_ROOT = Path(__file__).parent.resolve()
 INDEXNOW_KEY = "0af09ac783bf4a66a867cf66d3f7f01a"
 
+ROBOTS = """User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
 
-def get_local_pages():
-    pages = []
-    local_dir = SITE_ROOT / "local"
-    for root, dirs, files in os.walk(local_dir):
-        dirs.sort()
-        for fname in sorted(files):
-            if fname.endswith(".html"):
-                pages.append(Path(root) / fname)
-    return sorted(pages)
+User-agent: GPTBot
+Allow: /
 
+User-agent: ClaudeBot
+Allow: /
 
-def assign_dates(pages):
-    start = LAUNCH_DATE
-    schedule = {}
-    for i, page in enumerate(pages):
-        day_offset = i // PAGES_PER_DAY
-        schedule[page] = start + timedelta(days=day_offset)
-    return schedule
+User-agent: Google-Extended
+Allow: /
 
+User-agent: PerplexityBot
+Allow: /
 
-def update_robots(schedule):
-    published = {p: d for p, d in schedule.items() if d <= TODAY}
+User-agent: anthropic-ai
+Allow: /
 
-    allowed_paths = set()
-    for page in published:
-        rel = page.relative_to(SITE_ROOT).as_posix().replace("\\", "/")
-        parts = rel.split("/")
-        if len(parts) >= 3:
-            allowed_paths.add("/" + "/".join(parts[:-1]))
-
-    lines = [
-        "User-agent: *",
-        "# Published local pages — Allow before Disallow",
-    ]
-    for path in sorted(allowed_paths):
-        lines.append(f"Allow: {path}")
-    lines += [
-        "",
-        "# Block unpublished local pages",
-        "Disallow: /local/",
-        "Disallow: /admin/",
-        "Disallow: /private/",
-        "",
-        "# AI crawlers",
-        "User-agent: GPTBot",
-        "Allow: /",
-        "",
-        "User-agent: ClaudeBot",
-        "Allow: /",
-        "",
-        "User-agent: Google-Extended",
-        "Allow: /",
-        "",
-        "User-agent: PerplexityBot",
-        "Allow: /",
-        "",
-        "User-agent: anthropic-ai",
-        "Allow: /",
-        "",
-        f"Sitemap: {DOMAIN}/sitemap.xml",
-    ]
-
-    with open(SITE_ROOT / "robots.txt", "w", encoding="utf-8") as f:
-        f.write("\n".join(lines) + "\n")
-
-    return len(allowed_paths)
+Sitemap: {domain}/sitemap.xml
+"""
 
 
-def get_core_url_blocks():
-    sitemap_path = SITE_ROOT / "sitemap.xml"
-    with open(sitemap_path, "r", encoding="utf-8") as f:
-        content = f.read()
+def url_to_html(url):
+    """Map a sitemap URL to its HTML file path on disk (clean-URL aware)."""
+    path = url.replace(DOMAIN, "").strip("/")
+    if not path:
+        candidates = [SITE_ROOT / "index.html"]
+    else:
+        candidates = [SITE_ROOT / path / "index.html", SITE_ROOT / (path + ".html")]
+    for c in candidates:
+        if c.exists():
+            return c
+    return None
+
+
+def read_date(html_path):
+    try:
+        html = html_path.read_text(encoding="utf-8")
+        m = re.search(r'"datePublished":\s*"(\d{4}-\d{2}-\d{2})"', html)
+        if m:
+            return m.group(1)
+    except Exception:
+        pass
+    return None
+
+
+def refresh_sitemap():
+    """Preserve existing URL set, drop /local/, refresh lastmod from HTML."""
+    sm_path = SITE_ROOT / "sitemap.xml"
+    content = sm_path.read_text(encoding="utf-8")
     blocks = re.findall(r"<url>.*?</url>", content, re.DOTALL)
-    return [b for b in blocks if "/local/" not in b]
 
+    kept = []
+    today_urls = []
+    for b in blocks:
+        loc_m = re.search(r"<loc>([^<]+)</loc>", b)
+        if not loc_m:
+            continue
+        url = loc_m.group(1).strip()
+        if "/local/" in url:          # never keep legacy URLs
+            continue
+        html_path = url_to_html(url)
+        if html_path:
+            d = read_date(html_path)
+            if d:
+                if "<lastmod>" in b:
+                    b = re.sub(r"<lastmod>[^<]*</lastmod>", f"<lastmod>{d}</lastmod>", b)
+                else:
+                    b = b.replace("</url>", f"  <lastmod>{d}</lastmod>\n  </url>")
+                if d == TODAY.isoformat():
+                    today_urls.append(url)
+        kept.append(b)
 
-def update_sitemap(schedule):
-    published = {p: d for p, d in schedule.items() if d <= TODAY}
-    core_blocks = get_core_url_blocks()
-
-    local_blocks = []
-    for page, pub_date in sorted(published.items(), key=lambda x: x[1]):
-        rel = page.relative_to(SITE_ROOT).as_posix().replace("\\", "/")
-        url_path = rel.replace("/index.html", "")
-        url = f"{DOMAIN}/{url_path}"
-        local_blocks.append(f"""  <url>
-    <loc>{url}</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <lastmod>{pub_date.isoformat()}</lastmod>
-  </url>""")
-
-    sitemap = '''<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- Core Pages -->
-'''
-    sitemap += "\n".join(core_blocks)
-    sitemap += "\n\n  <!-- Published Local Pages -->\n"
-    sitemap += "\n".join(local_blocks)
-    sitemap += "\n</urlset>\n"
-
-    with open(SITE_ROOT / "sitemap.xml", "w", encoding="utf-8") as f:
-        f.write(sitemap)
-
-    return len(local_blocks)
+    sitemap = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n\n'
+        + "\n".join(kept)
+        + "\n</urlset>\n"
+    )
+    sm_path.write_text(sitemap, encoding="utf-8")
+    return len(kept), today_urls
 
 
 if __name__ == "__main__":
-    pages = get_local_pages()
-    schedule = assign_dates(pages)
-    published = {p: d for p, d in schedule.items() if d <= TODAY}
-    future = {p: d for p, d in schedule.items() if d > TODAY}
+    (SITE_ROOT / "robots.txt").write_text(ROBOTS.format(domain=DOMAIN), encoding="utf-8")
+    print("robots.txt: clean Allow: /")
 
-    print(f"Date: {TODAY} | Pages/day: {PAGES_PER_DAY}")
-    print(f"Local pages: {len(pages)} total | {len(published)} live | {len(future)} queued")
+    count, new_today = refresh_sitemap()
+    print(f"sitemap.xml: {count} URLs (0 /local/)")
 
-    allowed = update_robots(schedule)
-    print(f"robots.txt: {allowed} paths allowed")
-
-    in_sitemap = update_sitemap(schedule)
-    print(f"sitemap.xml: {in_sitemap} local URLs")
-
-    # IndexNow — notify Bing of newly published pages
-    yesterday = TODAY - timedelta(days=1)
-    new_today = [p for p, d in schedule.items() if d == TODAY]
+    # IndexNow — notify Bing of pages published today (usually none post-migration)
     if new_today:
-        urls = []
-        for page in new_today:
-            rel = page.relative_to(SITE_ROOT).as_posix().replace("\\", "/")
-            url_path = rel.replace("/index.html", "")
-            urls.append(f"{DOMAIN}/{url_path}")
         payload = {
             "host": DOMAIN.replace("https://", ""),
             "key": INDEXNOW_KEY,
             "keyLocation": f"{DOMAIN}/{INDEXNOW_KEY}.txt",
-            "urlList": urls
+            "urlList": new_today,
         }
         try:
             data = json.dumps(payload).encode("utf-8")
             req = urllib.request.Request(
                 "https://www.bing.com/indexnow",
                 data=data,
-                headers={"Content-Type": "application/json; charset=utf-8"}
+                headers={"Content-Type": "application/json; charset=utf-8"},
             )
             with urllib.request.urlopen(req, timeout=15) as resp:
-                print(f"IndexNow: submitted {len(urls)} URLs (HTTP {resp.status})")
+                print(f"IndexNow: submitted {len(new_today)} URLs (HTTP {resp.status})")
         except Exception as ex:
             print(f"IndexNow: error — {ex}")
 
-    # GSC Sitemaps API — resubmit sitemap to Google
+    # GSC Sitemaps API — resubmit sitemap to Google (CI only, needs secret)
     gsc_key_env = os.environ.get("GSC_SERVICE_ACCOUNT_KEY")
     gsc_key_file = SITE_ROOT / "gsc-key.json"
     if gsc_key_env:
@@ -188,7 +148,7 @@ if __name__ == "__main__":
             import urllib.parse
             creds = service_account.Credentials.from_service_account_file(
                 str(gsc_key_file),
-                scopes=["https://www.googleapis.com/auth/webmasters"]
+                scopes=["https://www.googleapis.com/auth/webmasters"],
             )
             creds.refresh(google_requests.Request())
             token = creds.token
@@ -206,20 +166,19 @@ if __name__ == "__main__":
             print(f"GSC sitemap submit error: {ex}")
         finally:
             if gsc_key_env and gsc_key_file.exists():
-                gsc_key_file.unlink()  # remove temp key file
+                gsc_key_file.unlink()
 
-    # Commit if anything changed
-    result = subprocess.run(
-        ["git", "diff", "--quiet", "robots.txt", "sitemap.xml"],
-        cwd=str(SITE_ROOT)
-    )
-    if result.returncode != 0:
-        subprocess.run(["git", "add", "robots.txt", "sitemap.xml"], cwd=str(SITE_ROOT), check=True)
-        subprocess.run(
-            ["git", "commit", "-m",
-             f"seo: release {len(published)} pages live ({TODAY}, {PAGES_PER_DAY}/day)"],
-            cwd=str(SITE_ROOT), check=True
+    # Commit only inside CI (local runs leave commits to the developer)
+    if os.environ.get("GITHUB_ACTIONS"):
+        result = subprocess.run(
+            ["git", "diff", "--quiet", "robots.txt", "sitemap.xml"], cwd=str(SITE_ROOT)
         )
-        print("Committed changes.")
-    else:
-        print("No changes to commit.")
+        if result.returncode != 0:
+            subprocess.run(["git", "add", "robots.txt", "sitemap.xml"], cwd=str(SITE_ROOT), check=True)
+            subprocess.run(
+                ["git", "commit", "-m", f"seo: refresh sitemap + robots ({TODAY})"],
+                cwd=str(SITE_ROOT), check=True,
+            )
+            print("Committed changes.")
+        else:
+            print("No changes to commit.")
