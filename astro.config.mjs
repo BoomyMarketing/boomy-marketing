@@ -100,21 +100,29 @@ function legacyStaticPages() {
       'astro:build:done': async ({ dir }) => {
         const distRoot = fileURLToPath(dir);
 
-        // Known static dirs
-        for (const dirName of ['local', 'assets', 'services', 'sitemap', 'locations']) {
+        // Known static dirs (including topical authority dirs)
+        for (const dirName of ['local', 'assets', 'services', 'sitemap', 'locations',
+                               'guides', 'best', 'industries']) {
           const src = path.join(root, dirName);
           if (fs.existsSync(src)) {
             await copyDir(src, path.join(distRoot, dirName));
           }
         }
 
-        // Auto-detect /{service}/{city} directories
+        // Auto-detect directories: /{service}/{city}/ AND /{service}/ (direct index.html)
         const entries = fs.readdirSync(root);
         for (const entry of entries) {
           if (SKIP_DIRS.has(entry) || entry.startsWith('.') || entry.startsWith('_')) continue;
           const src = path.join(root, entry);
           if (!fs.statSync(src).isDirectory()) continue;
+          // /{service}/{city}/ pattern (has sub-dirs with index.html)
           if (isServiceDir(src)) {
+            await copyDir(src, path.join(distRoot, entry));
+            continue;
+          }
+          // /{service}/ pattern (direct index.html — topical authority service pillars)
+          const directIdx = path.join(src, 'index.html');
+          if (fs.existsSync(directIdx)) {
             await copyDir(src, path.join(distRoot, entry));
           }
         }
