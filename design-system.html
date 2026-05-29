@@ -1,663 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Boomy Marketing — Design System</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    /* Brand */
-    --primary: #FF6B35;
-    --primary-dark: #e55a28;
-    --primary-glow: rgba(255,107,53,0.45);
-    --secondary: #7C3AED;
-    --accent: #FFD23F;
-    /* Backgrounds */
-    --bg: #100930;
-    --bg-surface: #1a0f3e;
-    --bg-soft: rgba(255,255,255,0.06);
-    --dark: #1a0f3e;
-    --hero-bg: linear-gradient(135deg, #1a0f3e 0%, #2D1B69 60%, #100930 100%);
-    /* Text */
-    --text-heading: #FFFFFF;
-    --text: rgba(255,255,255,0.78);
-    --text-muted: rgba(255,255,255,0.45);
-    --text-on-primary: #100930;
-    --logo-color: #FFFFFF;
-    /* Borders */
-    --border-color: rgba(255,255,255,0.12);
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, #FF6B35, #FFD23F);
-    /* Shape */
-    --radius: 16px;
-    --radius-sm: 8px;
-    --radius-lg: 24px;
-    --radius-btn: 100px;
-    /* Shadows */
-    --shadow: 0 4px 24px rgba(0,0,0,0.5);
-    --shadow-lg: 0 20px 60px rgba(255,107,53,0.2);
-    --shadow-primary: 0 8px 32px rgba(255,107,53,0.45);
-    /* Motion */
-    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
-    /* Fonts */
-    --font-heading: 'Berkshire Swash', serif;
-    --font-body: 'Inter', sans-serif;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boomy Marketing — Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <style>
+    /* ── Design System page-local styles ── */
+    :root {
+      /* Boomy brand tokens (inlined for standalone use) */
+      --primary: #FF6B35;
+      --primary-dark: #e55a28;
+      --primary-glow: rgba(255,107,53,0.45);
+      --secondary: #7C3AED;
+      --accent: #FFD23F;
+      --bg: #100930;
+      --bg-surface: #1a0f3e;
+      --bg-soft: rgba(255,255,255,0.06);
+      --dark: #1a0f3e;
+      --hero-bg: linear-gradient(135deg, #1a0f3e 0%, #2D1B69 60%, #100930 100%);
+      --text-heading: #FFFFFF;
+      --text: rgba(255,255,255,0.78);
+      --text-muted: rgba(255,255,255,0.45);
+      --text-on-primary: #100930;
+      --logo-color: #FFFFFF;
+      --border-color: rgba(255,255,255,0.12);
+      --gradient-primary: linear-gradient(135deg, #FF6B35, #FFD23F);
+      --radius: 16px;
+      --radius-sm: 8px;
+      --radius-lg: 24px;
+      --radius-btn: 100px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.5);
+      --shadow-lg: 0 20px 60px rgba(255,107,53,0.2);
+      --shadow-primary: 0 8px 32px rgba(255,107,53,0.45);
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    .ds-page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 5% 120px;
+    }
+    .ds-header {
+      text-align: center;
+      margin-bottom: 80px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .ds-logo {
+      font-family: 'Berkshire Swash', cursive;
+      font-size: 2.8rem;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .ds-logo span {
+      background: linear-gradient(135deg, #FF6B35, #FFD23F);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .ds-version {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
+    .ds-section { margin-bottom: 72px; }
+    .ds-section-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 28px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
 
-  /* ── LAYOUT ── */
-  .ds-header {
-    background: var(--hero-bg);
-    border-bottom: 1px solid var(--border-color);
-    padding: 60px 40px 48px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .ds-header::before {
-    content: '';
-    position: absolute;
-    top: -80px; right: -80px;
-    width: 400px; height: 400px;
-    background: var(--primary-glow);
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-  }
-  .ds-logo {
-    font-family: var(--font-heading);
-    font-size: 48px;
-    color: var(--text-heading);
-    letter-spacing: -1px;
-    position: relative;
-    z-index: 1;
-  }
-  .ds-logo span { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .ds-tagline { font-size: 16px; color: var(--text-muted); margin-top: 8px; position: relative; z-index: 1; }
-  .ds-meta { margin-top: 20px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
-  .ds-meta-pill {
-    background: var(--bg-soft);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-btn);
-    padding: 6px 14px;
-    font-size: 13px;
-    color: var(--text-muted);
-  }
+    .swatches { display: flex; flex-wrap: wrap; gap: 16px; }
+    .swatch { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 80px; }
+    .swatch__box { width: 72px; height: 72px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; }
+    .swatch__name { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; color: rgba(255,255,255,0.5); text-align: center; }
+    .swatch__hex  { font-size: 0.65rem; color: rgba(255,255,255,0.3); text-align: center; }
 
-  .ds-nav {
-    background: var(--bg-surface);
-    border-bottom: 1px solid var(--border-color);
-    padding: 0 40px;
-    display: flex;
-    gap: 0;
-    overflow-x: auto;
-  }
-  .ds-nav a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
-    padding: 14px 16px;
-    border-bottom: 2px solid transparent;
-    white-space: nowrap;
-    transition: var(--transition);
-  }
-  .ds-nav a:hover { color: var(--primary); border-bottom-color: var(--primary); }
+    .type-row { display: flex; align-items: baseline; gap: 24px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .type-label { font-size: 0.7rem; color: rgba(255,255,255,0.3); width: 80px; flex-shrink: 0; letter-spacing: 0.08em; text-transform: uppercase; }
 
-  .ds-main { max-width: 1100px; margin: 0 auto; padding: 48px 40px 80px; }
+    .demo-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; }
+    .demo-grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
+    .demo-grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
 
-  .ds-section { margin-bottom: 72px; }
-  .ds-section-title {
-    font-family: var(--font-heading);
-    font-size: 28px;
-    color: var(--text-heading);
-    margin-bottom: 8px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border-color);
-  }
-  .ds-section-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 28px; }
-
-  /* ── COLORS ── */
-  .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; }
-  .color-swatch {
-    border-radius: var(--radius);
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-    background: var(--bg-surface);
-  }
-  .color-block { height: 110px; width: 100%; }
-  .color-info { padding: 10px 12px; }
-  .color-name { font-size: 11px; font-weight: 600; color: var(--text-heading); font-family: monospace; }
-  .color-hex { font-size: 11px; color: var(--text-muted); font-family: monospace; margin-top: 2px; }
-
-  /* ── TYPOGRAPHY ── */
-  .type-samples { display: flex; flex-direction: column; gap: 24px; }
-  .type-row {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius);
-    padding: 24px;
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: 16px;
-    align-items: center;
-  }
-  .type-label { font-size: 11px; font-weight: 600; color: var(--text-muted); font-family: monospace; text-transform: uppercase; letter-spacing: 0.08em; }
-  .t-h1 { font-family: var(--font-heading); font-size: 48px; color: var(--text-heading); line-height: 1.1; }
-  .t-h2 { font-family: var(--font-heading); font-size: 36px; color: var(--text-heading); line-height: 1.2; }
-  .t-h3 { font-family: var(--font-heading); font-size: 26px; color: var(--text-heading); line-height: 1.3; }
-  .t-h4 { font-family: var(--font-body); font-size: 20px; font-weight: 700; color: var(--text-heading); }
-  .t-body { font-size: 16px; color: var(--text); }
-  .t-small { font-size: 14px; color: var(--text-muted); }
-  .t-mono { font-family: monospace; font-size: 14px; color: var(--primary); }
-
-  /* ── BUTTONS ── */
-  .btn-grid { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 14px 28px;
-    border-radius: var(--radius-btn);
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    transition: var(--transition);
-    text-decoration: none;
-  }
-  .btn-primary {
-    background: var(--gradient-primary);
-    color: var(--text-on-primary);
-    box-shadow: var(--shadow-primary);
-  }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,107,53,0.55); }
-  .btn-ghost {
-    background: transparent;
-    color: var(--text-heading);
-    border: 1.5px solid var(--border-color);
-  }
-  .btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
-  .btn-secondary {
-    background: var(--secondary);
-    color: #fff;
-    box-shadow: 0 8px 24px rgba(124,58,237,0.35);
-  }
-  .btn-secondary:hover { transform: translateY(-2px); }
-  .btn-sm { padding: 9px 18px; font-size: 13px; }
-  .btn-label { font-size: 11px; color: var(--text-muted); font-family: monospace; white-space: nowrap; margin-top: 6px; text-align: center; }
-  .btn-item { display: flex; flex-direction: column; align-items: center; gap: 0; }
-
-  /* ── CARDS ── */
-  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
-  .card {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: 28px;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-  }
-  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(255,107,53,0.3); }
-  .card-icon {
-    width: 52px; height: 52px;
-    background: var(--gradient-primary);
-    border-radius: var(--radius);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px; margin-bottom: 16px;
-  }
-  .card-title { font-family: var(--font-heading); font-size: 20px; color: var(--text-heading); margin-bottom: 8px; }
-  .card-text { font-size: 14px; color: var(--text); }
-  .card-pricing { text-align: center; }
-  .card-pricing .price { font-family: var(--font-heading); font-size: 36px; color: var(--primary); }
-  .card-pricing .price-label { font-size: 13px; color: var(--text-muted); }
-  .card-pricing ul { list-style: none; margin: 16px 0; text-align: left; }
-  .card-pricing ul li { padding: 6px 0; font-size: 14px; color: var(--text); border-bottom: 1px solid var(--border-color); }
-  .card-pricing ul li::before { content: '✓ '; color: var(--primary); font-weight: 700; }
-  .card-aside {
-    background: linear-gradient(135deg, rgba(255,107,53,0.12), rgba(255,210,63,0.08));
-    border: 1px solid rgba(255,107,53,0.25);
-  }
-  .card-aside .aside-heading { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary); font-weight: 700; margin-bottom: 10px; }
-
-  /* ── COMPONENTS ── */
-  .comp-row { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; margin-bottom: 28px; }
-
-  .badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 5px 12px;
-    border-radius: var(--radius-btn);
-    font-size: 12px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 0.07em;
-  }
-  .badge-primary { background: rgba(255,107,53,0.18); color: var(--primary); border: 1px solid rgba(255,107,53,0.3); }
-  .badge-accent { background: rgba(255,210,63,0.18); color: var(--accent); border: 1px solid rgba(255,210,63,0.3); }
-  .badge-secondary { background: rgba(124,58,237,0.18); color: var(--secondary); border: 1px solid rgba(124,58,237,0.3); }
-  .badge-muted { background: var(--bg-soft); color: var(--text-muted); border: 1px solid var(--border-color); }
-
-  .faq-item {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius);
-    margin-bottom: 8px;
-    overflow: hidden;
-  }
-  .faq-q {
-    padding: 16px 20px;
-    font-weight: 600;
-    color: var(--text-heading);
-    display: flex; justify-content: space-between; align-items: center;
-    cursor: pointer;
-  }
-  .faq-q::after { content: '+'; color: var(--primary); font-size: 20px; font-weight: 300; }
-  .faq-a { padding: 0 20px 16px; font-size: 14px; color: var(--text); }
-
-  .nearby-pills { display: flex; gap: 8px; flex-wrap: wrap; }
-  .pill {
-    background: var(--bg-soft);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-btn);
-    padding: 6px 14px;
-    font-size: 13px;
-    color: var(--text);
-    text-decoration: none;
-    transition: var(--transition);
-  }
-  .pill:hover { border-color: var(--primary); color: var(--primary); background: rgba(255,107,53,0.08); }
-
-  .breadcrumb { display: flex; gap: 6px; align-items: center; font-size: 13px; color: var(--text-muted); }
-  .breadcrumb a { color: var(--primary); text-decoration: none; }
-  .breadcrumb span { color: var(--text-muted); }
-
-  .stats-bar {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius);
-    padding: 24px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    text-align: center;
-  }
-  .stat-val { font-family: var(--font-heading); font-size: 28px; color: var(--primary); }
-  .stat-lbl { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-
-  /* ── GRADIENTS & SHADOWS ── */
-  .grad-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
-  .grad-block {
-    border-radius: var(--radius);
-    height: 100px;
-    display: flex; align-items: flex-end;
-    padding: 12px;
-    font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.9);
-    font-family: monospace;
-    position: relative;
-    overflow: hidden;
-  }
-  .shadow-demo {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius);
-    padding: 24px;
-    font-size: 13px;
-    color: var(--text-muted);
-    text-align: center;
-    font-family: monospace;
-  }
-
-  /* ── TOKENS TABLE ── */
-  .tokens-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-    font-family: monospace;
-  }
-  .tokens-table th {
-    background: var(--bg-surface);
-    color: var(--text-muted);
-    text-align: left;
-    padding: 10px 14px;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    border-bottom: 1px solid var(--border-color);
-  }
-  .tokens-table td {
-    padding: 10px 14px;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--text);
-    vertical-align: middle;
-  }
-  .tokens-table tr:hover td { background: var(--bg-soft); }
-  .token-name { color: var(--primary); }
-  .token-dot { width: 20px; height: 20px; border-radius: 4px; display: inline-block; vertical-align: middle; border: 1px solid var(--border-color); }
-  .token-section-row td { background: var(--bg-surface); color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; padding: 6px 14px; }
-
-  /* ── FOOTER ── */
-  .ds-footer {
-    background: var(--bg-surface);
-    border-top: 1px solid var(--border-color);
-    text-align: center;
-    padding: 24px;
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-</style>
+    @media (max-width: 768px) {
+      .demo-grid-2, .demo-grid-3 { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="ds-header">
-  <div class="ds-logo">Boomy <span>Marketing</span></div>
-  <p class="ds-tagline">AI-Powered Marketing That Gets You Results</p>
-  <div class="ds-meta">
-    <span class="ds-meta-pill">boomymarketing.com</span>
-    <span class="ds-meta-pill">Toronto, ON, Canada</span>
-    <span class="ds-meta-pill">Berkshire Swash + Inter</span>
-    <span class="ds-meta-pill">Design System v1.0</span>
+<div class="site-wrapper ds-page">
+
+  <div class="ds-header">
+    <div class="ds-logo">Boomy<span>.</span></div>
+    <p style="color:rgba(255,255,255,0.55);margin-bottom:8px;">Design System &amp; Component Library</p>
+    <p class="ds-version">Version 3.1 &nbsp;·&nbsp; Updated 2026-05-29</p>
   </div>
-</header>
 
-<!-- NAV -->
-<nav class="ds-nav">
-  <a href="#colors">Colors</a>
-  <a href="#typography">Typography</a>
-  <a href="#buttons">Buttons</a>
-  <a href="#cards">Cards</a>
-  <a href="#components">Components</a>
-  <a href="#gradients">Gradients & Shadows</a>
-  <a href="#tokens">Design Tokens</a>
-</nav>
-
-<main class="ds-main">
-
-  <!-- COLORS -->
-  <section class="ds-section" id="colors">
-    <h2 class="ds-section-title">Color Palette</h2>
-    <p class="ds-section-desc">All brand colors and their CSS custom property names.</p>
-    <div class="color-grid">
-      <div class="color-swatch">
-        <div class="color-block" style="background:#FF6B35;"></div>
-        <div class="color-info"><div class="color-name">--primary</div><div class="color-hex">#FF6B35</div></div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-block" style="background:#e55a28;"></div>
-        <div class="color-info"><div class="color-name">--primary-dark</div><div class="color-hex">#e55a28</div></div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-block" style="background:#7C3AED;"></div>
-        <div class="color-info"><div class="color-name">--secondary</div><div class="color-hex">#7C3AED</div></div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-block" style="background:#FFD23F;"></div>
-        <div class="color-info"><div class="color-name">--accent</div><div class="color-hex">#FFD23F</div></div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-block" style="background:#100930;"></div>
-        <div class="color-info"><div class="color-name">--bg</div><div class="color-hex">#100930</div></div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-block" style="background:#1a0f3e;"></div>
-        <div class="color-info"><div class="color-name">--bg-surface</div><div class="color-hex">#1a0f3e</div></div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-block" style="background:#2D1B69;"></div>
-        <div class="color-info"><div class="color-name">--dark (mid)</div><div class="color-hex">#2D1B69</div></div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-block" style="background:#FFFFFF;"></div>
-        <div class="color-info"><div class="color-name">--text-heading</div><div class="color-hex">#FFFFFF</div></div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-block" style="background:rgba(255,255,255,0.78);"></div>
-        <div class="color-info"><div class="color-name">--text</div><div class="color-hex">rgba(255,255,255,.78)</div></div>
-      </div>
-      <div class="color-swatch">
-        <div class="color-block" style="background:rgba(255,255,255,0.45);"></div>
-        <div class="color-info"><div class="color-name">--text-muted</div><div class="color-hex">rgba(255,255,255,.45)</div></div>
-      </div>
+  <!-- 01 COLORS -->
+  <div class="ds-section">
+    <div class="ds-section-title">01 · Color Tokens</div>
+    <div class="swatches">
+      <div class="swatch"><div class="swatch__box" style="background:#FF6B35;"></div><div class="swatch__name">--primary</div><div class="swatch__hex">#FF6B35</div></div>
+      <div class="swatch"><div class="swatch__box" style="background:#e55a28;"></div><div class="swatch__name">--primary-dark</div><div class="swatch__hex">#e55a28</div></div>
+      <div class="swatch"><div class="swatch__box" style="background:#FFD23F;"></div><div class="swatch__name">--accent</div><div class="swatch__hex">#FFD23F</div></div>
+      <div class="swatch"><div class="swatch__box" style="background:#7C3AED;"></div><div class="swatch__name">--secondary</div><div class="swatch__hex">#7C3AED</div></div>
+      <div class="swatch"><div class="swatch__box" style="background:#100930;border-color:rgba(255,255,255,0.2);"></div><div class="swatch__name">--bg</div><div class="swatch__hex">#100930</div></div>
+      <div class="swatch"><div class="swatch__box" style="background:#1a0f3e;border-color:rgba(255,255,255,0.2);"></div><div class="swatch__name">--bg-surface</div><div class="swatch__hex">#1a0f3e</div></div>
+      <div class="swatch"><div class="swatch__box" style="background:#2D1B69;border-color:rgba(255,255,255,0.2);"></div><div class="swatch__name">--bg-deep</div><div class="swatch__hex">#2D1B69</div></div>
+      <div class="swatch"><div class="swatch__box" style="background:rgba(255,255,255,0.08);"></div><div class="swatch__name">--card-bg</div><div class="swatch__hex">rgba(fff,0.08)</div></div>
+      <div class="swatch"><div class="swatch__box" style="background:#FFFFFF;"></div><div class="swatch__name">--text-primary</div><div class="swatch__hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch__box" style="background:rgba(255,255,255,0.7);"></div><div class="swatch__name">--text-sec</div><div class="swatch__hex">rgba(fff,0.7)</div></div>
+      <div class="swatch"><div class="swatch__box" style="background:rgba(255,255,255,0.45);"></div><div class="swatch__name">--text-muted</div><div class="swatch__hex">rgba(fff,0.45)</div></div>
+      <div class="swatch"><div class="swatch__box" style="background:linear-gradient(135deg,#FF6B35,#FFD23F);"></div><div class="swatch__name">--gradient-primary</div><div class="swatch__hex">Orange→Yellow</div></div>
     </div>
-  </section>
+  </div>
 
-  <!-- TYPOGRAPHY -->
-  <section class="ds-section" id="typography">
-    <h2 class="ds-section-title">Typography</h2>
-    <p class="ds-section-desc">Heading font: Berkshire Swash (serif) — Body font: Inter (sans-serif)</p>
-    <div class="type-samples">
-      <div class="type-row">
-        <div class="type-label">H1 / 48px<br>Berkshire Swash</div>
-        <div class="t-h1">AI-Powered Marketing</div>
-      </div>
-      <div class="type-row">
-        <div class="type-label">H2 / 36px<br>Berkshire Swash</div>
-        <div class="t-h2">Grow Your Business Faster</div>
-      </div>
-      <div class="type-row">
-        <div class="type-label">H3 / 26px<br>Berkshire Swash</div>
-        <div class="t-h3">SEO Agency in Toronto</div>
-      </div>
-      <div class="type-row">
-        <div class="type-label">H4 / 20px<br>Inter 700</div>
-        <div class="t-h4">Our Core Services</div>
-      </div>
-      <div class="type-row">
-        <div class="type-label">Body / 16px<br>Inter 400</div>
-        <div class="t-body">We help Canadian businesses rank higher, attract more customers, and grow revenue through data-driven SEO, PPC, and content marketing strategies proven in the Toronto market.</div>
-      </div>
-      <div class="type-row">
-        <div class="type-label">Small / 14px<br>Inter 400 muted</div>
-        <div class="t-small">Results may vary. Based on average client data across 500+ campaigns managed since 2019. Past performance does not guarantee future results.</div>
-      </div>
-      <div class="type-row">
-        <div class="type-label">Mono / 14px<br>system-mono</div>
-        <div class="t-mono">--primary: #FF6B35; --radius: 16px;</div>
-      </div>
+  <!-- 02 TYPOGRAPHY -->
+  <div class="ds-section">
+    <div class="ds-section-title">02 · Typography Scale</div>
+    <div class="type-row"><span class="type-label">H1 / hero</span><h1 style="font-size:clamp(2.6rem,6vw,5.5rem);font-weight:900;line-height:1.05;margin:0;">Grow Smarter</h1></div>
+    <div class="type-row"><span class="type-label">H2 section</span><h2 style="font-size:clamp(2rem,4.5vw,3.5rem);font-weight:800;margin:0;">Marketing That Converts</h2></div>
+    <div class="type-row"><span class="type-label">H3 card</span><h3 style="font-size:var(--text-2xl);font-weight:700;margin:0;">SEO &amp; Content Strategy</h3></div>
+    <div class="type-row"><span class="type-label">H4 label</span><h4 style="font-size:var(--text-xl);font-weight:700;margin:0;">Organic Traffic Growth</h4></div>
+    <div class="type-row"><span class="type-label">Body base</span><p style="font-size:var(--text-base);color:var(--text-sec);margin:0;max-width:600px;">We help ambitious brands in Canada and beyond dominate search, social, and paid — with strategy built on data and executed with craft.</p></div>
+    <div class="type-row"><span class="type-label">Body muted</span><p style="font-size:var(--text-sm);color:var(--text-muted);margin:0;">Last updated · January 2026 · 5 min read</p></div>
+    <div class="type-row"><span class="type-label">Gradient text</span><span class="gradient-text" style="font-size:var(--text-3xl);font-weight:800;">Booming Results</span></div>
+    <div class="type-row"><span class="type-label">Section label</span><span class="section-label">✦ Our Services</span></div>
+  </div>
+
+  <!-- 03 BUTTONS -->
+  <div class="ds-section">
+    <div class="ds-section-title">03 · Buttons</div>
+    <div class="demo-row">
+      <a href="#" class="btn btn-primary">Get Started</a>
+      <a href="#" class="btn btn-ghost">View Case Studies</a>
+      <a href="#" class="btn btn-cta">Start Your Growth</a>
+      <a href="#" class="nav-cta btn">Book a Call</a>
     </div>
-  </section>
+  </div>
 
-  <!-- BUTTONS -->
-  <section class="ds-section" id="buttons">
-    <h2 class="ds-section-title">Buttons</h2>
-    <p class="ds-section-desc">All button variants. Hover over each to see the interaction state.</p>
-    <div class="btn-grid">
-      <div class="btn-item">
-        <button class="btn btn-primary">Get a Free Quote</button>
-        <div class="btn-label">.btn-primary</div>
-      </div>
-      <div class="btn-item">
-        <button class="btn btn-ghost">View Case Studies</button>
-        <div class="btn-label">.btn-ghost</div>
-      </div>
-      <div class="btn-item">
-        <button class="btn btn-secondary">Learn More</button>
-        <div class="btn-label">.btn-secondary</div>
-      </div>
-      <div class="btn-item">
-        <button class="btn btn-primary btn-sm">Start Today</button>
-        <div class="btn-label">.btn-primary.btn-sm</div>
-      </div>
-      <div class="btn-item">
-        <button class="btn btn-ghost btn-sm">See Pricing</button>
-        <div class="btn-label">.btn-ghost.btn-sm</div>
-      </div>
+  <!-- 04 SERVICE CARDS -->
+  <div class="ds-section">
+    <div class="ds-section-title">04 · Service Cards</div>
+    <div class="demo-grid-3">
+      <a href="#" class="service-card">
+        <span class="service-icon">📈</span>
+        <div class="service-name">SEO &amp; Content</div>
+        <p class="service-desc">Dominate search results with keyword strategies built for conversion, not just traffic.</p>
+        <span class="service-more">Learn more →</span>
+      </a>
+      <a href="#" class="service-card">
+        <span class="service-icon">🎯</span>
+        <div class="service-name">Paid Advertising</div>
+        <p class="service-desc">Google and Meta campaigns managed for maximum ROAS and predictable pipeline.</p>
+        <span class="service-more">Learn more →</span>
+      </a>
+      <a href="#" class="service-card">
+        <span class="service-icon">🤖</span>
+        <div class="service-name">AI Automation</div>
+        <p class="service-desc">Scale operations with intelligent workflows that work 24/7 without overhead.</p>
+        <span class="service-more">Learn more →</span>
+      </a>
     </div>
-  </section>
+  </div>
 
-  <!-- CARDS -->
-  <section class="ds-section" id="cards">
-    <h2 class="ds-section-title">Cards</h2>
-    <p class="ds-section-desc">Service card, pricing card, and sidebar aside card variants.</p>
-    <div class="cards-grid">
-      <!-- Service Card -->
-      <div class="card">
-        <div class="card-icon">🚀</div>
-        <div class="card-title">SEO Agency</div>
-        <div class="card-text">Dominate search rankings across Toronto and Canada with our AI-enhanced SEO service. We build authority, fix technical issues, and drive organic traffic that converts.</div>
-        <div style="margin-top:16px;"><button class="btn btn-primary btn-sm">Learn More</button></div>
-      </div>
-      <!-- Pricing Card -->
-      <div class="card card-pricing">
-        <div style="margin-bottom:8px;"><span class="badge badge-accent">Most Popular</span></div>
-        <div class="card-title">Growth Plan</div>
-        <div class="price">$3,500 <span style="font-size:18px;color:var(--text-muted);">CAD/mo</span></div>
-        <ul>
-          <li>Full SEO + Content Strategy</li>
-          <li>Monthly reporting dashboard</li>
-          <li>Google Ads management</li>
-          <li>Dedicated account manager</li>
+  <!-- 05 PRICING CARDS -->
+  <div class="ds-section">
+    <div class="ds-section-title">05 · Pricing Cards</div>
+    <div class="demo-grid-3">
+      <div class="pricing-card">
+        <div class="pricing-card__name">Starter</div>
+        <div><span class="pricing-card__price">$1,500<span class="pricing-card__period">/mo CAD</span></span></div>
+        <p class="pricing-card__desc">Perfect for growing SMBs ready to invest in organic growth.</p>
+        <ul class="pricing-card__features">
+          <li>SEO audit &amp; strategy</li>
+          <li>4 blog posts / month</li>
+          <li>Local SEO setup</li>
+          <li>Monthly reporting</li>
         </ul>
-        <button class="btn btn-primary" style="width:100%;">Get Started</button>
+        <a href="#" class="btn btn-ghost" style="width:100%;justify-content:center;">Get Started</a>
       </div>
-      <!-- Aside Card -->
-      <div class="card card-aside">
-        <div class="aside-heading">Quick Stats</div>
-        <div class="stats-bar" style="background:transparent;border:none;padding:0;">
-          <div><div class="stat-val">500+</div><div class="stat-lbl">Clients Served</div></div>
-          <div><div class="stat-val">98%</div><div class="stat-lbl">Retention Rate</div></div>
-          <div><div class="stat-val">$50M+</div><div class="stat-lbl">Revenue Generated</div></div>
+      <div class="pricing-card pricing-card--featured">
+        <div class="pricing-card__badge">Most Popular</div>
+        <div class="pricing-card__name">Growth</div>
+        <div><span class="pricing-card__price">$3,500<span class="pricing-card__period">/mo CAD</span></span></div>
+        <p class="pricing-card__desc">For brands serious about multi-channel dominance.</p>
+        <ul class="pricing-card__features">
+          <li>Full SEO + PPC management</li>
+          <li>10 content pieces / month</li>
+          <li>Social media strategy</li>
+          <li>Weekly calls + reporting</li>
+          <li>CRO recommendations</li>
+        </ul>
+        <a href="#" class="btn btn-primary" style="width:100%;justify-content:center;">Get Started</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-card__name">Scale</div>
+        <div><span class="pricing-card__price">$7,500<span class="pricing-card__period">/mo CAD</span></span></div>
+        <p class="pricing-card__desc">Enterprise-grade marketing for market leaders.</p>
+        <ul class="pricing-card__features">
+          <li>Full-service agency team</li>
+          <li>Unlimited content</li>
+          <li>Custom AI integrations</li>
+          <li>Dedicated account director</li>
+          <li>SLA + priority support</li>
+        </ul>
+        <a href="#" class="btn btn-ghost" style="width:100%;justify-content:center;">Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 AUTHOR BIO (new) -->
+  <div class="ds-section">
+    <div class="ds-section-title">06 · Author Bio (new)</div>
+    <div class="author-bio">
+      <div class="author-bio__avatar" aria-hidden="true">👤</div>
+      <div class="author-bio__body">
+        <div class="author-bio__name">Sarah Mitchell</div>
+        <div class="author-bio__title">Head of SEO Strategy at Boomy Marketing</div>
+        <div class="author-bio__credentials">
+          <span class="author-bio__cred">Google Analytics 4 Certified</span>
+          <span class="author-bio__cred">HubSpot Content Marketing</span>
+          <span class="author-bio__cred">8+ Years in Digital Marketing</span>
+        </div>
+        <p class="author-bio__text">Sarah leads SEO strategy for 40+ Canadian brands, specialising in B2B and e-commerce content programs that convert organic traffic into qualified leads. She writes on AI search, topical authority, and technical SEO best practices.</p>
+        <div class="author-bio__socials">
+          <a href="#" class="author-bio__social-link" aria-label="LinkedIn">in</a>
+          <a href="#" class="author-bio__social-link" aria-label="Twitter / X">𝕏</a>
+          <a href="#" class="author-bio__social-link" aria-label="Website">🌐</a>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- COMPONENTS -->
-  <section class="ds-section" id="components">
-    <h2 class="ds-section-title">Components</h2>
-    <p class="ds-section-desc">UI atoms and molecules used across all pages.</p>
-
-    <h3 style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Badges / Labels</h3>
-    <div class="comp-row">
-      <span class="badge badge-primary">SEO</span>
-      <span class="badge badge-accent">New</span>
-      <span class="badge badge-secondary">AI-Powered</span>
-      <span class="badge badge-muted">Canada</span>
-      <span class="badge badge-primary">✓ Verified</span>
-    </div>
-
-    <h3 style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">FAQ Item</h3>
-    <div class="faq-item">
-      <div class="faq-q">How long does SEO take to show results?</div>
-      <div class="faq-a">Most clients begin to see measurable ranking improvements within 60–90 days. Significant traffic gains typically occur within 4–6 months, depending on industry competition and starting domain authority.</div>
-    </div>
-    <div class="faq-item" style="margin-bottom:24px;">
-      <div class="faq-q">Do you work with businesses outside Toronto?</div>
-      <div class="faq-a">Yes — while we're headquartered in Toronto, we serve clients across all major Canadian cities including Vancouver, Calgary, Ottawa, and Montreal.</div>
-    </div>
-
-    <h3 style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Nearby City Pills</h3>
-    <div class="comp-row">
-      <div class="nearby-pills">
-        <a href="#" class="pill">Mississauga</a>
-        <a href="#" class="pill">Brampton</a>
-        <a href="#" class="pill">Markham</a>
-        <a href="#" class="pill">Oakville</a>
-        <a href="#" class="pill">Hamilton</a>
+  <!-- 07 TLDR BLOCK (new) -->
+  <div class="ds-section">
+    <div class="ds-section-title">07 · TLDR / Direct-Answer Block (new)</div>
+    <div class="tldr-block">
+      <div class="tldr-block__label">Quick Answer</div>
+      <div class="tldr-block__title">What is the best SEO agency in Toronto?</div>
+      <div class="tldr-block__body">
+        <p>Boomy Marketing consistently ranks as Toronto's top-rated SEO agency for SMBs and mid-market brands, with proven results across 500+ clients since 2019.</p>
+        <ul>
+          <li>Average 3.8× organic traffic growth in 6 months</li>
+          <li>98% client retention rate — highest in the market</li>
+          <li>Transparent reporting with weekly calls included</li>
+          <li>Certified Google Partners with Canadian market expertise</li>
+        </ul>
       </div>
     </div>
+  </div>
 
-    <h3 style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Breadcrumb</h3>
-    <div class="comp-row">
-      <nav class="breadcrumb">
-        <a href="#">Home</a>
-        <span>›</span>
-        <a href="#">Services</a>
-        <span>›</span>
-        <a href="#">Toronto</a>
-        <span>›</span>
-        <span style="color:var(--text);">SEO Agency Toronto</span>
-      </nav>
+  <!-- 08 LINK CLUSTER (new) -->
+  <div class="ds-section">
+    <div class="ds-section-title">08 · Internal Link Cluster (new)</div>
+    <div class="link-cluster">
+      <div class="link-cluster__heading">Related Services &amp; Locations</div>
+      <div class="link-cluster__grid">
+        <a href="#" class="link-cluster__item">SEO Agency Toronto</a>
+        <a href="#" class="link-cluster__item">PPC Management Toronto</a>
+        <a href="#" class="link-cluster__item">Content Marketing Toronto</a>
+        <a href="#" class="link-cluster__item">Social Media Agency Toronto</a>
+        <a href="#" class="link-cluster__item">SEO Agency Mississauga</a>
+        <a href="#" class="link-cluster__item">Digital Marketing Brampton</a>
+        <a href="#" class="link-cluster__item">SEO Agency Vaughan</a>
+        <a href="#" class="link-cluster__item">Marketing Agency Oakville</a>
+      </div>
     </div>
+  </div>
 
-    <h3 style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Stats Bar</h3>
+  <!-- 09 COMPARISON TABLE (new) -->
+  <div class="ds-section">
+    <div class="ds-section-title">09 · Comparison Table (new)</div>
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Boomy Marketing</th>
+            <th>Big Agency</th>
+            <th>Freelancer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="ct-best">
+            <td>Dedicated Strategist</td>
+            <td class="ct-check">✓ Always included</td>
+            <td class="ct-cross">Account manager only</td>
+            <td class="ct-check">✓ Direct access</td>
+          </tr>
+          <tr>
+            <td>Weekly Reporting</td>
+            <td class="ct-check">✓ Dashboard + calls</td>
+            <td class="ct-cross">Monthly reports</td>
+            <td class="ct-cross">Ad hoc</td>
+          </tr>
+          <tr class="ct-best">
+            <td>AI-Powered Tools</td>
+            <td class="ct-check">✓ Fully integrated</td>
+            <td class="ct-cross">Partial</td>
+            <td class="ct-cross">Rare</td>
+          </tr>
+          <tr>
+            <td>Canadian Market Expertise</td>
+            <td class="ct-check">✓ Toronto-native team</td>
+            <td class="ct-cross">Global generalists</td>
+            <td class="ct-cross">Varies</td>
+          </tr>
+          <tr>
+            <td>Contract Flexibility</td>
+            <td class="ct-check">✓ Month-to-month</td>
+            <td class="ct-cross">12-month lock-in</td>
+            <td class="ct-check">✓ Project-based</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 10 INDUSTRY BADGES (new) -->
+  <div class="ds-section">
+    <div class="ds-section-title">10 · Industry Badges (new)</div>
+    <div class="demo-row">
+      <span class="industry-badge">Healthcare</span>
+      <span class="industry-badge">Real Estate</span>
+      <span class="industry-badge">E-commerce</span>
+      <span class="industry-badge industry-badge--secondary">Finance</span>
+      <span class="industry-badge industry-badge--secondary">Legal</span>
+      <span class="industry-badge industry-badge--purple">SaaS</span>
+      <span class="industry-badge industry-badge--purple">Tech Startup</span>
+    </div>
+  </div>
+
+  <!-- 11 FAQ ACCORDION -->
+  <div class="ds-section">
+    <div class="ds-section-title">11 · FAQ Accordion</div>
+    <div class="faq-accordion" id="faqDemo">
+      <div class="faq-item open">
+        <div class="faq-question" role="button" tabindex="0">How long until I see SEO results?</div>
+        <div class="faq-answer">Most clients see measurable organic traffic growth within 3–6 months. Competitive markets like Toronto may take 6–9 months for significant ranking improvements, but quick wins (featured snippets, long-tail keywords) often appear within the first 60 days.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" role="button" tabindex="0">Do you work with small businesses?</div>
+        <div class="faq-answer">Absolutely. Our Starter plan at $1,500 CAD/mo is designed specifically for growing SMBs ready to invest in sustainable, long-term organic growth without enterprise-level spend.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" role="button" tabindex="0">Is there a contract lock-in period?</div>
+        <div class="faq-answer">No long-term contracts. We operate month-to-month because we believe the results should earn your continued partnership — not legal obligation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12 STATS BAR -->
+  <div class="ds-section">
+    <div class="ds-section-title">12 · Stats Bar</div>
     <div class="stats-bar">
-      <div><div class="stat-val">500+</div><div class="stat-lbl">Clients Served</div></div>
-      <div><div class="stat-val">98%</div><div class="stat-lbl">Client Retention</div></div>
-      <div><div class="stat-val">$50M+</div><div class="stat-lbl">Revenue Generated</div></div>
+      <div class="stats-inner">
+        <div class="stat-item"><div class="stat-value">500+</div><div class="stat-label">Clients Served</div></div>
+        <div class="stat-item"><div class="stat-value">98%</div><div class="stat-label">Retention Rate</div></div>
+        <div class="stat-item"><div class="stat-value">$50M+</div><div class="stat-label">Revenue Generated</div></div>
+        <div class="stat-item"><div class="stat-value">3.8×</div><div class="stat-label">Avg Traffic Growth</div></div>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- GRADIENTS & SHADOWS -->
-  <section class="ds-section" id="gradients">
-    <h2 class="ds-section-title">Gradients &amp; Shadows</h2>
-    <p class="ds-section-desc">Visual samples of all gradient and shadow tokens.</p>
-    <div class="grad-grid" style="margin-bottom:24px;">
-      <div class="grad-block" style="background:linear-gradient(135deg, #FF6B35, #FFD23F);">--gradient-primary</div>
-      <div class="grad-block" style="background:linear-gradient(135deg, #1a0f3e 0%, #2D1B69 60%, #100930 100%);">--hero-bg</div>
-      <div class="grad-block" style="background:rgba(255,107,53,0.45);">--primary-glow</div>
-      <div class="grad-block" style="background:linear-gradient(135deg,#7C3AED,#FF6B35);">secondary → primary</div>
+  <!-- 13 BREADCRUMB -->
+  <div class="ds-section">
+    <div class="ds-section-title">13 · Breadcrumb</div>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span aria-hidden="true">›</span>
+      <a href="/services/">Services</a><span aria-hidden="true">›</span>
+      <span aria-current="page">SEO Agency Toronto</span>
+    </nav>
+  </div>
+
+  <!-- 14 PAGE HERO PREVIEW -->
+  <div class="ds-section">
+    <div class="ds-section-title">14 · Page Hero (preview)</div>
+    <div class="page-hero" style="min-height:260px;padding-top:60px;padding-bottom:60px;border-radius:var(--r-lg);">
+      <div class="page-hero-inner">
+        <nav class="breadcrumb"><a href="/">Home</a><span>›</span><a href="/local/">Cities</a><span>›</span><span aria-current="page">SEO Agency Toronto</span></nav>
+        <h1 class="gradient-text">SEO Agency Toronto, ON</h1>
+        <p>Drive sustainable organic growth with Canada's most trusted AI-powered SEO team.</p>
+        <a href="/contact.html" class="btn btn-primary">Book a Free Strategy Call</a>
+      </div>
     </div>
-    <div class="grad-grid">
-      <div class="shadow-demo" style="box-shadow:0 4px 24px rgba(0,0,0,0.5);">--shadow<br>0 4px 24px rgba(0,0,0,0.5)</div>
-      <div class="shadow-demo" style="box-shadow:0 20px 60px rgba(255,107,53,0.2);">--shadow-lg<br>0 20px 60px rgba(255,107,53,0.2)</div>
-      <div class="shadow-demo" style="box-shadow:0 8px 32px rgba(255,107,53,0.45);">--shadow-primary<br>0 8px 32px rgba(255,107,53,0.45)</div>
+  </div>
+
+  <!-- 15 UTILITY CLASSES -->
+  <div class="ds-section">
+    <div class="ds-section-title">15 · Utility Classes</div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div><span class="section-label">✦ Utility Demo</span></div>
+      <div class="section-title">Section Title Class</div>
+      <div class="section-sub">Section sub — max-width 560px, muted color, 1.7 line-height. Used below section headings.</div>
     </div>
-  </section>
+  </div>
 
-  <!-- TOKENS TABLE -->
-  <section class="ds-section" id="tokens">
-    <h2 class="ds-section-title">Design Tokens</h2>
-    <p class="ds-section-desc">Complete reference of all CSS custom properties defined in :root.</p>
-    <table class="tokens-table">
-      <thead>
-        <tr><th>Token</th><th>Value</th><th>Preview</th></tr>
-      </thead>
-      <tbody>
-        <tr class="token-section-row"><td colspan="3">Brand Colors</td></tr>
-        <tr><td class="token-name">--primary</td><td>#FF6B35</td><td><span class="token-dot" style="background:#FF6B35;"></span></td></tr>
-        <tr><td class="token-name">--primary-dark</td><td>#e55a28</td><td><span class="token-dot" style="background:#e55a28;"></span></td></tr>
-        <tr><td class="token-name">--primary-glow</td><td>rgba(255,107,53,0.45)</td><td><span class="token-dot" style="background:rgba(255,107,53,0.45);"></span></td></tr>
-        <tr><td class="token-name">--secondary</td><td>#7C3AED</td><td><span class="token-dot" style="background:#7C3AED;"></span></td></tr>
-        <tr><td class="token-name">--accent</td><td>#FFD23F</td><td><span class="token-dot" style="background:#FFD23F;"></span></td></tr>
-        <tr class="token-section-row"><td colspan="3">Backgrounds</td></tr>
-        <tr><td class="token-name">--bg</td><td>#100930</td><td><span class="token-dot" style="background:#100930;"></span></td></tr>
-        <tr><td class="token-name">--bg-surface</td><td>#1a0f3e</td><td><span class="token-dot" style="background:#1a0f3e;"></span></td></tr>
-        <tr><td class="token-name">--bg-soft</td><td>rgba(255,255,255,0.06)</td><td><span class="token-dot" style="background:rgba(255,255,255,0.06);border-color:#333;"></span></td></tr>
-        <tr><td class="token-name">--dark</td><td>#1a0f3e</td><td><span class="token-dot" style="background:#1a0f3e;"></span></td></tr>
-        <tr><td class="token-name">--hero-bg</td><td>linear-gradient(135deg,#1a0f3e,#2D1B69,#100930)</td><td><span class="token-dot" style="background:linear-gradient(135deg,#1a0f3e,#2D1B69,#100930);"></span></td></tr>
-        <tr class="token-section-row"><td colspan="3">Text</td></tr>
-        <tr><td class="token-name">--text-heading</td><td>#FFFFFF</td><td><span class="token-dot" style="background:#FFFFFF;"></span></td></tr>
-        <tr><td class="token-name">--text</td><td>rgba(255,255,255,0.78)</td><td><span class="token-dot" style="background:rgba(255,255,255,0.78);"></span></td></tr>
-        <tr><td class="token-name">--text-muted</td><td>rgba(255,255,255,0.45)</td><td><span class="token-dot" style="background:rgba(255,255,255,0.45);"></span></td></tr>
-        <tr><td class="token-name">--text-on-primary</td><td>#100930</td><td><span class="token-dot" style="background:#100930;"></span></td></tr>
-        <tr><td class="token-name">--logo-color</td><td>#FFFFFF</td><td><span class="token-dot" style="background:#FFFFFF;"></span></td></tr>
-        <tr class="token-section-row"><td colspan="3">Borders &amp; Gradients</td></tr>
-        <tr><td class="token-name">--border-color</td><td>rgba(255,255,255,0.12)</td><td><span class="token-dot" style="background:rgba(255,255,255,0.12);border-color:#555;"></span></td></tr>
-        <tr><td class="token-name">--gradient-primary</td><td>linear-gradient(135deg, #FF6B35, #FFD23F)</td><td><span class="token-dot" style="background:linear-gradient(135deg,#FF6B35,#FFD23F);"></span></td></tr>
-        <tr class="token-section-row"><td colspan="3">Shape</td></tr>
-        <tr><td class="token-name">--radius</td><td>16px</td><td>—</td></tr>
-        <tr><td class="token-name">--radius-sm</td><td>8px</td><td>—</td></tr>
-        <tr><td class="token-name">--radius-lg</td><td>24px</td><td>—</td></tr>
-        <tr><td class="token-name">--radius-btn</td><td>100px</td><td>—</td></tr>
-        <tr class="token-section-row"><td colspan="3">Shadows</td></tr>
-        <tr><td class="token-name">--shadow</td><td>0 4px 24px rgba(0,0,0,0.5)</td><td>—</td></tr>
-        <tr><td class="token-name">--shadow-lg</td><td>0 20px 60px rgba(255,107,53,0.2)</td><td>—</td></tr>
-        <tr><td class="token-name">--shadow-primary</td><td>0 8px 32px rgba(255,107,53,0.45)</td><td>—</td></tr>
-        <tr class="token-section-row"><td colspan="3">Motion</td></tr>
-        <tr><td class="token-name">--transition</td><td>0.3s cubic-bezier(0.4,0,0.2,1)</td><td>—</td></tr>
-        <tr class="token-section-row"><td colspan="3">Typography</td></tr>
-        <tr><td class="token-name">--font-heading</td><td>'Berkshire Swash', serif</td><td>—</td></tr>
-        <tr><td class="token-name">--font-body</td><td>'Inter', sans-serif</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </section>
+</div><!-- /ds-page -->
 
-</main>
-
-<footer class="ds-footer">
-  Boomy Marketing Design System — boomymarketing.com — Toronto, ON, Canada &nbsp;·&nbsp; Generated 2026-03-09
-</footer>
-
+<script>
+  document.querySelectorAll('.faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = this.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
+      if (!isOpen) item.classList.add('open');
+    });
+    btn.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.click(); }
+    });
+  });
+</script>
 </body>
 </html>
