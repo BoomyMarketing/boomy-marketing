@@ -188,7 +188,7 @@ const pageStyle = `
 
   <section class="pricing-section" aria-labelledby="plans-heading">
     <h2 class="reveal" id="plans-heading" style="text-align:center;font-size:clamp(1.8rem,3.5vw,2.8rem);margin-bottom:48px;">
-      Choose Your <span class="gradient-text">Growth Plan</span>
+      What Each <span class="gradient-text">Package Includes</span>
     </h2>
     <div class="pricing-grid">
       {plans.map((plan) => (
@@ -198,17 +198,14 @@ const pageStyle = `
         >
           {plan.featured && <div class="featured-badge">Most Popular</div>}
           <div class="plan-name" style={plan.enterprise ? 'color:#a78bfa;' : ''}>{plan.name}</div>
-          <div class="plan-price" style={plan.enterprise ? 'font-size:2rem;' : ''}>
-            {plan.price} <span>tailored quote</span>
-          </div>
           <div class="plan-tagline">{plan.tagline}</div>
           <ul class="plan-features">
             {plan.features.map((f) => (
               <li class:list={[{ 'not-included': !f.included }]}>{f.text}</li>
             ))}
           </ul>
-          <a href={plan.cta.href} class:list={['btn', plan.cta.style]} style="width:100%;border-radius:var(--r-md);">
-            {plan.cta.text}
+          <a href="/contact" class:list={['btn', plan.cta.style]} style="width:100%;border-radius:var(--r-md);">
+            Request a Free Quote &rarr;
           </a>
         </div>
       ))}
