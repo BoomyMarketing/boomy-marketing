@@ -4,7 +4,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 const plans = [
   {
     name: 'Starter',
-    price: '$1,500',
+    price: 'Custom',
     tagline: 'For businesses ready to build a foundation. SEO + one marketing channel, monthly reporting.',
     featured: false,
     enterprise: false,
@@ -24,7 +24,7 @@ const plans = [
   },
   {
     name: 'Growth',
-    price: '$3,500',
+    price: 'Custom',
     tagline: 'For scaling businesses. Full SEO + paid ads + web updates + AI automations, bi-weekly calls.',
     featured: true,
     enterprise: false,
@@ -44,7 +44,7 @@ const plans = [
   },
   {
     name: 'Scale',
-    price: '$7,500',
+    price: 'Custom',
     tagline: 'Full-stack marketing with a dedicated team. AI development, all channels, maximum velocity.',
     featured: false,
     enterprise: false,
@@ -111,7 +111,7 @@ const schema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Pricing — Boomy Marketing Agency',
-  description: 'Transparent CAD pricing for digital marketing services. Starter from $1,500/mo, Growth $3,500/mo, Scale $7,500/mo, Enterprise custom.',
+  description: 'Transparent CAD pricing for digital marketing services. Custom pricing tailored to your goals — request a free quote.',
   url: 'https://boomymarketing.com/pricing/',
   breadcrumb: {
     '@type': 'BreadcrumbList',
@@ -166,8 +166,8 @@ const pageStyle = `
 ---
 
 <BaseLayout
-  title="Pricing — Digital Marketing Packages in CAD | Boomy Marketing"
-  description="Transparent CAD pricing. Starter $1,500/mo · Growth $3,500/mo · Scale $7,500/mo · Enterprise custom. No hidden fees. Cancel after 3 months."
+  title="Pricing — Custom Digital Marketing Quotes | Boomy Marketing"
+  description="Transparent CAD pricing. Custom pricing tailored to your business. Request a free, no-obligation quote. Month-to-month flexibility."
   canonical="https://boomymarketing.com/pricing/"
   schema={schema}
   {pageStyle}
@@ -180,7 +180,7 @@ const pageStyle = `
       <div class="section-label reveal">💰 Transparent Pricing</div>
       <h1 id="pricing-heading" class="reveal">
         Simple, Honest Pricing<br />
-        <span class="gradient-text">In CAD — No Surprises</span>
+        <span class="gradient-text">Tailored to Your Goals</span>
       </h1>
       <p class="reveal">No hidden fees. No surprise invoices. Every package includes clear deliverables, direct access to your team, and real-time performance dashboards. Cancel anytime after 3 months.</p>
     </div>
@@ -199,7 +199,7 @@ const pageStyle = `
           {plan.featured && <div class="featured-badge">Most Popular</div>}
           <div class="plan-name" style={plan.enterprise ? 'color:#a78bfa;' : ''}>{plan.name}</div>
           <div class="plan-price" style={plan.enterprise ? 'font-size:2rem;' : ''}>
-            {plan.price} {!plan.enterprise && <span>CAD/mo</span>}
+            {plan.price} <span>tailored quote</span>
           </div>
           <div class="plan-tagline">{plan.tagline}</div>
           <ul class="plan-features">
@@ -215,7 +215,7 @@ const pageStyle = `
     </div>
 
     <div style="text-align:center;margin-top:48px;color:var(--text-sec);font-size:.9rem;">
-      All prices in CAD. HST added where applicable. Month-to-month after initial 3-month commitment. Prices subject to change — locked in once contract signed.
+      Every engagement is scoped to your goals and budget. Month-to-month flexibility after an initial 3-month commitment. Request a free quote — no obligation.
     </div>
   </section>
 
