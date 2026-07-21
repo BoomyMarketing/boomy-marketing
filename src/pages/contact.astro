@@ -157,7 +157,7 @@ const pageStyle = `
           <div class="form-title">Send Us a Message</div>
           <div class="form-sub">Tell us about your business and goals. We'll be in touch within 1 business day.</div>
 
-          <form id="contactForm" novalidate>
+          <form id="contactForm" action="/api/contact" novalidate>
             <div class="form-trap" aria-hidden="true">
               <label for="contact-company">Company website</label>
               <input type="text" id="contact-company" name="contact_company" tabindex="-1" autocomplete="off" />
@@ -300,6 +300,7 @@ const pageStyle = `
       contact_company: raw.contact_company || undefined,
       form_type: raw.form_type,
       form_started_at: raw.form_started_at,
+      cf_turnstile_response: raw['cf-turnstile-response'],
     };
 
     const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;

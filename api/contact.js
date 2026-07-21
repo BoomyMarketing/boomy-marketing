@@ -2,6 +2,7 @@ const SITE_LABEL = 'Boomy Marketing';
 const FROM_EMAIL = 'Boomy Marketing <leads@boomymarketing.com>';
 const TO_EMAILS = ['boomymarketing.com@gmail.com', 'evgeniygalyas@gmail.com'];
 const RESEND_URL = 'https://api.resend.com/emails';
+const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 const ALLOWED_ORIGINS = new Set([
   'https://boomymarketing.com',
   'https://www.boomymarketing.com',
@@ -66,10 +67,49 @@ function looksLikeRandomToken(value) {
 function isObviousSpam({ name, email, message }) {
   const emailName = email.split('@')[0] || '';
   const linkCount = (message.match(/(?:https?:\/\/|www\.)\S+/gi) || []).length;
+  const gamblingPromo = /(?:mostbet|1xbet|casino|казино|ставк[аи]|букмекер|промокод)/i.test(`${name} ${email} ${message}`);
   const generatedEmailName = looksLikeRandomToken(emailName)
     || (emailName.length >= 12 && /^[a-z0-9]+(?:\.[a-z0-9]+){3,}$/i.test(emailName));
-  if (linkCount >= 4) return true;
+  if (linkCount >= 4 || /<\/?a\b[^>]*>/i.test(message) || (gamblingPromo && linkCount >= 1)) return true;
   return looksLikeRandomToken(name) && generatedEmailName && looksLikeRandomToken(message);
+}
+
+function getTurnstileConfig() {
+  const siteKey = process.env.TURNSTILE_SITE_KEY || process.env.TURNSTILE_SITEKEY || '';
+  const secretKey = process.env.TURNSTILE_SECRET_KEY || '';
+  return { enabled: Boolean(siteKey && secretKey), secretKey };
+}
+
+async function verifyTurnstile(token, ip) {
+  const { enabled, secretKey } = getTurnstileConfig();
+  if (!enabled) return true;
+  if (!token) return false;
+
+  const payload = new URLSearchParams({ secret: secretKey, response: token });
+  if (ip && ip !== 'unknown') payload.set('remoteip', ip);
+
+  try {
+    const response = await fetch(TURNSTILE_VERIFY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: payload.toString(),
+    });
+    if (!response.ok) {
+      console.error(`Turnstile verification unavailable: HTTP ${response.status}`);
+      return true;
+    }
+
+    const result = await response.json();
+    if (!result.success) return false;
+    if (result.action && result.action !== 'contact') return false;
+    if (result.hostname && !['boomymarketing.com', 'www.boomymarketing.com', 'localhost'].includes(result.hostname)) {
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error('Turnstile verification unavailable:', error.message);
+    return true;
+  }
 }
 
 function getFormType({ requestedType, service, budget, consent, source, city, message }) {
@@ -125,6 +165,7 @@ module.exports = async (req, res) => {
   const budget = pick(body, 'budget', 'monthly_budget', 'monthlyBudget');
   const consent = pick(body, 'consent', 'gdpr');
   const source = pick(body, 'source', 'page_url', 'referrer');
+  const turnstileToken = pick(body, 'cf-turnstile-response', 'cf_turnstile_response', 'turnstile_token');
   const honeypot = pick(body, 'contact_company');
   const requestedType = pick(body, 'form_type');
   const formType = getFormType({ requestedType, service, budget, consent, source, city, message });
@@ -138,8 +179,13 @@ module.exports = async (req, res) => {
   }
 
   const now = Date.now();
-  if (isRateLimited(getClientIp(req), now)) {
+  const clientIp = getClientIp(req);
+  if (isRateLimited(clientIp, now)) {
     return res.status(429).json({ error: 'Too many submissions. Please try again later.' });
+  }
+
+  if (!await verifyTurnstile(turnstileToken, clientIp)) {
+    return res.status(400).json({ error: 'Please complete the security check.' });
   }
 
   const subject = `NEW LEAD [${SITE_LABEL}]${service ? ` - ${service}` : ''}${city ? ` in ${city}` : ''}`;

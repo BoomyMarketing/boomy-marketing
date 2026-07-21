@@ -46,6 +46,7 @@ const trustItems = [
     <form
       class="cta-form reveal"
       id="ctaForm"
+      action="/api/contact"
       novalidate
       aria-label="Request a free strategy session"
     >
@@ -110,6 +111,7 @@ const trustItems = [
           email: val,
           name: val.split('@')[0],
           contact_company: String(new FormData(ctaForm).get('contact_company') ?? ''),
+          cf_turnstile_response: String(new FormData(ctaForm).get('cf-turnstile-response') ?? ''),
         }),
       })
         .then((res) => {
