@@ -1775,7 +1775,7 @@ def build_lb_schema(city_slug: str, city: dict) -> str:
         "@type": ["LocalBusiness", "MarketingAgency"],
         "name": "Boomy Marketing Agency",
         "description": f"E-commerce SEO Agency services in {city['name']}",
-        "url": f"https://boomymarketing.com/local/{city_slug}/ecommerce-seo-agency",
+        "url": f"https://boomymarketing.com/ecommerce-seo-agency/{city_slug}",
         "telephone": "+16473701888",
         "email": "care@boomymarketing.com",
         "address": {
@@ -1864,9 +1864,9 @@ def build_bc_schema(city_slug: str, city: dict) -> str:
         "@type": "BreadcrumbList",
         "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://boomymarketing.com"},
-            {"@type": "ListItem", "position": 2, "name": "Local", "item": "https://boomymarketing.com/local/"},
+            {"@type": "ListItem", "position": 2, "name": "Locations", "item": "https://boomymarketing.com/locations"},
             {"@type": "ListItem", "position": 3, "name": f"E-commerce SEO Agency in {city['name']}",
-             "item": f"https://boomymarketing.com/local/{city_slug}/ecommerce-seo-agency"},
+             "item": f"https://boomymarketing.com/ecommerce-seo-agency/{city_slug}"},
         ],
     }
     return json.dumps(data, ensure_ascii=False)
@@ -1902,7 +1902,7 @@ def build_html(city_slug: str, city: dict) -> str:
 
     # Nearby cities
     nearby_li = "\n".join(
-        f'  <li><a href="https://boomymarketing.com/local/{slug}/ecommerce-seo-agency">E-commerce SEO in {label}</a></li>'
+        f'  <li><a href="https://boomymarketing.com/ecommerce-seo-agency/{slug}">E-commerce SEO in {label}</a></li>'
         for slug, label in city["nearby"]
     )
 
@@ -1966,7 +1966,7 @@ def build_html(city_slug: str, city: dict) -> str:
     <meta name="robots" content="index, follow">
     <title>{city["title"]}</title>
     <meta name="description" content="{city["meta_desc"]}">
-    <link rel="canonical" href="https://boomymarketing.com/local/{city_slug}/ecommerce-seo-agency">
+    <link rel="canonical" href="https://boomymarketing.com/ecommerce-seo-agency/{city_slug}">
     <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
     <link rel="icon" type="image/png" href="/assets/images/favicon-32.png" sizes="32x32">
     <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
@@ -1975,7 +1975,7 @@ def build_html(city_slug: str, city: dict) -> str:
 
     <meta property="og:title" content="{city["title"]}">
     <meta property="og:description" content="{city["meta_desc"]}">
-    <meta property="og:url" content="https://boomymarketing.com/local/{city_slug}/ecommerce-seo-agency">
+    <meta property="og:url" content="https://boomymarketing.com/ecommerce-seo-agency/{city_slug}">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://boomymarketing.com/img/og-default.jpg">
     <meta property="og:site_name" content="Boomy Marketing">
@@ -2432,12 +2432,12 @@ def build_html(city_slug: str, city: dict) -> str:
           <div class="footer-col">
             <h4>Top Locations</h4>
             <ul>
-              <li><a href="../../../local/toronto/ecommerce-seo-agency/index.html">E-commerce SEO Toronto</a></li>
-              <li><a href="../../../local/vancouver/ecommerce-seo-agency/index.html">E-commerce SEO Vancouver</a></li>
-              <li><a href="../../../local/calgary/ecommerce-seo-agency/index.html">E-commerce SEO Calgary</a></li>
-              <li><a href="../../../local/toronto/seo-agency/index.html">SEO Agency Toronto</a></li>
-              <li><a href="../../../local/toronto/google-ads-agency/index.html">Google Ads Toronto</a></li>
-              <li><a href="../../../local/ottawa/seo-agency/index.html">SEO Agency Ottawa</a></li>
+              <li><a href="/ecommerce-seo-agency/toronto">E-commerce SEO Toronto</a></li>
+              <li><a href="/ecommerce-seo-agency/vancouver">E-commerce SEO Vancouver</a></li>
+              <li><a href="/ecommerce-seo-agency/calgary">E-commerce SEO Calgary</a></li>
+              <li><a href="/seo-agency/toronto">SEO Agency Toronto</a></li>
+              <li><a href="/google-ads-agency/toronto">Google Ads Toronto</a></li>
+              <li><a href="/seo-agency/ottawa">SEO Agency Ottawa</a></li>
             </ul>
           </div>
           <div class="footer-col">
