@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "test": "node --test api/contact.test.js"
   },
   "dependencies": {
     "nodemailer": "^6.9.0"

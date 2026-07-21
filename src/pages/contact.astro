@@ -62,6 +62,7 @@ const pageStyle = `
   select.form-input { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a0a0b0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
   select.form-input option { background: var(--bg-deep, #1a0a4a); color: var(--text-primary, #fff); }
   .form-textarea { min-height: 130px; resize: vertical; font-family: inherit; }
+  .form-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
   .form-consent { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; font-size: .82rem; color: var(--text-muted); line-height: 1.5; }
   .form-consent input { margin-top: 3px; flex-shrink: 0; accent-color: var(--accent-orange); }
   .form-submit { width: 100%; background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); color: var(--bg-darkest); border: none; border-radius: var(--r-md); padding: 16px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: opacity .2s, transform .2s; }
@@ -157,6 +158,12 @@ const pageStyle = `
           <div class="form-sub">Tell us about your business and goals. We'll be in touch within 1 business day.</div>
 
           <form id="contactForm" novalidate>
+            <div class="form-trap" aria-hidden="true">
+              <label for="contact-company">Company website</label>
+              <input type="text" id="contact-company" name="contact_company" tabindex="-1" autocomplete="off" />
+            </div>
+            <input type="hidden" name="form_type" value="contact" />
+            <input type="hidden" name="form_started_at" />
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="fname">First Name <span class="req">*</span></label>
@@ -270,6 +277,8 @@ const pageStyle = `
 <script>
   const form = document.getElementById('contactForm') as HTMLFormElement | null;
   const successMsg = document.getElementById('successMsg');
+  const startedAtInput = form?.querySelector<HTMLInputElement>('input[name="form_started_at"]');
+  if (startedAtInput) startedAtInput.value = String(Date.now());
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -285,7 +294,12 @@ const pageStyle = `
       email: raw.email,
       phone: raw.phone || undefined,
       service: raw.service || undefined,
+      budget: raw.budget || undefined,
       message: raw.message || undefined,
+      consent: raw.consent || undefined,
+      contact_company: raw.contact_company || undefined,
+      form_type: raw.form_type,
+      form_started_at: raw.form_started_at,
     };
 
     const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;

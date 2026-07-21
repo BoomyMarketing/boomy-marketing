@@ -73,7 +73,7 @@ def read_date(html_path):
 
 
 def refresh_sitemap():
-    """Preserve existing URL set, drop /local/, refresh lastmod from HTML."""
+    """Preserve existing URL set, drop legacy paths, refresh lastmod from HTML."""
     sm_path = SITE_ROOT / "sitemap.xml"
     content = sm_path.read_text(encoding="utf-8")
     blocks = re.findall(r"<url>.*?</url>", content, re.DOTALL)
@@ -85,7 +85,7 @@ def refresh_sitemap():
         if not loc_m:
             continue
         url = loc_m.group(1).strip()
-        if "/local/" in url:          # never keep legacy URLs
+        if "/local/" in url or "/dist/" in url:  # never keep build output URLs
             continue
         html_path = url_to_html(url)
         if html_path:
@@ -114,7 +114,7 @@ if __name__ == "__main__":
     print("robots.txt: clean Allow: /")
 
     count, new_today = refresh_sitemap()
-    print(f"sitemap.xml: {count} URLs (0 /local/)")
+    print(f"sitemap.xml: {count} URLs (0 /local/ or /dist/)")
 
     # IndexNow — notify Bing of pages published today (usually none post-migration)
     if new_today:
