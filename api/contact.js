@@ -2,7 +2,8 @@ const SITE_LABEL = 'Boomy Marketing';
 const FROM_EMAIL = 'Boomy Marketing <leads@boomymarketing.com>';
 const TO_EMAILS = ['boomymarketing.com@gmail.com', 'evgeniygalyas@gmail.com'];
 const RESEND_URL = 'https://api.resend.com/emails';
-const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+const RECAPTCHA_ACTION = 'contact';
+const RECAPTCHA_MIN_SCORE = 0.3;
 const ALLOWED_ORIGINS = new Set([
   'https://boomymarketing.com',
   'https://www.boomymarketing.com',
@@ -74,40 +75,49 @@ function isObviousSpam({ name, email, message }) {
   return looksLikeRandomToken(name) && generatedEmailName && looksLikeRandomToken(message);
 }
 
-function getTurnstileConfig() {
-  const siteKey = process.env.TURNSTILE_SITE_KEY || process.env.TURNSTILE_SITEKEY || '';
-  const secretKey = process.env.TURNSTILE_SECRET_KEY || '';
-  return { enabled: Boolean(siteKey && secretKey), secretKey };
+function getRecaptchaConfig() {
+  const projectId = process.env.RECAPTCHA_PROJECT_ID || '';
+  const siteKey = process.env.RECAPTCHA_SITE_KEY || '';
+  const apiKey = process.env.RECAPTCHA_API_KEY || '';
+  return { enabled: Boolean(projectId && siteKey && apiKey), projectId, siteKey, apiKey };
 }
 
-async function verifyTurnstile(token, ip) {
-  const { enabled, secretKey } = getTurnstileConfig();
+async function verifyRecaptcha(token, ip, userAgent) {
+  const { enabled, projectId, siteKey, apiKey } = getRecaptchaConfig();
   if (!enabled) return true;
   if (!token) return false;
 
-  const payload = new URLSearchParams({ secret: secretKey, response: token });
-  if (ip && ip !== 'unknown') payload.set('remoteip', ip);
+  const event = {
+    token,
+    siteKey,
+    expectedAction: RECAPTCHA_ACTION,
+  };
+  if (ip && ip !== 'unknown') event.userIpAddress = ip;
+  if (userAgent) event.userAgent = userAgent;
 
   try {
-    const response = await fetch(TURNSTILE_VERIFY_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: payload.toString(),
-    });
+    const response = await fetch(
+      `https://recaptchaenterprise.googleapis.com/v1/projects/${encodeURIComponent(projectId)}/assessments?key=${encodeURIComponent(apiKey)}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ event }),
+      },
+    );
     if (!response.ok) {
-      console.error(`Turnstile verification unavailable: HTTP ${response.status}`);
+      console.error(`reCAPTCHA verification unavailable: HTTP ${response.status}`);
       return true;
     }
 
     const result = await response.json();
-    if (!result.success) return false;
-    if (result.action && result.action !== 'contact') return false;
-    if (result.hostname && !['boomymarketing.com', 'www.boomymarketing.com', 'localhost'].includes(result.hostname)) {
-      return false;
-    }
-    return true;
+    const properties = result.tokenProperties || {};
+    if (!properties.valid || properties.action !== RECAPTCHA_ACTION) return false;
+    if (!['boomymarketing.com', 'www.boomymarketing.com', 'localhost'].includes(properties.hostname)) return false;
+
+    const score = result.riskAnalysis?.score;
+    return typeof score !== 'number' || score >= RECAPTCHA_MIN_SCORE;
   } catch (error) {
-    console.error('Turnstile verification unavailable:', error.message);
+    console.error('reCAPTCHA verification unavailable:', error.message);
     return true;
   }
 }
@@ -165,7 +175,7 @@ module.exports = async (req, res) => {
   const budget = pick(body, 'budget', 'monthly_budget', 'monthlyBudget');
   const consent = pick(body, 'consent', 'gdpr');
   const source = pick(body, 'source', 'page_url', 'referrer');
-  const turnstileToken = pick(body, 'cf-turnstile-response', 'cf_turnstile_response', 'turnstile_token');
+  const recaptchaToken = pick(body, 'g-recaptcha-response', 'recaptcha_token');
   const honeypot = pick(body, 'contact_company');
   const requestedType = pick(body, 'form_type');
   const formType = getFormType({ requestedType, service, budget, consent, source, city, message });
@@ -184,7 +194,7 @@ module.exports = async (req, res) => {
     return res.status(429).json({ error: 'Too many submissions. Please try again later.' });
   }
 
-  if (!await verifyTurnstile(turnstileToken, clientIp)) {
+  if (!await verifyRecaptcha(recaptchaToken, clientIp, req.headers?.['user-agent'])) {
     return res.status(400).json({ error: 'Please complete the security check.' });
   }
 

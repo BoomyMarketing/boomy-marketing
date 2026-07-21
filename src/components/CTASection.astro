@@ -111,7 +111,7 @@ const trustItems = [
           email: val,
           name: val.split('@')[0],
           contact_company: String(new FormData(ctaForm).get('contact_company') ?? ''),
-          cf_turnstile_response: String(new FormData(ctaForm).get('cf-turnstile-response') ?? ''),
+          recaptcha_token: String(new FormData(ctaForm).get('g-recaptcha-response') ?? ''),
         }),
       })
         .then((res) => {

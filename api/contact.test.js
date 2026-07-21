@@ -1,7 +1,7 @@
 const assert = require('node:assert/strict');
 const test = require('node:test');
 const handler = require('./contact');
-const turnstileConfigHandler = require('./turnstile-config');
+const recaptchaConfigHandler = require('./recaptcha-config');
 
 function createResponse() {
   return {
@@ -22,58 +22,68 @@ function createResponse() {
   };
 }
 
-test('only exposes the public Turnstile site key when both keys are configured', () => {
-  const originalSiteKey = process.env.TURNSTILE_SITE_KEY;
-  const originalSecretKey = process.env.TURNSTILE_SECRET_KEY;
-  process.env.TURNSTILE_SITE_KEY = 'public-site-key';
-  process.env.TURNSTILE_SECRET_KEY = 'private-secret-key';
+test('only exposes the public reCAPTCHA site key when all server settings are configured', () => {
+  const originalProjectId = process.env.RECAPTCHA_PROJECT_ID;
+  const originalSiteKey = process.env.RECAPTCHA_SITE_KEY;
+  const originalApiKey = process.env.RECAPTCHA_API_KEY;
+  process.env.RECAPTCHA_PROJECT_ID = 'test-project';
+  process.env.RECAPTCHA_SITE_KEY = 'public-site-key';
+  process.env.RECAPTCHA_API_KEY = 'private-api-key';
   const response = createResponse();
 
   try {
-    turnstileConfigHandler({}, response);
+    recaptchaConfigHandler({}, response);
   } finally {
-    if (originalSiteKey == null) delete process.env.TURNSTILE_SITE_KEY;
-    else process.env.TURNSTILE_SITE_KEY = originalSiteKey;
-    if (originalSecretKey == null) delete process.env.TURNSTILE_SECRET_KEY;
-    else process.env.TURNSTILE_SECRET_KEY = originalSecretKey;
+    if (originalProjectId == null) delete process.env.RECAPTCHA_PROJECT_ID;
+    else process.env.RECAPTCHA_PROJECT_ID = originalProjectId;
+    if (originalSiteKey == null) delete process.env.RECAPTCHA_SITE_KEY;
+    else process.env.RECAPTCHA_SITE_KEY = originalSiteKey;
+    if (originalApiKey == null) delete process.env.RECAPTCHA_API_KEY;
+    else process.env.RECAPTCHA_API_KEY = originalApiKey;
   }
 
   assert.equal(response.statusCode, 200);
   assert.deepEqual(response.body, { enabled: true, siteKey: 'public-site-key' });
   assert.equal(response.headers['Cache-Control'], 'no-store');
-  assert.doesNotMatch(JSON.stringify(response.body), /private-secret-key/);
+  assert.doesNotMatch(JSON.stringify(response.body), /private-api-key|test-project/);
 });
 
 async function submit(body, ip, options = {}) {
   const response = createResponse();
   const originalFetch = global.fetch;
-  const originalSiteKey = process.env.TURNSTILE_SITE_KEY;
-  const originalSecretKey = process.env.TURNSTILE_SECRET_KEY;
+  const originalProjectId = process.env.RECAPTCHA_PROJECT_ID;
+  const originalSiteKey = process.env.RECAPTCHA_SITE_KEY;
+  const originalApiKey = process.env.RECAPTCHA_API_KEY;
   let sendCalls = 0;
   let verifyCalls = 0;
   let sentEmail;
   let verificationBody;
 
-  if (options.turnstile) {
-    process.env.TURNSTILE_SITE_KEY = '1x00000000000000000000AA';
-    process.env.TURNSTILE_SECRET_KEY = '1x0000000000000000000000000000000AA';
+  if (options.recaptcha) {
+    process.env.RECAPTCHA_PROJECT_ID = 'test-project';
+    process.env.RECAPTCHA_SITE_KEY = 'test-site-key';
+    process.env.RECAPTCHA_API_KEY = 'test-api-key';
   } else {
-    delete process.env.TURNSTILE_SITE_KEY;
-    delete process.env.TURNSTILE_SECRET_KEY;
+    delete process.env.RECAPTCHA_PROJECT_ID;
+    delete process.env.RECAPTCHA_SITE_KEY;
+    delete process.env.RECAPTCHA_API_KEY;
   }
 
   global.fetch = async (url, fetchOptions) => {
-    if (String(url).includes('/turnstile/v0/siteverify')) {
+    if (String(url).includes('recaptchaenterprise.googleapis.com')) {
       verifyCalls += 1;
-      verificationBody = new URLSearchParams(fetchOptions.body);
-      if (options.verificationError) throw new Error('Turnstile unavailable');
+      verificationBody = JSON.parse(fetchOptions.body);
+      if (options.verificationError) throw new Error('reCAPTCHA unavailable');
       return {
         ok: options.verificationHttpOk !== false,
         status: options.verificationHttpOk === false ? 503 : 200,
         json: async () => options.verificationResult || {
-          success: true,
-          action: 'contact',
-          hostname: 'boomymarketing.com',
+          tokenProperties: {
+            valid: true,
+            action: 'contact',
+            hostname: 'boomymarketing.com',
+          },
+          riskAnalysis: { score: 0.9 },
         },
       };
     }
@@ -91,10 +101,12 @@ async function submit(body, ip, options = {}) {
     }, response);
   } finally {
     global.fetch = originalFetch;
-    if (originalSiteKey == null) delete process.env.TURNSTILE_SITE_KEY;
-    else process.env.TURNSTILE_SITE_KEY = originalSiteKey;
-    if (originalSecretKey == null) delete process.env.TURNSTILE_SECRET_KEY;
-    else process.env.TURNSTILE_SECRET_KEY = originalSecretKey;
+    if (originalProjectId == null) delete process.env.RECAPTCHA_PROJECT_ID;
+    else process.env.RECAPTCHA_PROJECT_ID = originalProjectId;
+    if (originalSiteKey == null) delete process.env.RECAPTCHA_SITE_KEY;
+    else process.env.RECAPTCHA_SITE_KEY = originalSiteKey;
+    if (originalApiKey == null) delete process.env.RECAPTCHA_API_KEY;
+    else process.env.RECAPTCHA_API_KEY = originalApiKey;
   }
 
   return { response, sendCalls, verifyCalls, verificationBody, sentEmail };
@@ -202,48 +214,52 @@ test('does not reject a legitimate Russian-language enquiry', async () => {
   assert.equal(sendCalls, 1);
 });
 
-test('requires a Turnstile token when production keys are configured', async () => {
+test('requires a reCAPTCHA token when production keys are configured', async () => {
   const { response, sendCalls, verifyCalls } = await submit({
     name: 'Jane Smith',
     email: 'jane@company.com',
     service: 'seo agency',
     city: 'Toronto',
     message: 'We need help with local SEO.',
-  }, '198.51.100.9', { turnstile: true });
+  }, '198.51.100.9', { recaptcha: true });
 
   assert.equal(response.statusCode, 400);
   assert.equal(sendCalls, 0);
   assert.equal(verifyCalls, 0);
 });
 
-test('accepts a normal lead after successful Turnstile verification', async () => {
+test('accepts a normal lead after successful reCAPTCHA verification', async () => {
   const { response, sendCalls, verifyCalls, verificationBody } = await submit({
     name: 'Jane Smith',
     email: 'jane@company.com',
     service: 'seo agency',
     city: 'Toronto',
     message: 'We need help with local SEO.',
-    cf_turnstile_response: 'valid-test-token',
-  }, '198.51.100.10', { turnstile: true });
+    recaptcha_token: 'valid-test-token',
+  }, '198.51.100.10', { recaptcha: true });
 
   assert.equal(response.statusCode, 200);
   assert.equal(sendCalls, 1);
   assert.equal(verifyCalls, 1);
-  assert.equal(verificationBody.get('response'), 'valid-test-token');
-  assert.equal(verificationBody.get('remoteip'), '198.51.100.10');
+  assert.equal(verificationBody.event.token, 'valid-test-token');
+  assert.equal(verificationBody.event.siteKey, 'test-site-key');
+  assert.equal(verificationBody.event.expectedAction, 'contact');
+  assert.equal(verificationBody.event.userIpAddress, '198.51.100.10');
 });
 
-test('rejects a lead when Turnstile reports an invalid token', async () => {
+test('rejects a lead when reCAPTCHA reports an invalid token', async () => {
   const { response, sendCalls, verifyCalls } = await submit({
     name: 'Jane Smith',
     email: 'jane@company.com',
     service: 'seo agency',
     city: 'Toronto',
     message: 'We need help with local SEO.',
-    cf_turnstile_response: 'invalid-test-token',
+    recaptcha_token: 'invalid-test-token',
   }, '198.51.100.11', {
-    turnstile: true,
-    verificationResult: { success: false, 'error-codes': ['invalid-input-response'] },
+    recaptcha: true,
+    verificationResult: {
+      tokenProperties: { valid: false, invalidReason: 'INVALID_REASON_UNSPECIFIED' },
+    },
   });
 
   assert.equal(response.statusCode, 400);
@@ -251,7 +267,32 @@ test('rejects a lead when Turnstile reports an invalid token', async () => {
   assert.equal(verifyCalls, 1);
 });
 
-test('does not lose a normal lead during a Turnstile service outage', async () => {
+test('rejects only the lowest reCAPTCHA risk score', async () => {
+  const { response, sendCalls, verifyCalls } = await submit({
+    name: 'Jane Smith',
+    email: 'jane@company.com',
+    service: 'seo agency',
+    city: 'Toronto',
+    message: 'We need help with local SEO.',
+    recaptcha_token: 'low-score-test-token',
+  }, '198.51.100.12', {
+    recaptcha: true,
+    verificationResult: {
+      tokenProperties: {
+        valid: true,
+        action: 'contact',
+        hostname: 'boomymarketing.com',
+      },
+      riskAnalysis: { score: 0.1 },
+    },
+  });
+
+  assert.equal(response.statusCode, 400);
+  assert.equal(sendCalls, 0);
+  assert.equal(verifyCalls, 1);
+});
+
+test('does not lose a normal lead during a reCAPTCHA service outage', async () => {
   const originalConsoleError = console.error;
   console.error = () => {};
   try {
@@ -261,8 +302,8 @@ test('does not lose a normal lead during a Turnstile service outage', async () =
       service: 'seo agency',
       city: 'Toronto',
       message: 'We need help with local SEO.',
-      cf_turnstile_response: 'valid-test-token',
-    }, '198.51.100.12', { turnstile: true, verificationError: true });
+      recaptcha_token: 'valid-test-token',
+    }, '198.51.100.13', { recaptcha: true, verificationError: true });
 
     assert.equal(response.statusCode, 200);
     assert.equal(sendCalls, 1);

@@ -300,7 +300,7 @@ const pageStyle = `
       contact_company: raw.contact_company || undefined,
       form_type: raw.form_type,
       form_started_at: raw.form_started_at,
-      cf_turnstile_response: raw['cf-turnstile-response'],
+      recaptcha_token: raw['g-recaptcha-response'],
     };
 
     const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;

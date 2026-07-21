@@ -7,15 +7,44 @@
 
   const states = new Map();
 
-  function submitWhenReady(form, state) {
-    if (!state.pending) return;
-    state.pending = false;
-    form.requestSubmit();
-  }
-
   function setStatus(state, message) {
     state.status.textContent = message;
     state.status.style.display = message ? 'block' : 'none';
+  }
+
+  function setToken(form, state, token) {
+    let input = form.querySelector('input[name="g-recaptcha-response"]');
+    if (!input) {
+      input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'g-recaptcha-response';
+      form.appendChild(input);
+    }
+    input.value = token;
+    state.token = token;
+  }
+
+  function runChallenge(form, state) {
+    if (state.executing || !window.grecaptcha?.enterprise) return;
+    state.executing = true;
+    setStatus(state, 'Checking your submission…');
+
+    window.grecaptcha.enterprise.ready(() => {
+      window.grecaptcha.enterprise.execute(state.siteKey, { action: 'contact' })
+        .then((token) => {
+          state.executing = false;
+          setToken(form, state, token);
+          setStatus(state, '');
+          if (state.pending) {
+            state.pending = false;
+            form.requestSubmit();
+          }
+        })
+        .catch(() => {
+          state.executing = false;
+          setStatus(state, 'Security check could not load. Please try again.');
+        });
+    });
   }
 
   forms.forEach((form) => {
@@ -26,7 +55,15 @@
     const button = form.querySelector('button[type="submit"], input[type="submit"]');
     form.insertBefore(status, button || null);
 
-    const state = { ready: false, enabled: false, token: '', pending: false, status, widgetId: null };
+    const state = {
+      ready: false,
+      enabled: false,
+      executing: false,
+      pending: false,
+      siteKey: '',
+      token: '',
+      status,
+    };
     states.set(form, state);
 
     form.addEventListener('submit', (event) => {
@@ -34,68 +71,49 @@
         event.preventDefault();
         event.stopImmediatePropagation();
         state.pending = true;
-        setStatus(state, state.ready ? 'Please complete the security check.' : 'Preparing security checkâ€¦');
+        setStatus(state, state.ready ? 'Checking your submission…' : 'Preparing security check…');
+        if (state.ready) runChallenge(form, state);
         return;
       }
 
       if (state.enabled) {
         setStatus(state, '');
-        window.setTimeout(() => {
-          state.token = '';
-          if (state.widgetId != null && window.turnstile) window.turnstile.reset(state.widgetId);
-        }, 500);
+        window.setTimeout(() => setToken(form, state, ''), 0);
       }
     }, true);
   });
 
-  fetch('/api/turnstile-config', { headers: { Accept: 'application/json' }, cache: 'no-store' })
+  fetch('/api/recaptcha-config', { headers: { Accept: 'application/json' }, cache: 'no-store' })
     .then((response) => response.ok ? response.json() : { enabled: false })
     .then((config) => {
       if (!config.enabled || !config.siteKey) {
         states.forEach((state, form) => {
           state.ready = true;
-          submitWhenReady(form, state);
+          if (state.pending) {
+            state.pending = false;
+            form.requestSubmit();
+          }
         });
         return;
       }
 
       const script = document.createElement('script');
-      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.src = `https://www.google.com/recaptcha/enterprise.js?render=${encodeURIComponent(config.siteKey)}`;
       script.async = true;
       script.defer = true;
       script.onload = () => {
         states.forEach((state, form) => {
-          const container = document.createElement('div');
-          container.style.cssText = 'width:100%;margin:8px 0;';
-          form.insertBefore(container, state.status);
           state.enabled = true;
           state.ready = true;
-          state.widgetId = window.turnstile.render(container, {
-            sitekey: config.siteKey,
-            action: 'contact',
-            appearance: 'interaction-only',
-            size: 'flexible',
-            theme: 'auto',
-            callback(token) {
-              state.token = token;
-              setStatus(state, '');
-              submitWhenReady(form, state);
-            },
-            'expired-callback'() {
-              state.token = '';
-            },
-            'error-callback'() {
-              state.token = '';
-              setStatus(state, 'Security check could not load. Please try again.');
-            },
-          });
-          submitWhenReady(form, state);
+          state.siteKey = config.siteKey;
+          if (state.pending) runChallenge(form, state);
         });
       };
       script.onerror = () => {
-        states.forEach((state, form) => {
+        states.forEach((state) => {
           state.ready = true;
-          submitWhenReady(form, state);
+          state.enabled = true;
+          setStatus(state, 'Security check could not load. Please try again.');
         });
       };
       document.head.appendChild(script);
@@ -103,8 +121,10 @@
     .catch(() => {
       states.forEach((state, form) => {
         state.ready = true;
-        submitWhenReady(form, state);
+        if (state.pending) {
+          state.pending = false;
+          form.requestSubmit();
+        }
       });
     });
 })();
-
