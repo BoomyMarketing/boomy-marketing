@@ -23,6 +23,17 @@ const initStarfield = () => {
   let stars  = [];
   let raf;
 
+  /* Let the fixed starfield show through panels painted with opaque gradients
+     (hue/direction kept, only the alpha changes) so the stars span the whole page. */
+  const ALPHA = 0.78;
+  document.querySelectorAll('section, footer, div.section, .section').forEach(el => {
+    const cs = getComputedStyle(el);
+    if (cs.backgroundImage && cs.backgroundImage !== 'none' && /rgb\(/.test(cs.backgroundImage)) {
+      el.style.backgroundImage = cs.backgroundImage.replace(
+        /rgb\((\d+),\s*(\d+),\s*(\d+)\)/g, `rgba($1,$2,$3,${ALPHA})`);
+    }
+  });
+
   const resize = () => {
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;

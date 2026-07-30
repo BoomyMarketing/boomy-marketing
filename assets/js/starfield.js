@@ -16,16 +16,32 @@
   var ctx = c.getContext('2d');
   if (!ctx) return;
 
-  /* --- let the fixed starfield show through the whole page --- */
+  /* --- let the fixed starfield show through the whole page ---
+     Panels are painted either with a solid colour or with a gradient built from
+     solid rgb() stops; both are opaque and would hide the canvas. Solid panels in
+     the page's own base colour become transparent, every other solid colour and
+     every gradient stop is given a high alpha instead. Hue and direction are kept,
+     so the design reads the same — the stars simply show through. */
+  var ALPHA = 0.78;
   var base = getComputedStyle(document.body).backgroundColor;
   if (base && base !== 'rgba(0, 0, 0, 0)') {
     document.documentElement.style.backgroundColor = base;
     document.body.style.backgroundColor = 'transparent';
-    var blocks = document.querySelectorAll('section, footer, div.section, .section');
-    for (var i = 0; i < blocks.length; i++) {
-      if (getComputedStyle(blocks[i]).backgroundColor === base) {
-        blocks[i].style.backgroundColor = 'transparent';
-      }
+  }
+  var blocks = document.querySelectorAll('section, footer, div.section, .section');
+  for (var i = 0; i < blocks.length; i++) {
+    var el = blocks[i], cs = getComputedStyle(el);
+    if (cs.backgroundColor === base) {
+      el.style.backgroundColor = 'transparent';
+    } else if (/^rgb\(/.test(cs.backgroundColor)) {
+      el.style.backgroundColor = cs.backgroundColor.replace(
+        /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/, 'rgba($1,$2,$3,' + ALPHA + ')');
+    }
+    // gradients: only fully-opaque rgb() stops are softened (rgba() stops are already
+    // translucent design accents and are left exactly as they are)
+    if (cs.backgroundImage && cs.backgroundImage !== 'none' && /rgb\(/.test(cs.backgroundImage)) {
+      el.style.backgroundImage = cs.backgroundImage.replace(
+        /rgb\((\d+),\s*(\d+),\s*(\d+)\)/g, 'rgba($1,$2,$3,' + ALPHA + ')');
     }
   }
 
