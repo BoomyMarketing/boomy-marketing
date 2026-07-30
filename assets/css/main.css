@@ -869,7 +869,8 @@
 .cosmic-outro {
   position: relative;
   overflow: hidden;
-  padding: 100px 5% 260px;
+  /* bottom padding was 260px to clear the animated planet visual (removed for perf) */
+  padding: 100px 5% 120px;
   text-align: center;
   background: transparent;
   isolation: isolate;

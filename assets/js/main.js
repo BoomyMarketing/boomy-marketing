@@ -211,15 +211,33 @@ const initRevealAnimations = () => {
     );
   });
 
-  gsap.utils.toArray('.service-card, .team-card, .value-card, .bento-card').forEach((card, i) => {
+  // :not(.reveal) is required — cards that ALSO carry .reveal were animated by two
+  // competing tweens, which left them stuck at partial opacity (e.g. 0.11).
+  gsap.utils.toArray(
+    '.service-card:not(.reveal), .team-card:not(.reveal), .value-card:not(.reveal), .bento-card:not(.reveal)'
+  ).forEach((card, i) => {
     gsap.fromTo(card,
       { opacity: 0, y: 42, scale: 0.97 },
       { opacity: 1, y: 0, scale: 1, duration: 0.65, ease: 'power2.out',
-        delay: (i % 3) * 0.08,
+        delay: (i % 3) * 0.08, overwrite: 'auto',
         scrollTrigger: { trigger: card, start: 'top 91%', toggleActions: 'play none none none' }
       }
     );
   });
+
+  // Safety net: if a tween is interrupted (tab hidden mid-animation, aborted scroll),
+  // never leave content invisible — snap anything still faded once it is on screen.
+  const unstick = () => {
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .service-card, .team-card, .value-card, .bento-card')
+      .forEach(el => {
+        const op = parseFloat(getComputedStyle(el).opacity);
+        if (op < 0.95 && el.getBoundingClientRect().top < window.innerHeight) {
+          gsap.set(el, { opacity: 1, x: 0, y: 0, scale: 1, clearProps: 'transform' });
+        }
+      });
+  };
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) setTimeout(unstick, 400); });
+  window.addEventListener('load', () => setTimeout(unstick, 1800));
 };
 
 /* ================================================================
