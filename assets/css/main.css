@@ -95,7 +95,11 @@
    BASE
 ================================================================ */
 @layer base {
-  html { scroll-behavior: smooth; overflow-x: hidden; }
+  /* overflow-x must be `clip`, NOT `hidden`: `hidden` turns html/body into scroll
+     containers, which made GSAP ScrollTrigger read the page scroll as 0 — reveals
+     never fired and content stayed at opacity 0. `clip` stops horizontal scrolling
+     without creating a scroll container. (hidden kept first as an old-browser fallback) */
+  html { scroll-behavior: smooth; overflow-x: hidden; overflow-x: clip; }
 
   :focus-visible { outline: 2px solid var(--accent-orange, #FF6B35); outline-offset: 3px; border-radius: 3px; }
   :focus:not(:focus-visible) { outline: none; }
@@ -105,6 +109,7 @@
     background: var(--bg-darkest);
     color: var(--text-primary);
     overflow-x: hidden;
+    overflow-x: clip;
     line-height: 1.6;
     -webkit-tap-highlight-color: transparent;
   }

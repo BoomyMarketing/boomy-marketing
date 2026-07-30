@@ -94,8 +94,8 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <!-- Shared CSS & JS (cached across all pages) -->
-  <link rel="preload" href="/assets/css/main.css" as="style" />
-  <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="preload" href="/assets/css/main.css?v=2" as="style" />
+  <link rel="stylesheet" href="/assets/css/main.css?v=2" />
   <!-- ?v= is a cache buster: these assets are served with a long max-age, so the
        version must be bumped whenever main.js changes or visitors keep the old file -->
   <script defer src="/assets/js/main.js?v=3"></script>
