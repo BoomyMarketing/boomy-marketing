@@ -236,19 +236,40 @@ const initRevealAnimations = () => {
     );
   });
 
-  // Safety net: if a tween is interrupted (tab hidden mid-animation, aborted scroll),
-  // never leave content invisible — snap anything still faded once it is on screen.
+  /* Safety net — content must never stay invisible.
+     ScrollTrigger caches element positions, so a fast jump (anchor link, restored
+     scroll position, browser find, late-loading fonts/images shifting layout) can
+     leave a reveal un-fired at opacity 0. Anything that has been on screen for
+     ~900ms and is still faded gets snapped to its final state. The delay is longer
+     than the 0.72s reveal, so normal animations are never cut short. */
+  const REVEAL_SEL = '.reveal, .reveal-left, .reveal-right, .service-card, .team-card, .value-card, .bento-card';
   const unstick = () => {
-    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .service-card, .team-card, .value-card, .bento-card')
-      .forEach(el => {
-        const op = parseFloat(getComputedStyle(el).opacity);
-        if (op < 0.95 && el.getBoundingClientRect().top < window.innerHeight) {
-          gsap.set(el, { opacity: 1, x: 0, y: 0, scale: 1, clearProps: 'transform' });
-        }
-      });
+    document.querySelectorAll(REVEAL_SEL).forEach(el => {
+      if (parseFloat(getComputedStyle(el).opacity) >= 0.95) return;
+      const r = el.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < window.innerHeight) {
+        gsap.set(el, { opacity: 1, x: 0, y: 0, scale: 1, clearProps: 'transform' });
+      }
+    });
   };
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) setTimeout(unstick, 400); });
-  window.addEventListener('load', () => setTimeout(unstick, 1800));
+
+  let unstickTimer;
+  const scheduleUnstick = () => {
+    clearTimeout(unstickTimer);
+    unstickTimer = setTimeout(unstick, 900);
+  };
+
+  window.addEventListener('scroll', scheduleUnstick, { passive: true });
+  window.addEventListener('resize', scheduleUnstick, { passive: true });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) scheduleUnstick(); });
+  window.addEventListener('load', () => {
+    // re-measure triggers once everything that affects layout has settled
+    ScrollTrigger.refresh();
+    scheduleUnstick();
+  });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => ScrollTrigger.refresh());
+  }
 };
 
 /* ================================================================
