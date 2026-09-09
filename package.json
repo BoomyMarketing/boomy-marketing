@@ -8,7 +8,9 @@
     "test": "node --test api/contact.test.js && python -m unittest test_release.py"
   },
   "dependencies": {
-    "nodemailer": "^6.9.0"
+    "nodemailer": "^6.9.0",
+    "resend": "6.26.0",
+    "postal-mime": "2.7.5"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.2.1",
