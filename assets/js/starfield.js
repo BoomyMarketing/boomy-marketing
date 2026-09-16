@@ -43,13 +43,18 @@
     var el = blocks[i], cs = getComputedStyle(el);
     if (cs.backgroundColor === base) {
       el.style.backgroundColor = 'transparent';
-    } else if (/^rgb\(/.test(cs.backgroundColor)) {
+    } else if (!isLight && /^rgb\(/.test(cs.backgroundColor)) {
+      /* Softening only makes sense on a DARK page, where every panel is a near-black
+       shade of the base colour. On a light page the dark panels (navy heroes, CTA
+       bands) are deliberate contrast: fading them over a white base washes them out
+       to grey, so they are left fully opaque and the particles simply show across
+       the light areas instead. */
       el.style.backgroundColor = cs.backgroundColor.replace(
         /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/, 'rgba($1,$2,$3,' + ALPHA + ')');
     }
     // only fully-opaque rgb() stops are softened — rgba() stops are already
     // translucent design accents and are left exactly as they are
-    if (cs.backgroundImage && cs.backgroundImage !== 'none' && /rgb\(/.test(cs.backgroundImage)) {
+    if (!isLight && cs.backgroundImage && cs.backgroundImage !== 'none' && /rgb\(/.test(cs.backgroundImage)) {
       el.style.backgroundImage = cs.backgroundImage.replace(
         /rgb\((\d+),\s*(\d+),\s*(\d+)\)/g, 'rgba($1,$2,$3,' + ALPHA + ')');
     }
