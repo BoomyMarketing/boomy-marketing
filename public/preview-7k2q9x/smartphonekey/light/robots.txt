@@ -1,0 +1,3 @@
+# Indexing is off until the domain is confirmed (SITE_URL) and SITE_INDEXING=on.
+User-agent: *
+Disallow: /
