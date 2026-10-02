@@ -4,15 +4,15 @@
   <meta name="robots" content="noindex, nofollow">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Condo &amp; Building Entrance Access | SmartphoneKey Toronto &amp; GTA</title>
-  <meta name="description" content="Phone keys and cards for residents, QR calls for visitors, and one admin view for managers. Shared entrances assessed door by door across Toronto and the GTA.">
+  <title>Condo &amp; Building Entrance Access by Phone | SmartphoneKey Toronto</title>
+  <meta name="description" content="Residents open the lobby door with a Wallet key, visitors scan a QR code to call, and managers keep one list. For condos and rental buildings in Toronto &amp; GTA.">
   
   
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SmartphoneKey Toronto &amp; GTA">
   <meta property="og:locale" content="en_CA">
-  <meta property="og:title" content="Condo &amp; building entrance access">
-  <meta property="og:description" content="Residents tap in, visitors scan to call, managers keep one list and one log. Toronto and the GTA.">
+  <meta property="og:title" content="Residents tap in. Visitors call up.">
+  <meta property="og:description" content="Residents open the lobby door with a Wallet key, visitors scan a QR code to call, and managers keep one list. For condos and rental buildings in Toronto &amp; GTA.">
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#f4f7f5">
   <link rel="icon" type="image/png" sizes="32x32" href="/sites/light/favicon-32.png">
@@ -21,8 +21,10 @@
   <link rel="preload" href="/sites/light/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/sites/light/assets/site.css">
   <link rel="stylesheet" href="/sites/light/assets/light-theme.css">
+  <link rel="stylesheet" href="/sites/light/assets/pages.css">
   <script>document.documentElement.className += ' js' + ('IntersectionObserver' in window ? ' io' : '');</script>
   <script src="/sites/light/assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is phone access for a condo entrance?","acceptedAnswer":{"@type":"Answer","text":"Residents open the shared entrance with a key in Apple Wallet or Google Wallet. Visitors scan a QR code on the reader to call the person they are visiting. The property manager adds, finds and removes residents from one list, and every entry is logged, so move-outs no longer mean chasing keys and fobs."}},{"@type":"Question","name":"Can residents keep using fobs?","acceptedAnswer":{"@type":"Answer","text":"Residents who prefer a card can get an NFC key card that works on the same reader."}},{"@type":"Question","name":"How do visitors get in?","acceptedAnswer":{"@type":"Answer","text":"They scan the QR code on the reader with their phone camera and connect to the person they’re visiting to ask for entry. No app needed."}},{"@type":"Question","name":"We have hundreds of residents.","acceptedAnswer":{"@type":"Answer","text":"Larger plans let you import people from a CSV or Excel file, and the directory finds anyone by unit number, name, phone or licence plate."}},{"@type":"Question","name":"Can the superintendent manage keys?","acceptedAnswer":{"@type":"Answer","text":"Yes. Make them a local admin for the building, with their own set of Wallet Keys to give out."}},{"@type":"Question","name":"What does it cost for a building?","acceptedAnswer":{"@type":"Answer","text":"It depends on the doors, locks, power and how many people need keys. The local team explains setup and cost after the door check."}}]}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -36,11 +38,20 @@
       <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu"><span class="menu-toggle-label">Menu</span><span class="menu-toggle-icon" aria-hidden="true"></span></button>
       <nav class="site-nav" id="site-menu" aria-label="Main">
         <ul role="list">
-          <li><a href="/sites/light/gyms-and-studios/">Gyms &amp; studios</a></li>
-          <li><a href="/sites/light/condos-and-buildings/" aria-current="page">Condos &amp; buildings</a></li>
-          <li><a href="/sites/light/short-term-rentals/">Short-term rentals</a></li>
-          <li><a href="/sites/light/homes/">Homes</a></li>
-          <li><a href="/sites/light/#how-it-works">How it works</a></li>
+          <li class="nav-group">
+            <button class="nav-drop" id="nav-drop" type="button" aria-expanded="false" aria-controls="nav-audiences" data-current="true">Who it’s for <span class="nav-drop-icon" aria-hidden="true"></span></button>
+            <ul class="drop" id="nav-audiences" role="list">
+              <li><a href="/sites/light/gyms-and-studios/"><img src="/sites/light/media/photos/gym-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span><strong>Gyms &amp; studios</strong>Members tap in. You decide who can.</span></a></li>
+              <li><a href="/sites/light/condos-and-buildings/" aria-current="page"><img src="/sites/light/media/photos/condo-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span><strong>Condos &amp; buildings</strong>Residents tap in. Visitors call up.</span></a></li>
+              <li><a href="/sites/light/offices-and-coworking/"><img src="/sites/light/media/photos/office-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span><strong>Offices &amp; coworking</strong>Teams, clients and after-hours, sorted.</span></a></li>
+              <li><a href="/sites/light/salon-suites-and-rental-rooms/"><img src="/sites/light/media/photos/suites-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span><strong>Salon suites &amp; rental rooms</strong>Every renter gets their own door.</span></a></li>
+              <li><a href="/sites/light/short-term-rentals/"><img src="/sites/light/media/photos/str-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span><strong>Short-term rentals</strong>Every stay gets its own key.</span></a></li>
+              <li><a href="/sites/light/homes/"><img src="/sites/light/media/photos/home-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span><strong>Homes</strong>Family taps in. Guest keys end on time.</span></a></li>
+            </ul>
+          </li>
+          <li><a href="/sites/light/features/">Features</a></li>
+          <li><a href="/sites/light/how-it-works/">How it works</a></li>
+          <li><a href="/sites/light/#answers">Answers</a></li>
         </ul>
         <a class="btn btn-primary nav-cta" href="#request">Request a door check</a>
       </nav>
@@ -49,40 +60,22 @@
   </header>
 
   <main id="main">
-    <!-- Hero: the shared film hero, building headline and copy -->
-    <section class="hero hero--audience" id="top" aria-labelledby="hero-title">
+    <section class="hero hero--audience hero--photo" id="top" aria-labelledby="hero-title">
       <div class="wrap hero-head">
         <p class="kicker"><span class="kicker-led" aria-hidden="true"></span>Condos &amp; buildings · Toronto &amp; GTA</p>
         <h1 class="display hero-title" id="hero-title"><span class="line">Residents tap in.</span> <span class="line line-accent">Visitors call up.</span></h1>
         <div class="hero-sub">
-          <p class="hero-lede">For property managers, condo boards and building owners. Residents open shared doors with Wallet keys or cards, visitors scan a QR code to call, and your team adds and removes access in one admin view.</p>
+          <p class="hero-lede">Wallet keys for residents, a QR intercom on the reader for visitors, and one list for the property manager. Move-outs are removed, not chased.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#request">Request a building door check <span class="btn-arrow" aria-hidden="true">↓</span></a>
-            <a class="text-link" href="#which-door">Own unit or shared entrance?</a>
+            <a class="btn btn-primary" href="#request">Request a door check <span class="btn-arrow" aria-hidden="true">↓</span></a>
+            <a class="text-link" href="#in-short">The short answer</a>
           </div>
         </div>
       </div>
-
-      <figure class="film" data-film>
-        <div class="film-frame film-frame--hero">
-          <p class="film-plate" aria-hidden="true"><span>SmartphoneKey</span><span>Product film · 0:26</span></p>
-          <video class="film-video" playsinline preload="metadata" poster="/sites/light/media/smartphonekey-video-poster.jpg" controls width="1280" height="720" aria-label="SmartphoneKey product film" aria-describedby="film-label">
-            <source src="/sites/light/media/smartphonekey-product-film.mp4#t=3" type="video/mp4">
-            <p>This browser can’t play the film. Watch SmartphoneKey’s film on YouTube.</p>
-          </video>
-          <div class="film-fallback" hidden>
-            <p>The film couldn’t load here.</p>
-            Watch it on YouTube<span aria-hidden="true"> ↗</span><span class="visually-hidden"> (opens in a new tab)</span>
-          </div>
+      <figure class="film hero-media">
+        <div class="film-frame film-frame--hero hero-photo">
+          <picture><source type="image/webp" srcset="/sites/light/media/photos/condo-hero-768.webp 768w, /sites/light/media/photos/condo-hero-1152.webp 1152w, /sites/light/media/photos/condo-hero-1536.webp 1536w" sizes="(min-width: 1024px) 54vw, 100vw"><img src="/sites/light/media/photos/condo-hero.jpg" alt="A Toronto condo tower entrance at dusk with the SmartphoneKey reader beside the main doors." width="1536" height="1024" fetchpriority="high" decoding="async"></picture>
         </div>
-        <figcaption class="wrap film-caption">
-          <span class="tag tag-real">SmartphoneKey footage</span>
-          <span id="film-label">SmartphoneKey’s own film of the reader and app.</span>
-          <span class="film-controls">
-            <button class="film-toggle" type="button" hidden>Pause film</button>
-            
-          </span>
-        </figcaption>
       </figure>
     </section>
 
@@ -90,21 +83,20 @@
     <section class="section section--stone" id="request" aria-labelledby="request-title">
       <div class="wrap">
         <p class="label">Door check request</p>
-        <h2 class="display section-title" id="request-title">Request a door check for your building.</h2>
+        <h2 class="display section-title" id="request-title">Request a door check.</h2>
         <div class="request-grid">
           <div class="request-copy">
-            <p class="lede">Tell the local team about the entrance and your role in the building.</p>
+            <p class="lede">Tell the local team where the door is and what’s on it today.</p>
             <div class="request-next">
               <h3>How a door check works</h3>
               <ul class="points" role="list">
-                <li>You tell the team which shared doors you have in mind.</li>
-                <li>A visit checks the existing system, power, wiring, exits and network.</li>
-                <li>Setup and cost for your doors and keys are explained after that visit.</li>
+                <li>You tell the team about the door and who needs access.</li>
+                <li>A visit checks the lock, power, cable route and Wi-Fi or LTE.</li>
+                <li>Setup and cost are explained after that visit.</li>
               </ul>
             </div>
-            <p class="source-note">Resident rather than manager? Read <a href="#which-door">which door you can change</a> first.</p>
           </div>
-          <form class="request-form dark-panel" id="request-form" aria-label="Building door check request form" aria-describedby="request-notice">
+          <form class="request-form dark-panel" id="request-form" aria-label="Door check request form" aria-describedby="request-notice">
             <p class="request-notice" id="request-notice"><strong>This form isn’t connected yet.</strong> Requests can’t be sent or saved from this page until the local team’s inbox is set up.</p>
             <div class="request-fields">
               <div class="field">
@@ -119,18 +111,7 @@
               <div class="field">
                 <label for="rq-area">City or postal code</label>
                 <input id="rq-area" name="area" type="text" autocomplete="off" required aria-describedby="rq-area-hint">
-                <p class="field-hint" id="rq-area-hint">Toronto and the GTA, for example North York or M2N.</p>
-              </div>
-              <div class="field">
-                <label for="rq-role">Your role</label>
-                <select id="rq-role" name="role" required>
-                  <option value="">Choose one</option>
-                  <option value="manager">Property manager</option>
-                  <option value="board">Condo board member</option>
-                  <option value="owner">Building owner</option>
-                  <option value="resident">Resident</option>
-                  <option value="other">Something else</option>
-                </select>
+                <p class="field-hint" id="rq-area-hint">Toronto and the GTA, for example Etobicoke or M6K.</p>
               </div>
               <div class="field">
                 <label for="rq-space">Space</label>
@@ -138,13 +119,15 @@
                   <option value="">Choose one</option>
                   <option value="gym">Gym or studio</option>
                   <option value="building" selected>Condo or building</option>
+                  <option value="office">Office or coworking</option>
+                  <option value="suites">Salon suites or rental rooms</option>
                   <option value="rental">Short-term rental</option>
                   <option value="home">Home</option>
                   <option value="other">Something else</option>
                 </select>
               </div>
               <div class="field">
-                <label for="rq-lock">On the entrance today</label>
+                <label for="rq-lock">On the door today</label>
                 <select id="rq-lock" name="lock" required>
                   <option value="">Choose one</option>
                   <option value="mechanical">Regular key only</option>
@@ -153,8 +136,8 @@
                   <option value="unsure">Not sure</option>
                 </select>
               </div>
-              <div class="field field--wide">
-                <label for="rq-doors">Shared doors to connect</label>
+              <div class="field">
+                <label for="rq-doors">Doors to connect</label>
                 <select id="rq-doors" name="doors" required>
                   <option value="">Choose one</option>
                   <option value="1">1</option>
@@ -174,149 +157,135 @@
       </div>
     </section>
 
-    <!-- Which door: private unit vs shared entrance -->
-    <section class="section section--raised" id="which-door" aria-labelledby="which-title">
-      <div class="wrap">
-        <p class="label">Which door?</p>
-        <h2 class="display section-title" id="which-title">Your own door and the building’s entrance are different decisions.</h2>
-        <p class="lede">Most building requests start here, because it decides who can say yes.</p>
-        <div class="versus">
-          <div class="versus-col reveal">
-            <h3>The shared entrance</h3>
-            <p>Lobby, garage and amenity doors belong to the building. The owner, the property manager or the condo board decides, and building approvals come first.</p>
-            <ul class="points" role="list">
-              <li>Existing intercom or fob panels are part of the conversation.</li>
-              <li>A setup is sized by shared doors and keys, not by the number of suites.</li>
-              <li>Exit and fire requirements are confirmed on site.</li>
-            </ul>
-          </div>
-          <div class="versus-col reveal">
-            <h3>A private unit door</h3>
-            <p>A resident can only consider their own unit door, and building rules still apply: the door type, fire requirements and whether changes are allowed at all.</p>
-            <ul class="points" role="list">
-              <li>Check the building’s rules before planning anything.</li>
-              <li>The lobby stays under the building’s own system.</li>
-              <li>The <a href="/sites/light/homes/">homes page</a> covers a single unit door.</li>
-            </ul>
-          </div>
+    <section class="section" id="in-short" aria-labelledby="brief-title">
+      <div class="wrap brief">
+        <div class="brief-head">
+          <p class="label">In short</p>
+          <h2 class="display brief-title" id="brief-title">What is phone access for a condo entrance?</h2>
         </div>
-        <p class="callout"><strong>Resident, not manager?</strong> Buying a key can’t change the lobby door. Share this page with your property manager or board instead.</p>
-      </div>
-    </section>
-    <!-- What changes: residents, visitors and trades, managers -->
-    <section class="section section--stone" id="roles" aria-labelledby="roles-title">
-      <div class="wrap">
-        <div class="split">
-          <div>
-            <p class="label">What changes</p>
-            <h2 class="display section-title" id="roles-title">One entrance, three kinds of people.</h2>
-            <p class="lede">Residents come and go, visitors and trades need a way in, and the office keeps the list straight.</p>
-          </div>
-          <div class="board">
-            <p class="board-head"><span>Main entrance</span><span>How access could work</span></p>
-            <dl>
-              <div class="board-row"><dt>Residents</dt><dd>Wallet key or key card</dd></div>
-              <div class="board-row"><dt>Visitors</dt><dd>Scan the QR code to call</dd></div>
-              <div class="board-row"><dt>Movers &amp; trades</dt><dd>Guest key for the booked hours</dd></div>
-              <div class="board-row"><dt>Moved out</dt><dd>Key removed, so it stops working</dd></div>
-              <div class="board-row"><dt>Management</dt><dd>Activity log for each shared door</dd></div>
-            </dl>
-          </div>
-        </div>
-        <div class="roles-list">
-          <article class="role reveal" aria-labelledby="role-residents">
-            <h3 class="display role-name" id="role-residents">Residents</h3>
-            <div class="role-body">
-              <p class="role-promise">Keys without a pickup.</p>
-              <ul class="points" role="list">
-                <li>A key in Apple Wallet or Google Wallet, assigned from the admin.</li>
-                <li>Key cards for anyone who prefers one.</li>
-                <li>Lost phone? Remove that key and issue a new one.</li>
-              </ul>
-            </div>
-          </article>
-          <article class="role role-alt reveal" aria-labelledby="role-visitors">
-            <h3 class="display role-name" id="role-visitors">Visitors</h3>
-            <div class="role-body">
-              <p class="role-promise">The right person lets them in.</p>
-              <ul class="points" role="list">
-                <li>Visitors scan the QR code at the entrance to call; SmartphoneKey says no app is needed.</li>
-                <li>The admin guide describes a printable QR sheet for each door.</li>
-                <li>Movers and trades get a guest key with a start and end time.</li>
-              </ul>
-            </div>
-          </article>
-          <article class="role reveal" aria-labelledby="role-managers">
-            <h3 class="display role-name" id="role-managers">Managers</h3>
-            <div class="role-body">
-              <p class="role-promise">One list, one log.</p>
-              <ul class="points" role="list">
-                <li>Add access at move-in and remove it at move-out.</li>
-                <li>Local admins for the office or superintendent, as the admin guide describes.</li>
-                <li>An activity log that can be filtered by door, date and user.</li>
-                <li>Optional live view from compatible (ONVIF) cameras, with camera roles.</li>
-              </ul>
-              <div class="ledger dark-panel">
-                <table>
-                  <caption><span class="ledger-cap"><span>Activity log · main entrance</span><span>Example only, not the SmartphoneKey admin screen</span></span></caption>
-                  <thead><tr><th scope="col">Time</th><th scope="col">Who</th><th scope="col">Event</th></tr></thead>
-                  <tbody>
-                    <tr><td>09:02</td><td>Moving company</td><td>Guest key accepted</td></tr>
-                    <tr><td>12:00</td><td>Former resident</td><td>Key removed</td></tr>
-                    <tr><td>14:25</td><td>Courier</td><td>Guest key accepted, one use</td></tr>
-                    <tr><td>19:10</td><td>Resident</td><td>Key card accepted</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </article>
+        <div class="brief-body">
+          <p class="brief-for">For property managers, condo boards and building owners</p>
+          <p class="brief-answer">Residents open the shared entrance with a key in Apple Wallet or Google Wallet. Visitors scan a QR code on the reader to call the person they are visiting. The property manager adds, finds and removes residents from one list, and every entry is logged, so move-outs no longer mean chasing keys and fobs.</p>
         </div>
       </div>
     </section>
 
-    <!-- A day at the main entrance -->
-    <section class="keys" id="keys" aria-labelledby="keys-title">
-      <div class="keys-track">
-        <div class="keys-stage">
-          <div class="wrap">
-            <p class="label">Keys</p>
-            <h2 class="display section-title" id="keys-title">A day at the main entrance.</h2>
-            <p class="lede">Each line is a key; the bright part is when it opens the shared door.</p>
-            <figure class="day">
-              <div class="day-axis" aria-hidden="true">
-                <span class="day-axis-label">Who · key</span>
-                <span class="day-axis-track"><span style="--t:0">06:00</span><span class="tick-minor" style="--t:.1667">09:00</span><span style="--t:.3333">12:00</span><span class="tick-minor" style="--t:.5">15:00</span><span style="--t:.6667">18:00</span><span class="tick-minor" style="--t:.8333">21:00</span><span style="--t:1">24:00</span></span>
-              </div>
-              <ul class="day-rows" role="list">
-                <li class="day-row"><p class="day-label"><strong>Resident</strong> · Wallet key<span class="day-rule">Works until it’s removed</span></p><span class="day-track" aria-hidden="true"><span class="seg" style="--a:0;--b:1"></span></span></li>
-                <li class="day-row"><p class="day-label"><strong>Resident</strong> · Key card<span class="day-rule">For anyone who prefers a card</span></p><span class="day-track" aria-hidden="true"><span class="seg" style="--a:0;--b:1"></span></span></li>
-                <li class="day-row"><p class="day-label"><strong>Moving company</strong> · Guest key<span class="day-rule">Valid 09:00 to 13:00 for the booked move</span></p><span class="day-track" aria-hidden="true"><span class="seg" style="--a:.1667;--b:.3889"></span><span class="mark mark-end" style="--t:.3889"></span></span></li>
-                <li class="day-row"><p class="day-label"><strong>Moved-out resident</strong> · Wallet key<span class="day-rule">Removed at noon, then it stops working</span></p><span class="day-track" aria-hidden="true"><span class="seg" style="--a:0;--b:.3333"></span><span class="mark mark-cut" style="--t:.3333"></span></span></li>
-                <li class="day-row"><p class="day-label"><strong>Courier</strong> · Guest key, one use<span class="day-rule">Sent at 14:00, used at 14:25, then spent</span></p><span class="day-track" aria-hidden="true"><span class="seg" style="--a:.4444;--b:.4676"></span><span class="mark mark-use" style="--t:.4676"></span></span></li>
-                <li class="day-row"><p class="day-label"><strong>Visitor</strong> · No key<span class="day-rule">Scans the QR code at 18:40 to call a resident</span></p><span class="day-track" aria-hidden="true"><span class="mark mark-qr" style="--t:.7037"></span></span></li>
-              </ul>
-              <figcaption class="day-caption">An example day. Key types as SmartphoneKey describes them; how they apply to your entrance is confirmed at the door check.</figcaption>
+    <section class="section section--deep" id="moments" aria-labelledby="moments-title">
+      <div class="wrap">
+        <p class="label">At the door</p>
+        <h2 class="display section-title" id="moments-title">Three moments. Before and now.</h2>
+        <ol class="moments" role="list">
+          <li class="moment">
+            <figure class="moment-shot">
+              <picture><source type="image/webp" srcset="/sites/light/media/photos/condo-lobby-768.webp 768w, /sites/light/media/photos/condo-lobby-1152.webp 1152w, /sites/light/media/photos/condo-lobby-1536.webp 1536w" sizes="(min-width: 960px) 30vw, (min-width: 640px) 50vw, 100vw"><img src="/sites/light/media/photos/condo-lobby.jpg" alt="Residents tap in, dog and all." width="1536" height="1024" loading="lazy" decoding="async"></picture>
+              <figcaption class="moment-stamp"><time>17:40</time><span>Lobby door</span></figcaption>
             </figure>
-            <p class="keys-hint" aria-hidden="true">Scroll to run the day ↓</p>
-          </div>
+            <p class="moment-who">Resident</p>
+            <h3>Residents tap in, dog and all.</h3>
+            <dl class="moment-change">
+              <div><dt>Before</dt><dd>Fobs to buy, lose and replace.</dd></div>
+              <div><dt>Now</dt><dd>Residents tap in with the key in Apple Wallet or Google Wallet.</dd></div>
+            </dl>
+          </li>
+          <li class="moment">
+            <figure class="moment-shot">
+              <picture><source type="image/webp" srcset="/sites/light/media/photos/condo-courier-768.webp 768w, /sites/light/media/photos/condo-courier-1152.webp 1152w, /sites/light/media/photos/condo-courier-1536.webp 1536w" sizes="(min-width: 960px) 30vw, (min-width: 640px) 50vw, 100vw"><img src="/sites/light/media/photos/condo-courier.jpg" alt="Deliveries at the door." width="1536" height="1024" loading="lazy" decoding="async"></picture>
+              <figcaption class="moment-stamp"><time>19:05</time><span>Main entrance</span></figcaption>
+            </figure>
+            <p class="moment-who">Visitor call</p>
+            <h3>Deliveries at the door.</h3>
+            <dl class="moment-change">
+              <div><dt>Before</dt><dd>Couriers buzzing every unit until someone opens.</dd></div>
+              <div><dt>Now</dt><dd>A courier scans the QR code on the reader and reaches the right resident.</dd></div>
+            </dl>
+          </li>
+          <li class="moment">
+            <figure class="moment-shot">
+              <picture><source type="image/webp" srcset="/sites/light/media/photos/condo-manager-768.webp 768w, /sites/light/media/photos/condo-manager-1152.webp 1152w, /sites/light/media/photos/condo-manager-1536.webp 1536w" sizes="(min-width: 960px) 30vw, (min-width: 640px) 50vw, 100vw"><img src="/sites/light/media/photos/condo-manager.jpg" alt="Someone moves out. Their access goes with them." width="1536" height="1024" loading="lazy" decoding="async"></picture>
+              <figcaption class="moment-stamp"><time>09:00</time><span>Moving day</span></figcaption>
+            </figure>
+            <p class="moment-who">Manager</p>
+            <h3>Someone moves out. Their access goes with them.</h3>
+            <dl class="moment-change">
+              <div><dt>Before</dt><dd>Keys and fobs that never come back.</dd></div>
+              <div><dt>Now</dt><dd>The manager removes access and adds the new resident from one place.</dd></div>
+            </dl>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="keys" aria-labelledby="keys-title">
+      <div class="wrap">
+        <p class="label">Who gets which key</p>
+        <h2 class="display section-title" id="keys-title">A key for everyone at your door.</h2>
+        <p class="lede">Each person gets the access that fits them, and nothing more.</p>
+        <ul class="passes" role="list">
+          <li class="pass pass--wallet"><span class="pass-top"><span class="pass-brand">SmartphoneKey</span><span class="pass-kind">Wallet</span></span><span class="pass-who">Resident</span><span class="pass-key">Wallet key</span><span class="pass-rule">Lobby and unit door on one key</span></li>
+          <li class="pass pass--qr"><span class="pass-top"><span class="pass-brand">SmartphoneKey</span><span class="pass-kind">Intercom</span></span><span class="pass-who">Visitor</span><span class="pass-key">QR intercom</span><span class="pass-rule">Scan the code to call</span></li>
+          <li class="pass pass--guest"><span class="pass-top"><span class="pass-brand">SmartphoneKey</span><span class="pass-kind">Timed</span></span><span class="pass-who">Contractor</span><span class="pass-key">Guest key</span><span class="pass-rule">For the job’s dates only</span></li>
+          <li class="pass pass--card"><span class="pass-top"><span class="pass-brand">SmartphoneKey</span><span class="pass-kind">Admin</span></span><span class="pass-who">Property manager</span><span class="pass-key">Local admin</span><span class="pass-rule">Runs this building</span></li>
+        </ul>
+        <p class="source-note">Times shown are examples.</p>
+      </div>
+    </section>
+
+    <section class="section section--raised" id="features" aria-labelledby="features-title">
+      <div class="wrap">
+        <p class="label">What you get</p>
+        <h2 class="display section-title" id="features-title">The features that matter for condos &amp; buildings.</h2>
+        <ul class="tiles" role="list">
+          <li class="tile tile--keys"><p class="tile-group">Keys</p><h3>Apple Wallet &amp; Google Wallet keys</h3><p>The key lives in the phone’s Wallet. People tap it on the reader, with no separate app for everyday entry.</p></li>
+          <li class="tile tile--visitors"><p class="tile-group">Visitors</p><h3>QR intercom at the door</h3><p>Visitors scan the QR code on the reader with their phone camera. It opens in the browser and connects them to the right person to ask for entry.</p></li>
+          <li class="tile tile--keys"><p class="tile-group">Keys</p><h3>One key, several doors</h3><p>A single key can cover more than one lock, for example a lobby and a unit door, or a front door and a back door.</p></li>
+          <li class="tile tile--people"><p class="tile-group">People &amp; sites</p><h3>People directory</h3><p>Find anyone by name, email, phone, unit number or licence plate. Search by a unit number and that unit comes first.</p></li>
+          <li class="tile tile--people"><p class="tile-group">People &amp; sites</p><h3>Bulk import</h3><p>On larger plans, add many people at once from a CSV or Excel file.</p></li>
+          <li class="tile tile--people"><p class="tile-group">People &amp; sites</p><h3>Local admins</h3><p>Let a manager, front desk or superintendent run one site. You can hand them a set number of Wallet Keys to give out.</p></li>
+          <li class="tile tile--people"><p class="tile-group">People &amp; sites</p><h3>Sites and buildings</h3><p>Group doors and people by building, site or location, and switch between them from one admin portal.</p></li>
+          <li class="tile tile--logs"><p class="tile-group">Records &amp; control</p><h3>Activity log</h3><p>Every key accepted, door unlocked, and key added or removed, filterable by lock, person, event and date.</p></li>
+          <li class="tile tile--logs"><p class="tile-group">Records &amp; control</p><h3>Audit log</h3><p>A separate record of what admins did: who issued or removed which key, for whom, and when.</p></li>
+          <li class="tile tile--devices"><p class="tile-group">Doors &amp; devices</p><h3>Cameras and camera roles</h3><p>Connect ONVIF-compatible cameras for live footage, and decide which people can see which cameras.</p></li>
+        </ul>
+        <p class="tiles-more"><a class="text-link" href="/sites/light/features/">See every feature <span aria-hidden="true">→</span></a></p>
+      </div>
+    </section>
+
+    <section class="section" id="record" aria-labelledby="record-title">
+      <div class="wrap split">
+        <div>
+          <p class="label">The record</p>
+          <h2 class="display section-title" id="record-title">Every entry, written down.</h2>
+          <p class="lede">The activity log shows keys accepted and doors unlocked. A separate audit log records which admin issued or removed which key, and when.</p>
+        </div>
+        <div class="ledger dark-panel">
+          <table>
+            <caption><span class="ledger-cap"><span>Activity log · lobby door</span><span>Example only</span></span></caption>
+            <thead><tr><th scope="col">Time</th><th scope="col">Who</th><th scope="col">Key</th><th scope="col">Result</th></tr></thead>
+            <tbody>
+              <tr><td>08:12</td><td>Resident 1204</td><td>Wallet key</td><td class="is-ok">Opened</td></tr>
+              <tr><td>09:40</td><td>Contractor</td><td>Guest key</td><td class="is-ok">Opened</td></tr>
+              <tr><td>11:05</td><td>Visitor</td><td>QR intercom</td><td class="is-ok">Called 1204</td></tr>
+              <tr><td>17:40</td><td>Resident 702</td><td>Wallet key</td><td class="is-ok">Opened</td></tr>
+              <tr><td>18:02</td><td>Former resident</td><td>Wallet key</td><td class="is-no">Removed</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
 
-    <!-- The building entrance check -->
     <section class="section section--stone" id="door-check" aria-labelledby="door-title">
       <div class="wrap">
-        <p class="label">Your entrance</p>
-        <h2 class="display section-title" id="door-title">What we check at a shared entrance.</h2>
-        <p class="lede">SmartphoneKey switches electric locks. A shared entrance usually has an existing system around it, so the check starts with what is already there.</p>
+        <p class="label">The door check</p>
+        <h2 class="display section-title" id="door-title">What we check at your door.</h2>
+        <p class="lede">SmartphoneKey switches electric locks. Whether your door already has one, or needs one, decides what the job involves.</p>
         <div class="door-grid">
           <figure class="plan">
             <svg class="plan-svg" viewBox="0 0 520 430" role="img" aria-labelledby="plan-title plan-desc">
-              <title id="plan-title">Plan view of a building entrance, seen from above</title>
-              <desc id="plan-desc">A wall with a door opening from the street into the lobby. The reader sits on the outside wall next to the door, an electric strike sits in the frame, an exit button is inside, and a power supply is inside, joined by a cable. Numbers match the checklist.</desc>
+              <title id="plan-title">Plan view of an entrance, seen from above</title>
+              <desc id="plan-desc">A wall with a door opening. The door swings inward. The reader sits on the outside wall next to the door, an electric strike sits in the frame, an exit button is inside, and a power supply is inside, joined by a cable. Numbers match the checklist.</desc>
               <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path class="hatch-line" d="M0 0V7"/></pattern></defs>
-              <text x="20" y="40">OUTSIDE · STREET</text>
-              <text x="20" y="414">INSIDE · LOBBY</text>
+              <text x="20" y="40">OUTSIDE</text>
+              <text x="20" y="414">INSIDE</text>
               <rect class="wall" x="12" y="168" width="174" height="34"/>
               <rect class="wall" x="340" y="168" width="168" height="34"/>
               <rect class="jamb" x="186" y="164" width="8" height="42"/>
@@ -341,60 +310,105 @@
               <g class="marker"><circle cx="452" cy="120" r="13"/><text x="452" y="125">5</text></g>
               <g class="marker"><circle cx="232" cy="96" r="13"/><text x="232" y="101">6</text></g>
             </svg>
-            <figcaption>Simplified diagram: a building entrance seen from above. Every door is checked in person.</figcaption>
+            <figcaption>Simplified diagram: an entrance seen from above. Every door is checked in person.</figcaption>
           </figure>
           <div>
             <ol class="checks" role="list">
-              <li class="check"><span class="check-num" aria-hidden="true">1</span><div><h3>What’s on the entrance now</h3><p>Intercom panel, fob reader, electric strike or magnetic lock, and what should stay or change.</p></div></li>
+              <li class="check"><span class="check-num" aria-hidden="true">1</span><div><h3>The lock you have</h3><p>Regular key only, electric strike, magnetic lock or an old fob system.</p></div></li>
               <li class="check"><span class="check-num" aria-hidden="true">2</span><div><h3>Power at the door</h3><p>The reader and the lock need low-voltage power nearby.</p></div></li>
-              <li class="check"><span class="check-num" aria-hidden="true">3</span><div><h3>Wiring and other doors</h3><p>The cable route, plus which garage and amenity doors should be included.</p></div></li>
-              <li class="check"><span class="check-num" aria-hidden="true">4</span><div><h3>Exit and fire requirements</h3><p>Exit hardware and safety needs are confirmed on site before anything changes.</p></div></li>
-              <li class="check"><span class="check-num" aria-hidden="true">5</span><div><h3>Wi-Fi or LTE</h3><p>A dependable network at the entrance, or the LTE model with a SIM card.</p></div></li>
-              <li class="check"><span class="check-num" aria-hidden="true">6</span><div><h3>Who approves</h3><p>The owner, manager or board, and any building approvals the change needs.</p></div></li>
+              <li class="check"><span class="check-num" aria-hidden="true">3</span><div><h3>The cable route</h3><p>How wiring reaches the lock and the power supply.</p></div></li>
+              <li class="check"><span class="check-num" aria-hidden="true">4</span><div><h3>How people leave</h3><p>An exit button is included; exit and safety needs are confirmed on site.</p></div></li>
+              <li class="check"><span class="check-num" aria-hidden="true">5</span><div><h3>Wi-Fi or LTE</h3><p>Dependable Wi-Fi at the door, or the LTE model with a SIM card.</p></div></li>
+              <li class="check"><span class="check-num" aria-hidden="true">6</span><div><h3>Which door</h3><p>The shared entrance, a unit door, or both. The shared entrance is the building’s decision.</p></div></li>
             </ol>
-            <p class="door-foot"><strong>Suites aren’t doors.</strong> A large building may have only a few shared entrances, so a setup is sized by doors and keys, not by the number of suites.</p>
+            <div class="callout"><p>Live in a unit? Your own door is yours to change. The lobby, garage and other shared doors belong to the building, so the board or manager decides.</p></div>
+            <p class="door-cta"><a class="btn btn-primary" href="#request">Request a door check <span class="btn-arrow" aria-hidden="true">↑</span></a></p>
           </div>
         </div>
       </div>
     </section>
-    <!-- Building answers -->
+
+    <section class="section" id="fit" aria-labelledby="fit-title">
+      <div class="wrap">
+        <p class="label">Is it the right fit?</p>
+        <h2 class="display section-title" id="fit-title">Good for many. Not for every door.</h2>
+        <div class="versus">
+          <div class="versus-col fit-yes"><h3>A good fit if</h3><ul class="points" role="list"><li>You manage a building or several, with residents moving in and out.</li><li>You want visitors handled at the door without a wired buzzer panel.</li><li>You want one list of who has access, searchable by unit.</li></ul></div>
+          <div class="versus-col fit-no"><h3>Maybe not if</h3><ul class="points" role="list"><li>The shared entrance can’t take an electric lock or power.</li><li>You need access to sync automatically from another property system. That isn’t confirmed.</li></ul></div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="answers" aria-labelledby="answers-title">
       <div class="wrap faq-grid">
         <div class="faq-head">
-          <p class="label">Answers for buildings</p>
-          <h2 class="display section-title" id="answers-title">What managers and boards ask first.</h2>
-          <p class="lede">Including the questions that need a site visit to answer properly.</p>
+          <p class="label">Answers</p>
+          <h2 class="display section-title" id="answers-title">What condos &amp; buildings ask first.</h2>
+          <p class="lede">Straight answers, including the ones that aren’t a simple yes.</p>
         </div>
         <div class="faq">
           <details>
-            <summary>Can a resident put this on the lobby door?</summary>
-            <div class="answer"><p>No. Shared entrances are the building’s decision: the owner, property manager or condo board, with any approvals the building needs. A resident can only consider their own unit door, within the building’s rules.</p></div>
+            <summary>Can residents keep using fobs?</summary>
+            <div class="answer"><p>Residents who prefer a card can get an NFC key card that works on the same reader.</p></div>
           </details>
           <details>
-            <summary>Does it replace our intercom?</summary>
-            <div class="answer"><p>SmartphoneKey describes its QR code as a digital intercom: visitors scan it to call the right person. Whether that can replace your current intercom depends on the building and what the system has to do, so the door check covers it.</p></div>
+            <summary>How do visitors get in?</summary>
+            <div class="answer"><p>They scan the QR code on the reader with their phone camera and connect to the person they’re visiting to ask for entry. No app needed.</p></div>
           </details>
           <details>
-            <summary>What about residents without a smartphone?</summary>
-            <div class="answer"><p>SmartphoneKey key cards work on the same reader. They are programmed and revoked in the admin.</p></div>
+            <summary>We have hundreds of residents.</summary>
+            <div class="answer"><p>Larger plans let you import people from a CSV or Excel file, and the directory finds anyone by unit number, name, phone or licence plate.</p></div>
           </details>
           <details>
-            <summary>What happens when someone moves out?</summary>
-            <div class="answer"><p>Their key is removed in the admin and stops working. The activity log records keys added and removed as well as entries.</p></div>
+            <summary>Can the superintendent manage keys?</summary>
+            <div class="answer"><p>Yes. Make them a local admin for the building, with their own set of Wallet Keys to give out.</p></div>
           </details>
           <details>
-            <summary>How is pricing worked out for a large building?</summary>
-            <div class="answer"><p>By shared doors and keys, not suites, plus any electrical work. Package details are confirmed before a quote; there is no price on this site.</p></div>
-          </details>
-          <details>
-            <summary>We already have a fob system.</summary>
-            <div class="answer"><p>An existing system usually means electric locking hardware is in place, but that doesn’t make it compatible. The door check confirms what can stay and what would change.</p></div>
-          </details>
-          <details>
-            <summary>We manage more than one building.</summary>
-            <div class="answer"><p>SmartphoneKey’s admin guide describes separate entities for each building or site, each with its own doors, users and local admins.</p></div>
+            <summary>What does it cost for a building?</summary>
+            <div class="answer"><p>It depends on the doors, locks, power and how many people need keys. The local team explains setup and cost after the door check.</p></div>
           </details>
         </div>
+      </div>
+    </section>
+
+    <section class="section section--deep" id="other-doors" aria-labelledby="other-title">
+      <div class="wrap">
+        <p class="label">Other doors</p>
+        <h2 class="display section-title" id="other-title">The same reader, other jobs.</h2>
+        <nav class="directory" aria-labelledby="other-title">
+          <ul role="list">
+            <li>
+              <a class="dir-row" href="/sites/light/gyms-and-studios/">
+                <svg class="dir-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M3 33h34M5 25h4M13.5 25h13M31 25h4M16 22.5v5M24 22.5v5"/><rect x="9" y="17" width="4.5" height="16" rx="1.2"/><rect x="26.5" y="17" width="4.5" height="16" rx="1.2"/></svg>
+                <span class="dir-name">Gyms &amp; studios</span><span class="dir-who">Members tap in. You decide who can.</span><span class="dir-go" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li>
+              <a class="dir-row" href="/sites/light/offices-and-coworking/">
+                <svg class="dir-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M3 33h34M6 33V12h28v21M6 19h28M14 12v21M26 12v21"/><rect x="17" y="24" width="6" height="9"/></svg>
+                <span class="dir-name">Offices &amp; coworking</span><span class="dir-who">Teams, clients and after-hours, sorted.</span><span class="dir-go" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li>
+              <a class="dir-row" href="/sites/light/salon-suites-and-rental-rooms/">
+                <svg class="dir-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M3 33h34M5 33V9h30v24M15 9v24M25 9v24"/><circle cx="12.5" cy="22" r="1"/><circle cx="22.5" cy="22" r="1"/><circle cx="32.5" cy="22" r="1"/></svg>
+                <span class="dir-name">Salon suites &amp; rental rooms</span><span class="dir-who">Every renter gets their own door.</span><span class="dir-go" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li>
+              <a class="dir-row" href="/sites/light/short-term-rentals/">
+                <svg class="dir-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M3 33h34M13.5 17v-3.5h7V17M14 17v14M20 17v14M36 12a5 5 0 1 1-1.46-3.54M33.8 5.6l.7 2.9-2.9-.8"/><rect x="8" y="17" width="18" height="14" rx="2"/></svg>
+                <span class="dir-name">Short-term rentals</span><span class="dir-who">Every stay gets its own key.</span><span class="dir-go" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li>
+              <a class="dir-row" href="/sites/light/homes/">
+                <svg class="dir-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M3 33h34M9 33V19M31 33V19M6 21.5 20 8.5l14 13M26 14.1V9h3.2v8M17 33v-9h6v9"/><rect x="25" y="23" width="3.5" height="3.5"/></svg>
+                <span class="dir-name">Homes</span><span class="dir-who">Family taps in. Guest keys end on time.</span><span class="dir-go" aria-hidden="true">→</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </section>
 
@@ -402,9 +416,9 @@
     <section class="closing" id="next-step" aria-labelledby="closing-title">
       <div class="wrap">
         <p class="label">Next step</p>
-        <h2 class="display section-title" id="closing-title">Start with the shared entrance.</h2>
-        <p class="lede">A few fields tell the local team about the entrance, your role in the building and how many shared doors you have in mind.</p>
-        <a class="btn btn-primary" href="#request">Request a building door check <span class="btn-arrow" aria-hidden="true">↑</span></a>
+        <h2 class="display section-title" id="closing-title">Start with your door.</h2>
+        <p class="lede">A visit checks the lock, power, cable route and Wi-Fi or LTE. Setup and cost are explained after that visit.</p>
+        <a class="btn btn-primary" href="#request">Request a door check <span class="btn-arrow" aria-hidden="true">↑</span></a>
       </div>
     </section>
   </main>
@@ -421,32 +435,33 @@
           <ul role="list">
             <li><a href="/sites/light/gyms-and-studios/">Gyms &amp; studios</a></li>
             <li><a href="/sites/light/condos-and-buildings/">Condos &amp; buildings</a></li>
+            <li><a href="/sites/light/offices-and-coworking/">Offices &amp; coworking</a></li>
+            <li><a href="/sites/light/salon-suites-and-rental-rooms/">Salon suites &amp; rental rooms</a></li>
             <li><a href="/sites/light/short-term-rentals/">Short-term rentals</a></li>
             <li><a href="/sites/light/homes/">Homes</a></li>
           </ul>
         </nav>
-        <nav class="footer-col" aria-labelledby="footer-learn">
-          <h2 id="footer-learn">Learn</h2>
+        <nav class="footer-col" aria-labelledby="footer-product">
+          <h2 id="footer-product">Product</h2>
           <ul role="list">
-            <li><a href="/sites/light/#how-it-works">How it works</a></li>
-            <li><a href="/sites/light/#reader">The reader</a></li>
-            <li><a href="/sites/light/#keys">Kinds of keys</a></li>
-            <li><a href="/sites/light/#door-check">The door check</a></li>
-            <li><a href="/sites/light/#guide">Find your starting point</a></li>
+            <li><a href="/sites/light/features/">Features</a></li>
+            <li><a href="/sites/light/how-it-works/">How it works</a></li>
+            <li><a href="/sites/light/how-it-works/#door-check">Door check</a></li>
+            <li><a href="/sites/light/#answers">Answers</a></li>
           </ul>
         </nav>
-        <div class="footer-col">
-          <h2>From SmartphoneKey</h2>
+        <nav class="footer-col" aria-labelledby="footer-start">
+          <h2 id="footer-start">Get started</h2>
           <ul role="list">
-            
-            
-            
-            
+            <li><a href="#request">Request a door check</a></li>
+            <li><a href="/sites/light/how-it-works/#door-check">What we check</a></li>
+            <li><a href="/sites/light/how-it-works/#steps">Installation steps</a></li>
+            <li><a href="/sites/light/features/">Compare features</a></li>
           </ul>
-        </div>
+        </nav>
       </div>
       <div class="footer-notes">
-        <p>Product capabilities on this site are summarized from SmartphoneKey’s published materials; what works at a specific door is confirmed at a door check. The film is SmartphoneKey’s own footage.</p>
+        <p>Product details are summarized from SmartphoneKey’s published materials and admin guide; what works at your door is confirmed at a door check. Some features depend on the subscription package. This site is run by an independent local installer of SmartphoneKey.</p>
       </div>
     </div>
   </footer>

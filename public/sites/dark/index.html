@@ -12,7 +12,7 @@
   <meta property="og:site_name" content="SmartphoneKey Toronto &amp; GTA">
   <meta property="og:locale" content="en_CA">
   <meta property="og:title" content="SmartphoneKey installation in Toronto &amp; the GTA">
-  <meta property="og:description" content="Phone-based door access for gyms, condos, short-term rentals and homes. Every setup starts with a door check.">
+  <meta property="og:description" content="Phone-based door access for gyms, condos, offices, salon suites, short-term rentals and homes. Every setup starts with a door check.">
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#15130f">
   <link rel="icon" type="image/png" sizes="32x32" href="/sites/dark/favicon-32.png">
@@ -36,12 +36,21 @@
       </a>
       <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu"><span class="menu-toggle-label">Menu</span><span class="menu-toggle-icon" aria-hidden="true"></span></button>
       <nav class="site-nav" id="site-menu" aria-label="Main">
-        <ul role="list">
-          <li><a href="/sites/dark/gyms-and-studios/">Gyms &amp; studios</a></li>
-          <li><a href="/sites/dark/condos-and-buildings/">Condos &amp; buildings</a></li>
-          <li><a href="/sites/dark/short-term-rentals/">Short-term rentals</a></li>
-          <li><a href="/sites/dark/homes/">Homes</a></li>
-          <li><a href="/sites/dark/#how-it-works">How it works</a></li>
+        <ul class="nav-list" role="list">
+          <li class="nav-group" id="nav-group">
+            <button class="nav-drop" id="nav-drop" type="button" aria-expanded="false" aria-controls="nav-audiences">Who it’s for<span class="nav-caret" aria-hidden="true"></span></button>
+            <ul class="drop" id="nav-audiences" role="list">
+              <li><a href="/sites/dark/gyms-and-studios/"><img src="/sites/dark/media/photos/gym-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span class="drop-text"><span class="drop-name">Gyms &amp; studios</span><span class="drop-blurb">Members tap in. You decide who can.</span></span></a></li>
+              <li><a href="/sites/dark/condos-and-buildings/"><img src="/sites/dark/media/photos/condo-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span class="drop-text"><span class="drop-name">Condos &amp; buildings</span><span class="drop-blurb">Residents tap in. Visitors call up.</span></span></a></li>
+              <li><a href="/sites/dark/offices-and-coworking/"><img src="/sites/dark/media/photos/office-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span class="drop-text"><span class="drop-name">Offices &amp; coworking</span><span class="drop-blurb">Teams, clients and after-hours, sorted.</span></span></a></li>
+              <li><a href="/sites/dark/salon-suites-and-rental-rooms/"><img src="/sites/dark/media/photos/suites-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span class="drop-text"><span class="drop-name">Salon suites &amp; rental rooms</span><span class="drop-blurb">Every renter gets their own door.</span></span></a></li>
+              <li><a href="/sites/dark/short-term-rentals/"><img src="/sites/dark/media/photos/str-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span class="drop-text"><span class="drop-name">Short-term rentals</span><span class="drop-blurb">Every stay gets its own key.</span></span></a></li>
+              <li><a href="/sites/dark/homes/"><img src="/sites/dark/media/photos/home-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span class="drop-text"><span class="drop-name">Homes</span><span class="drop-blurb">Family taps in. Guest keys end on time.</span></span></a></li>
+            </ul>
+          </li>
+          <li><a href="/sites/dark/features/">Features</a></li>
+          <li><a href="/sites/dark/how-it-works/">How it works</a></li>
+          <li><a href="/sites/dark/#answers">Answers</a></li>
         </ul>
         <a class="btn btn-primary nav-cta" href="#request">Request a door check</a>
       </nav>
@@ -50,7 +59,7 @@
   </header>
 
   <main id="main">
-    <!-- Hero: SmartphoneKey's own film, never an AI poster -->
+    <!-- Hero: SmartphoneKey's own film -->
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="wrap hero-head">
         <p class="kicker"><span class="kicker-led" aria-hidden="true"></span>Phone-based door access · Installed in Toronto &amp; the GTA</p>
@@ -77,11 +86,10 @@
           <p class="film-plate" aria-hidden="true"><span>SmartphoneKey</span><span>Product film · 0:26</span></p>
           <video class="film-video" muted playsinline loop preload="metadata" controls width="1280" height="720" aria-label="SmartphoneKey product film" aria-describedby="film-label">
             <source src="/sites/dark/media/smartphonekey-product-film.mp4#t=3" type="video/mp4">
-            <p>This browser can’t play the film. Watch SmartphoneKey’s film on YouTube.</p>
+            <p>This browser can’t play the film.</p>
           </video>
           <div class="film-fallback" hidden>
             <p>The film couldn’t load here.</p>
-            Watch it on YouTube<span aria-hidden="true"> ↗</span><span class="visually-hidden"> (opens in a new tab)</span>
           </div>
         </div>
         <figcaption class="wrap film-caption">
@@ -89,7 +97,6 @@
           <span id="film-label">SmartphoneKey’s own film of the reader and app.</span>
           <span class="film-controls">
             <button class="film-toggle" type="button" hidden>Pause film</button>
-            
           </span>
         </figcaption>
       </figure>
@@ -99,7 +106,7 @@
     <section class="section" id="audiences" aria-labelledby="audiences-title">
       <div class="wrap">
         <p class="label">Who it’s for</p>
-        <h2 class="display section-title" id="audiences-title">Four kinds of doors. Four different jobs.</h2>
+        <h2 class="display section-title" id="audiences-title">Six kinds of doors. Six different jobs.</h2>
         <p class="lede">The reader is the same. What each owner needs from it isn’t, so each has its own page.</p>
 
         <nav class="directory" aria-labelledby="directory-title">
@@ -118,6 +125,18 @@
               </a>
             </li>
             <li>
+              <a class="dir-row" href="/sites/dark/offices-and-coworking/">
+                <svg class="dir-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M3 33h34M6 33V9h28v24M6 15h28M13 33V21h14v12M20 21v12"/><rect x="10" y="10.5" width="4" height="2.5"/><rect x="18" y="10.5" width="4" height="2.5"/><rect x="26" y="10.5" width="4" height="2.5"/></svg>
+                <span class="dir-name">Offices &amp; coworking</span><span class="dir-who">Teams, clients and after-hours, sorted.</span><span class="dir-go" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li>
+              <a class="dir-row" href="/sites/dark/salon-suites-and-rental-rooms/">
+                <svg class="dir-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M3 33h34M3 9h34M7 33V15h7v18M16.5 33V15h7v18M26 33V15h7v18"/><circle cx="12" cy="24.5" r=".9"/><circle cx="21.5" cy="24.5" r=".9"/><circle cx="31" cy="24.5" r=".9"/></svg>
+                <span class="dir-name">Salon suites &amp; rental rooms</span><span class="dir-who">Every renter gets their own door.</span><span class="dir-go" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li>
               <a class="dir-row" href="/sites/dark/short-term-rentals/">
                 <svg class="dir-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M3 33h34M13.5 17v-3.5h7V17M14 17v14M20 17v14M36 12a5 5 0 1 1-1.46-3.54M33.8 5.6l.7 2.9-2.9-.8"/><rect x="8" y="17" width="18" height="14" rx="2"/></svg>
                 <span class="dir-name">Short-term rentals</span><span class="dir-who">Each stay gets a key that starts and ends on time.</span><span class="dir-go" aria-hidden="true">→</span>
@@ -131,7 +150,7 @@
             </li>
           </ul>
         </nav>
-        <p class="also">Coworking spaces, salon suites and hourly studios hand out and take back access often too. Tell us about yours in a door check request.</p>
+        <p class="also">Something else? Tell the local team about your door in a door check request.</p>
 
         <div class="feature-scene reveal">
           <figure class="hero-visual">
@@ -187,6 +206,8 @@
                   <option value="">Choose one</option>
                   <option value="gym">Gym or studio</option>
                   <option value="building">Condo or building</option>
+                  <option value="office">Office or coworking</option>
+                  <option value="suites">Salon suites or rental rooms</option>
                   <option value="rental">Short-term rental</option>
                   <option value="home">Home</option>
                   <option value="other">Something else</option>
@@ -403,6 +424,8 @@
               <div class="choices">
                 <label class="choice"><input type="radio" name="guide-space" value="gym" checked>Gym or studio</label>
                 <label class="choice"><input type="radio" name="guide-space" value="building">Condo or building</label>
+                <label class="choice"><input type="radio" name="guide-space" value="office">Office or coworking</label>
+                <label class="choice"><input type="radio" name="guide-space" value="suites">Salon suites or rental rooms</label>
                 <label class="choice"><input type="radio" name="guide-space" value="rental">Short-term rental</label>
                 <label class="choice"><input type="radio" name="guide-space" value="home">Home</label>
               </div>
@@ -462,7 +485,7 @@
         <div class="faq">
           <details>
             <summary>Is this SmartphoneKey’s own website?</summary>
-            <div class="answer"><p>No. This site covers SmartphoneKey sales and installation in Toronto and the GTA.</p></div>
+            <div class="answer"><p>No. This site covers SmartphoneKey sales and installation in Toronto and the GTA, run by an independent local installer.</p></div>
           </details>
           <details>
             <summary>Do people need an app?</summary>
@@ -486,7 +509,7 @@
           </details>
           <details>
             <summary>Which page is right for me?</summary>
-            <div class="answer"><p>Pick the one that matches who runs the door: <a href="/sites/dark/gyms-and-studios/">gyms and studios</a>, <a href="/sites/dark/condos-and-buildings/">condos and buildings</a>, <a href="/sites/dark/short-term-rentals/">short-term rentals</a> or <a href="/sites/dark/homes/">homes</a>.</p></div>
+            <div class="answer"><p>Pick the one that matches who runs the door: <a href="/sites/dark/gyms-and-studios/">gyms and studios</a>, <a href="/sites/dark/condos-and-buildings/">condos and buildings</a>, <a href="/sites/dark/offices-and-coworking/">offices and coworking</a>, <a href="/sites/dark/salon-suites-and-rental-rooms/">salon suites and rental rooms</a>, <a href="/sites/dark/short-term-rentals/">short-term rentals</a> or <a href="/sites/dark/homes/">homes</a>. Every feature is on the <a href="/sites/dark/features/">features page</a>.</p></div>
           </details>
         </div>
       </div>
@@ -515,32 +538,32 @@
           <ul role="list">
             <li><a href="/sites/dark/gyms-and-studios/">Gyms &amp; studios</a></li>
             <li><a href="/sites/dark/condos-and-buildings/">Condos &amp; buildings</a></li>
+            <li><a href="/sites/dark/offices-and-coworking/">Offices &amp; coworking</a></li>
+            <li><a href="/sites/dark/salon-suites-and-rental-rooms/">Salon suites &amp; rental rooms</a></li>
             <li><a href="/sites/dark/short-term-rentals/">Short-term rentals</a></li>
             <li><a href="/sites/dark/homes/">Homes</a></li>
           </ul>
         </nav>
-        <nav class="footer-col" aria-labelledby="footer-learn">
-          <h2 id="footer-learn">Learn</h2>
+        <nav class="footer-col" aria-labelledby="footer-product">
+          <h2 id="footer-product">Product</h2>
           <ul role="list">
-            <li><a href="/sites/dark/#how-it-works">How it works</a></li>
-            <li><a href="/sites/dark/#reader">The reader</a></li>
-            <li><a href="/sites/dark/#keys">Kinds of keys</a></li>
-            <li><a href="/sites/dark/#door-check">The door check</a></li>
+            <li><a href="/sites/dark/features/">Features</a></li>
+            <li><a href="/sites/dark/how-it-works/">How it works</a></li>
+            <li><a href="/sites/dark/how-it-works/#door-check">Door check</a></li>
+            <li><a href="/sites/dark/#answers">Answers</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-col" aria-labelledby="footer-start">
+          <h2 id="footer-start">Get started</h2>
+          <ul role="list">
+            <li><a href="#request">Request a door check</a></li>
+            <li><a href="/sites/dark/how-it-works/#steps">Installation steps</a></li>
             <li><a href="/sites/dark/#guide">Find your starting point</a></li>
           </ul>
         </nav>
-        <div class="footer-col">
-          <h2>From SmartphoneKey</h2>
-          <ul role="list">
-            
-            
-            
-            
-          </ul>
-        </div>
       </div>
       <div class="footer-notes">
-        <p>Product capabilities on this site are summarized from SmartphoneKey’s published materials; what works at a specific door is confirmed at a door check. The film is SmartphoneKey’s own footage.</p>
+        <p>Product details are summarized from SmartphoneKey’s published materials and admin guide; what works at your door is confirmed at a door check. Some features depend on the subscription package. This site is run by an independent local installer of SmartphoneKey.</p>
       </div>
     </div>
   </footer>

@@ -5,14 +5,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Airbnb &amp; Short-Term Rental Door Access | SmartphoneKey Toronto</title>
-  <meta name="description" content="Guest keys that start and end on time, separate keys for cleaners, and access you can remove any time. Keys are sent manually; Airbnb sync isn’t confirmed.">
+  <meta name="description" content="Guest keys that start at check-in and end at check-out, cleaner keys for the turnover window, and an activity log. No lockbox. Toronto &amp; GTA.">
   
   
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SmartphoneKey Toronto &amp; GTA">
   <meta property="og:locale" content="en_CA">
-  <meta property="og:title" content="Short-term rental door access with timed guest keys">
-  <meta property="og:description" content="A key for every stay, a window for every cleaner, and an activity log. Keys are issued manually. Toronto and the GTA.">
+  <meta property="og:title" content="Every stay gets its own key.">
+  <meta property="og:description" content="Guest keys that start at check-in and end at check-out, cleaner keys for the turnover window, and an activity log. No lockbox. Toronto &amp; GTA.">
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#f4f7f5">
   <link rel="icon" type="image/png" sizes="32x32" href="/sites/light/favicon-32.png">
@@ -21,8 +21,10 @@
   <link rel="preload" href="/sites/light/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/sites/light/assets/site.css">
   <link rel="stylesheet" href="/sites/light/assets/light-theme.css">
+  <link rel="stylesheet" href="/sites/light/assets/pages.css">
   <script>document.documentElement.className += ' js' + ('IntersectionObserver' in window ? ' io' : '');</script>
   <script src="/sites/light/assets/site.js" defer></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does keyless check-in work without a lockbox?","acceptedAnswer":{"@type":"Answer","text":"For each stay you create a guest key that starts at check-in and ends at check-out, and send it to the guest by email or message. Cleaners get their own key for the turnover window. You issue the keys yourself, because an automatic link with Airbnb or other booking platforms isn’t confirmed."}},{"@type":"Question","name":"Does it sync with Airbnb?","acceptedAnswer":{"@type":"Answer","text":"An automatic link with Airbnb or other booking platforms isn’t confirmed. You create and send each guest key yourself."}},{"@type":"Question","name":"Do guests need an app?","acceptedAnswer":{"@type":"Answer","text":"No. A guest key works from a link, or from Apple Wallet or Google Wallet."}},{"@type":"Question","name":"A guest checks in late or leaves early.","acceptedAnswer":{"@type":"Answer","text":"Change the key’s times, or remove it, from the admin portal."}},{"@type":"Question","name":"What if the Wi-Fi goes down?","acceptedAnswer":{"@type":"Answer","text":"The LTE model uses a SIM card. If a lock is offline when you issue a key, the key is delivered when the lock comes back online."}},{"@type":"Question","name":"Can I see when the guest arrived?","acceptedAnswer":{"@type":"Answer","text":"Yes. The activity log shows when keys were accepted and the door unlocked."}}]}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -36,11 +38,20 @@
       <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu"><span class="menu-toggle-label">Menu</span><span class="menu-toggle-icon" aria-hidden="true"></span></button>
       <nav class="site-nav" id="site-menu" aria-label="Main">
         <ul role="list">
-          <li><a href="/sites/light/gyms-and-studios/">Gyms &amp; studios</a></li>
-          <li><a href="/sites/light/condos-and-buildings/">Condos &amp; buildings</a></li>
-          <li><a href="/sites/light/short-term-rentals/" aria-current="page">Short-term rentals</a></li>
-          <li><a href="/sites/light/homes/">Homes</a></li>
-          <li><a href="/sites/light/#how-it-works">How it works</a></li>
+          <li class="nav-group">
+            <button class="nav-drop" id="nav-drop" type="button" aria-expanded="false" aria-controls="nav-audiences" data-current="true">Who it’s for <span class="nav-drop-icon" aria-hidden="true"></span></button>
+            <ul class="drop" id="nav-audiences" role="list">
+              <li><a href="/sites/light/gyms-and-studios/"><img src="/sites/light/media/photos/gym-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span><strong>Gyms &amp; studios</strong>Members tap in. You decide who can.</span></a></li>
+              <li><a href="/sites/light/condos-and-buildings/"><img src="/sites/light/media/photos/condo-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span><strong>Condos &amp; buildings</strong>Residents tap in. Visitors call up.</span></a></li>
+              <li><a href="/sites/light/offices-and-coworking/"><img src="/sites/light/media/photos/office-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span><strong>Offices &amp; coworking</strong>Teams, clients and after-hours, sorted.</span></a></li>
+              <li><a href="/sites/light/salon-suites-and-rental-rooms/"><img src="/sites/light/media/photos/suites-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span><strong>Salon suites &amp; rental rooms</strong>Every renter gets their own door.</span></a></li>
+              <li><a href="/sites/light/short-term-rentals/" aria-current="page"><img src="/sites/light/media/photos/str-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span><strong>Short-term rentals</strong>Every stay gets its own key.</span></a></li>
+              <li><a href="/sites/light/homes/"><img src="/sites/light/media/photos/home-hero-768.webp" alt="" width="96" height="64" loading="lazy" decoding="async"><span><strong>Homes</strong>Family taps in. Guest keys end on time.</span></a></li>
+            </ul>
+          </li>
+          <li><a href="/sites/light/features/">Features</a></li>
+          <li><a href="/sites/light/how-it-works/">How it works</a></li>
+          <li><a href="/sites/light/#answers">Answers</a></li>
         </ul>
         <a class="btn btn-primary nav-cta" href="#request">Request a door check</a>
       </nav>
@@ -49,40 +60,22 @@
   </header>
 
   <main id="main">
-    <!-- Hero: the shared film hero, rental headline and copy -->
-    <section class="hero hero--audience" id="top" aria-labelledby="hero-title">
+    <section class="hero hero--audience hero--photo" id="top" aria-labelledby="hero-title">
       <div class="wrap hero-head">
         <p class="kicker"><span class="kicker-led" aria-hidden="true"></span>Airbnb &amp; short-term rentals · Toronto &amp; GTA</p>
         <h1 class="display hero-title" id="hero-title"><span class="line">Every stay gets</span> <span class="line line-accent">its own key.</span></h1>
         <div class="hero-sub">
           <p class="hero-lede">Create a guest key with a start and end time, send it by email or message, and remove it whenever you need to. You issue each key yourself: an automatic link with Airbnb or other booking platforms isn’t confirmed.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#request">Request a rental door check <span class="btn-arrow" aria-hidden="true">↓</span></a>
-            <a class="text-link" href="#turnover">See a turnover day</a>
+            <a class="btn btn-primary" href="#request">Request a door check <span class="btn-arrow" aria-hidden="true">↓</span></a>
+            <a class="text-link" href="#in-short">The short answer</a>
           </div>
         </div>
       </div>
-
-      <figure class="film" data-film>
-        <div class="film-frame film-frame--hero">
-          <p class="film-plate" aria-hidden="true"><span>SmartphoneKey</span><span>Product film · 0:26</span></p>
-          <video class="film-video" playsinline preload="metadata" poster="/sites/light/media/smartphonekey-video-poster.jpg" controls width="1280" height="720" aria-label="SmartphoneKey product film" aria-describedby="film-label">
-            <source src="/sites/light/media/smartphonekey-product-film.mp4#t=3" type="video/mp4">
-            <p>This browser can’t play the film. Watch SmartphoneKey’s film on YouTube.</p>
-          </video>
-          <div class="film-fallback" hidden>
-            <p>The film couldn’t load here.</p>
-            Watch it on YouTube<span aria-hidden="true"> ↗</span><span class="visually-hidden"> (opens in a new tab)</span>
-          </div>
+      <figure class="film hero-media">
+        <div class="film-frame film-frame--hero hero-photo">
+          <picture><source type="image/webp" srcset="/sites/light/media/photos/str-hero-768.webp 768w, /sites/light/media/photos/str-hero-1152.webp 1152w, /sites/light/media/photos/str-hero-1536.webp 1536w" sizes="(min-width: 1024px) 54vw, 100vw"><img src="/sites/light/media/photos/str-hero.jpg" alt="A Toronto townhouse rental at golden hour, a suitcase waiting at the door beside the SmartphoneKey reader." width="1536" height="1024" fetchpriority="high" decoding="async"></picture>
         </div>
-        <figcaption class="wrap film-caption">
-          <span class="tag tag-real">SmartphoneKey footage</span>
-          <span id="film-label">SmartphoneKey’s own film of the reader and app.</span>
-          <span class="film-controls">
-            <button class="film-toggle" type="button" hidden>Pause film</button>
-            
-          </span>
-        </figcaption>
       </figure>
     </section>
 
@@ -90,20 +83,20 @@
     <section class="section section--stone" id="request" aria-labelledby="request-title">
       <div class="wrap">
         <p class="label">Door check request</p>
-        <h2 class="display section-title" id="request-title">Request a door check for your rental.</h2>
+        <h2 class="display section-title" id="request-title">Request a door check.</h2>
         <div class="request-grid">
           <div class="request-copy">
-            <p class="lede">Tell the local team which door guests use and what’s on it today.</p>
+            <p class="lede">Tell the local team where the door is and what’s on it today.</p>
             <div class="request-next">
               <h3>How a door check works</h3>
               <ul class="points" role="list">
-                <li>You tell the team about the unit and the door guests use.</li>
-                <li>A visit checks the lock, power, cable route, backup entry and network.</li>
+                <li>You tell the team about the door and who needs access.</li>
+                <li>A visit checks the lock, power, cable route and Wi-Fi or LTE.</li>
                 <li>Setup and cost are explained after that visit.</li>
               </ul>
             </div>
           </div>
-          <form class="request-form dark-panel" id="request-form" aria-label="Rental door check request form" aria-describedby="request-notice">
+          <form class="request-form dark-panel" id="request-form" aria-label="Door check request form" aria-describedby="request-notice">
             <p class="request-notice" id="request-notice"><strong>This form isn’t connected yet.</strong> Requests can’t be sent or saved from this page until the local team’s inbox is set up.</p>
             <div class="request-fields">
               <div class="field">
@@ -118,18 +111,7 @@
               <div class="field">
                 <label for="rq-area">City or postal code</label>
                 <input id="rq-area" name="area" type="text" autocomplete="off" required aria-describedby="rq-area-hint">
-                <p class="field-hint" id="rq-area-hint">Toronto and the GTA, for example Liberty Village or M6K.</p>
-              </div>
-              <div class="field">
-                <label for="rq-which">Which door?</label>
-                <select id="rq-which" name="which-door" required>
-                  <option value="">Choose one</option>
-                  <option value="unit">Unit door</option>
-                  <option value="entrance">Building entrance</option>
-                  <option value="both">Both</option>
-                  <option value="house">Door of a house</option>
-                  <option value="unsure">Not sure</option>
-                </select>
+                <p class="field-hint" id="rq-area-hint">Toronto and the GTA, for example Etobicoke or M6K.</p>
               </div>
               <div class="field">
                 <label for="rq-space">Space</label>
@@ -137,6 +119,8 @@
                   <option value="">Choose one</option>
                   <option value="gym">Gym or studio</option>
                   <option value="building">Condo or building</option>
+                  <option value="office">Office or coworking</option>
+                  <option value="suites">Salon suites or rental rooms</option>
                   <option value="rental" selected>Short-term rental</option>
                   <option value="home">Home</option>
                   <option value="other">Something else</option>
@@ -152,7 +136,7 @@
                   <option value="unsure">Not sure</option>
                 </select>
               </div>
-              <div class="field field--wide">
+              <div class="field">
                 <label for="rq-doors">Doors to connect</label>
                 <select id="rq-doors" name="doors" required>
                   <option value="">Choose one</option>
@@ -173,116 +157,134 @@
       </div>
     </section>
 
-    <!-- A turnover day at one unit -->
-    <section class="keys" id="turnover" aria-labelledby="turnover-title">
-      <div class="keys-track">
-        <div class="keys-stage">
-          <div class="wrap">
-            <p class="label">A turnover day</p>
-            <h2 class="display section-title" id="turnover-title">Check-out, clean, check-in.</h2>
-            <p class="lede">One unit, one day. Each line is a key; the bright part is when it opens the door.</p>
-            <figure class="day">
-              <div class="day-axis" aria-hidden="true">
-                <span class="day-axis-label">Who · key</span>
-                <span class="day-axis-track"><span style="--t:0">06:00</span><span class="tick-minor" style="--t:.1667">09:00</span><span style="--t:.3333">12:00</span><span class="tick-minor" style="--t:.5">15:00</span><span style="--t:.6667">18:00</span><span class="tick-minor" style="--t:.8333">21:00</span><span style="--t:1">24:00</span></span>
-              </div>
-              <ul class="day-rows" role="list">
-                <li class="day-row"><p class="day-label"><strong>Departing guest</strong> · Guest key<span class="day-rule">Valid until the 11:00 check-out</span></p><span class="day-track" aria-hidden="true"><span class="seg" style="--a:0;--b:.2778"></span><span class="mark mark-end" style="--t:.2778"></span></span></li>
-                <li class="day-row"><p class="day-label"><strong>Cleaner</strong> · Guest key<span class="day-rule">Valid 11:30 to 15:00</span></p><span class="day-track" aria-hidden="true"><span class="seg" style="--a:.3056;--b:.5"></span><span class="mark mark-end" style="--t:.5"></span></span></li>
-                <li class="day-row"><p class="day-label"><strong>Plumber</strong> · Guest key, one use<span class="day-rule">Sent at 13:00, used at 13:20, then spent</span></p><span class="day-track" aria-hidden="true"><span class="seg" style="--a:.3889;--b:.4074"></span><span class="mark mark-use" style="--t:.4074"></span></span></li>
-                <li class="day-row"><p class="day-label"><strong>Arriving guest</strong> · Guest key<span class="day-rule">Valid from the 16:00 check-in</span></p><span class="day-track" aria-hidden="true"><span class="seg" style="--a:.5556;--b:1"></span></span></li>
-                <li class="day-row"><p class="day-label"><strong>You</strong> · Wallet key<span class="day-rule">Works until you remove it</span></p><span class="day-track" aria-hidden="true"><span class="seg" style="--a:0;--b:1"></span></span></li>
-                <li class="day-row"><p class="day-label"><strong>Guest’s visitor</strong> · No key<span class="day-rule">Scans the QR code at 20:10 to call</span></p><span class="day-track" aria-hidden="true"><span class="mark mark-qr" style="--t:.787"></span></span></li>
-              </ul>
-              <figcaption class="day-caption">An example day. Guest keys with start and end times or a use limit are described in SmartphoneKey’s admin guide; each one is created by you.</figcaption>
+    <section class="section" id="in-short" aria-labelledby="brief-title">
+      <div class="wrap brief">
+        <div class="brief-head">
+          <p class="label">In short</p>
+          <h2 class="display brief-title" id="brief-title">How does keyless check-in work without a lockbox?</h2>
+        </div>
+        <div class="brief-body">
+          <p class="brief-for">For airbnb hosts and short-term rental managers</p>
+          <p class="brief-answer">For each stay you create a guest key that starts at check-in and ends at check-out, and send it to the guest by email or message. Cleaners get their own key for the turnover window. You issue the keys yourself, because an automatic link with Airbnb or other booking platforms isn’t confirmed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--deep" id="moments" aria-labelledby="moments-title">
+      <div class="wrap">
+        <p class="label">At the door</p>
+        <h2 class="display section-title" id="moments-title">Three moments. Before and now.</h2>
+        <ol class="moments" role="list">
+          <li class="moment">
+            <figure class="moment-shot">
+              <picture><source type="image/webp" srcset="/sites/light/media/photos/str-lockbox-768.webp 768w, /sites/light/media/photos/str-lockbox-1152.webp 1152w, /sites/light/media/photos/str-lockbox-1536.webp 1536w" sizes="(min-width: 960px) 30vw, (min-width: 640px) 50vw, 100vw"><img src="/sites/light/media/photos/str-lockbox.jpg" alt="The lockbox problem." width="1536" height="1024" loading="lazy" decoding="async"></picture>
+              <figcaption class="moment-stamp"><time>January</time><span>Porch</span></figcaption>
             </figure>
-            <p class="keys-hint" aria-hidden="true">Scroll to run the day ↓</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- How keys are issued: manual, no booking sync -->
-    <section class="section section--stone" id="issuing" aria-labelledby="issuing-title">
-      <div class="wrap">
-        <div class="split">
-        <div>
-        <p class="label">How keys are issued</p>
-        <h2 class="display section-title" id="issuing-title">You send each key. Nothing syncs by itself.</h2>
-        <p class="lede">This is the manual flow SmartphoneKey’s guides describe, from booking to check-out.</p>
-        <ol class="flow" role="list">
-          <li class="reveal"><h3>A booking is confirmed</h3><p>Note the check-in and check-out times from your booking platform.</p></li>
-          <li class="reveal"><h3>Create a guest key</h3><p>In SmartphoneKey’s admin, set when the key starts and ends. Optionally limit how many times it works, or restrict it to the guest’s email.</p></li>
-          <li class="reveal"><h3>Send it</h3><p>Share the key by email or a messaging app. SmartphoneKey describes guest keys working as a link, or from Apple Wallet or Google Wallet.</p></li>
-          <li class="reveal"><h3>It ends on time</h3><p>The key stops at the end time. Remove it early if plans change, and check the activity log to see when the door was opened.</p></li>
+            <p class="moment-who">Guest key</p>
+            <h3>The lockbox problem.</h3>
+            <dl class="moment-change">
+              <div><dt>Before</dt><dd>A frozen dial and a code that keeps working after checkout.</dd></div>
+              <div><dt>Now</dt><dd>Each stay gets its own key with a start and end time.</dd></div>
+            </dl>
+          </li>
+          <li class="moment">
+            <figure class="moment-shot">
+              <picture><source type="image/webp" srcset="/sites/light/media/photos/str-arrival2-768.webp 768w, /sites/light/media/photos/str-arrival2-1152.webp 1152w, /sites/light/media/photos/str-arrival2-1536.webp 1536w" sizes="(min-width: 960px) 30vw, (min-width: 640px) 50vw, 100vw"><img src="/sites/light/media/photos/str-arrival2.jpg" alt="Late check-in, no host on call." width="1536" height="1024" loading="lazy" decoding="async"></picture>
+              <figcaption class="moment-stamp"><time>23:40</time><span>Unit door</span></figcaption>
+            </figure>
+            <p class="moment-who">Guest key</p>
+            <h3>Late check-in, no host on call.</h3>
+            <dl class="moment-change">
+              <div><dt>Before</dt><dd>Meeting guests or texting codes at midnight.</dd></div>
+              <div><dt>Now</dt><dd>The guest’s key starts at check-in. You issue it before they arrive.</dd></div>
+            </dl>
+          </li>
+          <li class="moment">
+            <figure class="moment-shot">
+              <picture><source type="image/webp" srcset="/sites/light/media/photos/str-cleaner-768.webp 768w, /sites/light/media/photos/str-cleaner-1152.webp 1152w, /sites/light/media/photos/str-cleaner-1536.webp 1536w" sizes="(min-width: 960px) 30vw, (min-width: 640px) 50vw, 100vw"><img src="/sites/light/media/photos/str-cleaner.jpg" alt="The cleaner between stays." width="1536" height="1024" loading="lazy" decoding="async"></picture>
+              <figcaption class="moment-stamp"><time>12:00</time><span>Unit door</span></figcaption>
+            </figure>
+            <p class="moment-who">Cleaner</p>
+            <h3>The cleaner between stays.</h3>
+            <dl class="moment-change">
+              <div><dt>Before</dt><dd>A spare key that never comes back.</dd></div>
+              <div><dt>Now</dt><dd>The cleaner’s key works in the window you set, and the log shows when they came.</dd></div>
+            </dl>
+          </li>
         </ol>
-        </div>
-          <figure class="product-shot">
-            <img src="/sites/light/media/supplier/wallet-key.webp" alt="A phone showing a SmartphoneKey key card in Apple Wallet." width="1080" height="1106" loading="lazy" decoding="async">
-            <figcaption class="media-caption">SmartphoneKey product image: a key in Apple Wallet.</figcaption>
-          </figure>
-        </div>
-        <p class="callout"><strong>Automatic reservation sync isn’t confirmed.</strong> If you need keys created from bookings automatically, compare smart locks that your booking platform connects to directly.</p>
       </div>
     </section>
 
-    <!-- What changes: guests, cleaners, host -->
-    <section class="section section--raised" id="roles" aria-labelledby="roles-title">
+    <section class="section" id="keys" aria-labelledby="keys-title">
       <div class="wrap">
-        <p class="label">What changes</p>
-        <h2 class="display section-title" id="roles-title">No key handover, no lockbox.</h2>
-        <p class="lede">Guests get in without meeting you, cleaners get their own window, and you can see what happened.</p>
-        <div class="roles-list">
-          <article class="role reveal" aria-labelledby="role-guests">
-            <h3 class="display role-name" id="role-guests">Guests</h3>
-            <div class="role-body">
-              <p class="role-promise">In without a meeting.</p>
-              <ul class="points" role="list">
-                <li>The key arrives before the stay and works from check-in to check-out.</li>
-                <li>No physical key to lose or return.</li>
-                <li>A QR code at the door lets their visitors call.</li>
-              </ul>
-            </div>
-          </article>
-          <article class="role role-alt reveal" aria-labelledby="role-cleaners">
-            <h3 class="display role-name" id="role-cleaners">Cleaners</h3>
-            <div class="role-body">
-              <p class="role-promise">Their own window.</p>
-              <ul class="points" role="list">
-                <li>A guest key for the cleaning window only.</li>
-                <li>One-use keys for one-off repair visits.</li>
-                <li>Remove any key the moment plans change.</li>
-              </ul>
-            </div>
-          </article>
-          <article class="role reveal" aria-labelledby="role-host">
-            <h3 class="display role-name" id="role-host">You</h3>
-            <div class="role-body">
-              <p class="role-promise">Every door, one admin.</p>
-              <ul class="points" role="list">
-                <li>Manage access remotely in SmartphoneKey’s admin.</li>
-                <li>One guest key can cover several locks, as the admin guide describes.</li>
-                <li>An activity log shows when keys were accepted and doors unlocked.</li>
-              </ul>
-            </div>
-          </article>
+        <p class="label">Who gets which key</p>
+        <h2 class="display section-title" id="keys-title">A key for everyone at your door.</h2>
+        <p class="lede">Each person gets the access that fits them, and nothing more.</p>
+        <ul class="passes" role="list">
+          <li class="pass pass--guest"><span class="pass-top"><span class="pass-brand">SmartphoneKey</span><span class="pass-kind">Timed</span></span><span class="pass-who">Guest</span><span class="pass-key">Guest key</span><span class="pass-rule">16:00 Fri → 11:00 Sun</span></li>
+          <li class="pass pass--guest"><span class="pass-top"><span class="pass-brand">SmartphoneKey</span><span class="pass-kind">Timed</span></span><span class="pass-who">Cleaner</span><span class="pass-key">Guest key</span><span class="pass-rule">11:30 → 15:00</span></li>
+          <li class="pass pass--once"><span class="pass-top"><span class="pass-brand">SmartphoneKey</span><span class="pass-kind">One use</span></span><span class="pass-who">Plumber</span><span class="pass-key">One-use key</span><span class="pass-rule">Opens once, then spent</span></li>
+          <li class="pass pass--wallet"><span class="pass-top"><span class="pass-brand">SmartphoneKey</span><span class="pass-kind">Wallet</span></span><span class="pass-who">You</span><span class="pass-key">Wallet key</span><span class="pass-rule">Works until you remove it</span></li>
+        </ul>
+        <p class="source-note">Times shown are examples.</p>
+      </div>
+    </section>
+
+    <section class="section section--raised" id="features" aria-labelledby="features-title">
+      <div class="wrap">
+        <p class="label">What you get</p>
+        <h2 class="display section-title" id="features-title">The features that matter for short-term rentals.</h2>
+        <ul class="tiles" role="list">
+          <li class="tile tile--keys"><p class="tile-group">Keys</p><h3>Guest keys with start and end times</h3><p>Give a visitor a key that starts and ends when you set. Limit how many times it opens, or tie it to one email.</p></li>
+          <li class="tile tile--keys"><p class="tile-group">Keys</p><h3>One-use keys</h3><p>A key for a single visit, such as a repair or a delivery. It opens once, then it is spent.</p></li>
+          <li class="tile tile--keys"><p class="tile-group">Keys</p><h3>One key, several doors</h3><p>A single key can cover more than one lock, for example a lobby and a unit door, or a front door and a back door.</p></li>
+          <li class="tile tile--keys"><p class="tile-group">Keys</p><h3>Keys reach offline locks</h3><p>If a lock is offline when you issue a key, the key waits as pending and is delivered when the lock is back online.</p></li>
+          <li class="tile tile--people"><p class="tile-group">People &amp; sites</p><h3>Remove access in seconds</h3><p>Remove a key, or deactivate a person entirely: their lock access ends and their portal sign-in is disabled.</p></li>
+          <li class="tile tile--logs"><p class="tile-group">Records &amp; control</p><h3>Activity log</h3><p>Every key accepted, door unlocked, and key added or removed, filterable by lock, person, event and date.</p></li>
+          <li class="tile tile--devices"><p class="tile-group">Doors &amp; devices</p><h3>Wi-Fi or built-in LTE</h3><p>The Wi-Fi model joins your network. The LTE model uses a SIM card where Wi-Fi does not reach, or on temporary sites.</p></li>
+          <li class="tile tile--visitors"><p class="tile-group">Visitors</p><h3>QR intercom at the door</h3><p>Visitors scan the QR code on the reader with their phone camera. It opens in the browser and connects them to the right person to ask for entry.</p></li>
+          <li class="tile tile--devices"><p class="tile-group">Doors &amp; devices</p><h3>Live lock status</h3><p>Each lock shows whether it is online or offline, so problems are visible before someone is stuck outside.</p></li>
+        </ul>
+        <p class="tiles-more"><a class="text-link" href="/sites/light/features/">See every feature <span aria-hidden="true">→</span></a></p>
+      </div>
+    </section>
+
+    <section class="section" id="record" aria-labelledby="record-title">
+      <div class="wrap split">
+        <div>
+          <p class="label">The record</p>
+          <h2 class="display section-title" id="record-title">Every entry, written down.</h2>
+          <p class="lede">The activity log shows keys accepted and doors unlocked. A separate audit log records which admin issued or removed which key, and when.</p>
+        </div>
+        <div class="ledger dark-panel">
+          <table>
+            <caption><span class="ledger-cap"><span>Activity log · porch</span><span>Example only</span></span></caption>
+            <thead><tr><th scope="col">Time</th><th scope="col">Who</th><th scope="col">Key</th><th scope="col">Result</th></tr></thead>
+            <tbody>
+              <tr><td>10:58</td><td>Departing guest</td><td>Guest key</td><td class="is-ok">Opened</td></tr>
+              <tr><td>11:04</td><td>Departing guest</td><td>Guest key</td><td class="is-no">Ended 11:00</td></tr>
+              <tr><td>11:35</td><td>Cleaner</td><td>Guest key</td><td class="is-ok">Opened</td></tr>
+              <tr><td>13:20</td><td>Plumber</td><td>One-use key</td><td class="is-ok">Opened, spent</td></tr>
+              <tr><td>23:40</td><td>Arriving guest</td><td>Guest key</td><td class="is-ok">Opened</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
 
-    <!-- The rental door check -->
     <section class="section section--stone" id="door-check" aria-labelledby="door-title">
       <div class="wrap">
-        <p class="label">Your rental door</p>
-        <h2 class="display section-title" id="door-title">What we check at a rental door.</h2>
-        <p class="lede">SmartphoneKey switches electric locks, so the door, its power and the building around it come first.</p>
+        <p class="label">The door check</p>
+        <h2 class="display section-title" id="door-title">What we check at your door.</h2>
+        <p class="lede">SmartphoneKey switches electric locks. Whether your door already has one, or needs one, decides what the job involves.</p>
         <div class="door-grid">
           <figure class="plan">
             <svg class="plan-svg" viewBox="0 0 520 430" role="img" aria-labelledby="plan-title plan-desc">
-              <title id="plan-title">Plan view of a rental unit door, seen from above</title>
-              <desc id="plan-desc">A wall with a door opening from the hallway into the unit. The reader sits on the hallway side next to the door, an electric strike sits in the frame, an exit button is inside, and a power supply is inside, joined by a cable. Numbers match the checklist.</desc>
+              <title id="plan-title">Plan view of an entrance, seen from above</title>
+              <desc id="plan-desc">A wall with a door opening. The door swings inward. The reader sits on the outside wall next to the door, an electric strike sits in the frame, an exit button is inside, and a power supply is inside, joined by a cable. Numbers match the checklist.</desc>
               <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path class="hatch-line" d="M0 0V7"/></pattern></defs>
-              <text x="20" y="40">OUTSIDE · HALLWAY</text>
-              <text x="20" y="414">INSIDE · UNIT</text>
+              <text x="20" y="40">OUTSIDE</text>
+              <text x="20" y="414">INSIDE</text>
               <rect class="wall" x="12" y="168" width="174" height="34"/>
               <rect class="wall" x="340" y="168" width="168" height="34"/>
               <rect class="jamb" x="186" y="164" width="8" height="42"/>
@@ -307,87 +309,105 @@
               <g class="marker"><circle cx="452" cy="120" r="13"/><text x="452" y="125">5</text></g>
               <g class="marker"><circle cx="232" cy="96" r="13"/><text x="232" y="101">6</text></g>
             </svg>
-            <figcaption>Simplified diagram: a rental unit door seen from above. Every door is checked in person.</figcaption>
+            <figcaption>Simplified diagram: an entrance seen from above. Every door is checked in person.</figcaption>
           </figure>
           <div>
             <ol class="checks" role="list">
-              <li class="check"><span class="check-num" aria-hidden="true">1</span><div><h3>The lock and the frame</h3><p>Whether an electric strike or magnetic lock suits your door, and what the building allows.</p></div></li>
-              <li class="check"><span class="check-num" aria-hidden="true">2</span><div><h3>Power at the door</h3><p>The reader and the lock need low-voltage power, which many unit doors don’t have nearby.</p></div></li>
-              <li class="check"><span class="check-num" aria-hidden="true">3</span><div><h3>The cable route</h3><p>How wiring reaches the lock and power supply without damaging finished walls.</p></div></li>
-              <li class="check"><span class="check-num" aria-hidden="true">4</span><div><h3>A backup way in</h3><p>What guests and you do if a phone dies, a link is lost or the network drops.</p></div></li>
-              <li class="check"><span class="check-num" aria-hidden="true">5</span><div><h3>Wi-Fi or LTE</h3><p>Guest Wi-Fi can be switched off or unstable; the LTE model uses a SIM card instead.</p></div></li>
-              <li class="check"><span class="check-num" aria-hidden="true">6</span><div><h3>The building around the door</h3><p>Which door guests use to get in, and whether the building’s entrance is separate.</p></div></li>
+              <li class="check"><span class="check-num" aria-hidden="true">1</span><div><h3>The lock you have</h3><p>Regular key only, electric strike, magnetic lock or an old fob system.</p></div></li>
+              <li class="check"><span class="check-num" aria-hidden="true">2</span><div><h3>Power at the door</h3><p>The reader and the lock need low-voltage power nearby.</p></div></li>
+              <li class="check"><span class="check-num" aria-hidden="true">3</span><div><h3>The cable route</h3><p>How wiring reaches the lock and the power supply.</p></div></li>
+              <li class="check"><span class="check-num" aria-hidden="true">4</span><div><h3>How people leave</h3><p>An exit button is included; exit and safety needs are confirmed on site.</p></div></li>
+              <li class="check"><span class="check-num" aria-hidden="true">5</span><div><h3>Wi-Fi or LTE</h3><p>Dependable Wi-Fi at the door, or the LTE model with a SIM card.</p></div></li>
+              <li class="check"><span class="check-num" aria-hidden="true">6</span><div><h3>A backup way in</h3><p>What guests and you do if a phone dies, a link is lost or the network drops.</p></div></li>
             </ol>
-            <p class="door-foot"><strong>Condo unit?</strong> Your guests may still need to get through the lobby, and that door is the building’s decision. Building rules and short-term rental rules also apply separately from the lock.</p>
+            <div class="callout"><p>Condo unit? Your guests may still need to get through the lobby, and that door is the building’s decision. Building rules and short-term rental rules apply separately from the lock.</p></div>
+            <p class="door-cta"><a class="btn btn-primary" href="#request">Request a door check <span class="btn-arrow" aria-hidden="true">↑</span></a></p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Honest fit -->
-    <section class="section section--stone" id="fit" aria-labelledby="fit-title">
+    <section class="section" id="fit" aria-labelledby="fit-title">
       <div class="wrap">
         <p class="label">Is it the right fit?</p>
-        <h2 class="display section-title" id="fit-title">Good for some hosts. Not for every rental.</h2>
+        <h2 class="display section-title" id="fit-title">Good for many. Not for every door.</h2>
         <div class="versus">
-          <div class="versus-col reveal">
-            <h3>A good fit if</h3>
-            <ul class="points" role="list">
-              <li>You manage several doors or units and want one admin for all of them.</li>
-              <li>You want guest keys, Wallet keys and cards side by side.</li>
-              <li>You want an activity log and QR visitor calls at the door.</li>
-              <li>You’re happy for a reader to be installed on an electric lock.</li>
-            </ul>
-          </div>
-          <div class="versus-col reveal">
-            <h3>Maybe not if</h3>
-            <ul class="points" role="list">
-              <li>You need keys created automatically from your bookings.</li>
-              <li>You only want a battery smart lock on one door that you fit yourself.</li>
-              <li>You can’t add power or change the door hardware.</li>
-            </ul>
-          </div>
+          <div class="versus-col fit-yes"><h3>A good fit if</h3><ul class="points" role="list"><li>You manage several doors or units and want one admin for all of them.</li><li>You want guest keys, Wallet keys and cards side by side.</li><li>You want an activity log and QR visitor calls at the door.</li></ul></div>
+          <div class="versus-col fit-no"><h3>Maybe not if</h3><ul class="points" role="list"><li>You need keys created automatically from your bookings.</li><li>You only want a battery smart lock on one door that you fit yourself.</li><li>You can’t add power or change the door hardware.</li></ul></div>
         </div>
       </div>
     </section>
-    <!-- Rental answers -->
+
     <section class="section" id="answers" aria-labelledby="answers-title">
       <div class="wrap faq-grid">
         <div class="faq-head">
-          <p class="label">Answers for hosts</p>
-          <h2 class="display section-title" id="answers-title">What hosts ask first.</h2>
-          <p class="lede">Starting with the one that matters most for a booking calendar.</p>
+          <p class="label">Answers</p>
+          <h2 class="display section-title" id="answers-title">What short-term rentals ask first.</h2>
+          <p class="lede">Straight answers, including the ones that aren’t a simple yes.</p>
         </div>
         <div class="faq">
           <details>
             <summary>Does it sync with Airbnb?</summary>
-            <div class="answer"><p>An automatic link with Airbnb or other booking platforms isn’t confirmed. Plan on creating and sending each guest key yourself from SmartphoneKey’s admin.</p></div>
+            <div class="answer"><p>An automatic link with Airbnb or other booking platforms isn’t confirmed. You create and send each guest key yourself.</p></div>
           </details>
           <details>
             <summary>Do guests need an app?</summary>
-            <div class="answer"><p>SmartphoneKey describes guest keys working as a link on the guest’s phone, or from Apple Wallet or Google Wallet, without a separate app.</p></div>
+            <div class="answer"><p>No. A guest key works from a link, or from Apple Wallet or Google Wallet.</p></div>
           </details>
           <details>
             <summary>A guest checks in late or leaves early.</summary>
-            <div class="answer"><p>Remove the old key and send a new one with the new times.</p></div>
-          </details>
-          <details>
-            <summary>Can cleaners use the guest’s key?</summary>
-            <div class="answer"><p>Give them their own guest key for the cleaning window instead, so each person’s access starts and ends on its own and shows separately in the activity log.</p></div>
+            <div class="answer"><p>Change the key’s times, or remove it, from the admin portal.</p></div>
           </details>
           <details>
             <summary>What if the Wi-Fi goes down?</summary>
-            <div class="answer"><p>SmartphoneKey’s admin guide says keys sent while a lock is offline wait until it reconnects. Consider the LTE model, and agree a backup way in during the door check.</p></div>
+            <div class="answer"><p>The LTE model uses a SIM card. If a lock is offline when you issue a key, the key is delivered when the lock comes back online.</p></div>
           </details>
           <details>
             <summary>Can I see when the guest arrived?</summary>
-            <div class="answer"><p>The activity log shows when keys were accepted and the door unlocked, and can be filtered by date and user.</p></div>
-          </details>
-          <details>
-            <summary>What does it cost?</summary>
-            <div class="answer"><p>It depends on the number of doors and keys and on any electrical work, so there is no price on this site. Cost is explained after the door check, including any ongoing costs.</p></div>
+            <div class="answer"><p>Yes. The activity log shows when keys were accepted and the door unlocked.</p></div>
           </details>
         </div>
+      </div>
+    </section>
+
+    <section class="section section--deep" id="other-doors" aria-labelledby="other-title">
+      <div class="wrap">
+        <p class="label">Other doors</p>
+        <h2 class="display section-title" id="other-title">The same reader, other jobs.</h2>
+        <nav class="directory" aria-labelledby="other-title">
+          <ul role="list">
+            <li>
+              <a class="dir-row" href="/sites/light/gyms-and-studios/">
+                <svg class="dir-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M3 33h34M5 25h4M13.5 25h13M31 25h4M16 22.5v5M24 22.5v5"/><rect x="9" y="17" width="4.5" height="16" rx="1.2"/><rect x="26.5" y="17" width="4.5" height="16" rx="1.2"/></svg>
+                <span class="dir-name">Gyms &amp; studios</span><span class="dir-who">Members tap in. You decide who can.</span><span class="dir-go" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li>
+              <a class="dir-row" href="/sites/light/condos-and-buildings/">
+                <svg class="dir-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M3 33h34M7.5 7h25M9 7v26M31 7v26M15 33v-8h10v8M20 25v8"/><rect x="13" y="11.5" width="4" height="3"/><rect x="23" y="11.5" width="4" height="3"/><rect x="13" y="17.5" width="4" height="3"/><rect x="23" y="17.5" width="4" height="3"/></svg>
+                <span class="dir-name">Condos &amp; buildings</span><span class="dir-who">Residents tap in. Visitors call up.</span><span class="dir-go" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li>
+              <a class="dir-row" href="/sites/light/offices-and-coworking/">
+                <svg class="dir-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M3 33h34M6 33V12h28v21M6 19h28M14 12v21M26 12v21"/><rect x="17" y="24" width="6" height="9"/></svg>
+                <span class="dir-name">Offices &amp; coworking</span><span class="dir-who">Teams, clients and after-hours, sorted.</span><span class="dir-go" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li>
+              <a class="dir-row" href="/sites/light/salon-suites-and-rental-rooms/">
+                <svg class="dir-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M3 33h34M5 33V9h30v24M15 9v24M25 9v24"/><circle cx="12.5" cy="22" r="1"/><circle cx="22.5" cy="22" r="1"/><circle cx="32.5" cy="22" r="1"/></svg>
+                <span class="dir-name">Salon suites &amp; rental rooms</span><span class="dir-who">Every renter gets their own door.</span><span class="dir-go" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li>
+              <a class="dir-row" href="/sites/light/homes/">
+                <svg class="dir-mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M3 33h34M9 33V19M31 33V19M6 21.5 20 8.5l14 13M26 14.1V9h3.2v8M17 33v-9h6v9"/><rect x="25" y="23" width="3.5" height="3.5"/></svg>
+                <span class="dir-name">Homes</span><span class="dir-who">Family taps in. Guest keys end on time.</span><span class="dir-go" aria-hidden="true">→</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </section>
 
@@ -395,9 +415,9 @@
     <section class="closing" id="next-step" aria-labelledby="closing-title">
       <div class="wrap">
         <p class="label">Next step</p>
-        <h2 class="display section-title" id="closing-title">Start with the door guests use.</h2>
-        <p class="lede">A few fields tell the local team which door guests use, what’s on it today and how many doors you manage.</p>
-        <a class="btn btn-primary" href="#request">Request a rental door check <span class="btn-arrow" aria-hidden="true">↑</span></a>
+        <h2 class="display section-title" id="closing-title">Start with your door.</h2>
+        <p class="lede">A visit checks the lock, power, cable route and Wi-Fi or LTE. Setup and cost are explained after that visit.</p>
+        <a class="btn btn-primary" href="#request">Request a door check <span class="btn-arrow" aria-hidden="true">↑</span></a>
       </div>
     </section>
   </main>
@@ -414,32 +434,33 @@
           <ul role="list">
             <li><a href="/sites/light/gyms-and-studios/">Gyms &amp; studios</a></li>
             <li><a href="/sites/light/condos-and-buildings/">Condos &amp; buildings</a></li>
+            <li><a href="/sites/light/offices-and-coworking/">Offices &amp; coworking</a></li>
+            <li><a href="/sites/light/salon-suites-and-rental-rooms/">Salon suites &amp; rental rooms</a></li>
             <li><a href="/sites/light/short-term-rentals/">Short-term rentals</a></li>
             <li><a href="/sites/light/homes/">Homes</a></li>
           </ul>
         </nav>
-        <nav class="footer-col" aria-labelledby="footer-learn">
-          <h2 id="footer-learn">Learn</h2>
+        <nav class="footer-col" aria-labelledby="footer-product">
+          <h2 id="footer-product">Product</h2>
           <ul role="list">
-            <li><a href="/sites/light/#how-it-works">How it works</a></li>
-            <li><a href="/sites/light/#reader">The reader</a></li>
-            <li><a href="/sites/light/#keys">Kinds of keys</a></li>
-            <li><a href="/sites/light/#door-check">The door check</a></li>
-            <li><a href="/sites/light/#guide">Find your starting point</a></li>
+            <li><a href="/sites/light/features/">Features</a></li>
+            <li><a href="/sites/light/how-it-works/">How it works</a></li>
+            <li><a href="/sites/light/how-it-works/#door-check">Door check</a></li>
+            <li><a href="/sites/light/#answers">Answers</a></li>
           </ul>
         </nav>
-        <div class="footer-col">
-          <h2>From SmartphoneKey</h2>
+        <nav class="footer-col" aria-labelledby="footer-start">
+          <h2 id="footer-start">Get started</h2>
           <ul role="list">
-            
-            
-            
-            
+            <li><a href="#request">Request a door check</a></li>
+            <li><a href="/sites/light/how-it-works/#door-check">What we check</a></li>
+            <li><a href="/sites/light/how-it-works/#steps">Installation steps</a></li>
+            <li><a href="/sites/light/features/">Compare features</a></li>
           </ul>
-        </div>
+        </nav>
       </div>
       <div class="footer-notes">
-        <p>Product capabilities on this site are summarized from SmartphoneKey’s published materials; what works at a specific door is confirmed at a door check. The film is SmartphoneKey’s own footage.</p>
+        <p>Product details are summarized from SmartphoneKey’s published materials and admin guide; what works at your door is confirmed at a door check. Some features depend on the subscription package. This site is run by an independent local installer of SmartphoneKey.</p>
       </div>
     </div>
   </footer>

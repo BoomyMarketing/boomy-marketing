@@ -39,6 +39,32 @@
     });
   }
 
+  /* ---------- "Who it's for" dropdown ---------- */
+  const navGroup = document.getElementById('nav-group');
+  const navDrop = document.getElementById('nav-drop');
+  if (navGroup && navDrop) {
+    const dropOpen = () => navGroup.classList.contains('is-open');
+    const setDrop = (open, returnFocus) => {
+      navGroup.classList.toggle('is-open', open);
+      navDrop.setAttribute('aria-expanded', String(open));
+      if (!open && returnFocus) navDrop.focus();
+    };
+    navDrop.addEventListener('click', () => setDrop(!dropOpen(), false));
+    // Escape closes the dropdown first; the menu's own Escape handler runs only when it is closed.
+    navGroup.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && dropOpen()) {
+        event.stopPropagation();
+        setDrop(false, true);
+      }
+    });
+    document.addEventListener('click', (event) => {
+      if (dropOpen() && !navGroup.contains(event.target)) setDrop(false, false);
+    });
+    navGroup.addEventListener('focusout', (event) => {
+      if (dropOpen() && event.relatedTarget && !navGroup.contains(event.relatedTarget) && window.matchMedia('(min-width: 1280px)').matches) setDrop(false, false);
+    });
+  }
+
   /* ---------- SmartphoneKey film ---------- */
   document.querySelectorAll('[data-film]').forEach((figure) => {
     const film = figure.querySelector('video');
@@ -136,6 +162,18 @@
       features: ['QR code visitor calls at the entrance', 'Access added at move-in and removed at move-out', 'Timed keys for movers, trades and deliveries', 'An activity log for shared doors'],
       note: 'A shared entrance is decided by the owner, manager or condo board, not by one resident.',
       page: '/sites/dark/condos-and-buildings/'
+    },
+    office: {
+      heading: 'Worth asking about for an office or coworking space',
+      features: ['Wallet keys for the team', 'Weekly lock schedules for each door', 'QR intercom for clients at the door', 'Access removed the day someone leaves'],
+      note: 'An automatic link with HR or booking software isn’t confirmed. Keys are issued in SmartphoneKey’s own admin.',
+      page: '/sites/dark/offices-and-coworking/'
+    },
+    suites: {
+      heading: 'Worth asking about for salon suites or rental rooms',
+      features: ['One key for the front door and the renter’s own suite', 'Guest keys for hourly bookings', 'Access removed when a lease ends', 'An activity log of every entry'],
+      note: 'Keys aren’t created automatically from your booking calendar. You issue each key yourself.',
+      page: '/sites/dark/salon-suites-and-rental-rooms/'
     },
     rental: {
       heading: 'Worth asking about for a rental',

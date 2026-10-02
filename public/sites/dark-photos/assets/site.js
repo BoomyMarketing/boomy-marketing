@@ -10,14 +10,14 @@
   const saveData = Boolean(navigator.connection && navigator.connection.saveData);
   const hasIO = 'IntersectionObserver' in window;
 
-  /* ---------- Menu below 1280px ---------- */
+  /* ---------- Menu below 1024px ---------- */
   const header = document.getElementById('site-header');
   const menuToggle = document.getElementById('menu-toggle');
   const menu = document.getElementById('site-menu');
   if (header && menuToggle && menu) {
     const menuLabel = menuToggle.querySelector('.menu-toggle-label');
     const inertTargets = [document.getElementById('main'), document.getElementById('site-footer')];
-    const wideNav = window.matchMedia('(min-width: 1280px)');
+    const wideNav = window.matchMedia('(min-width: 1024px)');
     const isOpen = () => header.classList.contains('is-open');
     const setMenu = (open, returnFocus) => {
       header.classList.toggle('is-open', open);
@@ -36,6 +36,29 @@
     });
     wideNav.addEventListener('change', (event) => {
       if (event.matches && isOpen()) setMenu(false, false);
+    });
+  }
+
+  /* ---------- "Who it's for" dropdown ---------- */
+  const navDrop = document.getElementById('nav-drop');
+  const navGroup = navDrop && navDrop.closest('.nav-group');
+  if (navDrop && navGroup) {
+    const isDropOpen = () => navDrop.getAttribute('aria-expanded') === 'true';
+    const setDrop = (open) => navDrop.setAttribute('aria-expanded', String(open));
+    navDrop.addEventListener('click', () => setDrop(!isDropOpen()));
+    // Escape closes the dropdown first; a second Escape closes the menu (handled above).
+    navGroup.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && isDropOpen()) {
+        event.stopPropagation();
+        setDrop(false);
+        navDrop.focus();
+      }
+    });
+    document.addEventListener('click', (event) => {
+      if (isDropOpen() && !navGroup.contains(event.target)) setDrop(false);
+    });
+    navGroup.addEventListener('focusout', (event) => {
+      if (isDropOpen() && event.relatedTarget && !navGroup.contains(event.relatedTarget) && window.matchMedia('(min-width: 1024px)').matches) setDrop(false);
     });
   }
 
@@ -136,6 +159,18 @@
       features: ['QR code visitor calls at the entrance', 'Access added at move-in and removed at move-out', 'Timed keys for movers, trades and deliveries', 'An activity log for shared doors'],
       note: 'A shared entrance is decided by the owner, manager or condo board, not by one resident.',
       page: '/sites/dark-photos/condos-and-buildings/'
+    },
+    office: {
+      heading: 'Worth asking about for an office or coworking space',
+      features: ['Wallet keys for the team and members', 'Weekly lock schedules for each door', 'QR intercom for clients at the door', 'An activity log and an audit log of admin changes'],
+      note: 'Access synced automatically from HR or booking software is not confirmed. In a larger building, the main entrance is the landlord’s decision.',
+      page: '/sites/dark-photos/offices-and-coworking/'
+    },
+    suites: {
+      heading: 'Worth asking about for salon suites or rental rooms',
+      features: ['One key for the front door and the renter’s own suite', 'Guest keys for hourly bookings that stop at the end time', 'Keys removed when a lease ends', 'An activity log of every entry'],
+      note: 'Keys created automatically from a booking calendar are not confirmed. Each connected suite door needs its own lock and power.',
+      page: '/sites/dark-photos/salon-suites-and-rental-rooms/'
     },
     rental: {
       heading: 'Worth asking about for a rental',
