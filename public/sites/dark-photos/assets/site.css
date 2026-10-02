@@ -1105,5 +1105,20 @@ html:not(.js) .nav-group:hover .drop, html:not(.js) .nav-group:focus-within .dro
   picture:has(source[srcset*="portrait/str-hero-"]) img { object-position: 50% 12% !important; }
   picture:has(source[srcset*="portrait/home-hero-"]) img { object-position: 50% 12% !important; }
   picture:has(source[srcset*="portrait/how-hero-"]) img { object-position: 50% 12% !important; }
+  picture:has(source[srcset*="portrait/gym-coach-"]) img { object-position: 50% 12% !important; }
+  picture:has(source[srcset*="portrait/gym-member-"]) img { object-position: 50% 12% !important; }
+  picture:has(source[srcset*="portrait/gym-owner-"]) img { object-position: 50% 12% !important; }
+  picture:has(source[srcset*="portrait/condo-lobby-"]) img { object-position: 50% 12% !important; }
+  picture:has(source[srcset*="portrait/condo-courier-"]) img { object-position: 50% 12% !important; }
+  picture:has(source[srcset*="portrait/condo-manager-"]) img { object-position: 50% 12% !important; }
+  picture:has(source[srcset*="portrait/office-visitor-"]) img { object-position: 50% 12% !important; }
+  picture:has(source[srcset*="portrait/office-late-"]) img { object-position: 50% 12% !important; }
+  picture:has(source[srcset*="portrait/studio-hourly-"]) img { object-position: 50% 12% !important; }
+  picture:has(source[srcset*="portrait/salon-owner-"]) img { object-position: 50% 12% !important; }
+  picture:has(source[srcset*="portrait/str-arrival2-"]) img { object-position: 50% 12% !important; }
+  picture:has(source[srcset*="portrait/str-cleaner-"]) img { object-position: 50% 12% !important; }
+  picture:has(source[srcset*="portrait/home-kids-"]) img { object-position: 50% 12% !important; }
+  picture:has(source[srcset*="portrait/home-dogwalker-"]) img { object-position: 50% 12% !important; }
+  picture:has(source[srcset*="portrait/home-sitter-"]) img { object-position: 50% 12% !important; }
 }
 /* <<< mobile framing */
