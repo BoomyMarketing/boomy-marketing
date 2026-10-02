@@ -44,8 +44,41 @@
     <button class="burger" type="button" aria-expanded="false" aria-controls="site-nav"><span class="visually-hidden">Menu</span><span class="burger-lines" aria-hidden="true"></span></button>
   </header>
   <main id="main">
-    <nav class="rail" aria-label="Chapters"><a href="#top" data-ch="top"><span class="rail-n">01</span><span class="rail-t">The tap</span></a><a href="#reader" data-ch="reader"><span class="rail-n">02</span><span class="rail-t">Taken apart</span></a><a href="#field" data-ch="field"><span class="rail-n">03</span><span class="rail-t">Field test</span></a><a href="#keys" data-ch="keys"><span class="rail-n">04</span><span class="rail-t">Keys</span></a><a href="#visitors" data-ch="visitors"><span class="rail-n">05</span><span class="rail-t">Visitors</span></a><a href="#faq" data-ch="faq"><span class="rail-n">06</span><span class="rail-t">Answers</span></a></nav>
-    <section class="launch" id="top" aria-labelledby="hero-title" data-launch data-count="183">
+    <nav class="rail" aria-label="Chapters"><a href="#tap" data-ch="tap"><span class="rail-n">01</span><span class="rail-t">The tap</span></a><a href="#reader" data-ch="reader"><span class="rail-n">02</span><span class="rail-t">Taken apart</span></a><a href="#field" data-ch="field"><span class="rail-n">03</span><span class="rail-t">Field test</span></a><a href="#keys" data-ch="keys"><span class="rail-n">04</span><span class="rail-t">Keys</span></a><a href="#visitors" data-ch="visitors"><span class="rail-n">05</span><span class="rail-t">Visitors</span></a><a href="#faq" data-ch="faq"><span class="rail-n">06</span><span class="rail-t">Answers</span></a></nav>
+    <section class="intro" id="top" aria-labelledby="hero-title">
+      <div class="wrap intro-grid">
+        <div class="intro-copy">
+          <p class="eyebrow">Phone keys · Installed across Toronto &amp; the GTA</p>
+          <h1 class="hero-title intro-title" id="hero-title">Keys get copied. <em>Phones don’t.</em></h1>
+          <p class="hero-lede">SmartphoneKey puts the key in Apple&nbsp;Wallet or Google&nbsp;Wallet. You decide who opens the door, and until when.<span class="intro-extra"> Every setup starts with a look at your door.</span></p>
+          <a class="text-link intro-film" href="#tap">Watch the tap <span aria-hidden="true">↓</span></a>
+        </div>
+
+        <form class="quick" id="request" aria-labelledby="quick-title" aria-describedby="quick-notice">
+          <p class="quick-title" id="quick-title">Request a door check</p>
+          <p class="quick-notice" id="quick-notice"><strong>Not connected yet.</strong> Nothing typed here is sent or saved until the local team’s inbox is set up.</p>
+          <div class="quick-fields">
+            <label class="f"><span>Your space</span>
+              <select id="q-space" name="space">
+                <option value="">Choose one</option>
+                <option value="gym">Gym or studio</option>
+                <option value="building">Condo or building</option>
+                <option value="office">Office or coworking</option>
+                <option value="suites">Salon suites or rental rooms</option>
+                <option value="rental">Short-term rental</option>
+                <option value="home">Home</option>
+                <option value="other">Something else</option>
+              </select>
+            </label>
+            <label class="f"><span>Email or phone</span><input id="q-contact" name="contact" type="text" autocomplete="off"></label>
+            <label class="f"><span>Postal code</span><input id="q-area" name="area" type="text" autocomplete="off" placeholder="M5V"></label>
+          </div>
+          <button class="send" type="submit" disabled aria-describedby="quick-notice">Send request</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="launch" id="tap" aria-labelledby="tap-title" data-launch data-count="183">
       <div class="launch-stage">
         <figure class="launch-film">
           <div class="seq">
@@ -77,36 +110,6 @@
       </div>
     </section>
 
-    <section class="sec start" aria-labelledby="quick-title">
-      <div class="wrap split">
-        <div>
-          <p class="eyebrow">Start here</p>
-          <p class="start-big">Every setup starts with a look at your door: the lock, power, cable route and Wi-Fi or LTE.</p>
-        </div>
-
-        <form class="quick" id="request" aria-labelledby="quick-title" aria-describedby="quick-notice">
-          <p class="quick-title" id="quick-title">Request a door check</p>
-          <p class="quick-notice" id="quick-notice"><strong>Not connected yet.</strong> Nothing typed here is sent or saved until the local team’s inbox is set up.</p>
-          <div class="quick-fields">
-            <label class="f"><span>Your space</span>
-              <select id="q-space" name="space">
-                <option value="">Choose one</option>
-                <option value="gym">Gym or studio</option>
-                <option value="building">Condo or building</option>
-                <option value="office">Office or coworking</option>
-                <option value="suites">Salon suites or rental rooms</option>
-                <option value="rental">Short-term rental</option>
-                <option value="home">Home</option>
-                <option value="other">Something else</option>
-              </select>
-            </label>
-            <label class="f"><span>Email or phone</span><input id="q-contact" name="contact" type="text" autocomplete="off"></label>
-            <label class="f"><span>Postal code</span><input id="q-area" name="area" type="text" autocomplete="off" placeholder="M5V"></label>
-          </div>
-          <button class="send" type="submit" disabled aria-describedby="quick-notice">Send request</button>
-        </form>
-      </div>
-    </section>
 
     <section class="xv" id="reader" aria-labelledby="xv-title" data-xv>
       <div class="xv-stage">
