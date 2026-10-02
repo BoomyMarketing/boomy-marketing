@@ -1,0 +1,49 @@
+/* Shared shell for the gym scroll-story versions. Each version sets the tokens and fonts in its own file. */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 72px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 1.0625rem/1.6 var(--body); overflow-x: clip; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-family: var(--display); text-wrap: balance; }
+p { margin: 0; }
+.skip { position: absolute; left: -999px; top: 8px; z-index: 50; background: var(--fg); color: var(--bg); padding: 8px 14px; border-radius: 8px; }
+.skip:focus { left: 8px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.bar { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px max(16px, env(safe-area-inset-left)); padding-top: calc(10px + env(safe-area-inset-top, 0px)); background: color-mix(in oklch, var(--bg) 84%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line-soft); }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; }
+.brand img { width: 104px; height: auto; filter: var(--logo-filter, none); }
+.brand span { font: 500 .72rem/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.bar-cta { font: 700 .9rem/1 var(--body); text-decoration: none; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); white-space: nowrap; }
+@media (max-width: 520px) { .brand span { display: none; } }
+
+.dock { position: fixed; z-index: 40; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); translate: -50% 0; display: inline-flex; gap: 8px; align-items: center; padding: 14px 22px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font: 700 1rem/1 var(--body); text-decoration: none; box-shadow: 0 10px 30px -8px var(--shadow); transition: opacity .3s, translate .3s; white-space: nowrap; }
+.dock.is-away { opacity: 0; translate: -50% 140%; pointer-events: none; }
+
+.shot { position: relative; margin: 0; aspect-ratio: 2 / 3; overflow: hidden; }
+.shot img { width: 100%; height: 100%; object-fit: cover; }
+
+.quick { display: grid; gap: 14px; padding: 22px; border-radius: 20px; background: var(--card); border: 1px solid var(--line-soft); }
+.quick-title { font: 800 1.45rem/1.15 var(--display); }
+.quick-lede { color: var(--muted); }
+.quick-notice { font-size: .9rem; color: var(--muted); padding: 10px 12px; border-radius: 10px; background: var(--notice-bg); }
+.quick-notice strong { color: var(--fg); }
+.quick-fields { display: grid; gap: 12px; }
+.f { display: grid; gap: 6px; font-size: .85rem; color: var(--muted); }
+.f input, .f select { font: 500 1rem/1.3 var(--body); color: var(--fg); background: var(--field); border: 1px solid var(--line-soft); border-radius: 12px; padding: 13px 14px; width: 100%; min-width: 0; }
+.f input:focus, .f select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.send { font: 700 1.05rem/1 var(--body); padding: 16px; border: 0; border-radius: 14px; background: var(--accent); color: var(--on-accent); opacity: .55; cursor: not-allowed; }
+@media (min-width: 720px) { .quick-fields { grid-template-columns: 1.2fr 1.4fr 1fr; } }
+
+.qa details { border-bottom: 1px solid var(--line-soft); padding: 16px 0; }
+.qa summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+.qa summary::after { content: '+'; color: var(--accent); font-weight: 400; font-size: 1.3rem; line-height: 1; }
+.qa details[open] summary::after { content: '–'; }
+.qa summary::-webkit-details-marker { display: none; }
+.qa details p { margin-top: 10px; color: var(--muted); max-width: 62ch; }
+
+.foot { padding: 48px 20px calc(110px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 14px; max-width: 900px; margin: 0 auto; color: var(--muted); font-size: .92rem; }
+.foot img { width: 110px; height: auto; filter: var(--logo-filter, none); }
+.foot-note { font-size: .8rem; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
