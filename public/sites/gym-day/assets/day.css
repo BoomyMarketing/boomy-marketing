@@ -1,0 +1,83 @@
+/* Version 2 "One day with the key": every section sits in its own sky; text tone follows the sky. */
+:root {
+  --bg: oklch(0.15 0.03 262); --fg: oklch(0.97 0.01 80); --muted: oklch(0.82 0.03 280);
+  --card: oklch(0.2 0.04 270 / .82); --field: oklch(0.13 0.03 265); --notice-bg: oklch(0.26 0.05 275);
+  --line-soft: oklch(0.42 0.05 280 / .6); --accent: oklch(0.84 0.13 75); --on-accent: oklch(0.2 0.04 60);
+  --shadow: oklch(0.05 0.03 270 / .7); --ok: oklch(0.83 0.14 150); --no: oklch(0.72 0.17 25);
+  --display: 'Fraunces', Georgia, serif; --body: 'Figtree', system-ui, sans-serif; --mono: 'Martian Mono', ui-monospace, monospace;
+  color-scheme: dark;
+}
+.is-light { --fg: oklch(0.22 0.04 265); --muted: oklch(0.42 0.04 265); --accent: oklch(0.55 0.15 45); --line-soft: oklch(0.7 0.03 250 / .7); --card: oklch(1 0 0 / .7); --ok: oklch(0.5 0.13 150); color-scheme: light; }
+.is-light, .is-dark { color: var(--fg); }
+em { font-style: italic; color: var(--accent); font-weight: 400; }
+
+/* header follows the sky */
+body[data-tone="light"] .bar { --bg: oklch(0.96 0.02 220); --fg: oklch(0.22 0.04 265); --muted: oklch(0.42 0.04 265); --accent: oklch(0.55 0.15 45); --line-soft: oklch(0.8 0.02 250); --logo-filter: invert(1) brightness(.25); color: var(--fg); }
+.bar { transition: background .6s, color .6s; }
+
+/* sun / moon clock */
+.sun { position: fixed; z-index: 35; top: calc(8px + env(safe-area-inset-top, 0px)); left: 50%; translate: -50% 0; width: 76px; display: grid; justify-items: center; pointer-events: none; color: var(--fg); }
+body[data-tone="light"] .sun { color: oklch(0.22 0.04 265); }
+.sun svg { width: 64px; height: 26px; overflow: visible; }
+.sun-arc { fill: none; stroke: currentColor; stroke-opacity: .35; stroke-width: 1.5; stroke-dasharray: 2 4; }
+.sun-dot { fill: oklch(0.86 0.15 80); filter: drop-shadow(0 0 6px oklch(0.86 0.15 80)); transition: fill .6s; }
+.sun.is-night .sun-dot { fill: oklch(0.92 0.02 250); filter: drop-shadow(0 0 6px oklch(0.92 0.02 250 / .8)); }
+.sun-clock { font: 600 .82rem/1 var(--mono); letter-spacing: .02em; margin-top: -2px; font-variant-numeric: tabular-nums; }
+@media (max-width: 359px) { .sun { display: none; } }
+
+/* moments */
+.moment, .after { position: relative; background: linear-gradient(var(--top), var(--bot)); padding: 34px 18px 64px; display: grid; gap: 22px; overflow: clip; }
+.horizon { height: 34vh; min-height: 180px; background: linear-gradient(var(--top), var(--bot)); display: grid; place-items: center; }
+.horizon span { font: 400 italic clamp(1.4rem, 6vw, 2.4rem)/1 var(--display); color: oklch(0.98 0.02 80 / .85); text-shadow: 0 2px 20px oklch(0.3 0.08 40 / .5); }
+.m-time { font: 300 clamp(5.5rem, 31vw, 12rem)/.85 var(--display); letter-spacing: -.04em; font-variant-numeric: lining-nums tabular-nums; color: var(--fg); opacity: .16; margin: 0 0 -.38em -.04em; }
+.m-shot { border-radius: 22px; box-shadow: 0 34px 70px -34px var(--shadow); z-index: 1; }
+.is-light .m-shot { box-shadow: 0 30px 60px -30px oklch(0.4 0.06 250 / .45); }
+.m-text { display: grid; gap: 14px; max-width: 58ch; }
+.m-at time { font: 600 .8rem/1 var(--mono); letter-spacing: .08em; padding: 7px 10px; border-radius: 999px; border: 1px solid var(--line-soft); }
+.eyebrow { font: 600 .72rem/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-weight: 700; font-size: clamp(2.2rem, 9vw, 4.4rem); line-height: 1; letter-spacing: -.02em; }
+h1 em { display: block; }
+.moment h2, .after h2 { font-weight: 700; font-size: clamp(1.9rem, 7.6vw, 3.4rem); line-height: 1.03; letter-spacing: -.015em; }
+.m-text > p:not(.m-at):not(.m-key):not(.eyebrow) { color: var(--muted); font-size: 1.06rem; }
+.m-key { justify-self: start; font: 600 .74rem/1 var(--mono); letter-spacing: .04em; padding: 10px 12px; border-radius: 10px; background: var(--card); border: 1px solid var(--line-soft); color: var(--fg); }
+.m-key::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); margin-right: 8px; box-shadow: 0 0 10px var(--ok); vertical-align: 1px; }
+.m-key--no::before { background: var(--no); box-shadow: 0 0 10px var(--no); }
+
+/* hero: the title comes before the photo on phones */
+.hero { padding-top: 26px; gap: 18px; }
+.hero h1 { font-size: clamp(2rem, 8.6vw, 4.2rem); }
+@media (min-width: 900px) {
+  .hero { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); align-items: start; min-height: calc(100svh - 64px); align-content: center; padding-top: 48px; }
+  .hero .m-shot { grid-column: 1; grid-row: 1 / span 2; }
+  .hero-head { grid-column: 2; grid-row: 1; align-self: end; }
+  .hero-rest { grid-column: 2; grid-row: 2; }
+}
+
+/* the day's log */
+.daylog { list-style: none; margin: 4px 0 0; padding: 0; font: 400 .8rem/1.4 var(--mono); border-top: 1px solid var(--line-soft); }
+.daylog li { display: grid; grid-template-columns: 4.6em 1fr auto; gap: 2px 10px; padding: 10px 0; border-bottom: 1px solid var(--line-soft); }
+.daylog time { color: var(--muted); }
+.daylog span { grid-column: 2; color: var(--muted); }
+.daylog em { grid-column: 3; grid-row: 1 / span 2; align-self: center; font-style: normal; color: var(--ok); text-align: right; }
+.daylog .no em { color: var(--no); }
+
+/* after: door check, answers, form */
+.after-in { display: grid; gap: 22px; max-width: 760px; margin: 0 auto; width: 100%; }
+.checks { list-style: none; margin: 0; padding: 0; counter-reset: c; }
+.checks li { counter-increment: c; padding: 14px 0 14px 44px; position: relative; border-bottom: 1px solid var(--line-soft); color: var(--muted); }
+.checks li::before { content: counter(c, decimal-leading-zero); position: absolute; left: 0; top: 15px; font: 600 .78rem/1 var(--mono); color: var(--accent); }
+.checks b { display: block; color: var(--fg); }
+.note { color: var(--muted); font-size: .92rem; padding: 14px 16px; border-radius: 14px; border: 1px dashed var(--line-soft); }
+.faq-title { margin-top: 24px; }
+
+@media (min-width: 900px) {
+  .moment { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); column-gap: 72px; align-items: center; padding: 96px max(40px, calc((100vw - 1180px) / 2)); }
+  .m-time { grid-column: 1 / -1; margin-bottom: -.5em; }
+  .m-shot { grid-column: 1; }
+  .m-text { grid-column: 2; }
+  .moment--flip { grid-template-columns: minmax(0, 1fr) minmax(0, 420px); }
+  .moment--flip .m-shot { grid-column: 2; grid-row: 2; }
+  .moment--flip .m-text { grid-column: 1; grid-row: 2; justify-self: end; }
+  .moment--flip .m-time { text-align: right; }
+  .after { padding: 96px 40px 120px; }
+}
