@@ -9,7 +9,7 @@
 
   <meta name="theme-color" content="#0d1220">
   <link rel="icon" href="/sites/gym-film/favicon-32.png" sizes="32x32">
-  <link rel="preload" as="image" href="/sites/gym-film/media/seq/000.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="/sites/gym-film/media/stills/poster.webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -24,33 +24,54 @@
   </header>
 
   <main id="main">
-    <section class="film" id="top" aria-labelledby="film-title" data-film='{"frames":149,"ev":{"tap":18,"green":40,"open":70,"lights":78,"inside":130}}'>
-      <div class="stage">
-        <img class="poster" src="/sites/gym-film/media/seq/000.webp" alt="At 05:29 a coach holds her phone to the door reader of a dark Toronto gym. The reader glows blue." width="720" height="1280" fetchpriority="high">
-        <canvas class="screen" aria-hidden="true"></canvas>
-        <div class="shade" aria-hidden="true"></div>
-        <dl class="hud" aria-hidden="true">
-          <div><dt>Door</dt><dd class="hud-door">Locked</dd></div>
-          <div><dt>Key</dt><dd class="hud-key">—</dd></div>
-          <div><dt>Lights</dt><dd class="hud-lights">0 / 12</dd></div>
-        </dl>
-        <div class="caps">
-          <div class="cap cap--intro" data-from="0" data-to="0.122">
-            <p class="eyebrow">Gyms &amp; studios · Toronto &amp; GTA</p>
-            <h1 id="film-title">05:29. <em>One tap opens the gym.</em></h1>
-            <p class="hint">Scroll to open the door <span aria-hidden="true">↓</span></p>
-          </div>
-          <p class="cap" data-from="0.122" data-to="0.270">Her key lives in her phone’s Wallet.</p>
-          <p class="cap" data-from="0.270" data-to="0.527">Green. <em>The lock lets go.</em></p>
-          <p class="cap" data-from="0.527" data-to="0.878">The lights come on before the first member does.</p>
-          <p class="cap" data-from="0.878" data-to="1.01">Nobody had to come in early <em>to unlock.</em></p>
+    <section class="film" id="top" aria-labelledby="film-title" data-film='{"frames":149,"ev":{"tap":18,"green":40,"open":70,"lights":78,"inside":130},"duration":12.041667}'>
+      <div class="wrap film-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">Gyms &amp; studios · Toronto &amp; GTA</p>
+          <h1 id="film-title">One tap opens <em>the gym.</em></h1>
+          <p class="lede">Nobody had to come in early to unlock.</p>
+          <p class="film-label"><span aria-hidden="true">▶</span> A morning in 12 seconds</p>
         </div>
-        <p class="load" aria-hidden="true"><span class="load-bar"><i></i></span><span class="load-txt">Loading the film</span></p>
+        <div class="film-player">
+          <div class="stage">
+            <video class="screen" src="/sites/gym-film/media/gym-loop.mp4" poster="/sites/gym-film/media/stills/poster.webp" width="480" height="854" muted loop playsinline controls preload="none" aria-label="A coach taps her Wallet key, the reader turns green, and the gym door opens." aria-describedby="film-story"></video>
+            <div class="shade" aria-hidden="true"></div>
+            <div class="caps" aria-hidden="true">
+              <p class="cap on" data-from="0" data-to="0.270">Her key lives <em>in her phone’s Wallet.</em></p>
+              <p class="cap" data-from="0.270" data-to="0.527">Green. <em>The lock lets go.</em></p>
+              <p class="cap" data-from="0.527" data-to="1.01">Lights on. <em>Ready for the first member.</em></p>
+            </div>
+          </div>
+          <div class="film-controls"><p class="film-state">12-second film · muted</p><button class="film-toggle" type="button" hidden>Play film</button></div>
+        </div>
+        <ol class="story-beats" id="film-story" role="list" aria-label="The film in three moments">
+          <li><b>Phone to reader</b><span>Her Wallet key is accepted.</span></li>
+          <li><b>Green. Door open.</b><span>The lock lets go.</span></li>
+          <li><b>The gym is ready</b><span>The lights come on.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="benefits" data-clock="Your day" data-note="You manage access" aria-labelledby="benefits-title">
+      <div class="wrap">
+        <p class="eyebrow">Less time at the door</p>
+        <h2 id="benefits-title">Members tap in. <em>You decide who can.</em></h2>
+        <ul class="benefit-list" role="list">
+          <li><b>A key that fits</b><p>Wallet keys for members. NFC cards for people who prefer a card. The same reader accepts both.</p></li>
+          <li><b>Access in your hands</b><p>Add and remove keys from your phone. Give a trial visitor one use, or a cleaner a time window.</p></li>
+          <li><b>A record of the day</b><p>Every accepted key and door unlock is written down. Filter the log by lock, person and date.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="reader" aria-labelledby="reader-title">
+      <div class="wrap reader-layout">
+        <figure class="reader-detail"><img src="/sites/gym-film/media/stills/reader.webp" alt="Illustrated film detail: a phone beside the reader, its green indicator and QR label." width="600" height="784" loading="lazy"><figcaption>Illustrated door detail · from the film</figcaption></figure>
+        <div class="reader-copy"><p class="eyebrow">At the door</p><h2 id="reader-title">The phone. The reader. <em>The green light.</em></h2><p class="lede">Your key is accepted. The reader’s relay switches the lock. The door check confirms the setup for your door.</p><a class="text-link" href="#door-check">See what we check <span aria-hidden="true">↓</span></a></div>
       </div>
     </section>
 
     <section class="keys" data-clock="06:00" data-note="Members tap in" aria-labelledby="keys-title">
-      <figure class="keys-shot"><img src="/sites/gym-film/media/stills/end.webp" alt="The gym door stands open at dawn and the lights are on inside." width="720" height="1280" loading="lazy"></figure>
       <div class="wrap">
         <p class="eyebrow">06:00 → 21:00</p>
         <h2 id="keys-title">Every door opening is a key <em>you set up once.</em></h2>
@@ -86,7 +107,7 @@
         <h2 id="xray-title">Before anything is installed, <em>we look inside your door.</em></h2>
         <p class="lede">Drag across the door to see what goes into the frame and the ceiling.</p>
       </div>
-      <div class="lens" style="--x: 38%">
+      <div class="lens" style="--x: 58%">
         <img class="lens-a" src="/sites/gym-film/media/stills/door-normal.webp" alt="The gym’s glass front door at night with the reader on the frame." width="1024" height="1536" loading="lazy">
         <img class="lens-b" src="/sites/gym-film/media/stills/door-xray.webp" alt="The same door as an X-ray: a cable runs inside the frame from the reader to the lock, with power and Wi-Fi above the ceiling." width="1024" height="1536" loading="lazy">
         <svg class="wires" viewBox="0 0 100 150" preserveAspectRatio="none" aria-hidden="true">
@@ -104,7 +125,7 @@
           <li class="tag" data-id="strike" data-x="0.474" style="--by:49.0%"><b>Electric strike</b><span>the other option, in the frame</span></li>
         </ul>
         <span class="lens-line" aria-hidden="true"></span>
-        <label class="lens-ctl"><span class="visually-hidden">Reveal the inside of the door</span><input type="range" min="0" max="100" value="38"></label>
+        <label class="lens-ctl"><span class="visually-hidden">Reveal the inside of the door</span><input type="range" min="0" max="100" value="58"></label>
       </div>
       <div class="wrap">
         <ol class="checks" role="list">
@@ -131,7 +152,7 @@
         <h2 class="ask-title">Tomorrow at 05:29, <em>it could be your door.</em></h2>
         <form class="quick" id="request" aria-labelledby="quick-title" aria-describedby="quick-notice">
           <p class="quick-title" id="quick-title">Request a door check</p>
-          <p class="quick-notice" id="quick-notice"><strong>Not connected yet.</strong> Nothing typed here is sent or saved until the local team’s inbox is set up.</p>
+          <p class="quick-notice" id="quick-notice"><strong>Preview form · sending isn’t set up.</strong> Nothing typed here is sent or saved.</p>
           <div class="quick-fields">
             <label class="f"><span>Your space</span><select name="space"><option value="gym" selected>Gym or studio</option><option value="studio">Yoga, dance or fitness studio</option><option value="other">Something else</option></select></label>
             <label class="f"><span>Email or phone</span><input name="contact" type="text" autocomplete="off"></label>
@@ -148,7 +169,6 @@
     <p>SmartphoneKey door access for gyms and studios, assessed and installed in Toronto and the GTA. Every setup starts with a door check.</p>
     <p class="foot-note">Product details are summarized from SmartphoneKey’s published materials and admin guide; what works at your door is confirmed at a door check. Some features depend on the subscription package. This site is run by an independent local installer of SmartphoneKey.</p>
   </footer>
-  <a class="dock" href="#request">Request a door check <span aria-hidden="true">↓</span></a>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it connect to our membership or billing software?","acceptedAnswer":{"@type":"Answer","text":"A ready-made link isn’t confirmed. Plan on managing access in SmartphoneKey’s own admin portal, and bring it up at the door check."}},{"@type":"Question","name":"Will access switch off when a membership ends?","acceptedAnswer":{"@type":"Answer","text":"When you remove the key or deactivate the person, their access ends. It doesn’t happen automatically from your billing system."}},{"@type":"Question","name":"What about members who don’t want to use a phone?","acceptedAnswer":{"@type":"Answer","text":"Program an NFC key card for them. Cards work on the same reader and are revoked from the admin portal."}},{"@type":"Question","name":"Can staff manage keys without the owner?","acceptedAnswer":{"@type":"Answer","text":"Yes. Make a manager a local admin for your location, and give them a set number of Wallet Keys to hand out."}},{"@type":"Question","name":"We have more than one location.","acceptedAnswer":{"@type":"Answer","text":"Each location can be its own site in the admin portal, and you switch between them from one sign-in."}}]}</script>
   <script src="/sites/gym-film/assets/film.js" defer></script>
 </body>
