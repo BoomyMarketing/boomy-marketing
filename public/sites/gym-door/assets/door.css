@@ -237,3 +237,28 @@ h1 { font-size: clamp(1.9rem, 7.6vw, 3.9rem); line-height: 1.08; }
 .dock { position: fixed; z-index: 55; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); translate: -50% 0; display: inline-flex; align-items: center; min-height: 50px; padding: 12px 24px; border-radius: 12px; background: var(--teal); color: var(--on-teal); font: 600 1rem/1 var(--f); text-decoration: none; box-shadow: 0 12px 30px -8px oklch(0 0 0 / .6); transition: opacity .3s, translate .3s; white-space: nowrap; }
 .dock.is-away { opacity: 0; translate: -50% 140%; pointer-events: none; }
 @media (min-width: 1024px) { .dock { display: none; } }
+
+/* for professionals */
+.sec--paper { background: var(--paper); color: var(--ink); }
+.pros { list-style: none; margin: 34px 0 26px; padding: 0; display: grid; gap: 14px; }
+.pros li { display: flex; gap: 14px; padding: 20px; border-radius: 16px; background: var(--white); border: 1px solid var(--line); }
+.pros h3 { font: 600 1.05rem/1.3 var(--f); }
+.pros p { color: var(--mute); margin-top: 4px; font-size: .94rem; }
+.src { color: var(--mute); font-size: .82rem; margin: 0 auto 18px; max-width: 60ch; }
+@media (min-width: 900px) { .pros { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Airbnb page */
+.air-hero { padding-top: clamp(40px, 7vw, 88px); }
+.air-hero h1 { font-size: clamp(2rem, 7vw, 3.6rem); line-height: 1.08; }
+.air-hero .lede { color: var(--mute-d); }
+.air-hero .hero-ctas { justify-content: flex-start; }
+.moments { list-style: none; margin: 36px 0 0; padding: 0; display: grid; gap: 22px; }
+.moment { display: grid; gap: 16px; padding: 16px; border-radius: 18px; background: var(--white); border: 1px solid var(--line); }
+.moment-shot { width: 100%; box-shadow: none; }
+.moment-time { font: 600 .82rem/1.3 var(--f); color: var(--teal-2); letter-spacing: .04em; text-transform: uppercase; }
+.moment h3 { font: 700 1.25rem/1.25 var(--f); margin-top: 4px; }
+.moment .was, .moment .now { margin-top: 8px; color: var(--mute); font-size: .95rem; }
+.moment b { color: var(--ink); font-weight: 600; margin-right: 4px; }
+.note-light { margin-top: 22px; font-size: .9rem; color: var(--mute); padding: 14px 16px; border-radius: 12px; border: 1px dashed var(--line); }
+@media (min-width: 720px) { .moment { grid-template-columns: 240px 1fr; align-items: center; } }
+@media (min-width: 1100px) { .moments { grid-template-columns: repeat(3, minmax(0, 1fr)); } .moment { grid-template-columns: 1fr; align-items: start; } }

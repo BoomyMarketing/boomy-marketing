@@ -32,6 +32,10 @@
   img[src*="photos/str-lockbox."] { object-position: 50% 32%; }
   img[src*="photos/studio-hourly."] { object-position: 65% 32%; }
   img[src*="photos/suites-hero."] { object-position: 46% 32%; }
+  img[src*="photos/airbnb-hero."] { object-position: 59% 32%; }
+  img[src*="photos/airbnb-late."] { object-position: 72% 32%; }
+  img[src*="photos/airbnb-cleaner."] { object-position: 65% 32%; }
+  img[src*="photos/airbnb-cohost."] { object-position: 68% 32%; }
   /* photos with a phone-shaped crop keep their own composition */
   picture:has(source[media]) img { object-position: 50% 30%; }
   video { height: auto; }
@@ -71,6 +75,10 @@
   img[src*="photos/str-lockbox."] { object-position: 50% 32% !important; }
   img[src*="photos/studio-hourly."] { object-position: 40% 12% !important; }
   img[src*="photos/suites-hero."] { object-position: 46% 12% !important; }
+  img[src*="photos/airbnb-hero."] { object-position: 59% 32% !important; }
+  img[src*="photos/airbnb-late."] { object-position: 72% 32% !important; }
+  img[src*="photos/airbnb-cleaner."] { object-position: 65% 32% !important; }
+  img[src*="photos/airbnb-cohost."] { object-position: 68% 32% !important; }
 
   /* photos that already have a phone-shaped crop keep their own composition */
   picture:has(source[media]) img { object-position: 50% 30% !important; }

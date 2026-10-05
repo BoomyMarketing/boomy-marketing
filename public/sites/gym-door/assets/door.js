@@ -67,11 +67,11 @@
   const dock = document.querySelector('.dock');
   const form = document.getElementById('request');
   const heroCopy = document.querySelector('.hero-copy');
-  if (dock && form && heroCopy && 'IntersectionObserver' in window) {
+  if (dock && form && 'IntersectionObserver' in window) {
     let nearForm = false, onFirst = true;
     const upd = () => dock.classList.toggle('is-away', nearForm || onFirst);
     new IntersectionObserver(([e]) => { nearForm = e.isIntersecting; upd(); }, { threshold: 0.1 }).observe(form);
-    const first = () => { onFirst = scrollY < innerHeight * 0.5; upd(); };
+    const first = () => { onFirst = scrollY < innerHeight * (heroCopy ? 0.5 : 0.35); upd(); };
     addEventListener('scroll', first, { passive: true });
     first();
   }
