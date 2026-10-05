@@ -16,14 +16,15 @@
 
 /* Keys as Wallet passes */
 .keys { overflow: hidden; }
-.passes { display: flex; gap: 16px; margin: clamp(32px, 4vw, 56px) 0 0; padding: 8px var(--gut) 24px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
-.passes::-webkit-scrollbar { display: none; }
+/* phones: one key under another (owner 05.10: vertical, not a sideways carousel); tablets: two per row */
+.passes { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; width: min(100% - 2 * var(--gut), 1240px); margin: clamp(32px, 4vw, 56px) auto 0; padding: 8px 0 24px; }
+@media (min-width: 720px) and (max-width: 1023px) { .passes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .pass {
   --tint: oklch(0.76 0.21 150);
   --tint-soft: oklch(0.76 0.21 150 / .35);
   --tint-line: oklch(0.76 0.21 150 / .45);
   --tint-bg: oklch(0.76 0.21 150 / .14);
-  flex: 0 0 min(78vw, 300px); scroll-snap-align: center; position: relative; overflow: hidden;
+  position: relative; overflow: hidden;
   display: flex; flex-direction: column; gap: 6px; min-height: 190px; padding: 20px 22px; border-radius: 20px;
   background: radial-gradient(120% 120% at 100% 0%, var(--tint-soft), transparent 55%), linear-gradient(160deg, oklch(0.22 0.014 262), oklch(0.14 0.012 262));
   border: 1px solid var(--tint-line);

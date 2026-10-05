@@ -744,3 +744,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
+
+/* owner 05.10: film ignores taps (plays by itself, no controls) */
+.film-video { pointer-events: none; }
+.film-video::-webkit-media-controls { display: none !important; }
+.film-toggle, .film-controls { display: none !important; }

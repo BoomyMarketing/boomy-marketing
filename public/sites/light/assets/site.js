@@ -86,45 +86,27 @@
       if (film.readyState === 0 && film.networkState === 3) fail();
     });
 
-    // Only the hero film plays by itself; inline films keep native controls.
-    if (figure.dataset.autoplay !== 'true' || !toggle) return;
-    let choice = 'auto'; // 'auto' | 'play' | 'pause' — the visitor's explicit choice wins
-    let inView = true;
+    // Every film plays by itself: muted, looping, no controls, nothing to tap (owner 05.10).
+    // Visitors who ask their phone for reduced motion see the still poster instead.
+    film.muted = true;
+    film.defaultMuted = true;
+    film.loop = true;
+    film.playsInline = true;
     film.removeAttribute('controls');
-    toggle.hidden = false;
-    const label = () => { toggle.textContent = film.paused ? 'Play film' : 'Pause film'; };
-    const wantsPlay = () => {
-      if (failed || document.hidden || !inView) return false;
-      if (choice === 'play') return true;
-      if (choice === 'pause') return false;
-      return !motionQuery.matches && !saveData;
+    const start = () => {
+      if (failed || motionQuery.matches || document.hidden) return;
+      const request = film.play();
+      if (request) request.catch(() => {});
     };
-    const update = () => {
-      if (wantsPlay()) {
-        if (film.paused) {
-          const request = film.play();
-          if (request) request.catch(label);
-        }
-      } else if (!film.paused) {
-        film.pause();
-      }
-      label();
-    };
-    toggle.addEventListener('click', () => {
-      choice = film.paused ? 'play' : 'pause';
-      update();
-    });
-    film.addEventListener('play', label);
-    film.addEventListener('pause', label);
-    document.addEventListener('visibilitychange', update);
-    motionQuery.addEventListener('change', update);
+    if (motionQuery.matches) { film.removeAttribute('autoplay'); film.pause(); }
+    film.addEventListener('pause', () => { if (!film.ended) start(); });
+    document.addEventListener('visibilitychange', start);
     if (hasIO) {
       new IntersectionObserver((entries) => {
-        inView = entries[entries.length - 1].isIntersecting;
-        update();
+        if (entries[entries.length - 1].isIntersecting) start();
       }, { threshold: 0.2 }).observe(frame);
     }
-    update();
+    start();
   });
 
   /* ---------- Scene story: the moment in the middle of the screen ---------- */

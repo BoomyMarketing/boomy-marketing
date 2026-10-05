@@ -4,138 +4,217 @@
   <meta name="robots" content="noindex, nofollow">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Gym Door Access by Phone · The Door Opens | SmartphoneKey Toronto</title>
-  <meta name="description" content="One gym door, opened by Wallet keys, cards and guest keys: members, coaches, trial visitors and cleaners. Toronto &amp; GTA.">
+  <title>Gym &amp; Studio Door Access by Phone | SmartphoneKey Toronto &amp; GTA</title>
+  <meta name="description" content="Members open the gym door with Apple Wallet or Google Wallet. Guest keys for trials and cleaners, access removed when a membership ends, an activity log, and a door check before install. Toronto &amp; GTA.">
   
-  <meta name="theme-color" content="#14161a">
+  <meta name="theme-color" content="#0b0b0c">
   <link rel="icon" href="/sites/gym-door/favicon-32.png" sizes="32x32">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Public+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="/sites/gym-door/assets/base.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="/sites/gym-door/assets/door.css">
 </head>
-<body class="v-door">
+<body>
   <a class="skip" href="#main">Skip to content</a>
-  <header class="bar">
-    <a class="brand" href="#top" aria-label="SmartphoneKey Toronto, back to top"><img src="/sites/gym-door/media/smartphonekey-logo.svg" alt="SmartphoneKey" width="119" height="41"><span>Gyms · Toronto&nbsp;&amp;&nbsp;GTA</span></a>
-    <a class="bar-cta" href="#request">Door check</a>
-  </header>
-  <main id="main" class="track">
-
-    <div class="scene" aria-hidden="true">
-      <div class="room"><div class="floor"></div><div class="glow"></div></div>
-      <div class="doorway">
-        <div class="inside"><div class="inside-racks"></div></div>
-        <div class="leaf"><div class="leaf-glass"></div><span class="leaf-handle"></span></div>
-        <div class="frame-side"><svg class="d-reader" viewBox="0 0 40 100" aria-hidden="true"><rect x="1" y="1" width="38" height="98" rx="7" class="dr-body"/><rect x="4" y="4" width="32" height="92" rx="5" class="dr-glass"/><rect x="14" y="24" width="12" height="20" rx="3" class="dr-icon"/><circle cx="20" cy="34" r="16" class="dr-ring"/><g class="dr-qr"><rect x="12" y="62" width="16" height="16" rx="1"/></g></svg></div>
-      </div>
-      <div class="spill"></div>
-      <div class="flood"></div>
+  <header class="hd">
+    <div class="hd-in">
+      <a class="hd-logo" href="#top" aria-label="SmartphoneKey Toronto, back to top"><img src="/sites/gym-door/media/smartphonekey-logo.svg" alt="SmartphoneKey" width="119" height="41"></a>
+      <nav class="hd-nav" id="hd-nav" aria-label="Main">
+        <ul role="list"><li><a href="#how">How it works</a></li><li><a href="#features">Features</a></li><li><a href="#keys">Keys</a></li><li><a href="#door-check">Door check</a></li><li><a href="#faq">FAQ</a></li><li><a href="#request">Contact</a></li></ul>
+      </nav>
+      <a class="btn btn--sm hd-cta" href="#request">Book a door check</a>
+      <button class="hd-burger" type="button" aria-expanded="false" aria-controls="hd-nav"><span class="visually-hidden">Menu</span><i></i><i></i><i></i></button>
     </div>
+  </header>
 
-    <section class="beat beat--hero" id="top" data-open="0" aria-labelledby="hero-title">
-      <div class="card card--hero">
-        <p class="eyebrow">Gyms &amp; studios · Toronto &amp; GTA</p>
-        <h1 id="hero-title">Your gym is behind <em>one door.</em></h1>
-        <p>Members, coaches, trial visitors and cleaners all come through it. Scroll, and watch who it opens for.</p>
-        <p class="c-state"><span class="c-meter" style="--o:0"></span>Door: locked</p>
-      </div>
-    </section>
-
-    <section class="beat " data-open="0.12" aria-labelledby="b1">
-      <div class="card">
-        
-        <div class="c-text">
-          <p class="c-state"><span class="c-meter" style="--o:0.12"></span>Door: unlocking</p>
-          <h2 id="b1">A tap, <em>and the lock lets go.</em></h2>
-          <p>The reader on the frame checks the key and switches the electric lock. Three ways to give it a key:</p>
-          <ul class="ways" role="list"><li><b>Wallet key</b> Apple Wallet or Google Wallet. Tap like paying.</li><li><b>NFC key card</b> For anyone who would rather not use a phone.</li><li><b>QR code</b> Visitors scan it to call the person they’re here to see.</li></ul>
+  <main id="main">
+    <!-- 1. The door opens (scroll) -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-stage">
+        <div class="scene" aria-hidden="true">
+          <div class="glow"></div>
+          <div class="doorway">
+            <div class="inside"><div class="inside-racks"></div></div>
+            <div class="leaf"><div class="leaf-glass"></div><span class="leaf-handle"></span></div>
+            <div class="frame-side"><svg class="d-reader" viewBox="0 0 40 100" aria-hidden="true"><rect x="1" y="1" width="38" height="98" rx="7" class="dr-body"/><rect x="4" y="4" width="32" height="92" rx="5" class="dr-glass"/><rect x="14" y="24" width="12" height="20" rx="3" class="dr-icon"/><circle cx="20" cy="34" r="16" class="dr-ring"/><g class="dr-qr"><rect x="12" y="62" width="16" height="16" rx="1"/></g></svg></div>
+          </div>
+          <div class="spill"></div>
+          <div class="floor"></div>
+        </div>
+        <p class="state" aria-hidden="true"><span class="meter"><i></i></span><span class="state-txt">Door: locked</span></p>
+        <div class="hero-copy">
+          <p class="kicker">Gyms &amp; studios · Toronto &amp; GTA</p>
+          <h1 id="hero-title">Your gym. <em>One door.</em> Every member’s phone is the key.</h1>
+          <p class="hero-lede">Wallet keys for members, a key for trial visitors that ends on its own, and access removed the day a membership ends. Your front desk stops being the door.</p>
+          <div class="hero-ctas"><a class="btn " href="#request">Book a door check</a><a class="btn btn--ghost" href="#how">See how it works</a></div>
         </div>
       </div>
     </section>
 
-    <section class="beat " data-open="0.32" aria-labelledby="b2">
-      <div class="card card--photo">
-        <figure class="shot c-shot"><picture><source type="image/webp" srcset="/sites/gym-door/media/portrait/gym-member-512.webp 512w, /sites/gym-door/media/portrait/gym-member-1024.webp 1024w" sizes="(min-width: 900px) 34vw, 100vw"><img src="/sites/gym-door/media/portrait/gym-member-1024.webp" alt="A member in a vest holds his phone to the reader at the glass door of a Toronto strength gym." width="1024" height="1536" loading="lazy" decoding="async"></picture></figure>
-        <div class="c-text">
-          <p class="c-state"><span class="c-meter" style="--o:0.32"></span>Door: open for members</p>
-          <h2 id="b2">Members let <em>themselves in.</em></h2>
-          <p>Each member gets a Wallet key that works until you remove it. Nobody at the desk has to buzz the door at 6 a.m.</p>
+    <!-- 2. Who it's for -->
+    <section class="sec sec--light" id="who" aria-labelledby="who-title">
+      <div class="wrap split">
+        <div class="split-text">
+          <h2 id="who-title">Access made <em>easy</em>. Control made <em>yours</em>.</h2>
+          <p class="lede">One reader on your door, and the right key for everyone who uses it. Your front desk stops being the door.</p>
+          <ul class="ticks" role="list"><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><span><b>Owners</b> add and remove members from your phone, at any hour.</span></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><span><b>Front-desk leads</b> become local admins and hand out keys without the owner.</span></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><span><b>Coaches</b> open up at 05:30 with a phone or a key card.</span></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><span><b>Members</b> tap in with the key already in their Wallet.</span></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><span><b>Trial visitors</b> get a guest key that is spent after one visit.</span></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><span><b>Cleaners</b> get a key that works only from 20:30 to 23:00.</span></li></ul>
+          <a class="btn" href="#how">See it in action</a>
+        </div>
+        <figure class="shot split-shot"><picture><source type="image/webp" srcset="/sites/gym-door/media/portrait/gym-member-512.webp 512w, /sites/gym-door/media/portrait/gym-member-1024.webp 1024w" sizes="(min-width: 900px) 34vw, 100vw"><img src="/sites/gym-door/media/portrait/gym-member-1024.webp" alt="A member in a vest holds his phone to the reader at the glass door of a Toronto strength gym." width="1024" height="1536" loading="lazy" decoding="async"></picture></figure>
+      </div>
+    </section>
+
+    <!-- 3. Features -->
+    <section class="sec sec--dark" id="features" aria-labelledby="features-title">
+      <div class="wrap">
+        <h2 id="features-title" class="center"><em>Every feature</em> your gym needs at the door.</h2>
+        <figure class="product">
+          <video class="product-film" autoplay muted loop playsinline disablepictureinpicture disableremoteplayback preload="metadata" poster="/sites/gym-door/media/film/smartphonekey-video-poster.jpg" width="1280" height="720" aria-label="SmartphoneKey’s own film of the reader and app">
+            <source src="/sites/gym-door/media/film/smartphonekey-product-film.mp4#t=3" type="video/mp4">
+          </video>
+          <figcaption>SmartphoneKey’s own footage of the reader and app.</figcaption>
+        </figure>
+        <ul class="feats" role="list"><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><div><h3>Wallet keys</h3><p>Members carry the key in Apple Wallet or Google Wallet. No separate app for everyday entry.</p></div></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><div><h3>Guest keys with start and end times</h3><p>A trial visitor’s or cleaner’s key starts and ends when you set it.</p></div></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><div><h3>One-use keys</h3><p>A key for a single visit, such as a repair. It opens once, then it is spent.</p></div></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><div><h3>NFC key cards</h3><p>Cards on the same reader for coaches or members who would rather not use a phone.</p></div></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><div><h3>Weekly lock schedules</h3><p>Set the hours each door accepts keys, day by day.</p></div></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><div><h3>Remove access in seconds</h3><p>Remove a key or deactivate a person, and their access ends.</p></div></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><div><h3>Local admins</h3><p>Let a manager or front-desk lead run your location, with a set number of Wallet Keys to hand out.</p></div></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><div><h3>Activity log</h3><p>Every key accepted and every door unlocked, filterable by lock, person and date.</p></div></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><div><h3>QR visitor calls</h3><p>A visitor scans the code on the reader to call the person they’re here to see.</p></div></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><div><h3>Cameras</h3><p>Connect ONVIF-compatible cameras and decide who can see which camera.</p></div></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><div><h3>Live lock status</h3><p>See whether each lock is online, before someone is stuck outside.</p></div></li><li><svg class="ki" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="5"/><path d="M11.5 11.5 21 21m-4-4 2.5-2.5M14.5 14.5 17 12"/></svg><div><h3>Wi-Fi or LTE</h3><p>The Wi-Fi model joins your network; the LTE model uses a SIM card.</p></div></li></ul>
+        <p class="center"><a class="btn " href="#request">Book a door check</a></p>
+      </div>
+    </section>
+
+    <!-- 4. How it works -->
+    <section class="sec sec--light" id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <h2 id="how-title" class="center">How it works. <em>Five steps</em>, in this order.</h2>
+        <ol class="steps" role="list"><li><span class="num" aria-hidden="true">01</span><div><h3>Door check</h3><p>We look at the lock, power, cable route, Wi-Fi or LTE and who needs keys, then explain setup and cost.</p></div></li><li><span class="num" aria-hidden="true">02</span><div><h3>Installation</h3><p>The reader is mounted beside the door and wired to an electric strike or magnetic lock, with an exit button inside.</p></div></li><li><span class="num" aria-hidden="true">03</span><div><h3>Claim the lock</h3><p>The lock is registered to your account and appears in your admin portal.</p></div></li><li><span class="num" aria-hidden="true">04</span><div><h3>Add people</h3><p>Add members one by one or, on larger plans, from a spreadsheet. Send Wallet keys, guest keys or program cards.</p></div></li><li><span class="num" aria-hidden="true">05</span><div><h3>Tap and manage</h3><p>Members tap their phone to open the door. You watch the activity log and change access whenever you need to.</p></div></li></ol>
+      </div>
+    </section>
+
+    <!-- 5. Keys -->
+    <section class="sec sec--dark" id="keys" aria-labelledby="keys-title">
+      <div class="wrap">
+        <h2 id="keys-title" class="center">One door. <em>A key for everyone</em> who uses it.</h2>
+        <p class="lede center">Each person gets access that fits them, and nothing more.</p>
+        <ul class="passes" role="list">
+          <li class="pass"><span class="pass-brand">smartphone <b>KEY</b></span><span class="pass-type">Member</span><span class="pass-who">Wallet key</span><span class="pass-rule">Works until you remove it</span></li>
+          <li class="pass"><span class="pass-brand">smartphone <b>KEY</b></span><span class="pass-type">Coach</span><span class="pass-who">Key card or Wallet key</span><span class="pass-rule">Same reader, their choice</span></li>
+          <li class="pass pass--once"><span class="pass-brand">smartphone <b>KEY</b></span><span class="pass-type">Trial visitor</span><span class="pass-who">Guest key</span><span class="pass-rule">One use, then spent</span></li>
+          <li class="pass pass--guest"><span class="pass-brand">smartphone <b>KEY</b></span><span class="pass-type">Cleaner</span><span class="pass-who">Guest key</span><span class="pass-rule">Valid 20:30 → 23:00</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. A day at the door -->
+    <section class="sec sec--light" id="day" aria-labelledby="day-title">
+      <div class="wrap split split--rev">
+        <div class="split-text">
+          <h2 id="day-title">A day at <em>your door</em>.</h2>
+          <p class="lede">From the first coach to the last cleaner, every opening is a key you set up once.</p>
+          <ol class="day" role="list"><li><time>05:30</time><div><b>The coach opens up</b><span>Key card · side door</span></div></li><li><time>05:58</time><div><b>First members tap in</b><span>Wallet keys · front door</span></div></li><li><time>12:10</time><div><b>The noon class arrives on schedule</b><span>Weekly lock schedule</span></div></li><li><time>17:45</time><div><b>A trial visitor’s first workout</b><span>Guest key · one use</span></div></li><li><time>20:40</time><div><b>The cleaner comes in</b><span>Guest key · 20:30 → 23:00</span></div></li><li><time>21:15</time><div><b>An ended membership is removed</b><span>Access ends at once</span></div></li></ol>
+        </div>
+        <figure class="shot split-shot"><picture><source type="image/webp" srcset="/sites/gym-door/media/portrait/gym-coach-512.webp 512w, /sites/gym-door/media/portrait/gym-coach-1024.webp 1024w" sizes="(min-width: 900px) 34vw, 100vw"><img src="/sites/gym-door/media/portrait/gym-coach-1024.webp" alt="A coach with a coffee taps her phone on the reader at the gym side door at dawn, the CN Tower behind her." width="1024" height="1536" loading="lazy" decoding="async"></picture></figure>
+      </div>
+    </section>
+
+    <!-- 7. Activity log -->
+    <section class="sec sec--dark" id="log" aria-labelledby="log-title">
+      <div class="wrap split">
+        <div class="split-text">
+          <h2 id="log-title">Every tap <em>is written down</em>.</h2>
+          <p class="lede">See who came in, when, and with which key. Remove a key, and the door stops opening for it at once.</p>
+          <a class="btn " href="#request">Book a door check</a>
+        </div>
+        <ol class="log" role="list" aria-label="Activity log, example only">
+          <li class="ok"><time>05:30</time><b>Coach</b><span>Key card</span><em>Opened</em></li>
+          <li class="ok"><time>05:58</time><b>Member</b><span>Wallet key</span><em>Opened</em></li>
+          <li class="no"><time>12:01</time><b>Former member</b><span>Wallet key</span><em>Removed at 12:00</em></li>
+          <li class="ok"><time>18:10</time><b>Trial visitor</b><span>Guest key</span><em>Opened, spent</em></li>
+          <li class="ok"><time>21:05</time><b>Cleaner</b><span>Guest key</span><em>Opened</em></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 8. Compare -->
+    <section class="sec sec--light" id="compare" aria-labelledby="compare-title">
+      <div class="wrap">
+        <h2 id="compare-title" class="center">Keys and fobs, <em>or phone keys</em>?</h2>
+        <div class="cmp-wrap">
+          <table class="cmp">
+            <thead><tr><th scope="col">At your door</th><th scope="col">Keys &amp; fobs</th><th scope="col">SmartphoneKey</th></tr></thead>
+            <tbody><tr><th scope="row">Opening at 05:30</th><td data-label="Keys &amp; fobs">Someone has to come in early to unlock</td><td data-label="SmartphoneKey">The coach taps her phone or card</td></tr><tr><th scope="row">A lost key or fob</th><td data-label="Keys &amp; fobs">Re-key or buy and program a new fob</td><td data-label="SmartphoneKey">Remove that key in seconds</td></tr><tr><th scope="row">Trial visitors</th><td data-label="Keys &amp; fobs">Someone at the desk lets them in</td><td data-label="SmartphoneKey">A guest key that ends on its own</td></tr><tr><th scope="row">Cleaners after hours</th><td data-label="Keys &amp; fobs">A copied key that works any time</td><td data-label="SmartphoneKey">A key that works 20:30 → 23:00</td></tr><tr><th scope="row">A membership ends</th><td data-label="Keys &amp; fobs">Chase the fob or key back</td><td data-label="SmartphoneKey">Remove access from your phone</td></tr><tr><th scope="row">Who came in, and when</th><td data-label="Keys &amp; fobs">Nobody really knows</td><td data-label="SmartphoneKey">The activity log shows every tap</td></tr></tbody>
+          </table>
+        </div>
+        <p class="center"><a class="btn " href="#request">Get a door check</a></p>
+      </div>
+    </section>
+
+    <!-- 9. Door check (X-ray) -->
+    <section class="sec sec--dark" id="door-check" aria-labelledby="check-title">
+      <div class="wrap split">
+        <div class="split-text">
+          <h2 id="check-title">Before anything is installed, <em>we look inside your door</em>.</h2>
+          <p class="lede">Drag across the door to see what goes into the frame and the ceiling.</p>
+          <ol class="checks" role="list"><li><b>The lock you have</b> Regular key only, electric strike, magnetic lock or an old fob system.</li><li><b>Power at the door</b> The reader and the lock need low-voltage power nearby.</li><li><b>The cable route</b> How wiring reaches the lock and the power supply.</li><li><b>Wi-Fi or LTE</b> Dependable Wi-Fi at the door, or the LTE model with a SIM card.</li><li><b>Who needs keys</b> Members, coaches, cleaners and trial visitors, and who would rather use a card.</li></ol>
+          <p class="note">A reader decides who can open the door. It does not stop someone following a member in, and it does not replace a plan for unstaffed hours. Talk these through at the door check.</p>
+        </div>
+        <div class="lens" style="--x: 38%">
+          <img class="lens-a" src="/sites/gym-door/media/stills/door-normal.webp" alt="The gym’s glass front door at night with the reader on the frame." width="1024" height="1536" loading="lazy">
+          <img class="lens-b" src="/sites/gym-door/media/stills/door-xray.webp" alt="The same door as an X-ray: a cable runs inside the frame from the reader to the lock, with power and Wi-Fi above the ceiling." width="1024" height="1536" loading="lazy">
+          <svg class="wires" viewBox="0 0 100 150" preserveAspectRatio="none" aria-hidden="true">
+            <g class="w" data-id="wifi"><path d="M45.6 8.4 L48.6 5.3 L57 5.3"/><circle cx="45.6" cy="8.4" r="1.1"/></g>
+            <g class="w" data-id="power"><path d="M29.0 8.0 L32.0 15.8 L57 15.8"/><circle cx="29.0" cy="8.0" r="1.1"/></g>
+            <g class="w" data-id="mag"><path d="M33.0 18.4 L36.0 26.3 L57 26.3"/><circle cx="33.0" cy="18.4" r="1.1"/></g>
+            <g class="w" data-id="reader"><path d="M48.0 47.4 L51.0 45.0 L57 45.0"/><circle cx="48.0" cy="47.4" r="1.1"/></g>
+            <g class="w" data-id="strike"><path d="M47.4 76.0 L50.4 73.5 L57 73.5"/><circle cx="47.4" cy="76.0" r="1.1"/></g>
+          </svg>
+          <ul class="tags" role="list">
+            <li class="tag" data-id="wifi" data-x="0.456" style="--by:3.5%"><b>Wi-Fi</b><span>or the LTE model with a SIM</span></li>
+            <li class="tag" data-id="power" data-x="0.29" style="--by:10.5%"><b>Low-voltage power</b><span>12–24 V DC</span></li>
+            <li class="tag" data-id="mag" data-x="0.33" style="--by:17.5%"><b>Magnetic lock</b><span>one option, along the top</span></li>
+            <li class="tag" data-id="reader" data-x="0.48" style="--by:30.0%"><b>The reader</b><span>its relay switches the lock</span></li>
+            <li class="tag" data-id="strike" data-x="0.474" style="--by:49.0%"><b>Electric strike</b><span>the other option, in the frame</span></li>
+          </ul>
+          <span class="lens-line" aria-hidden="true"></span>
+          <label class="lens-ctl"><span class="visually-hidden">Reveal the inside of the door</span><input type="range" min="0" max="100" value="38"></label>
         </div>
       </div>
     </section>
 
-    <section class="beat " data-open="0.5" aria-labelledby="b3">
-      <div class="card card--photo">
-        <figure class="shot c-shot"><picture><source type="image/webp" srcset="/sites/gym-door/media/portrait/gym-coach-512.webp 512w, /sites/gym-door/media/portrait/gym-coach-1024.webp 1024w" sizes="(min-width: 900px) 34vw, 100vw"><img src="/sites/gym-door/media/portrait/gym-coach-1024.webp" alt="A coach with a coffee taps her phone on the reader at the gym side door at dawn, the CN Tower behind her." width="1024" height="1536" loading="lazy" decoding="async"></picture></figure>
-        <div class="c-text">
-          <p class="c-state"><span class="c-meter" style="--o:0.5"></span>Door: open for staff</p>
-          <h2 id="b3">Coaches open up. <em>On their hours.</em></h2>
-          <p>The coach’s key works on the side door, and it stops working the day she leaves. A weekly schedule decides the hours each door accepts keys.</p>
-          <ol class="roles" role="list"><li><b>Member</b><span>Wallet key · Works until you remove it</span></li><li><b>Coach</b><span>Key card or Wallet key · Same reader, their choice</span></li><li><b>Trial visitor</b><span>Guest key · One use, then spent</span></li><li><b>Cleaner</b><span>Guest key · Valid 20:30 → 23:00</span></li></ol>
-        </div>
+    <!-- 10. FAQ -->
+    <section class="sec sec--light" id="faq" aria-labelledby="faq-title">
+      <div class="wrap narrow">
+        <h2 id="faq-title" class="center">What gym owners <em>ask first</em>.</h2>
+        <div class="qa"><details><summary>Does it connect to our membership or billing software?</summary><p>A ready-made link isn’t confirmed. Plan on managing access in SmartphoneKey’s own admin portal, and bring it up at the door check.</p></details><details><summary>Will access switch off when a membership ends?</summary><p>When you remove the key or deactivate the person, their access ends. It doesn’t happen automatically from your billing system.</p></details><details><summary>What about members who don’t want to use a phone?</summary><p>Program an NFC key card for them. Cards work on the same reader and are revoked from the admin portal.</p></details><details><summary>Can staff manage keys without the owner?</summary><p>Yes. Make a manager a local admin for your location, and give them a set number of Wallet Keys to hand out.</p></details><details><summary>We have more than one location.</summary><p>Each location can be its own site in the admin portal, and you switch between them from one sign-in.</p></details><details><summary>What if Wi-Fi doesn’t reach the door?</summary><p>The LTE model uses a SIM card instead.</p></details><details><summary>Who can change our locks after installation?</summary><p>You do. An installer needs your approval for temporary access to specific locks.</p></details><details><summary>What does it cost?</summary><p>It depends on the door, the lock, power, wiring and how many doors you connect. You get the scope and cost after the door check.</p></details></div>
       </div>
     </section>
 
-    <section class="beat " data-open="0.68" aria-labelledby="b4">
-      <div class="card card--photo">
-        <figure class="shot c-shot"><picture><source type="image/webp" srcset="/sites/gym-door/media/portrait/gym-dusk-512.webp 512w, /sites/gym-door/media/portrait/gym-dusk-1024.webp 1024w" sizes="(min-width: 900px) 34vw, 100vw"><img src="/sites/gym-door/media/portrait/gym-dusk-1024.webp" alt="After work a young man in a parka holds his phone to the reader at a busy gym door on a wet Toronto evening." width="1024" height="1536" loading="lazy" decoding="async"></picture></figure>
-        <div class="c-text">
-          <p class="c-state"><span class="c-meter" style="--o:0.68"></span>Door: open once</p>
-          <h2 id="b4">A trial visitor <em>gets one visit.</em></h2>
-          <p>Send a guest key before the first workout. It opens once, then it is spent. The cleaner’s guest key works only from 20:30 to 23:00.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="beat " data-open="0.84" aria-labelledby="b5">
-      <div class="card">
-        
-        <div class="c-text">
-          <p class="c-state"><span class="c-meter" style="--o:0.84"></span>Door: every opening recorded</p>
-          <h2 id="b5">The door <em>remembers who.</em></h2>
-          <ol class="dlog" role="list" aria-label="Activity log, example only"><li class="ok"><time>05:30</time><b>Coach</b><span>Key card</span><em>Opened</em></li><li class="ok"><time>05:58</time><b>Member</b><span>Wallet key</span><em>Opened</em></li><li class="no"><time>12:01</time><b>Former member</b><span>Wallet key</span><em>Removed at 12:00</em></li><li class="ok"><time>18:10</time><b>Trial visitor</b><span>Guest key</span><em>Opened, spent</em></li><li class="ok"><time>21:05</time><b>Cleaner</b><span>Guest key</span><em>Opened</em></li></ol>
-          <p>Remove a key, or deactivate someone, and the door stops opening for them at once.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="inside-page" data-open="1" aria-labelledby="in-title">
-      <div class="in-wrap">
-        <div class="in-head">
-          <p class="eyebrow">Door: open · you’re inside</p>
-          <h2 id="in-title">Step inside. <em>We start at your door.</em></h2>
-          <p>Before anything is installed, we come out and look at the door, the lock and the power. Then you know what it takes.</p>
-        </div>
-        <figure class="shot in-shot"><picture><source type="image/webp" srcset="/sites/gym-door/media/portrait/gym-threshold-512.webp 512w, /sites/gym-door/media/portrait/gym-threshold-1024.webp 1024w" sizes="(min-width: 900px) 34vw, 100vw"><img src="/sites/gym-door/media/portrait/gym-threshold-1024.webp" alt="A member with a gym bag walks through the open door into a warm, bright gym and smiles back over her shoulder." width="1024" height="1536" loading="lazy" decoding="async"></picture></figure>
-        <ol class="checks" role="list"><li><b>The lock you have</b>Regular key only, electric strike, magnetic lock or an old fob system.</li><li><b>Power at the door</b>The reader and the lock need low-voltage power nearby.</li><li><b>The cable route</b>How wiring reaches the lock and the power supply.</li><li><b>Wi-Fi or LTE</b>Dependable Wi-Fi at the door, or the LTE model with a SIM card.</li><li><b>Who needs keys</b>Members, coaches, cleaners and trial visitors, and who would rather use a card.</li></ol>
-        <p class="note">A reader decides who can open the door. It does not stop someone following a member in, and it does not replace a plan for unstaffed hours. Talk these through at the door check.</p>
-        <h2 class="faq-title" id="faq">What gym owners <em>ask first.</em></h2>
-        <div class="qa"><details><summary>Does it connect to our membership or billing software?</summary><p>A ready-made link isn’t confirmed. Plan on managing access in SmartphoneKey’s own admin portal, and bring it up at the door check.</p></details><details><summary>Will access switch off when a membership ends?</summary><p>When you remove the key or deactivate the person, their access ends. It doesn’t happen automatically from your billing system.</p></details><details><summary>What about members who don’t want to use a phone?</summary><p>Program an NFC key card for them. Cards work on the same reader and are revoked from the admin portal.</p></details><details><summary>Can staff manage keys without the owner?</summary><p>Yes. Make a manager a local admin for your location, and give them a set number of Wallet Keys to hand out.</p></details><details><summary>We have more than one location.</summary><p>Each location can be its own site in the admin portal, and you switch between them from one sign-in.</p></details></div>
-
-      <form class="quick" id="request" aria-labelledby="quick-title" aria-describedby="quick-notice">
-        <p class="quick-title" id="quick-title">Request a door check</p>
-        <p class="quick-lede">Tell us where the gym is. We check the door and the lock, and tell you what it takes.</p>
-        <p class="quick-notice" id="quick-notice"><strong>Not connected yet.</strong> Nothing typed here is sent or saved until the local team’s inbox is set up.</p>
-        <div class="quick-fields">
-          <label class="f"><span>Your space</span><select name="space"><option value="gym" selected>Gym or studio</option><option value="studio">Yoga, dance or fitness studio</option><option value="other">Something else</option></select></label>
+    <!-- 11. Request -->
+    <section class="sec sec--form" id="contact" aria-labelledby="quick-title">
+      <div class="wrap narrow">
+        <h2 class="center">Your door, <em>open by phone</em>.</h2>
+        <p class="lede center">Tell us where the gym is. We check the door and the lock, and tell you what it takes.</p>
+        <form class="quick" id="request" aria-labelledby="quick-title" aria-describedby="quick-notice">
+          <p class="quick-title" id="quick-title">Book a door check</p>
+          <p class="quick-notice" id="quick-notice"><strong>Not connected yet.</strong> Nothing typed here is sent or saved until the local team’s inbox is set up.</p>
+          <label class="f"><span>Your space</span><select name="space"><option value="gym" selected>Gym or fitness club</option><option value="studio">Yoga, dance or boutique studio</option><option value="other">Something else</option></select></label>
+          <label class="f"><span>Name</span><input name="name" type="text" autocomplete="off"></label>
           <label class="f"><span>Email or phone</span><input name="contact" type="text" autocomplete="off"></label>
           <label class="f"><span>Postal code</span><input name="area" type="text" autocomplete="off" placeholder="M5V"></label>
-        </div>
-        <button class="send" type="submit" disabled aria-describedby="quick-notice" data-node>Send request</button>
-      </form>
+          <label class="f"><span>How many doors?</span><select name="doors"><option>1</option><option>2</option><option>3 or more</option></select></label>
+          <button class="btn send" type="submit" disabled aria-describedby="quick-notice">Book a door check</button>
+        </form>
       </div>
     </section>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it connect to our membership or billing software?","acceptedAnswer":{"@type":"Answer","text":"A ready-made link isn’t confirmed. Plan on managing access in SmartphoneKey’s own admin portal, and bring it up at the door check."}},{"@type":"Question","name":"Will access switch off when a membership ends?","acceptedAnswer":{"@type":"Answer","text":"When you remove the key or deactivate the person, their access ends. It doesn’t happen automatically from your billing system."}},{"@type":"Question","name":"What about members who don’t want to use a phone?","acceptedAnswer":{"@type":"Answer","text":"Program an NFC key card for them. Cards work on the same reader and are revoked from the admin portal."}},{"@type":"Question","name":"Can staff manage keys without the owner?","acceptedAnswer":{"@type":"Answer","text":"Yes. Make a manager a local admin for your location, and give them a set number of Wallet Keys to hand out."}},{"@type":"Question","name":"We have more than one location.","acceptedAnswer":{"@type":"Answer","text":"Each location can be its own site in the admin portal, and you switch between them from one sign-in."}}]}</script>
   </main>
-  <footer class="foot">
-    <img src="/sites/gym-door/media/smartphonekey-logo.svg" alt="SmartphoneKey" width="119" height="41" loading="lazy">
-    <p>SmartphoneKey door access for gyms and studios, assessed and installed in Toronto and the GTA. Every setup starts with a door check.</p>
-    <p class="foot-note">Product details are summarized from SmartphoneKey’s published materials and admin guide; what works at your door is confirmed at a door check. Some features depend on the subscription package. This site is run by an independent local installer of SmartphoneKey.</p>
+
+  <footer class="ft">
+    <div class="ft-in">
+      <div class="ft-brand"><img src="/sites/gym-door/media/smartphonekey-logo.svg" alt="SmartphoneKey" width="110" height="38"><p>SmartphoneKey door access for gyms and studios, assessed and installed in Toronto and the GTA. Every setup starts with a door check.</p><a class="btn btn--sm" href="#request">Book a door check</a></div>
+      <ul class="ft-col" role="list"><li><a href="#top">Home</a></li><li><a href="#how">How it works</a></li><li><a href="#features">Features</a></li><li><a href="#keys">Kinds of keys</a></li><li><a href="#log">Activity log</a></li></ul>
+      <ul class="ft-col" role="list"><li><a href="#door-check">The door check</a></li><li><a href="#compare">Keys vs phone keys</a></li><li><a href="#faq">FAQ</a></li><li><a href="#request">Contact</a></li></ul>
+    </div>
+    <p class="ft-note">Product details are summarized from SmartphoneKey’s published materials and admin guide; what works at your door is confirmed at a door check. Some features depend on the subscription package. This site is run by an independent local installer of SmartphoneKey.</p>
+    <p class="ft-copy">© 2026 SmartphoneKey Toronto &amp; GTA</p>
   </footer>
-  <a class="dock" href="#request">Request a door check <span aria-hidden="true">↓</span></a>
-  <script src="/sites/gym-door/assets/base.js" defer></script>
+  <a class="dock" href="#request">Book a door check</a>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it connect to our membership or billing software?","acceptedAnswer":{"@type":"Answer","text":"A ready-made link isn’t confirmed. Plan on managing access in SmartphoneKey’s own admin portal, and bring it up at the door check."}},{"@type":"Question","name":"Will access switch off when a membership ends?","acceptedAnswer":{"@type":"Answer","text":"When you remove the key or deactivate the person, their access ends. It doesn’t happen automatically from your billing system."}},{"@type":"Question","name":"What about members who don’t want to use a phone?","acceptedAnswer":{"@type":"Answer","text":"Program an NFC key card for them. Cards work on the same reader and are revoked from the admin portal."}},{"@type":"Question","name":"Can staff manage keys without the owner?","acceptedAnswer":{"@type":"Answer","text":"Yes. Make a manager a local admin for your location, and give them a set number of Wallet Keys to hand out."}},{"@type":"Question","name":"We have more than one location.","acceptedAnswer":{"@type":"Answer","text":"Each location can be its own site in the admin portal, and you switch between them from one sign-in."}},{"@type":"Question","name":"What if Wi-Fi doesn’t reach the door?","acceptedAnswer":{"@type":"Answer","text":"The LTE model uses a SIM card instead."}},{"@type":"Question","name":"Who can change our locks after installation?","acceptedAnswer":{"@type":"Answer","text":"You do. An installer needs your approval for temporary access to specific locks."}},{"@type":"Question","name":"What does it cost?","acceptedAnswer":{"@type":"Answer","text":"It depends on the door, the lock, power, wiring and how many doors you connect. You get the scope and cost after the door check."}}]}</script>
   <script src="/sites/gym-door/assets/door.js" defer></script>
 </body>
 </html>
