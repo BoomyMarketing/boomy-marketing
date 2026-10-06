@@ -22,7 +22,3 @@ a.card:hover, a.card:focus-visible { transform: translateY(-3px); border-color: 
   a.card { grid-template-columns: 1fr; align-items: start; padding: 14px; }
   .shot { width: 100%; }
 }
-
-.shot.landscape{aspect-ratio:16/10}.shot.landscape img{object-fit:cover}@media(max-width:899px){li[data-getlayers] .card{grid-template-columns:1fr}li[data-getlayers] .shot{width:100%}}
-
-.shot.landscape{display:block;position:relative}.shot.landscape img{position:absolute;inset:0}
