@@ -1,0 +1,38 @@
+# SmartphoneKey Toronto & GTA
+
+> Sales and installation of SmartphoneKey phone-based door access in Toronto and the Greater Toronto Area, by an independent local installer (not SmartphoneKey's own site). Every setup starts with a door check; the cost is given before any work starts.
+
+Key facts (from SmartphoneKey's published materials):
+- A slim reader beside the door reads keys from Apple Wallet or Google Wallet and NFC key cards; its built-in relay switches an electric strike or a magnetic lock.
+- Guest keys have a start and end time, can be limited to a number of uses and are sent as a link; one-use keys exist for single visits.
+- Visitors without a key scan a QR code on the reader with their phone camera to call the right person; no app is needed.
+- An admin portal (browser, any device) adds, schedules and removes keys, groups doors by site, supports local admins, and keeps an activity log and a separate audit log.
+- Wi-Fi model or LTE model with a SIM card; low-voltage power (12-24 V DC per SmartphoneKey's guide); an exit button is included.
+- Matter support (Wi-Fi or Thread) and ONVIF-compatible cameras with camera roles, per SmartphoneKey.
+
+Not claimed: prices or free installation, warranties, reviews, 24/7 support, entry with a dead phone, compatibility with every lock, wire-free installation, or automatic sync with Airbnb, booking, membership, billing or HR software.
+
+## Pages by place
+- [Gyms & studios](https://boomymarketing.com/sites/dark/gyms-and-studios): Members open the gym door with Apple Wallet or Google Wallet. Guest keys for trials, keys removed when memberships end, and an activity log. Toronto & GTA.
+- [Condos & buildings](https://boomymarketing.com/sites/dark/condos-and-buildings): Residents open the lobby door with a Wallet key, visitors scan a QR code to call, and managers keep one list. For condos and rental buildings in Toronto & GTA.
+- [Offices & coworking](https://boomymarketing.com/sites/dark/offices-and-coworking): Teams open the office with Apple Wallet or Google Wallet, clients scan a QR code at the door, and after-hours access follows a weekly schedule. Toronto & GTA.
+- [Salon suites & rental rooms](https://boomymarketing.com/sites/dark/salon-suites-and-rental-rooms): Each renter opens their own suite with a Wallet key, hourly bookings get a guest key for their hours, and owners see every entry. Toronto & GTA.
+- [Short-term rentals](https://boomymarketing.com/sites/dark/short-term-rentals): Guest keys that start at check-in and end at check-out, cleaner keys for the turnover window, and an activity log. No lockbox. Toronto & GTA.
+- [Airbnb hosts](https://boomymarketing.com/sites/dark/airbnb): Self check-in for Airbnb hosts: guest keys from check-in to check-out, a cleaner window between stays and an activity log. Toronto & GTA.
+- [Homes](https://boomymarketing.com/sites/dark/homes): Family keys in Apple Wallet and Google Wallet, guest keys for sitters and dog walkers that end on time, and Matter for the smart home. Toronto & GTA.
+
+## Pages by system
+- [Access control systems](https://boomymarketing.com/sites/dark/access-control-system): Access control with Apple Wallet and Google Wallet keys, NFC cards, timed guest keys, QR visitor calls and activity logs. Assessed and installed in Toronto & GTA.
+- [Keyless entry systems](https://boomymarketing.com/sites/dark/keyless-entry-system): Keyless entry with phone keys in Apple Wallet or Google Wallet, NFC cards and guest keys that start and end on time. Door check, then installation in Toronto & GTA.
+- [Smart door locks](https://boomymarketing.com/sites/dark/smart-door-lock): A smart door lock setup opened with Apple Wallet or Google Wallet: a reader and a powered electric lock, guest keys that end on time and an entry log. Toronto & GTA.
+- [Smart lock installation](https://boomymarketing.com/sites/dark/smart-lock-installation): Smart lock and keyless entry installation in Toronto & GTA: a door check of the lock, power, cable route and Wi-Fi or LTE, then the reader, electric lock and first keys.
+- [Electric strikes & mag locks](https://boomymarketing.com/sites/dark/electric-strike-installation): Electric strike and magnetic lock installation with phone access: the reader’s relay switches the lock, keys live in Apple Wallet or Google Wallet. Toronto & GTA.
+- [Intercom systems](https://boomymarketing.com/sites/dark/intercom-system): A QR intercom on the door reader: visitors scan with their phone camera to call the right person, residents and staff tap in with Wallet keys. Toronto & GTA.
+- [Apartment & condo intercoms](https://boomymarketing.com/sites/dark/apartment-intercom-system): Apartment and condo intercom on the entrance reader: residents tap in with Wallet keys, visitors scan a QR code to call, managers keep one list. Toronto & GTA.
+- [Buzzer system replacement](https://boomymarketing.com/sites/dark/buzzer-system): Replace or upgrade an apartment buzzer system with QR visitor calls and resident phone keys on one reader. Door check first, then installation. Toronto & GTA.
+- [Key fob & key card systems](https://boomymarketing.com/sites/dark/key-fob-system): Key fob and key card entry with SmartphoneKey: NFC cards and Apple Wallet or Google Wallet keys on one reader, removed in seconds, with an entry log. Toronto & GTA.
+
+## Product
+- [Home](https://boomymarketing.com/sites/dark): Door keys in Apple Wallet or Google Wallet, timed guest keys, QR visitor calls and one admin portal. Installed in Toronto and the GTA after a door check.
+- [Features](https://boomymarketing.com/sites/dark/features): Every SmartphoneKey feature: Wallet keys, guest and one-use keys, NFC cards, QR intercom, schedules, local admins, activity and audit logs, cameras, Matter and LTE.
+- [How it works](https://boomymarketing.com/sites/dark/how-it-works): How SmartphoneKey is installed in Toronto and the GTA: the door check, the reader and electric lock, claiming the lock and sending keys.
