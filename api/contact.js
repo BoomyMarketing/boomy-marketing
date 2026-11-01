@@ -183,7 +183,8 @@ async function forwardToV2(lead) {
         company: lead.company || undefined,
         website: lead.website || undefined,
         service: lead.service || undefined,
-        budget: lead.budget || undefined,
+        // The contact form's budget options are monthly CAD ranges.
+        budget: lead.budget ? `${lead.budget} CAD per month (form choice)` : undefined,
         message: [lead.message, extra].filter(Boolean).join('\n\n'),
       }),
       signal: controller.signal,

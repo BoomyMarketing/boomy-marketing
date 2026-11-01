@@ -387,7 +387,7 @@ test('forwards a valid enquiry to HeyBoomy V2 and still emails it', async () => 
   assert.equal(v2.headers['x-lead-secret'], 'test-secret');
   assert.equal(v2.body.email, 'ann@example.com');
   assert.equal(v2.body.company, 'Ann Plumbing');
-  assert.equal(v2.body.budget, '1500-3500');
+  assert.equal(v2.body.budget, '1500-3500 CAD per month (form choice)');
   assert.match(v2.body.message, /Need more calls from Google\.\n\nCity: Toronto/);
 });
 
