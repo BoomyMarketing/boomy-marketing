@@ -156,6 +156,46 @@ function isValidSubmission(lead) {
   return formType === 'cta' && !service && !budget && !message;
 }
 
+const V2_FORWARD_TIMEOUT_MS = 4000;
+
+// Also file the enquiry in HeyBoomy V2 (lead card + first-reply draft for the
+// owner's Telegram approval). Optional and best-effort: it never changes the
+// form response or the lead email. Enabled only when both env vars are set.
+async function forwardToV2(lead) {
+  const url = process.env.V2_LEAD_INTAKE_URL || '';
+  const secret = process.env.V2_LEAD_INTAKE_SECRET || '';
+  if (!url || !secret) return { skipped: true };
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), V2_FORWARD_TIMEOUT_MS);
+  try {
+    const extra = [
+      lead.city ? `City: ${lead.city}` : '',
+      lead.source ? `Page: ${lead.source}` : '',
+      `Form: ${lead.formType}`,
+    ].filter(Boolean).join('\n');
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-lead-secret': secret },
+      body: JSON.stringify({
+        name: lead.name,
+        email: lead.email,
+        phone: lead.phone || undefined,
+        company: lead.company || undefined,
+        website: lead.website || undefined,
+        service: lead.service || undefined,
+        budget: lead.budget || undefined,
+        message: [lead.message, extra].filter(Boolean).join('\n\n'),
+      }),
+      signal: controller.signal,
+    });
+    return { ok: response.ok, status: response.status };
+  } catch (error) {
+    return { ok: false, error: error.name === 'AbortError' ? 'timeout' : error.message };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
@@ -223,6 +263,7 @@ module.exports = async (req, res) => {
     .replace(/>/g, '&gt;');
   const html = `<pre style="font-family:system-ui,Segoe UI,monospace;white-space:pre-wrap;font-size:14px">${escapeHtml(text)}</pre>`;
 
+  const v2Forward = forwardToV2(lead);
   let result;
   try {
     const response = await fetch(RESEND_URL, {
@@ -247,6 +288,8 @@ module.exports = async (req, res) => {
   }
 
   console.log(`Contact form [${SITE_LABEL}] result:`, JSON.stringify(result));
+  const v2Result = await v2Forward;
+  if (!v2Result.skipped) console.log(`Contact form [${SITE_LABEL}] V2 intake:`, JSON.stringify(v2Result));
 
   if (!result.ok) return res.status(500).json({ error: 'Failed to send email' });
 

@@ -325,3 +325,83 @@ test('rejects a honeypot submission', async () => {
   assert.equal(response.statusCode, 400);
   assert.equal(sendCalls, 0);
 });
+
+async function submitWithV2(body, ip, v2Behaviour) {
+  const response = createResponse();
+  const originalFetch = global.fetch;
+  const saved = { url: process.env.V2_LEAD_INTAKE_URL, secret: process.env.V2_LEAD_INTAKE_SECRET };
+  process.env.V2_LEAD_INTAKE_URL = 'https://v2.example.test/lead-intake';
+  process.env.V2_LEAD_INTAKE_SECRET = 'test-secret';
+  delete process.env.RECAPTCHA_PROJECT_ID;
+  const calls = [];
+  global.fetch = async (url, fetchOptions) => {
+    calls.push({ url: String(url), headers: fetchOptions.headers, body: JSON.parse(fetchOptions.body) });
+    if (String(url).startsWith('https://v2.example.test')) {
+      if (v2Behaviour === 'throw') throw new Error('network down');
+      if (v2Behaviour === 'hang') {
+        return new Promise((resolve, reject) => {
+          fetchOptions.signal.addEventListener('abort', () => {
+            const error = new Error('aborted');
+            error.name = 'AbortError';
+            reject(error);
+          });
+        });
+      }
+      return { ok: true, status: 200, json: async () => ({ ok: true }) };
+    }
+    return { ok: true, status: 200, json: async () => ({ id: 'test-email' }) };
+  };
+  try {
+    await handler({
+      method: 'POST',
+      headers: { origin: 'https://boomymarketing.com', 'x-forwarded-for': ip },
+      body,
+    }, response);
+  } finally {
+    global.fetch = originalFetch;
+    if (saved.url == null) delete process.env.V2_LEAD_INTAKE_URL; else process.env.V2_LEAD_INTAKE_URL = saved.url;
+    if (saved.secret == null) delete process.env.V2_LEAD_INTAKE_SECRET; else process.env.V2_LEAD_INTAKE_SECRET = saved.secret;
+  }
+  return { response, calls };
+}
+
+const V2_BODY = {
+  form_type: 'contact',
+  name: 'Ann Lee',
+  email: 'ann@example.com',
+  company: 'Ann Plumbing',
+  service: 'seo',
+  budget: '1500-3500',
+  city: 'Toronto',
+  message: 'Need more calls from Google.',
+  consent: 'on',
+};
+
+test('forwards a valid enquiry to HeyBoomy V2 and still emails it', async () => {
+  const { response, calls } = await submitWithV2(V2_BODY, '198.51.100.201', 'ok');
+  assert.equal(response.statusCode, 200);
+  const email = calls.find((c) => c.url.includes('api.resend.com'));
+  const v2 = calls.find((c) => c.url.startsWith('https://v2.example.test'));
+  assert.ok(email, 'lead email still sent');
+  assert.ok(v2, 'forwarded to V2');
+  assert.equal(v2.headers['x-lead-secret'], 'test-secret');
+  assert.equal(v2.body.email, 'ann@example.com');
+  assert.equal(v2.body.company, 'Ann Plumbing');
+  assert.equal(v2.body.budget, '1500-3500');
+  assert.match(v2.body.message, /Need more calls from Google\.\n\nCity: Toronto/);
+});
+
+test('a V2 failure or timeout never changes the form response', async () => {
+  for (const [behaviour, ip] of [['throw', '198.51.100.202'], ['hang', '198.51.100.203']]) {
+    const { response, calls } = await submitWithV2(V2_BODY, ip, behaviour);
+    assert.equal(response.statusCode, 200, behaviour);
+    assert.deepEqual(response.body, { success: true });
+    assert.ok(calls.some((c) => c.url.includes('api.resend.com')));
+  }
+});
+
+test('invalid submissions are not forwarded to V2', async () => {
+  const { response, calls } = await submitWithV2({ ...V2_BODY, email: 'bad' }, '198.51.100.204', 'ok');
+  assert.equal(response.statusCode, 400);
+  assert.equal(calls.length, 0);
+});
