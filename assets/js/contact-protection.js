@@ -33,6 +33,37 @@
     state.status.style.display = message ? 'block' : 'none';
   }
 
+  async function submitLegacyForm(form, state) {
+    if (state.submitting) return;
+
+    const values = Object.fromEntries(new FormData(form));
+    values.form_type = 'landing';
+    values.service ||= 'Marketing enquiry';
+    values.source = window.location.pathname;
+
+    state.submitting = true;
+    if (state.button) state.button.disabled = true;
+    setStatus(state, 'Sending your message…');
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      });
+      if (!response.ok) {
+        setStatus(state, 'Your message could not be sent. Please check the form and try again.');
+        return;
+      }
+      form.reset();
+      setStatus(state, 'Thank you. Your message was sent.');
+    } catch {
+      setStatus(state, 'Your message could not be sent. Please try again.');
+    } finally {
+      state.submitting = false;
+      if (state.button) state.button.disabled = false;
+    }
+  }
+
   function setToken(form, state, token) {
     let input = form.querySelector('input[name="g-recaptcha-response"]');
     if (!input) {
@@ -85,6 +116,8 @@
       siteKey: '',
       token: '',
       status,
+      button,
+      submitting: false,
     };
     states.set(form, state);
 
@@ -101,6 +134,12 @@
       if (state.enabled) {
         setStatus(state, '');
         window.setTimeout(() => setToken(form, state, ''), 0);
+      }
+
+      if (form.hasAttribute('data-legacy-contact')) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        void submitLegacyForm(form, state);
       }
     }, true);
   });

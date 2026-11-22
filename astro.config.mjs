@@ -21,17 +21,22 @@ const MIME = {
 };
 
 const PROTECTED_FORM = /<form\b[^>]*\s(?:action\s*=\s*["']\/api\/contact["']|id\s*=\s*["'](?:ctaForm|contactForm)["'])/i;
+const RETIRED_FORM_ACTION = /(<form\b[^>]*\saction\s*=\s*)(["'])(?:\/contact|\/api\/submit\.php)\2/gi;
 const OLD_PAGE_SCRIPTS = /<script\b[^>]*\bsrc=["']\/assets\/js\/(?:starfield|contact-protection)\.js(?:\?[^"']*)?["'][^>]*>\s*<\/script>/gi;
 const OLD_MAIN_SCRIPT = /(\bsrc=["']\/assets\/js\/main\.js)(?:\?[^"']*)?(?=["'])/gi;
 
 function addLegacyPageAssets(html) {
+  const updated = html.replace(RETIRED_FORM_ACTION, '$1"/api/contact" data-legacy-contact');
+  const page = updated === html ? html : updated
+    .replace(/https:\/\/api\.web3forms\.com\/submit/g, '/api/contact')
+    .replace(/<input\b[^>]*\sname=["']access_key["'][^>]*>/gi, '');
   const styles = '<link rel="stylesheet" href="/assets/css/site-experience.css?v=1">';
-  const stars = '<script defer src="/assets/js/starfield.js?v=2"></script>';
-  const protection = '<script defer src="/assets/js/contact-protection.js?v=2"></script>';
-  return html
+  const stars = '<script defer src="/assets/js/starfield.js?v=20261122"></script>';
+  const protection = '<script defer src="/assets/js/contact-protection.js?v=20261122"></script>';
+  return page
     .replace(OLD_PAGE_SCRIPTS, '')
-    .replace(OLD_MAIN_SCRIPT, '$1?v=4')
-    .replace(/<\/head\s*>/i, [styles, stars, PROTECTED_FORM.test(html) && protection, '</head>'].filter(Boolean).join('\n'));
+    .replace(OLD_MAIN_SCRIPT, '$1?v=20261122')
+    .replace(/<head\b[^>]*>/i, (head) => [head, styles, stars, PROTECTED_FORM.test(page) && protection].filter(Boolean).join('\n'));
 }
 
 async function copyDir(src, dest, legacyPages = false) {

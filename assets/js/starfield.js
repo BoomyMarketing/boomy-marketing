@@ -41,10 +41,14 @@
   if (legacyCanvas) legacyCanvas.replaceWith(field);
   else document.body.prepend(field);
 
+  let paintedSize = '';
+
   function paint() {
     const { clientWidth: width, clientHeight: height } = field;
-    if (!width || !height || (canvas.width === width && canvas.height === height * 2)) return;
+    const size = width + 'x' + height;
+    if (!width || !height || size === paintedSize) return;
 
+    paintedSize = size;
     canvas.width = width;
     canvas.height = height * 2;
     field.style.setProperty('--starfield-duration', Math.max(30, height / 8) + 's');
