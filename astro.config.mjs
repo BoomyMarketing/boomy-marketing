@@ -30,8 +30,8 @@ function addLegacyPageAssets(html) {
   const page = updated === html ? html : updated
     .replace(/https:\/\/api\.web3forms\.com\/submit/g, '/api/contact')
     .replace(/<input\b[^>]*\sname=["']access_key["'][^>]*>/gi, '');
-  const styles = '<link rel="stylesheet" href="/assets/css/site-experience.css?v=1">';
-  const stars = '<script defer src="/assets/js/starfield.js?v=20261122"></script>';
+  const styles = '<link rel="stylesheet" href="/assets/css/site-experience.css?v=2">';
+  const stars = '<script defer src="/assets/js/starfield.js?v=20261122-2"></script>';
   const protection = '<script defer src="/assets/js/contact-protection.js?v=20261122"></script>';
   return page
     .replace(OLD_PAGE_SCRIPTS, '')
