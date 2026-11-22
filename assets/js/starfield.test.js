@@ -6,39 +6,24 @@ const vm = require('node:vm');
 
 const source = fs.readFileSync(path.join(__dirname, 'starfield.js'), 'utf8');
 
-function runStarfield(base, computedBlocks, { width = 1200, hidden = false } = {}) {
+function runStarfield(base, computedBlocks, { hidden = false } = {}) {
   const blocks = computedBlocks.map((computed) => ({ computed, style: {} }));
   const body = { classList: new Set(), prepend() {} };
   const listeners = new Map();
   const attributes = new Set();
-  let dots = 0;
   const field = {
-    append() {},
-    clientHeight: 800,
-    clientWidth: width,
     setAttribute(name) { attributes.add(name); },
-    style: { setProperty() {} },
     toggleAttribute(name, enabled) {
       if (enabled) attributes.add(name);
       else attributes.delete(name);
     },
   };
-  const context = {
-    arc() { dots += 1; },
-    beginPath() {},
-    fill() {},
-    moveTo() {},
-  };
-  const canvas = {
-    getContext: () => context,
-    height: 0,
-    width: 0,
-  };
   const document = {
     addEventListener(name, callback) { listeners.set(name, callback); },
     body,
-    createElement: (tag) => tag === 'canvas' ? canvas : field,
+    createElement: () => field,
     hidden,
+    readyState: 'complete',
     querySelector: () => null,
     querySelectorAll: () => blocks,
   };
@@ -49,10 +34,10 @@ function runStarfield(base, computedBlocks, { width = 1200, hidden = false } = {
       if (element === body) return { backgroundColor: base };
       return element.computed;
     },
-    ResizeObserver: class { observe() {} },
+    window: { requestIdleCallback(callback) { callback(); } },
   });
 
-  return { attributes, blocks, canvas, document, dots, listeners };
+  return { attributes, blocks, document, listeners };
 }
 
 test('preserves dark-page gradient softening on base-colour panels', () => {
@@ -90,14 +75,9 @@ test('preserves a stronger tint for dark panels on light pages', () => {
   );
 });
 
-test('paints 55 mobile particles twice to repeat the tile and follows tab visibility', () => {
-  const { attributes, canvas, document, dots, listeners } = runStarfield('rgb(16, 9, 48)', [], {
-    width: 375,
-    hidden: true,
-  });
-
-  assert.equal(canvas.height, 1600);
-  assert.equal(dots, 110);
+test('marks the decorative layer and follows tab visibility', () => {
+  const { attributes, document, listeners } = runStarfield('rgb(16, 9, 48)', [], { hidden: true });
+  assert.equal(attributes.has('aria-hidden'), true);
   assert.equal(attributes.has('data-paused'), true);
 
   document.hidden = false;
