@@ -1,92 +1,10 @@
 /* ================================================================
    BOOMY MARKETING — Shared JavaScript
    Version: 3.0 | 2026-04-14 | ES2022+
-   Covers: starfield, navbar, progress bar, hamburger, magnetic
-           buttons, GSAP reveals, visibility pause
+   Covers: navbar, progress bar, hamburger, magnetic
+           buttons and GSAP reveals
    Note: body scroll-lock on menu open handled by CSS :has()
 ================================================================ */
-
-/* ================================================================
-   1. STARFIELD CANVAS
-================================================================ */
-const initStarfield = () => {
-  const canvas = document.getElementById('starfield');
-  if (!canvas) return;
-
-  // Respect prefers-reduced-motion
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    canvas.style.display = 'none';
-    return;
-  }
-
-  const ctx = canvas.getContext('2d');
-  let stars  = [];
-  let raf;
-
-  /* Let the fixed starfield show through panels painted with opaque gradients
-     (hue/direction kept, only the alpha changes) so the stars span the whole page. */
-  const ALPHA = 0.78;
-  document.querySelectorAll('section, footer, div.section, .section').forEach(el => {
-    const cs = getComputedStyle(el);
-    if (cs.backgroundImage && cs.backgroundImage !== 'none' && /rgb\(/.test(cs.backgroundImage)) {
-      el.style.backgroundImage = cs.backgroundImage.replace(
-        /rgb\((\d+),\s*(\d+),\s*(\d+)\)/g, `rgba($1,$2,$3,${ALPHA})`);
-    }
-  });
-
-  const resize = () => {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
-  };
-
-  const createStars = (n = 150) => {
-    stars = Array.from({ length: n }, () => ({
-      x:  Math.random() * canvas.width,
-      y:  Math.random() * canvas.height,
-      r:  Math.random() * 1.3 + 0.3,
-      a:  Math.random() * 0.55 + 0.2,
-      sp: Math.random() * 0.22 + 0.04,
-      dr: (Math.random() - 0.5) * 0.07,
-      td: Math.random() * 0.013 + 0.004,
-      ti: Math.random() > 0.5 ? 1 : -1,
-    }));
-  };
-
-  const draw = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (const s of stars) {
-      s.a += s.td * s.ti;
-      if (s.a > 0.82 || s.a < 0.1) s.ti *= -1;
-      s.y -= s.sp;
-      s.x += s.dr;
-      if (s.y < -2)               { s.y = canvas.height + 2; s.x = Math.random() * canvas.width; }
-      if (s.x < -2)               s.x = canvas.width + 2;
-      if (s.x > canvas.width + 2) s.x = -2;
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, 6.2832);
-      ctx.fillStyle = `rgba(255,255,255,${s.a.toFixed(3)})`;
-      ctx.fill();
-    }
-    raf = requestAnimationFrame(draw);
-  };
-
-  // Pause when tab hidden — save CPU/battery
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) cancelAnimationFrame(raf);
-    else raf = requestAnimationFrame(draw);
-  });
-
-  window.addEventListener('resize', () => {
-    cancelAnimationFrame(raf);
-    resize();
-    createStars();
-    draw();
-  }, { passive: true });
-
-  resize();
-  createStars();
-  draw();
-};
 
 /* ================================================================
    2. NAVBAR — glass blur on scroll
@@ -347,7 +265,6 @@ const initFaqAccordion = () => {
    INIT
 ================================================================ */
 document.addEventListener('DOMContentLoaded', () => {
-  initStarfield();
   initProgressBar();
   initHamburger();
   initMagneticButtons();

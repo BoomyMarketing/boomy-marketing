@@ -6,16 +6,28 @@ const vm = require('node:vm');
 
 const source = fs.readFileSync(path.join(__dirname, 'starfield.js'), 'utf8');
 
-function runStarfield(base, computedBlocks) {
+function runStarfield(base, computedBlocks, { width = 1200, hidden = false } = {}) {
   const blocks = computedBlocks.map((computed) => ({ computed, style: {} }));
-  const body = { style: {} };
-  const documentElement = { style: {} };
+  const body = { classList: new Set(), prepend() {} };
+  const listeners = new Map();
+  const attributes = new Set();
+  let dots = 0;
+  const field = {
+    append() {},
+    clientHeight: 800,
+    clientWidth: width,
+    setAttribute(name) { attributes.add(name); },
+    style: { setProperty() {} },
+    toggleAttribute(name, enabled) {
+      if (enabled) attributes.add(name);
+      else attributes.delete(name);
+    },
+  };
   const context = {
-    arc() {},
+    arc() { dots += 1; },
     beginPath() {},
-    clearRect() {},
     fill() {},
-    fillStyle: '',
+    moveTo() {},
   };
   const canvas = {
     getContext: () => context,
@@ -23,38 +35,29 @@ function runStarfield(base, computedBlocks) {
     width: 0,
   };
   const document = {
-    addEventListener() {},
+    addEventListener(name, callback) { listeners.set(name, callback); },
     body,
-    documentElement,
-    getElementById: () => canvas,
-    hidden: false,
+    createElement: (tag) => tag === 'canvas' ? canvas : field,
+    hidden,
+    querySelector: () => null,
     querySelectorAll: () => blocks,
-  };
-  const window = {
-    addEventListener() {},
-    innerHeight: 800,
-    innerWidth: 1200,
-    matchMedia: () => ({ matches: false }),
   };
 
   vm.runInNewContext(source, {
-    cancelAnimationFrame() {},
     document,
     getComputedStyle(element) {
       if (element === body) return { backgroundColor: base };
       return element.computed;
     },
-    Math,
-    requestAnimationFrame: () => 1,
-    window,
+    ResizeObserver: class { observe() {} },
   });
 
-  return blocks;
+  return { attributes, blocks, canvas, document, dots, listeners };
 }
 
 test('preserves dark-page gradient softening on base-colour panels', () => {
   const gradient = 'linear-gradient(rgb(16, 9, 48), rgb(45, 27, 105))';
-  const [panel] = runStarfield('rgb(16, 9, 48)', [{
+  const { blocks: [panel] } = runStarfield('rgb(16, 9, 48)', [{
     backgroundColor: 'rgb(16, 9, 48)',
     backgroundImage: gradient,
   }]);
@@ -62,13 +65,13 @@ test('preserves dark-page gradient softening on base-colour panels', () => {
   assert.equal(panel.style.backgroundColor, 'transparent');
   assert.equal(
     panel.style.backgroundImage,
-    'linear-gradient(rgba(16,9,48,0.78), rgba(45,27,105,0.78))',
+    'linear-gradient(rgba(16, 9, 48, 0.72), rgba(45, 27, 105, 0.72))',
   );
 });
 
-test('keeps deliberate dark panels opaque on light pages', () => {
+test('preserves a stronger tint for dark panels on light pages', () => {
   const darkGradient = 'linear-gradient(rgb(16, 9, 48), rgb(45, 27, 105))';
-  const [basePanel, darkPanel] = runStarfield('rgb(250, 250, 247)', [
+  const { blocks: [basePanel, darkPanel] } = runStarfield('rgb(250, 250, 247)', [
     {
       backgroundColor: 'rgb(250, 250, 247)',
       backgroundImage: 'none',
@@ -80,6 +83,24 @@ test('keeps deliberate dark panels opaque on light pages', () => {
   ]);
 
   assert.equal(basePanel.style.backgroundColor, 'transparent');
-  assert.equal(darkPanel.style.backgroundColor, undefined);
-  assert.equal(darkPanel.style.backgroundImage, undefined);
+  assert.equal(darkPanel.style.backgroundColor, 'rgba(16, 9, 48, 0.86)');
+  assert.equal(
+    darkPanel.style.backgroundImage,
+    'linear-gradient(rgba(16, 9, 48, 0.86), rgba(45, 27, 105, 0.86))',
+  );
+});
+
+test('paints 55 mobile particles twice to repeat the tile and follows tab visibility', () => {
+  const { attributes, canvas, document, dots, listeners } = runStarfield('rgb(16, 9, 48)', [], {
+    width: 375,
+    hidden: true,
+  });
+
+  assert.equal(canvas.height, 1600);
+  assert.equal(dots, 110);
+  assert.equal(attributes.has('data-paused'), true);
+
+  document.hidden = false;
+  listeners.get('visibilitychange')();
+  assert.equal(attributes.has('data-paused'), false);
 });

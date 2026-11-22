@@ -1,0 +1,50 @@
+/* Shared by Astro and standalone pages with their own stylesheets. */
+body.has-site-starfield { isolation: isolate; }
+
+.site-starfield {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.site-starfield > canvas {
+  position: absolute;
+  inset: 0 auto auto 0;
+  display: block;
+  width: 100%;
+  height: 200%;
+  max-width: none;
+  animation: starfield-drift var(--starfield-duration, 100s) linear infinite;
+}
+
+.site-starfield[data-paused] > canvas { animation-play-state: paused; }
+
+@keyframes starfield-drift {
+  to { transform: translateY(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-starfield > canvas { animation: none; }
+}
+
+@media print {
+  .site-starfield { display: none; }
+}
+
+/* Attribution is rendered beside each protected form before Google loads. */
+.has-recaptcha-disclosure .grecaptcha-badge { visibility: hidden; }
+
+.recaptcha-disclosure {
+  margin-top: var(--space-sm, 0.75rem);
+  color: inherit;
+  font-size: var(--text-sm, 0.875rem);
+  line-height: 1.5;
+}
+
+.recaptcha-disclosure a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
