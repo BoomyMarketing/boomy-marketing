@@ -20,12 +20,29 @@ const MIME = {
   '.json': 'application/json',
 };
 
-async function copyDir(src, dest) {
+const PROTECTED_FORM = /<form\b[^>]*\s(?:action\s*=\s*["']\/api\/contact["']|id\s*=\s*["'](?:ctaForm|contactForm)["'])/i;
+const OLD_PAGE_SCRIPTS = /<script\b[^>]*\bsrc=["']\/assets\/js\/(?:starfield|contact-protection)\.js(?:\?[^"']*)?["'][^>]*>\s*<\/script>/gi;
+const OLD_MAIN_SCRIPT = /(\bsrc=["']\/assets\/js\/main\.js)(?:\?[^"']*)?(?=["'])/gi;
+
+function addLegacyPageAssets(html) {
+  const styles = '<link rel="stylesheet" href="/assets/css/site-experience.css?v=1">';
+  const stars = '<script defer src="/assets/js/starfield.js?v=2"></script>';
+  const protection = '<script defer src="/assets/js/contact-protection.js?v=2"></script>';
+  return html
+    .replace(OLD_PAGE_SCRIPTS, '')
+    .replace(OLD_MAIN_SCRIPT, '$1?v=4')
+    .replace(/<\/head\s*>/i, [styles, stars, PROTECTED_FORM.test(html) && protection, '</head>'].filter(Boolean).join('\n'));
+}
+
+async function copyDir(src, dest, legacyPages = false) {
   await fsp.mkdir(dest, { recursive: true });
   for (const entry of await fsp.readdir(src, { withFileTypes: true })) {
     const s = path.join(src, entry.name);
     const d = path.join(dest, entry.name);
-    if (entry.isDirectory()) await copyDir(s, d);
+    if (entry.isDirectory()) await copyDir(s, d, legacyPages);
+    else if (legacyPages && entry.name.endsWith('.html')) {
+      await fsp.writeFile(d, addLegacyPageAssets(await fsp.readFile(s, 'utf8')));
+    }
     else await fsp.copyFile(s, d);
   }
 }
@@ -34,7 +51,9 @@ function serveFile(res, filePath) {
   const ext = path.extname(filePath).toLowerCase();
   res.setHeader('Content-Type', MIME[ext] ?? 'application/octet-stream');
   res.setHeader('Cache-Control', 'no-store');
-  res.end(fs.readFileSync(filePath));
+  res.end(ext === '.html'
+    ? addLegacyPageAssets(fs.readFileSync(filePath, 'utf8'))
+    : fs.readFileSync(filePath));
 }
 
 // Directories excluded from service-slug auto-detection
@@ -105,7 +124,7 @@ function legacyStaticPages() {
                                'guides', 'best', 'industries']) {
           const src = path.join(root, dirName);
           if (fs.existsSync(src)) {
-            await copyDir(src, path.join(distRoot, dirName));
+            await copyDir(src, path.join(distRoot, dirName), dirName !== 'assets');
           }
         }
 
@@ -117,13 +136,13 @@ function legacyStaticPages() {
           if (!fs.statSync(src).isDirectory()) continue;
           // /{service}/{city}/ pattern (has sub-dirs with index.html)
           if (isServiceDir(src)) {
-            await copyDir(src, path.join(distRoot, entry));
+            await copyDir(src, path.join(distRoot, entry), true);
             continue;
           }
           // /{service}/ pattern (direct index.html — topical authority service pillars)
           const directIdx = path.join(src, 'index.html');
           if (fs.existsSync(directIdx)) {
-            await copyDir(src, path.join(distRoot, entry));
+            await copyDir(src, path.join(distRoot, entry), true);
           }
         }
 

@@ -7,6 +7,27 @@
 
   const states = new Map();
 
+  function addDisclosure(form) {
+    const disclosure = document.createElement('p');
+    disclosure.className = 'recaptcha-disclosure';
+
+    const privacy = document.createElement('a');
+    privacy.href = 'https://policies.google.com/privacy';
+    privacy.textContent = 'Privacy Policy';
+
+    const terms = document.createElement('a');
+    terms.href = 'https://policies.google.com/terms';
+    terms.textContent = 'Terms of Service';
+
+    for (const link of [privacy, terms]) {
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    }
+
+    disclosure.append('This site is protected by reCAPTCHA and the Google ', privacy, ' and ', terms, ' apply.');
+    form.after(disclosure);
+  }
+
   function setStatus(state, message) {
     state.status.textContent = message;
     state.status.style.display = message ? 'block' : 'none';
@@ -48,6 +69,7 @@
   }
 
   forms.forEach((form) => {
+    addDisclosure(form);
     const status = document.createElement('div');
     status.setAttribute('role', 'status');
     status.style.cssText = 'display:none;width:100%;margin:8px 0;color:#fbbf24;font-size:13px;line-height:1.4;';
@@ -98,6 +120,7 @@
       }
 
       const script = document.createElement('script');
+      document.documentElement.classList.add('has-recaptcha-disclosure');
       script.src = `https://www.google.com/recaptcha/enterprise.js?render=${encodeURIComponent(config.siteKey)}`;
       script.async = true;
       script.defer = true;

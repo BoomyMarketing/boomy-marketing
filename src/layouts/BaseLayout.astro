@@ -99,19 +99,18 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
   <!-- Shared CSS & JS (cached across all pages) -->
   <link rel="preload" href="/assets/css/main.css?v=2" as="style" />
   <link rel="stylesheet" href="/assets/css/main.css?v=2" />
+  <link rel="stylesheet" href="/assets/css/site-experience.css?v=1" />
   <!-- ?v= is a cache buster: these assets are served with a long max-age, so the
        version must be bumped whenever main.js changes or visitors keep the old file -->
-  <script defer src="/assets/js/main.js?v=3"></script>
-  <script defer src="/assets/js/contact-protection.js"></script>
+  <script defer src="/assets/js/main.js?v=4"></script>
+  <script defer src="/assets/js/starfield.js?v=2"></script>
+  <script defer src="/assets/js/contact-protection.js?v=2"></script>
   <script is:inline defer src={`/assets/js/boomy-assistant.js?v=${assistantVersion}`} data-api-base="/api/assistant"></script>
 
   <!-- Page-specific CSS -->
   {pageStyle && <style set:html={pageStyle} />}
 </head>
 <body>
-  <!-- Starfield Canvas Background -->
-  <canvas id="starfield" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;"></canvas>
-  
   <Nav />
   <main>
     <slot />
