@@ -5,12 +5,14 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "test": "node --test api/contact.test.js assets/js/starfield.test.js && python -m unittest test_release.py"
+    "test": "node --test api/contact.test.js assets/js/starfield.test.js test/assistant.test.mjs && python -m unittest test_release.py"
   },
   "dependencies": {
+    "@vercel/functions": "3.11.3",
     "nodemailer": "^6.9.0",
+    "postal-mime": "2.7.5",
     "resend": "6.26.0",
-    "postal-mime": "2.7.5"
+    "ws": "8.23.0"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.2.1",
