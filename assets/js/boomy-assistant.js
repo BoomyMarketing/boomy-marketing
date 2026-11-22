@@ -27,15 +27,15 @@
     }
     *, *::before, *::after { box-sizing: border-box; }
     [hidden] { display: none !important; }
-    button, input, textarea { font: inherit; }
+    button, input, select, textarea { font: inherit; }
     button { cursor: pointer; }
     button:disabled { cursor: default; }
-    button:focus-visible, input:focus-visible, textarea:focus-visible,
+    button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible,
     .conversation:focus-visible, .lead-view:focus-visible {
       outline: 2px solid var(--yellow);
       outline-offset: 3px;
     }
-    button, input, textarea { -webkit-tap-highlight-color: transparent; }
+    button, input, select, textarea { -webkit-tap-highlight-color: transparent; }
     p, h2, h3 { margin: 0; }
     svg { display: block; width: 20px; height: 20px; flex: none; }
     .sr-only {
@@ -228,7 +228,7 @@
     .lead-copy { margin: 0 0 14px; color: var(--muted); font-size: 14px; }
     .lead-fields { display: grid; gap: 10px; min-inline-size: 0; padding: 0; margin: 0; border: 0; }
     .field { display: grid; gap: 4px; color: var(--muted); font-size: 13px; }
-    .field input, .field textarea {
+    .field input, .field select, .field textarea {
       width: 100%;
       min-height: 44px;
       padding: 8px 12px;
@@ -274,81 +274,91 @@
   const markup = `
     <button class="launcher" type="button" aria-haspopup="dialog" aria-controls="boomy-panel" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.5a7.9 7.9 0 0 1-8.3 7.5 9 9 0 0 1-3.1-.6L4 20l1.5-4.1a7 7 0 0 1-1.8-4.4A7.9 7.9 0 0 1 12 4a7.9 7.9 0 0 1 8.5 7.5Z"/><path d="M8.5 11.5h7"/></svg>
-      Спросить Boomy
+      Ask Boomy
     </button>
     <dialog class="panel" id="boomy-panel" aria-labelledby="boomy-title">
       <header class="header">
         <span class="mark" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 1.5 2.7 7.8 7.8 2.7-7.8 2.7-2.7 7.8-2.7-7.8L1.5 12l7.8-2.7Z"/></svg>
         </span>
-        <h2 class="title" id="boomy-title" tabindex="-1" autofocus><span class="brand" lang="en">Boomy</span><small>ИИ-ассистент</small></h2>
-        <button type="button" class="icon close" aria-label="Закрыть чат">
+        <h2 class="title" id="boomy-title" tabindex="-1" autofocus><span class="brand" lang="en">Boomy</span><small>AI sales assistant</small></h2>
+        <button type="button" class="icon close" aria-label="Close chat">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
         </button>
       </header>
       <div class="chat-view">
-        <section class="conversation" tabindex="0" aria-label="История переписки">
-          <div class="messages" role="log" aria-label="Сообщения" aria-live="off">
+        <section class="conversation" tabindex="0" aria-label="Chat history">
+          <div class="messages" role="log" aria-label="Messages" aria-live="off">
             <article class="opening">
-              <p class="message"><span class="sr-only">Ассистент: </span>Здравствуйте! Я помогу разобраться в услугах Boomy и передать ваш запрос команде. О чём хотите поговорить?</p>
+              <p class="message"><span class="sr-only">Boomy: </span>Hi, I’m Boomy’s AI assistant. What would you like marketing to do for your business?</p>
               <div class="prompts">
-                <button class="prompt" type="button" data-prompt="Какие услуги предлагает Boomy?">Услуги Boomy</button>
-                <button class="prompt" type="button" data-prompt="С чего начать продвижение бизнеса?">С чего начать?</button>
+                <button class="prompt" type="button" data-prompt="Which Boomy services could help my business?">Explore services</button>
+                <button class="prompt" type="button" data-prompt="How would you help me get more qualified leads?">I need more leads</button>
               </div>
             </article>
           </div>
-          <div class="typing" aria-hidden="true" hidden><span></span><span></span><span></span>Ассистент печатает</div>
+          <div class="typing" aria-hidden="true" hidden><span></span><span></span><span></span>Boomy is typing</div>
           <div class="chat-feedback" hidden>
             <p class="feedback"></p>
-            <button type="button" class="link retry">Повторить отправку</button>
+            <button type="button" class="link retry">Try again</button>
           </div>
           <div class="voice" hidden>
             <p class="voice-text"></p>
             <p class="caption" hidden></p>
             <div class="voice-actions">
-              <button type="button" class="link stop" hidden>Остановить голос</button>
-              <button type="button" class="link play" hidden>Включить звук</button>
+              <button type="button" class="link stop" hidden>Stop voice</button>
+              <button type="button" class="link play" hidden>Play audio</button>
             </div>
           </div>
         </section>
         <footer class="footer">
           <form class="compose">
-            <button type="button" class="icon mic" aria-label="Микрофон" aria-pressed="false" aria-describedby="boomy-notice">
+            <button type="button" class="icon mic" aria-label="Microphone" aria-pressed="false" aria-describedby="boomy-notice">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5.5 10.5v1a6.5 6.5 0 0 0 13 0v-1M12 18v3m-3 0h6"/></svg>
             </button>
-            <textarea rows="1" class="composer" maxlength="1200" aria-label="Сообщение" placeholder="Напишите сообщение…" required></textarea>
-            <button type="submit" class="icon send" aria-label="Отправить сообщение" disabled>
+            <textarea rows="1" class="composer" maxlength="1200" aria-label="Message" placeholder="Write a message…" required></textarea>
+            <button type="submit" class="icon send" aria-label="Send message" disabled>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5m-5 5 5-5 5 5"/></svg>
             </button>
           </form>
           <div class="footer-meta">
-            <p class="notice" id="boomy-notice">Разговор записывается для контроля качества.</p>
-            <button type="button" class="link lead-action">Оставить заявку</button>
+            <p class="notice" id="boomy-notice">This conversation is recorded for quality.</p>
+            <button type="button" class="link lead-action">Request a callback</button>
           </div>
         </footer>
       </div>
       <section class="lead-view" aria-labelledby="boomy-lead-title" hidden>
         <div class="lead-head">
-          <button type="button" class="icon back" aria-label="Вернуться к чату">
+          <button type="button" class="icon back" aria-label="Back to chat">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m6 6-6-6 6-6"/></svg>
           </button>
-          <h3 id="boomy-lead-title" tabindex="-1">Заявка для Boomy</h3>
+          <h3 id="boomy-lead-title" tabindex="-1">Request a callback</h3>
         </div>
         <form class="lead-form">
-          <p class="lead-copy">Расскажите о бизнесе и оставьте контакт для ответа.</p>
-          <p class="lead-copy voice-disclosure" hidden>К заявке будет приложена расшифровка голосового разговора.</p>
+          <p class="lead-copy">Choose when our team can call to discuss your business.</p>
+          <p class="lead-copy voice-disclosure" hidden>Your voice transcript will be included with this request.</p>
           <fieldset class="lead-fields">
-            <label class="field">Имя<input name="name" maxlength="80" autocomplete="name" required></label>
-            <label class="field">Телефон или электронная почта<input name="contact" maxlength="160" required></label>
-            <label class="field">Вид бизнеса<input name="businessType" maxlength="120" required></label>
-            <label class="field">Чем вам помочь?<textarea name="goal" maxlength="800" rows="2" required></textarea></label>
-            <label class="consent"><input type="checkbox" name="consent" required>Согласен передать эти данные команде Boomy для ответа на заявку.</label>
-            <button class="primary" type="submit">Отправить заявку</button>
+            <label class="field">Name<input name="name" maxlength="80" autocomplete="name" required></label>
+            <label class="field">Phone number<input type="tel" name="phone" maxlength="40" autocomplete="tel" required></label>
+            <label class="field">Email address<input type="email" name="email" maxlength="160" autocomplete="email" required></label>
+            <label class="field">Business<input name="businessType" maxlength="120" autocomplete="organization" required></label>
+            <label class="field">Service you're interested in<input name="serviceInterest" maxlength="160" placeholder="e.g. SEO or Google Ads" required></label>
+            <label class="field">What would you like to achieve?<textarea name="goal" maxlength="800" rows="2" required></textarea></label>
+            <label class="field">Callback window (Toronto time)<select name="windowId" required><option value="">Choose a time</option></select></label>
+            <button type="button" class="link refresh-windows" hidden>Refresh callback times</button>
+            <details><summary>Location, budget or timing (optional)</summary>
+              <label class="field">Service area<input name="location" maxlength="100"></label>
+              <label class="field">Budget<input name="budget" maxlength="80"></label>
+              <label class="field">Timeline<input name="timeline" maxlength="100"></label>
+            </details>
+            <label class="consent"><input type="checkbox" name="consent" required>I agree to share these details with Boomy and receive a call about this request.</label>
+            <button class="primary" type="submit">Confirm callback request</button>
           </fieldset>
           <p class="feedback lead-feedback" role="status"></p>
         </form>
         <div class="receipt" hidden>
-          <p>Спасибо! Ваша заявка получена.</p>
+          <p>Your callback request has reached the Boomy team.</p>
+          <p class="confirmed-window"></p>
           <p class="reference"></p>
         </div>
       </section>
@@ -367,7 +377,7 @@
 
     const host = document.createElement("div");
     host.id = hostId;
-    host.lang = "ru";
+    host.lang = "en";
     const root = host.attachShadow({ mode: "open" });
     root.innerHTML = markup;
     const style = document.createElement("style");
@@ -423,7 +433,7 @@
     const isAtBottom = () => feed.scrollHeight - feed.scrollTop - feed.clientHeight < 64;
     setupChat(find, post, announce, scroll, isAtBottom);
     const voice = setupVoice(find, root, postJson, announce, scroll, isAtBottom);
-    setupLead(find, postJson, voice, announce);
+    setupLead(find, postJson, voice, announce, endpoint);
 
     function syncViewport() {
       if (!viewport) return;
@@ -467,7 +477,7 @@
     });
     panel.addEventListener("keydown", (event) => {
       if (event.key !== "Tab" || event.altKey || event.ctrlKey || event.metaKey) return;
-      const controls = Array.from(panel.querySelectorAll("button, input, textarea, [tabindex]"))
+      const controls = Array.from(panel.querySelectorAll("button, input, select, textarea, summary, [tabindex]"))
         .filter((element) => element.tabIndex >= 0 && !element.matches(":disabled") && element.getClientRects().length);
       const first = controls[0];
       const last = controls.at(-1);
@@ -500,7 +510,7 @@
       bubble.className = "message " + sender;
       const label = document.createElement("span");
       label.className = "sr-only";
-      label.textContent = sender === "user" ? "Вы: " : "Ассистент: ";
+      label.textContent = sender === "user" ? "You: " : "Boomy: ";
       const content = document.createTextNode(message);
       bubble.append(label, content);
       messages.append(bubble);
@@ -518,7 +528,7 @@
       updateSend();
       feedback.hidden = true;
       typing.hidden = false;
-      announce("Ассистент готовит ответ.");
+      announce("Boomy is thinking.");
       scroll();
 
       let answer;
@@ -538,11 +548,11 @@
           : (await response.json())?.reply;
         if (typeof reply !== "string" || !reply.trim()) throw new Error("Missing reply");
         showReply(reply);
-        announce("Ассистент: " + reply);
+        announce("Boomy: " + reply);
       } catch (error) {
         answer?.bubble.remove();
         failedTurn = turn;
-        const message = visitorMessage(error, "Не удалось получить ответ. Попробуйте отправить сообщение ещё раз.");
+        const message = visitorMessage(error, "We couldn’t get a reply. You can try sending that message again.");
         feedback.querySelector("p").textContent = message;
         feedback.hidden = false;
         announce(message);
@@ -634,7 +644,7 @@
     return reply;
   }
 
-  function setupLead(find, postJson, voice, announce) {
+  function setupLead(find, postJson, voice, announce, endpoint) {
     const chatView = find(".chat-view");
     const leadView = find(".lead-view");
     const leadAction = find(".lead-action");
@@ -643,6 +653,32 @@
     const fields = find(".lead-fields");
     const feedback = find(".lead-feedback");
     const disclosure = find(".voice-disclosure");
+    const windowField = form.elements.namedItem("windowId");
+    const refresh = find(".refresh-windows");
+    let windowRequest;
+    let summaryToken;
+    async function loadWindows() {
+      if (windowRequest || received) return;
+      const previous = windowField.value;
+      windowRequest = true;
+      try {
+        const res = await fetch(endpoint + "/lead", { cache:"no-store", credentials:"same-origin", signal:AbortSignal.timeout(8000) });
+        if (!res.ok) throw new Error("Window lookup failed");
+        const { windows, summaryToken: snapshot } = await res.json();
+        if (!Array.isArray(windows) || windows.length !== 3 ||
+            windows.some(w => typeof w.id !== "string" || typeof w.label !== "string") ||
+            typeof snapshot !== "string") throw new Error("Invalid windows");
+        summaryToken = snapshot;
+        windowField.replaceChildren(new Option("Choose a time",""), ...windows.map(w => new Option(w.label,w.id)));
+        windowField.value = windows.some(w => w.id === previous) ? previous : "";
+        windowField.setCustomValidity("");
+        refresh.hidden = true;
+      } catch {
+        feedback.textContent = "We couldn't load the callback times. Refresh them to continue.";
+        refresh.hidden = false;
+      } finally { windowRequest = false; }
+    }
+    refresh.addEventListener("click", loadWindows);
     let attempt;
     let pending = false;
     let received = false;
@@ -653,6 +689,7 @@
       chatView.hidden = true;
       leadView.hidden = false;
       title.focus({ preventScroll: true });
+      loadWindows();
     });
     find(".back").addEventListener("click", () => {
       leadView.hidden = true;
@@ -667,38 +704,41 @@
     form.addEventListener("invalid", (event) => {
       const field = event.target;
       if (!field.validity.valueMissing) return;
-      field.setCustomValidity(field.type === "checkbox" ? "Подтвердите согласие на отправку заявки." : "Заполните это поле.");
+      field.setCustomValidity(field.type === "checkbox" ? "Please agree to share your details and receive a callback." : "Please complete this field.");
     }, true);
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (pending || received) return;
 
       const details = {};
-      for (const name of ["name", "contact", "businessType", "goal"]) {
+      for (const name of ["name", "phone", "email", "businessType", "serviceInterest", "goal", "windowId"]) {
         const input = form.elements.namedItem(name);
         const value = input.value.trim();
         if (!value) {
-          input.setCustomValidity("Заполните это поле.");
+          input.setCustomValidity("Please complete this field.");
           input.reportValidity();
           return;
         }
         details[name] = value;
       }
-      const contact = details.contact;
-      const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact);
-      const digitCount = contact.replace(/\D/g, "").length;
-      const phone = /^\+?[\d(). \-]+$/.test(contact) && digitCount >= 7 && digitCount <= 15;
-      if (!email && !phone) {
-        const input = form.elements.namedItem("contact");
-        input.setCustomValidity("Введите телефон или адрес электронной почты.");
+      const digits = details.phone.replace(/\D/g,"");
+      const validPhone = /^\+?[\d(). -]+$/.test(details.phone) &&
+        (details.phone.startsWith("+") ? /^[1-9]\d{7,14}$/.test(digits) : /^(?:1\d{10}|\d{10})$/.test(digits));
+      if (!validPhone || !/^[^\s@,;<>]+@[^\s@,;<>]+\.[^\s@,;<>]+$/.test(details.email)) {
+        const input = form.elements.namedItem(validPhone ? "email" : "phone");
+        input.setCustomValidity(validPhone ? "Enter a valid email address." : "Enter a ten-digit North American number or include your country code with +.");
         input.reportValidity();
         return;
+      }
+      for (const name of ["location","budget","timeline"]) {
+        const value = form.elements.namedItem(name).value.trim();
+        if (value) details[name] = value;
       }
       if (!form.elements.namedItem("consent").checked) return;
 
       const key = JSON.stringify(details);
       if (attempt?.key !== key) {
-        const payload = { requestId: crypto.randomUUID(), ...details, consent: true };
+        const payload = { requestId: crypto.randomUUID(), ...details, summaryToken, consent: true };
         const summary = voice.summary();
         if (summary) payload.voiceSummary = summary;
         attempt = { key, payload };
@@ -706,27 +746,30 @@
 
       pending = true;
       fields.disabled = true;
-      feedback.textContent = "Отправляем заявку…";
+      feedback.textContent = "Sending your callback request…";
       try {
         const receipt = await postJson("/lead", attempt.payload);
-        if (receipt?.status !== "received" || typeof receipt.reference !== "string" || !receipt.reference.trim()) {
+        if (receipt?.status !== "received" || typeof receipt.reference !== "string" || !receipt.reference.trim() ||
+            typeof receipt.window !== "string" || !receipt.window.trim()) {
           throw new Error("Missing lead receipt");
         }
         received = true;
         form.reset();
         form.hidden = true;
-        title.textContent = "Заявка получена";
-        find(".reference").textContent = "Номер заявки: " + receipt.reference;
+        title.textContent = "Callback request received";
+        find(".reference").textContent = "Reference: " + receipt.reference;
+        find(".confirmed-window").textContent = "Your requested call window is " + receipt.window + ".";
         find(".receipt").hidden = false;
-        leadAction.textContent = "Статус заявки";
+        leadAction.textContent = "Callback status";
         attempt = undefined;
         if (!leadView.hidden) {
           leadView.scrollTop = 0;
           title.focus({ preventScroll: true });
         }
-        announce("Заявка получена.");
+        announce("Callback request received for " + receipt.window + ".");
       } catch (error) {
-        feedback.textContent = visitorMessage(error, "Не удалось подтвердить заявку. Данные сохранены в форме. Попробуйте ещё раз.");
+        refresh.hidden = false;
+        feedback.textContent = visitorMessage(error, "We couldn’t confirm the request. Your details are still in the form. You can try again.");
       } finally {
         pending = false;
         fields.disabled = false;
@@ -743,7 +786,7 @@
     const playButton = find(".play");
     const audio = find(".remote-audio");
     const captions = { input: "", output: "" };
-    const labels = { input: "Вы", output: "Ассистент" };
+    const labels = { input: "You", output: "Boomy" };
     let current;
     let connectPending = false;
 
@@ -775,7 +818,7 @@
       }
     }
 
-    function stop(text = "Голосовой режим выключен.") {
+    function stop(text = "Voice is off.") {
       if (!current) return;
       const session = current;
       const returnFocus = root.activeElement === stopButton || root.activeElement === playButton;
@@ -796,7 +839,7 @@
       } catch {
         if (current === session) {
           playButton.hidden = false;
-          announce("Нажмите «Включить звук», чтобы услышать ассистента.");
+          announce("Select Play audio to hear Boomy.");
         }
       }
     }
@@ -807,7 +850,7 @@
       for (const track of session.stream.getAudioTracks()) {
         peer.addTrack(track, session.stream);
         track.addEventListener("ended", () => {
-          if (current === session) stop("Микрофон отключён. Вы можете написать в чат.");
+          if (current === session) stop("Your microphone is off. You can keep typing.");
         }, { once: true });
       }
       peer.addEventListener("track", (event) => {
@@ -819,9 +862,9 @@
         if (current !== session) return;
         if (peer.connectionState === "connected") {
           clearTimeout(session.connectionTimer);
-          message("Микрофон включён. Можно говорить.");
+          message("Your microphone is on. Go ahead.");
         } else if (["failed", "disconnected", "closed"].includes(peer.connectionState)) {
-          stop("Голосовое соединение прервано. Вы можете написать в чат.");
+          stop("Voice disconnected. You can keep typing.");
         }
       });
       const events = peer.createDataChannel("oai-events");
@@ -834,7 +877,7 @@
           return;
         }
         if (data?.type === "error") {
-          stop("Голосовой сеанс прерван. Вы можете написать в чат.");
+          stop("The voice session ended. You can keep typing.");
           return;
         }
         const kind = data?.type === "session.input_transcript.delta" ? "input"
@@ -852,14 +895,14 @@
     async function start() {
       if (current || connectPending) return;
       if (!navigator.mediaDevices?.getUserMedia || typeof RTCPeerConnection !== "function") {
-        message("В этом браузере голос недоступен. Вы можете написать в чат.");
+        message("Voice is unavailable in this browser. You can type a message.");
         return;
       }
       const session = { cancel: new AbortController() };
       current = session;
       caption.hidden = true;
       updateMic();
-      message("Разговор записывается для контроля качества. Разрешите доступ к микрофону.");
+      message("This conversation is recorded for quality. Allow microphone access to speak.");
 
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
@@ -873,7 +916,7 @@
         session.stream = stream;
         if (!stream.getAudioTracks().length) throw new Error("No audio track");
         const peer = wirePeer(session);
-        message("Подключаем голос…");
+        message("Connecting voice…");
         const ticket = await postJson("/voice-token", { action: "issue", requestId: crypto.randomUUID() }, { timeoutMs: 10_000 });
         if (current !== session) return;
         if (typeof ticket?.token !== "string" || !ticket.token || !Number.isFinite(ticket.maxSeconds) || ticket.maxSeconds <= 0) {
@@ -885,7 +928,7 @@
 
         const connectStarted = Date.now();
         session.connectionTimer = setTimeout(() => {
-          if (current === session) stop("Подключение заняло слишком много времени. Вы можете написать в чат.");
+          if (current === session) stop("Voice took too long to connect. You can type a message.");
         }, 18_000);
         connectPending = true;
         let answer;
@@ -909,17 +952,17 @@
           || !Number.isFinite(answer.maxSeconds) || answer.maxSeconds <= 0) {
           throw new Error("Invalid voice answer");
         }
-        const limit = Math.min(120, ticket.maxSeconds, answer.maxSeconds) * 1000;
+        const limit = Math.min(360, ticket.maxSeconds, answer.maxSeconds) * 1000;
         session.limitTimer = setTimeout(() => {
-          if (current === session) stop("Время голосового разговора истекло. Вы можете продолжить в чате.");
+          if (current === session) stop("The six-minute voice session has ended. You can keep typing.");
         }, Math.max(0, limit - (Date.now() - connectStarted)));
         await peer.setRemoteDescription({ type: "answer", sdp: answer.sdp });
       } catch (error) {
         if (current !== session) return;
         if (["NotAllowedError", "SecurityError"].includes(error.name)) {
-          stop("Доступ к микрофону не разрешён. Вы можете написать в чат.");
+          stop("Microphone access was declined. You can type a message.");
         } else {
-          stop(visitorMessage(error, "Не удалось подключить голос. Вы можете написать в чат."));
+          stop(visitorMessage(error, "Voice could not connect. You can type a message."));
         }
       }
     }

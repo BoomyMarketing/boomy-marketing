@@ -1,9 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash, randomUUID } from 'node:crypto';
+import { EventEmitter } from 'node:events';
 import { context, visitor, handler } from '../lib/assistant/runtime.mjs';
 import { InstanceStore } from '../lib/assistant/instance-store.mjs';
-import { chat, lead, deliverLead, voice, stopVoice } from '../lib/assistant/service.mjs';
+import { chat, lead, voice, stopVoice, recordClose } from '../lib/assistant/service.mjs';
+import { callbackWindows, callbackEmail, callbackHistory } from '../lib/assistant/callback.mjs';
+import { monitorVoice } from '../lib/assistant/voice-control.mjs';
+import { voiceAdvice } from '../lib/assistant/voice-advice.mjs';
 import { reserve, settle, throttle, voiceReserve } from '../lib/assistant/state.mjs';
 
 function fixture() {
@@ -18,6 +22,7 @@ function fixture() {
     reply: async () => { stats.replies++; return { reply: 'Проверенный ответ', charged: 321 }; },
     notify: async (record, key) => { sends.add(key); return 'mock-receipt'; },
     openVoice: async () => { stats.sessions++; return { upstream: 'test-upstream', sdp: 'v=0\r\n' }; },
+    monitor: () => ({ready:Promise.resolve(),done:new Promise(()=>{})}), handoff:async()=>true,
     watch: async () => { stats.watches++; return 21; } };
   return { ctx, data, jobs, sends, stats };
 }
@@ -54,24 +59,50 @@ test('per-IP sliding windows survive parallel calls and recover after expiration
   await throttle(ctx.store,ctx.ip,'t',3,1000,ctx.now+1000);
 });
 
+function sampleCallback(now) {
+  return {requestId:randomUUID(),name:'Pat',phone:'+1 416 555 0100',email:'pat@example.com',
+    businessType:'Salon',serviceInterest:'Google Ads',goal:'More weekday bookings',windowId:callbackWindows(now)[0].id,consent:true};
+}
+
 test('only the confirmed owner email is a receipt; cold retries reuse the same provider key', async () => {
   const {ctx, sends} = fixture();
-  const body = {requestId:randomUUID(),name:'Test',contact:'example@example.com',businessType:'Salon',goal:'Demo',consent:true};
+  const body = sampleCallback(ctx.now);
   await assert.rejects(lead(ctx,{...body,consent:false}),{status:400});
-  await assert.rejects(lead(ctx,{...body,contact:'a@example.com,b@example.com'}),{status:400});
+  for (const invalid of [{phone:'123'},{phone:'call 416 555 0100'},{email:'a@example.com,b@example.com'},{email:''},{serviceInterest:''},{windowId:'yesterday'}]) {
+    await assert.rejects(lead(ctx,{...body,...invalid}),{status:400});
+  }
   const first=await lead(ctx,body);
   const again=await lead({...ctx,store:new InstanceStore()}, {...body,requestId:randomUUID()});
   assert.deepEqual(first,again); assert.equal(sends.size,1);
+  assert.equal(first.window,callbackWindows(ctx.now)[0].label);
 });
 
 test('inline owner delivery failure is visible and confirmed replay recovers', async () => {
   const {ctx}=fixture();
-  const body={requestId:randomUUID(),name:'A',contact:'+1 555 010 0100',businessType:'A',goal:'A',consent:true};
+  const body=sampleCallback(ctx.now);
   const keys=[];
   ctx.notify=async (_,key)=>{keys.push(key); throw Error('unknown mail response');};
   await assert.rejects(lead(ctx,body));
   ctx.notify=async (_,key)=>{keys.push(key);return 'accepted';};
   assert.equal((await lead(ctx,body)).status,'received'); assert.equal(new Set(keys).size,1);
+});
+
+test('Toronto callback windows use local working days, local time changes and three future choices', () => {
+  const sun=callbackWindows(Date.parse('2026-11-01T16:00:00Z'));
+  assert.deepEqual(sun.map(w=>w.id),['2026-11-02-am','2026-11-02-pm','2026-11-03-am']);
+  assert.ok(sun.every(w=>w.timeZone==='America/Toronto' && w.label.includes('Toronto time')));
+  assert.equal(callbackWindows(Date.parse('2026-07-06T13:01:00Z'))[0].id,'2026-07-06-pm');
+  assert.equal(callbackWindows(Date.parse('2026-11-02T13:01:00Z'))[0].id,'2026-11-02-am');
+});
+
+test('callback notice contains the accepted window, sales brief, typed context and voice summary', async () => {
+  const {ctx}=fixture();
+  ctx.previous={history:[{role:'user',content:'We only want weekday calls.'},{role:'assistant',content:'We can review search intent.'}]};
+  let mail;
+  ctx.notify=async record=>{mail=callbackEmail(record);return 'accepted';};
+  const receipt=await lead(ctx,{...sampleCallback(ctx.now),voiceSummary:'Visitor: We use Shopify.',budget:'CAD 1200'});
+  assert.equal(mail.subject,'CALL REQUEST '+receipt.reference);
+  for(const part of [receipt.window,'Sales brief','CAD 1200','Conversation summary','weekday calls','search intent','Shopify']) assert.ok(mail.text.includes(part));
 });
 
 const offer = 'v=0\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111\r\n';
@@ -111,15 +142,125 @@ test('voice ticket is conversation-bound, single use, expires at 45 seconds and 
 
 test('server watchdog receives the deadline before releasing SDP; confirmed closure reconciles exposure', async () => {
   const {ctx, jobs, data, stats} = fixture();
-  let deadline; ctx.watch = (_,due) => {deadline=due;return new Promise(() => {});};
+  let deadline; ctx.monitor = (_,due) => {deadline=due;return {ready:Promise.resolve(),done:new Promise(() => {})};};
   const {token}=await voice(ctx,{action:'issue',requestId:randomUUID()});
   const answer=await voice(ctx,{action:'connect',token,sdp:offer});
-  assert.equal(answer.maxSeconds,120); assert.equal(deadline,ctx.now+120000);
+  assert.equal(answer.maxSeconds,360); assert.equal(deadline,ctx.now+360000);
   await assert.rejects(voice(ctx,{action:'connect',token,sdp:offer}),{status:409});
   await assert.rejects(voice({...ctx,sid:'other'},{action:'stop',callId:answer.callId}),{status:403});
   assert.equal(stats.sessions,1); assert.equal(data.get('spend').totals['2026-11'],voiceReserve);
-  ctx.now += 120000; ctx.watch = async () => 120;
+  ctx.now += 360000; ctx.watch = async () => 360;
   await stopVoice(ctx,answer.callId);
-  assert.equal(data.get('spend').totals['2026-11'],100000);
+  assert.equal(data.get('spend').totals['2026-11'],300000);
   assert.equal((await ctx.store.read('calls/'+answer.callId)).state,'closed');
+});
+
+test('a failed control attachment withholds the WebRTC answer and tries to close the created provider call', async()=>{
+  const {ctx,stats}=fixture();
+  ctx.monitor=()=>({ready:Promise.reject(new Error('attach failed')),done:new Promise(()=>{})});
+  const {token}=await voice(ctx,{action:'issue',requestId:randomUUID()});
+  await assert.rejects(voice(ctx,{action:'connect',token,sdp:offer}));
+  assert.equal(stats.sessions,1);assert.equal(stats.watches,1);
+});
+
+test('an explicit provider rejection releases the admission hold; an ambiguous creation retains it',async()=>{
+  for(const definitelyRejected of [true,false]){
+    const {ctx,data}=fixture();
+    ctx.openVoice=async()=>{const error=new Error('upstream');error.creationRejected=definitelyRejected;throw error;};
+    const {token}=await voice(ctx,{action:'issue',requestId:randomUUID()});
+    await assert.rejects(voice(ctx,{action:'connect',token,sdp:offer}));
+    assert.equal(data.get('spend').totals['2026-11'],definitelyRejected?0:voiceReserve);
+  }
+});
+
+test('confirmed overrun is fully accounted and repeated settlement is idempotent',async()=>{
+  const {ctx,data}=fixture();
+  await reserve(ctx.store,'voice',1000,ctx.limits,ctx.now,360000);
+  await recordClose(ctx,'voice',7400);
+  const actual=Math.ceil(7400*50000/60);
+  assert.equal(data.get('spend').totals['2026-11'],actual);
+  await recordClose(ctx,'voice',7400);
+  assert.equal(data.get('spend').totals['2026-11'],actual);
+  assert.equal(data.get('calls/voice').overrun,true);
+});
+
+class TestSocket extends EventEmitter {
+  readyState=0;
+  sent=[];
+  open(){this.readyState=1;this.emit('open');}
+  send(message){this.sent.push(JSON.parse(message));}
+  terminate(){this.readyState=3;this.emit('close');}
+}
+
+test('a six-minute call hands supervision to a verified second attachment before the first Hobby function expires',async t=>{
+  t.mock.timers.enable({apis:['setTimeout','Date'],now:0});
+  const sockets=[];let renewals=0;
+  const watcher=monitorVoice('fixture',360000,'fixture',async()=>{renewals++;return true;},null,'primary',()=>{
+    const socket=new TestSocket();sockets.push(socket);return socket;
+  });
+  sockets[0].open();await watcher.ready;
+  t.mock.timers.tick(150000);await Promise.resolve();
+  assert.equal(renewals,1);
+  assert.equal(await watcher.done,null);assert.equal(sockets[0].readyState,3);
+  t.mock.timers.tick(90000);assert.equal(sockets[0].sent.length,0);
+});
+
+test('failed handoff closes early; a disconnected sideband reattaches and records final usage',async t=>{
+  t.mock.timers.enable({apis:['setTimeout','Date'],now:0});
+  const sockets=[];
+  const watcher=monitorVoice('fixture',360000,'fixture',async()=>false,null,'primary',()=>{
+    const socket=new TestSocket();sockets.push(socket);return socket;
+  });
+  sockets[0].open();await watcher.ready;sockets[0].terminate();
+  t.mock.timers.tick(600);assert.equal(sockets.length,2);sockets[1].open();
+  t.mock.timers.tick(149400);await Promise.resolve();t.mock.timers.tick(90000);
+  assert.deepEqual(sockets[1].sent,[{type:'session.close'}]);
+  sockets[1].emit('message',Buffer.from(JSON.stringify({type:'session.closed',usage:{seconds:240}})));
+  assert.equal(await watcher.done,240);
+});
+
+test('an unattached successor never hangs up a healthy primary session',async t=>{
+  t.mock.timers.enable({apis:['setTimeout','Date'],now:0});
+  const hangup=t.mock.method(globalThis,'fetch',async()=>({ok:true}));
+  const watcher=monitorVoice('fixture',210000,'fixture',null,null,'successor',()=>new TestSocket());
+  const rejected=assert.rejects(watcher.ready,/timed out/);t.mock.timers.tick(8000);
+  await rejected;await assert.rejects(watcher.done,/timed out/);
+  assert.equal(hangup.mock.callCount(),0);
+});
+
+test('a delegated result completed during reconnection is sent on the new sideband',async t=>{
+  t.mock.timers.enable({apis:['setTimeout','Date'],now:0});
+  const sockets=[];let reply;
+  const advisor=async(event,send)=>{if(event.type==='session.delegation.created')reply=send;};
+  const watcher=monitorVoice('fixture',200000,'fixture',null,advisor,'successor',()=>{
+    const socket=new TestSocket();sockets.push(socket);return socket;
+  });
+  sockets[0].open();await watcher.ready;
+  sockets[0].emit('message',JSON.stringify({type:'session.delegation.created'}));
+  sockets[0].terminate();reply({type:'session.commentary.append',content:'A scoped answer'});
+  t.mock.timers.tick(600);sockets[1].open();
+  assert.equal(sockets[1].sent[0].content,'A scoped answer');
+  sockets[1].emit('message',JSON.stringify({type:'session.closed',usage:{seconds:21}}));
+  assert.equal(await watcher.done,21);assert.equal(sockets[0].sent.length,0);
+});
+
+test('snapshot uses existing chat when the browser has no encrypted history or an older turn count',()=>{
+  const live={count:2,history:[{role:'user',content:'qualified HVAC calls'}]};
+  assert.deepEqual(callbackHistory(null,live),live.history);
+  assert.deepEqual(callbackHistory({count:0,history:[]},live),live.history);
+  assert.deepEqual(callbackHistory({count:1,history:[{role:'user',content:'old'}]},live),live.history);
+});
+
+test('delegated speech uses bounded approved text replies, deduplicates delegation ids and keeps quoted directives as visitor input',async()=>{
+  const {ctx,stats}=fixture(),sent=[];
+  ctx.reply=async body=>{
+    stats.replies++;assert.equal(body.input.at(-1).role,'user');assert.match(body.input.at(-1).content,/qualified leads/);
+    assert.ok(body.max_output_tokens<=200);return {reply:'Check booked jobs against each campaign.',charged:120,usage:{}};
+  };
+  const advisor=voiceAdvice(ctx,'fixture');const send=e=>sent.push(e);
+  await advisor({type:'session.input_transcript.delta',delta:'How do I measure qualified leads?'},send);
+  const e={type:'session.delegation.created',delegation:{id:'delegation_1',target:'client'}};
+  await advisor(e,send,false);assert.equal(stats.replies,0);
+  await Promise.all([advisor(e,send),advisor(e,send)]);
+  assert.equal(stats.replies,1);assert.equal(sent.length,1);assert.equal(sent[0].delegation_id,e.delegation.id);
 });

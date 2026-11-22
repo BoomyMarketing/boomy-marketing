@@ -6,7 +6,7 @@
   "trailingSlash": false,
   "functions": {
     "api/assistant/chat.mjs": { "maxDuration": 60 },
-    "api/assistant/voice-token.mjs": { "maxDuration": 160 }
+    "api/assistant/voice-token.mjs": { "maxDuration": 300 }
   },
   "redirects": [
     {
