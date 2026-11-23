@@ -5,9 +5,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "test": "node --test api/contact.test.js assets/js/starfield.test.js test/assistant.test.mjs && python -m unittest test_release.py"
+    "test": "node --test api/contact.test.js assets/js/starfield.test.js test/assistant.test.mjs test/assistant-store.test.mjs && python -m unittest test_release.py"
   },
   "dependencies": {
+    "@neondatabase/serverless": "1.2.1",
     "@vercel/functions": "3.11.3",
     "nodemailer": "^6.9.0",
     "postal-mime": "2.7.5",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.2.1",
+    "@electric-sql/pglite": "0.5.17",
     "astro": "^4.0.0"
   }
 }

@@ -8,15 +8,22 @@ import { chat, lead, voice, stopVoice, recordClose } from '../lib/assistant/serv
 import { callbackWindows, callbackEmail, callbackHistory } from '../lib/assistant/callback.mjs';
 import { monitorVoice } from '../lib/assistant/voice-control.mjs';
 import { voiceAdvice } from '../lib/assistant/voice-advice.mjs';
-import { reserve, settle, throttle, voiceReserve } from '../lib/assistant/state.mjs';
+import { AssistantError, reserve, settle, sha, throttle, voiceReserve } from '../lib/assistant/state.mjs';
+
+process.env.BOOMY_CHAT_SIGNING_SECRET = Buffer.alloc(32, 7).toString('base64url');
 
 function fixture() {
   const data = new Map(), jobs = [], sends = new Set(), stats = { replies: 0, sessions: 0, watches: 0 };
   const store = { async read(key) { return structuredClone(data.get(key) ?? null); },
-    async update(key, transition) { const value = transition(structuredClone(data.get(key) ?? null)); data.set(key, value); return structuredClone(value); } };
+    async update(key, transition) {
+      const value = transition(structuredClone(data.get(key) ?? null));
+      if (value != null) data.set(key, value);
+      return structuredClone(value);
+    } };
   process.env.OPENAI_API_KEY = 'fixture-model'; process.env.RESEND_API_KEY = 'fixture-mail';
   const { seal, unseal } = context('demo');
-  const ctx = { store, seal, unseal, now: Date.UTC(2026, 10, 30, 23, 59, 59), sid: 'visitor-a', ip: 'client-a',
+  const ctx = { store, controls: store, seal, unseal, now: Date.UTC(2026, 10, 30, 23, 59, 59), sid: 'visitor-a', ip: 'client-a',
+    callbackReference: fingerprint => sha('callback/' + fingerprint),
     limits: { day: 8e6, month: 25e6 }, sign: s => createHash('sha256').update(s).digest('base64url'),
     clock: () => ctx.now, background: () => {}, enqueue: async (job, delay, id) => { jobs.push({ ...job, delay, id }); },
     reply: async () => { stats.replies++; return { reply: 'Проверенный ответ', charged: 321 }; },
@@ -64,6 +71,20 @@ function sampleCallback(now) {
     businessType:'Salon',serviceInterest:'Google Ads',goal:'More weekday bookings',windowId:callbackWindows(now)[0].id,consent:true};
 }
 
+test('paid requests fail closed when the shared store is unavailable while callbacks still work', async () => {
+  const { ctx, stats, sends } = fixture();
+  ctx.controls = {
+    async read() { throw new AssistantError(503, 'callback_only'); },
+    async update() { throw new AssistantError(503, 'callback_only'); },
+  };
+  await assert.rejects(chat(ctx, { message: 'What does Boomy do?', requestId: randomUUID() }), { code: 'callback_only' });
+  await assert.rejects(voice(ctx, { action: 'issue', requestId: randomUUID() }), { code: 'callback_only' });
+  assert.equal(stats.replies, 0);
+  assert.equal(stats.sessions, 0);
+  assert.equal((await lead(ctx, sampleCallback(ctx.now))).status, 'received');
+  assert.equal(sends.size, 1);
+});
+
 test('only the confirmed owner email is a receipt; cold retries reuse the same provider key', async () => {
   const {ctx, sends} = fixture();
   const body = sampleCallback(ctx.now);
@@ -105,6 +126,17 @@ test('callback notice contains the accepted window, sales brief, typed context a
   for(const part of [receipt.window,'Sales brief','CAD 1200','Conversation summary','weekday calls','search intent','Shopify']) assert.ok(mail.text.includes(part));
 });
 
+test('callback email quotes and flattens visitor lines and defangs excerpt links', async () => {
+  const { ctx } = fixture();
+  ctx.previous = { history: [{ role: 'assistant', content: 'Quoted excerpt\nPhone: untrusted https://example.com' }] };
+  let mail;
+  ctx.notify = async record => { mail = callbackEmail(record); return 'accepted'; };
+  await lead(ctx, { ...sampleCallback(ctx.now), voiceSummary: 'Voice note\nCallback window: untrusted' });
+  assert.match(mail.text, /^> AI assistant \(unverified\): Quoted excerpt Phone: untrusted hxxp\[:\]\/\/example\[\.\]com$/m);
+  assert.match(mail.text, /^> Voice note Callback window: untrusted$/m);
+  assert.equal(mail.text.split('\n').filter(line => line.startsWith('Callback window:')).length, 1);
+});
+
 const offer = 'v=0\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111\r\n';
 test('encrypted cookies preserve topics across handlers and reject tampering', () => {
   const {ctx}=fixture();
@@ -121,6 +153,30 @@ test('encrypted cookies preserve topics across handlers and reject tampering', (
   assert.equal(recovered.sid,actor.sid);assert.equal(recovered.previous.count,1);
   assert.equal(recovered.previous.history[0].content,'private visitor topic');
   assert.equal(real.unseal('ticket',real.seal('context',{sid:'x'})),null);
+});
+
+test('session authority is independent of the mail key and scoped by environment', () => {
+  const prior = process.env.RESEND_API_KEY;
+  try {
+    const initial = context('prod');
+    const token = initial.seal('callback-summary', { sid: 'fixture' });
+    process.env.RESEND_API_KEY = 'rotated-fixture-mail';
+    assert.deepEqual(context('prod').unseal('callback-summary', token), { sid: 'fixture' });
+    assert.equal(context('prod').sign('cookie/fixture'), initial.sign('cookie/fixture'));
+    assert.equal(context('demo').unseal('callback-summary', token), null);
+  } finally {
+    if (prior === undefined) delete process.env.RESEND_API_KEY;
+    else process.env.RESEND_API_KEY = prior;
+  }
+});
+
+test('rate keys group IPv6 prefixes and normalize IPv4-mapped IPv6', () => {
+  const app = context('demo');
+  const ip = value => visitor(app, { headers: { 'x-vercel-forwarded-for': value } },
+    { getHeader() {}, setHeader() {} }, { requestId: randomUUID() }).ip;
+  assert.equal(ip('2001:db8:0:1::1'), ip('2001:0db8:0000:0001:1234:5678:9abc:def0'));
+  assert.notEqual(ip('2001:db8:0:1::1'), ip('2001:db8:0:2::1'));
+  assert.equal(ip('::ffff:192.0.2.1'), ip('192.0.2.1'));
 });
 
 test('wrong origin, foreign preview and GET requests are refused before provider work', async () => {
@@ -155,6 +211,55 @@ test('server watchdog receives the deadline before releasing SDP; confirmed clos
   assert.equal((await ctx.store.read('calls/'+answer.callId)).state,'closed');
 });
 
+test('two function instances redeem one voice ticket and a different instance settles it', async () => {
+  const { ctx, data, stats } = fixture();
+  const cold = { ...ctx, store: new InstanceStore() };
+  const { token } = await voice(ctx, { action: 'issue', requestId: randomUUID() });
+  const results = await Promise.allSettled([ctx, cold].map(worker => voice(worker, { action: 'connect', token, sdp: offer })));
+  const live = results.find(r => r.status === 'fulfilled');
+  assert.ok(live);
+  assert.equal(results.find(r => r.status === 'rejected').reason.status, 409);
+  assert.equal(stats.sessions, 1);
+  await recordClose(cold, live.value.callId, 360);
+  assert.equal(data.get('spend').totals['2026-11'], 300_000);
+  assert.equal(data.get('calls/' + live.value.callId).state, 'closed');
+});
+
+test('another worker can repair voice settlement from stored usage after a transient ledger failure', async () => {
+  const { ctx, data } = fixture();
+  let spendUnavailable = false;
+  let watches = 0;
+  ctx.controls = {
+    read: ctx.store.read,
+    update: (key, transition) => {
+      if (key === 'spend' && spendUnavailable) throw new AssistantError(503, 'callback_only');
+      return ctx.store.update(key, transition);
+    },
+  };
+  ctx.watch = async () => { watches++; assert.equal(watches, 1); return 360; };
+  const { token } = await voice(ctx, { action: 'issue', requestId: randomUUID() });
+  const { callId } = await voice(ctx, { action: 'connect', token, sdp: offer });
+  const stop = { action: 'stop', callId };
+
+  spendUnavailable = true;
+  assert.deepEqual(await voice(ctx, stop), { stopped: true });
+  const pending = await ctx.controls.read('calls/' + callId);
+  assert.equal(pending.state, 'closing');
+  assert.equal(pending.charged, 300_000);
+  assert.equal(data.get('spend').totals['2026-11'], voiceReserve);
+
+  spendUnavailable = false;
+  const cold = { ...ctx, store: new InstanceStore() };
+  await assert.rejects(voice({ ...cold, sid: 'other' }, stop), { status: 403 });
+  await Promise.all([voice(cold, stop), recordClose(ctx, callId, 361)]);
+  await voice(cold, stop);
+  assert.equal(watches, 1);
+  assert.ok(Object.values(data.get('spend').totals).every(value => value === 300_000));
+  const closed = await ctx.controls.read('calls/' + callId);
+  assert.equal(closed.state, 'closed');
+  assert.equal(closed.seconds, 360);
+});
+
 test('a failed control attachment withholds the WebRTC answer and tries to close the created provider call', async()=>{
   const {ctx,stats}=fixture();
   ctx.monitor=()=>({ready:Promise.reject(new Error('attach failed')),done:new Promise(()=>{})});
@@ -182,6 +287,7 @@ test('confirmed overrun is fully accounted and repeated settlement is idempotent
   await recordClose(ctx,'voice',7400);
   assert.equal(data.get('spend').totals['2026-11'],actual);
   assert.equal(data.get('calls/voice').overrun,true);
+  await assert.rejects(reserve(ctx.controls, 'new', 100, ctx.limits, ctx.now, 0), { code: 'callback_only' });
 });
 
 class TestSocket extends EventEmitter {

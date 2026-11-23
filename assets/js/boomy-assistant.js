@@ -420,6 +420,10 @@
       if (!response.ok) {
         const error = await response.json().catch(() => null);
         if (typeof error?.message === "string" && error.message.trim() && error.message.length <= 500) {
+          if (error.error === "callback_only" && (path === "/chat" ||
+              (path === "/voice-token" && ["issue", "connect"].includes(payload.action)))) {
+            showCallbackOnly(error.message);
+          }
           throw new VisitorError(error.message);
         }
         throw new Error("Unexpected HTTP status " + response.status);
@@ -433,7 +437,7 @@
     const isAtBottom = () => feed.scrollHeight - feed.scrollTop - feed.clientHeight < 64;
     setupChat(find, post, announce, scroll, isAtBottom);
     const voice = setupVoice(find, root, postJson, announce, scroll, isAtBottom);
-    setupLead(find, postJson, voice, announce, endpoint);
+    const showCallbackOnly = setupLead(find, postJson, voice, announce, endpoint);
 
     function syncViewport() {
       if (!viewport) return;
@@ -683,15 +687,17 @@
     let pending = false;
     let received = false;
 
-    leadAction.addEventListener("click", () => {
+    function showLead() {
       voice.stop();
       disclosure.hidden = !voice.summary();
       chatView.hidden = true;
       leadView.hidden = false;
       title.focus({ preventScroll: true });
       loadWindows();
-    });
-    find(".back").addEventListener("click", () => {
+    }
+    const back = find(".back");
+    leadAction.addEventListener("click", showLead);
+    back.addEventListener("click", () => {
       leadView.hidden = true;
       chatView.hidden = false;
       leadAction.focus({ preventScroll: true });
@@ -775,6 +781,12 @@
         fields.disabled = false;
       }
     });
+    return (message) => {
+      back.hidden = true;
+      showLead();
+      feedback.textContent = message;
+      announce(message);
+    };
   }
 
   function setupVoice(find, root, postJson, announce, scroll, isAtBottom) {
