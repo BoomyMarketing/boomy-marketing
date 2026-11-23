@@ -291,7 +291,7 @@
           <div class="messages" role="log" aria-label="Messages" aria-live="off">
             <article class="opening">
               <p class="message"><span class="sr-only">Boomy: </span>Hi, I’m Boomy’s AI assistant. What would you like marketing to do for your business?</p>
-              <div class="prompts">
+              <div class="prompts" hidden>
                 <button class="prompt" type="button" data-prompt="Which Boomy services could help my business?">Explore services</button>
                 <button class="prompt" type="button" data-prompt="How would you help me get more qualified leads?">I need more leads</button>
               </div>
@@ -312,8 +312,8 @@
           </div>
         </section>
         <footer class="footer">
-          <form class="compose">
-            <button type="button" class="icon mic" aria-label="Microphone" aria-pressed="false" aria-describedby="boomy-notice">
+          <form class="compose" hidden>
+            <button type="button" class="icon mic" aria-label="Microphone" aria-pressed="false" aria-describedby="boomy-notice" hidden>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5.5 10.5v1a6.5 6.5 0 0 0 13 0v-1M12 18v3m-3 0h6"/></svg>
             </button>
             <textarea rows="1" class="composer" maxlength="1200" aria-label="Message" placeholder="Write a message…" required></textarea>
@@ -439,6 +439,21 @@
     const voice = setupVoice(find, root, postJson, announce, scroll, isAtBottom);
     const showCallbackOnly = setupLead(find, postJson, voice, announce, endpoint);
 
+    async function refreshAssistantMode() {
+      try {
+        const res = await fetch(endpoint + "/lead", { method: "HEAD", cache: "no-store", signal: AbortSignal.timeout(8000) });
+        if (!res.ok || !panel.open) return;
+        const mode = res.headers.get("X-Boomy-Assistant-Mode");
+        if (mode === "callback-only") {
+          showCallbackOnly("Text and voice are temporarily unavailable. You can still request a callback.");
+        } else if (mode === "text" || mode === "text-and-voice") {
+          find(".compose").hidden = false;
+          find(".prompts").hidden = false;
+          find(".mic").hidden = mode !== "text-and-voice";
+        }
+      } catch { /* The callback link remains available. */ }
+    }
+
     function syncViewport() {
       if (!viewport) return;
       panel.style.setProperty("--viewport-height", viewport.height + "px");
@@ -453,6 +468,7 @@
       panel.showModal();
       launcher.setAttribute("aria-expanded", "true");
       title.focus({ preventScroll: true });
+      refreshAssistantMode();
     });
 
     function closePanel() {

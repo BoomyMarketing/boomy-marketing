@@ -4,6 +4,7 @@ import { createHash, randomUUID } from 'node:crypto';
 import { EventEmitter } from 'node:events';
 import { context, visitor, handler } from '../lib/assistant/runtime.mjs';
 import { InstanceStore } from '../lib/assistant/instance-store.mjs';
+import { responseBody, textReserve } from '../lib/assistant/provider.mjs';
 import { chat, lead, voice, stopVoice, recordClose } from '../lib/assistant/service.mjs';
 import { callbackWindows, callbackEmail, callbackHistory } from '../lib/assistant/callback.mjs';
 import { monitorVoice } from '../lib/assistant/voice-control.mjs';
@@ -83,6 +84,112 @@ test('paid requests fail closed when the shared store is unavailable while callb
   assert.equal(stats.sessions, 0);
   assert.equal((await lead(ctx, sampleCallback(ctx.now))).status, 'received');
   assert.equal(sends.size, 1);
+});
+
+function setAssistantEnv(t, overrides = {}) {
+  const values = { VERCEL_ENV: 'production', VERCEL_URL: 'boomy-fixture.invalid',
+    OPENAI_API_KEY: 'fixture-model', BOOMY_CHAT_DATABASE_URL: 'postgres://fixture:fixture@ledger.invalid/test',
+    BOOMY_CHAT_DAILY_USD: '8', BOOMY_CHAT_MONTHLY_USD: undefined, BOOMY_CHAT_ENABLED: undefined,
+    BOOMY_CHAT_DISABLED: undefined, BOOMY_CHAT_SHARED_LEDGER_ENABLED: undefined, ...overrides };
+  for (const [name, value] of Object.entries(values)) {
+    const previous = process.env[name];
+    t.after(() => { if (previous === undefined) delete process.env[name]; else process.env[name] = previous; });
+    if (value === undefined) delete process.env[name]; else process.env[name] = value;
+  }
+}
+
+async function assistantRequest(action, body, cookie, method = body ? 'POST' : 'GET') {
+  const headers = new Map();
+  const origin = process.env.VERCEL_ENV === 'production' ? 'https://boomymarketing.com' : 'https://boomy-fixture.invalid';
+  const req = { method, body,
+    headers: { 'x-vercel-forwarded-for': '192.0.2.4', 'content-type': 'application/json', origin, cookie } };
+  const res = { getHeader: name => headers.get(name), setHeader: (name, value) => headers.set(name, value),
+    status(code) { this.code = code; return this; }, json(payload) { return { code: this.code, payload, headers }; },
+    end() { return this.json(); } };
+  return handler(action)(req, res);
+}
+
+test('local spend survives idle expiry across UTC midnight', async t => {
+  let now = Date.UTC(2026, 10, 30, 23, 59, 59);
+  t.mock.method(Date, 'now', () => now);
+  const store = new InstanceStore();
+  const limits = { day: 2e6, month: 25e6 };
+  const attempts = await Promise.allSettled(['one', 'two'].map(id => reserve(store, id, 1.2e6, limits, now, 120000)));
+  assert.deepEqual(attempts.map(attempt => attempt.status), ['fulfilled', 'rejected']);
+  assert.equal(attempts[1].reason.code, 'callback_only');
+  assert.equal(store.read('spend').totals['2026-12-01'], 1.2e6);
+  store.update('chat/fixture', () => ({ temporary: true }));
+  now += 3_700_000;
+  assert.equal(store.read('chat/fixture'), null);
+  await assert.rejects(reserve(store, 'over', 800001, limits, now, 120000), { code: 'callback_only' });
+  await reserve(store, 'exact', 8e5, limits, now, 120000);
+  assert.equal(store.read('spend').totals['2026-12-01'], 2e6);
+  await reserve(new InstanceStore(), 'independent', 2e6, limits, now, 120000);
+});
+
+test('default local runtime clamps an old USD 8 setting and holds ambiguous text spend', async t => {
+  setAssistantEnv(t);
+  t.mock.method(Date, 'now', () => Date.UTC(2026, 10, 23, 12));
+  const calls = [];
+  t.mock.method(globalThis, 'fetch', async url => {
+    calls.push(String(url));
+    throw new Error('Ambiguous fixture response');
+  });
+  const ctx = context('prod');
+  assert.equal(ctx.controls, ctx.store);
+  assert.equal(ctx.limits.day, 2e6);
+  const message = 'What can you help my company with?';
+  const charge = textReserve(responseBody([], message));
+  await reserve(ctx.controls, 'prefill', 2e6 - charge, ctx.limits, ctx.now, 68_000);
+  const replies = await Promise.all(Array.from({ length: 2 }, () =>
+    assistantRequest('chat', { message, requestId: randomUUID() })));
+  assert.deepEqual(replies.map(r => [r.code, r.payload.error]).sort(), [[429, 'callback_only'], [503, 'unavailable']]);
+  const mode = await assistantRequest('lead', undefined, undefined, 'HEAD');
+  assert.equal(mode.code, 200);
+  assert.equal(mode.headers.get('X-Boomy-Assistant-Mode'), 'text');
+  assert.equal(mode.headers.has('Set-Cookie'), false);
+  for (const action of ['issue', 'connect', 'supervise']) {
+    assert.equal((await assistantRequest('voice-token', { action, requestId: randomUUID() })).payload.error, 'callback_only');
+  }
+  assert.deepEqual(calls, ['https://api.openai.com/v1/responses']);
+  assert.equal(ctx.controls.read('spend').totals[new Date(ctx.now).toISOString().slice(0, 10)], 2e6);
+});
+
+test('kill switch overrides a shared-ledger opt-in and still accepts a demo callback', async t => {
+  setAssistantEnv(t, { VERCEL_ENV: 'preview', BOOMY_CHAT_DISABLED: 'true', BOOMY_CHAT_SHARED_LEDGER_ENABLED: 'true' });
+  const outbound = t.mock.method(globalThis, 'fetch', async () => { throw Error('Unexpected outbound call'); });
+  assert.equal(context('demo').controls, context('demo').store);
+  const result = await assistantRequest('lead');
+  assert.equal(result.code, 200);
+  assert.equal(result.headers.get('X-Boomy-Assistant-Mode'), 'callback-only');
+  assert.equal(result.payload.windows.length, 3);
+  const cookie = result.headers.get('Set-Cookie').map(value => value.split(';')[0]).join('; ');
+  assert.equal((await assistantRequest('chat', { message: 'Hello', requestId: randomUUID() }, cookie)).payload.error, 'callback_only');
+  for (const action of ['issue', 'connect', 'supervise']) {
+    assert.equal((await assistantRequest('voice-token', { action }, cookie)).payload.error, 'callback_only');
+  }
+  const callback = await assistantRequest('lead', { ...sampleCallback(Date.now()), summaryToken: result.payload.summaryToken }, cookie);
+  assert.equal(callback.payload.status, 'received');
+  assert.equal(outbound.mock.callCount(), 0);
+});
+
+test('shared-ledger opt-in with a missing URL fails closed without a local paid fallback', async t => {
+  setAssistantEnv(t, { BOOMY_CHAT_SHARED_LEDGER_ENABLED: 'true', BOOMY_CHAT_DATABASE_URL: undefined });
+  const outbound = t.mock.method(globalThis, 'fetch', async () => { throw Error('Unexpected outbound call'); });
+  assert.notEqual(context('prod').controls, context('prod').store);
+  const reply = await assistantRequest('chat', { message: 'Hello', requestId: randomUUID() });
+  assert.equal(reply.payload.error, 'callback_only');
+  assert.equal(outbound.mock.callCount(), 0);
+});
+
+test('local controls allow signed teardown of an earlier voice call', async () => {
+  const { ctx, stats } = fixture();
+  const ref = randomUUID();
+  const controls = new InstanceStore();
+  const lastCall = { ref, sid: ctx.sid, upstream: 'earlier-call', deadline: ctx.now + 1000, state: 'open' };
+  await stopVoice({ ...ctx, controls, lastCall }, ref, true);
+  assert.equal(stats.watches, 1);
+  assert.equal(controls.read('spend'), null);
 });
 
 test('only the confirmed owner email is a receipt; cold retries reuse the same provider key', async () => {
